@@ -147,3 +147,6 @@ Debug_Monitor/
 *.ai
 .a
 *.a
+Test/Platforms/Linux/test
+TestGraphics/Platforms/Linux/testgraphics
+TestGraphics/Platforms/Windows/Tegra-Android/Debug/
