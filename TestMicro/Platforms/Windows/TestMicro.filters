@@ -1,0 +1,737 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Application">
+      <UniqueIdentifier>{5e9b2763-9074-472a-bd97-96768e7a11de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GEN">
+      <UniqueIdentifier>{c447d2eb-1cb4-437b-ab43-53f7b86b963f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GEN\DataIO">
+      <UniqueIdentifier>{041c79a5-1553-4548-87af-f374838dceb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GEN\Utils">
+      <UniqueIdentifier>{53aea054-3ef2-46f5-8ad7-495031465746}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GEN\Main">
+      <UniqueIdentifier>{0944c3d5-31f3-4610-adab-000a1b642d14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GEN\Plataforms">
+      <UniqueIdentifier>{10561e35-d5f4-42ba-b932-46d6e953e883}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GEN\Plataforms\Windows">
+      <UniqueIdentifier>{62c942ff-37fd-44ad-8843-4e1a1cb1fa7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GEN\Cipher">
+      <UniqueIdentifier>{124b0c6f-86df-40cd-b1d7-b9fc1e9749d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GEN\Compress">
+      <UniqueIdentifier>{2788f590-9924-406f-83d5-31eb45644b80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GEN\Compress\zlib">
+      <UniqueIdentifier>{9799faff-e61d-4b28-83d8-b6297775c5c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GEN\Plataforms\Microcontrollers">
+      <UniqueIdentifier>{463cad11-d6ca-4680-93aa-59825758dd49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GEN\Plataforms\Microcontrollers\STM32F0xx">
+      <UniqueIdentifier>{ef3d613d-4c7f-4548-8dda-b763d05cafa5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GEN\DataIO\I2C">
+      <UniqueIdentifier>{4f8859a9-cb9a-4704-bb08-db92cb761b21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GEN\Plataforms\Linux">
+      <UniqueIdentifier>{5b159e6c-77e3-4c36-9a31-8ebf46434e73}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Application\TestMicro.cpp">
+      <Filter>Source Files\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Main\Main.cpp">
+      <Filter>Source Files\GEN\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Utils\XString.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Utils\XBuffer.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Utils\XBase.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Utils\XFactory.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Windows\WINDOWSMain.cpp">
+      <Filter>Source Files\GEN\Plataforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Utils\XTimer.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Windows\WINDOWSStackWalker.cpp">
+      <Filter>Source Files\GEN\Plataforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Windows\XWINDOWSSystem.cpp">
+      <Filter>Source Files\GEN\Plataforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Windows\XWINDOWSThread.cpp">
+      <Filter>Source Files\GEN\Plataforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Windows\XWINDOWSTimer.cpp">
+      <Filter>Source Files\GEN\Plataforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Windows\XWINDOWSSleep.cpp">
+      <Filter>Source Files\GEN\Plataforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Utils\XSleep.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Utils\XVariant.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Utils\XSystem.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Utils\XThread.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Utils\XDateTime.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Windows\XWINDOWSDateTime.cpp">
+      <Filter>Source Files\GEN\Plataforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Windows\XWINDOWSFactory.cpp">
+      <Filter>Source Files\GEN\Plataforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Windows\XWINDOWSConsole.cpp">
+      <Filter>Source Files\GEN\Plataforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Windows\XWINDOWSDir.cpp">
+      <Filter>Source Files\GEN\Plataforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Windows\XWINDOWSFile.cpp">
+      <Filter>Source Files\GEN\Plataforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Utils\XFile.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Utils\XPath.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Utils\XPathsManager.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Utils\XLog.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Utils\XConsole.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Utils\XDir.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Utils\XLanguage.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Utils\XFileTXT.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Utils\XFileXML.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Utils\XFileZIP.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Utils\XPublisher.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Windows\XWINDOWSRand.cpp">
+      <Filter>Source Files\GEN\Plataforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Cipher\Cipher.cpp">
+      <Filter>Source Files\GEN\Cipher</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Compress\zlib\adler32.c">
+      <Filter>Source Files\GEN\Compress\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Compress\zlib\compress.c">
+      <Filter>Source Files\GEN\Compress\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Compress\zlib\crc32.c">
+      <Filter>Source Files\GEN\Compress\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Compress\zlib\deflate.c">
+      <Filter>Source Files\GEN\Compress\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Compress\zlib\gzio.c">
+      <Filter>Source Files\GEN\Compress\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Compress\zlib\infback.c">
+      <Filter>Source Files\GEN\Compress\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Compress\zlib\inffast.c">
+      <Filter>Source Files\GEN\Compress\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Compress\zlib\inflate.c">
+      <Filter>Source Files\GEN\Compress\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Compress\zlib\inftrees.c">
+      <Filter>Source Files\GEN\Compress\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Compress\zlib\ioapi.c">
+      <Filter>Source Files\GEN\Compress\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Compress\zlib\trees.c">
+      <Filter>Source Files\GEN\Compress\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Compress\zlib\uncompr.c">
+      <Filter>Source Files\GEN\Compress\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Compress\zlib\unzip.c">
+      <Filter>Source Files\GEN\Compress\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Compress\zlib\zip.c">
+      <Filter>Source Files\GEN\Compress\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Compress\zlib\zutil.c">
+      <Filter>Source Files\GEN\Compress\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Utils\XScheduler.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Utils\XApplication.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\DataIO\DIOFactory.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\DataIO\DIOURL.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Windows\XWINDOWSDebug.cpp">
+      <Filter>Source Files\GEN\Plataforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\DataIO\DIOIP.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Utils\XDebug.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\DataIO\DIOStream.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Windows\DIOWINDOWSFactory.cpp">
+      <Filter>Source Files\GEN\Plataforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Windows\DIOWINDOWSURL.cpp">
+      <Filter>Source Files\GEN\Plataforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Windows\DIOWINDOWSStreamUART.cpp">
+      <Filter>Source Files\GEN\Plataforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Windows\DIOWINDOWSStreamUARTLocalEnumDevices.cpp">
+      <Filter>Source Files\GEN\Plataforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\DataIO\DIOStreamEnumDevices.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\DataIO\DIOStreamUART.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\DataIO\DIOStreamUARTConfig.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\DataIO\DIOStreamUARTLocalEnumDevices.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\DataIO\DIOStreamConfig.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\DataIO\DIOStreamDevice.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Utils\XFSMachine.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Microcontrollers\STM32F0xx\DIOSTM32F0xxFactory.cpp">
+      <Filter>Source Files\GEN\Plataforms\Microcontrollers\STM32F0xx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Microcontrollers\STM32F0xx\STM32F0XXMain.cpp">
+      <Filter>Source Files\GEN\Plataforms\Microcontrollers\STM32F0xx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Microcontrollers\STM32F0xx\XSTM32F0xxDateTime.cpp">
+      <Filter>Source Files\GEN\Plataforms\Microcontrollers\STM32F0xx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Microcontrollers\STM32F0xx\XSTM32F0xxDebug.cpp">
+      <Filter>Source Files\GEN\Plataforms\Microcontrollers\STM32F0xx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Microcontrollers\STM32F0xx\XSTM32F0xxFactory.cpp">
+      <Filter>Source Files\GEN\Plataforms\Microcontrollers\STM32F0xx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Microcontrollers\STM32F0xx\XSTM32F0xxRand.cpp">
+      <Filter>Source Files\GEN\Plataforms\Microcontrollers\STM32F0xx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Microcontrollers\STM32F0xx\XSTM32F0xxSleep.cpp">
+      <Filter>Source Files\GEN\Plataforms\Microcontrollers\STM32F0xx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Microcontrollers\STM32F0xx\XSTM32F0xxSystem.cpp">
+      <Filter>Source Files\GEN\Plataforms\Microcontrollers\STM32F0xx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Microcontrollers\STM32F0xx\XSTM32F0xxTimer.cpp">
+      <Filter>Source Files\GEN\Plataforms\Microcontrollers\STM32F0xx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Utils\XThreadCollected.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Microcontrollers\STM32F0xx\XSTM32F0xxThread.cpp">
+      <Filter>Source Files\GEN\Plataforms\Microcontrollers\STM32F0xx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Utils\XThreadListNonPreemptive.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Microcontrollers\STM32F0xx\DIOSTM32F0xxStreamUART.cpp">
+      <Filter>Source Files\GEN\Plataforms\Microcontrollers\STM32F0xx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Microcontrollers\STM32F0xx\DIOSTM32F0xxStreamUSB.cpp">
+      <Filter>Source Files\GEN\Plataforms\Microcontrollers\STM32F0xx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\DataIO\DIOStreamUSB.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\DataIO\DIOStreamUSBConfig.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\DataIO\DIOStreamUSBLocalEnumDevices.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Windows\DIOWINDOWSStreamUSB.cpp">
+      <Filter>Source Files\GEN\Plataforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Windows\DIOWINDOWSStreamUSBLocalEnumDevices.cpp">
+      <Filter>Source Files\GEN\Plataforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\DataIO\DIOStreamDeviceUSB.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Microcontrollers\STM32F0xx\DIOSTM32F0xxStreamI2C.cpp">
+      <Filter>Source Files\GEN\Plataforms\Microcontrollers\STM32F0xx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\DataIO\DIOStreamI2C.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\DataIO\DIOStreamI2CConfig.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Windows\DIOWINDOWSStreamI2C.cpp">
+      <Filter>Source Files\GEN\Plataforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\DataIO\I2C\DIOI2CSensorLightTSL2561.cpp">
+      <Filter>Source Files\GEN\DataIO\I2C</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Linux\DIOLINUXStreamI2C.cpp">
+      <Filter>Source Files\GEN\Plataforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Linux\DIOLINUXStreamUART.cpp">
+      <Filter>Source Files\GEN\Plataforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Linux\DIOLINUXStreamUARTLocalEnumDevices.cpp">
+      <Filter>Source Files\GEN\Plataforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Linux\DIOLINUXStreamUSB.cpp">
+      <Filter>Source Files\GEN\Plataforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Linux\DIOLINUXStreamUSBLocalEnumDevices.cpp">
+      <Filter>Source Files\GEN\Plataforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Linux\XLINUXConsole.cpp">
+      <Filter>Source Files\GEN\Plataforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Linux\XLINUXDateTime.cpp">
+      <Filter>Source Files\GEN\Plataforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Linux\XLINUXDebug.cpp">
+      <Filter>Source Files\GEN\Plataforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Linux\XLINUXFactory.cpp">
+      <Filter>Source Files\GEN\Plataforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Linux\XLINUXSleep.cpp">
+      <Filter>Source Files\GEN\Plataforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Linux\XLINUXSystem.cpp">
+      <Filter>Source Files\GEN\Plataforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Linux\XLINUXTimer.cpp">
+      <Filter>Source Files\GEN\Plataforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Linux\DIOLINUXFactory.cpp">
+      <Filter>Source Files\GEN\Plataforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Linux\LINUXMain.cpp">
+      <Filter>Source Files\GEN\Plataforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Linux\XLINUXRand.cpp">
+      <Filter>Source Files\GEN\Plataforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Linux\XLINUXThread.cpp">
+      <Filter>Source Files\GEN\Plataforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GENFrameWork\GEN\Platforms\Linux\DIOLINUXURL.cpp">
+      <Filter>Source Files\GEN\Plataforms\Linux</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Application\TestMicro.h">
+      <Filter>Source Files\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Main\Main.h">
+      <Filter>Source Files\GEN\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Utils\XString.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Utils\XBuffer.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Utils\XBase.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Utils\XFactory.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Windows\WINDOWSMain.h">
+      <Filter>Source Files\GEN\Plataforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Utils\XTimer.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Windows\WINDOWSStackWalker.h">
+      <Filter>Source Files\GEN\Plataforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Windows\XWINDOWSSystem.h">
+      <Filter>Source Files\GEN\Plataforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Windows\XWINDOWSThread.h">
+      <Filter>Source Files\GEN\Plataforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Windows\XWINDOWSTimer.h">
+      <Filter>Source Files\GEN\Plataforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Windows\XWINDOWSSleep.h">
+      <Filter>Source Files\GEN\Plataforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Utils\XSleep.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Utils\XVariant.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Utils\XSystem.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Utils\XThread.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Utils\XDateTime.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Windows\XWINDOWSDateTime.h">
+      <Filter>Source Files\GEN\Plataforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Windows\XWINDOWSFactory.h">
+      <Filter>Source Files\GEN\Plataforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Windows\XWINDOWSConsole.h">
+      <Filter>Source Files\GEN\Plataforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Windows\XWINDOWSDir.h">
+      <Filter>Source Files\GEN\Plataforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Windows\XWINDOWSFile.h">
+      <Filter>Source Files\GEN\Plataforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Utils\XFile.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Utils\XPath.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Utils\XPathsManager.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Utils\XLog.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Utils\XConsole.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Utils\XDir.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Utils\XLanguage.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Utils\XFileTXT.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Utils\XFileXML.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Utils\XFileZIP.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Utils\XPublisher.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Windows\XWINDOWSRand.h">
+      <Filter>Source Files\GEN\Plataforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Cipher\Cipher.h">
+      <Filter>Source Files\GEN\Cipher</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Compress\zlib\crc32.h">
+      <Filter>Source Files\GEN\Compress\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Compress\zlib\crypt.h">
+      <Filter>Source Files\GEN\Compress\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Compress\zlib\deflate.h">
+      <Filter>Source Files\GEN\Compress\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Compress\zlib\inffast.h">
+      <Filter>Source Files\GEN\Compress\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Compress\zlib\inffixed.h">
+      <Filter>Source Files\GEN\Compress\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Compress\zlib\inflate.h">
+      <Filter>Source Files\GEN\Compress\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Compress\zlib\inftrees.h">
+      <Filter>Source Files\GEN\Compress\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Compress\zlib\ioapi.h">
+      <Filter>Source Files\GEN\Compress\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Compress\zlib\trees.h">
+      <Filter>Source Files\GEN\Compress\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Compress\zlib\unzip.h">
+      <Filter>Source Files\GEN\Compress\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Compress\zlib\zconf.h">
+      <Filter>Source Files\GEN\Compress\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Compress\zlib\zconf.in.h">
+      <Filter>Source Files\GEN\Compress\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Compress\zlib\zip.h">
+      <Filter>Source Files\GEN\Compress\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Compress\zlib\zlib.h">
+      <Filter>Source Files\GEN\Compress\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Compress\zlib\zutil.h">
+      <Filter>Source Files\GEN\Compress\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Utils\XApplication.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Utils\XScheduler.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\DataIO\DIOFactory.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\DataIO\DIOURL.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Windows\XWINDOWSDebug.h">
+      <Filter>Source Files\GEN\Plataforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\DataIO\DIOIP.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Utils\XDebug.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\DataIO\DIOStream.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Windows\DIOWINDOWSFactory.h">
+      <Filter>Source Files\GEN\Plataforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Windows\DIOWINDOWSURL.h">
+      <Filter>Source Files\GEN\Plataforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Windows\DIOWINDOWSStreamUART.h">
+      <Filter>Source Files\GEN\Plataforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Windows\DIOWINDOWSStreamUARTLocalEnumDevices.h">
+      <Filter>Source Files\GEN\Plataforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\DataIO\DIOStreamEnumDevices.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\DataIO\DIOStreamUART.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\DataIO\DIOStreamUARTConfig.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\DataIO\DIOStreamUARTLocalEnumDevices.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\DataIO\DIOStreamConfig.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\DataIO\DIOStreamDevice.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Utils\XFSMachine.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Microcontrollers\STM32F0xx\DIOSTM32F0xxFactory.h">
+      <Filter>Source Files\GEN\Plataforms\Microcontrollers\STM32F0xx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Microcontrollers\STM32F0xx\DIOSTM32F0xxStreamUART.h">
+      <Filter>Source Files\GEN\Plataforms\Microcontrollers\STM32F0xx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Microcontrollers\STM32F0xx\STM32F0xxMain.h">
+      <Filter>Source Files\GEN\Plataforms\Microcontrollers\STM32F0xx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Microcontrollers\STM32F0xx\XSTM32F0xxDateTime.h">
+      <Filter>Source Files\GEN\Plataforms\Microcontrollers\STM32F0xx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Microcontrollers\STM32F0xx\XSTM32F0xxDebug.h">
+      <Filter>Source Files\GEN\Plataforms\Microcontrollers\STM32F0xx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Microcontrollers\STM32F0xx\XSTM32F0xxFactory.h">
+      <Filter>Source Files\GEN\Plataforms\Microcontrollers\STM32F0xx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Microcontrollers\STM32F0xx\XSTM32F0xxRand.h">
+      <Filter>Source Files\GEN\Plataforms\Microcontrollers\STM32F0xx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Microcontrollers\STM32F0xx\XSTM32F0xxSleep.h">
+      <Filter>Source Files\GEN\Plataforms\Microcontrollers\STM32F0xx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Microcontrollers\STM32F0xx\XSTM32F0xxSystem.h">
+      <Filter>Source Files\GEN\Plataforms\Microcontrollers\STM32F0xx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Microcontrollers\STM32F0xx\XSTM32F0xxTimer.h">
+      <Filter>Source Files\GEN\Plataforms\Microcontrollers\STM32F0xx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Utils\XThreadCollected.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Microcontrollers\STM32F0xx\XSTM32F0xxThread.h">
+      <Filter>Source Files\GEN\Plataforms\Microcontrollers\STM32F0xx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Utils\XThreadListNonPreemptive.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Utils\XVector.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Microcontrollers\STM32F0xx\DIOSTM32F0xxStreamUSB.h">
+      <Filter>Source Files\GEN\Plataforms\Microcontrollers\STM32F0xx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\DataIO\DIOStreamUSB.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\DataIO\DIOStreamUSBConfig.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\DataIO\DIOStreamUSBLocalEnumDevices.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Windows\DIOWINDOWSStreamUSB.h">
+      <Filter>Source Files\GEN\Plataforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Windows\DIOWINDOWSStreamUSBLocalEnumDevices.h">
+      <Filter>Source Files\GEN\Plataforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\DataIO\DIOStreamDeviceUSB.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Utils\XMap.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Microcontrollers\STM32F0xx\DIOSTM32F0xxStreamI2C.h">
+      <Filter>Source Files\GEN\Plataforms\Microcontrollers\STM32F0xx</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\DataIO\DIOStreamI2C.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\DataIO\DIOStreamI2CConfig.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Windows\DIOWINDOWSStreamI2C.h">
+      <Filter>Source Files\GEN\Plataforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\DataIO\I2C\DIOI2CSensorLightTSL2561.h">
+      <Filter>Source Files\GEN\DataIO\I2C</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Linux\DIOLINUXStreamI2C.h">
+      <Filter>Source Files\GEN\Plataforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Linux\DIOLINUXStreamUART.h">
+      <Filter>Source Files\GEN\Plataforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Linux\DIOLINUXStreamUARTLocalEnumDevices.h">
+      <Filter>Source Files\GEN\Plataforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Linux\DIOLINUXStreamUSB.h">
+      <Filter>Source Files\GEN\Plataforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Linux\DIOLINUXStreamUSBLocalEnumDevices.h">
+      <Filter>Source Files\GEN\Plataforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Linux\XLINUXConsole.h">
+      <Filter>Source Files\GEN\Plataforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Linux\XLINUXDateTime.h">
+      <Filter>Source Files\GEN\Plataforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Linux\XLINUXDebug.h">
+      <Filter>Source Files\GEN\Plataforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Linux\XLINUXFactory.h">
+      <Filter>Source Files\GEN\Plataforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Linux\XLINUXSleep.h">
+      <Filter>Source Files\GEN\Plataforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Linux\XLINUXSystem.h">
+      <Filter>Source Files\GEN\Plataforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Linux\XLINUXTimer.h">
+      <Filter>Source Files\GEN\Plataforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Linux\DIOLINUXFactory.h">
+      <Filter>Source Files\GEN\Plataforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Linux\LINUXMain.h">
+      <Filter>Source Files\GEN\Plataforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Linux\XLINUXRand.h">
+      <Filter>Source Files\GEN\Plataforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Linux\XLINUXThread.h">
+      <Filter>Source Files\GEN\Plataforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GENFrameWork\GEN\Platforms\Linux\DIOLINUXURL.h">
+      <Filter>Source Files\GEN\Plataforms\Linux</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

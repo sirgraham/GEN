@@ -1,0 +1,28 @@
+[Buildset]
+BuildItems=@Variant(\x00\x00\x00\t\x00\x00\x00\x00\x00)
+
+[Defines And Includes][Compiler]
+Name=GCC
+Path=gcc
+Type=GCC
+
+[Launch]
+Launch Configurations=Launch Configuration 0
+
+[Launch][Launch Configuration 0]
+Configured Launch Modes=execute
+Configured Launchers=nativeAppLauncher
+Name=New Native Application Configuration
+Type=Native Application
+
+[Launch][Launch Configuration 0][Data]
+Arguments=-p "/mnt/GENFrameWork/APPUpdate/resources/PI-linux" -v 1 -s 50 -e 0 -b no
+Dependencies=@Variant(\x00\x00\x00\t\x00\x00\x00\x00\x00)
+Dependency Action=Nothing
+EnvironmentGroup=default
+Executable=file:///mnt/GENFrameWork/APPUpdate/Platforms/Linux/appupdate
+External Terminal=konsole --noclose --workdir %workdir -e %exe
+Project Target=
+Use External Terminal=false
+Working Directory=
+isExecutable=true

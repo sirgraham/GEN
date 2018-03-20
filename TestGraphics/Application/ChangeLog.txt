@@ -1,0 +1,250 @@
+GEN ------- 19 FEB 2018
+
+NEW:
+-GRPWidget text-indent
+-GRPWidget word-space
+-GRPWidget white-space
+-GRPWidget change text on the fly
+-GRPWidget underline baselines
+-GRPWidget shadows
+
+FIX:
+-GRPWidget text alignment on respect to bounding box
+-GRPWidget spaces alignment bug fix
+
+TO DO:
+-GRPWidget parse img attributes
+-GRPWidget parse form attributes
+-GRPWidget parse input attributes
+-GRPWidget wordbreak
+-GRPWidget Tables
+-GRPWidget transformations
+-GRPWidget z-index
+-GRPWidget transitions
+-GRPWidget tidiness and dirty bit
+-GRPWidget material matrix
+-GRPWidget gradients
+-GRPWidget download files
+-GRPWidget Input type Edit
+-GRPWidget Input type Textarea
+-GRPWidget Input type Button
+-GRPWidget Input type Checkbox
+-GRPWidget Input type Radiobutton
+-GRPWidget Input type List
+-GRPWidget Input type Combobox
+-GRPWidget Input type Menu
+-GRPWidget Input type Slider
+-GRPWidget Input type Scrollbar
+-GRPWidget Input type Window
+-GRPWidget Cursors
+-GRPWidget Drag and Drop	
+-GRPWidget Outline
+-GRPWidget line styles
+-GRPWidgetStyle dependency level 1+
+-GRPWidgetStyle parse values correctly
+-SVG parsing
+
+BUG:
+-XML tags inside anonymous text fails to parse
+-Load of multiple material surfaces on FBX crashes
+
+
+GEN ------- 16 FEB 2018
+
+NEW:
+-Work on Widget CSS
+-GRPWidget overflow
+-GRPWidget borders
+-GRPWidget background offset
+-GRPWidget background tiling
+-GRPWidget max and min size
+-GRPWidget events
+-GRPWidgetStyle selectors
+-GRPWidgetStyle dependency level 0
+-GRPWidget tags
+-GRPWidget borders segments
+
+FIX:
+-Fixed leaks and bugs on GRPObjectBuilder stroke
+
+TO DO:
+-GRPWidget parse attributes
+-GRPWidget wordbreak
+-GRPWidget white-space
+-GRPWidget Tables
+-GRPWidget shadow
+-GRPWidget transformations
+-GRPWidget z-index
+-GRPWidget transitions
+-GRPWidget tidiness and dirty bit
+-GRPWidget material matrix
+-GRPWidget gradients
+-GRPWidget download files
+-GRPWidget Input types
+	-Edit
+	-Textarea
+	-Button
+	-Checkbox
+	-Radiobutton
+	-List
+	-Combobox
+	-Menu
+	-Slider
+	-Scrollbar
+	-window
+-GRPWidget Cursors
+-GRPWidget Drag and Drop	
+-GRPWidgetStyle dependency level 1+
+-GRPWidget underline baselines
+-SVG parsing
+
+BUG:
+-XML tags inside anonymous text fails to parse
+-Load of multiple material surfaces on FBX crashes
+
+
+GEN ------- 1 FEB 2018
+
+NEW:
+-Work on widget ui
+-Position and text flow
+-GRPFontManager font families
+
+FIX:
+
+TO DO:
+-GRPWidget parse attributes
+-GRPWidgetStyle selectors
+-GRPWidget tags
+-GRPWidget borders
+-GRPWidget overflow
+-GRPWidget wordbreak
+-GRPWidget shadow
+-GRPWidget transformations
+-GRPWidget background offset
+-GRPWidget background tiling
+-GRPWidget z-index
+-GRPWidget max and min size
+-GRPWidget events
+-GRPWidget transitions
+-GRPWidget tidiness and dirty bit
+-SVG parsing
+
+BUG:
+-GRPWidget artifacts on android
+-XML tags inside anonymous text fails to parse
+-Load of multiple material surfaces on FBX crashes
+
+
+GEN ------- 2 JAN 2018
+
+-NEW:
+-Improved loading interface
+-simplified testgraphics
+-Improved GRPWidget positioning 
+-Improved GRPWidget styling
+-Added parsing of comments on css
+
+-FIX:
+-Fixed leaks and clean up of scene
+-Fixed visual debugger
+
+BUG:
+-Load of multiple material surfaces on FBX crashes
+
+GEN ------- 20 DEC 2017
+
+NEW:
+-GRPPlane maths
+-GRPFrustum object
+-GRPHighDinamicRangePass
+-GRPWidgetPass and GRPWidgetStyles allows to load a CSS/HTML code flow
+-Improved Observer pattern
+
+FIX:
+-Fixed relation on objects and scene
+-Fixed destruction of scene
+-Fixed creation of entities on GGF
+-Fixed VisualDebugger entity creation bug
+-Fixes on skinning
+-Removed a lot of leaks
+
+BUG:
+-Load of multiple material surfaces on FBX crashes like a pro
+
+
+GEN ------ 21 NOV 2017
+
+NEW:
+-Added passes to manager
+-Optimizations for speed (48 fps for double scene on rpi)
+-Frustum added to camera
+-LAMBERT is a preprocessor now
+-Work on widgets
+
+
+FIX: 
+-AI messaging
+-thread safety of cubemaps
+-Multitexture swapping
+-VBO multhreading
+-Shaders on nonshaded element are aplied after the load of ggf
+
+
+GEN ------ 31 OCT 2017
+
+NEW: 
+-Added music section to xml
+-Depth pass
+-Verbosity control 
+
+FIX:
+-fixed animation precission removing optimizations
+-fixed behavior on X11 mouse
+-fixed bug on XDebug special with incorrect target
+-fixed shadow pass scale
+
+BUG: 
+-loading of cubemaps is not thread safe
+
+GEN ------ 27 OCT 2017
+
+NEW: 
+-minor optimizations of GL machine (60 fps on rpi)
+-removed redundancy of gpu calls
+-added scissor test to viewport pass
+
+FIX: 
+-fixed bug on loading screen
+-fixed bug on texture binding
+
+BUG: 
+-loading of cubemaps is not thread safe
+
+
+
+GEN ------ 25 OCT 2017
+
+NEW:
+-XML now loads passes and materials
+-Passes are added on render thread to prevent loading problems
+-Minor fixes
+-GRPApplication default management of load
+
+FIXED: 
+-AI::Animation notifications
+
+BUG: 
+-cubemap loading is not thread safe
+
+
+GEN ------ 20 Oct 2017
+
+NEW:
+-Changes on AIState to notify step after the change to prevent one step on the older animation
+-Flags on GRPApplication
+-Sound disabled on global flag
+
+FIX: 
+
+BUG:

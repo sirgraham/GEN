@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<webscrapers>
+	
+	<webscraper name="TRANSLATION">
+		  	  
+	  <web url="http://translate.google.com/translate_a/t?client=p&text=%s&hl=%s&sl=es&tl=%s&ie=UTF-8&oe=UTF-8" method="GET" format="JSON" >
+	  	<value name="TRANSLATION" 		priority="1" namevalue="trans" 						/>	 
+	 		<value name="ORIGIN" 					priority="0" namevalue="orig" 						/>	 		
+	 		<value name="SPELL_HTML" 			priority="0" namevalue="spell_html_res" 	/>	 		
+	  </web>    
+	
+	</webscraper>
+
+</webscrapers>

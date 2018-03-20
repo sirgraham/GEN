@@ -1,0 +1,45 @@
+[StLinkDriver]
+stlinkserialNo=B2306BF2
+stlinkfoundProbes=
+CStepIntDis=_ 0
+[Stack]
+FillEnabled=0
+OverflowWarningsEnabled=1
+WarningThreshold=90
+SpWarningsEnabled=1
+WarnLogOnly=1
+UseTrigger=1
+TriggerName=main
+LimitSize=0
+ByteLimit=50
+[Exceptions]
+StopOnUncaught=_ 0
+StopOnThrow=_ 0
+[DebugChecksum]
+Checksum=1798158958
+[CallStack]
+ShowArgs=0
+[Disassembly]
+MixedMode=1
+[struct_types]
+Fmt0=I2C_TypeDef-CR2	4	0
+Fmt1=I2C_TypeDef-TIMINGR	4	0
+[Log file]
+LoggingEnabled=_ 0
+LogFile=_ ""
+Category=_ 0
+[TermIOLog]
+LoggingEnabled=_ 0
+LogFile=_ ""
+[CallStackLog]
+Enabled=0
+[CallStackStripe]
+ShowTiming=1
+[Disassemble mode]
+mode=0
+[Breakpoints2]
+Bp0=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxSystem.cpp}.214.1" 0 0 1 "" 0 "" 0
+Count=1
+[Aliases]
+Count=0
+SuppressDialog=0

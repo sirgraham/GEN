@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<webscrapers>
+
+	<webscraper name="SEXNAME">
+		
+	  <web url="www.namepedia.org/en/firstname/%s/" method="GET" format="HTML">     	
+	    <value name="SEX" 		priority="1"	start="<img src=\x22/img/icon/" 		end="_big_1.gif" /> 
+	    <value name="NAME" 		priority="0"	start="First name: " 								end="<img src="  />
+	  </web>  
+	    
+	</webscraper>
+
+</webscrapers>

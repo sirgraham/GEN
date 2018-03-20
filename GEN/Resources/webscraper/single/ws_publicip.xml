@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<webscrapers>
+	
+	<webscraper name="PUBLICIP">
+		
+	  <web url="www.see-my-ip.com/index_en.php" method="GET" format="HTML"> 
+	    <value name="IP" priority="1" start="Your IP address is" end="</p>" /> 
+	  </web>  
+	  
+	  <web url="www.vermiip.es" method="GET" format="HTML" > 
+	    <value name="IP" priority="1" start="<h2>Tu IP p&uacute;blica es:" end="</h2>" />      
+	  </web>    
+	
+	</webscraper>
+
+</webscrapers>

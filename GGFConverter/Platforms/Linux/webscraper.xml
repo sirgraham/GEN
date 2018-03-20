@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<webservices>
+
+	<webservice name="PUBLICIP">
+		
+	  <web url="www.see-my-ip.com/index_en.php" method="GET" format="HTML"> 
+	    <value name="IP" priority="1" start="Your IP address is" end="</p>" /> 
+	  </web>  
+	  
+	  <web url="www.vermiip.es" method="GET" format="HTML" > 
+	    <value name="IP" priority="1" start="<h2>Tu IP p&uacute;blica es:" end="</h2>" />      
+	  </web>    
+	
+	</webservice>
+	
+	
+	<webservice name="GEOLOCATIONIP">
+		
+		<web url="http://whatismyipaddress.com/ip/%s"  method="GET" format="HTML"> 
+			<value name="COUNTRY" 			priority="1" 	start="<tr><th>Country:</th><td>" 							end="<img src="		  />
+			<value name="STATE"					priority="1"	start="<tr><th>State/Region:</th><td>" 					end="</td></tr>" 		/>
+			<value name="CITY"					priority="1"  start="<tr><th>City:</th><td>"    							end="</td></tr>" 	  />
+			<value name="LATITUDE" 			priority="0"	start="<tr><th>Latitude:</th><td>"							end="&nbsp;&nbsp;" 	/>
+			<value name="LONGITUDE" 		priority="0"	start="<tr><th>Longitude:</th><td>"							end="&nbsp;&nbsp;" 	/>
+			<value name="ISP" 					priority="0"	start="</td></tr><tr><th>ISP:</th><td>"					end="</td></tr>" 		/>
+			<value name="ORGANIZATION"	priority="0"	start="</tr><tr><th>Organization:</th><td>" 		end="</td></tr>"		/>
+		</web> 
+	
+		<web url="http://www.elhacker.net/api.html?ap=geoloc&host=%s"  method="GET" format="HTML"> 
+			<value name="COUNTRY" 			priority="1" 	start="nombre_pais   : '" 											end="'," />
+			<value name="STATE"					priority="1"	start="region        : '"  											end="'," />
+			<value name="CITY"					priority="1"  start="ciudad        : '"    			      				end="'," />
+			<value name="LATITUDE" 			priority="0"	start="latitud       : '"												end="'," />
+			<value name="LONGITUDE" 		priority="0"	start="longitud      : '"												end="'," />
+		</web> 
+		
+	  <web url="freegeoip.net/json/%s" method="GET" format="JSON" > 
+	 		<value name="COUNTRY" 			priority="1" 	namevalue="country_name" />
+			<value name="STATE"					priority="1"	namevalue="region_name"	 />
+			<value name="CITY"					priority="1"	namevalue="city"				 />
+			<value name="LATITUDE" 			priority="0"	namevalue="latitude"		 />
+			<value name="LONGITUDE" 		priority="0"	namevalue="longitude"		 />
+	  </web>    
+	
+	</webservice>
+
+	
+	<webservice name="SEXNAME">
+	
+	  <web url="www.namepedia.org/en/firstname/%s/" method="GET" format="HTML">     	
+	    <value name="SEX" 		priority="1"	start="<img src=\x22/img/icon/" 		end="_big_1.gif" /> 
+	    <value name="NAME" 		priority="0"	start="First name: " 								end="<img src="  />
+	  </web>  
+	    
+	</webservice>
+	
+	
+	<webservice name="USERAGENTID">
+		  	 
+	  
+	  <web url="http://id.furud.net/identify.php?uagent=%s" method="GET" format="HTML" >
+	  	<value name="BROWSER" 	priority="1"	start="\x0A\x20\x20<tr>\x0A\x20\x20\x20\x20<td>\x0A\x20\x20\x20\x20\x20\x20<i>" 								end="</i>" /> 
+	    <value name="SO" 				priority="0"	start="</i>\x0A\x20\x20\x20\x20</td>\x0A\x20\x20\x20\x20<td>\x0A\x20\x20\x20\x20\x20\x20<i>" 		end="</i>" />
+	  </web>     
+	
+	</webservice>
+	
+	
+	<webservice name="TRANSLATION">
+		  	  
+	  <web url="http://translate.google.com/translate_a/t?client=p&text=%s&hl=%s&sl=%s&tl=%s&ie=UTF-8&oe=UTF-8" method="GET" format="JSON" >
+	  	<value name="TRANSLATION" 		priority="1" namevalue="trans" 						/>	 
+	 		<value name="ORIGIN" 					priority="0" namevalue="orig" 						/>	 		
+	 		<value name="SPELL_HTML" 			priority="0" namevalue="spell_html_res" 	/>	 		
+	  </web>    
+	
+	</webservice>
+	
+	
+	<webservice name="MACMANUFACTURED">
+		  	  
+	  <web url="http://coffer.com/mac_find/?string=%s" method="GET" format="HTML" >
+	  	<value name="MANUFACTURED" 		priority="1"	start="http://www.google.com/search?q=" 					end="\x22>" /> 
+	  </web>    
+	
+	</webservice>
+
+</webservices>

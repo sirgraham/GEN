@@ -1,0 +1,472 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\GEN\Cipher\Cipher.cpp" />
+    <ClCompile Include="..\..\..\GEN\Compress\zlib\adler32.c" />
+    <ClCompile Include="..\..\..\GEN\Compress\zlib\compress.c" />
+    <ClCompile Include="..\..\..\GEN\Compress\zlib\crc32.c" />
+    <ClCompile Include="..\..\..\GEN\Compress\zlib\deflate.c" />
+    <ClCompile Include="..\..\..\GEN\Compress\zlib\gzio.c" />
+    <ClCompile Include="..\..\..\GEN\Compress\zlib\infback.c" />
+    <ClCompile Include="..\..\..\GEN\Compress\zlib\inffast.c" />
+    <ClCompile Include="..\..\..\GEN\Compress\zlib\inflate.c" />
+    <ClCompile Include="..\..\..\GEN\Compress\zlib\inftrees.c" />
+    <ClCompile Include="..\..\..\GEN\Compress\zlib\ioapi.c" />
+    <ClCompile Include="..\..\..\GEN\Compress\zlib\trees.c" />
+    <ClCompile Include="..\..\..\GEN\Compress\zlib\uncompr.c" />
+    <ClCompile Include="..\..\..\GEN\Compress\zlib\unzip.c" />
+    <ClCompile Include="..\..\..\GEN\Compress\zlib\zip.c" />
+    <ClCompile Include="..\..\..\GEN\Compress\zlib\zutil.c" />
+    <ClCompile Include="..\..\..\GEN\DataIO\DIOFactory.cpp" />
+    <ClCompile Include="..\..\..\GEN\DataIO\DIOIP.cpp" />
+    <ClCompile Include="..\..\..\GEN\DataIO\DIOStream.cpp" />
+    <ClCompile Include="..\..\..\GEN\DataIO\DIOStreamConfig.cpp" />
+    <ClCompile Include="..\..\..\GEN\DataIO\DIOStreamDevice.cpp" />
+    <ClCompile Include="..\..\..\GEN\DataIO\DIOStreamDeviceUSB.cpp" />
+    <ClCompile Include="..\..\..\GEN\DataIO\DIOStreamEnumDevices.cpp" />
+    <ClCompile Include="..\..\..\GEN\DataIO\DIOStreamI2C.cpp" />
+    <ClCompile Include="..\..\..\GEN\DataIO\DIOStreamI2CConfig.cpp" />
+    <ClCompile Include="..\..\..\GEN\DataIO\DIOStreamSPI.cpp" />
+    <ClCompile Include="..\..\..\GEN\DataIO\DIOStreamSPIConfig.cpp" />
+    <ClCompile Include="..\..\..\GEN\DataIO\DIOStreamUART.cpp" />
+    <ClCompile Include="..\..\..\GEN\DataIO\DIOStreamUARTConfig.cpp" />
+    <ClCompile Include="..\..\..\GEN\DataIO\DIOStreamUARTLocalEnumDevices.cpp" />
+    <ClCompile Include="..\..\..\GEN\DataIO\DIOStreamUSB.cpp" />
+    <ClCompile Include="..\..\..\GEN\DataIO\DIOStreamUSBConfig.cpp" />
+    <ClCompile Include="..\..\..\GEN\DataIO\DIOStreamUSBLocalEnumDevices.cpp" />
+    <ClCompile Include="..\..\..\GEN\DataIO\DIOURL.cpp" />
+    <ClCompile Include="..\..\..\GEN\DataIO\I2C\DIOI2C3DCompassAccelerometerLSM303DLHC.cpp" />
+    <ClCompile Include="..\..\..\GEN\DataIO\I2C\DIOI2CSensorLightTSL2561.cpp" />
+    <ClCompile Include="..\..\..\GEN\DataIO\SPI\DIOSPILCDPhilipsPCF8833.cpp" />
+    <ClCompile Include="..\..\..\GEN\Main\Main.cpp" />
+    <ClCompile Include="..\..\..\GEN\Platforms\Linux\DIOLINUXFactory.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GEN\Platforms\Linux\DIOLINUXPortData.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GEN\Platforms\Linux\DIOLINUXStreamI2C.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GEN\Platforms\Linux\DIOLINUXStreamSPI.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GEN\Platforms\Linux\DIOLINUXStreamUART.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GEN\Platforms\Linux\DIOLINUXStreamUARTLocalEnumDevices.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GEN\Platforms\Linux\DIOLINUXStreamUSB.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GEN\Platforms\Linux\DIOLINUXStreamUSBLocalEnumDevices.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GEN\Platforms\Linux\DIOLINUXURL.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GEN\Platforms\Linux\LINUXMain.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GEN\Platforms\Linux\XLINUXConsole.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GEN\Platforms\Linux\XLINUXDateTime.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GEN\Platforms\Linux\XLINUXDebug.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GEN\Platforms\Linux\XLINUXFactory.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GEN\Platforms\Linux\XLINUXRand.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GEN\Platforms\Linux\XLINUXSleep.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GEN\Platforms\Linux\XLINUXSystem.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GEN\Platforms\Linux\XLINUXThread.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GEN\Platforms\Linux\XLINUXTimer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\DIOSTM32FxxxFactory.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\DIOSTM32FxxxPortData.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\DIOSTM32FxxxStreamI2C.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\DIOSTM32FxxxStreamSPI.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\DIOSTM32FxxxStreamUART.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\DIOSTM32FxxxStreamUSB.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\STM32FxxxMain.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxDateTime.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxDebug.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxFactory.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxRand.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxSleep.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxSystem.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxThread.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxTimer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\GEN\Platforms\Windows\DIOWINDOWSFactory.cpp" />
+    <ClCompile Include="..\..\..\GEN\Platforms\Windows\DIOWINDOWSPortData.cpp" />
+    <ClCompile Include="..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamI2C.cpp" />
+    <ClCompile Include="..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamSPI.cpp" />
+    <ClCompile Include="..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamUART.cpp" />
+    <ClCompile Include="..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamUARTLocalEnumDevices.cpp" />
+    <ClCompile Include="..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamUSB.cpp" />
+    <ClCompile Include="..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamUSBLocalEnumDevices.cpp" />
+    <ClCompile Include="..\..\..\GEN\Platforms\Windows\DIOWINDOWSURL.cpp" />
+    <ClCompile Include="..\..\..\GEN\Platforms\Windows\WINDOWSMain.cpp" />
+    <ClCompile Include="..\..\..\GEN\Platforms\Windows\WINDOWSStackWalker.cpp" />
+    <ClCompile Include="..\..\..\GEN\Platforms\Windows\XWINDOWSConsole.cpp" />
+    <ClCompile Include="..\..\..\GEN\Platforms\Windows\XWINDOWSDateTime.cpp" />
+    <ClCompile Include="..\..\..\GEN\Platforms\Windows\XWINDOWSDebug.cpp" />
+    <ClCompile Include="..\..\..\GEN\Platforms\Windows\XWINDOWSDir.cpp" />
+    <ClCompile Include="..\..\..\GEN\Platforms\Windows\XWINDOWSFactory.cpp" />
+    <ClCompile Include="..\..\..\GEN\Platforms\Windows\XWINDOWSFile.cpp" />
+    <ClCompile Include="..\..\..\GEN\Platforms\Windows\XWINDOWSRand.cpp" />
+    <ClCompile Include="..\..\..\GEN\Platforms\Windows\XWINDOWSSleep.cpp" />
+    <ClCompile Include="..\..\..\GEN\Platforms\Windows\XWINDOWSSystem.cpp" />
+    <ClCompile Include="..\..\..\GEN\Platforms\Windows\XWINDOWSThread.cpp" />
+    <ClCompile Include="..\..\..\GEN\Platforms\Windows\XWINDOWSTimer.cpp" />
+    <ClCompile Include="..\..\..\GEN\Utils\XApplication.cpp" />
+    <ClCompile Include="..\..\..\GEN\Utils\XBase.cpp" />
+    <ClCompile Include="..\..\..\GEN\Utils\XBuffer.cpp" />
+    <ClCompile Include="..\..\..\GEN\Utils\XConsole.cpp" />
+    <ClCompile Include="..\..\..\GEN\Utils\XDateTime.cpp" />
+    <ClCompile Include="..\..\..\GEN\Utils\XDebug.cpp" />
+    <ClCompile Include="..\..\..\GEN\Utils\XDir.cpp" />
+    <ClCompile Include="..\..\..\GEN\Utils\XFactory.cpp" />
+    <ClCompile Include="..\..\..\GEN\Utils\XFile.cpp" />
+    <ClCompile Include="..\..\..\GEN\Utils\XFileTXT.cpp" />
+    <ClCompile Include="..\..\..\GEN\Utils\XFileXML.cpp" />
+    <ClCompile Include="..\..\..\GEN\Utils\XFileZIP.cpp" />
+    <ClCompile Include="..\..\..\GEN\Utils\XFSMachine.cpp" />
+    <ClCompile Include="..\..\..\GEN\Utils\XLanguage.cpp" />
+    <ClCompile Include="..\..\..\GEN\Utils\XLog.cpp" />
+    <ClCompile Include="..\..\..\GEN\Utils\XPath.cpp" />
+    <ClCompile Include="..\..\..\GEN\Utils\XPathsManager.cpp" />
+    <ClCompile Include="..\..\..\GEN\Utils\XPublisher.cpp" />
+    <ClCompile Include="..\..\..\GEN\Utils\XScheduler.cpp" />
+    <ClCompile Include="..\..\..\GEN\Utils\XSleep.cpp" />
+    <ClCompile Include="..\..\..\GEN\Utils\XString.cpp" />
+    <ClCompile Include="..\..\..\GEN\Utils\XSystem.cpp" />
+    <ClCompile Include="..\..\..\GEN\Utils\XThread.cpp" />
+    <ClCompile Include="..\..\..\GEN\Utils\XTimer.cpp" />
+    <ClCompile Include="..\..\..\GEN\Utils\XVariant.cpp" />
+    <ClCompile Include="..\..\Application\TestMicro.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\GEN\Cipher\Cipher.h" />
+    <ClInclude Include="..\..\..\GEN\Compress\zlib\crc32.h" />
+    <ClInclude Include="..\..\..\GEN\Compress\zlib\crypt.h" />
+    <ClInclude Include="..\..\..\GEN\Compress\zlib\deflate.h" />
+    <ClInclude Include="..\..\..\GEN\Compress\zlib\inffast.h" />
+    <ClInclude Include="..\..\..\GEN\Compress\zlib\inffixed.h" />
+    <ClInclude Include="..\..\..\GEN\Compress\zlib\inflate.h" />
+    <ClInclude Include="..\..\..\GEN\Compress\zlib\inftrees.h" />
+    <ClInclude Include="..\..\..\GEN\Compress\zlib\ioapi.h" />
+    <ClInclude Include="..\..\..\GEN\Compress\zlib\trees.h" />
+    <ClInclude Include="..\..\..\GEN\Compress\zlib\unzip.h" />
+    <ClInclude Include="..\..\..\GEN\Compress\zlib\zconf.h" />
+    <ClInclude Include="..\..\..\GEN\Compress\zlib\zconf.in.h" />
+    <ClInclude Include="..\..\..\GEN\Compress\zlib\zip.h" />
+    <ClInclude Include="..\..\..\GEN\Compress\zlib\zlib.h" />
+    <ClInclude Include="..\..\..\GEN\Compress\zlib\zutil.h" />
+    <ClInclude Include="..\..\..\GEN\DataIO\DIODeviceI2C.h" />
+    <ClInclude Include="..\..\..\GEN\DataIO\DIODeviceSPI.h" />
+    <ClInclude Include="..\..\..\GEN\DataIO\DIOFactory.h" />
+    <ClInclude Include="..\..\..\GEN\DataIO\DIOIP.h" />
+    <ClInclude Include="..\..\..\GEN\DataIO\DIOPortData.h" />
+    <ClInclude Include="..\..\..\GEN\DataIO\DIOStream.h" />
+    <ClInclude Include="..\..\..\GEN\DataIO\DIOStreamConfig.h" />
+    <ClInclude Include="..\..\..\GEN\DataIO\DIOStreamDevice.h" />
+    <ClInclude Include="..\..\..\GEN\DataIO\DIOStreamDeviceUSB.h" />
+    <ClInclude Include="..\..\..\GEN\DataIO\DIOStreamEnumDevices.h" />
+    <ClInclude Include="..\..\..\GEN\DataIO\DIOStreamI2C.h" />
+    <ClInclude Include="..\..\..\GEN\DataIO\DIOStreamI2CConfig.h" />
+    <ClInclude Include="..\..\..\GEN\DataIO\DIOStreamSPI.h" />
+    <ClInclude Include="..\..\..\GEN\DataIO\DIOStreamSPIConfig.h" />
+    <ClInclude Include="..\..\..\GEN\DataIO\DIOStreamUART.h" />
+    <ClInclude Include="..\..\..\GEN\DataIO\DIOStreamUARTConfig.h" />
+    <ClInclude Include="..\..\..\GEN\DataIO\DIOStreamUARTLocalEnumDevices.h" />
+    <ClInclude Include="..\..\..\GEN\DataIO\DIOStreamUSB.h" />
+    <ClInclude Include="..\..\..\GEN\DataIO\DIOStreamUSBConfig.h" />
+    <ClInclude Include="..\..\..\GEN\DataIO\DIOStreamUSBLocalEnumDevices.h" />
+    <ClInclude Include="..\..\..\GEN\DataIO\DIOURL.h" />
+    <ClInclude Include="..\..\..\GEN\DataIO\I2C\DIOI2C3DCompassAccelerometerLSM303DLHC.h" />
+    <ClInclude Include="..\..\..\GEN\DataIO\I2C\DIOI2CSensorLightTSL2561.h" />
+    <ClInclude Include="..\..\..\GEN\DataIO\SPI\DIOSPILCDPhilipsPCF8833.h" />
+    <ClInclude Include="..\..\..\GEN\Main\Main.h" />
+    <ClInclude Include="..\..\..\GEN\Platforms\Linux\DIOLINUXFactory.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GEN\Platforms\Linux\DIOLINUXPortData.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GEN\Platforms\Linux\DIOLINUXStreamI2C.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GEN\Platforms\Linux\DIOLINUXStreamSPI.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GEN\Platforms\Linux\DIOLINUXStreamUART.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GEN\Platforms\Linux\DIOLINUXStreamUARTLocalEnumDevices.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GEN\Platforms\Linux\DIOLINUXStreamUSB.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GEN\Platforms\Linux\DIOLINUXStreamUSBLocalEnumDevices.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GEN\Platforms\Linux\DIOLINUXURL.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GEN\Platforms\Linux\LINUXMain.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GEN\Platforms\Linux\XLINUXConsole.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GEN\Platforms\Linux\XLINUXDateTime.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GEN\Platforms\Linux\XLINUXDebug.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GEN\Platforms\Linux\XLINUXFactory.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GEN\Platforms\Linux\XLINUXRand.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GEN\Platforms\Linux\XLINUXSleep.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GEN\Platforms\Linux\XLINUXSystem.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GEN\Platforms\Linux\XLINUXThread.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GEN\Platforms\Linux\XLINUXTimer.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\DIOSTM32FxxxFactory.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\DIOSTM32FxxxPortData.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\DIOSTM32FxxxStreamI2C.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\DIOSTM32FxxxStreamSPI.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\DIOSTM32FxxxStreamUART.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\DIOSTM32FxxxStreamUSB.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\STM32FxxxMain.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxDateTime.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxDebug.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxFactory.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxRand.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxSleep.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxSystem.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxThread.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxTimer.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32Fxxx_HAL.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GEN\Platforms\Windows\DIOWINDOWSFactory.h" />
+    <ClInclude Include="..\..\..\GEN\Platforms\Windows\DIOWINDOWSPortData.h" />
+    <ClInclude Include="..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamI2C.h" />
+    <ClInclude Include="..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamSPI.h" />
+    <ClInclude Include="..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamUART.h" />
+    <ClInclude Include="..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamUARTLocalEnumDevices.h" />
+    <ClInclude Include="..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamUSB.h" />
+    <ClInclude Include="..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamUSBLocalEnumDevices.h" />
+    <ClInclude Include="..\..\..\GEN\Platforms\Windows\DIOWINDOWSURL.h" />
+    <ClInclude Include="..\..\..\GEN\Platforms\Windows\WINDOWSMain.h" />
+    <ClInclude Include="..\..\..\GEN\Platforms\Windows\WINDOWSStackWalker.h" />
+    <ClInclude Include="..\..\..\GEN\Platforms\Windows\XWINDOWSConsole.h" />
+    <ClInclude Include="..\..\..\GEN\Platforms\Windows\XWINDOWSDateTime.h" />
+    <ClInclude Include="..\..\..\GEN\Platforms\Windows\XWINDOWSDebug.h" />
+    <ClInclude Include="..\..\..\GEN\Platforms\Windows\XWINDOWSDir.h" />
+    <ClInclude Include="..\..\..\GEN\Platforms\Windows\XWINDOWSFactory.h" />
+    <ClInclude Include="..\..\..\GEN\Platforms\Windows\XWINDOWSFile.h" />
+    <ClInclude Include="..\..\..\GEN\Platforms\Windows\XWINDOWSRand.h" />
+    <ClInclude Include="..\..\..\GEN\Platforms\Windows\XWINDOWSSleep.h" />
+    <ClInclude Include="..\..\..\GEN\Platforms\Windows\XWINDOWSSystem.h" />
+    <ClInclude Include="..\..\..\GEN\Platforms\Windows\XWINDOWSThread.h" />
+    <ClInclude Include="..\..\..\GEN\Platforms\Windows\XWINDOWSTimer.h" />
+    <ClInclude Include="..\..\..\GEN\Utils\XApplication.h" />
+    <ClInclude Include="..\..\..\GEN\Utils\XBase.h" />
+    <ClInclude Include="..\..\..\GEN\Utils\XBuffer.h" />
+    <ClInclude Include="..\..\..\GEN\Utils\XConsole.h" />
+    <ClInclude Include="..\..\..\GEN\Utils\XDateTime.h" />
+    <ClInclude Include="..\..\..\GEN\Utils\XDebug.h" />
+    <ClInclude Include="..\..\..\GEN\Utils\XDir.h" />
+    <ClInclude Include="..\..\..\GEN\Utils\XFactory.h" />
+    <ClInclude Include="..\..\..\GEN\Utils\XFile.h" />
+    <ClInclude Include="..\..\..\GEN\Utils\XFileTXT.h" />
+    <ClInclude Include="..\..\..\GEN\Utils\XFileXML.h" />
+    <ClInclude Include="..\..\..\GEN\Utils\XFileZIP.h" />
+    <ClInclude Include="..\..\..\GEN\Utils\XFSMachine.h" />
+    <ClInclude Include="..\..\..\GEN\Utils\XLanguage.h" />
+    <ClInclude Include="..\..\..\GEN\Utils\XLog.h" />
+    <ClInclude Include="..\..\..\GEN\Utils\XMap.h" />
+    <ClInclude Include="..\..\..\GEN\Utils\XPath.h" />
+    <ClInclude Include="..\..\..\GEN\Utils\XPathsManager.h" />
+    <ClInclude Include="..\..\..\GEN\Utils\XPublisher.h" />
+    <ClInclude Include="..\..\..\GEN\Utils\XScheduler.h" />
+    <ClInclude Include="..\..\..\GEN\Utils\XSleep.h" />
+    <ClInclude Include="..\..\..\GEN\Utils\XString.h" />
+    <ClInclude Include="..\..\..\GEN\Utils\XSubject.h" />
+    <ClInclude Include="..\..\..\GEN\Utils\XSystem.h" />
+    <ClInclude Include="..\..\..\GEN\Utils\XThread.h" />
+    <ClInclude Include="..\..\..\GEN\Utils\XTimer.h" />
+    <ClInclude Include="..\..\..\GEN\Utils\XVariant.h" />
+    <ClInclude Include="..\..\..\GEN\Utils\XVector.h" />
+    <ClInclude Include="..\..\Application\TestMicro.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{F757F36B-622C-430D-B054-F790312269B3}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>TestMicro</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;WINDOWS;XVISUALC;HW_PC;XDEBUG;DIO_ACTIVE;DIOUART_ACTIVE;DIOUSB_ACTIVE;DIOI2C_ACTIVE;DIOSPI_ACTIVE;DIOPORTDATA_ACTIVE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>..\..\Application;..\..\..\..\GENFrameWork\GEN\Utils;..\..\..\..\GENFrameWork\GEN\DataIO;..\..\..\..\GENFrameWork\GEN\DataIO\I2C;..\..\..\..\GENFrameWork\GEN\DataIO\SPI;..\..\..\..\GENFrameWork\GEN\Compress\zlib;..\..\..\..\GENFrameWork\GEN\Compress;..\..\..\..\GENFrameWork\GEN\Cipher;..\..\..\..\GENFrameWork\GEN\Main;..\..\..\..\GENFrameWork\GEN\Platforms\Microcontrollers\STM32F0xx;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>ws2_32.lib;iphlpapi.lib;setupapi.lib;dbghelp.lib;secur32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

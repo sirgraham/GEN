@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<webscrapers>
+	
+	<webscraper name="GEOLOCATIONIP">
+		
+		<web url="http://www.elhacker.net/api.html?ap=geoloc&host=%s"  method="GET" format="HTML"> 
+			<value name="COUNTRY" 		priority="1" 	start="nombre_pais   : '" 							end="'," />
+			<value name="STATE"				priority="1"	start="region        : '"  							end="'," />
+			<value name="CITY"				priority="1"  start="ciudad        : '"    			      end="'," />
+			<value name="LATITUDE" 		priority="0"	start="latitud       : '"								end="'," />
+			<value name="LONGITUDE" 	priority="0"	start="longitud      : '"								end="'," />
+		</web> 
+		
+	  
+	  <web url="freegeoip.net/json/%s" method="GET" format="JSON" > 
+	 		<value name="COUNTRY" 		priority="1" 	namevalue="country_name" />
+			<value name="STATE"				priority="1"	namevalue="region_name"	 />
+			<value name="CITY"				priority="1"	namevalue="city"				 />
+			<value name="LATITUDE" 		priority="0"	namevalue="latitude"		 />
+			<value name="LONGITUDE" 	priority="0"	namevalue="longitude"		 />
+	  </web>    
+	
+	</webscraper>
+
+</webscrapers>
