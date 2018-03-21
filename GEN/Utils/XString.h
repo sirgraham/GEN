@@ -343,9 +343,8 @@ class XSTRING
 		bool									Format													(const XCHAR* mask, ...);
 		bool									AddFormat												(const XCHAR* mask, ...);
 		bool									UnFormat												(const XCHAR* mask, ...);
-		bool									isspace													(XCHAR);
-		bool									isdigit													(XCHAR);
-		bool									atob														(unsigned long* vp,int base);
+		bool									IsSpace													(XCHAR xchar);
+		bool									IsDigit													(XCHAR xchar);		
 		int										FindCharacterFromSet						(const XCHAR* set);
 				
     bool									AdjustSize											(XDWORD size,bool ahead = false, XCHAR* characters = NULL, bool addstring = false);

@@ -4707,286 +4707,92 @@ bool XSTRING::UnFormat(const XCHAR* mask,...)
 }
 
 
+
+
+
 /*-------------------------------------------------------------------
-//	 XSTRING::Scan
+//	 XSTRING::IsSpace
 */
 /**
-//
 //	
 //
-//	@author		Diego Martinez Ruiz de Gaona 
-//	@version	27/02/2018 11:11:11
+//	@author		Abraham J. Velez 
+//	@version	21/03/2018 9:16:26
+//
+//	@return		bool : 
+//
+//	@param		XCHAR : 
+//
+*//*-----------------------------------------------------------------*/
+bool XSTRING::IsSpace(XCHAR xchar) 
+{
+	if(xchar == 0x20) return true; // space
+	if(xchar == 0x09) return true; //	horizontal tab(TAB)
+	if(xchar == 0x0a) return true; //	newline(LF)
+	if(xchar == 0x0b) return true; //	vertical tab(VT)
+	if(xchar == 0x0c) return true; //	feed(FF)
+	if(xchar == 0x0d) return true; //	carriage return (CR)
+
+	return false;
+}
+
+
+
+/*-------------------------------------------------------------------
+//	 XSTRING::IsDigit
+*/
+/**
+//	
+//
+//	@author		Abraham J. Velez 
+//	@version	21/03/2018 9:17:15
+//
+//	@return		bool : 
+//
+//	@param		XCHAR : 
+//
+*//*-----------------------------------------------------------------*/
+bool XSTRING::IsDigit(XCHAR xchar)
+{
+	return (xchar >= __C('0') && xchar <= __C('9'));
+}
+
+
+
+/*-------------------------------------------------------------------
+//	 XSTRING::FindCharacterFromSet
+*/
+/**
+//	
+//
+//	@author		Abraham J. Velez 
+//	@version	21/03/2018 9:16:59
+//
 //	@return		int : 
 //
 //	@param		const : 
-//	@param		... : 
 //
-*//*----------------------------------------------------------------*/
-/*
-int XSTRING::Scan(const XCHAR* mask, ...)
-{
-		va_list ap;
-		va_start(ap, mask);
-		//int n=Scanf(this->text,mask,ap);
-		int n = UNICODESSCANF(this->text, mask, ap);
-		va_end(ap);
-		return n;
-}
-
-int XSTRING::Scanf(const XCHAR *buf, const XCHAR *s, va_list ap)
-{
-		
-		int             count, noassign, base, lflag;
-		unsigned long   width;
-		//const XCHAR     *tc;
-		//XCHAR           *t, tmp[200];
-		XCHAR           tmp[200];
-
-		count = noassign = width = lflag = 0;
-		while (*s && *buf) {
-				while (isspace(*s))
-						s++;
-				if (*s == __C('%')) {
-						s++;
-						for (; *s; s++) {
-								if (
-										*s != __C('d') &&
-										*s != __C('i') &&
-										*s != __C('b') &&
-										*s != __C('o') &&
-										*s != __C('u') &&
-										*s != __C('x') &&
-										*s != __C('c') &&
-										*s != __C('s') &&
-										*s != __C('e') &&
-										*s != __C('f') &&
-										*s != __C('g') &&
-										*s != __C('%'))
-										break;
-								//if (strchr("dibouxcsefg%", *s))
-								//		break;
-								if (*s == '*')
-										noassign = 1;
-								else if (*s == 'l' || *s == 'L')
-										lflag = 1;
-								else if (*s >= '1' && *s <= '9') {
-
-										//for (tc = s; isdigit(*s); s++);
-										//strncpy(tmp, tc, s - tc);
-										XCHAR* t = tmp;
-										while (isdigit(*s))
-										{
-												*t = *s;
-												t++;
-												s++;
-										}
-										*t = __C('\0');
-										//tmp[s - tc] = '\0';
-										XSTRING stmp = tmp;
-										stmp.atob(&width, 10);
-										s--;
-								}
-
-								if (*s == 's') {
-										while (isspace(*buf))
-												buf++;
-										if (!width)
-										{
-												//	width = strcspn(buf, ISSPACE); //" \t\n\r\f\v"
-												XSTRING sbuf = buf;
-												width = sbuf.FindCharacterFromSet(__L(" \t\n\r\f\v"));
-										}
-										if (!noassign) {
-												{
-														//	strncpy(t = va_arg(ap, char *), buf, width);
-														XCHAR* stringpointer = va_arg(ap, XCHAR *);
-														XSTRING s;
-														XSTRING sbuf = buf;
-														sbuf.Copy(0, width, s);
-														memcpy(stringpointer, s.Get(), s.GetSize()*sizeof(XCHAR));
-												}
-												//t[width] = __C('\0');
-										}
-										buf += width;
-								}
-								else if (*s == 'c') {
-										if (!width)
-												width = 1;
-										if (!noassign) {
-												{
-														//strncpy(t = va_arg(ap, char *), buf, width);
-														XCHAR* stringpointer = va_arg(ap, XCHAR *);
-														XSTRING s;
-														XSTRING sbuf = buf;
-														sbuf.Copy(0, width, s);
-														memcpy(stringpointer, sbuf.Get(), sbuf.GetSize()*sizeof(XCHAR));
-												}
-
-												//t[width] = __C('\0');
-										}
-										buf += width;
-								}
-								else
-										//if (strchr("dobxu", *s)) {
-										if (
-												*s == __C('d') ||
-												*s == __C('o') ||
-												*s == __C('b') ||
-												*s == __C('x') ||
-												*s == __C('u')) {
-												while (isspace(*buf))
-														buf++;
-												if (*s == __C('d') || *s == __C('u'))
-														base = 10;
-												else if (*s == __C('x'))
-														base = 16;
-												else if (*s == __C('o'))
-														base = 8;
-												else if (*s == __C('b'))
-														base = 2;
-												if (!width) {
-														if (isspace(*(s + 1)) || *(s + 1) == 0)
-														{
-																//width = strcspn(buf, ISSPACE);
-																XSTRING sbuf = buf;
-																width = sbuf.FindCharacterFromSet(__L(" \t\n\r\f\v"));
-														}
-														else
-														{
-																//width = strchr(buf, *(s + 1)) - buf;
-																XSTRING sbuf = buf;
-																width = sbuf.FindCharacter(*(s + 1));
-														}
-												}
-												//strncpy(tmp, buf, width);
-												XSTRING stmp;
-												XSTRING sbuf = buf;
-												sbuf.Copy(0, width, stmp);
-												width = stmp.FindCharacterFromSet(__L(" \t\n\r\f\v"));
-												//tmp[width] = '\0';
-												stmp.Get()[width] = __C('\0');
-												buf += width;
-												if (!noassign)
-												{
-														unsigned long* v = va_arg(ap, unsigned long *);
-														stmp.atob(v, base);
-												}
-										}
-								if (!noassign)
-										count++;
-								width = noassign = lflag = 0;
-								s++;
-						}
-				}
-				else {
-						while (isspace(*buf))
-								buf++;
-						if (*s != *buf)
-								break;
-						else
-								s++, buf++;
-				}
-		}
-		return (count);
-
-return 0;
-}
-
-*/
-
-bool XSTRING::isspace(XCHAR s)  
-{
-		if (s == 0x20) return true; // space
-		if (s == 0x09) return true; //	horizontal tab(TAB)
-		if (s == 0x0a) return true; //		newline(LF)
-		if (s == 0x0b) return true; //		vertical tab(VT)
-		if (s == 0x0c) return true; //		feed(FF)
-		if (s == 0x0d) return true; //		carriage return (CR)
-		return false;
-}
-
-bool XSTRING::isdigit(XCHAR s)
-{
-		return (s >= __C('0') && s <= __C('9'));
-}
-
-bool XSTRING::atob(unsigned long* vp,int base)
-{
-  unsigned long value, v1, v2;
-  XCHAR* q; 
-  //XCHAR  tmp[20];
-  int digit;
-  XCHAR* p = text;
-
-int _p = 0;
-
-if (p[0] == '0' && (p[1] == 'x' || p[1] == 'X')) {
-		base = 16;
-		p += 2;
-		_p += 2;
-}
-
-int posq;
-if ((posq = this->FindCharacter(__C('.')))!=NOTFOUND)
-{
-		q = &(this->Get()[posq]);
-
-		if (base == 16) {				
-				
-				//strncpy(tmp, p, q - p);				
-				XSTRING stmp;
-				this->Copy(_p, posq - _p, stmp);
-				///tmp[posq - _p] = __C('\0');
-				
-				if (!stmp.atob(&v1,16))
-						return (0);
-
-				q++;
-				XSTRING sq = q;
-				if (sq.FindCharacter(__C('.'))==NOTFOUND)
-						return (0);
-				
-				if (!sq.atob(&v2, 16))
-						return (0);
-				*vp = (v1 << 16) + v2;
-				return (1);
-		}
-}
-
-value = *vp = 0;
-for (; *p; p++) {
-		if (*p >= '0' && *p <= '9')
-				digit = *p - '0';
-		else if (*p >= 'a' && *p <= 'f')
-				digit = *p - 'a' + 10;
-		else if (*p >= 'A' && *p <= 'F')
-				digit = *p - 'A' + 10;
-		else
-				return (0);
-
-		if (digit >= base)
-				return (0);
-		value *= base;
-		value += digit;
-}
-*vp = value;
-return (1);
-}
-
+*//*-----------------------------------------------------------------*/
 int XSTRING::FindCharacterFromSet(const XCHAR* chars)
 {
-		XCHAR c, *s;
-		const XCHAR*p;
+	XCHAR					c;
+	XCHAR*				s;
+	const XCHAR*	p;
 
-		for (s = text, c = *s; c != 0; s++, c = *s) {
-				for (p = chars; *p != 0; p++) {
-						if (c == *p) {
-								return s - text;
+	for(s = text, c = *s; c != 0; s++, c = *s) 
+		{
+			for(p = chars; *p != 0; p++) 
+				{
+					if(c == *p) 
+						{
+							return s - text;
 						}
 				}
 		}
-		return s - text;
+
+	return s - text;
 }
+
 
 
 /*-------------------------------------------------------------------
