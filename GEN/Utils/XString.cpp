@@ -4726,12 +4726,12 @@ bool XSTRING::UnFormat(const XCHAR* mask,...)
 *//*-----------------------------------------------------------------*/
 bool XSTRING::IsSpace(XCHAR xchar) 
 {
-	if(xchar == 0x20) return true; // space
-	if(xchar == 0x09) return true; //	horizontal tab(TAB)
-	if(xchar == 0x0a) return true; //	newline(LF)
-	if(xchar == 0x0b) return true; //	vertical tab(VT)
-	if(xchar == 0x0c) return true; //	feed(FF)
-	if(xchar == 0x0d) return true; //	carriage return (CR)
+	if(xchar == 0x20) return true;	//  space
+	if(xchar == 0x09) return true;	//	horizontal tab(TAB)
+	if(xchar == 0x0a) return true;	//	newline(LF)
+	if(xchar == 0x0b) return true;	//	vertical tab(VT)
+	if(xchar == 0x0c) return true;	//	feed(FF)
+	if(xchar == 0x0d) return true;	//	carriage return (CR)
 
 	return false;
 }
@@ -4921,12 +4921,15 @@ bool XSTRING::AdjustSize()
 bool XSTRING::BinaryCompare(XSTRING& string)
 {
 	if(size != string.size)
-	{
-		return false;
-	}
+		{
+			return false;
+		}
 
 	return memcmp(text, string.text, size*sizeof(XCHAR)) == 0;
 }
+
+
+
 
 /*-------------------------------------------------------------------
 //	XSTRING::Explode
