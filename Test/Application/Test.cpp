@@ -297,7 +297,7 @@ bool TEST::Ini()
 
 	//----------------------------------------------------------------	-------------------------------
 
-	XDEBUG_SETTARGET(0, XDEBUGCTRLTYPE_NET			, XDEBUG_DEFAULT_NETAIM);	
+	XDEBUG_SETTARGET(0, XDEBUGCTRLTYPE_NET			, XDEBUG_DEFAULT_NETAIM1);	
 	XDEBUG_SETTARGET(1, XDEBUGCTRLTYPE_NET			, XDEBUG_DEFAULT_NETAIM2);	
 	XDEBUG_SETTARGET(2, XDEBUGCTRLTYPE_NET			, XDEBUG_DEFAULT_NETAIM3);	
 	XDEBUG_SETTARGET(3, XDEBUGCTRLTYPE_NET			, XDEBUG_DEFAULT_NETAIM4);	
@@ -463,7 +463,7 @@ bool TEST::FirstUpdate()
 	//if(!Test_DIOStreamTCPIP(modeserver))									return false;
 	//if(!Test_OBEX())																			return false;
 	//if(!Test_ATCommand())																	return false;
-	//if(!Test_SSHReverse())																return false;
+	if(!Test_SSHReverse())																return false;
 	//if(!Test_ClientBTModuleCSR())													return false;
 	//if(!Test_HASHGeneric())																return false;		
 	//if(!Test_HASHCOMP128())																return false;
@@ -479,7 +479,7 @@ bool TEST::FirstUpdate()
 	//if(!Test_NTP())																				return false;		
 	//if(!Test_Log())																				return false;
 	//if(!Test_Scheduler())																	return false;
-	if(!Test_Script())																		return false;
+	   //if(!Test_Script())																		return false;
 	//if(!Test_OrganicCipherDB())														return false;
 	//if(!Test_AOSONGSensor())															return false;
 	//if(!Test_Rele220V())																	return false;
@@ -2467,12 +2467,22 @@ bool TEST::Test_SSHReverse()
 	string = __L("Execute reverse SSH  : ");
 	xconsole->PrintMessage(string.Get(), 1, true, false);
 			
+	/*
 	DIOSSHREVERSE::GetInstance().GetURLTarget()->Set(__L("laboratory.servegame.org"));
 	DIOSSHREVERSE::GetInstance().GetLocalIP()->Set(__L("localhost"));
 	DIOSSHREVERSE::GetInstance().GetLogin()->Set(__L("root"));
 	DIOSSHREVERSE::GetInstance().GetPassword()->Set(__L("[pass]"));
 	DIOSSHREVERSE::GetInstance().SetPort(2210);
-			
+	*/
+		
+	DIOSSHREVERSE::GetInstance().GetURLTarget()->Set(__L("192.168.1.18"));
+	DIOSSHREVERSE::GetInstance().GetLocalIP()->Set(__L("localhost"));
+	DIOSSHREVERSE::GetInstance().GetLogin()->Set(__L("root"));
+	DIOSSHREVERSE::GetInstance().GetPassword()->Set(__L("Isploon0314"));
+	DIOSSHREVERSE::GetInstance().SetPort(2200);	
+
+
+
 	DIOSSHREVERSE::GetInstance().Activate();			
 	
 	stringresult = (DIOSSHREVERSE::GetInstance().IsRunning()) ? __L("Ok.") : __L("ERROR!");

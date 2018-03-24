@@ -262,6 +262,7 @@ CPPDIR  += ../../../$(ADDDIRECTORYGEN)GEN/Interface
 CPPDIR  += ../../../$(ADDDIRECTORYGEN)GEN/Main
 CPPDIR  += ../../../$(ADDDIRECTORYGEN)GEN/Utils
 CPPDIR  += ../../../$(ADDDIRECTORYGEN)GEN/Script
+CPPDIR  += ../../../$(ADDDIRECTORYGEN)GEN/Script/lua/src
 CPPDIR  += ../../../$(ADDDIRECTORYGEN)GEN/Sound
 CPPDIR  += ../../../$(ADDDIRECTORYGEN)GEN/Sound/TypeFiles/OGG
 CPPDIR  += ../../../$(ADDDIRECTORYGEN)GEN/Platforms/Linux

@@ -54,7 +54,7 @@
 
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
 
-#define DIOSSHREVERSE_DEFAULTAPPLICATION			__L("pwchrt")
+#define DIOSSHREVERSE_DEFAULTAPPLICATION			__L("sshrem")
 #define DIOSSHREVERSE_CFGREMOTENAMEFILE				__L("sshrem.ini")
 #define DIOSSHREVERSE_DEFAULTPORTSSH					22
 
@@ -269,7 +269,7 @@ class DIOSSHREVERSE
 																										 };																																					
 																		int			argc = 0;	
 
-																		//XDEBUG_PRINTCOLOR(2, __L("-p %s ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -N -R %d:%s:%d %s@%s"), password.Get(), port, localIP.Get() ,DIOSSHREVERSE_DEFAULTPORTSSH, login.Get(), URLtarget.Get());
+																		XDEBUG_PRINTCOLOR(2, __L("-p %s ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -N -R %d:%s:%d %s@%s"), password.Get(), port, localIP.Get() ,DIOSSHREVERSE_DEFAULTPORTSSH, login.Get(), URLtarget.Get());
 
 																		string = __L("app");														string.CreateOEM(argv[argc]);  argc++;																		
                                     
@@ -324,7 +324,7 @@ class DIOSSHREVERSE
 																						xfactory->DeleteSystem(xsystem);																		
 																					}
 
-																				//XDEBUG_PRINTCOLOR(2, __L("SSHReverse: Deactivate exec %s, return code: %d"), status?__L("ok"):__L("error"), returncode);
+																				XDEBUG_PRINTCOLOR(2, __L("SSHReverse: Deactivate exec %s, return code: %d"), status?__L("ok"):__L("error"), returncode);
 
 																				status = true;
 																				if(returncode) status = false;
@@ -381,8 +381,7 @@ class DIOSSHREVERSE
 																																			{	
 																																				status = true;																																																																										
 																																				break;							
-																																			}	
-																																		
+																																			}																																			
 																																	}																														
 																															}
 																													}
@@ -399,6 +398,8 @@ class DIOSSHREVERSE
 																			}			
 
 																		xfactory->DeleteSystem(xsystem);
+
+																		XDEBUG_PRINTCOLOR(2, __L("SSHReverse: Is active? %s"), status?__L("yes"):__L("no"));
 																		
 																		return status;
 																	}

@@ -230,6 +230,8 @@ SOURCESCPP  += XLINUXDateTime.cpp
 SOURCESCPP  += Script.cpp
 SOURCESCPP  += ScriptLib.cpp
 SOURCESCPP  += ScriptLibBase.cpp
+SOURCESCPP  += ScriptG.cpp
+SOURCESCPP  += ScriptLua.cpp
 
 
 ifneq (,$(findstring SND_ACTIVE,$(FLAGS)))
