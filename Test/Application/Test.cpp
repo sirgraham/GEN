@@ -879,6 +879,10 @@ bool TEST::Test_WaitThread()
 		return true;
 }
 
+
+
+
+
 /*-------------------------------------------------------------------
 //  TEST::Test_XBuffer1
 */ 
@@ -2458,38 +2462,54 @@ bool TEST::Test_SSHReverse()
 			delete webscraperpublicip;
 		}
 	
+	
+		
+	
 	string.Format(__L("public IP            : [%s]"), publicIPstring.Get());
 	xconsole->PrintMessage(string.Get(), 1, true, true);
 	
 	string.Format(__L("local IP             : [%s]"), localIP.Get());
 	xconsole->PrintMessage(string.Get(), 1, true, true);
 
-	string = __L("Execute reverse SSH  : ");
-	xconsole->PrintMessage(string.Get(), 1, true, false);
+	int c = 0;
+	while(1)
+		{			
 			
-	/*
-	DIOSSHREVERSE::GetInstance().GetURLTarget()->Set(__L("laboratory.servegame.org"));
-	DIOSSHREVERSE::GetInstance().GetLocalIP()->Set(__L("localhost"));
-	DIOSSHREVERSE::GetInstance().GetLogin()->Set(__L("root"));
-	DIOSSHREVERSE::GetInstance().GetPassword()->Set(__L("[pass]"));
-	DIOSSHREVERSE::GetInstance().SetPort(2210);
-	*/
-		
-	DIOSSHREVERSE::GetInstance().GetURLTarget()->Set(__L("192.168.1.18"));
-	DIOSSHREVERSE::GetInstance().GetLocalIP()->Set(__L("localhost"));
-	DIOSSHREVERSE::GetInstance().GetLogin()->Set(__L("root"));
-	DIOSSHREVERSE::GetInstance().GetPassword()->Set(__L("Isploon0314"));
-	DIOSSHREVERSE::GetInstance().SetPort(2200);	
+			DIOSSHREVERSE::GetInstance().GetURLTarget()->Set(__L("dns.com"));
+			DIOSSHREVERSE::GetInstance().GetLocalIP()->Set(__L("localhost"));
+			DIOSSHREVERSE::GetInstance().GetLogin()->Set(__L("root"));
+			DIOSSHREVERSE::GetInstance().GetPassword()->Set(__L("[pass]"));
+			DIOSSHREVERSE::GetInstance().SetPort(2210);
+			
 
+			XBYTE key = 0;
+			while(!xconsole->KBHit())
+				{
+					xsleep->MilliSeconds(100);
+				}
+				
+			key = xconsole->GetChar();						
+			switch(key)
+				{
+					case 'Q': DIOSSHREVERSE::GetInstance().DelInstance();	
+										return true; 
 
+					case 'A': DIOSSHREVERSE::GetInstance().Activate();			break;										
+					case 'D': DIOSSHREVERSE::GetInstance().DeActivate();		break;
 
-	DIOSSHREVERSE::GetInstance().Activate();			
-	
-	stringresult = (DIOSSHREVERSE::GetInstance().IsRunning()) ? __L("Ok.") : __L("ERROR!");
-	xconsole->PrintMessage(stringresult.Get(), 0, false, true);
+				}
+
+			string.Format(__L("\n[%2d] Execute reverse SSH  : "), c);
+			xconsole->PrintMessage(string.Get(), 1, true, true);
+
+			stringresult = (DIOSSHREVERSE::GetInstance().IsRunning()) ? __L("Ok.") : __L("ERROR!");
+			xconsole->PrintMessage(stringresult.Get(), 0, false, true);
+
+			c++;
+		}
 
 	DIOSSHREVERSE::GetInstance().DelInstance();	
-	
+
 	return true;
 }
 
