@@ -39,7 +39,7 @@
 #include "XFileDBF.h"
 #include "XDebug.h"
 #include "XThread.h"
-#include "XFileHASH.h"
+#include "XFileHash.h"
 #include "XConsole.h"
 #include "XApplication.h"
 #include "XMPInteger.h"
