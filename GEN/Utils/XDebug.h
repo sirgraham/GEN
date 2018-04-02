@@ -61,7 +61,6 @@ enum XDEBUGCTRLTYPE
 #define XDEBUG_DEFAULT_SPECIALAIM						__L("Debug Monitor")
 
 
-//#define XDEBUG_DEFAULT_NETURL		            __L("xdebug.kicks-ass.org")
 #define XDEBUG_DEFAULT_NETAIM1	            __L("xdebug1.kicks-ass.org:10021")
 #define XDEBUG_DEFAULT_NETAIM2		          __L("xdebug2.kicks-ass.org:10022")
 #define XDEBUG_DEFAULT_NETAIM3	            __L("xdebug3.kicks-ass.org:10023")

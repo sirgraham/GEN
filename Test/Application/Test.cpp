@@ -420,10 +420,10 @@ bool TEST::FirstUpdate()
 	//--------------------------------------------------------------------------------------
 
 
-	xconsole->TipicalHeader_Show(2012, APPLICATION_NAMEAPP, APPLICATION_VERSION
-																							, APPLICATION_SUBVERSION
-																							, APPLICATION_SUBVERSIONERR
-																							, APPLICATION_ENTERPRISE);
+	xconsole->TipicalHeader_Show(2012	, APPLICATION_NAMEAPP, APPLICATION_VERSION
+																		, APPLICATION_SUBVERSION
+																 		, APPLICATION_SUBVERSIONERR
+																		, APPLICATION_ENTERPRISE);
 
 	xconsole->PrintMessage(__L("\n\n"),0,false,false);
 	
@@ -444,7 +444,7 @@ bool TEST::FirstUpdate()
 			
 	XLOG::GetInstance().SetLimit(XLOGTYPELIMIT_SIZE, 500*1000, 10);
 	XLOG::GetInstance().SetBackup(true, 3, true);
-	XLOG::GetInstance().SetFilters(__L("Status, Generic, Update"), 0x0F);
+	XLOG::GetInstance().SetFilters(__L("Status, Generic, Update, Ini, End, SSHreverse"), 0x0F);
 	
 
 	//--------------------------------------------------------------------------------------
@@ -479,7 +479,7 @@ bool TEST::FirstUpdate()
 	//if(!Test_NTP())																				return false;		
 	//if(!Test_Log())																				return false;
 	//if(!Test_Scheduler())																	return false;
-	   //if(!Test_Script())																		return false;
+//if(!Test_Script())																		return false;
 	//if(!Test_OrganicCipherDB())														return false;
 	//if(!Test_AOSONGSensor())															return false;
 	//if(!Test_Rele220V())																	return false;
@@ -2480,7 +2480,6 @@ bool TEST::Test_SSHReverse()
 			DIOSSHREVERSE::GetInstance().GetLogin()->Set(__L("root"));
 			DIOSSHREVERSE::GetInstance().GetPassword()->Set(__L("[pass]"));
 			DIOSSHREVERSE::GetInstance().SetPort(2210);
-			
 
 			XBYTE key = 0;
 			while(!xconsole->KBHit())
