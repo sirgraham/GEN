@@ -398,8 +398,10 @@ bool DIOLINUXSTREAMTCPIP::SetPropertysHandle(int socket)
 	opt = 1;
   if(setsockopt(socket, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt)) < 0) return false;
 
+	#ifdef SO_REUSEPORT
 	opt = 1;
-  //if(setsockopt(socket, SOL_SOCKET, SO_REUSEPORT, &opt, sizeof(opt)) < 0) return false;
+  if(setsockopt(socket, SOL_SOCKET, SO_REUSEPORT, &opt, sizeof(opt)) < 0) return false;
+	#endif
 
 	opt = 1;
 	if(setsockopt(socket, SOL_SOCKET, SO_KEEPALIVE , &opt, sizeof(opt)) < 0) return false;
