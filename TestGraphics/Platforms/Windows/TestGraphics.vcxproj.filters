@@ -3548,7 +3548,6 @@
     <ClInclude Include="..\..\..\GEN\Graphic\GRPOverlayPass.h">
       <Filter>Source Files\GEN\Graphic\Passes</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\GEN\UserInterface\UIMotion.h" />
     <ClInclude Include="..\..\..\GEN\DataIO\DIORemoteFileConfig.h">
       <Filter>Source Files\GEN\DataIO</Filter>
     </ClInclude>
@@ -3608,6 +3607,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Application\TestTexture.h">
       <Filter>Source Files\Application\GRAPHIC\TextureOperations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\GEN\UserInterface\UIMotion.h">
+      <Filter>Source Files\GEN\UserInterface</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

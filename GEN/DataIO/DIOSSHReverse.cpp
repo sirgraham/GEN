@@ -190,7 +190,7 @@ bool DIOSSHREVERSE::Activate()
 	XSYSTEM* xsystem = xfactory->CreateSystem();
 	if(xsystem) 
 		{				
-			command.Format(__L("%s -p %s ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -N -R %d:%s:%d %s@%s > /dev/null &"), DIOSSHREVERSE_DEFAULTAPPLICATION, password.Get(), port, localIP.Get() ,DIOSSHREVERSE_DEFAULTPORTSSH, login.Get(), URLtarget.Get());																				
+			command.Format(__L("%s -p %s ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o ExitOnForwardFailure=yes -N -R %d:%s:%d %s@%s &"), DIOSSHREVERSE_DEFAULTAPPLICATION, password.Get(), port, localIP.Get() ,DIOSSHREVERSE_DEFAULTPORTSSH, login.Get(), URLtarget.Get());																				
 			status = xsystem->MakeCommand(command.Get(), &returncode);
 			
 			xfactory->DeleteSystem(xsystem);																		
