@@ -681,6 +681,7 @@
     <ClCompile Include="..\..\..\GEN\DataIO\DIOProtocolConnexionsManager.cpp" />
     <ClCompile Include="..\..\..\GEN\DataIO\DIOSMTP.cpp" />
     <ClCompile Include="..\..\..\GEN\DataIO\DIOSNMP.cpp" />
+    <ClCompile Include="..\..\..\GEN\DataIO\DIOSSHReverse.cpp" />
     <ClCompile Include="..\..\..\GEN\DataIO\DIOStream.cpp" />
     <ClCompile Include="..\..\..\GEN\DataIO\DIOStreamBluetooth.cpp" />
     <ClCompile Include="..\..\..\GEN\DataIO\DIOStreamBluetoothConfig.cpp" />

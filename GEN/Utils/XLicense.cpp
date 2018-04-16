@@ -16,7 +16,7 @@
 
 #include "XFactory.h"
 #include "XPublisher.h"
-#include "XFileHASH.h"
+#include "XFileHash.h"
 #include "XFile.h"
 #include "XFileINI.h"
 

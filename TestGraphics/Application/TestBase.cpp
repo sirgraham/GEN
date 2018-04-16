@@ -40,6 +40,7 @@
 
 #include "XMemory.h"
 
+
 /*---- GENERAL VARIABLE ------------------------------------------------------------------*/
 	
 	
@@ -67,15 +68,12 @@ TESTBASE::TESTBASE(GRPAPPLICATION* xapplication)
 																
 	this->xapplication	= xapplication;
 
-			if (!keyboard)
-			{
-				keyboard = INPMANAGER::GetInstance()->GetDevice(INPDEVICE_TYPE_KEYBOARD);
-			}
-			if (!mouse)
-			{
-				mouse = INPMANAGER::GetInstance()->GetDevice(INPDEVICE_TYPE_MOUSE);
-			}
+	if(!keyboard) keyboard = INPMANAGER::GetInstance()->GetDevice(INPDEVICE_TYPE_KEYBOARD);	
+	if(!mouse)		mouse		 = INPMANAGER::GetInstance()->GetDevice(INPDEVICE_TYPE_MOUSE);		
 }
+
+
+
 
 /*-------------------------------------------------------------------
 //	TESTBASE::PathManagement
@@ -117,6 +115,8 @@ bool TESTBASE::PathManagement(XCHAR* addpath)
 }
 
 
+
+
 /*-------------------------------------------------------------------
 //	TESTBASE::InputManagement
 */	
@@ -133,113 +133,134 @@ bool TESTBASE::PathManagement(XCHAR* addpath)
 /*-----------------------------------------------------------------*/
 bool TESTBASE::InputManagement()
 { 
-			keyboard = INPMANAGER::GetInstance()->GetDevice(INPDEVICE_TYPE_KEYBOARD);
+	keyboard = INPMANAGER::GetInstance()->GetDevice(INPDEVICE_TYPE_KEYBOARD);
 	if(!keyboard) return false;
 
-			mouse = INPMANAGER::GetInstance()->GetDevice(INPDEVICE_TYPE_MOUSE);
-	if (!mouse)
-			mouse = INPMANAGER::GetInstance()->GetDevice(INPDEVICE_TYPE_TOUCHSCREEN);
+	mouse = INPMANAGER::GetInstance()->GetDevice(INPDEVICE_TYPE_MOUSE);
+	if (!mouse) mouse = INPMANAGER::GetInstance()->GetDevice(INPDEVICE_TYPE_TOUCHSCREEN);
 	if (!mouse) return false;
 
 
-		if(keyboard->GetButton(INPBUTTON_ID_ESCAPE))
-		if(keyboard->GetButton(INPBUTTON_ID_ESCAPE)->GetState()==INPBUTTON_STATE_RELEASED) 			
-		xapplication->SetExitStatus(XAPPLICATIONEXITTYPE_BYUSER); 
+	if(keyboard->GetButton(INPBUTTON_ID_ESCAPE))
+	if(keyboard->GetButton(INPBUTTON_ID_ESCAPE)->GetState()==INPBUTTON_STATE_RELEASED) 			
+	xapplication->SetExitStatus(XAPPLICATIONEXITTYPE_BYUSER); 
 
 	if(keyboard->GetButton(INPBUTTON_ID_F1))												
 	if(keyboard->GetButton(INPBUTTON_ID_F1)->GetState()==INPBUTTON_STATE_RELEASED) 			
-					xapplication->GetMainScene()->ShowDebug(GRPDEBUG_FLAG_NORMAL);
+	xapplication->GetMainScene()->ShowDebug(GRPDEBUG_FLAG_NORMAL);
 
 	if(keyboard->GetButton(INPBUTTON_ID_F2))
 	if(keyboard->GetButton(INPBUTTON_ID_F2)->GetState()==INPBUTTON_STATE_RELEASED) 			
-					xapplication->GetMainScene()->ShowDebug(GRPDEBUG_FLAG_BOTH);	
+	xapplication->GetMainScene()->ShowDebug(GRPDEBUG_FLAG_BOTH);	
 
 	if(keyboard->GetButton(INPBUTTON_ID_F3))
 	if(keyboard->GetButton(INPBUTTON_ID_F3)->GetState()==INPBUTTON_STATE_RELEASED) 			
-					xapplication->GetMainScene()->ShowDebug(GRPDEBUG_FLAG_DEBUG);	
+	xapplication->GetMainScene()->ShowDebug(GRPDEBUG_FLAG_DEBUG);	
 
 	float speed=1.0f;
 
 	if(keyboard->GetButton(INPBUTTON_ID_UP))
-	if(keyboard->GetButton(INPBUTTON_ID_UP)->GetState()==INPBUTTON_STATE_HOLD) 			
-	{
-		GRPCAMERA* cam=xapplication->GetMainScene()->GetCamera();
-		const GRPVECTOR* v=cam->GetPosition();
-		cam->SetPosition(v->vector[0],v->vector[1]+speed,v->vector[2]);		
-	}
+		{
+			if(keyboard->GetButton(INPBUTTON_ID_UP)->GetState()==INPBUTTON_STATE_HOLD) 			
+				{
+					GRPCAMERA* cam		  =	xapplication->GetMainScene()->GetCamera();
+					const GRPVECTOR* v	= cam->GetPosition();
+			
+					cam->SetPosition(v->vector[0],v->vector[1]+speed,v->vector[2]);		
+				}
+		}
+
 	if(keyboard->GetButton(INPBUTTON_ID_DOWN))
-	if(keyboard->GetButton(INPBUTTON_ID_DOWN)->GetState()==INPBUTTON_STATE_HOLD) 			
-	{
-		GRPCAMERA* cam=xapplication->GetMainScene()->GetCamera();
-		const GRPVECTOR* v=cam->GetPosition();
-		cam->SetPosition(v->vector[0],v->vector[1]-speed,v->vector[2]);
-	}
+		{
+			if(keyboard->GetButton(INPBUTTON_ID_DOWN)->GetState()==INPBUTTON_STATE_HOLD) 			
+				{
+					GRPCAMERA*			 cam	=	xapplication->GetMainScene()->GetCamera();
+					const GRPVECTOR* v		=	cam->GetPosition();
+
+					cam->SetPosition(v->vector[0],v->vector[1]-speed,v->vector[2]);
+				}
+		}
+
 	if(keyboard->GetButton(INPBUTTON_ID_RIGHT))
-	if(keyboard->GetButton(INPBUTTON_ID_RIGHT)->GetState()==INPBUTTON_STATE_HOLD) 			
-	{
-		GRPCAMERA* cam=xapplication->GetMainScene()->GetCamera();
-		const GRPVECTOR* v=cam->GetPosition();
-		cam->SetPosition(v->vector[0]+speed,v->vector[1],v->vector[2]);
-	}
+		{
+			if(keyboard->GetButton(INPBUTTON_ID_RIGHT)->GetState()==INPBUTTON_STATE_HOLD) 			
+				{
+					GRPCAMERA*			 cam = xapplication->GetMainScene()->GetCamera();
+					const GRPVECTOR* v   = cam->GetPosition();
+
+					cam->SetPosition(v->vector[0]+speed,v->vector[1],v->vector[2]);
+				}
+		}
 
 	if(keyboard->GetButton(INPBUTTON_ID_LEFT))
-	if(keyboard->GetButton(INPBUTTON_ID_LEFT)->GetState()==INPBUTTON_STATE_HOLD) 			
-	{
-		GRPCAMERA* cam=xapplication->GetMainScene()->GetCamera();
-		const GRPVECTOR* v=cam->GetPosition();
-		cam->SetPosition(v->vector[0]-speed,v->vector[1],v->vector[2]);
-	}
+		{
+			if(keyboard->GetButton(INPBUTTON_ID_LEFT)->GetState()==INPBUTTON_STATE_HOLD) 			
+				{
+					GRPCAMERA*			 cam	=	xapplication->GetMainScene()->GetCamera();
+					const GRPVECTOR* v		=	cam->GetPosition();
+
+					cam->SetPosition(v->vector[0]-speed,v->vector[1],v->vector[2]);
+				}
+		}
 
 	if(keyboard->GetButton(INPBUTTON_ID_PAGE_UP))
-	if(keyboard->GetButton(INPBUTTON_ID_PAGE_UP)->GetState()==INPBUTTON_STATE_HOLD) 			
-	{
-		GRPCAMERA* cam=xapplication->GetMainScene()->GetCamera();
-		const GRPVECTOR* v=cam->GetPosition();
-		cam->SetPosition(v->vector[0],v->vector[1],v->vector[2]+speed);
-	}
+		{
+			if(keyboard->GetButton(INPBUTTON_ID_PAGE_UP)->GetState()==INPBUTTON_STATE_HOLD) 			
+				{
+					GRPCAMERA*			 cam = xapplication->GetMainScene()->GetCamera();
+					const GRPVECTOR* v	 = cam->GetPosition();
+
+					cam->SetPosition(v->vector[0],v->vector[1],v->vector[2]+speed);
+				}
+		}
+
 	if(keyboard->GetButton(INPBUTTON_ID_PAGE_DOWN))
-	if(keyboard->GetButton(INPBUTTON_ID_PAGE_DOWN)->GetState()==INPBUTTON_STATE_HOLD) 			
-	{
-		GRPCAMERA* cam=xapplication->GetMainScene()->GetCamera();
-		const GRPVECTOR* v=cam->GetPosition();
-		cam->SetPosition(v->vector[0],v->vector[1],v->vector[2]-speed);
-	}
+		{
+			if(keyboard->GetButton(INPBUTTON_ID_PAGE_DOWN)->GetState()==INPBUTTON_STATE_HOLD) 			
+				{
+					GRPCAMERA*			 cam = xapplication->GetMainScene()->GetCamera();
+					const GRPVECTOR* v   = cam->GetPosition();
+		
+					cam->SetPosition(v->vector[0],v->vector[1],v->vector[2]-speed);
+				}
+		}
 
 	static const GRPVECTOR oldposition=*xapplication->GetMainScene()->GetCamera()->GetPosition();
 	
-
 	static GRPVECTOR lastmouse;
 
-	if (!lockcamera)
-	if (mouse && (mouse->GetButton(2)->IsPressed() || mouse->GetButton(1)->IsPressed() || mouse->GetButton(0)->IsPressed()))
-	{
-	float x=mouse->GetCursor(0)->GetX();
-	float y=mouse->GetCursor(0)->GetY();
-	float z=mouse->GetCursor(0)->GetZ();
-
-	lastmouse.vector[0]=x;
-	lastmouse.vector[1]=y;
-	lastmouse.vector[2]=z;	
-
-	float rx=(x)/this->xapplication->GetMainScreen()->GetWidth();
-	float ry=(y)/this->xapplication->GetMainScreen()->GetHeight();
-
-	rx*=2.0f;	rx-=1.0f;
-	ry*=2.0f;	ry-=1.0f;
-
-		GRPCAMERA* cam=xapplication->GetMainScene()->GetCamera();
-		const GRPVECTOR* v=cam->GetPosition();
-		if (!(x==0.0f && y==0.0f))
+	if(!lockcamera)
 		{
-			const GRPVECTOR* rot=cam->GetRotation();
-				
-			if (cam->GetCameraType()==GRPCAMERA_TYPE_TARGET)
-					cam->Orbit(rx,ry);
-			else
-					cam->SetRotation(ry/2.0f+rot->vector[0],0.0f,-rx/2.0f+rot->vector[2]);
+			if(mouse && (mouse->GetButton(2)->IsPressed() || mouse->GetButton(1)->IsPressed() || mouse->GetButton(0)->IsPressed()))
+				{
+					float x = mouse->GetCursor(0)->GetX();
+					float y = mouse->GetCursor(0)->GetY();
+					float z	=	mouse->GetCursor(0)->GetZ();
 
+					lastmouse.vector[0]=x;
+					lastmouse.vector[1]=y;
+					lastmouse.vector[2]=z;	
+
+					float rx = (x) / xapplication->GetMainScreen()->GetWidth();
+					float ry=  (y) / xapplication->GetMainScreen()->GetHeight();
+
+					rx*=2.0f;	rx-=1.0f;
+					ry*=2.0f;	ry-=1.0f;
+
+					GRPCAMERA*			 cam =	xapplication->GetMainScene()->GetCamera();
+					const GRPVECTOR* v   = cam->GetPosition();
+		
+					if(!(x==0.0f && y==0.0f))
+						{
+							const GRPVECTOR* rot=cam->GetRotation();
+				
+							if (cam->GetCameraType()==GRPCAMERA_TYPE_TARGET)
+								  	cam->Orbit(rx,ry);
+							 else cam->SetRotation(ry/2.0f+rot->vector[0],0.0f,-rx/2.0f+rot->vector[2]);
+						}
+			  }
 		}
-	}
+
 	return true;							
 }
 
@@ -302,6 +323,8 @@ GRPOBJECT* TESTBASE::LoadObject(GRPOBJECT* obj,XCHAR* path,XDWORD loadflags,XDWO
 	return object;
 }
 
+
+
 /*-------------------------------------------------------------------
 //	TESTBASE::InitConsole
 */	
@@ -316,35 +339,42 @@ GRPOBJECT* TESTBASE::LoadObject(GRPOBJECT* obj,XCHAR* path,XDWORD loadflags,XDWO
 /*-----------------------------------------------------------------*/
 void TESTBASE::InitConsole(float size)
 {
-						console = new GRPCONSOLE();	if(!console)	{	return;		}												
-						console->SetScreen(xapplication->GetMainScreen());
+	console = new GRPCONSOLE();	
+	if(!console)	
+		{	
+			return;		
+		}												
 
- 						if (!console->Create(GRPCONSOLE::CREATE_FONT & GRPCONSOLE::CREATE_SCENE))
-						{
-							delete(console);
-							console=NULL;
-							return;
-						}
+	console->SetScreen(xapplication->GetMainScreen());
 
-						console->SetFontScale(size);													
-
-						GRPBB bb;												
-									bb.minpoint.x			=0.0f;
-									bb.minpoint.y			=0.0f;
-									bb.maxpoint.x			=1.0f;
-									bb.maxpoint.y			=1.0f;
-												
-									bb.toppadding			=0.05f;
-									bb.leftpadding		=0.05f;
-									bb.bottompadding	=0.05f;
-									bb.rightpadding		=0.05f;
-												
-						console->SetArea(&bb);							
-												
-						XSTRING id;	id.Format(__L("%s %d.%d.%d"),	TESTGRAPHICS_NAMEAPP,TESTGRAPHICS_VERSION,TESTGRAPHICS_SUBVERSION,TESTGRAPHICS_SUBVERSIONERR);
-						console->Print(0,id.Get());
+ 	if(!console->Create(GRPCONSOLE::CREATE_FONT & GRPCONSOLE::CREATE_SCENE))
+		{
+			delete(console);
+			console=NULL;
 	
-						xapplication->GetMainScene()->Add(console);
+			return;
+		}
+
+	console->SetFontScale(size);													
+
+	GRPBB bb;												
+	
+	bb.minpoint.x			=0.0f;
+	bb.minpoint.y			=0.0f;
+	bb.maxpoint.x			=1.0f;
+	bb.maxpoint.y			=1.0f;
+												
+	bb.toppadding			=0.05f;
+	bb.leftpadding		=0.05f;
+	bb.bottompadding	=0.05f;
+	bb.rightpadding		=0.05f;
+												
+	console->SetArea(&bb);							
+												
+	XSTRING id;	id.Format(__L("%s %d.%d.%d"),	TESTGRAPHICS_NAMEAPP,TESTGRAPHICS_VERSION,TESTGRAPHICS_SUBVERSION,TESTGRAPHICS_SUBVERSIONERR);
+	console->Print(0,id.Get());
+	
+	xapplication->GetMainScene()->Add(console);
 				
 	return;
 }

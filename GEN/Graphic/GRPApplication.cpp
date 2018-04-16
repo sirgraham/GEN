@@ -60,9 +60,11 @@
 /*-----------------------------------------------------------------*/
 bool GRPAPPLICATION::IniRenderer(GRPSCREEN*	screen, GRPSCENE* scene) 
 {	
-	
+
 	return true;										
 }				
+
+
 
 /*-------------------------------------------------------------------
 //	GRPAPPLICATION::IniMainScreen
@@ -142,8 +144,7 @@ bool GRPAPPLICATION::EndMainScreen()
 	if(!grpfactory || !mainscreen) return false;
 
 	UnSubscribeEvent(GRPXEVENTTYPE_SCREEN_CHANGESIZE, (XSUBJECT*)mainscreen);
-	
-	
+		
 	grpfactory->DeleteScreen(mainscreen);
 	grpfactory->DeleteContext(maincontext);
 
@@ -152,6 +153,8 @@ bool GRPAPPLICATION::EndMainScreen()
 	
 	return true;		
 }	
+
+
 
 /*-------------------------------------------------------------------
 //	 GRPAPPLICATION::InitLog
@@ -169,24 +172,27 @@ bool GRPAPPLICATION::EndMainScreen()
 *//*-----------------------------------------------------------------*/
 bool GRPAPPLICATION::InitLog(XCHAR* name)
 {
-	  XPATH xpathroot;
-		XPATH xpath;
+	XPATH xpathroot;
+	XPATH xpath;
 
-		if (GetApplicationName()->GetSize() == 0) return false;
+	if(GetApplicationName()->GetSize() == 0) return false;
 
-		XPATHSMANAGER::GetInstance().GetPathOfSection(XPATHSMANAGERSECTIONTYPE_ROOT, xpathroot);
-		xpath.Create(3, xpathroot.Get(), name, __L(".log"));
+	XPATHSMANAGER::GetInstance().GetPathOfSection(XPATHSMANAGERSECTIONTYPE_ROOT, xpathroot);
+	xpath.Create(3, xpathroot.Get(), name, __L(".log"));
 
-		XDEBUG_PRINTCOLOR(2, __L("Log path: %s"), xpath.Get());
+	XDEBUG_PRINTCOLOR(2, __L("Log path: %s"), xpath.Get());
 
-		if (!XLOG::GetInstance().Ini(xpath, (*GetApplicationName()), true)) return false;
+	if (!XLOG::GetInstance().Ini(xpath, (*GetApplicationName()), true)) return false;
 
-		XLOG::GetInstance().SetLimit(XLOGTYPELIMIT_SIZE, 1024 * 1024 * 16, 10);
-		XLOG::GetInstance().SetBackup(true, 10, true);
-		XLOG::GetInstance().AddEntry(XLOGLEVEL_INFO, __L("Generic"), false, __L("Initializing application ..."));
-		
-		return true;
+	XLOG::GetInstance().SetLimit(XLOGTYPELIMIT_SIZE, 1024 * 1024 * 16, 10);
+	XLOG::GetInstance().SetBackup(true, 10, true);
+	XLOG::GetInstance().AddEntry(XLOGLEVEL_INFO, __L("Generic"), false, __L("Initializing application ..."));
+	
+	return true;
 }
+
+
+
 
 /*-------------------------------------------------------------------
 //	 GRPAPPLICATION::InitDebug
@@ -206,17 +212,19 @@ bool GRPAPPLICATION::InitLog(XCHAR* name)
 *//*-----------------------------------------------------------------*/
 bool GRPAPPLICATION::InitDebug(const int VERSION, const int SUBVERSION, const int SUBVERSIONERR)
 {			
-		XDEBUG_SETTARGET(0, XDEBUGCTRLTYPE_NET, XDEBUG_DEFAULT_NETAIM);
-		XDEBUG_SETTARGET(1, XDEBUGCTRLTYPE_NET, XDEBUG_DEFAULT_NETAIM2);
-		XDEBUG_SETTARGET(2, XDEBUGCTRLTYPE_NET, XDEBUG_DEFAULT_NETAIM3);
-		XDEBUG_SETTARGET(3, XDEBUGCTRLTYPE_NET, XDEBUG_DEFAULT_NETAIM4);
-		XDEBUG_SETTARGET(4, XDEBUGCTRLTYPE_NET, XDEBUG_DEFAULT_NETAIM5);
+	XDEBUG_SETTARGET(0, XDEBUGCTRLTYPE_NET, XDEBUG_DEFAULT_NETAIM1);
+	XDEBUG_SETTARGET(1, XDEBUGCTRLTYPE_NET, XDEBUG_DEFAULT_NETAIM2);
+	XDEBUG_SETTARGET(2, XDEBUGCTRLTYPE_NET, XDEBUG_DEFAULT_NETAIM3);
+	XDEBUG_SETTARGET(3, XDEBUGCTRLTYPE_NET, XDEBUG_DEFAULT_NETAIM4);
+	XDEBUG_SETTARGET(4, XDEBUGCTRLTYPE_NET, XDEBUG_DEFAULT_NETAIM5);
 
-		XDEBUG_SETAPPLICATIONNAME(this->GetApplicationName()->Get());
-		XDEBUG_SETAPPLICATIONVERSION(VERSION, SUBVERSION, SUBVERSIONERR);
+	XDEBUG_SETAPPLICATIONNAME(this->GetApplicationName()->Get());
+	XDEBUG_SETAPPLICATIONVERSION(VERSION, SUBVERSION, SUBVERSIONERR);
 
-		return true;
+	return true;
 }
+
+
 
 /*-------------------------------------------------------------------
 //	 GRPAPPLICATION::LoadConfigurationFromFile
@@ -234,26 +242,29 @@ bool GRPAPPLICATION::InitDebug(const int VERSION, const int SUBVERSION, const in
 *//*-----------------------------------------------------------------*/
 bool GRPAPPLICATION::LoadConfigurationFromFile()
 {	
-		if (configurationfile.GetSize() > 0)
+	if(configurationfile.GetSize() > 0)
 		{
-				graphicsettings = new GRPAPPLICATIONCONFIG(this->configurationfile.Get());
-				if (graphicsettings)
+			graphicsettings = new GRPAPPLICATIONCONFIG(this->configurationfile.Get());
+			if(graphicsettings)
 				{
-						if (graphicsettings->Load())
+					if(graphicsettings->Load())
 						{
-								graphicsettings->GetScreenPosition	(&positionx,		&positiony);
-								graphicsettings->GetResolution			(&resolutionx,	&resolutiony);
+							graphicsettings->GetScreenPosition(&positionx,		&positiony);
+							graphicsettings->GetResolution(&resolutionx,	&resolutiony);
 
-								isfullscreen								= graphicsettings->IsFullScreen();
-								SNDFACTORY::SoundIsActive		= graphicsettings->Sound_IsActive();
+							isfullscreen								= graphicsettings->IsFullScreen();
+							SNDFACTORY::SoundIsActive		= graphicsettings->Sound_IsActive();
 								
-								return OnConfigurationFileLoaded();
+							return OnConfigurationFileLoaded();
 						}						
 				}
-				return false;
+
+			return false;
 		}
-		return true;
+
+	return true;
 }
+
 
 
 /*-------------------------------------------------------------------
@@ -272,18 +283,17 @@ bool GRPAPPLICATION::LoadConfigurationFromFile()
 *//*-----------------------------------------------------------------*/
 bool GRPAPPLICATION::InitPaths()
 {
-		if (!XPATHSMANAGER::GetInstance().AdjustRootPathDefault((XCHAR*)this->GetApplicationName()->Get(), __L("resources")))		return false;
+	if(!XPATHSMANAGER::GetInstance().AdjustRootPathDefault((XCHAR*)this->GetApplicationName()->Get(), __L("resources")))	return false;
 		
-		if (!XPATHSMANAGER::GetInstance().AddPathSection(XPATHSMANAGERSECTIONTYPE_GRAPHICS, __L("graphics")))		return false;
-		if (!XPATHSMANAGER::GetInstance().AddPathSection(XPATHSMANAGERSECTIONTYPE_FONTS,		__L("fonts")))			return false;
-		if (!XPATHSMANAGER::GetInstance().AddPathSection(XPATHSMANAGERSECTIONTYPE_SOUNDS,		__L("sounds")))			return false;
+	if(!XPATHSMANAGER::GetInstance().AddPathSection(XPATHSMANAGERSECTIONTYPE_GRAPHICS	, __L("graphics")))		return false;
+	if(!XPATHSMANAGER::GetInstance().AddPathSection(XPATHSMANAGERSECTIONTYPE_FONTS		,	__L("fonts")))			return false;
+	if(!XPATHSMANAGER::GetInstance().AddPathSection(XPATHSMANAGERSECTIONTYPE_SOUNDS		,	__L("sounds")))			return false;
 
-		XPATH xpath;
-		xpath.Create(XPATHSMANAGERSECTIONTYPE_GRAPHICS, 1, __L(""));
-		GRPMATERIALLIBRARY::Get()->SetResourceLocation(xpath);
+	XPATH xpath;
+	xpath.Create(XPATHSMANAGERSECTIONTYPE_GRAPHICS, 1, __L(""));
+	GRPMATERIALLIBRARY::Get()->SetResourceLocation(xpath);
 
-
-		return true;
+	return true;
 }
 
 
@@ -303,24 +313,33 @@ bool GRPAPPLICATION::InitPaths()
 //
 *//*-----------------------------------------------------------------*/
 bool GRPAPPLICATION::InitLoader(XCHAR* xml, XCHAR* material, XCHAR* shader)
-{
-																																									OPENGLCHECKERROR(__L("GRPAPPLICATION::InitLoader()"));
-		XPATH xpath;
-		xpath.Create(XPATHSMANAGERSECTIONTYPE_GRAPHICS, 1, xml);
+{																																								
+	OPENGLCHECKERROR(__L("GRPAPPLICATION::InitLoader()"));
 
-		loaderInterface = new GRPLOADERINTERFACE(mainscene, material, GRPSHADERLIBRARY::Get()->GetProgramByName(shader));
-		if	(!loaderInterface)																				return false;		OPENGLCHECKERROR(__L("GRPAPPLICATION::InitLoader() GRPLOADERINTERFACE"));
+	XPATH xpath;
+	xpath.Create(XPATHSMANAGERSECTIONTYPE_GRAPHICS, 1, xml);
 
-		loaderInterface->AddObserver(this);
-		if	(!loaderInterface->Init())																return false; 	OPENGLCHECKERROR(__L("GRPAPPLICATION::InitLoader() loaderInterface->Init"));
+	loaderInterface = new GRPLOADERINTERFACE(mainscene, material, GRPSHADERLIBRARY::Get()->GetProgramByName(shader));
+	if(!loaderInterface)												return false;		
+	
+	OPENGLCHECKERROR(__L("GRPAPPLICATION::InitLoader() GRPLOADERINTERFACE"));
 
-		if	(!loaderInterface->AddTask(xpath.Get()))									return false;
+	loaderInterface->AddObserver(this);
+	if(!loaderInterface->Init())								return false; 	
+	
+	OPENGLCHECKERROR(__L("GRPAPPLICATION::InitLoader() loaderInterface->Init"));
 
-		if	(!loaderInterface->GetLoader())														return false;
-					loaderInterface->GetLoader()->Start();
+	if(!loaderInterface->AddTask(xpath.Get()))	return false;
+
+	if(!loaderInterface->GetLoader())						return false;
+					
+	loaderInterface->GetLoader()->Start();
 		
-		return true;
+	return true;
 }
+
+
+
 
 /*-------------------------------------------------------------------
 //	 GRPAPPLICATION::SetVersion
@@ -340,12 +359,15 @@ bool GRPAPPLICATION::InitLoader(XCHAR* xml, XCHAR* material, XCHAR* shader)
 *//*-----------------------------------------------------------------*/
 bool GRPAPPLICATION::SetVersion(XDWORD v, XDWORD sv, XDWORD ve)
 {
-		this->version[0] = v;
-		this->version[1] = sv;
-		this->version[2] = ve;
+	this->version[0] = v;
+	this->version[1] = sv;
+	this->version[2] = ve;
 
-		return true;
+	return true;
 }
+
+
+
 
 /*-------------------------------------------------------------------
 //	 GRPAPPLICATION::LoadObject
@@ -367,35 +389,42 @@ bool GRPAPPLICATION::SetVersion(XDWORD v, XDWORD sv, XDWORD ve)
 *//*-----------------------------------------------------------------*/
 GRPOBJECT* GRPAPPLICATION::LoadObject(GRPOBJECT* obj, XCHAR* path, XDWORD loadflags, XDWORD verbose, XDWORD NextStackID)
 {
-if (!GetMainScene())		 return NULL;
-bool ownedobj = false;
+	if(!GetMainScene())		 return NULL;
 
-XPATH			xpath;
-					xpath.Create(XPATHSMANAGERSECTIONTYPE_GRAPHICS, 1, path);
+	bool ownedobj = false;
+
+	XPATH	xpath;
+	
+	xpath.Create(XPATHSMANAGERSECTIONTYPE_GRAPHICS, 1, path);
 				
-if (obj == NULL)
-{
-		obj = new GRPOBJECT();
-		ownedobj = true;
+	if(obj == NULL)
+		{
+			obj = new GRPOBJECT();
+			ownedobj = true;
+		}
+
+	GRPFILE3D* grpfile3d = NULL;
+						
+	grpfile3d = new GRPFILE3D();						
+	if (!grpfile3d) return NULL;
+
+	grpfile3d->SetObject(obj);
+	grpfile3d->SetScene(GetMainScene());
+	grpfile3d->SetVerboseLevel(verbose);
+	grpfile3d->SetLoadFlags(loadflags);
+	grpfile3d->SetNextStackID(NextStackID);
+
+	GRPOBJECT* object = grpfile3d->Load(xpath.Get());
+	
+	OPENGLCHECKERROR(__L("LoadObj"));
+
+	delete(grpfile3d);
+	grpfile3d = NULL;
+
+	return object;
 }
 
-GRPFILE3D*	grpfile3d = NULL;
-						grpfile3d = new GRPFILE3D();						if (!grpfile3d) return NULL;
 
-						grpfile3d->SetObject(obj);
-						grpfile3d->SetScene(GetMainScene());
-						grpfile3d->SetVerboseLevel(verbose);
-						grpfile3d->SetLoadFlags(loadflags);
-						grpfile3d->SetNextStackID(NextStackID);
-
-GRPOBJECT* object = grpfile3d->Load(xpath.Get());
-OPENGLCHECKERROR(__L("LoadObj"));
-
-delete(grpfile3d);
-grpfile3d = NULL;
-
-return object;
-}
 
 /*-------------------------------------------------------------------
 //	 GRPAPPLICATION::IniApplication
@@ -414,23 +443,25 @@ return object;
 *//*-----------------------------------------------------------------*/
 bool GRPAPPLICATION::IniApplication(XSYSTEM* xsystem, XVECTOR<XSTRING*>* execparams)
 {
-		if (!xfactory)	return false;
-		if (!xsystem)		return false;
+	if (!xfactory)	return false;
+	if (!xsystem)		return false;
 
-		this->xsystem				= xsystem;
-		this->execparams		= execparams;
+	this->xsystem				= xsystem;
+	this->execparams		= execparams;
 
-		xtimerglobal = xfactory->CreateTimer();
-		if (!xtimerglobal) return false;
+	xtimerglobal = xfactory->CreateTimer();
+	if (!xtimerglobal) return false;
 
-		xtimerglobal->Reset();
+	xtimerglobal->Reset();
 
-#ifdef GRP_ACTIVE
-		if (!Ini()) return false;
-#endif
+	#ifdef GRP_ACTIVE
+	if (!Ini()) return false;
+	#endif
 
-		return true;
+	return true;
 }
+
+
 
 
 /*-------------------------------------------------------------------
@@ -450,13 +481,19 @@ bool GRPAPPLICATION::IniApplication(XSYSTEM* xsystem, XVECTOR<XSTRING*>* execpar
 *//*-----------------------------------------------------------------*/
 bool GRPAPPLICATION::Notify(GRPMSGTYPE type, GRPSUBJECT* subject) 
 { 
-		switch (type)
+	switch (type)
 		{
-		case GRPMSG_EXIT:	if (subject->GetSubjectType() == GRPNAMED_TYPE_TASK)				this->OnLoadFail((GRPLOADERTASK*)subject);					  break;
-		case GRPMSG_END:	if (subject->GetSubjectType() == GRPNAMED_TYPE_TASKMANAGER)	this->OnResourcesLoaded();													break;
+			case GRPMSG_EXIT	:	if(subject->GetSubjectType() == GRPNAMED_TYPE_TASK)					this->OnLoadFail((GRPLOADERTASK*)subject);			  
+													break;
+
+			case GRPMSG_END		:	if(subject->GetSubjectType() == GRPNAMED_TYPE_TASKMANAGER)	this->OnResourcesLoaded();													
+													break;
 		}
-		return	true; 
+
+	return	true; 
 }
+
+
 
 /*-------------------------------------------------------------------
 //	GRPAPPLICATION::PathManagement
@@ -475,20 +512,20 @@ bool GRPAPPLICATION::Notify(GRPMSGTYPE type, GRPSUBJECT* subject)
 /*-----------------------------------------------------------------*/
 bool GRPAPPLICATION::PathManagement(XCHAR* addpath)
 { 
-	XPATH			 xpathroot;		
-	XPATH			 xpath;
+	XPATH xpathroot;		
+	XPATH xpath;
 
-	if (rootpath.IsEmpty())
+	if(rootpath.IsEmpty())
 	XPATHSMANAGER::GetInstance().GetPathOfSection(XPATHSMANAGERSECTIONTYPE_ROOT, rootpath);
 
-	if (addpath)
-	{
-	xpath=rootpath;
-	xpath.Slash_Add();
-	xpath += addpath;
-	}
-	XPATHSMANAGER::GetInstance().AddPathSection(XPATHSMANAGERSECTIONTYPE_ROOT, rootpath);	
+	if(addpath)
+		{
+			xpath=rootpath;
+			xpath.Slash_Add();
+			xpath += addpath;
+		}
 
+	XPATHSMANAGER::GetInstance().AddPathSection(XPATHSMANAGERSECTIONTYPE_ROOT, rootpath);	
 	
 	XPATHSMANAGER::GetInstance().AddPathSection(XPATHSMANAGERSECTIONTYPE_GRAPHICS , __L("graphics"));
 	XPATHSMANAGER::GetInstance().AddPathSection(XPATHSMANAGERSECTIONTYPE_FONTS		, __L("fonts"));
@@ -499,6 +536,9 @@ bool GRPAPPLICATION::PathManagement(XCHAR* addpath)
 
 	return true;
 }
+
+
+
 
 /*-------------------------------------------------------------------
 //	GRPAPPLICATION::Update
@@ -516,39 +556,46 @@ bool GRPAPPLICATION::PathManagement(XCHAR* addpath)
 /*-----------------------------------------------------------------*/
 bool	GRPAPPLICATION::Update()
 {
-		if (this->exitstatus != XAPPLICATIONEXITTYPE_NONE)
-				return false;
+	if(this->exitstatus != XAPPLICATIONEXITTYPE_NONE) return false;
 
-		switch (state)
+	switch (state)
 		{
-		case GRPAPPLICATION_STATE_INIT:																																			
-																		return FirstUpdate();
-																		break;
+			case GRPAPPLICATION_STATE_INIT								:	return FirstUpdate();
+																											break;
 
-		case GRPAPPLICATION_STATE_WAITING_FOR_WINDOW:
-																		return true;
-																		break;
+			case GRPAPPLICATION_STATE_WAITING_FOR_WINDOW	:	return true;
+																											break;
 		
-		case GRPAPPLICATION_STATE_RENDERING:
-																		#ifdef INP_ACTIVE
-																		INPMANAGER::GetInstance()->Update();
-																		#endif
+			case GRPAPPLICATION_STATE_RENDERING						:
+																											#ifdef INP_ACTIVE
+																											INPMANAGER::GetInstance()->Update();
+																											#endif
 
-																		if (SNDFACTORY::Get())
-																				if (SNDFACTORY::Get()->IsInit())
-																						SNDFACTORY::Get()->Update();
+																											if(SNDFACTORY::Get())
+																												{
+																													if(SNDFACTORY::Get()->IsInit()) SNDFACTORY::Get()->Update();
+																												}
 
-																		if (mainscene)				mainscene->renderer->Render();
-																		if (mainscreen)		if (!mainscreen->Update()) return false;
-																		if (maincontext)	if (!maincontext->Update()) return false;
+																											if(mainscene)		mainscene->renderer->Render();
 
-																		GRPPROFILER::ShowStatistics();
+																											if(mainscreen)	
+																												{
+																													if(!mainscreen->Update()) return false;
+																												}
 
-																		return OnUpdate();
-																		break;
+																											if(maincontext)	
+																												{
+																													if(!maincontext->Update()) return false;
+																												}
+
+																											GRPPROFILER::ShowStatistics();
+
+																											return OnUpdate();
+																											break;
 
 		}
-		return false;
+	
+	return false;
 }
 
 /*-------------------------------------------------------------------
@@ -567,30 +614,32 @@ bool	GRPAPPLICATION::Update()
 /*-----------------------------------------------------------------*/
 bool GRPAPPLICATION::IniInputManager()
 {	
-#ifdef INP_ACTIVE
+	#ifdef INP_ACTIVE
 
-		if (!INPFACTORY::GetInstance())				return true;
-		if (!INPMANAGER::GetInstance()) 			return true;
+	if(!INPFACTORY::GetInstance())			return true;
+	if(!INPMANAGER::GetInstance()) 			return true;
 
-		if (!INPMANAGER::GetInstance()->GetDevice(INPDEVICE_TYPE_KEYBOARD))
+	if(!INPMANAGER::GetInstance()->GetDevice(INPDEVICE_TYPE_KEYBOARD))
 		{
-				keyboard = INPFACTORY::GetInstance()->CreateDevice(__L("keyboard"), mainscreen);
-				if (keyboard)		INPMANAGER::GetInstance()->AddDevice(keyboard);
+			keyboard = INPFACTORY::GetInstance()->CreateDevice(__L("keyboard"), mainscreen);
+			if(keyboard)	INPMANAGER::GetInstance()->AddDevice(keyboard);
 		}
-		else
-				keyboard = INPMANAGER::GetInstance()->GetDevice(INPDEVICE_TYPE_KEYBOARD);
+	 else keyboard = INPMANAGER::GetInstance()->GetDevice(INPDEVICE_TYPE_KEYBOARD);
 
-		if (!INPMANAGER::GetInstance()->GetDevice(INPDEVICE_TYPE_MOUSE))
+	if(!INPMANAGER::GetInstance()->GetDevice(INPDEVICE_TYPE_MOUSE))
 		{
-				mouse = INPFACTORY::GetInstance()->CreateDevice(__L("mouse"), mainscreen);
-				if (mouse)				INPMANAGER::GetInstance()->AddDevice(mouse);
+			mouse = INPFACTORY::GetInstance()->CreateDevice(__L("mouse"), mainscreen);
+			if(mouse) INPMANAGER::GetInstance()->AddDevice(mouse);
 		}
-		else
-				mouse= INPMANAGER::GetInstance()->GetDevice(INPDEVICE_TYPE_MOUSE);
+		else mouse= INPMANAGER::GetInstance()->GetDevice(INPDEVICE_TYPE_MOUSE);
 
-#endif
+	#endif
+
 	return true;
 }
+
+
+
 
 /*-------------------------------------------------------------------
 //	 GRPAPPLICATION::Init
@@ -608,34 +657,43 @@ bool GRPAPPLICATION::IniInputManager()
 *//*-----------------------------------------------------------------*/
 bool GRPAPPLICATION::Ini()
 {		
-if (!xsystem)																						return false;
-if (!InitPaths())																				return false;
+	if(!xsystem)																					return false;
+	if(!InitPaths())																			return false;
 
-if (!OnConfig())																				return false;
+	if(!OnConfig())																				return false;
 
-if (initoptions & GRPAPPLICATION_OPTIONS_DEBUG)					if (!InitDebug(version[0], version[1], version[2]))			return false;
-if (initoptions & GRPAPPLICATION_OPTIONS_LOADCONFIG)		if (!LoadConfigurationFromFile())												return false;
-if (initoptions & GRPAPPLICATION_OPTIONS_LOG)						if (!InitLog(GetApplicationName()->Get()))							return false;
+	if(initoptions & GRPAPPLICATION_OPTIONS_DEBUG)					
+		{
+			if(!InitDebug(version[0], version[1], version[2])) return false;
+		}
 
-state = GRPAPPLICATION_STATE_WAITING_FOR_WINDOW;
+	if(initoptions & GRPAPPLICATION_OPTIONS_LOADCONFIG)		
+		{
+			if(!LoadConfigurationFromFile())	return false;
+		}
 
-#ifndef ANDROID
-if (initoptions & GRPAPPLICATION_OPTIONS_SCREEN)				if (!IniMainScreen())																		return false;
-#endif		
+	if(initoptions & GRPAPPLICATION_OPTIONS_LOG)						
+		{
+			if(!InitLog(GetApplicationName()->Get()))	 return false;
+		}
 
-if (!(initoptions & GRPAPPLICATION_OPTIONS_SCREEN) &&
-		(initoptions & GRPAPPLICATION_OPTIONS_INPUT))				if (!IniInputManager())																	return false;
+	state = GRPAPPLICATION_STATE_WAITING_FOR_WINDOW;
 
+	#ifndef ANDROID
+	if(initoptions & GRPAPPLICATION_OPTIONS_SCREEN)				
+		{
+			if(!IniMainScreen()) return false;
+		}
+	#endif		
 
+	if(!(initoptions & GRPAPPLICATION_OPTIONS_SCREEN) && (initoptions & GRPAPPLICATION_OPTIONS_INPUT))				
+		{
+			if(!IniInputManager()) return false;
+		}
 
+	if(!XAPPLICATION::Ini())  return false;
 
-
-if (!XAPPLICATION::Ini()) 
-				return false;
-
-
-
-return true;
+	return true;
 }
 
 
@@ -655,46 +713,49 @@ return true;
 *//*-----------------------------------------------------------------*/
 bool GRPAPPLICATION::End()
 {
-		OnEnd();
+	OnEnd();
 
-		//--------------------------------------------------------------------------------------
+	//--------------------------------------------------------------------------------------
 
-		switch (GetExitStatus())
+	switch (GetExitStatus())
 		{
-		case XAPPLICATIONEXITTYPE_NONE			: XLOG::GetInstance().AddEntry(XLOGLEVEL_ERROR	, __L("General"), false, __L("No information closing."));											break;
-		case XAPPLICATIONEXITTYPE_APPERROR	: XLOG::GetInstance().AddEntry(XLOGLEVEL_ERROR	, __L("General"), false, __L("Application closed by a serious error."));			break;
-		case XAPPLICATIONEXITTYPE_APPEND		: XLOG::GetInstance().AddEntry(XLOGLEVEL_INFO		, __L("General"), false, __L("Completed application."));											break;
-		case XAPPLICATIONEXITTYPE_BYUSER		: XLOG::GetInstance().AddEntry(XLOGLEVEL_INFO		, __L("General"), false, __L("Application closed by user."));									break;
-		case XAPPLICATIONEXITTYPE_SOSHUTDOWN: XLOG::GetInstance().AddEntry(XLOGLEVEL_WARNING, __L("General"), false, __L("Application closed by S.O. shutdown."));				break;
-		default: break;
+			case XAPPLICATIONEXITTYPE_NONE				: XLOG::GetInstance().AddEntry(XLOGLEVEL_ERROR	, __L("General"), false, __L("No information closing."));											break;
+			case XAPPLICATIONEXITTYPE_APPERROR		:	XLOG::GetInstance().AddEntry(XLOGLEVEL_ERROR	, __L("General"), false, __L("Application closed by a serious error."));			break;
+			case XAPPLICATIONEXITTYPE_APPEND			: XLOG::GetInstance().AddEntry(XLOGLEVEL_INFO		, __L("General"), false, __L("Completed application."));											break;
+			case XAPPLICATIONEXITTYPE_BYUSER			: XLOG::GetInstance().AddEntry(XLOGLEVEL_INFO		, __L("General"), false, __L("Application closed by user."));									break;
+			case XAPPLICATIONEXITTYPE_SOSHUTDOWN	: XLOG::GetInstance().AddEntry(XLOGLEVEL_WARNING, __L("General"), false, __L("Application closed by S.O. shutdown."));				break;
+																		default	: break;
 		}
 
+	//--------------------------------------------------------------------------------------
 
-		//-------
+	#ifdef GRP_ACTIVE
+	DeleteRenderer();
+	EndMainScreen();
+	#endif
 
-#ifdef GRP_ACTIVE
-		DeleteRenderer();
-		EndMainScreen();
-#endif
+	//--------------------------------------------------------------------------------------
 
-		//--------------------------------------------------------------------------------------
+	if(loaderInterface) delete(loaderInterface);
 
-		if (loaderInterface)
-				delete(loaderInterface);
+	//--------------------------------------------------------------------------------------
 
-		//--------------------------------------------------------------------------------------
+	delete(this->graphicsettings);
 
-		delete(this->graphicsettings);
-
-		//--------------------------------- 
-		XLOG::GetInstance().AddEntry(XLOGLEVEL_INFO, __L("General"), false, __L("Closing the application ..."));
+	//--------------------------------- 
 	
-		//--------------------------------- sound		
-		SNDMANAGER::Get()->Destroy();
+	XLOG::GetInstance().AddEntry(XLOGLEVEL_INFO, __L("General"), false, __L("Closing the application ..."));
+	
+	//--------------------------------- sound		
 
-		return OnEnded();
+	SNDMANAGER::Get()->Destroy();
 
+	return OnEnded();
 }
+
+
+
+
 /*-------------------------------------------------------------------
 //	 GRPAPPLICATION::FirstUpdate
 */
@@ -711,19 +772,18 @@ bool GRPAPPLICATION::End()
 *//*-----------------------------------------------------------------*/
 bool GRPAPPLICATION::FirstUpdate()
 {
-		if (!OnInit())
-				return false;
-
-		if (!mainrenderer)
-				return false;
+	if(!OnInit())			return false;
+	if(!mainrenderer) return false;
 		
-		mainrenderer->PrepareScenes();
-		mainrenderer->SetClearFlags(GRPSCENE_CLEAR_ALL);
+	mainrenderer->PrepareScenes();
+	mainrenderer->SetClearFlags(GRPSCENE_CLEAR_ALL);
 
-		state = GRPAPPLICATION::GRPAPPLICATION_STATE_RENDERING;
+	state = GRPAPPLICATION::GRPAPPLICATION_STATE_RENDERING;
 
-		return OnStartRendering();
+	return OnStartRendering();
 }
+
+
 
 /*-------------------------------------------------------------------
 //	 GRPAPPLICATION::LoadResources
@@ -740,9 +800,8 @@ bool GRPAPPLICATION::FirstUpdate()
 //
 *//*-----------------------------------------------------------------*/
 bool GRPAPPLICATION::LoadResources()
-{
-		
-		return OnResourcesLoaded();		
+{		
+	return OnResourcesLoaded();		
 }
 
 
@@ -762,16 +821,20 @@ bool GRPAPPLICATION::LoadResources()
 *//*-----------------------------------------------------------------*/
 bool GRPAPPLICATION::WindowCreated()
 {		
-		if (!CreateRenderer())																			return false;
+	if(!CreateRenderer())	return false;
 
-		if (initoptions & GRPAPPLICATION_OPTIONS_INPUT)			
-				if (!IniInputManager())																	return false;
+	if(initoptions & GRPAPPLICATION_OPTIONS_INPUT)			
+		{
+			if(!IniInputManager())	return false;
+		}
 				
 
-		state = GRPAPPLICATION::GRPAPPLICATION_STATE_INIT;
+	state = GRPAPPLICATION::GRPAPPLICATION_STATE_INIT;
 
-		return OnCreateWindow();
+	return OnCreateWindow();
 }
+
+
 
 /*-------------------------------------------------------------------
 //	GRPAPPLICATION::CreateRenderer
@@ -789,19 +852,38 @@ bool GRPAPPLICATION::WindowCreated()
 /*-----------------------------------------------------------------*/
 bool GRPAPPLICATION::CreateRenderer()
 {				
-	if (mainrenderer != NULL)	delete(mainrenderer);
-	mainrenderer	= new GRPRENDERER		(mainscreen, maincontext);	if(!mainrenderer)		{	return false;	}	XDEBUG_PRINTCOLOR(0, __L("Creating Renderer")); 
-	mainscene			= new GRPSCENE			(mainscreen);								if (!mainscene)			{ delete(mainrenderer); return false; } XDEBUG_PRINTCOLOR(0, __L("Creating Scene"));
-	mainscene->SetName(__L("MainScene"));
-																		
+	if(mainrenderer != NULL)	delete(mainrenderer);
 	
-	if(!IniRenderer(mainscreen, mainscene))		return false;	XDEBUG_PRINTCOLOR(0, __L("Initializing Renderer"));
+	mainrenderer = new GRPRENDERER(mainscreen, maincontext);	
+	if(!mainrenderer)		
+		{	
+			return false;	
+		}	
+	
+	XDEBUG_PRINTCOLOR(0, __L("Creating Renderer")); 
 
-			mainrenderer->AddScene(mainscene);
-	if(!mainrenderer->Ini())									return false;				
+	mainscene	= new GRPSCENE(mainscreen);								
+	if(!mainscene)			
+		{ 
+			delete(mainrenderer); 
+			return false; 
+		} 
+	
+	XDEBUG_PRINTCOLOR(0, __L("Creating Scene"));
+
+	mainscene->SetName(__L("MainScene"));
+																			
+	if(!IniRenderer(mainscreen, mainscene))	return false;	
+	
+	XDEBUG_PRINTCOLOR(0, __L("Initializing Renderer"));
+
+	mainrenderer->AddScene(mainscene);
+	if(!mainrenderer->Ini()) return false;				
 
 	return true;
 }
+
+
 
 
 

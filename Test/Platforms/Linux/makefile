@@ -4,32 +4,33 @@ TARGET   		 	= test
 ARCHITECTURE = PC
 #ARCHITECTURE  = RASPBERRYPI
 DEBUGMODE    	= YES
-TOOLCHAIN			= LINARO
+TOOLCHAIN     = RASPBIAN
+#TOOLCHAIN			= LINARO
 SYSROOT				= JESSIE
 
 FLAGS  			 += -D LINUX
 FLAGS  			 += -D UNICODE
 FLAGS  			 += -D XMEM
-FLAGS				 += -D SND_ACTIVE
+#FLAGS				 += -D SND_ACTIVE
 FLAGS				 += -D DIO_ACTIVE
 FLAGS				 += -D DIOUART_ACTIVE
-FLAGS				 += -D DIOUSB_ACTIVE
+#FLAGS				 += -D DIOUSB_ACTIVE
 FLAGS				 += -D DIOICMP_ACTIVE
 FLAGS				 += -D DIOUDP_ACTIVE
 FLAGS				 += -D DIOTCPIP_ACTIVE
 FLAGS				 += -D DIOTCPIPLOCALENUMSERVERS_ACTIVE
-FLAGS				 += -D DIOBLUETOOTH_ACTIVE
-FLAGS				 += -D DIOWIFI_ACTIVE
-FLAGS				 += -D DIOSPI_ACTIVE
-FLAGS				 += -D DIOI2C_ACTIVE
+#FLAGS				 += -D DIOBLUETOOTH_ACTIVE
+#FLAGS				 += -D DIOWIFI_ACTIVE
+#FLAGS				 += -D DIOSPI_ACTIVE
+#FLAGS				 += -D DIOI2C_ACTIVE
 FLAGS				 += -D DIONTP_ACTIVE
 FLAGS				 += -D DIOPING_ACTIVE
 FLAGS				 += -D DIOGPIO_ACTIVE
 FLAGS				 += -D DIOALERTS_ACTIVE
-#FLAGS		  	 += -D DBSQL_ACTIVE
-#FLAGS		  	 += -D DBSQLMYSQL_ACTIVE	
-#FLAGS		  	 += -D DBSQLPOSTGRESQL_ACTIVE
-#FLAGS		  	 += -D DBSQLSQLITE_ACTIVE			
+#FLAGS		   	 += -D DBSQL_ACTIVE
+#FLAGS		   	 += -D DBSQLMYSQL_ACTIVE	
+#FLAGS		     += -D DBSQLPOSTGRESQL_ACTIVE
+#FLAGS		     += -D DBSQLSQLITE_ACTIVE			
 #FLAGS     	   += -D DIOPCAP_ACTIVE
 
 FLAGSC  		 += 
@@ -68,9 +69,6 @@ SOURCESCPP	+= CompressLZW.cpp
 SOURCESCPP	+= CompressManager.cpp
 SOURCESCPP	+= CompressGZ.cpp
 SOURCESCPP	+= CompressZIP.cpp
-
-SOURCESCPP	+= GRPVector.cpp
-SOURCESCPP	+= GRPMatrix.cpp
 
 SOURCESCPP  += DIOFactory.cpp
 SOURCESCPP	+= DIOAlerts.cpp
@@ -165,7 +163,7 @@ SOURCESCPP	+= DIOSMTP.cpp
 SOURCESCPP  += DIOBusPirate.cpp
 SOURCESCPP  += DIOWiiMote.cpp
 SOURCESCPP  += DIOApplicationUpdate.cpp
-
+SOURCESCPP  += DIOSSHReverse.cpp
 
 SOURCESCPP	+= INPButton.cpp
 SOURCESCPP	+= INPCursor.cpp
@@ -230,6 +228,8 @@ SOURCESCPP  += XLINUXDateTime.cpp
 SOURCESCPP  += Script.cpp
 SOURCESCPP  += ScriptLib.cpp
 SOURCESCPP  += ScriptLibBase.cpp
+SOURCESCPP  += ScriptG.cpp
+SOURCESCPP  += ScriptLua.cpp
 
 
 ifneq (,$(findstring SND_ACTIVE,$(FLAGS)))
@@ -249,7 +249,7 @@ ifneq (,$(findstring SND_ACTIVE,$(FLAGS)))
 	SOURCESCPP += SNDLINUXResampler.cpp
 	SOURCESCPP += SNDCodecFFMPEG.cpp
 	SOURCESCPP += MEDIAFrameReaderLibAV.cpp
-	SOURCESCPP += MEDIAFile.cpp
+	SOURCESCPP += MEDIAFile.cpp                
 endif
 
 
@@ -344,8 +344,7 @@ ifneq (,$(findstring SND_ACTIVE,$(FLAGS)))
 	SOURCESC += stb_vorbis.c         
 endif         
          
-              
-       
+             
 include ../../../GEN/Platforms/Linux/makefile      
      
    

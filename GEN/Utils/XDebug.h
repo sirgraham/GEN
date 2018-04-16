@@ -61,12 +61,11 @@ enum XDEBUGCTRLTYPE
 #define XDEBUG_DEFAULT_SPECIALAIM						__L("Debug Monitor")
 
 
-#define XDEBUG_DEFAULT_NETURL		            __L("xdebug.kicks-ass.org")
-#define XDEBUG_DEFAULT_NETAIM		            __L("xdebug.kicks-ass.org:10222")
-#define XDEBUG_DEFAULT_NETAIM2		          __L("xdebug2.kicks-ass.org:10223")
-#define XDEBUG_DEFAULT_NETAIM3	            __L("xdebug3.kicks-ass.org:10224")
-#define XDEBUG_DEFAULT_NETAIM4		          __L("xdebug4.kicks-ass.org:10225")
-#define XDEBUG_DEFAULT_NETAIM5	            __L("xdebug5.kicks-ass.org:10226")
+#define XDEBUG_DEFAULT_NETAIM1	            __L("xdebug1.kicks-ass.org:10021")
+#define XDEBUG_DEFAULT_NETAIM2		          __L("xdebug2.kicks-ass.org:10022")
+#define XDEBUG_DEFAULT_NETAIM3	            __L("xdebug3.kicks-ass.org:10023")
+#define XDEBUG_DEFAULT_NETAIM4		          __L("xdebug4.kicks-ass.org:10024")
+#define XDEBUG_DEFAULT_NETAIM5	            __L("xdebug5.kicks-ass.org:10025")
 
 #define XDEBUG_LIMITCTRLNETRESURCES					25
 

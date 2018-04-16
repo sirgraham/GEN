@@ -4141,7 +4141,7 @@ bool XSTRING::ConvertFromDoubleToSpanishText(double value, bool withintegerpart,
 																																			tmp.ConvertFromDoubleToSpanishText(fmod(integerpart, (double)1000000), true, false, _integerpart, _decimalpart);
 																																			Add(tmp);
 																																		}
-																																	 else if(integerpart < 1000000000000)
+																																	 else if(integerpart < 1000000000000LL)
 																																					{ 
 																																						 ConvertFromDoubleToSpanishText((integerpart / 1000000), true, false, _integerpart, _decimalpart);
 																																						 Add(__L(" millones"));
@@ -4154,22 +4154,22 @@ bool XSTRING::ConvertFromDoubleToSpanishText(double value, bool withintegerpart,
 																																					}
 																																				 else 
 																																					{
-																																						if(integerpart == 1000000000000) Set(__L("un billon"));
-																																							else if(integerpart < 2000000000000) 
+																																						if(integerpart == 1000000000000LL) Set(__L("un billon"));
+																																							else if(integerpart < 2000000000000LL) 
 																																								{
 																																									Set(__L("un billon")); 
-																																									tmp.ConvertFromDoubleToSpanishText(Truncate(integerpart / 1000000000000) * 1000000000000, true, false, _integerpart, _decimalpart);
+																																									tmp.ConvertFromDoubleToSpanishText(Truncate(integerpart / 1000000000000LL) * 1000000000000LL, true, false, _integerpart, _decimalpart);
 																																									Add(tmp);
 																																								}
 																																							 else
 																																								{
-																																									 ConvertFromDoubleToSpanishText(Truncate(integerpart / 1000000000000), true, false, _integerpart, _decimalpart);
+																																									 ConvertFromDoubleToSpanishText(Truncate(integerpart / 1000000000000LL), true, false, _integerpart, _decimalpart);
 																																									 Add(__L(" billones"));
 
-																																									 if((integerpart - Truncate(integerpart / 1000000000000) * 1000000000000) > 0) 
+																																									 if((integerpart - Truncate(integerpart / 1000000000000LL) * 1000000000000LL) > 0) 
 																																										 {
 																																											 Add(__L(" "));
-																																											 tmp.ConvertFromDoubleToSpanishText(integerpart - Truncate(integerpart / 1000000000000) * 1000000000000, true, false, _integerpart, _decimalpart);
+																																											 tmp.ConvertFromDoubleToSpanishText(integerpart - Truncate(integerpart / 1000000000000LL) * 1000000000000LL, true, false, _integerpart, _decimalpart);
 																																											 Add(tmp);
 																																										 }
 																																								}

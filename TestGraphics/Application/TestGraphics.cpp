@@ -178,6 +178,7 @@ bool TESTGRAPHICS::OnUpdate()
 }
 
 
+
 //-------------------------------------------------------------------
 //  TESTGRAPHICS::FirstUpdate
 /**
@@ -194,7 +195,7 @@ bool TESTGRAPHICS::OnInit()
 
 	if (testtoexec==-1)
 	{
-		testtoexec = TESTGRAPHICSTEST_DIVS;
+		testtoexec = TESTGRAPHICSTEST_MULTIRENDER; //TESTGRAPHICSTEST_DIVS;
 	}  
 	testbase = NULL;
 	switch(testtoexec)

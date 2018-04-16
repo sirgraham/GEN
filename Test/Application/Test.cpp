@@ -39,7 +39,7 @@
 #include "XFileDBF.h"
 #include "XDebug.h"
 #include "XThread.h"
-#include "XFileHASH.h"
+#include "XFileHash.h"
 #include "XConsole.h"
 #include "XApplication.h"
 #include "XMPInteger.h"
@@ -297,7 +297,7 @@ bool TEST::Ini()
 
 	//----------------------------------------------------------------	-------------------------------
 
-	XDEBUG_SETTARGET(0, XDEBUGCTRLTYPE_NET			, XDEBUG_DEFAULT_NETAIM);	
+	XDEBUG_SETTARGET(0, XDEBUGCTRLTYPE_NET			, XDEBUG_DEFAULT_NETAIM1);	
 	XDEBUG_SETTARGET(1, XDEBUGCTRLTYPE_NET			, XDEBUG_DEFAULT_NETAIM2);	
 	XDEBUG_SETTARGET(2, XDEBUGCTRLTYPE_NET			, XDEBUG_DEFAULT_NETAIM3);	
 	XDEBUG_SETTARGET(3, XDEBUGCTRLTYPE_NET			, XDEBUG_DEFAULT_NETAIM4);	
@@ -420,10 +420,10 @@ bool TEST::FirstUpdate()
 	//--------------------------------------------------------------------------------------
 
 
-	xconsole->TipicalHeader_Show(2012, APPLICATION_NAMEAPP, APPLICATION_VERSION
-																							, APPLICATION_SUBVERSION
-																							, APPLICATION_SUBVERSIONERR
-																							, APPLICATION_ENTERPRISE);
+	xconsole->TipicalHeader_Show(2012	, APPLICATION_NAMEAPP, APPLICATION_VERSION
+																		, APPLICATION_SUBVERSION
+																 		, APPLICATION_SUBVERSIONERR
+																		, APPLICATION_ENTERPRISE);
 
 	xconsole->PrintMessage(__L("\n\n"),0,false,false);
 	
@@ -444,7 +444,7 @@ bool TEST::FirstUpdate()
 			
 	XLOG::GetInstance().SetLimit(XLOGTYPELIMIT_SIZE, 500*1000, 10);
 	XLOG::GetInstance().SetBackup(true, 3, true);
-	XLOG::GetInstance().SetFilters(__L("Status, Generic, Update"), 0x0F);
+	XLOG::GetInstance().SetFilters(__L("Status, Generic, Update, Ini, End, SSHreverse"), 0x0F);
 	
 
 	//--------------------------------------------------------------------------------------
@@ -463,7 +463,7 @@ bool TEST::FirstUpdate()
 	//if(!Test_DIOStreamTCPIP(modeserver))									return false;
 	//if(!Test_OBEX())																			return false;
 	//if(!Test_ATCommand())																	return false;
-	//if(!Test_SSHReverse())																return false;
+	if(!Test_SSHReverse())																return false;
 	//if(!Test_ClientBTModuleCSR())													return false;
 	//if(!Test_HASHGeneric())																return false;		
 	//if(!Test_HASHCOMP128())																return false;
@@ -479,7 +479,7 @@ bool TEST::FirstUpdate()
 	//if(!Test_NTP())																				return false;		
 	//if(!Test_Log())																				return false;
 	//if(!Test_Scheduler())																	return false;
-	if(!Test_Script())																		return false;
+//if(!Test_Script())																		return false;
 	//if(!Test_OrganicCipherDB())														return false;
 	//if(!Test_AOSONGSensor())															return false;
 	//if(!Test_Rele220V())																	return false;
@@ -878,6 +878,10 @@ bool TEST::Test_WaitThread()
 		xconsole->Printf(__L("end"));
 		return true;
 }
+
+
+
+
 
 /*-------------------------------------------------------------------
 //  TEST::Test_XBuffer1
@@ -2458,28 +2462,53 @@ bool TEST::Test_SSHReverse()
 			delete webscraperpublicip;
 		}
 	
+	
+		
+	
 	string.Format(__L("public IP            : [%s]"), publicIPstring.Get());
 	xconsole->PrintMessage(string.Get(), 1, true, true);
 	
 	string.Format(__L("local IP             : [%s]"), localIP.Get());
 	xconsole->PrintMessage(string.Get(), 1, true, true);
 
-	string = __L("Execute reverse SSH  : ");
-	xconsole->PrintMessage(string.Get(), 1, true, false);
+	int c = 0;
+	while(1)
+		{			
 			
-	DIOSSHREVERSE::GetInstance().GetURLTarget()->Set(__L("laboratory.servegame.org"));
-	DIOSSHREVERSE::GetInstance().GetLocalIP()->Set(__L("localhost"));
-	DIOSSHREVERSE::GetInstance().GetLogin()->Set(__L("root"));
-	DIOSSHREVERSE::GetInstance().GetPassword()->Set(__L("[pass]"));
-	DIOSSHREVERSE::GetInstance().SetPort(2210);
-			
-	DIOSSHREVERSE::GetInstance().Activate();			
-	
-	stringresult = (DIOSSHREVERSE::GetInstance().IsRunning()) ? __L("Ok.") : __L("ERROR!");
-	xconsole->PrintMessage(stringresult.Get(), 0, false, true);
+			DIOSSHREVERSE::GetInstance().GetURLTarget()->Set(__L("dns.com"));
+			DIOSSHREVERSE::GetInstance().GetLocalIP()->Set(__L("localhost"));
+			DIOSSHREVERSE::GetInstance().GetLogin()->Set(__L("root"));
+			DIOSSHREVERSE::GetInstance().GetPassword()->Set(__L("[pass]"));
+			DIOSSHREVERSE::GetInstance().SetPort(2210);
+
+			XBYTE key = 0;
+			while(!xconsole->KBHit())
+				{
+					xsleep->MilliSeconds(100);
+				}
+				
+			key = xconsole->GetChar();						
+			switch(key)
+				{
+					case 'Q': DIOSSHREVERSE::GetInstance().DelInstance();	
+										return true; 
+
+					case 'A': DIOSSHREVERSE::GetInstance().Activate();			break;										
+					case 'D': DIOSSHREVERSE::GetInstance().DeActivate();		break;
+
+				}
+
+			string.Format(__L("\n[%2d] Execute reverse SSH  : "), c);
+			xconsole->PrintMessage(string.Get(), 1, true, true);
+
+			stringresult = (DIOSSHREVERSE::GetInstance().IsRunning()) ? __L("Ok.") : __L("ERROR!");
+			xconsole->PrintMessage(stringresult.Get(), 0, false, true);
+
+			c++;
+		}
 
 	DIOSSHREVERSE::GetInstance().DelInstance();	
-	
+
 	return true;
 }
 
