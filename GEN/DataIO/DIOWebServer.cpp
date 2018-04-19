@@ -255,6 +255,7 @@ bool DIOWEBSERVER_HEADER::Create(DIOWEBSERVER* webserver, DIOWEBSERVER_CONNEXION
 		else if (resource->Find(__L(".gif"),		true) != XSTRING_NOTFOUND)  line += __L("image/gif");
 		else if (resource->Find(__L(".jpg"),		true) != XSTRING_NOTFOUND)  line += __L("image/jpeg");
 		else if (resource->Find(__L(".jpeg"),		true) != XSTRING_NOTFOUND)  line += __L("image/jpeg");
+		else if (resource->Find(__L(".png"),		true) != XSTRING_NOTFOUND)  line += __L("image/png");
 		else if (resource->Find(__L(".wav"),		true) != XSTRING_NOTFOUND)  line += __L("audio/x-wav");
 		else if (resource->Find(__L(".mp3"),		true) != XSTRING_NOTFOUND)  line += __L("audio/mp3");
 		else if (resource->Find(__L(".gz"),			true) != XSTRING_NOTFOUND)  line += __L("application/x-gzip");
