@@ -245,9 +245,7 @@ XLANGUAGE_CODE XLINUXSYSTEM::GetLanguage()
 /*-----------------------------------------------------------------*/
 bool XLINUXSYSTEM::GetMemoryInfo(XDWORD& total,XDWORD& free)
 {
-  if(!xfactory) return false;
-
-	struct sysinfo meminfo;
+  struct sysinfo meminfo;
 
 	if(sysinfo(&meminfo) == -1) return false;
 

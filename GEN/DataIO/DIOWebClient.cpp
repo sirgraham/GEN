@@ -748,8 +748,6 @@ bool DIOWEBCLIENT::Post(XCHAR* url, XPATH& pathwebpage, XBUFFER* boundary, XFILE
 /*-----------------------------------------------------------------*/
 bool DIOWEBCLIENT::MakeOperationBuffer(DIOURL& url, XBUFFER& webpage, XBUFFER* postdata, XCHAR* addhead, int timeout, XSTRING* localIP)
 {
-	if(!xfactory)					return false;
-	if(!diofactory)				return false;	
 	if(!diostreamcfg)			return false;
 	if(!diostream)			  return false;	
 	if(!timerout)					return false;
@@ -990,9 +988,6 @@ bool DIOWEBCLIENT::MakeOperationBuffer(DIOURL& url, XBUFFER& webpage, XBUFFER* p
 /*-----------------------------------------------------------------*/
 bool DIOWEBCLIENT::MakeOperationFile(DIOURL& url, XFILE& webpage, XBUFFER* postdata, XCHAR* addhead, int timeout, XSTRING* localIP)
 {
-	if(!xfactory)					return false;
-	if(!diofactory)				return false;
-	
 	if(!diostreamcfg)			return false;
 	if(!diostream)			  return false;
 	
@@ -1237,9 +1232,6 @@ bool DIOWEBCLIENT::MakeOperationFile(DIOURL& url, XFILE& webpage, XBUFFER* postd
 /*-----------------------------------------------------------------*/
 bool DIOWEBCLIENT::MakeOperationFile(DIOURL& url, XBUFFER& webpage, XBUFFER* boundary, XFILE* file, XCHAR* addheader, int timeout, XSTRING* localIP)
 {
-	if(!xfactory)					return false;
-	if(!diofactory)				return false;
-	
 	if(!diostreamcfg)			return false;
 	if(!diostream)			  return false;
 	

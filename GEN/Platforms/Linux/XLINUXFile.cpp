@@ -431,9 +431,7 @@ bool XLINUXFILE::Close()
 */
 //-------------------------------------------------------------------
 bool XLINUXFILE::Erase(XCHAR* xpath,bool overwrite)
-{
-	if(!xfactory)						return false;
-
+{	
 	if(Exist(xpath)!=true)  return false;
 
 	bool status = true;  
@@ -471,9 +469,7 @@ bool XLINUXFILE::Erase(XCHAR* xpath,bool overwrite)
 */
 /*-----------------------------------------------------------------*/
 bool XLINUXFILE::Rename(XCHAR* xpathold, XCHAR* xpathnew)
-{
-	if(!xfactory)	return false;
-
+{	
 	XBUFFER _xpathbufferold;
 	XBUFFER _xpathbuffernew;
 	XPATH   _xpathold;
@@ -583,8 +579,6 @@ bool XLINUXFILE::ActualizeSize()
 /*-----------------------------------------------------------------*/
 bool XLINUXFILE::ExtendedOpen(XCHAR* xpath, XCHAR* mode)
 {
-	if(!xfactory) return false;
-
 	if(isopen) Close();
 
 	this->xpathnamefile = xpath;

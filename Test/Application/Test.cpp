@@ -2474,12 +2474,19 @@ bool TEST::Test_SSHReverse()
 	int c = 0;
 	while(1)
 		{			
-			
+			/*
 			DIOSSHREVERSE::GetInstance().GetURLTarget()->Set(__L("dns.com"));
 			DIOSSHREVERSE::GetInstance().GetLocalIP()->Set(__L("localhost"));
 			DIOSSHREVERSE::GetInstance().GetLogin()->Set(__L("root"));
 			DIOSSHREVERSE::GetInstance().GetPassword()->Set(__L("[pass]"));
 			DIOSSHREVERSE::GetInstance().SetPort(2210);
+			*/
+
+			DIOSSHREVERSE::GetInstance().GetURLTarget()->Set(__L("storeroom.homedns.org"));
+			DIOSSHREVERSE::GetInstance().GetLocalIP()->Set(__L("localhost"));
+			DIOSSHREVERSE::GetInstance().GetLogin()->Set(__L("root"));
+			DIOSSHREVERSE::GetInstance().GetPassword()->Set(__L("Isploon0314"));
+			DIOSSHREVERSE::GetInstance().SetPort(2210);	
 
 			XBYTE key = 0;
 			while(!xconsole->KBHit())
@@ -2493,7 +2500,7 @@ bool TEST::Test_SSHReverse()
 					case 'Q': DIOSSHREVERSE::GetInstance().DelInstance();	
 										return true; 
 
-					case 'A': DIOSSHREVERSE::GetInstance().Activate();			break;										
+					case 'A': DIOSSHREVERSE::GetInstance().Activate(true);	break;										
 					case 'D': DIOSSHREVERSE::GetInstance().DeActivate();		break;
 
 				}

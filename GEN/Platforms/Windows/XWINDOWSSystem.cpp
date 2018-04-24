@@ -142,10 +142,10 @@ XSYSTEM_SO XWINDOWSSYSTEM::GetSO()
 			case _WIN32_WINNT_WINXP         : return XSYSTEM_SO_WINDOWSXP;
 			case _WIN32_WINNT_WS03          :	return XSYSTEM_SO_WINDOWSSERVER2003;
 			case _WIN32_WINNT_VISTA         : return XSYSTEM_SO_WINDOWSVISTA;
-			case _WIN32_WINNT_WIN7          : return XSYSTEM_SO_WINDOWS7;
+			case _WIN32_WINNT_WIN7          : return XSYSTEM_SO_WINDOWS7;		
 			case _WIN32_WINNT_WIN8          : return XSYSTEM_SO_WINDOWS8;
 			case _WIN32_WINNT_WINBLUE       : return XSYSTEM_SO_WINDOWS81;
-			case _WIN32_WINNT_WIN10		      : return XSYSTEM_SO_WINDOWS10;
+			case _WIN32_WINNT_WIN10		      : return XSYSTEM_SO_WINDOWS10;			
 		}
   #endif
 	

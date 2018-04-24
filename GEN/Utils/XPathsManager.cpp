@@ -374,9 +374,7 @@ bool XPATHSMANAGER::CreateAllPathSectionOnDisk()
 */
 /*-----------------------------------------------------------------*/
 bool XPATHSMANAGER::AdjustRootPathDefault(XCHAR* nameapp, XCHAR* recopilatedir)
-{
-	if(!xfactory) return false;
-		
+{		
 	XDIR* xdir = xfactory->Create_Dir();
 	if(!xdir) return false;
 	

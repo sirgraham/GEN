@@ -253,24 +253,31 @@ bool DIOLINUXSTREAMUART::Config(XWORD mask)
 		{			
 			cfg.c_iflag  = (IGNBRK| IGNPAR);
 
+			#ifdef CMSPAR
 			cfg.c_cflag &= ~CMSPAR;
+			#endif
 			cfg.c_cflag &= ~PARENB;	
 			cfg.c_cflag &= ~PARODD;
 
 			switch(this->config->GetParity())
 				{
-    			case DIOSTREAMUARTPARITY_NONE					: cfg.c_cflag &= ~CMSPAR;
+    			case DIOSTREAMUARTPARITY_NONE					: 
+																									#ifdef CMSPAR
+																									cfg.c_cflag &= ~CMSPAR;
+																									#endif
 																									cfg.c_cflag &= ~PARENB;	
 																									cfg.c_cflag &= ~PARODD;
 																									break;	
-					
-					case DIOSTREAMUARTPARITY_MARK					: cfg.c_cflag |= CMSPAR;			 // Not available on many systems.		
+					#ifdef CMSPAR
+					case DIOSTREAMUARTPARITY_MARK					: cfg.c_cflag |= CMSPAR;			 // Not available on many systems.	
+					#endif					
 
 					case DIOSTREAMUARTPARITY_ODD					: cfg.c_cflag |= PARENB;
 																									cfg.c_cflag |= PARODD;
 																									break;
-
-					case DIOSTREAMUARTPARITY_SPACE				: cfg.c_cflag |= CMSPAR;			// Not available on many systems.														 																																
+					#ifdef CMSPAR
+					case DIOSTREAMUARTPARITY_SPACE				: cfg.c_cflag |= CMSPAR;			// Not available on many systems.		
+					#endif
 
     			case DIOSTREAMUARTPARITY_EVEN					: cfg.c_cflag |= PARENB;
 																									cfg.c_cflag &= ~PARODD;

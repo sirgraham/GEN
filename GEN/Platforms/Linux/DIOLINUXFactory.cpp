@@ -1,4 +1,6 @@
-﻿//------------------------------------------------------------------------------------------
+
+
+//------------------------------------------------------------------------------------------
 //	DIOLINUXFACTORY.CPP
 //	
 //	LINUX DIO factory class
@@ -78,25 +80,25 @@
 
 #ifdef DIOGPIO_ACTIVE
 
-	#ifdef HW_PC
-	#include "DIOLINUXGPIOPC.h"
-	#endif
+#ifdef HW_PC
+#include "DIOLINUXGPIOPC.h"
+#endif
 
-	#ifdef HW_GUMSTIXCONNEX
-	#include "DIOLINUXGPIOGumstixConnex.h"
-	#endif
+#ifdef HW_GUMSTIXCONNEX
+#include "DIOLINUXGPIOGumstixConnex.h"
+#endif
 
-	#ifdef HW_LEX3V700A
-	#include "DIOLINUXGPIOLex3V700A.h"
-	#endif
+#ifdef HW_LEX3V700A
+#include "DIOLINUXGPIOLex3V700A.h"
+#endif
 
-	#ifdef HW_ARTILA500
-	#include "DIOLINUXGPIOArtila500.h"
-	#endif
+#ifdef HW_ARTILA500
+#include "DIOLINUXGPIOArtila500.h"
+#endif
 
-	#ifdef HW_RASPBERRYPI
-	#include "DIOLINUXGPIORaspberryPi.h"
-	#endif
+#ifdef HW_RASPBERRYPI
+#include "DIOLINUXGPIORaspberryPi.h"
+#endif
 
 #endif
 
@@ -520,9 +522,9 @@ bool DIOLINUXFACTORY::DeleteGPIO(DIOGPIO* port)
 	return true;
 }
 
-
-
 #endif
+
+
 
 
 

@@ -134,9 +134,7 @@ bool HASH::Do(XPATH& xpath, int size, int pos)
 {
 	XFILE* file;
 	bool 	 status;
-
-	if(!xfactory) return false;
-
+	
   file = xfactory->Create_File();
 	if(!file) return false;
 

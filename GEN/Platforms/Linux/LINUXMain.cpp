@@ -1009,15 +1009,21 @@ static inline void Signal_PrintfStackTrace(FILE *out, unsigned int max_frames)
 					*begin_name++   = '\0';
 					*end_offset++   = '\0';
 					
-					if(begin_offset) *begin_offset++ = '\0';
- 
+					if(begin_offset) *begin_offset++ = '\0';	
+					
+					
+					int	  status = -1;
+					char* ret		 = NULL;
 					// mangled name is now in [begin_name, begin_offset) and caller
 					// offset in [begin_offset, end_offset). now apply
 					// __cxa_demangle():
-					int	 status = 0;
-					char* ret		= abi::__cxa_demangle(begin_name, funcname, &funcnamesize, &status);
+					
+					#ifndef HW_PC_OLD
+					abi::__cxa_demangle(begin_name, funcname, &funcnamesize, &status);
+					#endif
+				
 					char* fname	= begin_name;
-
+				
 					if(status == 0)  fname = ret;
 					
 					beginname		= fname;					

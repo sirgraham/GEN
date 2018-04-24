@@ -351,8 +351,6 @@ XSCHEDULER::~XSCHEDULER()
 /*-----------------------------------------------------------------*/
 bool XSCHEDULER::Ini()
 {
-	if(!xfactory) return false;
-
 	xmutexscheduler = xfactory->Create_Mutex();
 	if(!xmutexscheduler) return false;	
 	

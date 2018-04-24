@@ -1989,9 +1989,7 @@ DIOWEBSERVER::~DIOWEBSERVER()
 */
 /*-----------------------------------------------------------------*/
 bool DIOWEBSERVER::Ini(int port, int timeoutserverpage, XSTRING* addrlocal)	
-{
-	if(!xfactory) return false;
-
+{	
 	isactive				= false;
 	doexit					= false;
 

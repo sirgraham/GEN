@@ -868,7 +868,7 @@ DIOIEC60870_5::~DIOIEC60870_5()
 bool DIOIEC60870_5::Connect(XWORD addressfield,XBYTE addressPM, XDWORD keyPM, bool inlittleendian, bool havelongaddress, int timeout)
 {
   if(!diostream)																									return false;
-	if(diostream->GetConnectStatus()!=DIOSTREAMSTATUS_DISCONNECTED) return false;
+	//if(diostream->GetConnectStatus()!=DIOSTREAMSTATUS_DISCONNECTED) return false;
 
 	#ifdef XDEBUG
 

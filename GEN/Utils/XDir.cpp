@@ -230,8 +230,6 @@ bool XDIR::Copy(XPATH& xpathsource,XPATH& xpathtarget)
 	#define COPYFILE_MAXBUFFER 2048
 
 	bool status = true;
-
-	if(!xfactory) return false;
 	
 	XFILE* fsource = xfactory->Create_File();
 	XFILE* ftarget = xfactory->Create_File();

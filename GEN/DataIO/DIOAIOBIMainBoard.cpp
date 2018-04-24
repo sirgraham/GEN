@@ -1,8 +1,8 @@
 
 /*------------------------------------------------------------------------------------------
-//	DIOINNOMATICMAINBOARD.CPP
+//	DIOAIOBIMAINBOARD.CPP
 //	
-//	sdaawsd
+//	Main Board AIOBI class
 //   
 //	Author						: Abraham J. Velez
 //	Date Of Creation	: 17/02/2016 16:02:34
@@ -15,7 +15,7 @@
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
 
-#include "DIOInnomaticMainBoard.h"
+#include "DIOAIOBIMainBoard.h"
 	
 /*---- GENERAL VARIABLE ------------------------------------------------------------------*/
 	
@@ -25,7 +25,7 @@
 
 
 /*-------------------------------------------------------------------
-//	DIOINNOMATICMAINBOARD::Ini
+//	DIOAIOBIMAINBOARD::Ini
 */	
 /**	
 //	
@@ -38,7 +38,7 @@
 //
 */
 /*-----------------------------------------------------------------*/
-bool DIOINNOMATICMAINBOARD::Ini()
+bool DIOAIOBIMAINBOARD::Ini()
 {
 	
 	for(int c=0; c<3; c++)
@@ -47,21 +47,21 @@ bool DIOINNOMATICMAINBOARD::Ini()
 			if(!pcf8574[c])	return false;
 		}
 
-	if(!pcf8574[DIOINNOMATICMAINBOARD_I2CDIGIGPIO_IN]->Ini(DIOINNOMATICMAINBOARD_I2CDEVICENAME		 , DIOINNOMATICMAINBOARD_I2CDIGIGPIO_ID_IN			, DIOINNOMATICMAINBOARD_DEFAULTTIMEOUT)) 
+	if(!pcf8574[DIOAIOBIMAINBOARD_I2CDIGIGPIO_IN]->Ini(DIOAIOBIMAINBOARD_I2CDEVICENAME		 , DIOAIOBIMAINBOARD_I2CDIGIGPIO_ID_IN			, DIOAIOBIMAINBOARD_DEFAULTTIMEOUT)) 
 		{
-			XLOG::GetInstance().AddEntry(XLOGLEVEL_ERROR, DIOINNOMATICMAINBOARD_LOGSECTIONID, false, __L("Innomatic Main Board: ERROR! I2C GPIO IN not init!"));			
+			XLOG::GetInstance().AddEntry(XLOGLEVEL_ERROR, DIOAIOBIMAINBOARD_LOGSECTIONID, false, __L("AIOBI Main Board: ERROR! I2C GPIO IN not init!"));			
 			return false;
 		}
 
-	if(!pcf8574[DIOINNOMATICMAINBOARD_I2CDIGIGPIO_OUT]->Ini(DIOINNOMATICMAINBOARD_I2CDEVICENAME		 , DIOINNOMATICMAINBOARD_I2CDIGIGPIO_ID_OUT		  , DIOINNOMATICMAINBOARD_DEFAULTTIMEOUT)) 
+	if(!pcf8574[DIOAIOBIMAINBOARD_I2CDIGIGPIO_OUT]->Ini(DIOAIOBIMAINBOARD_I2CDEVICENAME		 , DIOAIOBIMAINBOARD_I2CDIGIGPIO_ID_OUT		  , DIOAIOBIMAINBOARD_DEFAULTTIMEOUT)) 
 		{
-			XLOG::GetInstance().AddEntry(XLOGLEVEL_ERROR, DIOINNOMATICMAINBOARD_LOGSECTIONID, false, __L("Innomatic Main Board: ERROR! I2C GPIO OUT not init!")); 
+			XLOG::GetInstance().AddEntry(XLOGLEVEL_ERROR, DIOAIOBIMAINBOARD_LOGSECTIONID, false, __L("AIOBI Main Board: ERROR! I2C GPIO OUT not init!")); 
 			return false;
 		}
 
-	if(!pcf8574[DIOINNOMATICMAINBOARD_I2CDIGIGPIO_RELAYS]->Ini(DIOINNOMATICMAINBOARD_I2CDEVICENAME , DIOINNOMATICMAINBOARD_I2CDIGIGPIO_ID_RELAYS	, DIOINNOMATICMAINBOARD_DEFAULTTIMEOUT)) 
+	if(!pcf8574[DIOAIOBIMAINBOARD_I2CDIGIGPIO_RELAYS]->Ini(DIOAIOBIMAINBOARD_I2CDEVICENAME , DIOAIOBIMAINBOARD_I2CDIGIGPIO_ID_RELAYS	, DIOAIOBIMAINBOARD_DEFAULTTIMEOUT)) 
 		{
-			XLOG::GetInstance().AddEntry(XLOGLEVEL_ERROR, DIOINNOMATICMAINBOARD_LOGSECTIONID, false, __L("Innomatic Main Board: ERROR! I2C GPIO Relays not init!")); 
+			XLOG::GetInstance().AddEntry(XLOGLEVEL_ERROR, DIOAIOBIMAINBOARD_LOGSECTIONID, false, __L("AIOBI Main Board: ERROR! I2C GPIO Relays not init!")); 
 			return false;
 		}
 
@@ -75,9 +75,9 @@ bool DIOINNOMATICMAINBOARD::Ini()
 
 	eeprom->SetType(DIOI2CEEPROM24XXXTYPE_16);
 
-	if(!eeprom->Ini(DIOINNOMATICMAINBOARD_I2CDEVICENAME, DIOINNOMATICMAINBOARD_I2CEEPROM, DIOINNOMATICMAINBOARD_DEFAULTTIMEOUT)) 
+	if(!eeprom->Ini(DIOAIOBIMAINBOARD_I2CDEVICENAME, DIOAIOBIMAINBOARD_I2CEEPROM, DIOAIOBIMAINBOARD_DEFAULTTIMEOUT)) 
 		{
-			XLOG::GetInstance().AddEntry(XLOGLEVEL_ERROR, DIOINNOMATICMAINBOARD_LOGSECTIONID, false, __L("Innomatic Main Board: ERROR! I2C Serial EEPROM not init!")); 
+			XLOG::GetInstance().AddEntry(XLOGLEVEL_ERROR, DIOAIOBIMAINBOARD_LOGSECTIONID, false, __L("AIOBI Main Board: ERROR! I2C Serial EEPROM not init!")); 
 			return false;
 		}
 
@@ -85,9 +85,9 @@ bool DIOINNOMATICMAINBOARD::Ini()
 	pca9685 = new DIOI2CPWMCONTROLERPCA9685();
 	if(!pca9685) return false;	
 	
-	if(!pca9685->Ini(DIOINNOMATICMAINBOARD_I2CDEVICENAME, DIOINNOMATICMAINBOARD_I2CPWM, DIOINNOMATICMAINBOARD_DEFAULTTIMEOUT))  
+	if(!pca9685->Ini(DIOAIOBIMAINBOARD_I2CDEVICENAME, DIOAIOBIMAINBOARD_I2CPWM, DIOAIOBIMAINBOARD_DEFAULTTIMEOUT))  
 		{		
-			XLOG::GetInstance().AddEntry(XLOGLEVEL_ERROR, DIOINNOMATICMAINBOARD_LOGSECTIONID, false, __L("Innomatic Main Board: ERROR! I2C PCA9685 (PWM) not init!")); 
+			XLOG::GetInstance().AddEntry(XLOGLEVEL_ERROR, DIOAIOBIMAINBOARD_LOGSECTIONID, false, __L("AIOBI Main Board: ERROR! I2C PCA9685 (PWM) not init!")); 
 			return false;	
 		}
 	
@@ -95,13 +95,13 @@ bool DIOINNOMATICMAINBOARD::Ini()
 	gpio = diofactory->CreateGPIO();
 	if(!gpio) 
 		{
-			XLOG::GetInstance().AddEntry(XLOGLEVEL_ERROR, DIOINNOMATICMAINBOARD_LOGSECTIONID, false, __L("Innomatic Main Board: ERROR! GPIO not created!")); 
+			XLOG::GetInstance().AddEntry(XLOGLEVEL_ERROR, DIOAIOBIMAINBOARD_LOGSECTIONID, false, __L("AIOBI Main Board: ERROR! GPIO not created!")); 
 			return false;
 		}
 
 	if(!gpio->Ini()) 
 		{
-			XLOG::GetInstance().AddEntry(XLOGLEVEL_ERROR,  DIOINNOMATICMAINBOARD_LOGSECTIONID, false, __L("Innomatic Main Board: ERROR! GPIO not init!")); 
+			XLOG::GetInstance().AddEntry(XLOGLEVEL_ERROR,  DIOAIOBIMAINBOARD_LOGSECTIONID, false, __L("AIOBI Main Board: ERROR! GPIO not init!")); 
 			return false;
 		}
 
@@ -111,7 +111,7 @@ bool DIOINNOMATICMAINBOARD::Ini()
 
 
 /*-------------------------------------------------------------------
-//	DIOINNOMATICMAINBOARD::SwitchReleK1
+//	DIOAIOBIMAINBOARD::SwitchReleK1
 */	
 /**	
 //	
@@ -125,23 +125,23 @@ bool DIOINNOMATICMAINBOARD::Ini()
 //  @param				on : 
 */
 /*-----------------------------------------------------------------*/
-bool DIOINNOMATICMAINBOARD::SwitchReleK1(bool on)
+bool DIOAIOBIMAINBOARD::SwitchReleK1(bool on)
 {
-	if(!pcf8574[DIOINNOMATICMAINBOARD_I2CDIGIGPIO_RELAYS])									return false;
-	if(!pcf8574[DIOINNOMATICMAINBOARD_I2CDIGIGPIO_RELAYS]->IsInitialized()) return false;
+	if(!pcf8574[DIOAIOBIMAINBOARD_I2CDIGIGPIO_RELAYS])									return false;
+	if(!pcf8574[DIOAIOBIMAINBOARD_I2CDIGIGPIO_RELAYS]->IsInitialized()) return false;
 
 	XBYTE value = 0;
-	if(!pcf8574[DIOINNOMATICMAINBOARD_I2CDIGIGPIO_RELAYS]->Read(value)) return false;
+	if(!pcf8574[DIOAIOBIMAINBOARD_I2CDIGIGPIO_RELAYS]->Read(value)) return false;
 
 	value = on?(value|0x01):(value&~0x01);
-	return pcf8574[DIOINNOMATICMAINBOARD_I2CDIGIGPIO_RELAYS]->Write(value); 
+	return pcf8574[DIOAIOBIMAINBOARD_I2CDIGIGPIO_RELAYS]->Write(value); 
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	DIOINNOMATICMAINBOARD::SwitchReleK2
+//	DIOAIOBIMAINBOARD::SwitchReleK2
 */	
 /**	
 //	
@@ -155,22 +155,22 @@ bool DIOINNOMATICMAINBOARD::SwitchReleK1(bool on)
 //  @param				on : 
 */
 /*-----------------------------------------------------------------*/
-bool DIOINNOMATICMAINBOARD::SwitchReleK2(bool on)
+bool DIOAIOBIMAINBOARD::SwitchReleK2(bool on)
 {
-	if(!pcf8574[DIOINNOMATICMAINBOARD_I2CDIGIGPIO_RELAYS])									return false;
-	if(!pcf8574[DIOINNOMATICMAINBOARD_I2CDIGIGPIO_RELAYS]->IsInitialized()) return false;
+	if(!pcf8574[DIOAIOBIMAINBOARD_I2CDIGIGPIO_RELAYS])									return false;
+	if(!pcf8574[DIOAIOBIMAINBOARD_I2CDIGIGPIO_RELAYS]->IsInitialized()) return false;
 
 	XBYTE value = 0;
-	if(!pcf8574[DIOINNOMATICMAINBOARD_I2CDIGIGPIO_RELAYS]->Read(value)) return false;
+	if(!pcf8574[DIOAIOBIMAINBOARD_I2CDIGIGPIO_RELAYS]->Read(value)) return false;
 
 	value = on?(value|0x02):(value&~0x02);
-	return pcf8574[DIOINNOMATICMAINBOARD_I2CDIGIGPIO_RELAYS]->Write(value); 
+	return pcf8574[DIOAIOBIMAINBOARD_I2CDIGIGPIO_RELAYS]->Write(value); 
 }
 
 
 
 /*-------------------------------------------------------------------
-//	DIOINNOMATICMAINBOARD::SwitchReleK3
+//	DIOAIOBIMAINBOARD::SwitchReleK3
 */	
 /**	
 //	
@@ -184,16 +184,16 @@ bool DIOINNOMATICMAINBOARD::SwitchReleK2(bool on)
 //  @param				on : 
 */
 /*-----------------------------------------------------------------*/
-bool DIOINNOMATICMAINBOARD::SwitchReleK3(bool on)
+bool DIOAIOBIMAINBOARD::SwitchReleK3(bool on)
 {
-	if(!pcf8574[DIOINNOMATICMAINBOARD_I2CDIGIGPIO_RELAYS])									return false;
-	if(!pcf8574[DIOINNOMATICMAINBOARD_I2CDIGIGPIO_RELAYS]->IsInitialized()) return false;
+	if(!pcf8574[DIOAIOBIMAINBOARD_I2CDIGIGPIO_RELAYS])									return false;
+	if(!pcf8574[DIOAIOBIMAINBOARD_I2CDIGIGPIO_RELAYS]->IsInitialized()) return false;
 
 	XBYTE value = 0;
-	if(!pcf8574[DIOINNOMATICMAINBOARD_I2CDIGIGPIO_RELAYS]->Read(value)) return false;
+	if(!pcf8574[DIOAIOBIMAINBOARD_I2CDIGIGPIO_RELAYS]->Read(value)) return false;
 
 	value = on?(value|0x04):(value&~0x04);
-	return pcf8574[DIOINNOMATICMAINBOARD_I2CDIGIGPIO_RELAYS]->Write(value); 
+	return pcf8574[DIOAIOBIMAINBOARD_I2CDIGIGPIO_RELAYS]->Write(value); 
 }
 
 
@@ -201,7 +201,7 @@ bool DIOINNOMATICMAINBOARD::SwitchReleK3(bool on)
 
 
 /*-------------------------------------------------------------------
-//	DIOINNOMATICMAINBOARD::GetDigitalInput
+//	DIOAIOBIMAINBOARD::GetDigitalInput
 */	
 /**	
 //	
@@ -215,19 +215,19 @@ bool DIOINNOMATICMAINBOARD::SwitchReleK3(bool on)
 //  @param				XBYTE& data : 
 */
 /*-----------------------------------------------------------------*/
-bool DIOINNOMATICMAINBOARD::GetDigitalInput(XBYTE& data)
+bool DIOAIOBIMAINBOARD::GetDigitalInput(XBYTE& data)
 {
-	if(!pcf8574[DIOINNOMATICMAINBOARD_I2CDIGIGPIO_IN])													return false;
-	if(!pcf8574[DIOINNOMATICMAINBOARD_I2CDIGIGPIO_IN]->IsInitialized())					return false;
+	if(!pcf8574[DIOAIOBIMAINBOARD_I2CDIGIGPIO_IN])													return false;
+	if(!pcf8574[DIOAIOBIMAINBOARD_I2CDIGIGPIO_IN]->IsInitialized())					return false;
 	
-	return pcf8574[DIOINNOMATICMAINBOARD_I2CDIGIGPIO_IN]->Read(data); 
+	return pcf8574[DIOAIOBIMAINBOARD_I2CDIGIGPIO_IN]->Read(data); 
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	DIOINNOMATICMAINBOARD::SetDigitalOutput
+//	DIOAIOBIMAINBOARD::SetDigitalOutput
 */	
 /**	
 //	
@@ -242,10 +242,10 @@ bool DIOINNOMATICMAINBOARD::GetDigitalInput(XBYTE& data)
 //  @param				on : 
 */
 /*-----------------------------------------------------------------*/
-bool DIOINNOMATICMAINBOARD::SetDigitalOutput(XBYTE bit, bool on)
+bool DIOAIOBIMAINBOARD::SetDigitalOutput(XBYTE bit, bool on)
 {
-	if(!pcf8574[DIOINNOMATICMAINBOARD_I2CDIGIGPIO_OUT])														return false;
-	if(!pcf8574[DIOINNOMATICMAINBOARD_I2CDIGIGPIO_OUT]->IsInitialized())					return false;
+	if(!pcf8574[DIOAIOBIMAINBOARD_I2CDIGIGPIO_OUT])														return false;
+	if(!pcf8574[DIOAIOBIMAINBOARD_I2CDIGIGPIO_OUT]->IsInitialized())					return false;
 		
 	XBYTE mask = 0x01;
 	
@@ -258,7 +258,7 @@ bool DIOINNOMATICMAINBOARD::SetDigitalOutput(XBYTE bit, bool on)
 				outputdigitaldata |=  mask; 
 	 else outputdigitaldata &= ~mask;
 
-	return pcf8574[DIOINNOMATICMAINBOARD_I2CDIGIGPIO_OUT]->Write(outputdigitaldata); 
+	return pcf8574[DIOAIOBIMAINBOARD_I2CDIGIGPIO_OUT]->Write(outputdigitaldata); 
 }
 
 
@@ -268,7 +268,7 @@ bool DIOINNOMATICMAINBOARD::SetDigitalOutput(XBYTE bit, bool on)
 
 
 /*-------------------------------------------------------------------
-//	DIOINNOMATICMAINBOARD::End
+//	DIOAIOBIMAINBOARD::End
 */	
 /**	
 //	
@@ -281,7 +281,7 @@ bool DIOINNOMATICMAINBOARD::SetDigitalOutput(XBYTE bit, bool on)
 //
 */
 /*-----------------------------------------------------------------*/
-bool DIOINNOMATICMAINBOARD::End()
+bool DIOAIOBIMAINBOARD::End()
 {
 	for(int c=0; c<3; c++)
 		{

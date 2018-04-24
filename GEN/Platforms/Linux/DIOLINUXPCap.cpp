@@ -87,7 +87,6 @@ DIOLINUXPCAP::~DIOLINUXPCAP()
 bool DIOLINUXPCAP::Capture_Start(DIOPCAPNETINTERFACE* netinterface, bool promiscuousmode, int timeout)
 {
   if(!netinterface) return false;
-  if(!xfactory)     return false;
      
   char errbuf[PCAP_ERRBUF_SIZE];
 

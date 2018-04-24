@@ -563,7 +563,7 @@ bool DIOLINUXSTREAMTCPIP::GetHandleServer()
 bool DIOLINUXSTREAMTCPIP::GetHandleClient()
 {
 	if(config->GetRemoteURL()->IsEmpty())
-		{
+		{			
 			SetEvent(DIOLINUXTCPIPFSMEVENT_DISCONNECTING);
 			return false;
 		} 
@@ -582,7 +582,7 @@ bool DIOLINUXSTREAMTCPIP::GetHandleClient()
 			XSTRING						 IPstring;
 																																					
 			config->GetLocalIP()->GetXString(IPstring);
-
+			
 			memset(&loc_addr, 0, sizeof(struct sockaddr_in));
 
 			loc_addr.sin_family			 = AF_INET;
@@ -594,7 +594,7 @@ bool DIOLINUXSTREAMTCPIP::GetHandleClient()
 			loc_addr.sin_port				 = 0; //htons(diostream->config->GetRemotePort());
 																																					
 			if(bind(handlesocket, (struct sockaddr *)&loc_addr, sizeof(loc_addr)) < 0 )
-				{
+				{			
 					SetEvent(DIOLINUXTCPIPFSMEVENT_DISCONNECTING);
 					SetLastDIOError(DIOSTREAMERROR_UNKNOWN);
 					return false;
@@ -635,7 +635,7 @@ bool DIOLINUXSTREAMTCPIP::GetHandleClient()
 	if(connect(handlesocket, (struct sockaddr *)&rem_addr, sizeof(rem_addr)) < 0)
 		{
 			if(errno == EADDRINUSE)
-				{
+				{			
 					SetEvent(DIOLINUXTCPIPFSMEVENT_DISCONNECTING);
 					SetLastDIOError(DIOSTREAMERROR_ADDRINUSE);
 					return false;
@@ -683,7 +683,7 @@ void DIOLINUXSTREAMTCPIP::ThreadConnexion(void* data)
 																																		diostream->GetHandleServer();																																					
 																																	}
                                                         				 else
-																																	{
+																																	{																																		
 																																		diostream->GetHandleClient();																																					
 																																	}																																																
 																															}											
@@ -730,10 +730,7 @@ void DIOLINUXSTREAMTCPIP::ThreadConnexion(void* data)
 																													
 																														int error = select((int)(diostream->handlesocket)+1, &read_flags, &write_flags, (fd_set*)NULL, &waitd);																															
 																														if((error==-1))   //Socket ready for reading
-																															{			
-																																
-																																XDEBUG_PRINTCOLOR(4, __L("Disconected Select error [%d]"), errno);
-																																
+																															{																																																																			
 																																diostream->SetEvent(DIOLINUXTCPIPFSMEVENT_DISCONNECTING);
 																																break;
 																															}

@@ -278,11 +278,7 @@ bool XFILE::OverwriteContent(XCHAR* xpath)
 */
 //-------------------------------------------------------------------
 bool XFILECONTAINER::CreatePrimaryFile()
-{
-	
-
-  if(!xfactory) return false;
-
+{	  
 	file = xfactory->Create_File();
 	if(!file) return false;
 
@@ -322,8 +318,7 @@ XFILE* XFILECONTAINER::GetPrimaryFile()
 //-------------------------------------------------------------------
 bool XFILECONTAINER::DeletePrimaryFile()
 {
-  if(!xfactory)      return false;
-  if(!file)          return false;
+  if(!file)  return false;
 
   if(!eraseprimaryfile) return false;
 

@@ -222,7 +222,7 @@ bool XLINUXTHREAD::Ini(bool run)
 		{		
 			XSTRING_CREATEOEM(ID, charstr)		
 			if(ID.GetSize()>=16) charstr[15] = 0;
-			pthread_setname_np(thhandle, charstr);
+			//pthread_setname_np(thhandle, charstr);
 			XSTRING_DELETEOEM(charstr)
 		}
 	 else		
@@ -347,9 +347,11 @@ void* XLINUXTHREAD::Callback(void* thread)
 
 			switch(th->priority)
 				{
+					#ifdef SCHED_IDLE
 					case XTHREADPRIORITY_LOW			: policy = SCHED_IDLE;
 																					param.sched_priority = sched_get_priority_min(policy);
 																					break;
+					#endif
 
 					case XTHREADPRIORITY_HIGH			: policy = SCHED_FIFO;
 																					param.sched_priority = sched_get_priority_max(policy)/2;	 
@@ -383,8 +385,7 @@ void* XLINUXTHREAD::Callback(void* thread)
 			
 			if(!th) break;
 
-			if(th->waityield) usleep(th->waityield*1000);
-							
+			if(th->waityield) usleep(th->waityield*1000);				
 		}
 
 			

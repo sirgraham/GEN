@@ -90,9 +90,7 @@ XLINUXDIR::~XLINUXDIR()
 */
 /*-----------------------------------------------------------------*/ 
 bool XLINUXDIR::Exist(XCHAR* path)
-{
-	if(!xfactory)	return false;
-
+{	
 	XPATH		xpath;
   XBUFFER actualpath( (XDWORD)_MAXPATH);
 	XBUFFER newpath;
@@ -199,8 +197,6 @@ bool XLINUXDIR::Make(XCHAR* path)
 /*-----------------------------------------------------------------*/
 bool XLINUXDIR::ChangeTo(XCHAR* path)
 {
-	if(!xfactory)	return false;
-
 	XPATH		xpath;  
 	XBUFFER newpath;
 	int			status = 1;
@@ -231,8 +227,6 @@ bool XLINUXDIR::ChangeTo(XCHAR* path)
 /*-----------------------------------------------------------------*/
 bool XLINUXDIR::Delete(XCHAR* path,bool all)
 {	
-	if(!xfactory)	return false;
-
 	XDIRELEMENT search;
 	XPATH				pathfile;
 	XPATH				xpath;  
@@ -288,7 +282,6 @@ bool XLINUXDIR::Delete(XCHAR* path,bool all)
 //-------------------------------------------------------------------
 bool XLINUXDIR::FirstSearch(XCHAR* path,XCHAR* patternsearch,XDIRELEMENT* searchelement)
 {		
-	if(!xfactory)			 return false;	  
 	if(!searchelement) return false;	
 
 	XPATH		xpath;  
@@ -338,7 +331,6 @@ bool XLINUXDIR::FirstSearch(XCHAR* path,XCHAR* patternsearch,XDIRELEMENT* search
 //-------------------------------------------------------------------
 bool XLINUXDIR::NextSearch(XDIRELEMENT* searchelement)
 {	
-	if(!xfactory)			 return false;
 	if(!searchelement) return false;
 
 	DIR*					 dir	  = (DIR*)searchelement->GetHandle();
@@ -418,7 +410,6 @@ void XLINUXDIR::Clean()
 /*-----------------------------------------------------------------*/
 XDIRELEMENTTYPE XLINUXDIR::TypeOfEntry(XCHAR* path)
 {	
-	if(!xfactory)	return XDIRELEMENTTYPE_NONE;
 	if(!path)			return XDIRELEMENTTYPE_NONE;
 
 	XPATH						xpath;  

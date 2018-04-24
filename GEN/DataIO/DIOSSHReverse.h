@@ -95,7 +95,7 @@ class DIOSSHREVERSE
 																		return DownloadCFG(URL.Get(), publicIP, localIP);										 
 																	}
 
-		bool													Activate        			();																																	
+		bool													Activate							();
 		bool													DeActivate						();
 		
 		bool													IsRunning							();
@@ -106,6 +106,7 @@ class DIOSSHREVERSE
 																		
 																		if(IsRunning())	
 																			{
+																				status = true;
 																				return status;
 																			}
 																																					

@@ -102,12 +102,17 @@ XQWORD XLINUXTIMER::GetMicroSecondsTickCounter()
 	return elapsedtime;
 	*/
 
-	
+		
+	XQWORD elapsedtime = 0;
   struct timespec t1;
 
+	#ifdef CLOCK_MONOTONIC
 	clock_gettime(CLOCK_MONOTONIC, &t1);
+	#else
+	clock_gettime(CLOCK_REALTIME, &t1);
+	#endif
 
-	XQWORD elapsedtime = ((double)(t1.tv_sec) * 1000000) + (double)(t1.tv_nsec/1000); // to us
+	elapsedtime = ((double)(t1.tv_sec) * 1000000) + (double)(t1.tv_nsec/1000); // to us		
 	
 	return elapsedtime;
 }

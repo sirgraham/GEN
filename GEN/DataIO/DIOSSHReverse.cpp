@@ -174,11 +174,11 @@ bool DIOSSHREVERSE::DownloadCFG(XCHAR* URL, XSTRING& publicIP, XSTRING& localIP)
 //	
 //
 //	@author		Abraham J. Velez 
-//	@version	27/03/2018 7:40:22
+//	@version	14/04/2018 17:43:48
 //
 //	@return		bool : 
 //
-//	@param		 : 
+//	@param		withscreen : 
 //
 *//*-----------------------------------------------------------------*/
 bool DIOSSHREVERSE::Activate()
@@ -189,8 +189,9 @@ bool DIOSSHREVERSE::Activate()
 
 	XSYSTEM* xsystem = xfactory->CreateSystem();
 	if(xsystem) 
-		{				
-			command.Format(__L("%s -p %s ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o ExitOnForwardFailure=yes -N -R %d:%s:%d %s@%s &"), DIOSSHREVERSE_DEFAULTAPPLICATION, password.Get(), port, localIP.Get() ,DIOSSHREVERSE_DEFAULTPORTSSH, login.Get(), URLtarget.Get());																				
+		{							
+			//command.AddFormat(__L("%s -p %s ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o ExitOnForwardFailure=yes -N -R %d:%s:%d %s@%s &"), DIOSSHREVERSE_DEFAULTAPPLICATION, password.Get(), port, localIP.Get() ,DIOSSHREVERSE_DEFAULTPORTSSH, login.Get(), URLtarget.Get());																				
+			command.AddFormat(__L("%s -p %s autossh -M 0 -o \"ServerAliveInterval 30\" -o \"ServerAliveCountMax 3\" -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o ExitOnForwardFailure=yes -N -R %d:%s:%d %s@%s &"), DIOSSHREVERSE_DEFAULTAPPLICATION, password.Get(), port, localIP.Get() ,DIOSSHREVERSE_DEFAULTPORTSSH, login.Get(), URLtarget.Get());																				
 			status = xsystem->MakeCommand(command.Get(), &returncode);
 			
 			xfactory->DeleteSystem(xsystem);																		
@@ -279,10 +280,12 @@ bool DIOSSHREVERSE::IsRunning()
 	XSYSTEM* xsystem = xfactory->CreateSystem();
 	if(!xsystem) return false;
 
-	bool status = xsystem->IsApplicationRunning(DIOSSHREVERSE_DEFAULTAPPLICATION);
-	if(status)
+	bool status = false;
+
+	//status = xsystem->IsApplicationRunning(DIOSSHREVERSE_DEFAULTAPPLICATION);
+	//if(status)
 		{
-			status = false;
+			//status = false;
 																																		
 			XSTRING command;
 			XSTRING publicIPtarget;
@@ -323,7 +326,7 @@ bool DIOSSHREVERSE::IsRunning()
 																		{
 																			XSTRING application;
 
-																			application.Format(__L("/ssh "), DIOSSHREVERSE_DEFAULTAPPLICATION);
+																			application = __L("/ssh ");
 
 																			if((line->Find(publicIPtarget.Get() , false, 0) != XSTRING_NOTFOUND) &&
 																				 (line->Find(__L("ESTABLISHED")   , false, 0) != XSTRING_NOTFOUND) &&

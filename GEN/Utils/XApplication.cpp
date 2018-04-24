@@ -95,7 +95,6 @@ XAPPLICATION::~XAPPLICATION()
 /*-----------------------------------------------------------------*/
 bool XAPPLICATION::IniApplication(XSYSTEM* xsystem, XVECTOR<XSTRING*>* execparams)
 {	
-	if(!xfactory)		return false;	
 	if(!xsystem)		return false;	
 
   #ifdef MICROCONTROLLER

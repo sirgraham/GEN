@@ -21,7 +21,27 @@ ifeq "$(ARCHITECTURE)" "PC"
  #FLAGS  += -m64
  
 	CPPDIR += /usr/include/postgresql  
+	
 endif
+
+#---- PC_OLD --------------------------------------------------------------------------------------------------------------
+
+ifeq "$(ARCHITECTURE)" "PC_OLD"
+	CC		  = gcc3
+	CCPP	  = g++3
+	FLAGS	+= -DHW_PC
+	FLAGS	+= -DHW_PC_OLD
+	
+	FLAGS	+= -D__STDC_CONSTANT_MACROS
+	FLAGS += -w
+	FLAGS += -Wfatal-errors
+	
+ #FLAGS  += -m64
+ 
+	CPPDIR += /usr/include/postgresql  
+	
+endif
+
 
 
 #---- RASPBERRY PI ----------------------------------------------------------------------------------------------
@@ -302,9 +322,9 @@ ifneq (,$(findstring SND_ACTIVE,$(FLAGS)))
 	FLAGS += -D MEDIA_ACTIVE
 endif
 
-LIBS				+= -l stdc++
-LIBS				+= -l pthread
-LIBS				+= -l rt
+LIBS				+= -lstdc++
+LIBS				+= -lpthread
+LIBS				+= -lrt
 
 ifneq (,$(findstring DIOBLUETOOTH_ACTIVE,$(FLAGS)))	
 	LIBS			+= -l bluetooth
