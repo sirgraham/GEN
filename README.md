@@ -9,3 +9,5 @@ GEN is a small multiplatform framework for the development of applications in C/
 - **It is a generic framework**, is developed to perform any type of application: Utilities, games, libraries, etc ... having great versatility of functions and modules by general use.
 
 - **It is very portable**, being able to be used in multiple compilers and IDEs, both in old and modern versions. This allows great flexibility when making applications: you can program on almost any platform, for practically any platform.
+
+
