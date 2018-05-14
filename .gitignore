@@ -1,51 +1,51 @@
 syntax: glob
 
-Tests/Test/resources/
-Tests/Test/Platforms/Linux/debug/
-Tests/Test/Platforms/Linux/release/
+Tests/Test/resources/*
+Tests/Test/Platforms/Linux/debug/*
+Tests/Test/Platforms/Linux/release/*
 Tests/Test/Platforms/Linux/release/test
-Tests/Test/Platforms/Windows/Debug/
-Tests/Test/Platforms/Windows/Release/
+Tests/Test/Platforms/Windows/Debug/*
+Tests/Test/Platforms/Windows/Release/*
 
-Tests/TestGraphics/resources/
-Tests/TestGraphics/Graphics/
-Tests/TestGraphics/Platforms/Linux/debug/
-Tests/TestGraphics/Platforms/Linux/release/
+Tests/TestGraphics/resources/*
+Tests/TestGraphics/Graphics/*
+Tests/TestGraphics/Platforms/Linux/debug/*
+Tests/TestGraphics/Platforms/Linux/release/*
 Tests/TestGraphics/Platforms/Linux/testgraphics
-Tests/TestGraphics/Platforms/Windows/Release/
-Tests/TestGraphics/Platforms/Windows/Debug/
-Tests/TestGraphics/Platforms/Windows/assets/
-Tests/TestGraphics/Platforms/Windows/res/
-Tests/TestGraphics/Platforms/Windows/Tegra-Android/
+Tests/TestGraphics/Platforms/Windows/Release/*
+Tests/TestGraphics/Platforms/Windows/Debug/*
+Tests/TestGraphics/Platforms/Windows/assets/*
+Tests/TestGraphics/Platforms/Windows/res/*
+Tests/TestGraphics/Platforms/Windows/Tegra-Android/*
 
 
-Tests/TestMicro/Platforms/Microcontrollers/STM32F0xx/Debug/
-Tests/TestMicro/Platforms/Microcontrollers/STM32F0xx/Release/
-Tests/TestMicro/Platforms/Microcontrollers/STM32F3xx/Debug/
-Tests/TestMicro/Platforms/Microcontrollers/STM32F3xx/Release/
-Tests/TestMicro/Platforms/Microcontrollers/STM32F4xx/Debug/
-Tests/TestMicro/Platforms/Microcontrollers/STM32F4xx/Release/
+Tests/TestMicro/Platforms/Microcontrollers/STM32F0xx/Debug/*
+Tests/TestMicro/Platforms/Microcontrollers/STM32F0xx/Release/*
+Tests/TestMicro/Platforms/Microcontrollers/STM32F3xx/Debug/*
+Tests/TestMicro/Platforms/Microcontrollers/STM32F3xx/Release/*
+Tests/TestMicro/Platforms/Microcontrollers/STM32F4xx/Debug/*
+Tests/TestMicro/Platforms/Microcontrollers/STM32F4xx/Release/*
 
-Utils/GGFConverter/resources/
-Utils/GGFConverter/Platforms/Linux/debug/
-Utils/GGFConverter/Platforms/Linux/release/
+Utils/GGFConverter/resources/*
+Utils/GGFConverter/Platforms/Linux/debug/*
+Utils/GGFConverter/Platforms/Linux/release/*
 Utils/GGFConverter/Platforms/Linux/ggfconverter
-Utils/GGFConverter/Platforms/Windows/Debug/
-Utils/GGFConverter/Platforms/Windows/Release/
+Utils/GGFConverter/Platforms/Windows/Debug/*
+Utils/GGFConverter/Platforms/Windows/Release/*
 
-Utils/APPUpdate/resources/
-Utils/APPUpdate/Platforms/Linux/debug/
-Utils/APPUpdate/Platforms/Linux/release/
+Utils/APPUpdate/resources/*
+Utils/APPUpdate/Platforms/Linux/debug/*
+Utils/APPUpdate/Platforms/Linux/release/*
 Utils/APPUpdate/Platforms/Linux/appupdate
-Utils/APPUpdate/Platforms/Windows/Debug/
-Utils/APPUpdate/Platforms/Windows/Release/
+Utils/APPUpdate/Platforms/Windows/Debug/*
+Utils/APPUpdate/Platforms/Windows/Release/*
 
-Utils/Macros/Extensions/packages
-Utils/Macros/Extensions/Extensions/bin
+Utils/Macros/Extensions/packages/*
+Utils/Macros/Extensions/Extensions/bin/*
 
-Debug_Monitor/
+Utils/Debug_Monitor/*
 
-ThirdPartyLibraries/
+ThirdPartyLibraries/*
 
 *.obj
 *.exe
