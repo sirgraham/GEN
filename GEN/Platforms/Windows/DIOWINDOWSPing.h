@@ -1,21 +1,21 @@
 /*------------------------------------------------------------------------------------------
-//	DIOWINDOWSPING.H
-*/	
-/**	
-// \class 
-//   
+//  DIOWINDOWSPING.H
+*/
+/**
+// \class
+//
 //  Data IO Ping class
-//   
-//	@author	 Abraham J. Velez
-//	@version 30/08/2012 9:13:13
-*/	
-/*	GEN  Copyright (C).  All right reserved.	
+//
+//  @author  Abraham J. Velez
+//  @version 30/08/2012 9:13:13
+*/
+/*  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
+
 #ifndef _DIOWINDOWSPING_H_
 #define _DIOWINDOWSPING_H_
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
 #include "DIOPing.h"
@@ -30,27 +30,27 @@
 
 class DIOWINDOWSPING  : public  DIOPING
 {
-	public:
+  public:
 
-																	DIOWINDOWSPING      				();                                  
-		virtual											 ~DIOWINDOWSPING   						();
-		
-		#ifdef DIOPING_USEWINDOWDLL
-		bool													Do				                  (XDWORD nretries = DIOPING_DEFAULTNRETRYS, XDWORD timebetweenchecks = DIOPING_DEFAULTTIMEBETWEENCHECKS, bool exitfirstgoodreply = false);	
-		#endif
-    		    	
-	private:
+                                  DIOWINDOWSPING              ();
+    virtual                      ~DIOWINDOWSPING              ();
 
-		void													Clean												()
-																	{
-		
-																	}					
+    #ifdef DIOPING_USEWINDOWDLL
+    bool                          Do                          (XDWORD nretries = DIOPING_DEFAULTNRETRYS, XDWORD timebetweenchecks = DIOPING_DEFAULTTIMEBETWEENCHECKS, bool exitfirstgoodreply = false);
+    #endif
+
+  private:
+
+    void                          Clean                       ()
+                                  {
+
+                                  }
 
 };
 
 
-	
+
 /*---- INLINE FUNCTIONS ------------------------------------------------------------------*/
-	
+
 #endif
 

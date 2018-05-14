@@ -1,16 +1,16 @@
 //------------------------------------------------------------------------------------------
-//	XTHREAD.CPP
-//	
-//	Thread for Windows
-//   
-//	Author						: Abraham J. Velez
-//	Date Of Creation	: 06/03/2006 11:46:26
-//	Last Mofificacion	:	
-//	
-//	GEN  Copyright (C).  All right reserved.			 
+//  XTHREAD.CPP
+//
+//  Thread for Windows
+//
+//  Author            : Abraham J. Velez
+//  Date Of Creation  : 06/03/2006 11:46:26
+//  Last Mofificacion :
+//
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
-	
+
+
 //---- INCLUDES ----------------------------------------------------------------------------
 
 #include <stdio.h>
@@ -21,7 +21,7 @@
 #include "XThread.h"
 
 #include "XMemory.h"
-	
+
 
 
 //---- GENERAL VARIABLE --------------------------------------------------------------------
@@ -33,32 +33,32 @@
 
 
 /*-------------------------------------------------------------------
-//	XTHREAD::XTHREAD
-*/	
-/**	
-//	
-//	Class Constructor XTHREAD
-//	
-//	@author				Abraham J. Velez
-//	@version			21/04/2016 10:02:26
-//	
-//  @param				groupID : 
-//  @param				ID : 
-//  @param				function : 
-//  @param				param : 
+//  XTHREAD::XTHREAD
+*/
+/**
+//
+//  Class Constructor XTHREAD
+//
+//  @author       Abraham J. Velez
+//  @version      21/04/2016 10:02:26
+//
+//  @param        groupID :
+//  @param        ID :
+//  @param        function :
+//  @param        param :
 */
 /*-----------------------------------------------------------------*/
 XTHREAD::XTHREAD(XTHREADGROUPID groupID, XCHAR* ID, XTHREADFUNCTION function, void* param)
-{	
-	Clean();
+{
+  Clean();
 
-	statusfunc = XTHREADSTATUS_NONE;
+  statusfunc = XTHREADSTATUS_NONE;
 
-	this->groupID     = groupID;
-	this->ID					= ID;
-	this->function		= function;
-	this->param				= param;
-	
+  this->groupID     = groupID;
+  this->ID          = ID;
+  this->function    = function;
+  this->param       = param;
+
 }
 
 
@@ -66,63 +66,63 @@ XTHREAD::XTHREAD(XTHREADGROUPID groupID, XCHAR* ID, XTHREADFUNCTION function, vo
 //-------------------------------------------------------------------
 //  XTHREAD::~XTHREAD
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			06/03/2006 12:03:47
-//	
-//	@return				
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      06/03/2006 12:03:47
+//
+//  @return
+//  */
 //-------------------------------------------------------------------
 XTHREAD::~XTHREAD()
-{	
-	Clean();
+{
+  Clean();
 }
-		 
+
 
 
 /*-------------------------------------------------------------------
-//	XTHREAD::WaitToEnd
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/11/2016 10:43:30
-//	
-//	@return 			bool : 
+//  XTHREAD::WaitToEnd
+*/
+/**
 //
-//  @param				timeout : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      02/11/2016 10:43:30
+//
+//  @return       bool :
+//
+//  @param        timeout :
 */
 /*-----------------------------------------------------------------*/
 bool XTHREAD::WaitToEnd(XDWORD timeout)
-{	
-	
-	if(!gotofunction) 
-		{
-			statusfunc = XTHREADSTATUS_END;
-			return true;
-		}
-	
+{
 
-	bool statustimeout = false;
+  if(!gotofunction)
+    {
+      statusfunc = XTHREADSTATUS_END;
+      return true;
+    }
 
-	XTIMER* xtimerout = xfactory->CreateTimer();
-	if(!xtimerout) return false;
 
-	while(statusfunc != XTHREADSTATUS_END)
-		{	
-			Wait();
+  bool statustimeout = false;
 
-			if(xtimerout->GetMeasureSeconds() >= timeout)  
-				{
-					statustimeout = true;
-					break;
-				}
-		} 
-	
-	xfactory->DeleteTimer(xtimerout);
+  XTIMER* xtimerout = xfactory->CreateTimer();
+  if(!xtimerout) return false;
 
-	return (!statustimeout);	
+  while(statusfunc != XTHREADSTATUS_END)
+    {
+      Wait();
+
+      if(xtimerout->GetMeasureSeconds() >= timeout)
+        {
+          statustimeout = true;
+          break;
+        }
+    }
+
+  xfactory->DeleteTimer(xtimerout);
+
+  return (!statustimeout);
 }

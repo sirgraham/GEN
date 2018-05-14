@@ -1,89 +1,90 @@
 /*------------------------------------------------------------------------------------------
-//	MYSQLRESULT.H
-*/	
-/**	
-// \class 
-//   
-//  MYSQL concrete result set
-//   
-//	@author	 Diego Martinez Ruiz de Gaona
+//  MYSQLRESULT.H
+*/
+/**
+// \class
 //
-//	Date Of Creation	: 11/08/2015 16:39:01
-//	Last Modification	:	
-*/	
-/*	GEN  Copyright (C).  All right reserved.
+//  MYSQL concrete result set
+//
+//  @author  Diego Martinez Ruiz de Gaona
+//
+//  Date Of Creation  : 11/08/2015 16:39:01
+//  Last Modification :
+*/
+/*  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
+
 
 #if defined(DBSQL_ACTIVE) && defined(DBSQLMYSQL_ACTIVE)
 
 #ifndef _MYSQLRESULT_H_
 #define _MYSQLRESULT_H_
-	
+
 
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
-#include "mysql.h"	
+#include "mysql.h"
 
 #include "DBSQLBase.h"
 #include "DBSQLResult.h"
 
+#include "SQLMYSQLQuery.h"
 
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
-	
-	
+
+
 /*---- CLASS -----------------------------------------------------------------------------*/
 
 class SQLMYSQLQUERY;
 
 class SQLMYSQLRESULT : public DBSQLRESULT
 {
-	public:
+  public:
 
-		friend									SQLMYSQLQUERY;
-		
-		virtual				 				 ~SQLMYSQLRESULT									();
+    friend class            SQLMYSQLQUERY;
 
-		virtual XQWORD					GetNumRows											();
-		virtual	XQWORD					GetNumColumns										();
-		virtual	bool						Seek														(int index);
-		virtual	bool						First														();
-		virtual	bool						Last														();
-		virtual	bool						Next														();
-		virtual	bool						ProcessRow											();
-		virtual	bool						Abort														();
-		virtual	bool						HasNext													();
+    virtual                ~SQLMYSQLRESULT                  ();
 
-	protected:		
-														SQLMYSQLRESULT									() : DBSQLRESULT() 
-														{ 
-															Clean();															
-														}			
+    virtual XQWORD          GetNumRows                      ();
+    virtual XQWORD          GetNumColumns                   ();
+    virtual bool            Seek                            (int index);
+    virtual bool            First                           ();
+    virtual bool            Last                            ();
+    virtual bool            Next                            ();
+    virtual bool            ProcessRow                      ();
+    virtual bool            Abort                           ();
+    virtual bool            HasNext                         ();
 
-		SQLMYSQLQUERY*					query;														 
-		int											hasnext;
+  protected:
+                            SQLMYSQLRESULT                  () : DBSQLRESULT()
+                            {
+                              Clean();
+                            }
 
-		MYSQL_BIND*							bindresults;
-		int											bind_results_size;
+    SQLMYSQLQUERY*          query;
+    int                     hasnext;
 
-	private:
-				
-		void										Clean														()
-														{
-															query							= NULL;
-															hasnext						= 0;				
-															bind_results_size	= 0;
-															bindresults				= NULL;
-															currentrow				= 0;
-														}
+    MYSQL_BIND*             bindresults;
+    int                     bind_results_size;
+
+  private:
+
+    void                    Clean                           ()
+                            {
+                              query             = NULL;
+                              hasnext           = 0;
+                              bind_results_size = 0;
+                              bindresults       = NULL;
+                              currentrow        = 0;
+                            }
 };
-	
-	
+
+
 /*---- INLINE FUNCTIONS ------------------------------------------------------------------*/
-	
+
 #endif
-	
-	
+
+
 
 
 

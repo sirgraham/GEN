@@ -1,28 +1,28 @@
 /*------------------------------------------------------------------------------------------
-//	PHYSXENGINE.H
-*/	
-/**	
-// \class 
-//   
-//  PHYSX concrete engine
-//   
-//	@author	 Diego Martinez 
+//  PHYSXENGINE.H
+*/
+/**
+// \class
 //
-//	Date Of Creation	: 26/05/2016 18:38:21
-//	Last Modification	:	
-*/	
-/*	(C) Copyright GEN All right reserved.
+//  PHYSX concrete engine
+//
+//  @author  Diego Martinez
+//
+//  Date Of Creation  : 26/05/2016 18:38:21
+//  Last Modification :
+*/
+/*  (C) Copyright GEN All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
+
 #ifdef PHY_ACTIVE
 
 #ifndef _PHYSXENGINE_H_
 #define _PHYSXENGINE_H_
-	
+
 
 
 #pragma comment(lib, "PhysX3ExtensionsDEBUG.lib")
-	
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
 #include <stdint.h>
@@ -30,7 +30,7 @@
 #include <PxPhysicsAPI.h>
 #include <foundation\PxFoundation.h>
 #include <extensions\PxDefaultErrorCallback.h>
-	
+
 #include "PHYEngine.h"
 
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
@@ -42,47 +42,47 @@ class PHYMATERIAL;
 /*---- CLASS -----------------------------------------------------------------------------*/
 class PHYSXENGINE : public PHYENGINE
 {
-		friend class PHYSXWORLD;
+    friend class PHYSXWORLD;
 
 public:
-		
 
-										PHYSXENGINE			()			{ Clean(); }
-		virtual					~PHYSXENGINE		()			{ Clean(); }
 
-		bool						Init						(GRPSCENE* scene);		
-		bool						Step						();
-		PHYWORLD*				CreateWorld			();
-		PHYMATERIAL*		CreateMaterial	();		
+                    PHYSXENGINE     ()      { Clean(); }
+    virtual         ~PHYSXENGINE    ()      { Clean(); }
 
-		bool						Destroy			();
-		bool						End					();
-		
+    bool            Init            (GRPSCENE* scene);
+    bool            Step            ();
+    PHYWORLD*       CreateWorld     ();
+    PHYMATERIAL*    CreateMaterial  ();
 
-		XDWORD				GetSubjectType	() { return GRPNAMED_TYPE_GRPLAYER; }
-		
+    bool            Destroy     ();
+    bool            End         ();
 
-						physx::PxFoundation*									gFoundation;
-						physx::PxPhysics*											gPhysicsSDK;
-						
-						//physx::PxVisualDebuggerConnection*		gConnection;
-						physx::PxDefaultErrorCallback					gDefaultErrorCallback;
-						physx::PxDefaultAllocator							gDefaultAllocatorCallback;
+
+    XDWORD        GetSubjectType  () { return GRPNAMED_TYPE_GRPLAYER; }
+
+
+            physx::PxFoundation*                  gFoundation;
+            physx::PxPhysics*                     gPhysicsSDK;
+
+            //physx::PxVisualDebuggerConnection*    gConnection;
+            physx::PxDefaultErrorCallback         gDefaultErrorCallback;
+            physx::PxDefaultAllocator             gDefaultAllocatorCallback;
 
 private:
 
-		void Clean()
-		{
-						gFoundation									=NULL;
-						gPhysicsSDK									=NULL;
-						//gConnection									=NULL;
-		}
+    void Clean()
+    {
+            gFoundation                 =NULL;
+            gPhysicsSDK                 =NULL;
+            //gConnection                 =NULL;
+    }
 
 };
-	
-	
+
+
 /*---- INLINE FUNCTIONS ------------------------------------------------------------------*/
-	
+
 #endif
 
 #endif

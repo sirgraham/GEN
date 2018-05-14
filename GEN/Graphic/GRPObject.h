@@ -1,24 +1,24 @@
 /*------------------------------------------------------------------------------------------
-//	GRPOBJECT.H
-*/	
-/**	
-// \class 
-//   
-//  Graphics Base for Object class
-//   
-//	@author	 Diego Martinez Ruiz de Gaona
+//  GRPOBJECT.H
+*/
+/**
+// \class
 //
-//	Date Of Creation	: 12/05/2014 12:58:17
-//	Last Modification	:	
-*/	
-/*	GEN  Copyright (C).  All right reserved.
+//  Graphics Base for Object class
+//
+//  @author  Diego Martinez Ruiz de Gaona
+//
+//  Date Of Creation  : 12/05/2014 12:58:17
+//  Last Modification :
+*/
+/*  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
+
 #ifndef _GRPOBJECT_H_
 #define _GRPOBJECT_H_
-	
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
-	
+
 #include "XVector.h"
 #include "XMap.h"
 
@@ -33,7 +33,7 @@
 #include "XMemory.h"
 
 #include "AILogic.h"
-	
+
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
 
 /*---- CLASS -----------------------------------------------------------------------------*/
@@ -53,126 +53,126 @@ class GRPPASS;
 
 class GRPOBJECT : public virtual GRPNAMED, public GRPOBSERVER, public GRPSUBJECT
 {
-	public:
-		virtual		XDWORD							GetSubjectType					() { return GRPNAMED_TYPE_GRPOBJECT; }
+  public:
+    virtual   XDWORD              GetSubjectType          () { return GRPNAMED_TYPE_GRPOBJECT; }
 
-																	GRPOBJECT								();
-		virtual											 ~GRPOBJECT								();		
-	  void													SetTag									(XQWORD tag);
+                                  GRPOBJECT               ();
+    virtual                      ~GRPOBJECT               ();
+    void                          SetTag                  (XQWORD tag);
 
-		virtual	bool									Draw										(GRPMATRIX&,GRPSCENE*);
+    virtual bool                  Draw                    (GRPMATRIX&,GRPSCENE*);
 
-		GRPMATERIAL*									GetMaterial							();
-		void													SetMaterial							(GRPMATERIAL* material);
+    GRPMATERIAL*                  GetMaterial             ();
+    void                          SetMaterial             (GRPMATERIAL* material);
 
-		void													SetProgram							(GRPSHADERPROGRAM* p);
-		void													SetRenderMode						(GRPRENDERMODE mode);
-		
-		GRPELEMENT*										FindByName							(XCHAR* name);
-		bool													AddElement							(GRPELEMENT* element);
+    void                          SetProgram              (GRPSHADERPROGRAM* p);
+    void                          SetRenderMode           (GRPRENDERMODE mode);
 
-		bool													AddText									(GRPTEXTELEMENT* tbox);
+    GRPELEMENT*                   FindByName              (XCHAR* name);
+    bool                          AddElement              (GRPELEMENT* element);
 
-		XVECTOR<GRPELEMENT*>*					GetElements							();
-		GRPSHADERPROGRAM*							GetProgram							();
+    bool                          AddText                 (GRPTEXTELEMENT* tbox);
 
-		GRPNODE*											GetNode									();
-		virtual void									SetNode									(GRPNODE* node);
+    XVECTOR<GRPELEMENT*>*         GetElements             ();
+    GRPSHADERPROGRAM*             GetProgram              ();
 
-		bool													MergeElements						();
-		bool													MergeAnimations					();
+    GRPNODE*                      GetNode                 ();
+    virtual void                  SetNode                 (GRPNODE* node);
 
-		void													SetVisible							(bool visible);
-		GRPANIMATIONCONTROL*					GetAnimationControl			();
-		void													SetAnimationControl			(GRPANIMATIONCONTROL*);
-		void													PlayAll									();
-	
-		bool													Add(GRPPASS*		 pass);
-		bool													Add(GRPNODE*		 node);
-		bool													Add(GRPCAMERA*	 camera);
-		bool													Add(GRPLIGHT*	 light);
-		bool													Add(GRPELEMENT* element);
-		bool													Add(GRPTEXTELEMENT* textbox);
+    bool                          MergeElements           ();
+    bool                          MergeAnimations         ();
 
-		GRPNODE*											FindNode								(XCHAR* name);
-		GRPELEMENT*										FindElementByNodeName		(XCHAR* name);
-		
-		GRPELEMENT*										FindElement							(XCHAR* name);
-		GRPCAMERA*										FindCamera							(XCHAR* name);
-		GRPLIGHT*											FindLight								(XCHAR* name);			
-		GRPTEXTELEMENT*								FindTextBox							(XCHAR* name);			
+    void                          SetVisible              (bool visible);
+    GRPANIMATIONCONTROL*          GetAnimationControl     ();
+    void                          SetAnimationControl     (GRPANIMATIONCONTROL*);
+    void                          PlayAll                 ();
 
-		GRPNODE*											CreateNode							();
-		GRPLIGHT*											CreateLight							();
-		GRPCAMERA*										CreateCamera						();
-		bool													CreateTextLocators			();
-		GRPTEXTELEMENT*								CreateTextFromLocator		(GRPNODE* node=NULL);
+    bool                          Add(GRPPASS*     pass);
+    bool                          Add(GRPNODE*     node);
+    bool                          Add(GRPCAMERA*   camera);
+    bool                          Add(GRPLIGHT*  light);
+    bool                          Add(GRPELEMENT* element);
+    bool                          Add(GRPTEXTELEMENT* textbox);
 
-		virtual bool									Notify									(GRPMSGTYPE msg, GRPSUBJECT* notifier);
+    GRPNODE*                      FindNode                (XCHAR* name);
+    GRPELEMENT*                   FindElementByNodeName   (XCHAR* name);
 
-		void													SetCurrentCamera				(XDWORD n)								{ currentcamera = n; }
-		XDWORD												GetCurrentCamera				()												{ return currentcamera; }
-		GRPCAMERA*										GetCamera								()												{ return cameras.Get(currentcamera); }
+    GRPELEMENT*                   FindElement             (XCHAR* name);
+    GRPCAMERA*                    FindCamera              (XCHAR* name);
+    GRPLIGHT*                     FindLight               (XCHAR* name);
+    GRPTEXTELEMENT*               FindTextBox             (XCHAR* name);
 
-		XVECTOR<GRPNODE*					>*	GetNodes								()												{ return &nodes;																		}		
-		XVECTOR<GRPCAMERA*				>*	GetCameras							()												{ return &cameras;																	}		
-		XVECTOR<GRPLIGHT*					>*	GetLights								()												{ return &lights;																		}
-		XVECTOR<GRPTEXTELEMENT*		>*	GetTexts								()												{ return &textboxes;																}
+    GRPNODE*                      CreateNode              ();
+    GRPLIGHT*                     CreateLight             ();
+    GRPCAMERA*                    CreateCamera            ();
+    bool                          CreateTextLocators      ();
+    GRPTEXTELEMENT*               CreateTextFromLocator   (GRPNODE* node=NULL);
 
-		AI::LOGIC*										GetLogic								()												{ return logic;																			}
-		void													SetLogic								(AI::LOGIC* logic)				{ this->logic=logic;																}
-		GRPBB*												GetBoundingBox					()												{ return &this->boundingbox;;												}
-		XVECTOR<GRPPASS*>*						GetPasses								()												{ return &this->passes; }
+    virtual bool                  Notify                  (GRPMSGTYPE msg, GRPSUBJECT* notifier);
 
-		
-		void													UpdateBoundingBox				();
-		GRPVECTOR											UpVector;
+    void                          SetCurrentCamera        (XDWORD n)                { currentcamera = n; }
+    XDWORD                        GetCurrentCamera        ()                        { return currentcamera; }
+    GRPCAMERA*                    GetCamera               ()                        { return cameras.Get(currentcamera); }
+
+    XVECTOR<GRPNODE*          >*  GetNodes                ()                        { return &nodes;                                    }
+    XVECTOR<GRPCAMERA*        >*  GetCameras              ()                        { return &cameras;                                  }
+    XVECTOR<GRPLIGHT*         >*  GetLights               ()                        { return &lights;                                   }
+    XVECTOR<GRPTEXTELEMENT*   >*  GetTexts                ()                        { return &textboxes;                                }
+
+    AI::LOGIC*                    GetLogic                ()                        { return logic;                                     }
+    void                          SetLogic                (AI::LOGIC* logic)        { this->logic=logic;                                }
+    GRPBB*                        GetBoundingBox          ()                        { return &this->boundingbox;;                       }
+    XVECTOR<GRPPASS*>*            GetPasses               ()                        { return &this->passes; }
 
 
-	protected:
-		
-		AI::LOGIC*										logic;
+    void                          UpdateBoundingBox       ();
+    GRPVECTOR                     UpVector;
 
-		GRPANIMATIONCONTROL*					AnimationControl;
 
-		GRPNODE*											node;
+  protected:
 
-		XVECTOR<GRPNODE*>							nodes;	
-		XVECTOR<GRPELEMENT*>					elements;	
-		XVECTOR<GRPLIGHT*>						lights;	
-		XVECTOR<GRPCAMERA*>						cameras;	
-		XVECTOR<GRPTEXTELEMENT*>			textboxes;	
+    AI::LOGIC*                    logic;
 
-		XDWORD												currentcamera;
+    GRPANIMATIONCONTROL*          AnimationControl;
 
-		GRPSHADERPROGRAM*							program;		
-		GRPMATERIAL*									material;
-		GRPANIMATIONLAYER*						animation;
+    GRPNODE*                      node;
 
-		XMUTEX*												lock;
+    XVECTOR<GRPNODE*>             nodes;
+    XVECTOR<GRPELEMENT*>          elements;
+    XVECTOR<GRPLIGHT*>            lights;
+    XVECTOR<GRPCAMERA*>           cameras;
+    XVECTOR<GRPTEXTELEMENT*>      textboxes;
 
-		GRPBB													boundingbox;
+    XDWORD                        currentcamera;
 
-		XVECTOR<GRPPASS*>							passes;
+    GRPSHADERPROGRAM*             program;
+    GRPMATERIAL*                  material;
+    GRPANIMATIONLAYER*            animation;
 
-	private:
+    XMUTEX*                       lock;
 
-		void													Clean										()
-																	{			
-																		animation						=	NULL;
-																		material						=	NULL;			
-																		node								=	NULL;
-																		program							=	NULL;
-																		AnimationControl		= NULL;
-																		lock								= NULL;
-																		currentcamera				= 0;
-																		logic								= NULL;
-																	}
+    GRPBB                         boundingbox;
+
+    XVECTOR<GRPPASS*>             passes;
+
+  private:
+
+    void                          Clean                   ()
+                                  {
+                                    animation           = NULL;
+                                    material            = NULL;
+                                    node                = NULL;
+                                    program             = NULL;
+                                    AnimationControl    = NULL;
+                                    lock                = NULL;
+                                    currentcamera       = 0;
+                                    logic               = NULL;
+                                  }
 };
 
-	
+
 /*---- INLINE FUNCTIONS ------------------------------------------------------------------*/
-	
+
 #endif
 
 

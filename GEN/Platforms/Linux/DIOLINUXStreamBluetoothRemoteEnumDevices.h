@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------------------
-//	DIOLINUXSTREAMBLUETOOTHREMOTEENUMDEVICES.H
+//  DIOLINUXSTREAMBLUETOOTHREMOTEENUMDEVICES.H
 //
 /**
 // \class
 //
 //  LINUX Data IO Stream Bluetooth Remote Enum Devices class
 //
-//	@author	 Abraham J. Velez
-//	@version 02/01/2002
+//  @author  Abraham J. Velez
+//  @version 02/01/2002
 */
-//	GEN  Copyright (C).  All right reserved.
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
 
 #ifndef _DIOLINUXSTREAMBLUETOOTHREMOTEENUMDEVICES_H_
@@ -35,25 +35,25 @@
 
 enum DIOLINUXBTENUMFSMFSMEVENTS
 {
-	DIOLINUXBTENUMFSMEVENT_NONE							= 0 ,
-	DIOLINUXBTENUMFSMEVENT_SEARCHMAC						,	
-	DIOLINUXBTENUMFSMEVENT_SEARCHSERVICES				,
-	DIOLINUXBTENUMFSMEVENT_SEARCHNAME						,
-	DIOLINUXBTENUMFSMEVENT_SEARCHEND						,
-		
-	DIOLINUXBTENUM_LASTEVENT
+  DIOLINUXBTENUMFSMEVENT_NONE             = 0 ,
+  DIOLINUXBTENUMFSMEVENT_SEARCHMAC            ,
+  DIOLINUXBTENUMFSMEVENT_SEARCHSERVICES       ,
+  DIOLINUXBTENUMFSMEVENT_SEARCHNAME           ,
+  DIOLINUXBTENUMFSMEVENT_SEARCHEND            ,
+
+  DIOLINUXBTENUM_LASTEVENT
 };
 
 
 enum DIOLINUXBTENUMFSMSTATES
 {
-	DIOLINUXBTENUMFSMSTATE_NONE							= 0 ,	
-	DIOLINUXBTENUMFSMSTATE_SEARCHMAC						,
-	DIOLINUXBTENUMFSMSTATE_SEARCHSERVICES				,
-	DIOLINUXBTENUMFSMSTATE_SEARCHNAME						,
-	DIOLINUXBTENUMFSMSTATE_SEARCHEND						,
+  DIOLINUXBTENUMFSMSTATE_NONE             = 0 ,
+  DIOLINUXBTENUMFSMSTATE_SEARCHMAC            ,
+  DIOLINUXBTENUMFSMSTATE_SEARCHSERVICES       ,
+  DIOLINUXBTENUMFSMSTATE_SEARCHNAME           ,
+  DIOLINUXBTENUMFSMSTATE_SEARCHEND            ,
 
-	DIOLINUXBTENUM_LASTSTATE
+  DIOLINUXBTENUM_LASTSTATE
 };
 
 
@@ -65,42 +65,42 @@ class XTHREADCOLLECTED;
 class DIOSTREAMDEVICEBLUETOOTH;
 
 
-struct search_context 
+struct search_context
 {
-	char*				svc;			/* Service */
-	uuid_t			group;		/* Browse group */
-	int					tree;			/* Display full attribute tree */
-	uint32_t		handle;		/* Service record handle */
+  char*       svc;      /* Service */
+  uuid_t      group;    /* Browse group */
+  int         tree;     /* Display full attribute tree */
+  uint32_t    handle;   /* Service record handle */
 };
 
 
 class DIOLINUXSTREAMBLUETOOTHREMOTEENUMDEVICES :  public DIOSTREAMBLUETOOTHREMOTEENUMDEVICES, public XFSMACHINE
 {
-	public:
-															DIOLINUXSTREAMBLUETOOTHREMOTEENUMDEVICES				();
-		virtual									 ~DIOLINUXSTREAMBLUETOOTHREMOTEENUMDEVICES				();
+  public:
+                              DIOLINUXSTREAMBLUETOOTHREMOTEENUMDEVICES        ();
+    virtual                  ~DIOLINUXSTREAMBLUETOOTHREMOTEENUMDEVICES        ();
 
-		bool											Search																					();	
-		bool											StopSearch																			(bool waitend);
-		bool											IsSearching																			();
+    bool                      Search                                          ();
+    bool                      StopSearch                                      (bool waitend);
+    bool                      IsSearching                                     ();
 
-	private:
+  private:
 
-		void											Clean																						();	
-		
-		bool											GetAddrFromLocalDevice													(int localdeviceindex, char* btaddr);
+    void                      Clean                                           ();
 
-		int												IsReadyConnect																	(int socket);
+    bool                      GetAddrFromLocalDevice                          (int localdeviceindex, char* btaddr);
 
-		void											SearchServices																	();
-		bool											ScanDevices																			(XVECTOR<DIOSTREAMDEVICE*>* devices);
-		bool											ScanDevicesName																	(DIOSTREAMDEVICEBLUETOOTH* device);
-		bool											ScanDevicesServices															(XVECTOR<DIOSTREAMDEVICE*>* devices);
-		bool											ScanDeviceServices															(DIOSTREAMDEVICEBLUETOOTH* device, struct search_context* context);
+    int                       IsReadyConnect                                  (int socket);
 
-		static void								ThreadEnumDevices																(void* thread);	
+    void                      SearchServices                                  ();
+    bool                      ScanDevices                                     (XVECTOR<DIOSTREAMDEVICE*>* devices);
+    bool                      ScanDevicesName                                 (DIOSTREAMDEVICEBLUETOOTH* device);
+    bool                      ScanDevicesServices                             (XVECTOR<DIOSTREAMDEVICE*>* devices);
+    bool                      ScanDeviceServices                              (DIOSTREAMDEVICEBLUETOOTH* device, struct search_context* context);
 
-		XTHREADCOLLECTED*					threadenumdevices;	
+    static void               ThreadEnumDevices                               (void* thread);
+
+    XTHREADCOLLECTED*         threadenumdevices;
 };
 
 

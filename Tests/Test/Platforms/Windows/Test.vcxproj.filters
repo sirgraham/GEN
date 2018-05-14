@@ -1,0 +1,2140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\GEN">
+      <UniqueIdentifier>{9e5ca614-3aed-46ec-9fa7-da053ac1ea90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GEN\Platforms">
+      <UniqueIdentifier>{24c8cf25-a410-45d8-80d4-9d6f8926a322}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GEN\Platforms\Windows">
+      <UniqueIdentifier>{21774ec1-cd6e-42ac-b70d-d967df2dadd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GEN\Sound">
+      <UniqueIdentifier>{3961447f-1376-4f5b-ac76-a32ac596e547}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GEN\Utils">
+      <UniqueIdentifier>{27c8ddbb-b317-49dc-8a62-7ae880669790}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GEN\Main">
+      <UniqueIdentifier>{82bf6552-212f-4c23-85df-c4dee8d2569a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GEN\DataIO">
+      <UniqueIdentifier>{1594d733-e0fe-490a-98fb-9a9ac3e42dee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GEN\Compress">
+      <UniqueIdentifier>{0420ec75-1382-4797-acd2-47f3145eeebb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GEN\Cipher">
+      <UniqueIdentifier>{c01c2f7b-b9b9-4fbd-a8a5-e7e288444713}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Application">
+      <UniqueIdentifier>{2751a4c8-86f1-487b-86f9-03976e7a1873}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GEN\DataIO\SPI">
+      <UniqueIdentifier>{04e81c0a-756b-4c40-ae13-9a90929bfa6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GEN\DataIO\I2C">
+      <UniqueIdentifier>{98c993dc-7fb3-4507-9802-e46fbd7b0a21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GEN\Platforms\Linux">
+      <UniqueIdentifier>{726c2c61-2cf5-4ca0-9e6d-d82137ff3a0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GEN\DatabasesSQL">
+      <UniqueIdentifier>{315e1e0c-ce70-4563-8c1d-5f91a28255ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GEN\DatabasesSQL\MySQL">
+      <UniqueIdentifier>{1c9cbc59-e5c0-4b49-8e7e-6d8449de9539}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GEN\DatabasesSQL\PostgresSQL">
+      <UniqueIdentifier>{a869d927-c268-4c4a-b066-9dceb48a128e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GEN\DatabasesSQL\SQLite">
+      <UniqueIdentifier>{b45174ca-5f70-44f2-8a74-8ddf014ff46e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GEN\Platforms\Common">
+      <UniqueIdentifier>{17cc3c9e-57ff-4649-b050-fe37caf01c4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GEN\Platforms\Common\SNDOpenAL">
+      <UniqueIdentifier>{aade38b4-a8ac-4cf7-a452-aecf7b4b8d91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Application\scripts">
+      <UniqueIdentifier>{5edb15ea-873f-4d63-b600-b800e5c596ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GEN\Media">
+      <UniqueIdentifier>{9043bfad-6d1b-435c-9238-e19d699de5fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GEN\Script">
+      <UniqueIdentifier>{ac440d5e-ca31-48b1-a0c7-0cd37b47c421}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ThirdPartyLibraries">
+      <UniqueIdentifier>{ce0c70a0-e396-4999-b67e-fd3064907e79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ThirdPartyLibraries\zlib">
+      <UniqueIdentifier>{d39c47f6-0c76-4988-a0ed-3834ddc5f130}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ThirdPartyLibraries\lua">
+      <UniqueIdentifier>{2600a063-7fa2-4440-9405-5ce9af4503bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ThirdPartyLibraries\sqlite">
+      <UniqueIdentifier>{89a71e5e-91c9-4d40-a106-734f183f5948}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ThirdPartyLibraries\stb">
+      <UniqueIdentifier>{86ddfcfd-bdb6-484b-a785-5b91d24ecea9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\GEN\Cipher\Cipher.cpp">
+      <Filter>Source Files\GEN\Cipher</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Cipher\CipherDES.cpp">
+      <Filter>Source Files\GEN\Cipher</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Cipher\Cipher3DES.cpp">
+      <Filter>Source Files\GEN\Cipher</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Cipher\CipherAES.cpp">
+      <Filter>Source Files\GEN\Cipher</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Cipher\CipherBlowfish.cpp">
+      <Filter>Source Files\GEN\Cipher</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Cipher\Hash.cpp">
+      <Filter>Source Files\GEN\Cipher</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Cipher\HashSHA2.cpp">
+      <Filter>Source Files\GEN\Cipher</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Cipher\HashCOMP128v1.cpp">
+      <Filter>Source Files\GEN\Cipher</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Cipher\HashCRC32.cpp">
+      <Filter>Source Files\GEN\Cipher</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Cipher\HashMD5.cpp">
+      <Filter>Source Files\GEN\Cipher</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Cipher\HashSHA1.cpp">
+      <Filter>Source Files\GEN\Cipher</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Cipher\HashWhirlpool.cpp">
+      <Filter>Source Files\GEN\Cipher</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Main\Main.cpp">
+      <Filter>Source Files\GEN\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XApplication.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XFileConfig.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XBase.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XBER.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XBuffer.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XConsole.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XDebug.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XDir.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XFile.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XFileCSV.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XFileHash.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XFileINI.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XFileJSON.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XFileTXT.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XFileXDB.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XFileXML.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XFSMachine.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XLanguage.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XLog.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XMemory.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XPath.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XPhone.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XPublisher.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XScheduler.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XSerialize.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XString.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XSystem.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XThread.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XUUID.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XErrorMsg.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XFileDBF.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XFileHEX.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XFileZIP.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\zlib\adler32.c">
+      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\zlib\compress.c">
+      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\zlib\crc32.c">
+      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\zlib\deflate.c">
+      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\zlib\infback.c">
+      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\zlib\inffast.c">
+      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\zlib\inflate.c">
+      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\zlib\inftrees.c">
+      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\zlib\trees.c">
+      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\zlib\uncompr.c">
+      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\zlib\contrib\minizip\unzip.c">
+      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\zlib\contrib\minizip\zip.c">
+      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\zlib\zutil.c">
+      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Compress\CompressBase.cpp">
+      <Filter>Source Files\GEN\Compress</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Compress\CompressLZRW1KH.cpp">
+      <Filter>Source Files\GEN\Compress</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Compress\CompressLZW.cpp">
+      <Filter>Source Files\GEN\Compress</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Compress\CompressManager.cpp">
+      <Filter>Source Files\GEN\Compress</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Compress\CompressZIP.cpp">
+      <Filter>Source Files\GEN\Compress</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XFileSentences.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOATCMDGSM.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOATCMDS.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOCheckInternetConnexion.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOCLIClient.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOCLIClientBTModuleCSR.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOIEC60870_5.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOIP.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOMAC.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOMACManufactured.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOModBus.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIONTP.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOOBEXPush.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOPCap.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOPCapEX.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOPing.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOProtocol.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOSNMP.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStream.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamBluetooth.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamBluetoothConfig.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamBluetoothLocalEnumDevices.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamBluetoothRemoteEnumDevices.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamConfig.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamDevice.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamDeviceBluetooth.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamDeviceIP.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamEnumDevices.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamEnumServers.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamIPLocalEnumDevices.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamSPI.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamSPIConfig.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamTCPIP.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamTCPIPConfig.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamUART.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamUARTConfig.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamUARTLocalEnumDevices.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamUDP.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamUDPConfig.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamUDPLocalEnumServers.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamUSB.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamUSBConfig.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOURL.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOWebClient.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOWebHeader.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOWebScraper.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOWebScraperCache.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOWebScraperGeolocationIP.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOWebScraperMACManufacturer.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOWebScraperPublicIP.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOWebScraperSexName.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOWebScraperTranslation.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOWebScraperUserAgentID.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOWebServer.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOWebServerQueryString.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamDeviceWifi.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamWifiRemoteEnumDevices.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamI2C.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamI2CConfig.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Cipher\CipherRSA.cpp">
+      <Filter>Source Files\GEN\Cipher</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XMPInteger.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSFactory.cpp">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamBluetooth.cpp">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamBluetoothLocalEnumDevices.cpp">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamBluetoothRemoteEnumDevices.cpp">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamIPLocalEnumDevices.cpp">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamSPI.cpp">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamTCPIP.cpp">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamUART.cpp">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamUARTLocalEnumDevices.cpp">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamUDP.cpp">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamUSB.cpp">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamWifiRemoteEnumDevices.cpp">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSURL.cpp">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\WINDOWSMain.cpp">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSConsole.cpp">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSDebug.cpp">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSDir.cpp">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSFactory.cpp">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSFile.cpp">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSPhone.cpp">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSRand.cpp">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSSystem.cpp">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSThread.cpp">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\WINDOWSStackWalker.cpp">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Cipher\CipherFileKeys.cpp">
+      <Filter>Source Files\GEN\Cipher</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOWebScraperWeather.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamI2C.cpp">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOPiFace.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIODynDNS.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XLicense.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOSMTP.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOEmailAddress.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamUSBLocalEnumDevices.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamUSBLocalEnumDevices.cpp">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamDeviceUSB.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XDateTime.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSDateTime.cpp">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSTimer.cpp">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XTimer.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXFactory.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXPCap.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamBluetooth.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamBluetoothLocalEnumDevices.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamBluetoothRemoteEnumDevices.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamI2C.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamIPLocalEnumDevices.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamSPI.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamTCPIP.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamUART.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamUARTLocalEnumDevices.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamUDP.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamUSB.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamUSBLocalEnumDevices.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamWifiRemoteEnumDevices.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXURL.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\LINUXMain.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\XLINUXConsole.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\XLINUXDateTime.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\XLINUXDebug.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\XLINUXDir.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\XLINUXFactory.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\XLINUXFile.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\XLINUXRand.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\XLINUXSystem.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\XLINUXThread.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\XLINUXTimer.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamCipher.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOAlerts.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOBusPirate.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOWiiMote.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamUDPAcknowledge.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamICMPConfig.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamICMP.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamICMP.cpp">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamICMP.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOCheckConnexions.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOApplicationUpdate.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOProtocolConnexionsManager.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DatabasesSQL\DBSQLConnection.cpp">
+      <Filter>Source Files\GEN\DatabasesSQL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DatabasesSQL\DBSQLDatabase.cpp">
+      <Filter>Source Files\GEN\DatabasesSQL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DatabasesSQL\DBSQLQuery.cpp">
+      <Filter>Source Files\GEN\DatabasesSQL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DatabasesSQL\DBSQLVariant.cpp">
+      <Filter>Source Files\GEN\DatabasesSQL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DatabasesSQL\MySQL\SQLMYSQLConnection.cpp">
+      <Filter>Source Files\GEN\DatabasesSQL\MySQL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DatabasesSQL\MySQL\SQLMYSQLDatabase.cpp">
+      <Filter>Source Files\GEN\DatabasesSQL\MySQL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DatabasesSQL\MySQL\SQLMYSQLQuery.cpp">
+      <Filter>Source Files\GEN\DatabasesSQL\MySQL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DatabasesSQL\MySQL\SQLMYSQLResult.cpp">
+      <Filter>Source Files\GEN\DatabasesSQL\MySQL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DatabasesSQL\MySQL\SQLMYSQLVariant.cpp">
+      <Filter>Source Files\GEN\DatabasesSQL\MySQL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DatabasesSQL\PostgreSQL\SQLPostgreSQLQuery.cpp">
+      <Filter>Source Files\GEN\DatabasesSQL\PostgresSQL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DatabasesSQL\PostgreSQL\SQLPostgreSQLResult.cpp">
+      <Filter>Source Files\GEN\DatabasesSQL\PostgresSQL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DatabasesSQL\SQLite\SQLSQLITEConnection.cpp">
+      <Filter>Source Files\GEN\DatabasesSQL\SQLite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DatabasesSQL\SQLite\SQLSQLITEDatabase.cpp">
+      <Filter>Source Files\GEN\DatabasesSQL\SQLite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DatabasesSQL\SQLite\SQLSQLITEQuery.cpp">
+      <Filter>Source Files\GEN\DatabasesSQL\SQLite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DatabasesSQL\SQLite\SQLSQLITEResult.cpp">
+      <Filter>Source Files\GEN\DatabasesSQL\SQLite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DatabasesSQL\PostgreSQL\SQLPostgreSQLConnection.cpp">
+      <Filter>Source Files\GEN\DatabasesSQL\PostgresSQL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DatabasesSQL\PostgreSQL\SQLPostgreSQLDatabase.cpp">
+      <Filter>Source Files\GEN\DatabasesSQL\PostgresSQL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DatabasesSQL\DBSQLFactory.cpp">
+      <Filter>Source Files\GEN\DatabasesSQL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSPCap.cpp">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Sound\SNDElement.cpp">
+      <Filter>Source Files\GEN\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Sound\SNDEvent.cpp">
+      <Filter>Source Files\GEN\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Sound\SNDFile.cpp">
+      <Filter>Source Files\GEN\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Sound\SNDFileOGG.cpp">
+      <Filter>Source Files\GEN\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Common\SNDOpenAL\SNDOpenAL.cpp">
+      <Filter>Source Files\GEN\Platforms\Common\SNDOpenAL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Common\SNDOpenAL\SNDOpenALBuffer.cpp">
+      <Filter>Source Files\GEN\Platforms\Common\SNDOpenAL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Common\SNDOpenAL\SNDOpenALElement.cpp">
+      <Filter>Source Files\GEN\Platforms\Common\SNDOpenAL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Common\SNDOpenAL\SNDOpenALSource.cpp">
+      <Filter>Source Files\GEN\Platforms\Common\SNDOpenAL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XVariant.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XFactory.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Application\Test.cpp">
+      <Filter>Source Files\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOFactory.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Cipher\HashCRC16.cpp">
+      <Filter>Source Files\GEN\Cipher</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Cipher\HashCKS16.cpp">
+      <Filter>Source Files\GEN\Cipher</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XPathsManager.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Application\TestProtocol.cpp">
+      <Filter>Source Files\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Application\TestProtocolConnexionsManager.cpp">
+      <Filter>Source Files\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSPing.cpp">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXPing.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XThreadCollected.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Compress\CompressGZ.cpp">
+      <Filter>Source Files\GEN\Compress</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XSleep.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSSleep.cpp">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\XLINUXSleep.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Common\SNDOpenAL\SNDOpenALStreamElement.cpp">
+      <Filter>Source Files\GEN\Platforms\Common\SNDOpenAL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Sound\SNDFactory.cpp">
+      <Filter>Source Files\GEN\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\SNDLINUXFactory.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\SNDWINDOWSFactory.cpp">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XBufferBits.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXGPIOArtila500.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXGPIOGumstixConnex.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXGPIOLex3V700A.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXGPIOPC.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXGPIORaspberryPi.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSGPIO.cpp">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Media\MEDIAFile.cpp">
+      <Filter>Source Files\GEN\Media</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Media\MEDIAFrameReaderLibAV.cpp">
+      <Filter>Source Files\GEN\Media</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Media\MEDIAH264FrameReader.cpp">
+      <Filter>Source Files\GEN\Media</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\SNDWINDOWSResampler.cpp">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Sound\SNDCodecFFMPEG.cpp">
+      <Filter>Source Files\GEN\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Sound\SNDFileFFMPEG.cpp">
+      <Filter>Source Files\GEN\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Sound\SNDSource.cpp">
+      <Filter>Source Files\GEN\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Sound\SNDStreamInstance.cpp">
+      <Filter>Source Files\GEN\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStringProtocol.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\SPI\DIOSPIGPIOMCP23S17.cpp">
+      <Filter>Source Files\GEN\DataIO\SPI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\SPI\DIOSPIOLEDScreenSSD1331.cpp">
+      <Filter>Source Files\GEN\DataIO\SPI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\SPI\DIOSPITouchScreenSTMPE610.cpp">
+      <Filter>Source Files\GEN\DataIO\SPI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\I2C\DIOI2C6AxisTrackingLSM303DLHC.cpp">
+      <Filter>Source Files\GEN\DataIO\I2C</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\I2C\DIOI2C9AxisTrackingMPU9150.cpp">
+      <Filter>Source Files\GEN\DataIO\I2C</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\I2C\DIOI2CADDAConverterPCF8591.cpp">
+      <Filter>Source Files\GEN\DataIO\I2C</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\I2C\DIOI2CEEprom24XXX.cpp">
+      <Filter>Source Files\GEN\DataIO\I2C</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\I2C\DIOI2CGPIOMCP2317.cpp">
+      <Filter>Source Files\GEN\DataIO\I2C</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\I2C\DIOI2CGPIOPCF8574.cpp">
+      <Filter>Source Files\GEN\DataIO\I2C</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\I2C\DIOI2CLightSensorTSL2561.cpp">
+      <Filter>Source Files\GEN\DataIO\I2C</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\I2C\DIOI2COLEDScreenSSD1306.cpp">
+      <Filter>Source Files\GEN\DataIO\I2C</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\I2C\DIOI2CPWMControlerPCA9685.cpp">
+      <Filter>Source Files\GEN\DataIO\I2C</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\I2C\DIOI2CTemHumSensorAM2315.cpp">
+      <Filter>Source Files\GEN\DataIO\I2C</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\SPI\DIOSPILCDScreenPCF8833.cpp">
+      <Filter>Source Files\GEN\DataIO\SPI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\SPI\DIOSPILCDScreenILI9341.cpp">
+      <Filter>Source Files\GEN\DataIO\SPI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOLightSensorLDRAnalog.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOTemHumSensorAM2301.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Script\Script.cpp">
+      <Filter>Source Files\GEN\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Script\ScriptG.cpp">
+      <Filter>Source Files\GEN\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Script\ScriptLib.cpp">
+      <Filter>Source Files\GEN\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Script\ScriptLibBase.cpp">
+      <Filter>Source Files\GEN\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\lua\src\lapi.c">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\lua\src\lauxlib.c">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\lua\src\lbaselib.c">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\lua\src\lbitlib.c">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\lua\src\lcode.c">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\lua\src\lcorolib.c">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\lua\src\lctype.c">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\lua\src\ldblib.c">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\lua\src\ldebug.c">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\lua\src\ldo.c">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\lua\src\ldump.c">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\lua\src\lfunc.c">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\lua\src\lgc.c">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\lua\src\linit.c">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\lua\src\liolib.c">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\lua\src\llex.c">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\lua\src\lmathlib.c">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\lua\src\lmem.c">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\lua\src\loadlib.c">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\lua\src\lobject.c">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\lua\src\lopcodes.c">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\lua\src\loslib.c">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\lua\src\lparser.c">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\lua\src\lstate.c">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\lua\src\lstring.c">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\lua\src\lstrlib.c">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\lua\src\ltable.c">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\lua\src\ltablib.c">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\lua\src\ltm.c">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\lua\src\lundump.c">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\lua\src\lutf8lib.c">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\lua\src\lvm.c">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\lua\src\lzio.c">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Script\ScriptLua.cpp">
+      <Filter>Source Files\GEN\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOSSHReverse.cpp">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XDictionary.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XFString.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\sqlite\sqlite3.c">
+      <Filter>Source Files\ThirdPartyLibraries\sqlite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\stb\stb_vorbis.c">
+      <Filter>Source Files\ThirdPartyLibraries\stb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\zlib\contrib\minizip\ioapi.c">
+      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSFactory.h">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSPCap.h">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamBluetooth.h">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamBluetoothLocalEnumDevices.h">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamBluetoothRemoteEnumDevices.h">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamIPLocalEnumDevices.h">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamSPI.h">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamTCPIP.h">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamUART.h">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamUARTLocalEnumDevices.h">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamUDP.h">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamUSB.h">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamWifiRemoteEnumDevices.h">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSURL.h">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\WINDOWSMain.h">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSConsole.h">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSDebug.h">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSDir.h">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSFactory.h">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSFile.h">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSPhone.h">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSRand.h">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSSystem.h">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSThread.h">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Main\Main.h">
+      <Filter>Source Files\GEN\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Cipher\Cipher.h">
+      <Filter>Source Files\GEN\Cipher</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Cipher\Cipher3DES.h">
+      <Filter>Source Files\GEN\Cipher</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Cipher\CipherAES.h">
+      <Filter>Source Files\GEN\Cipher</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Cipher\CipherBlowfish.h">
+      <Filter>Source Files\GEN\Cipher</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Cipher\CipherDES.h">
+      <Filter>Source Files\GEN\Cipher</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Cipher\CipherFileKeys.h">
+      <Filter>Source Files\GEN\Cipher</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Cipher\CipherRSA.h">
+      <Filter>Source Files\GEN\Cipher</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Cipher\Hash.h">
+      <Filter>Source Files\GEN\Cipher</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Cipher\HashCOMP128v1.h">
+      <Filter>Source Files\GEN\Cipher</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Cipher\HashCRC32.h">
+      <Filter>Source Files\GEN\Cipher</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Cipher\HashMD5.h">
+      <Filter>Source Files\GEN\Cipher</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Cipher\HashSHA1.h">
+      <Filter>Source Files\GEN\Cipher</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Cipher\HashSHA2.h">
+      <Filter>Source Files\GEN\Cipher</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Cipher\HashWhirlpool.h">
+      <Filter>Source Files\GEN\Cipher</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Compress\CompressBase.h">
+      <Filter>Source Files\GEN\Compress</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Compress\CompressLZRW1KH.h">
+      <Filter>Source Files\GEN\Compress</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Compress\CompressLZW.h">
+      <Filter>Source Files\GEN\Compress</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Compress\CompressManager.h">
+      <Filter>Source Files\GEN\Compress</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Compress\CompressZIP.h">
+      <Filter>Source Files\GEN\Compress</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOATCMDS.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOCheckInternetConnexion.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOCLIClient.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOCLIClientBTModuleCSR.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOFactory.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOIEC60870_5.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOIP.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOMAC.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOMACManufactured.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOModBus.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIONTP.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOOBEXPush.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOPCap.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOPCapEX.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOPing.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOProtocol.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOSNMP.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStream.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamBluetooth.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamBluetoothConfig.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamBluetoothLocalEnumDevices.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamBluetoothRemoteEnumDevices.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamConfig.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamDevice.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamDeviceBluetooth.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamDeviceIP.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamDeviceWifi.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamEnumDevices.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamEnumServers.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamI2C.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamI2CConfig.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamIPLocalEnumDevices.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamSPI.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamSPIConfig.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamTCPIP.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamTCPIPConfig.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamUART.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamUARTConfig.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamUARTLocalEnumDevices.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamUDP.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamUDPConfig.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamUDPLocalEnumServers.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamUSB.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamUSBConfig.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamWifiRemoteEnumDevices.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamXEvent.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOURL.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOWebClient.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOWebClientXEvent.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOWebHeader.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOWebScraper.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOWebScraperCache.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOWebScraperGeolocationIP.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOWebScraperMACManufacturer.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOWebScraperPublicIP.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOWebScraperSexName.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOWebScraperTranslation.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOWebScraperUserAgentID.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOWebScraperWeather.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOWebServer.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOWebServerQueryString.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOWebServerXEvent.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XApplication.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XFileConfig.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XBase.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XBER.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XBuffer.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XConsole.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XDebug.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XDir.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XErrorMsg.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XEvent.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XFactory.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XFile.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XFileCSV.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XFileDBF.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XFileHash.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XFileHashID.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XFileHEX.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XFileID.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XFileINI.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XFileJSON.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XFileSentences.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XFileTXT.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XFileXDB.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XFileXML.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XFileZIP.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XFSMachine.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XLanguage.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XLog.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XMap.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XMemory.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XObserver.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XPath.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XPhone.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XPublisher.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XRand.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XScheduler.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XSerialize.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XString.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XSubject.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XSystem.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XThread.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XUUID.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XVector.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamI2C.h">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOPiFace.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIODynDNS.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XLicense.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOSMTP.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOEmailAddress.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamUSBLocalEnumDevices.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamUSBLocalEnumDevices.h">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamDeviceUSB.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XDateTime.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSDateTime.h">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSTimer.h">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XTimer.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXFactory.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXPCap.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamBluetooth.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamBluetoothLocalEnumDevices.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamBluetoothRemoteEnumDevices.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamI2C.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamIPLocalEnumDevices.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamSPI.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamTCPIP.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamUART.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamUARTLocalEnumDevices.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamUDP.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamUSB.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamUSBLocalEnumDevices.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamWifiRemoteEnumDevices.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXURL.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\LINUXMain.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\XLINUXConsole.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\XLINUXDateTime.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\XLINUXDebug.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\XLINUXDir.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\XLINUXFactory.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\XLINUXFile.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\XLINUXRand.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\XLINUXSystem.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\XLINUXThread.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\XLINUXTimer.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamCipher.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOAlerts.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOATCMDGSM.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOBusPirate.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOWiiMote.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamUDPAcknowledge.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamICMPConfig.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamICMP.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamICMP.h">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamICMP.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOCheckConnexions.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOApplicationUpdate.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\crc32.h">
+      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\crypt.h">
+      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\deflate.h">
+      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\inffast.h">
+      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\inffixed.h">
+      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\inflate.h">
+      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\inftrees.h">
+      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\trees.h">
+      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\unzip.h">
+      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\zconf.h">
+      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\zconf.in.h">
+      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\zip.h">
+      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\zlib.h">
+      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\zutil.h">
+      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOApplicationUpdateXEvent.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOProtocolConnexionsManager.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DatabasesSQL\DBSQLBase.h">
+      <Filter>Source Files\GEN\DatabasesSQL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DatabasesSQL\DBSQLConnection.h">
+      <Filter>Source Files\GEN\DatabasesSQL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DatabasesSQL\DBSQLDatabase.h">
+      <Filter>Source Files\GEN\DatabasesSQL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DatabasesSQL\DBSQLQuery.h">
+      <Filter>Source Files\GEN\DatabasesSQL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DatabasesSQL\DBSQLVariant.h">
+      <Filter>Source Files\GEN\DatabasesSQL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DatabasesSQL\DBSQLFactory.h">
+      <Filter>Source Files\GEN\DatabasesSQL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DatabasesSQL\DBSQLResult.h">
+      <Filter>Source Files\GEN\DatabasesSQL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DatabasesSQL\DBSQLError.h">
+      <Filter>Source Files\GEN\DatabasesSQL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DatabasesSQL\MySQL\SQLMYSQLConnection.h">
+      <Filter>Source Files\GEN\DatabasesSQL\MySQL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DatabasesSQL\MySQL\SQLMYSQLDatabase.h">
+      <Filter>Source Files\GEN\DatabasesSQL\MySQL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DatabasesSQL\MySQL\SQLMYSQLQuery.h">
+      <Filter>Source Files\GEN\DatabasesSQL\MySQL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DatabasesSQL\MySQL\SQLMYSQLResult.h">
+      <Filter>Source Files\GEN\DatabasesSQL\MySQL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DatabasesSQL\MySQL\SQLMYSQLVariant.h">
+      <Filter>Source Files\GEN\DatabasesSQL\MySQL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DatabasesSQL\PostgreSQL\SQLPostgreSQLConnection.h">
+      <Filter>Source Files\GEN\DatabasesSQL\PostgresSQL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DatabasesSQL\PostgreSQL\SQLPostgreSQLDatabase.h">
+      <Filter>Source Files\GEN\DatabasesSQL\PostgresSQL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DatabasesSQL\PostgreSQL\SQLPostgreSQLQuery.h">
+      <Filter>Source Files\GEN\DatabasesSQL\PostgresSQL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DatabasesSQL\PostgreSQL\SQLPostgreSQLResult.h">
+      <Filter>Source Files\GEN\DatabasesSQL\PostgresSQL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DatabasesSQL\SQLite\SQLSQLITEConnection.h">
+      <Filter>Source Files\GEN\DatabasesSQL\SQLite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DatabasesSQL\SQLite\SQLSQLITEDatabase.h">
+      <Filter>Source Files\GEN\DatabasesSQL\SQLite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DatabasesSQL\SQLite\SQLSQLITEQuery.h">
+      <Filter>Source Files\GEN\DatabasesSQL\SQLite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DatabasesSQL\SQLite\SQLSQLITEResult.h">
+      <Filter>Source Files\GEN\DatabasesSQL\SQLite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Sound\SNDElement.h">
+      <Filter>Source Files\GEN\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Sound\SNDEvent.h">
+      <Filter>Source Files\GEN\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Sound\SNDFile.h">
+      <Filter>Source Files\GEN\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Sound\SNDFileOGG.h">
+      <Filter>Source Files\GEN\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Sound\SNDSource.h">
+      <Filter>Source Files\GEN\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Common\SNDOpenAL\SNDOpenAL.h">
+      <Filter>Source Files\GEN\Platforms\Common\SNDOpenAL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Common\SNDOpenAL\SNDOpenALBuffer.h">
+      <Filter>Source Files\GEN\Platforms\Common\SNDOpenAL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Common\SNDOpenAL\SNDOpenALElement.h">
+      <Filter>Source Files\GEN\Platforms\Common\SNDOpenAL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Common\SNDOpenAL\SNDOpenALSource.h">
+      <Filter>Source Files\GEN\Platforms\Common\SNDOpenAL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XAVLTree.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XBinaryMap.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XVariant.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XFactoryMacros.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XMPInteger.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Application\Test.h">
+      <Filter>Source Files\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XSerializable.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Cipher\HashCRC16.h">
+      <Filter>Source Files\GEN\Cipher</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Cipher\HashCKS16.h">
+      <Filter>Source Files\GEN\Cipher</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XPathsManager.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Sound\SNDInstance.h">
+      <Filter>Source Files\GEN\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Application\TestProtocol.h">
+      <Filter>Source Files\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Application\TestProtocolConnexionsManager.h">
+      <Filter>Source Files\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Application\TestProtocolApplicationData.h">
+      <Filter>Source Files\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XVectorMutex.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSPing.h">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXPing.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XThreadCollected.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XSleep.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSSleep.h">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\XLINUXSleep.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Compress\CompressGZ.h">
+      <Filter>Source Files\GEN\Compress</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Common\SNDOpenAL\SNDOpenALStreamElement.h">
+      <Filter>Source Files\GEN\Platforms\Common\SNDOpenAL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIODeviceI2C.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Sound\SNDFactory.h">
+      <Filter>Source Files\GEN\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\SNDLINUXFactory.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\SNDWINDOWSFactory.h">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIODeviceSPI.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XBufferBits.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOGPIO.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXGPIOArtila500.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXGPIOGumstixConnex.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXGPIOLex3V700A.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXGPIOPC.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXGPIORaspberryPi.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSGPIO.h">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Media\MEDIACodec.h">
+      <Filter>Source Files\GEN\Media</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Media\MEDIAFile.h">
+      <Filter>Source Files\GEN\Media</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Media\MEDIAFrameReader.h">
+      <Filter>Source Files\GEN\Media</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Media\MEDIAFrameReaderLibAV.h">
+      <Filter>Source Files\GEN\Media</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Media\MEDIAH264FrameReader.h">
+      <Filter>Source Files\GEN\Media</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\SNDWINDOWSResampler.h">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Sound\SNDCodec.h">
+      <Filter>Source Files\GEN\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Sound\SNDCodecFFMPEG.h">
+      <Filter>Source Files\GEN\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Sound\SNDFileFFMPEG.h">
+      <Filter>Source Files\GEN\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Sound\SNDResampler.h">
+      <Filter>Source Files\GEN\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Sound\SNDStreamElement.h">
+      <Filter>Source Files\GEN\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Sound\SNDStreamInstance.h">
+      <Filter>Source Files\GEN\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStringProtocol.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\SPI\DIOSPIGPIOMCP23S17.h">
+      <Filter>Source Files\GEN\DataIO\SPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\SPI\DIOSPIOLEDScreenSSD1331.h">
+      <Filter>Source Files\GEN\DataIO\SPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\SPI\DIOSPITouchScreenSTMPE610.h">
+      <Filter>Source Files\GEN\DataIO\SPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\I2C\DIOI2C6AxisTrackingLSM303DLHC.h">
+      <Filter>Source Files\GEN\DataIO\I2C</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\I2C\DIOI2C9AxisTrackingMPU9150.h">
+      <Filter>Source Files\GEN\DataIO\I2C</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\I2C\DIOI2CADDAConverterPCF8591.h">
+      <Filter>Source Files\GEN\DataIO\I2C</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\I2C\DIOI2CEEprom24XXX.h">
+      <Filter>Source Files\GEN\DataIO\I2C</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\I2C\DIOI2CGPIOMCP2317.h">
+      <Filter>Source Files\GEN\DataIO\I2C</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\I2C\DIOI2CGPIOPCF8574.h">
+      <Filter>Source Files\GEN\DataIO\I2C</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\I2C\DIOI2CLightSensorTSL2561.h">
+      <Filter>Source Files\GEN\DataIO\I2C</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\I2C\DIOI2COLEDScreenSSD1306.h">
+      <Filter>Source Files\GEN\DataIO\I2C</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\I2C\DIOI2CPWMControlerPCA9685.h">
+      <Filter>Source Files\GEN\DataIO\I2C</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\I2C\DIOI2CTemHumSensorAM2315.h">
+      <Filter>Source Files\GEN\DataIO\I2C</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\SPI\DIOSPILCDScreenPCF8833.h">
+      <Filter>Source Files\GEN\DataIO\SPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\SPI\DIOSPILCDScreenILI9341.h">
+      <Filter>Source Files\GEN\DataIO\SPI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOLightSensorLDRAnalog.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOTemHumSensorAM2301.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOSSHReverse.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOBackdoor.h">
+      <Filter>Source Files\GEN\DataIO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Script\Script.h">
+      <Filter>Source Files\GEN\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Script\ScriptG.h">
+      <Filter>Source Files\GEN\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Script\ScriptLib.h">
+      <Filter>Source Files\GEN\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Script\ScriptLibBase.h">
+      <Filter>Source Files\GEN\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\lua\src\lapi.h">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\lua\src\lauxlib.h">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\lua\src\lcode.h">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\lua\src\lctype.h">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\lua\src\ldebug.h">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\lua\src\ldo.h">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\lua\src\lfunc.h">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\lua\src\lgc.h">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\lua\src\llex.h">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\lua\src\llimits.h">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\lua\src\lmem.h">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\lua\src\lobject.h">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\lua\src\lopcodes.h">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\lua\src\lparser.h">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\lua\src\lprefix.h">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\lua\src\lstate.h">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\lua\src\lstring.h">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\lua\src\ltable.h">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\lua\src\ltm.h">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\lua\src\lua.h">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\lua\src\lua.hpp">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\lua\src\luaconf.h">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\lua\src\lualib.h">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\lua\src\lundump.h">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\lua\src\lvm.h">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\lua\src\lzio.h">
+      <Filter>Source Files\ThirdPartyLibraries\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Script\ScriptLua.h">
+      <Filter>Source Files\GEN\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XDictionary.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XFString.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\sqlite\sqlite3.h">
+      <Filter>Source Files\ThirdPartyLibraries\sqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\stb\stb_vorbis.h">
+      <Filter>Source Files\ThirdPartyLibraries\stb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\contrib\minizip\ioapi.h">
+      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\GEN\Platforms\Linux\makefile">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </None>
+    <None Include="..\Linux\makefile" />
+    <None Include="..\..\resources\helloworld.c!">
+      <Filter>Source Files\Application\scripts</Filter>
+    </None>
+    <None Include="..\..\resources\test.c!">
+      <Filter>Source Files\Application\scripts</Filter>
+    </None>
+  </ItemGroup>
+</Project>

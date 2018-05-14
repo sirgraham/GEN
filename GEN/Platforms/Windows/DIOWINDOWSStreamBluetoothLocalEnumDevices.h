@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------------------
-//	DIOWINDOWSSTREAMBLUETOOTHLOCALENUMDEVICES.H
+//  DIOWINDOWSSTREAMBLUETOOTHLOCALENUMDEVICES.H
 //
 /**
 // \class
 //
 //  WINDOWS Data IO Stream Bluetooth Local Enum Devices class
 //
-//	@author	 Abraham J. Velez
-//	@version 02/01/2002
+//  @author  Abraham J. Velez
+//  @version 02/01/2002
 */
-//	GEN  Copyright (C).  All right reserved.
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
 
 #ifndef _DIOWINDOWSSTREAMBLUETOOTHLOCALENUMDEVICES_H_
@@ -32,12 +32,12 @@ class XPUBLISHER;
 
 class DIOWINDOWSSTREAMBLUETOOTHLOCALENUMDEVICES :  public DIOSTREAMBLUETOOTHLOCALENUMDEVICES
 {
-	public:
-															DIOWINDOWSSTREAMBLUETOOTHLOCALENUMDEVICES			();
-		virtual									 ~DIOWINDOWSSTREAMBLUETOOTHLOCALENUMDEVICES			();
+  public:
+                              DIOWINDOWSSTREAMBLUETOOTHLOCALENUMDEVICES     ();
+    virtual                  ~DIOWINDOWSSTREAMBLUETOOTHLOCALENUMDEVICES     ();
 
-		bool											Search																				();		
-	
+    bool                      Search                                        ();
+
 };
 
 

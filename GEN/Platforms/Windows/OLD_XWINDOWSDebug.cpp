@@ -1,17 +1,17 @@
 //------------------------------------------------------------------------------------------
-//	XWINDOWSDEBUGCTRL.CPP
-//	
-//	WINDOWS Debug class
-//   
-//	Author						: Abraham J. Velez
-//	Date Of Creation	: 05/04/2002
-//	Last Mofificacion	:	
-//	
-//	GEN  Copyright (C).  All right reserved.		 			 
+//  XWINDOWSDEBUGCTRL.CPP
+//
+//  WINDOWS Debug class
+//
+//  Author            : Abraham J. Velez
+//  Date Of Creation  : 05/04/2002
+//  Last Mofificacion :
+//
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
 
-#ifdef XDEBUG	
-	
+#ifdef XDEBUG
+
 //---- INCLUDES ----------------------------------------------------------------------------
 
 #include <winsock2.h>
@@ -41,142 +41,142 @@
 //-------------------------------------------------------------------
 //  XWINDOWSDEBUGCTRL::XWINDOWSDEBUGCTRL
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			10/01/2001 17:03:05
-//	
-//	@return 			
+//
+//
+//  @author       Abraham J. Velez
+//  @version      10/01/2001 17:03:05
+//
+//  @return
 */
 //-------------------------------------------------------------------
-XWINDOWSDEBUGCTRL::XWINDOWSDEBUGCTRL() 
-{		
-	Clean();
+XWINDOWSDEBUGCTRL::XWINDOWSDEBUGCTRL()
+{
+  Clean();
 
-	XDebugCtrl = this;	
-  
+  XDebugCtrl = this;
+
   mutexhandle = (XDWORD)CreateMutex( NULL, FALSE, NULL);
-  if(!mutexhandle) return;	
-};				
+  if(!mutexhandle) return;
+};
 
 
 
 //-------------------------------------------------------------------
 //  XDEBUGCTRL::~XDEBUGCTRL
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			10/01/2001 17:03:22
-//	
-//	@return 			
+//
+//
+//  @author       Abraham J. Velez
+//  @version      10/01/2001 17:03:22
+//
+//  @return
 */
 //-------------------------------------------------------------------
 XWINDOWSDEBUGCTRL::~XWINDOWSDEBUGCTRL()
-{						
+{
   if(mutexhandle)
     {
       CloseHandle((HANDLE)mutexhandle);
       mutexhandle = NULL;
     }
 
-	for(int c=0; c<XDEBUG_MAXNTARGETS; c++)
-		{
-			if(targets[c].GetType() == XDEBUGCTRLTYPE_NET) 
-				{
-				  CloseHandleNet(&targets[c]);
-				}
-		}
+  for(int c=0; c<XDEBUG_MAXNTARGETS; c++)
+    {
+      if(targets[c].GetType() == XDEBUGCTRLTYPE_NET)
+        {
+          CloseHandleNet(&targets[c]);
+        }
+    }
 
-	Clean();
+  Clean();
 
-	XDebugCtrl =  NULL;
+  XDebugCtrl =  NULL;
 }
 
 
 
 /*-------------------------------------------------------------------
-//	XWINDOWSDEBUGCTRL::PrintSpecial
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			09/05/2016 11:28:50
-//	
-//  @param				target : 
-//  @param				level : 
-//  @param				string : 
+//  XWINDOWSDEBUGCTRL::PrintSpecial
+*/
+/**
+//
+//
+//
+//  @author       Abraham J. Velez
+//  @version      09/05/2016 11:28:50
+//
+//  @param        target :
+//  @param        level :
+//  @param        string :
 */
 /*-----------------------------------------------------------------*/
 void XWINDOWSDEBUGCTRL::PrintSpecial(XDEBUGCTRLTARGET* target, XBYTE level, XCHAR* string)
-{	
-	if(!target)							 return;
-	if(!target->GetAim()[0]) return;
+{
+  if(!target)              return;
+  if(!target->GetAim()[0]) return;
 
   Lock();
 
-	HWND					 hwnd;
-	COPYDATASTRUCT cs;	
+  HWND           hwnd;
+  COPYDATASTRUCT cs;
 
-	hwnd = FindWindow(NULL, target->GetAim());
-	
-	if(hwnd==NULL) 
-		{
-			#ifdef _MSC_VER	
+  hwnd = FindWindow(NULL, target->GetAim());
 
-			if(level) 
-				{
-					if((level & XDEBUGCTRLLEVEL_WITHCOLOR) == XDEBUGCTRLLEVEL_WITHCOLOR)
-						{
-					
-						}
-					 else
-						{
-							if((level & XDEBUGCTRLLEVEL_WITHTAB) == XDEBUGCTRLLEVEL_WITHTAB)
-								{
-									XSTRING tabstr;
+  if(hwnd==NULL)
+    {
+      #ifdef _MSC_VER
 
-									GenerateTab(level&0x0F,tabstr);		
-									OutputDebugString(tabstr.Get()); 										
-								}
-							 else
-								{ 
-									if((level & XDEBUGCTRLLEVEL_WITHCODE) == XDEBUGCTRLLEVEL_WITHCODE)
-										{
-											XSTRING codestr;
+      if(level)
+        {
+          if((level & XDEBUGCTRLLEVEL_WITHCOLOR) == XDEBUGCTRLLEVEL_WITHCOLOR)
+            {
 
-											codestr.Format(__L("%02d: "), (level&0x0F));
-											OutputDebugString(codestr.Get()); 									
-										}
-								}
-						}			
-				}
-			     		
-			OutputDebugString(string); 
-			OutputDebugString(__L("\n")); 	
-			#endif		
-		}
-	 else
-	  {		
+            }
+           else
+            {
+              if((level & XDEBUGCTRLLEVEL_WITHTAB) == XDEBUGCTRLLEVEL_WITHTAB)
+                {
+                  XSTRING tabstr;
 
-			XDWORD             IP = 0;
-			XBUFFER						 xbufferpacket;
-			XWINDOWSDATETIME   xdatetime;  				
-	
-			xdatetime.Read();
+                  GenerateTab(level&0x0F,tabstr);
+                  OutputDebugString(tabstr.Get());
+                }
+               else
+                {
+                  if((level & XDEBUGCTRLLEVEL_WITHCODE) == XDEBUGCTRLLEVEL_WITHCODE)
+                    {
+                      XSTRING codestr;
 
-			SetToDebugPacket(IP, level, sequence, &xdatetime,  string, xbufferpacket);
+                      codestr.Format(__L("%02d: "), (level&0x0F));
+                      OutputDebugString(codestr.Get());
+                    }
+                }
+            }
+        }
 
-			cs.dwData  = 0;
-			cs.lpData  = (PVOID)xbufferpacket.Get();
-			cs.cbData  = (XDWORD)xbufferpacket.GetSize();
+      OutputDebugString(string);
+      OutputDebugString(__L("\n"));
+      #endif
+    }
+   else
+    {
 
-			SendMessage(hwnd, WM_COPYDATA, (WPARAM)NULL, (LPARAM)&cs);	
-		}
+      XDWORD             IP = 0;
+      XBUFFER            xbufferpacket;
+      XWINDOWSDATETIME   xdatetime;
 
-	target->AddNSend();
+      xdatetime.Read();
+
+      SetToDebugPacket(IP, level, sequence, &xdatetime,  string, xbufferpacket);
+
+      cs.dwData  = 0;
+      cs.lpData  = (PVOID)xbufferpacket.Get();
+      cs.cbData  = (XDWORD)xbufferpacket.GetSize();
+
+      SendMessage(hwnd, WM_COPYDATA, (WPARAM)NULL, (LPARAM)&cs);
+    }
+
+  target->AddNSend();
 
   UnLock();
 }
@@ -184,32 +184,32 @@ void XWINDOWSDEBUGCTRL::PrintSpecial(XDEBUGCTRLTARGET* target, XBYTE level, XCHA
 
 
 /*-------------------------------------------------------------------
-//	XWINDOWSDEBUGCTRL::PrintFile
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			09/05/2016 11:28:44
-//	
-//  @param				target : 
-//  @param				level : 
-//  @param				string : 
+//  XWINDOWSDEBUGCTRL::PrintFile
+*/
+/**
+//
+//
+//
+//  @author       Abraham J. Velez
+//  @version      09/05/2016 11:28:44
+//
+//  @param        target :
+//  @param        level :
+//  @param        string :
 */
 /*-----------------------------------------------------------------*/
 void XWINDOWSDEBUGCTRL::PrintFile(XDEBUGCTRLTARGET* target, XBYTE level, XCHAR* string)
 {
-	if(!target)							 return;
-	if(!target->GetAim()[0]) return;
+  if(!target)              return;
+  if(!target->GetAim()[0]) return;
 
-	XSTRING line;
-  FILE*		file = NULL;
+  XSTRING line;
+  FILE*   file = NULL;
 
   Lock();
 
   int error = 0;
-  
+
   #ifdef BUILDER
   file = _wfopen(target->GetAim(), __L("at"));
   if(!file)
@@ -220,31 +220,31 @@ void XWINDOWSDEBUGCTRL::PrintFile(XDEBUGCTRLTARGET* target, XBYTE level, XCHAR* 
   #else
   error = _wfopen_s(&file, target->GetAim(), __L("at"));
   #endif
-  
+
   if(error)
-    { 
+    {
       UnLock();
       return;
     }
 
-	// --- Check File size --------------
-	int		sizefile = 0;
-	char* linechar = NULL;
+  // --- Check File size --------------
+  int   sizefile = 0;
+  char* linechar = NULL;
 
-	fflush(file);
+  fflush(file);
 
-	int position = ftell(file);
-	fseek(file,0,SEEK_END);	
-	sizefile = ftell(file);
-	fseek(file,position,SEEK_SET);
-	
-	if(sizefile+(XDWORD)line.GetSize()>sizelimit)
-		{
-			fclose(file);	
+  int position = ftell(file);
+  fseek(file,0,SEEK_END);
+  sizefile = ftell(file);
+  fseek(file,position,SEEK_SET);
 
-			DeleteFile(target->GetAim());
+  if(sizefile+(XDWORD)line.GetSize()>sizelimit)
+    {
+      fclose(file);
 
-			#ifdef BUILDER
+      DeleteFile(target->GetAim());
+
+      #ifdef BUILDER
       file = _wfopen(target->GetAim(),__L("at"));
       if(!file)
         {
@@ -255,62 +255,62 @@ void XWINDOWSDEBUGCTRL::PrintFile(XDEBUGCTRLTARGET* target, XBYTE level, XCHAR* 
       error = _wfopen_s(&file, target->GetAim(), __L("at"));
       #endif
 
-			if(error)	
+      if(error)
         {
           UnLock();
           return;
         };
-		}
+    }
 
-	// --- Check File size --------------
-  
-	if(level) 
-		{
-			if((level & XDEBUGCTRLLEVEL_WITHCOLOR) == XDEBUGCTRLLEVEL_WITHCOLOR)
-				{
-					
-				}
-			 else
-			  {
-					if((level & XDEBUGCTRLLEVEL_WITHTAB) == XDEBUGCTRLLEVEL_WITHTAB)
-						{
-							XSTRING tabstr;
-							
-							GenerateTab(level&0x0F, tabstr);					
-							
-							XSTRING_CREATEOEM(tabstr, charstr)
-							fwrite(charstr, 1, tabstr.GetSize(), file);
-							XSTRING_DELETEOEM(charstr)
-						}
-					 else
-					  { 
-							if((level & XDEBUGCTRLLEVEL_WITHCODE) == XDEBUGCTRLLEVEL_WITHCODE)
-								{
-									XSTRING codestr;
-									
-									codestr.Format(__L("%02d: "), (level&0x0F));
+  // --- Check File size --------------
 
-									XSTRING_CREATEOEM(codestr, charstr)
-									fwrite(charstr, 1, codestr.GetSize(), file);
-									XSTRING_DELETEOEM(charstr)
-								}
-						}
-				}			
-		}
-	
-	line = string;
+  if(level)
+    {
+      if((level & XDEBUGCTRLLEVEL_WITHCOLOR) == XDEBUGCTRLLEVEL_WITHCOLOR)
+        {
 
-	{ 
-		XSTRING_CREATEOEM(line, charstr)	
-		fwrite(charstr, 1, line.GetSize(), file);
-		XSTRING_DELETEOEM(charstr)
-	}
+        }
+       else
+        {
+          if((level & XDEBUGCTRLLEVEL_WITHTAB) == XDEBUGCTRLLEVEL_WITHTAB)
+            {
+              XSTRING tabstr;
 
-	fwrite(__L("\n\r"),1,1,file);
-	
-  fclose(file);	
+              GenerateTab(level&0x0F, tabstr);
 
-	target->AddNSend();
+              XSTRING_CREATEOEM(tabstr, charstr)
+              fwrite(charstr, 1, tabstr.GetSize(), file);
+              XSTRING_DELETEOEM(charstr)
+            }
+           else
+            {
+              if((level & XDEBUGCTRLLEVEL_WITHCODE) == XDEBUGCTRLLEVEL_WITHCODE)
+                {
+                  XSTRING codestr;
+
+                  codestr.Format(__L("%02d: "), (level&0x0F));
+
+                  XSTRING_CREATEOEM(codestr, charstr)
+                  fwrite(charstr, 1, codestr.GetSize(), file);
+                  XSTRING_DELETEOEM(charstr)
+                }
+            }
+        }
+    }
+
+  line = string;
+
+  {
+    XSTRING_CREATEOEM(line, charstr)
+    fwrite(charstr, 1, line.GetSize(), file);
+    XSTRING_DELETEOEM(charstr)
+  }
+
+  fwrite(__L("\n\r"),1,1,file);
+
+  fclose(file);
+
+  target->AddNSend();
 
   UnLock();
 }
@@ -319,157 +319,157 @@ void XWINDOWSDEBUGCTRL::PrintFile(XDEBUGCTRLTARGET* target, XBYTE level, XCHAR* 
 
 
 /*-------------------------------------------------------------------
-//	XWINDOWSDEBUGCTRL::PrintNet
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			09/05/2016 11:29:44
-//	
-//  @param				target : 
-//  @param				level : 
-//  @param				string : 
+//  XWINDOWSDEBUGCTRL::PrintNet
+*/
+/**
+//
+//
+//
+//  @author       Abraham J. Velez
+//  @version      09/05/2016 11:29:44
+//
+//  @param        target :
+//  @param        level :
+//  @param        string :
 */
 /*-----------------------------------------------------------------*/
 void XWINDOWSDEBUGCTRL::PrintNet(XDEBUGCTRLTARGET* target, XBYTE level, XCHAR* string)
-{	
-	/*
-	if(!target)							 return;
-	if(!target->GetAim()[0]) return;
+{
+  /*
+  if(!target)              return;
+  if(!target->GetAim()[0]) return;
 
-	SOCKADDR_IN  addr;
-	SOCKET			 handle;
-													
-	Lock();
-	
-	memset(&addr,0,sizeof(SOCKADDR_IN));
-	
-	handle = socket(AF_INET, SOCK_DGRAM, 0);
-	if(handle == INVALID_SOCKET)  
-		{
-			UnLock();	
-			return;
-		}
-							
-	if(!target->GetIP()[0])  
-		{
-			UnLock();	
-			return;
-		}
-	
-	addr.sin_family				= AF_INET;
-	addr.sin_addr.s_addr	= inet_addr(target->GetIP());	  
-	addr.sin_port					= htons(target->GetPort());				
-																																																				
-	connect(handle,(LPSOCKADDR)&addr,sizeof(SOCKADDR_IN));		
+  SOCKADDR_IN  addr;
+  SOCKET       handle;
 
-	XDWORD             IP = 0;
-	XWINDOWSDATETIME   xdatetime;  	
-	XBUFFER						 xbufferpacket;
-	
-	xdatetime.Read();
-		
-	SetToDebugPacket(IP, level, sequence, &xdatetime,  string, xbufferpacket);
+  Lock();
 
-	send(handle,(const char*)xbufferpacket.Get(), xbufferpacket.GetSize(), 0);	
+  memset(&addr,0,sizeof(SOCKADDR_IN));
 
-	closesocket(handle);
+  handle = socket(AF_INET, SOCK_DGRAM, 0);
+  if(handle == INVALID_SOCKET)
+    {
+      UnLock();
+      return;
+    }
 
-	UnLock();
-	*/
+  if(!target->GetIP()[0])
+    {
+      UnLock();
+      return;
+    }
 
-	if(!target)							 return;
-	if(!target->GetAim()[0]) return;
-	if(!target->GetIP()[0])  return;
+  addr.sin_family       = AF_INET;
+  addr.sin_addr.s_addr  = inet_addr(target->GetIP());
+  addr.sin_port         = htons(target->GetPort());
 
-	Lock();
+  connect(handle,(LPSOCKADDR)&addr,sizeof(SOCKADDR_IN));
 
-	XDWORD             IP = 0;
-	XWINDOWSDATETIME   xdatetime;  	
-	XBUFFER						 xbufferpacket;
-	
-	xdatetime.Read();
-		
-	SetToDebugPacket(IP, level, sequence, &xdatetime,  string, xbufferpacket);
+  XDWORD             IP = 0;
+  XWINDOWSDATETIME   xdatetime;
+  XBUFFER            xbufferpacket;
 
-	SOCKET handle = (SOCKET)target->GetNETHandle();
+  xdatetime.Read();
 
-	send(handle,(const char*)xbufferpacket.Get(), xbufferpacket.GetSize(), 0);	
+  SetToDebugPacket(IP, level, sequence, &xdatetime,  string, xbufferpacket);
 
-	UnLock();
+  send(handle,(const char*)xbufferpacket.Get(), xbufferpacket.GetSize(), 0);
+
+  closesocket(handle);
+
+  UnLock();
+  */
+
+  if(!target)              return;
+  if(!target->GetAim()[0]) return;
+  if(!target->GetIP()[0])  return;
+
+  Lock();
+
+  XDWORD             IP = 0;
+  XWINDOWSDATETIME   xdatetime;
+  XBUFFER            xbufferpacket;
+
+  xdatetime.Read();
+
+  SetToDebugPacket(IP, level, sequence, &xdatetime,  string, xbufferpacket);
+
+  SOCKET handle = (SOCKET)target->GetNETHandle();
+
+  send(handle,(const char*)xbufferpacket.Get(), xbufferpacket.GetSize(), 0);
+
+  UnLock();
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	XWINDOWSDEBUGCTRL::GetHandleNet
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/12/2016 14:18:19
-//	
-//	@return 			bool : 
+//  XWINDOWSDEBUGCTRL::GetHandleNet
+*/
+/**
 //
-//  @param				target : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/12/2016 14:18:19
+//
+//  @return       bool :
+//
+//  @param        target :
 */
 /*-----------------------------------------------------------------*/
-bool XWINDOWSDEBUGCTRL::GetHandleNet(XDEBUGCTRLTARGET* target)																					
+bool XWINDOWSDEBUGCTRL::GetHandleNet(XDEBUGCTRLTARGET* target)
 {
-	SOCKADDR_IN  addr;
-	SOCKET			 handle;
-													
-	memset(&addr,0,sizeof(SOCKADDR_IN));
-	
-	handle = socket(AF_INET, SOCK_DGRAM, 0);
-	if(handle == INVALID_SOCKET)  return false;
-							
-	if(!target->GetIP()[0]) return false; 
-	
-	addr.sin_family				= AF_INET;
-	addr.sin_addr.s_addr	= inet_addr(target->GetIP());	  
-	addr.sin_port					= htons(target->GetPort());				
-																																																				
-	connect(handle,(LPSOCKADDR)&addr,sizeof(SOCKADDR_IN));	
+  SOCKADDR_IN  addr;
+  SOCKET       handle;
 
-	XQWORD NEThandle = (XQWORD)handle;
+  memset(&addr,0,sizeof(SOCKADDR_IN));
 
-	target->SetNETHandle(NEThandle);
+  handle = socket(AF_INET, SOCK_DGRAM, 0);
+  if(handle == INVALID_SOCKET)  return false;
 
-	return true;                              
+  if(!target->GetIP()[0]) return false;
+
+  addr.sin_family       = AF_INET;
+  addr.sin_addr.s_addr  = inet_addr(target->GetIP());
+  addr.sin_port         = htons(target->GetPort());
+
+  connect(handle,(LPSOCKADDR)&addr,sizeof(SOCKADDR_IN));
+
+  XQWORD NEThandle = (XQWORD)handle;
+
+  target->SetNETHandle(NEThandle);
+
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
-//	XWINDOWSDEBUGCTRL::CloseHandleNet
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/12/2016 14:39:11
-//	
-//	@return 			bool : 
+//  XWINDOWSDEBUGCTRL::CloseHandleNet
+*/
+/**
 //
-//  @param				target : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/12/2016 14:39:11
+//
+//  @return       bool :
+//
+//  @param        target :
 */
 /*-----------------------------------------------------------------*/
 bool XWINDOWSDEBUGCTRL::CloseHandleNet(XDEBUGCTRLTARGET* target)
 {
-	SOCKET handle = (SOCKET)target->GetNETHandle(); 	
-	if(!handle) return false;
-		
-	closesocket(handle);
-	target->SetNETHandle(0); 
-	
-	return true;
+  SOCKET handle = (SOCKET)target->GetNETHandle();
+  if(!handle) return false;
+
+  closesocket(handle);
+  target->SetNETHandle(0);
+
+  return true;
 }
 
 
@@ -478,20 +478,20 @@ bool XWINDOWSDEBUGCTRL::CloseHandleNet(XDEBUGCTRLTARGET* target)
 
 /*-------------------------------------------------------------------
 //  XWINDOWSDEBUGCTRL::Lock
-*/ 
+*/
 /**
-//  
-//  
+//
+//
 //  @author       Abraham J. Velez
 //  @version      08/10/2012 17:54:16
-//  
-//  @return       bool : 
+//
+//  @return       bool :
 //  */
 /*-----------------------------------------------------------------*/
 bool XWINDOWSDEBUGCTRL::Lock()
 {
-	if(!mutexhandle) return false;
-	if(WaitForSingleObject((HANDLE)mutexhandle, INFINITE) == WAIT_FAILED) return false;  
+  if(!mutexhandle) return false;
+  if(WaitForSingleObject((HANDLE)mutexhandle, INFINITE) == WAIT_FAILED) return false;
 
   return true;
 }
@@ -501,20 +501,20 @@ bool XWINDOWSDEBUGCTRL::Lock()
 
 /*-------------------------------------------------------------------
 //  XWINDOWSDEBUGCTRL::UnLock
-*/ 
+*/
 /**
-//  
+//
 //  ResolveURL(const char* url, char* IP)
 //  @author       Abraham J. Velez
 //  @version      08/10/2012 17:54:22
-//  
-//  @return       bool : 
+//
+//  @return       bool :
 //  */
 /*-----------------------------------------------------------------*/
 bool XWINDOWSDEBUGCTRL::UnLock()
-{	
- 	if(!mutexhandle)							         return false;
-	if(!ReleaseMutex((HANDLE)mutexhandle)) return false;
+{
+  if(!mutexhandle)                       return false;
+  if(!ReleaseMutex((HANDLE)mutexhandle)) return false;
 
   return true;
 }

@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------------------
-//	DIOWINDOWSSTREAMTCPIP.CPP
-//	
-//	WINDOWS Data IO Stream Bluetooth Local Enum Devices class
-//   
-//	Author						: Abraham J. Velez
-//	Date Of Creation	: 02/01/2002
-//	Last Mofificacion	:	
+//  DIOWINDOWSSTREAMTCPIP.CPP
 //
-//	GEN  Copyright (C).  All right reserved.		 			 
+//  WINDOWS Data IO Stream Bluetooth Local Enum Devices class
+//
+//  Author            : Abraham J. Velez
+//  Date Of Creation  : 02/01/2002
+//  Last Mofificacion :
+//
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
+
 
 #if defined(DIO_ACTIVE) && defined(DIOBLUETOOTH_ACTIVE)
 
@@ -18,7 +18,7 @@
 
 #include <windows.h>
 #include <iphlpapi.h>
-#include <bluetoothapis.h> 
+#include <bluetoothapis.h>
 
 #include "DIOStreamDeviceBluetooth.h"
 #include "DIOWINDOWSStreamBluetoothLocalEnumDevices.h"
@@ -28,7 +28,7 @@
 
 //---- GENERAL VARIABLE --------------------------------------------------------------------
 
-	
+
 //---- CLASS MEMBERS -----------------------------------------------------------------------
 
 
@@ -36,36 +36,36 @@
 
 /*-------------------------------------------------------------------
 //  DIOWINDOWSSTREAMTCPIPLOCALENUMDEVICES::DIOWINDOWSSTREAMTCPIPLOCALENUMDEVICES
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/04/2013 19:00:01
-//	
-//	@return 			
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/04/2013 19:00:01
+//
+//  @return
 
- 
+
 */
 /*-----------------------------------------------------------------*/
 DIOWINDOWSSTREAMBLUETOOTHLOCALENUMDEVICES::DIOWINDOWSSTREAMBLUETOOTHLOCALENUMDEVICES() : DIOSTREAMBLUETOOTHLOCALENUMDEVICES()
 {
 
 }
-	
+
 
 
 /*-------------------------------------------------------------------
 //  DIOWINDOWSSTREAMTCPIPLOCALENUMDEVICES::~DIOWINDOWSSTREAMTCPIPLOCALENUMDEVICES
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/04/2013 19:00:12
-//	
-//	@return 			
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/04/2013 19:00:12
+//
+//  @return
+//  */
 /*-----------------------------------------------------------------*/
 DIOWINDOWSSTREAMBLUETOOTHLOCALENUMDEVICES::~DIOWINDOWSSTREAMBLUETOOTHLOCALENUMDEVICES()
 {
@@ -76,83 +76,83 @@ DIOWINDOWSSTREAMBLUETOOTHLOCALENUMDEVICES::~DIOWINDOWSSTREAMBLUETOOTHLOCALENUMDE
 
 /*-------------------------------------------------------------------
 //  DIOWINDOWSSTREAMTCPIPLOCALENUMDEVICES::Search
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/04/2013 19:00:27
-//	
-//	@return 			bool : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/04/2013 19:00:27
+//
+//  @return       bool :
+//  */
 /*-----------------------------------------------------------------*/
 bool DIOWINDOWSSTREAMBLUETOOTHLOCALENUMDEVICES::Search()
-{		
-	DelAllDevices();
+{
+  DelAllDevices();
 
-	BLUETOOTH_FIND_RADIO_PARAMS radioparams;
-	HBLUETOOTH_RADIO_FIND				hfind;
-	HANDLE											hradio   = NULL;
+  BLUETOOTH_FIND_RADIO_PARAMS radioparams;
+  HBLUETOOTH_RADIO_FIND       hfind;
+  HANDLE                      hradio   = NULL;
 
-	memset(&radioparams, 0, sizeof(radioparams));
-	radioparams.dwSize = sizeof(radioparams);
+  memset(&radioparams, 0, sizeof(radioparams));
+  radioparams.dwSize = sizeof(radioparams);
 
-	hfind = BluetoothFindFirstRadio((BLUETOOTH_FIND_RADIO_PARAMS*)&radioparams,(HANDLE*)&hradio);
-	if(hfind)
-		{
-			BLUETOOTH_RADIO_INFO	radioinfo;
-			BOOL									foundnext;
-			int										index = 0;
+  hfind = BluetoothFindFirstRadio((BLUETOOTH_FIND_RADIO_PARAMS*)&radioparams,(HANDLE*)&hradio);
+  if(hfind)
+    {
+      BLUETOOTH_RADIO_INFO  radioinfo;
+      BOOL                  foundnext;
+      int                   index = 0;
 
-			do{ memset(&radioinfo, 0, sizeof(radioinfo));
-					radioinfo.dwSize =  sizeof(radioinfo);
-				
-					int wt		 = 0;
-					int status;
+      do{ memset(&radioinfo, 0, sizeof(radioinfo));
+          radioinfo.dwSize =  sizeof(radioinfo);
 
-					do{ status = BluetoothGetRadioInfo(hradio, &radioinfo);
-							if(status == ERROR_SUCCESS) break;
+          int wt     = 0;
+          int status;
 
-							wt++;
-							if(wt>8) break;
+          do{ status = BluetoothGetRadioInfo(hradio, &radioinfo);
+              if(status == ERROR_SUCCESS) break;
 
-						} while(1);
-					
-					if(status == ERROR_SUCCESS)
-						{
-							DIOSTREAMDEVICEBLUETOOTH* device = new DIOSTREAMDEVICEBLUETOOTH();
-							if(device)
-								{
-									device->SetIndex(index);
-									
-									device->GetName()->Set((XCHAR*)radioinfo.szName);																		
+              wt++;
+              if(wt>8) break;
 
-									XSTRING MAC;
-									MAC.Format(__L("%02X:%02X:%02X:%02X:%02X:%02X")	, (XBYTE)radioinfo.address.rgBytes[5]
-																																	, (XBYTE)radioinfo.address.rgBytes[4]
-																																	, (XBYTE)radioinfo.address.rgBytes[3]
-																																	, (XBYTE)radioinfo.address.rgBytes[2]
-																																	,	(XBYTE)radioinfo.address.rgBytes[1]
-																																	, (XBYTE)radioinfo.address.rgBytes[0]);					
-									device->GetMAC()->Set(MAC);
+            } while(1);
 
-									device->SetIsVisible(BluetoothIsDiscoverable(hradio)?true:false);		
+          if(status == ERROR_SUCCESS)
+            {
+              DIOSTREAMDEVICEBLUETOOTH* device = new DIOSTREAMDEVICEBLUETOOTH();
+              if(device)
+                {
+                  device->SetIndex(index);
 
-									devices.Add(device);
-								}
-						}
-					
-					foundnext = BluetoothFindNextRadio(hfind,(HANDLE*)&hradio);
+                  device->GetName()->Set((XCHAR*)radioinfo.szName);
 
-					if(foundnext) index++;
+                  XSTRING MAC;
+                  MAC.Format(__L("%02X:%02X:%02X:%02X:%02X:%02X") , (XBYTE)radioinfo.address.rgBytes[5]
+                                                                  , (XBYTE)radioinfo.address.rgBytes[4]
+                                                                  , (XBYTE)radioinfo.address.rgBytes[3]
+                                                                  , (XBYTE)radioinfo.address.rgBytes[2]
+                                                                  , (XBYTE)radioinfo.address.rgBytes[1]
+                                                                  , (XBYTE)radioinfo.address.rgBytes[0]);
+                  device->GetMAC()->Set(MAC);
 
-				
-				} while(foundnext);
+                  device->SetIsVisible(BluetoothIsDiscoverable(hradio)?true:false);
 
-			BluetoothFindRadioClose(hfind);
-		}
+                  devices.Add(device);
+                }
+            }
 
-	return true;
+          foundnext = BluetoothFindNextRadio(hfind,(HANDLE*)&hradio);
+
+          if(foundnext) index++;
+
+
+        } while(foundnext);
+
+      BluetoothFindRadioClose(hfind);
+    }
+
+  return true;
 }
 
 

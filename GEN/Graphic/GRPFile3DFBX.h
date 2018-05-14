@@ -1,22 +1,22 @@
 /*------------------------------------------------------------------------------------------
-//	GRPFILE3DFBX.H
-*/	
-/**	
-// \class 
-//   
-//  Loads FilmBox Mesh File
-//   
-//	@author	 Diego Martinez Ruiz de Gaona
+//  GRPFILE3DFBX.H
+*/
+/**
+// \class
 //
-//	Date Of Creation	: 12/01/2015 16:44:44
-//	Last Modification	:	
-*/	
-/*	GEN  Copyright (C).  All right reserved.
+//  Loads FilmBox Mesh File
+//
+//  @author  Diego Martinez Ruiz de Gaona
+//
+//  Date Of Creation  : 12/01/2015 16:44:44
+//  Last Modification :
+*/
+/*  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
+
 #ifndef _GRPFILE3DFBX_H_
 #define _GRPFILE3DFBX_H_
-	
+
 /*
                                                +-> settings       +-> Faces
                                                |                  |
@@ -72,34 +72,34 @@ Scene  +----> Settings                         |
 
 #include "XFString.h"
 
-#define		FBX_STATUS	0
-#define		FBX_PROCESS 1
-#define		FBX_WARNING 2
-#define		FBX_NOTIFY	3
-#define		FBX_ERROR		4
+#define   FBX_STATUS  0
+#define   FBX_PROCESS 1
+#define   FBX_WARNING 2
+#define   FBX_NOTIFY  3
+#define   FBX_ERROR   4
 
 #ifdef XDEBUG
-#define		FBX_DEBUG XDEBUG_PRINTCOLOR
+#define   FBX_DEBUG XDEBUG_PRINTCOLOR
 #else
-#define		FBX_DEBUG {}
+#define   FBX_DEBUG {}
 #endif
 
 #define USE_XFSTRING
 
-#define		FBXFILETXT	FFILETXT
-#define		FBXMAP			XMAP
+#define   FBXFILETXT  FFILETXT
+#define   FBXMAP      XMAP
 #ifdef USE_XFSTRING
-#define   FBXSTRING		XFSTRING
+#define   FBXSTRING   XFSTRING
 #else
-#define   FBXSTRING		XSTRING
+#define   FBXSTRING   XSTRING
 #endif
-#define   FBXVECTOR		XVECTOR
+#define   FBXVECTOR   XVECTOR
 
-//#define		MAX_FBX_NODES 18000
-//#define		MAX_FBX_DATAS 18000
-#define		MAX_FBX_DATAS 12000
-#define		MAX_FBX_NODES 12000
-//#define		MAX_FBX_NODES 9000
+//#define   MAX_FBX_NODES 18000
+//#define   MAX_FBX_DATAS 18000
+#define   MAX_FBX_DATAS 12000
+#define   MAX_FBX_NODES 12000
+//#define   MAX_FBX_NODES 9000
 
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
 
@@ -124,72 +124,72 @@ class GRPSKIN;
 
 enum GRPFILE3DFBX_STEP
 {
-	GRPFILE3DFBX_STEP_LOADINGFILE				=0,
-	GRPFILE3DFBX_STEP_PARSING						,
-	GRPFILE3DFBX_STEP_LOADOBJECTS				,
-	GRPFILE3DFBX_STEP_LOADINGDICTIONARY	
+  GRPFILE3DFBX_STEP_LOADINGFILE       =0,
+  GRPFILE3DFBX_STEP_PARSING           ,
+  GRPFILE3DFBX_STEP_LOADOBJECTS       ,
+  GRPFILE3DFBX_STEP_LOADINGDICTIONARY
 };
 
 enum GRPFILE3DFBX_INHERIT_TYPE
 {
-	GRPFILE3DFBX_INHERIT_TYPE_RRSS = 0, 
-	GRPFILE3DFBX_INHERIT_TYPE_RSRS, 
-	GRPFILE3DFBX_INHERIT_TYPE_RRS 
+  GRPFILE3DFBX_INHERIT_TYPE_RRSS = 0,
+  GRPFILE3DFBX_INHERIT_TYPE_RSRS,
+  GRPFILE3DFBX_INHERIT_TYPE_RRS
 };
 
 enum GRPFILE3DFBX_APPLICATION_TYPE
 {
-	GRPFILE3DFBX_APPLICATION_TYPE_UNKNOWN=0,
-	GRPFILE3DFBX_APPLICATION_TYPE_MAYA,
-	GRPFILE3DFBX_APPLICATION_TYPE_3DSMAX,
-	GRPFILE3DFBX_APPLICATION_TYPE_MUDBOX
+  GRPFILE3DFBX_APPLICATION_TYPE_UNKNOWN=0,
+  GRPFILE3DFBX_APPLICATION_TYPE_MAYA,
+  GRPFILE3DFBX_APPLICATION_TYPE_3DSMAX,
+  GRPFILE3DFBX_APPLICATION_TYPE_MUDBOX
 };
 
 enum GRPFILE3DFBX_INDEXING_TYPE
 {
-	GRPFILE3DFBX_INDEXING_TYPE_UNKNOWN=0,
-	GRPFILE3DFBX_INDEXING_TYPE_BYPOLYGON,
-	GRPFILE3DFBX_INDEXING_TYPE_BYVERTEX,
-	GRPFILE3DFBX_INDEXING_TYPE_ALLSAME	
+  GRPFILE3DFBX_INDEXING_TYPE_UNKNOWN=0,
+  GRPFILE3DFBX_INDEXING_TYPE_BYPOLYGON,
+  GRPFILE3DFBX_INDEXING_TYPE_BYVERTEX,
+  GRPFILE3DFBX_INDEXING_TYPE_ALLSAME
 };
 
 enum GRPFILE3DFBX_REFERENCE_TYPE
 {
-	GRPFILE3DFBX_REFERENCE_TYPE_UNKNOWN=0,
-	GRPFILE3DFBX_REFERENCE_TYPE_DIRECT,
-	GRPFILE3DFBX_REFERENCE_TYPE_INDEXTODIRECT
+  GRPFILE3DFBX_REFERENCE_TYPE_UNKNOWN=0,
+  GRPFILE3DFBX_REFERENCE_TYPE_DIRECT,
+  GRPFILE3DFBX_REFERENCE_TYPE_INDEXTODIRECT
 };
 
 enum GRPFILE3DFBX_CONNECTION_TYPE
 {
-	GRPFILE3DFBX_CONNECTION_TYPE_UNKNOWN=0,
-	GRPFILE3DFBX_CONNECTION_TYPE_MODEL,
-	GRPFILE3DFBX_CONNECTION_TYPE_LOCATOR,
-	GRPFILE3DFBX_CONNECTION_TYPE_MESH,
-	GRPFILE3DFBX_CONNECTION_TYPE_CAMERA,
-	GRPFILE3DFBX_CONNECTION_TYPE_LIGHT,
-	GRPFILE3DFBX_CONNECTION_TYPE_NODEATTRIBUTE,
-	GRPFILE3DFBX_CONNECTION_TYPE_NODEATTRIBUTE_LIGHT,
-	GRPFILE3DFBX_CONNECTION_TYPE_NODEATTRIBUTE_CAMERA,
-	GRPFILE3DFBX_CONNECTION_TYPE_NODEATTRIBUTE_LIMB,
-	GRPFILE3DFBX_CONNECTION_TYPE_NODEATTRIBUTE_NULL,	
-	GRPFILE3DFBX_CONNECTION_TYPE_GEOMETRY,
-	GRPFILE3DFBX_CONNECTION_TYPE_TEXTURE,
-	GRPFILE3DFBX_CONNECTION_TYPE_MATERIAL,
-	GRPFILE3DFBX_CONNECTION_TYPE_ANIMATION_LAYER,
-	GRPFILE3DFBX_CONNECTION_TYPE_ANIMATION_STACK,
-	GRPFILE3DFBX_CONNECTION_TYPE_ANIMATION_NODE,
-	GRPFILE3DFBX_CONNECTION_TYPE_ANIMATION_CURVE,
-	GRPFILE3DFBX_CONNECTION_TYPE_VIDEO,
-	GRPFILE3DFBX_CONNECTION_TYPE_DEFORMER_MORPH,
-	GRPFILE3DFBX_CONNECTION_TYPE_DEFORMER_SKIN,
-	GRPFILE3DFBX_CONNECTION_TYPE_SUBDEFORMER_MORPH,
-	GRPFILE3DFBX_CONNECTION_TYPE_SUBDEFORMER_CLUSTER,
-	GRPFILE3DFBX_CONNECTION_TYPE_SUBDEFORMER_SHAPE,
-	GRPFILE3DFBX_CONNECTION_TYPE_SKIN_LIMB,
-	GRPFILE3DFBX_CONNECTION_TYPE_SKIN_POSE,
-	GRPFILE3DFBX_CONNECTION_TYPE_SKIN_ROOT,
-	GRPFILE3DFBX_CONNECTION_TYPE_CONSTRAINT
+  GRPFILE3DFBX_CONNECTION_TYPE_UNKNOWN=0,
+  GRPFILE3DFBX_CONNECTION_TYPE_MODEL,
+  GRPFILE3DFBX_CONNECTION_TYPE_LOCATOR,
+  GRPFILE3DFBX_CONNECTION_TYPE_MESH,
+  GRPFILE3DFBX_CONNECTION_TYPE_CAMERA,
+  GRPFILE3DFBX_CONNECTION_TYPE_LIGHT,
+  GRPFILE3DFBX_CONNECTION_TYPE_NODEATTRIBUTE,
+  GRPFILE3DFBX_CONNECTION_TYPE_NODEATTRIBUTE_LIGHT,
+  GRPFILE3DFBX_CONNECTION_TYPE_NODEATTRIBUTE_CAMERA,
+  GRPFILE3DFBX_CONNECTION_TYPE_NODEATTRIBUTE_LIMB,
+  GRPFILE3DFBX_CONNECTION_TYPE_NODEATTRIBUTE_NULL,
+  GRPFILE3DFBX_CONNECTION_TYPE_GEOMETRY,
+  GRPFILE3DFBX_CONNECTION_TYPE_TEXTURE,
+  GRPFILE3DFBX_CONNECTION_TYPE_MATERIAL,
+  GRPFILE3DFBX_CONNECTION_TYPE_ANIMATION_LAYER,
+  GRPFILE3DFBX_CONNECTION_TYPE_ANIMATION_STACK,
+  GRPFILE3DFBX_CONNECTION_TYPE_ANIMATION_NODE,
+  GRPFILE3DFBX_CONNECTION_TYPE_ANIMATION_CURVE,
+  GRPFILE3DFBX_CONNECTION_TYPE_VIDEO,
+  GRPFILE3DFBX_CONNECTION_TYPE_DEFORMER_MORPH,
+  GRPFILE3DFBX_CONNECTION_TYPE_DEFORMER_SKIN,
+  GRPFILE3DFBX_CONNECTION_TYPE_SUBDEFORMER_MORPH,
+  GRPFILE3DFBX_CONNECTION_TYPE_SUBDEFORMER_CLUSTER,
+  GRPFILE3DFBX_CONNECTION_TYPE_SUBDEFORMER_SHAPE,
+  GRPFILE3DFBX_CONNECTION_TYPE_SKIN_LIMB,
+  GRPFILE3DFBX_CONNECTION_TYPE_SKIN_POSE,
+  GRPFILE3DFBX_CONNECTION_TYPE_SKIN_ROOT,
+  GRPFILE3DFBX_CONNECTION_TYPE_CONSTRAINT
 };
 
 
@@ -197,154 +197,154 @@ enum GRPFILE3DFBX_CONNECTION_TYPE
 class FFILETXT : public XFILETXT
 {
 public:
-	
-		bool								  ReadAllFile							()
-		{
-			if(!file)						return false;
-			if(!file->IsOpen()) return false;
 
-			DeleteAllLines();
+    bool                  ReadAllFile             ()
+    {
+      if(!file)           return false;
+      if(!file->IsOpen()) return false;
 
-			int								 sizeBOM							= 0;
-			XFILETXTFORMATCHAR formatchar						= GetFormatCharFromFile(&sizeBOM);
-			int								 sizebytescharacter		= SizeOfCharacter(formatchar);
+      DeleteAllLines();
 
-			if(this->formatchar==XFILETXTFORMATCHAR_UNKNOWN) this->formatchar = formatchar;
-	
-			file->SetPosition(sizeBOM);	
+      int                sizeBOM              = 0;
+      XFILETXTFORMATCHAR formatchar           = GetFormatCharFromFile(&sizeBOM);
+      int                sizebytescharacter   = SizeOfCharacter(formatchar);
 
-			unsigned long totalsize=file->GetSize();
+      if(this->formatchar==XFILETXTFORMATCHAR_UNKNOWN) this->formatchar = formatchar;
 
-			bool		endfile;
-			int			br;
-			XBUFFER dataline(false);
+      file->SetPosition(sizeBOM);
 
-			XBYTE*  readbuffer = new XBYTE[totalsize];
-			if(!readbuffer) return false;
-	
-			memset(readbuffer, 0, totalsize);
+      unsigned long totalsize=file->GetSize();
 
-					unsigned long  bufferpos = 0;
-		
-					br						= totalsize;							
-					endfile = !file->Read(readbuffer, &br);			
-					if(!br) return false;;
+      bool    endfile;
+      int     br;
+      XBUFFER dataline(false);
 
-					XFILETXTTYPELF	_typeLF		= XFILETXTTYPELF_UNKNOWN;
-					int							sizeLF		= 0;
-					int							sizeline	= 0;
+      XBYTE*  readbuffer = new XBYTE[totalsize];
+      if(!readbuffer) return false;
 
-					lines.SetIsMulti(true);
-					lines.SetAddInLimit(40000);
+      memset(readbuffer, 0, totalsize);
 
-					XSTRING all;
-					all.ConvertFromUTF8(readbuffer,totalsize);
+          unsigned long  bufferpos = 0;
 
-					all.Explode(__C('\n'),&lines);
+          br            = totalsize;
+          endfile = !file->Read(readbuffer, &br);
+          if(!br) return false;;
 
-				delete [] readbuffer;
+          XFILETXTTYPELF  _typeLF   = XFILETXTTYPELF_UNKNOWN;
+          int             sizeLF    = 0;
+          int             sizeline  = 0;
 
-			return true;	
-		}
+          lines.SetIsMulti(true);
+          lines.SetAddInLimit(40000);
 
-	bool GetSizeOfLine(XBYTE* buffer, int& size, int maxsize)
-	{
-		bool status = false;
-		int	 c	    = 0;
+          XSTRING all;
+          all.ConvertFromUTF8(readbuffer,totalsize);
 
-		typeLF = XFILETXTTYPELF_UNKNOWN;
+          all.Explode(__C('\n'),&lines);
 
-		XWORD* bufw = (XWORD*) buffer;
-		XBYTE* bufb = (XBYTE*) buffer;
+        delete [] readbuffer;
 
-		for(c=0; c<maxsize; c++)
-		{
-			if(bufb[c]==0x0A)
-				{
-					status = true;
-					typeLF = XFILETXTTYPELF_0A;																									
-					break;
-				}
+      return true;
+    }
 
-		}					
+  bool GetSizeOfLine(XBYTE* buffer, int& size, int maxsize)
+  {
+    bool status = false;
+    int  c      = 0;
 
-		if(status) size = c;
-	
-		return status;
-	}
-	
+    typeLF = XFILETXTTYPELF_UNKNOWN;
+
+    XWORD* bufw = (XWORD*) buffer;
+    XBYTE* bufb = (XBYTE*) buffer;
+
+    for(c=0; c<maxsize; c++)
+    {
+      if(bufb[c]==0x0A)
+        {
+          status = true;
+          typeLF = XFILETXTTYPELF_0A;
+          break;
+        }
+
+    }
+
+    if(status) size = c;
+
+    return status;
+  }
+
 };
 /*---- CLASS -----------------------------------------------------------------------------*/
 
 
 //----------------------------------------------------- FBXData
 /*
-//  Holds data for a fbx block. 
+//  Holds data for a fbx block.
 //
 /--------------------------------------------------------------*/
 
 class FBXData
 {
 public:
-											FBXData		();
-											~FBXData	();
+                      FBXData   ();
+                      ~FBXData  ();
 
-	FBXSTRING						name;
-	FBXSTRING						type;
-	FBXSTRING						subtype;
-	FBXSTRING						label;
-	FBXSTRING						value;
+  FBXSTRING           name;
+  FBXSTRING           type;
+  FBXSTRING           subtype;
+  FBXSTRING           label;
+  FBXSTRING           value;
 
-	XQWORD							tag;
+  XQWORD              tag;
 
-	bool								property;
+  bool                property;
 
-	//FBXVECTOR<double>*		GetArrayValues();
-	//FBXVECTOR<long long>*	GetArrayIndex();
+  //FBXVECTOR<double>*    GetArrayValues();
+  //FBXVECTOR<long long>* GetArrayIndex();
 
-	void								SetArrayValues(FBXVECTOR<double>*		v);
-	void								SetArrayIndex	(FBXVECTOR<long long>* v);
+  void                SetArrayValues(FBXVECTOR<double>*   v);
+  void                SetArrayIndex (FBXVECTOR<long long>* v);
 
-	FBXVECTOR<double>*		ArrayValues;
-	FBXVECTOR<long long>*	ArrayIndex;
+  FBXVECTOR<double>*    ArrayValues;
+  FBXVECTOR<long long>* ArrayIndex;
 
-	void								Delete();
-		
+  void                Delete();
+
 };
 
 
 //----------------------------------------------------- FBXNODE
 /*
-//  Holds hierarchy for a fbx block. 
+//  Holds hierarchy for a fbx block.
 //
 /--------------------------------------------------------------*/
 
 class FBXNode
 {
 public:
-			
-					FBXNode		();		
-					~FBXNode	();
-	void		Show			(XDWORD level);
 
-	operator XDWORD		();
-	operator GLFLOAT	();
-	operator GRPVECTOR();
-	operator GRPPOINT	();
-	operator GRPMATRIX();
-	operator GRPCOLOR	();
+          FBXNode   ();
+          ~FBXNode  ();
+  void    Show      (XDWORD level);
 
-	XDWORD	 LastIndex;
+  operator XDWORD   ();
+  operator GLFLOAT  ();
+  operator GRPVECTOR();
+  operator GRPPOINT ();
+  operator GRPMATRIX();
+  operator GRPCOLOR ();
 
-	FBXData*					data;
-	FBXVECTOR<FBXNode*>*Children;
+  XDWORD   LastIndex;
 
-	void Delete()
-	{
-	if (Children!=NULL)					
-		Children->DeleteAll();		
-	delete(Children);
-	}
+  FBXData*          data;
+  FBXVECTOR<FBXNode*>*Children;
+
+  void Delete()
+  {
+  if (Children!=NULL)
+    Children->DeleteAll();
+  delete(Children);
+  }
 
 private:
 
@@ -354,293 +354,293 @@ private:
 class FBXNodeComparator
 {
 public:
-	virtual int Compare(FBXNode*)=0;
+  virtual int Compare(FBXNode*)=0;
 };
 
 class FBXNodeComparatorByName : public FBXNodeComparator
 {
 public:
 
-	FBXSTRING name;
+  FBXSTRING name;
 
-	virtual int Compare(FBXNode* a)
-	{
-		if (a->data)
-			return a->data->name.Compare(name);
-		return 1;
-	}
+  virtual int Compare(FBXNode* a)
+  {
+    if (a->data)
+      return a->data->name.Compare(name);
+    return 1;
+  }
 };
-class FBXNodeComparatorByNameAndValue : public FBXNodeComparator 
+class FBXNodeComparatorByNameAndValue : public FBXNodeComparator
 {
 public:
 
-	FBXSTRING name;
-	FBXSTRING value;
+  FBXSTRING name;
+  FBXSTRING value;
 
-	virtual int Compare(FBXNode* a)
-	{
-		if (a->data)
-				if (a->data->value.Compare(value)==0)
-					if (a->data->name.Compare(name)==0)
-						return 0;
-		return 1;
-	}
+  virtual int Compare(FBXNode* a)
+  {
+    if (a->data)
+        if (a->data->value.Compare(value)==0)
+          if (a->data->name.Compare(name)==0)
+            return 0;
+    return 1;
+  }
 };
 
 
 //----------------------------------------------------- GRPFILE3DFBX
 /*
-//  FBX loader class 
+//  FBX loader class
 //
 /--------------------------------------------------------------*/
 class GRPFILE3DFBX : public GRPFILE3D
 {
 public:
-																															GRPFILE3DFBX									() : GRPFILE3D() 
-																															{
-																																SetupIgnoredNodes();
-																																Clean();												
-																															};
+                                                              GRPFILE3DFBX                  () : GRPFILE3D()
+                                                              {
+                                                                SetupIgnoredNodes();
+                                                                Clean();
+                                                              };
 
-				virtual																								~GRPFILE3DFBX									();
-		
-				virtual GRPOBJECT*																		Load													(XCHAR* file);		
-								void																					ShowTree											()							{ Root->Show(0);}					
+        virtual                                               ~GRPFILE3DFBX                 ();
+
+        virtual GRPOBJECT*                                    Load                          (XCHAR* file);
+                void                                          ShowTree                      ()              { Root->Show(0);}
 
 protected:
-								void																					SetupIgnoredNodes							();	
-								bool																					IsIgnoredNode									(FBXSTRING& name);
-								bool																					LoadHeaderData								();
-								bool																					LoadNameData									();
-								bool																					LoadConnectionsAndProperties	();				
+                void                                          SetupIgnoredNodes             ();
+                bool                                          IsIgnoredNode                 (FBXSTRING& name);
+                bool                                          LoadHeaderData                ();
+                bool                                          LoadNameData                  ();
+                bool                                          LoadConnectionsAndProperties  ();
 
-								FBXVECTOR<FBXSTRING*>													IgnoredNodes;
+                FBXVECTOR<FBXSTRING*>                         IgnoredNodes;
 
-								XDWORD																				UpAxis;
-								int																						UpAxisSign;
-								XDWORD																				FrontAxis;
-								int																						FrontAxisSign;
-								XDWORD																				RightAxis;
-								int																						RightAxisSign;
-								XQWORD																				TimeMode;
-								XQWORD																				TimeProtocol;
-								int																						CustomFrameRate;
-								float																					UnitScaleFactor;
-								FBXSTRING																			DefaultCamera;
-
-
-								XPATH																					FBXfile;
-
-								FBXFILETXT*																		xfiletxt;
-								int																						CurrentLine;
-								int																						nlines;
-
-								FBXSTRING																			line;					
-								FBXSTRING																			name;
-								FBXSTRING																			value;
-								FBXSTRING																			connectionType;
-
-								FBXNode*																			Root;	
-								FBXNode*																			Connections;
-
-								int																						level;
-
-								FBXNode*																			Objects;					
-
-								GRPFILE3DFBX_APPLICATION_TYPE									Application;
-
-								FBXNode																				FBXNodes[MAX_FBX_NODES];
-								XQWORD																				FBXNodeIndex;
-
-								XVECTOR<FBXNode*>															ExcessNodes;
-
-								FBXData																				FBXDatas[MAX_FBX_NODES];
-								XQWORD																				FBXDataIndex;
-
-								XVECTOR<FBXData*>															ExcessDatas;
-
-								FBXMAP<XQWORD,FBXSTRING*>											TagMap;
-								FBXMAP<XQWORD,FBXSTRING*>											ObjectNameMap;
-
-								FBXMAP<XQWORD,XQWORD>													TypesMap;
-								FBXMAP<XQWORD,XQWORD>													ObjectConnectionsMap;
-								FBXMAP<XQWORD,XQWORD>													PropertyConnectionsMap;
-								FBXMAP<XQWORD,FBXSTRING*>											PropertyConnectionsTypeMap;
-	
-								//---------- Geometric
-								FBXMAP<XQWORD,GRPELEMENT*>										GeometricMap;						// element data
-								FBXVECTOR<GRPMESH*>														MeshMap;								// mesh data
-	
-								//---------- surfaces	
-								FBXMAP<XQWORD,GRPMATERIAL*>										MaterialMap;						// material data
-								FBXMAP<XQWORD,GRPTEXTURE*>										TextureMap;							// texture data	
-	
-								FBXMAP<XQWORD,XQWORD>													NodeAttributeMap;				// nodeattribute data , camera, light, limb
-
-								//--------- camera
-								FBXMAP<XQWORD,GRPCAMERA*>											CameraMap;							// camera data
-								FBXMAP<XQWORD,GRPCAMERA*>											CameraAttributeMap;			// camera attributes data
-
-								//---------- lights
-								FBXMAP<XQWORD,GRPLIGHT*>											LightMap;								// light data	
-								FBXMAP<XQWORD,GRPLIGHT*>											LightAttributeMap;			// light attributes data	
-
-								//----------- spatial
-								FBXMAP<XQWORD,GRPNODE*>												LocatorMap;							// null nodes
-								FBXMAP<XQWORD,GRPNODE*>												NodeMap;								// pure model nodes
-	
-
-								//------------- morph
-								FBXMAP<XQWORD,GRPDEFORMER*>										DeformerMap;						// deformers [blending, morpher]
-								FBXMAP<XQWORD,GRPSUBDEFORMER*>								SubdeformerMap;					// deformer channel geometry	
-								FBXMAP<XQWORD,GRPSUBDEFORMERSHAPE*>						SubdeformerShapeMap;		// deformer shape geometry	
-
-								//------------- skin
-								FBXMAP<XQWORD,GRPSKINLIMB*>										SkinLimbMap;						// Skin limb nodes
-								FBXMAP<XQWORD,GRPSKINCLUSTER*>								SkinClusterMap;					// vertex limb association
-								FBXMAP<XQWORD,GRPSKINPOSE*>										SkinPoseMap;						// Limb pose , optional, might not be on the fbx
-								FBXMAP<XQWORD,GRPSKIN*>												SkinMap;								// skin object
-								FBXMAP<XQWORD,GRPSKINLIMB*>										SkinLimbAttributeMap;		// limb attribute size
-								FBXMAP<XQWORD,GRPNODE*>												SkinRootMap;						// null nodes
-
-								//------------ animation	
-								FBXMAP<XQWORD,GRPANIMATIONSTACK*>							AnimationStackMap;			// animation stack data
-								FBXMAP<XQWORD,GRPANIMATIONLAYER*>							AnimationLayerMap;			// animation layer data
-								FBXMAP<XQWORD,GRPANIMATIONCURVE*>							AnimationCurveMap;			// animation curve data
-								FBXMAP<XQWORD,GRPANIMATIONNODE*>							AnimationNodeMap;				// animation node	data
-		
-
-								GRPFILE3DFBX_CONNECTION_TYPE									IsType									(XQWORD id);
-
-								bool																					FindNode								(FBXNode* CurrentNode,FBXNodeComparator* Comparator,FBXNode** Result);
-								bool																					FindNode								(XCHAR* name,int size,FBXNode**,bool Case=false);
-								bool																					FindNode								(XCHAR* name,int size,FBXNode* CurrentNode,FBXNode**,bool Case=false);
-								bool																					FindChildNode						(XCHAR* name,int size,FBXNode* CurrentNode,FBXNode**,bool Case=false);
-
-				virtual void																					ConsumeBlock						();
-								bool																					ReadNode								(FBXNode* node);
-								void																					SkipArray								();
-		FBXVECTOR<double>*																				ReadArrayDouble					(XDWORD size);
-		FBXVECTOR<long long>*																			ReadArrayIndex					(XDWORD size);
-
-								bool																					LoadGlobalSettings			();
-								GRPOBJECT*																		LoadDictionary					();
-								bool																					LoadObjects							();
-
-								bool																					LoadModelNode						(XQWORD,FBXNode*);
-								bool																					LoadModelNode						(XQWORD,FBXNode*,GRPNODE*);
-
-								bool																					LoadGeometryNode				(XQWORD,FBXNode*);
-								bool																					LoadMorpherShapeNode		(XQWORD,FBXNode*);
-
-								bool																					LoadMaterialNode				(XQWORD,FBXNode*);
-								bool																					LoadTextureNode					(XQWORD,FBXNode*);
-
-								bool																					LoadNodeAttribute				(XQWORD,FBXNode*);
-								bool																					LoadNodeAttributeCamera (XQWORD,FBXNode*);
-								bool																					LoadNodeAttributeLight	(XQWORD,FBXNode*);
-
-								bool																					LoadAnimationStackNode	(XQWORD,FBXNode*);
-								bool																					LoadAnimationLayerNode	(XQWORD,FBXNode*);
-								bool																					LoadAnimationNode				(XQWORD,FBXNode*);
-								bool																					LoadAnimationCurve			(XQWORD,FBXNode*);
-
-								bool																					LoadDeformer						(XQWORD,FBXNode*);
-								bool																					LoadMorphDeformer				(XQWORD,FBXNode*);
-								bool																					LoadSubdeformer					(XQWORD,FBXNode*);
-								bool																					LoadNodeAttributeLimb		(XQWORD,FBXNode*);
-								bool																					LoadLimbNode						(XQWORD,FBXNode*);
-								bool																					LoadSkinDeformer				(XQWORD,FBXNode*);
-								bool																					LoadSkinPose						(XQWORD,FBXNode*);
-								bool																					LoadSkinCluster					(XQWORD,FBXNode*);								
-
-								void																					DeleteTree							(FBXNode*);
-									
-								bool																					IsConnected							(XQWORD id);
-								bool																					Setup										(GRPOBJECT* obj);
-								void																					Abort										();
-
-								GRPANIMATIONCURVEAXIS													GetPropertyTypeByName		(FBXSTRING* subtype);							
-
-								FBXNode*																			CreateFBXNode						();
-								FBXData*																			CreateFBXData						();
+                XDWORD                                        UpAxis;
+                int                                           UpAxisSign;
+                XDWORD                                        FrontAxis;
+                int                                           FrontAxisSign;
+                XDWORD                                        RightAxis;
+                int                                           RightAxisSign;
+                XQWORD                                        TimeMode;
+                XQWORD                                        TimeProtocol;
+                int                                           CustomFrameRate;
+                float                                         UnitScaleFactor;
+                FBXSTRING                                     DefaultCamera;
 
 
-								FBXSTRING																			ConnectionString;
-								FBXSTRING																			ParameterString;
-									
-								GRPFILE3DFBX_STEP															CurrentStep;
+                XPATH                                         FBXfile;
 
-								void																					SetObject								(GRPOBJECT* obj) { this->object=obj;}
+                FBXFILETXT*                                   xfiletxt;
+                int                                           CurrentLine;
+                int                                           nlines;
 
-								//-------------- task control
+                FBXSTRING                                     line;
+                FBXSTRING                                     name;
+                FBXSTRING                                     value;
+                FBXSTRING                                     connectionType;
 
-								void																					UpdateTask();
-								int																						currentDictionary;
-								int																						currentObject;
-								
+                FBXNode*                                      Root;
+                FBXNode*                                      Connections;
+
+                int                                           level;
+
+                FBXNode*                                      Objects;
+
+                GRPFILE3DFBX_APPLICATION_TYPE                 Application;
+
+                FBXNode                                       FBXNodes[MAX_FBX_NODES];
+                XQWORD                                        FBXNodeIndex;
+
+                XVECTOR<FBXNode*>                             ExcessNodes;
+
+                FBXData                                       FBXDatas[MAX_FBX_NODES];
+                XQWORD                                        FBXDataIndex;
+
+                XVECTOR<FBXData*>                             ExcessDatas;
+
+                FBXMAP<XQWORD,FBXSTRING*>                     TagMap;
+                FBXMAP<XQWORD,FBXSTRING*>                     ObjectNameMap;
+
+                FBXMAP<XQWORD,XQWORD>                         TypesMap;
+                FBXMAP<XQWORD,XQWORD>                         ObjectConnectionsMap;
+                FBXMAP<XQWORD,XQWORD>                         PropertyConnectionsMap;
+                FBXMAP<XQWORD,FBXSTRING*>                     PropertyConnectionsTypeMap;
+
+                //---------- Geometric
+                FBXMAP<XQWORD,GRPELEMENT*>                    GeometricMap;           // element data
+                FBXVECTOR<GRPMESH*>                           MeshMap;                // mesh data
+
+                //---------- surfaces
+                FBXMAP<XQWORD,GRPMATERIAL*>                   MaterialMap;            // material data
+                FBXMAP<XQWORD,GRPTEXTURE*>                    TextureMap;             // texture data
+
+                FBXMAP<XQWORD,XQWORD>                         NodeAttributeMap;       // nodeattribute data , camera, light, limb
+
+                //--------- camera
+                FBXMAP<XQWORD,GRPCAMERA*>                     CameraMap;              // camera data
+                FBXMAP<XQWORD,GRPCAMERA*>                     CameraAttributeMap;     // camera attributes data
+
+                //---------- lights
+                FBXMAP<XQWORD,GRPLIGHT*>                      LightMap;               // light data
+                FBXMAP<XQWORD,GRPLIGHT*>                      LightAttributeMap;      // light attributes data
+
+                //----------- spatial
+                FBXMAP<XQWORD,GRPNODE*>                       LocatorMap;             // null nodes
+                FBXMAP<XQWORD,GRPNODE*>                       NodeMap;                // pure model nodes
+
+
+                //------------- morph
+                FBXMAP<XQWORD,GRPDEFORMER*>                   DeformerMap;            // deformers [blending, morpher]
+                FBXMAP<XQWORD,GRPSUBDEFORMER*>                SubdeformerMap;         // deformer channel geometry
+                FBXMAP<XQWORD,GRPSUBDEFORMERSHAPE*>           SubdeformerShapeMap;    // deformer shape geometry
+
+                //------------- skin
+                FBXMAP<XQWORD,GRPSKINLIMB*>                   SkinLimbMap;            // Skin limb nodes
+                FBXMAP<XQWORD,GRPSKINCLUSTER*>                SkinClusterMap;         // vertex limb association
+                FBXMAP<XQWORD,GRPSKINPOSE*>                   SkinPoseMap;            // Limb pose , optional, might not be on the fbx
+                FBXMAP<XQWORD,GRPSKIN*>                       SkinMap;                // skin object
+                FBXMAP<XQWORD,GRPSKINLIMB*>                   SkinLimbAttributeMap;   // limb attribute size
+                FBXMAP<XQWORD,GRPNODE*>                       SkinRootMap;            // null nodes
+
+                //------------ animation
+                FBXMAP<XQWORD,GRPANIMATIONSTACK*>             AnimationStackMap;      // animation stack data
+                FBXMAP<XQWORD,GRPANIMATIONLAYER*>             AnimationLayerMap;      // animation layer data
+                FBXMAP<XQWORD,GRPANIMATIONCURVE*>             AnimationCurveMap;      // animation curve data
+                FBXMAP<XQWORD,GRPANIMATIONNODE*>              AnimationNodeMap;       // animation node data
+
+
+                GRPFILE3DFBX_CONNECTION_TYPE                  IsType                  (XQWORD id);
+
+                bool                                          FindNode                (FBXNode* CurrentNode,FBXNodeComparator* Comparator,FBXNode** Result);
+                bool                                          FindNode                (XCHAR* name,int size,FBXNode**,bool Case=false);
+                bool                                          FindNode                (XCHAR* name,int size,FBXNode* CurrentNode,FBXNode**,bool Case=false);
+                bool                                          FindChildNode           (XCHAR* name,int size,FBXNode* CurrentNode,FBXNode**,bool Case=false);
+
+        virtual void                                          ConsumeBlock            ();
+                bool                                          ReadNode                (FBXNode* node);
+                void                                          SkipArray               ();
+    FBXVECTOR<double>*                                        ReadArrayDouble         (XDWORD size);
+    FBXVECTOR<long long>*                                     ReadArrayIndex          (XDWORD size);
+
+                bool                                          LoadGlobalSettings      ();
+                GRPOBJECT*                                    LoadDictionary          ();
+                bool                                          LoadObjects             ();
+
+                bool                                          LoadModelNode           (XQWORD,FBXNode*);
+                bool                                          LoadModelNode           (XQWORD,FBXNode*,GRPNODE*);
+
+                bool                                          LoadGeometryNode        (XQWORD,FBXNode*);
+                bool                                          LoadMorpherShapeNode    (XQWORD,FBXNode*);
+
+                bool                                          LoadMaterialNode        (XQWORD,FBXNode*);
+                bool                                          LoadTextureNode         (XQWORD,FBXNode*);
+
+                bool                                          LoadNodeAttribute       (XQWORD,FBXNode*);
+                bool                                          LoadNodeAttributeCamera (XQWORD,FBXNode*);
+                bool                                          LoadNodeAttributeLight  (XQWORD,FBXNode*);
+
+                bool                                          LoadAnimationStackNode  (XQWORD,FBXNode*);
+                bool                                          LoadAnimationLayerNode  (XQWORD,FBXNode*);
+                bool                                          LoadAnimationNode       (XQWORD,FBXNode*);
+                bool                                          LoadAnimationCurve      (XQWORD,FBXNode*);
+
+                bool                                          LoadDeformer            (XQWORD,FBXNode*);
+                bool                                          LoadMorphDeformer       (XQWORD,FBXNode*);
+                bool                                          LoadSubdeformer         (XQWORD,FBXNode*);
+                bool                                          LoadNodeAttributeLimb   (XQWORD,FBXNode*);
+                bool                                          LoadLimbNode            (XQWORD,FBXNode*);
+                bool                                          LoadSkinDeformer        (XQWORD,FBXNode*);
+                bool                                          LoadSkinPose            (XQWORD,FBXNode*);
+                bool                                          LoadSkinCluster         (XQWORD,FBXNode*);
+
+                void                                          DeleteTree              (FBXNode*);
+
+                bool                                          IsConnected             (XQWORD id);
+                bool                                          Setup                   (GRPOBJECT* obj);
+                void                                          Abort                   ();
+
+                GRPANIMATIONCURVEAXIS                         GetPropertyTypeByName   (FBXSTRING* subtype);
+
+                FBXNode*                                      CreateFBXNode           ();
+                FBXData*                                      CreateFBXData           ();
+
+
+                FBXSTRING                                     ConnectionString;
+                FBXSTRING                                     ParameterString;
+
+                GRPFILE3DFBX_STEP                             CurrentStep;
+
+                void                                          SetObject               (GRPOBJECT* obj) { this->object=obj;}
+
+                //-------------- task control
+
+                void                                          UpdateTask();
+                int                                           currentDictionary;
+                int                                           currentObject;
+
 private:
-					
 
-								FBXSTRING animationnodename;
-								void									Clean										()
-								{
-									ConnectionString	=__L("C:");
-									ParameterString		=__L("p:");
-									CurrentLine				=0;									
-									UpAxis						=1;
-									UpAxisSign				=1;
-									FrontAxis					=2;
-									FrontAxisSign			=1;
-									RightAxis					=0;
-									RightAxisSign			=1;
-									level							=0;
-									FBXNodeIndex			=0;
-									FBXDataIndex			=0;
-									xfiletxt					=NULL;
-									Root							=NULL;
-									Connections				=NULL;								
-									Objects						=NULL;
 
-									ObjectConnectionsMap.SetIsMulti					(true);
-									PropertyConnectionsMap.SetIsMulti				(true);
-									PropertyConnectionsTypeMap.SetIsMulti		(true);
-									TypesMap.SetIsMulti											(true);
-									TypesMap.DeleteAll											();
-									NodeMap.SetIsMulti											(true);
-									GeometricMap.SetIsMulti									(true);
-									MaterialMap.SetIsMulti									(true);
-									TextureMap.SetIsMulti										(true);											
-									NodeAttributeMap.SetIsMulti							(true);
-									CameraMap.SetIsMulti										(true);
-									CameraAttributeMap.SetIsMulti						(true);
-									LightMap.SetIsMulti											(true);
-									LightAttributeMap.SetIsMulti						(true);
-									LocatorMap.SetIsMulti										(true);
-									DeformerMap.SetIsMulti									(true);
-									SubdeformerMap.SetIsMulti								(true);
-									SkinLimbMap.SetIsMulti									(true);
-									SkinClusterMap.SetIsMulti								(true);
-									SkinPoseMap.SetIsMulti									(true);
-									SkinMap.SetIsMulti											(true);
-									SkinLimbAttributeMap.SetIsMulti					(true);
-									AnimationStackMap.SetIsMulti						(true);
-									AnimationLayerMap.SetIsMulti						(true);
-									AnimationCurveMap.SetIsMulti						(true);
-									AnimationNodeMap.SetIsMulti							(true);
-									TagMap.SetIsMulti												(false);
-									ObjectNameMap.SetIsMulti								(false);
-									ExcessDatas.SetIsMulti									(true);
+                FBXSTRING animationnodename;
+                void                  Clean                   ()
+                {
+                  ConnectionString  =__L("C:");
+                  ParameterString   =__L("p:");
+                  CurrentLine       =0;
+                  UpAxis            =1;
+                  UpAxisSign        =1;
+                  FrontAxis         =2;
+                  FrontAxisSign     =1;
+                  RightAxis         =0;
+                  RightAxisSign     =1;
+                  level             =0;
+                  FBXNodeIndex      =0;
+                  FBXDataIndex      =0;
+                  xfiletxt          =NULL;
+                  Root              =NULL;
+                  Connections       =NULL;
+                  Objects           =NULL;
 
-									nlines=0;
-									percent = 0;
-									currentask = 0;
-								}
+                  ObjectConnectionsMap.SetIsMulti         (true);
+                  PropertyConnectionsMap.SetIsMulti       (true);
+                  PropertyConnectionsTypeMap.SetIsMulti   (true);
+                  TypesMap.SetIsMulti                     (true);
+                  TypesMap.DeleteAll                      ();
+                  NodeMap.SetIsMulti                      (true);
+                  GeometricMap.SetIsMulti                 (true);
+                  MaterialMap.SetIsMulti                  (true);
+                  TextureMap.SetIsMulti                   (true);
+                  NodeAttributeMap.SetIsMulti             (true);
+                  CameraMap.SetIsMulti                    (true);
+                  CameraAttributeMap.SetIsMulti           (true);
+                  LightMap.SetIsMulti                     (true);
+                  LightAttributeMap.SetIsMulti            (true);
+                  LocatorMap.SetIsMulti                   (true);
+                  DeformerMap.SetIsMulti                  (true);
+                  SubdeformerMap.SetIsMulti               (true);
+                  SkinLimbMap.SetIsMulti                  (true);
+                  SkinClusterMap.SetIsMulti               (true);
+                  SkinPoseMap.SetIsMulti                  (true);
+                  SkinMap.SetIsMulti                      (true);
+                  SkinLimbAttributeMap.SetIsMulti         (true);
+                  AnimationStackMap.SetIsMulti            (true);
+                  AnimationLayerMap.SetIsMulti            (true);
+                  AnimationCurveMap.SetIsMulti            (true);
+                  AnimationNodeMap.SetIsMulti             (true);
+                  TagMap.SetIsMulti                       (false);
+                  ObjectNameMap.SetIsMulti                (false);
+                  ExcessDatas.SetIsMulti                  (true);
+
+                  nlines=0;
+                  percent = 0;
+                  currentask = 0;
+                }
 };
-	
-	
+
+
 /*---- INLINE FUNCTIONS ------------------------------------------------------------------*/
-	
+
 #endif
 
 

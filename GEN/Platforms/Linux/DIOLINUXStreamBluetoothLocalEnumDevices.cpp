@@ -1,18 +1,18 @@
 //------------------------------------------------------------------------------------------
-//	DIOLINUXSTREAMTCPIP.CPP
-//	
-//	LINUX Data IO Stream Bluetooth Local Enum Devices class
-//   
-//	Author						: Abraham J. Velez
-//	Date Of Creation	: 02/01/2002
-//	Last Mofificacion	:	
+//  DIOLINUXSTREAMTCPIP.CPP
 //
-//	GEN  Copyright (C).  All right reserved.		 			 
+//  LINUX Data IO Stream Bluetooth Local Enum Devices class
+//
+//  Author            : Abraham J. Velez
+//  Date Of Creation  : 02/01/2002
+//  Last Mofificacion :
+//
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
+
 
 #if defined(DIO_ACTIVE) && defined(DIOBLUETOOTH_ACTIVE)
-	
+
 //---- INCLUDES ----------------------------------------------------------------------------
 
 
@@ -29,7 +29,7 @@
 
 //---- GENERAL VARIABLE --------------------------------------------------------------------
 
-	
+
 //---- CLASS MEMBERS -----------------------------------------------------------------------
 
 
@@ -37,36 +37,36 @@
 
 /*-------------------------------------------------------------------
 //  DIOLINUXSTREAMTCPIPLOCALENUMDEVICES::DIOLINUXSTREAMTCPIPLOCALENUMDEVICES
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/04/2013 19:00:01
-//	
-//	@return 			
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/04/2013 19:00:01
+//
+//  @return
 
- 
+
 */
 /*-----------------------------------------------------------------*/
 DIOLINUXSTREAMBLUETOOTHLOCALENUMDEVICES::DIOLINUXSTREAMBLUETOOTHLOCALENUMDEVICES() : DIOSTREAMBLUETOOTHLOCALENUMDEVICES()
 {
 
 }
-	
+
 
 
 /*-------------------------------------------------------------------
 //  DIOLINUXSTREAMTCPIPLOCALENUMDEVICES::~DIOLINUXSTREAMTCPIPLOCALENUMDEVICES
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/04/2013 19:00:12
-//	
-//	@return 			
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/04/2013 19:00:12
+//
+//  @return
+//  */
 /*-----------------------------------------------------------------*/
 DIOLINUXSTREAMBLUETOOTHLOCALENUMDEVICES::~DIOLINUXSTREAMBLUETOOTHLOCALENUMDEVICES()
 {
@@ -77,42 +77,42 @@ DIOLINUXSTREAMBLUETOOTHLOCALENUMDEVICES::~DIOLINUXSTREAMBLUETOOTHLOCALENUMDEVICE
 
 /*-------------------------------------------------------------------
 //  DIOLINUXSTREAMTCPIPLOCALENUMDEVICES::Search
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/04/2013 19:00:27
-//	
-//	@return 			bool : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/04/2013 19:00:27
+//
+//  @return       bool :
+//  */
 /*-----------------------------------------------------------------*/
 bool DIOLINUXSTREAMBLUETOOTHLOCALENUMDEVICES::Search()
-{		
-	DelAllDevices();
+{
+  DelAllDevices();
 
-	struct hci_dev_info	di;
-	int									indexdev = 0;
+  struct hci_dev_info di;
+  int                 indexdev = 0;
 
-	while(hci_devinfo(indexdev, &di)>=0)
-		{
-			DIOSTREAMDEVICEBLUETOOTH* device = new DIOSTREAMDEVICEBLUETOOTH();
-			if(device)
-				{
-					char addr[32];
-					
-					device->GetName()->Set(di.name);
+  while(hci_devinfo(indexdev, &di)>=0)
+    {
+      DIOSTREAMDEVICEBLUETOOTH* device = new DIOSTREAMDEVICEBLUETOOTH();
+      if(device)
+        {
+          char addr[32];
 
-					ba2str(&di.bdaddr, addr);							
-					device->GetMAC()->Set(addr);
+          device->GetName()->Set(di.name);
 
-					devices.Add(device);
-				}
+          ba2str(&di.bdaddr, addr);
+          device->GetMAC()->Set(addr);
 
-			indexdev++;
-		}
-	
-	return true;
+          devices.Add(device);
+        }
+
+      indexdev++;
+    }
+
+  return true;
 }
 
 

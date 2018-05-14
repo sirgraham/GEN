@@ -1,21 +1,21 @@
 //------------------------------------------------------------------------------------------
-//	GRPLINUXSCREENX11.H
-//	
-/**	
-// \class 
-//   
+//  GRPLINUXSCREENX11.H
+//
+/**
+// \class
+//
 //  LINUX graphics screen class
-//   
-//	@author	 Abraham J. Velez
-//	@version 28/06/2002
-*/	
-//	GEN  Copyright (C).  All right reserved.		 			 
+//
+//  @author  Abraham J. Velez
+//  @version 28/06/2002
+*/
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
+
 #ifndef _GRPLINUXSCREENX11_H_
 #define _GRPLINUXSCREENX11_H_
-	
-	
+
+
 //---- INCLUDES ----------------------------------------------------------------------------
 
 
@@ -23,7 +23,7 @@
 
 #include "GRPOpenGL.h"
 #include "GRPScreen.h"
-	
+
 //---- DEFINES & ENUMS  --------------------------------------------------------------------
 
 
@@ -46,49 +46,49 @@ class XPUBLISHER;
 
 class GRPLINUXSCREENX11 : public GRPSCREEN
 {
-	public:	
-																					GRPLINUXSCREENX11						();
-		virtual															 ~GRPLINUXSCREENX11						();
-		
+  public:
+                                          GRPLINUXSCREENX11           ();
+    virtual                              ~GRPLINUXSCREENX11           ();
 
-		void																	SetIsDesktop								(bool isdesktop)												{ this->isdesktop = isdesktop;	}
-		bool																	IsDesktop										()																			{ return this->isdesktop;				}
 
-		virtual bool													Create											(void* handle = NULL);
-		virtual bool													Update											() {return true;};
-		bool																	Delete											();
-	
-		Display*															GetDisplay									();
-		Window*																GetWindow										();
-		XVisualInfo**													GetVisualInfo								();
-		Window*																GetRootWindow								();
+    void                                  SetIsDesktop                (bool isdesktop)                        { this->isdesktop = isdesktop;  }
+    bool                                  IsDesktop                   ()                                      { return this->isdesktop;       }
 
-		bool																	Resize											(int width, int height);
-		bool																	HasFocus										();
+    virtual bool                          Create                      (void* handle = NULL);
+    virtual bool                          Update                      () {return true;};
+    bool                                  Delete                      ();
 
-		bool																	OpenDisplay									();
-		bool																	CreateX11Window							();
+    Display*                              GetDisplay                  ();
+    Window*                               GetWindow                   ();
+    XVisualInfo**                         GetVisualInfo               ();
+    Window*                               GetRootWindow               ();
 
-		void																	ShowCursor									(bool);
+    bool                                  Resize                      (int width, int height);
+    bool                                  HasFocus                    ();
+
+    bool                                  OpenDisplay                 ();
+    bool                                  CreateX11Window             ();
+
+    void                                  ShowCursor                  (bool);
 
 protected:
 
-		Display*															display;
-		Window																window;	
-		XVisualInfo*													vi;
-		Window											          root;
+    Display*                              display;
+    Window                                window;
+    XVisualInfo*                          vi;
+    Window                                root;
 
-		bool																	isdesktop;
+    bool                                  isdesktop;
 
-	private:
+  private:
 
-		void																	Clean												();	
+    void                                  Clean                       ();
 };
 
 
-	
+
 //---- INLINE FUNCTIONS --------------------------------------------------------------------
-	
+
 #endif
 
 

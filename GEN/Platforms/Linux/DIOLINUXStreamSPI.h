@@ -1,23 +1,23 @@
 /*------------------------------------------------------------------------------------------
 //  DIOLINUXSTREAMSPI.H
-*/  
-/** 
-// \class 
-//   
+*/
+/**
+// \class
+//
 //  Data IO Stream SPI class
-//   
+//
 //  @author  Abraham J. Velez
 //  @version 20/09/2012 14:31:53
-*/  
-/*  GEN  Copyright (C).  All right reserved.		
+*/
+/*  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-  
+
 #ifndef _DIOLINUXSTREAMSPI_H_
 #define _DIOLINUXSTREAMSPI_H_
-  
-  
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
-  
+
 #include "XBuffer.h"
 #include "XLINUXThread.h"
 
@@ -27,30 +27,30 @@
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
 
 
-  
+
 /*---- CLASS -----------------------------------------------------------------------------*/
-  
+
 class XBUFFER;
 class XFACTORY;
 
 
-class DIOLINUXSTREAMSPI : public DIOSTREAMSPI 
+class DIOLINUXSTREAMSPI : public DIOSTREAMSPI
 {
-	public:
-																	DIOLINUXSTREAMSPI										();
-		virtual											 ~DIOLINUXSTREAMSPI										();		
-		
-		bool									        Open																();				
-		bool									        Close																();				
-		bool													TransferBuffer											(XBYTE* bufferread, XBYTE* bufferwrite, XDWORD size);
+  public:
+                                  DIOLINUXSTREAMSPI                   ();
+    virtual                      ~DIOLINUXSTREAMSPI                   ();
 
-		virtual void									Sleep																(int count);
-  
-	private:
-		
-		void													Clean																();
+    bool                          Open                                ();
+    bool                          Close                               ();
+    bool                          TransferBuffer                      (XBYTE* bufferread, XBYTE* bufferwrite, XDWORD size);
 
-		int														handle;
+    virtual void                  Sleep                               (int count);
+
+  private:
+
+    void                          Clean                               ();
+
+    int                           handle;
 };
 
 

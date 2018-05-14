@@ -1,17 +1,17 @@
 /*------------------------------------------------------------------------------------------
-//	SQLSQLITEDATABASE.H
-*/	
-/**	
-// \class 
-//   
-//  SQLite database concrete class
-//   
-//	@author	 Diego Martinez Ruiz de Gaona
+//  SQLSQLITEDATABASE.H
+*/
+/**
+// \class
 //
-//	Date Of Creation	: 10/08/2015 12:26:06
-//	Last Modification	:	
-*/	
-/*	GEN  Copyright (C).  All right reserved.
+//  SQLite database concrete class
+//
+//  @author  Diego Martinez Ruiz de Gaona
+//
+//  Date Of Creation  : 10/08/2015 12:26:06
+//  Last Modification :
+*/
+/*  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
 
 
@@ -23,13 +23,13 @@
 #ifndef SQLITE_CORE
 #define SQLITE_CORE
 #endif
-	
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
-	
-	
+
+
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
-	
-	
+
+
 /*---- CLASS -----------------------------------------------------------------------------*/
 
 /*---- INCLUDES --------------------------------------------------------------------------*/
@@ -39,63 +39,67 @@
 #include "DBSQLBase.h"
 #include "DBSQLDatabase.h"
 
+#include "SQLSQLITEQuery.h"
+#include "SQLSQLITEConnection.h"
+
 
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
-	
 
-	
+
+
 /*---- CLASS -----------------------------------------------------------------------------*/
-class SQLSQLITEQUERY;
-class SQLSQLITECONNECTION;
+
+//class SQLSQLITEQUERY;
+//class SQLSQLITECONNECTION;
 
 
 class SQLSQLITEDATABASE : public DBSQLDATABASE
 {
-	public:
-	
-		friend class										SQLSQLITECONNECTION;
-		friend class										SQLSQLITEQUERY;
+  public:
 
-	
-																		SQLSQLITEDATABASE				() : DBSQLDATABASE()
-																		{		
-																			Clean();
-																
-																			type	=	DBSQLDATABASE_FLAGS_SQL | DBSQLDATABASE_FLAGS_TRANSACTIONAL;															
-																		}
+    friend class                    SQLSQLITECONNECTION;
+    friend class                    SQLSQLITEQUERY;
 
-		virtual													~SQLSQLITEDATABASE			()															{ Clean();																				}
-		virtual	XCHAR*									GetName									()															{ return __L("SQLITE");														}
 
-		virtual	bool										Rollback								(XCHAR* savepointname = NULL);
-		virtual	bool										Savepoint								(XCHAR* savepoint);
-		virtual	bool										ReleaseSavepoint				(XCHAR* savepoint);
-		virtual	bool										Transaction							();
-		virtual	bool										Commit									();
-		virtual	DBSQLQUERY*							CreateQuery							();
-		virtual DBSQLCONNECTION*				CreateConnection				();
-		virtual bool										GetTables								();
+                                    SQLSQLITEDATABASE       () : DBSQLDATABASE()
+                                    {
+                                      Clean();
 
-		virtual	DBSQLDATABASE_ENCODING	GetDatabaseEncoding			();
-		virtual	bool										SetDatabaseEncoding			(DBSQLDATABASE_ENCODING encodingtouse);
+                                      type  = DBSQLDATABASE_FLAGS_SQL | DBSQLDATABASE_FLAGS_TRANSACTIONAL;
+                                    }
 
-	protected:
-		
-		sqlite3*												sqlite3database;	
-		
-	private:
+    virtual                         ~SQLSQLITEDATABASE      ()                              { Clean();                                        }
+    virtual XCHAR*                  GetName                 ()                              { return __L("SQLITE");                           }
 
-		void														Clean										()
-																		{
-																			type						=	DBSQLDATABASE_FLAGS_NONE;
-																			connection			=	NULL;
-																			sqlite3database	=	NULL;
-																		}
+    virtual bool                    Rollback                (XCHAR* savepointname = NULL);
+    virtual bool                    Savepoint               (XCHAR* savepoint);
+    virtual bool                    ReleaseSavepoint        (XCHAR* savepoint);
+    virtual bool                    Transaction             ();
+    virtual bool                    Commit                  ();
+    virtual DBSQLQUERY*             CreateQuery             ();
+    virtual DBSQLCONNECTION*        CreateConnection        ();
+    virtual bool                    GetTables               ();
+
+    virtual DBSQLDATABASE_ENCODING  GetDatabaseEncoding     ();
+    virtual bool                    SetDatabaseEncoding     (DBSQLDATABASE_ENCODING encodingtouse);
+
+  protected:
+
+    sqlite3*                        sqlite3database;
+
+  private:
+
+    void                            Clean                   ()
+                                    {
+                                      type            = DBSQLDATABASE_FLAGS_NONE;
+                                      connection      = NULL;
+                                      sqlite3database = NULL;
+                                    }
 };
-	
-	
+
+
 /*---- INLINE FUNCTIONS ------------------------------------------------------------------*/
-	
+
 #endif
 
 

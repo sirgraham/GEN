@@ -1,18 +1,18 @@
 /*------------------------------------------------------------------------------------------
-//	DIOWEBPAGEHTMLCREATOR.CPP
-//	
-//	DIO Web Page HTML Creator class
-//   
-//	Author						: Abraham J. Velez
-//	Date Of Creation	: 08/01/2014 17:18:15
-//	Last Mofificacion	:	
-//	
-//	GEN  Copyright (C).  All right reserved.
+//  DIOWEBPAGEHTMLCREATOR.CPP
+//
+//  DIO Web Page HTML Creator class
+//
+//  Author            : Abraham J. Velez
+//  Date Of Creation  : 08/01/2014 17:18:15
+//  Last Mofificacion :
+//
+//  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
-	
+
 #include "XFactory.h"
 #include "XFileTXT.h"
 #include "XBuffer.h"
@@ -23,35 +23,35 @@
 #include "XDebug.h"
 
 #include "XMemory.h"
-	
+
 /*---- GENERAL VARIABLE ------------------------------------------------------------------*/
-	
-	
+
+
 /*---- CLASS MEMBERS ---------------------------------------------------------------------*/
 
 
 
 /*-------------------------------------------------------------------
 //  DIOWEBPAGEHTMLCREATOR::DIOWEBPAGEHTMLCREATOR
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			07/02/2014 11:00:26
-//	
-//	@return 			
-//  @param				xpublisher : 
-//  @param				connexion : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      07/02/2014 11:00:26
+//
+//  @return
+//  @param        xpublisher :
+//  @param        connexion :
 */
 /*-----------------------------------------------------------------*/
 DIOWEBPAGEHTMLCREATOR::DIOWEBPAGEHTMLCREATOR(DIOWEBSERVER_CONNEXION* connexion) : XSTRING()
 {
-	Clean();
-	
-	this->connexion		 = connexion;
+  Clean();
 
-	RegisterEvent(DIOWEBPAGEHTMLCREATORXEVENTTYPE_XTAGFOUND);
+  this->connexion    = connexion;
+
+  RegisterEvent(DIOWEBPAGEHTMLCREATORXEVENTTYPE_XTAGFOUND);
 }
 
 
@@ -60,19 +60,19 @@ DIOWEBPAGEHTMLCREATOR::DIOWEBPAGEHTMLCREATOR(DIOWEBSERVER_CONNEXION* connexion) 
 //-------------------------------------------------------------------
 //  DIOWEBPAGEHTMLCREATOR::~DIOWEBPAGEHTMLCREATOR
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/02/2007 17:46:41
-//	
-//	@return			 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      02/02/2007 17:46:41
+//
+//  @return
+//  */
 //-------------------------------------------------------------------
 DIOWEBPAGEHTMLCREATOR::~DIOWEBPAGEHTMLCREATOR()
-{	
-	DeRegisterEvent(DIOWEBPAGEHTMLCREATORXEVENTTYPE_XTAGFOUND);
+{
+  DeRegisterEvent(DIOWEBPAGEHTMLCREATORXEVENTTYPE_XTAGFOUND);
 
-	Clean();
+  Clean();
 }
 
 
@@ -81,111 +81,111 @@ DIOWEBPAGEHTMLCREATOR::~DIOWEBPAGEHTMLCREATOR()
 
 /*-------------------------------------------------------------------
 //  DIOWEBPAGEHTMLCREATOR::Printf
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			18/01/2011 11:24:11
-//	
-//	@return				
-bool : 
-//	@param				mask : 
-//  @param				... : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      18/01/2011 11:24:11
+//
+//  @return
+bool :
+//  @param        mask :
+//  @param        ... :
 */
 /*-----------------------------------------------------------------*/
 bool DIOWEBPAGEHTMLCREATOR::Printf(XCHAR* mask,...)
 {
-	XSTRING outstring;
+  XSTRING outstring;
 
-	va_list arg;
-			
-	va_start(arg, mask);
-	
-	outstring.FormatArg(mask, &arg, true);
-		
-	va_end(arg);
+  va_list arg;
+
+  va_start(arg, mask);
+
+  outstring.FormatArg(mask, &arg, true);
+
+  va_end(arg);
 
 
   //--------------------------------------------------
   // To See better the sorce code of WEB page
-		
-	if(connexion)
-		{
-			connexion->Send(outstring.Get());
-			#ifdef XDEBUG
-			//connexion->Send(__L("\n"));
-			#endif
-		}
-	 else
-	  {
-			Add(outstring.Get());
-			#ifdef XDEBUG
-			//Add(__L("\n"));
-			#endif
-		}
-	
-	return true;
+
+  if(connexion)
+    {
+      connexion->Send(outstring.Get());
+      #ifdef XDEBUG
+      //connexion->Send(__L("\n"));
+      #endif
+    }
+   else
+    {
+      Add(outstring.Get());
+      #ifdef XDEBUG
+      //Add(__L("\n"));
+      #endif
+    }
+
+  return true;
 }
 
 
 /*-------------------------------------------------------------------
-//	DIOWEBPAGEHTMLCREATOR::Print
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			11/11/2015 15:56:45
-//	
-//	@return 			bool : 
+//  DIOWEBPAGEHTMLCREATOR::Print
+*/
+/**
 //
-//  @param				text : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      11/11/2015 15:56:45
+//
+//  @return       bool :
+//
+//  @param        text :
 */
 /*-----------------------------------------------------------------*/
 bool DIOWEBPAGEHTMLCREATOR::Print(XCHAR* text)
-{		
-	if(connexion)
-		{
-			connexion->Send(text);
-			#ifdef XDEBUG
-			//connexion->Send(__L("\n"));
-			#endif
-		}
-	 else
-	  {
-			Add(text);
-			#ifdef XDEBUG
-			//Add(__L("\n"));
-			#endif
-		}
-	
-	return true;
+{
+  if(connexion)
+    {
+      connexion->Send(text);
+      #ifdef XDEBUG
+      //connexion->Send(__L("\n"));
+      #endif
+    }
+   else
+    {
+      Add(text);
+      #ifdef XDEBUG
+      //Add(__L("\n"));
+      #endif
+    }
+
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIOWEBPAGEHTMLCREATOR::Table_Ini
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			29/11/2013 13:11:53
-//	
-//	@return 			bool : 
-//	@param				border : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      29/11/2013 13:11:53
+//
+//  @return       bool :
+//  @param        border :
 */
 /*-----------------------------------------------------------------*/
 bool DIOWEBPAGEHTMLCREATOR::Table_Ini(int border)
 {
-	this->tableborder = border;
+  this->tableborder = border;
 
-	Printf(__L("<table style=\"border-collapse: collapse; font-family: Arial; font-size: 0.85em;\">"), border);	
-	 
-	return true;
+  Printf(__L("<table style=\"border-collapse: collapse; font-family: Arial; font-size: 0.85em;\">"), border);
+
+  return true;
 }
 
 
@@ -193,122 +193,122 @@ bool DIOWEBPAGEHTMLCREATOR::Table_Ini(int border)
 
 /*-------------------------------------------------------------------
 //  DIOWEBPAGEHTMLCREATOR::Table_Line
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			29/11/2013 12:07:57
-//	
-//	@return 			bool : 
-//	@param				columns : 
-//  @param				... : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      29/11/2013 12:07:57
+//
+//  @return       bool :
+//  @param        columns :
+//  @param        ... :
 */
 /*-----------------------------------------------------------------*/
 bool DIOWEBPAGEHTMLCREATOR::Table_Line(int columns, ...)
 {
-	va_list arg;
+  va_list arg;
 
-	va_start(arg,columns); 
-	
-	Printf(__L("<tr>"));
+  va_start(arg,columns);
 
-	for(int c=0;c<columns;c++)
-		{		
-			int													width = va_arg(arg, int);
-			DIOWEBPAGEHTMLCREATORALIGN	align = (DIOWEBPAGEHTMLCREATORALIGN)va_arg(arg, int);
-			XCHAR*											text  = va_arg(arg, XCHAR*);
-			XSTRING											alignstr;				
-			XSTRING											textrev;
+  Printf(__L("<tr>"));
 
-			textrev.FormatArg(text, &arg, true);
+  for(int c=0;c<columns;c++)
+    {
+      int                         width = va_arg(arg, int);
+      DIOWEBPAGEHTMLCREATORALIGN  align = (DIOWEBPAGEHTMLCREATORALIGN)va_arg(arg, int);
+      XCHAR*                      text  = va_arg(arg, XCHAR*);
+      XSTRING                     alignstr;
+      XSTRING                     textrev;
 
-			alignstr.Empty();
+      textrev.FormatArg(text, &arg, true);
 
-			switch(align)
-				{
-					case DIOWEBPAGEHTMLCREATORALIGN_NONE	 : alignstr = __L("");				break;
-					case DIOWEBPAGEHTMLCREATORALIGN_LEFT   : alignstr = __L("left");	  break;
-					case DIOWEBPAGEHTMLCREATORALIGN_RIGHT  : alignstr = __L("right");		break;
-					case DIOWEBPAGEHTMLCREATORALIGN_CENTER : alignstr = __L("center");  break;
-				}			
+      alignstr.Empty();
 
-			Printf(__L("<td style=\"border: %dpx solid silver;\" width=\"%d\" align=\"%s\">%s</td>"), tableborder, width, alignstr.Get(), textrev.Get());
-				
-		}
-	
-	Printf(__L("</tr>"));	
+      switch(align)
+        {
+          case DIOWEBPAGEHTMLCREATORALIGN_NONE   : alignstr = __L("");        break;
+          case DIOWEBPAGEHTMLCREATORALIGN_LEFT   : alignstr = __L("left");    break;
+          case DIOWEBPAGEHTMLCREATORALIGN_RIGHT  : alignstr = __L("right");   break;
+          case DIOWEBPAGEHTMLCREATORALIGN_CENTER : alignstr = __L("center");  break;
+        }
 
-	va_end(arg);
+      Printf(__L("<td style=\"border: %dpx solid silver;\" width=\"%d\" align=\"%s\">%s</td>"), tableborder, width, alignstr.Get(), textrev.Get());
 
-	return true;
+    }
+
+  Printf(__L("</tr>"));
+
+  va_end(arg);
+
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIOWEBPAGEHTMLCREATOR::Table_PrintLine
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			29/11/2013 12:07:38
-//	
-//	@return 			bool : 
-//	@param				colorbackground : 
-//  @param				columns : 
-//  @param				... : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      29/11/2013 12:07:38
+//
+//  @return       bool :
+//  @param        colorbackground :
+//  @param        columns :
+//  @param        ... :
 */
 /*-----------------------------------------------------------------*/
 bool DIOWEBPAGEHTMLCREATOR::Table_Line(XCHAR* colorbackground, int columns, ...)
 {
-	va_list	arg;
-	
-	va_start(arg, columns); 
+  va_list arg;
 
-	XSTRING tr;
-	XSTRING color;
-	color = colorbackground;
+  va_start(arg, columns);
 
-	if(!color.IsEmpty())
-		{
-			tr = __L("<tr bgcolor=\"");
-			tr += colorbackground;
-			tr += "\">";
-		}
-	 else tr = __L("<tr>");
-				
-	Printf(tr.Get());
+  XSTRING tr;
+  XSTRING color;
+  color = colorbackground;
 
-	for(int c=0;c<columns;c++)
-		{		
-			int													width = va_arg(arg, int);
-			DIOWEBPAGEHTMLCREATORALIGN	align = (DIOWEBPAGEHTMLCREATORALIGN)va_arg(arg, int);
-			XCHAR*											text  = va_arg(arg, XCHAR*);
-			XSTRING											alignstr;
-			XSTRING											textrev;
+  if(!color.IsEmpty())
+    {
+      tr = __L("<tr bgcolor=\"");
+      tr += colorbackground;
+      tr += "\">";
+    }
+   else tr = __L("<tr>");
 
-			textrev.FormatArg(text, &arg, true);
+  Printf(tr.Get());
 
-			alignstr.Empty();
+  for(int c=0;c<columns;c++)
+    {
+      int                         width = va_arg(arg, int);
+      DIOWEBPAGEHTMLCREATORALIGN  align = (DIOWEBPAGEHTMLCREATORALIGN)va_arg(arg, int);
+      XCHAR*                      text  = va_arg(arg, XCHAR*);
+      XSTRING                     alignstr;
+      XSTRING                     textrev;
 
-			switch(align)
-				{
-					case DIOWEBPAGEHTMLCREATORALIGN_NONE	 : alignstr = __L("");				break;
-					case DIOWEBPAGEHTMLCREATORALIGN_LEFT	 : alignstr = __L("left");	  break;
-					case DIOWEBPAGEHTMLCREATORALIGN_RIGHT  : alignstr = __L("right");		break;
-					case DIOWEBPAGEHTMLCREATORALIGN_CENTER : alignstr = __L("center");  break;
-				}			
+      textrev.FormatArg(text, &arg, true);
 
-			Printf(__L("<td style=\"border: %dpx solid silver;\" width=\"%d\" align=\"%s\">%s</td>"), tableborder, width, alignstr.Get(), textrev.Get());									
-		}
-	
-	Printf(__L("</tr>"));	
+      alignstr.Empty();
 
-	va_end(arg);
+      switch(align)
+        {
+          case DIOWEBPAGEHTMLCREATORALIGN_NONE   : alignstr = __L("");        break;
+          case DIOWEBPAGEHTMLCREATORALIGN_LEFT   : alignstr = __L("left");    break;
+          case DIOWEBPAGEHTMLCREATORALIGN_RIGHT  : alignstr = __L("right");   break;
+          case DIOWEBPAGEHTMLCREATORALIGN_CENTER : alignstr = __L("center");  break;
+        }
 
-	return true;
+      Printf(__L("<td style=\"border: %dpx solid silver;\" width=\"%d\" align=\"%s\">%s</td>"), tableborder, width, alignstr.Get(), textrev.Get());
+    }
+
+  Printf(__L("</tr>"));
+
+  va_end(arg);
+
+  return true;
 }
 
 
@@ -316,76 +316,76 @@ bool DIOWEBPAGEHTMLCREATOR::Table_Line(XCHAR* colorbackground, int columns, ...)
 
 /*-------------------------------------------------------------------
 //  DIOWEBPAGEHTMLCREATOR::Table_LineColor
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			03/02/2014 17:49:35
-//	
-//	@return 			bool : 
-//	@param				columns : 
-//  @param				... : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      03/02/2014 17:49:35
+//
+//  @return       bool :
+//  @param        columns :
+//  @param        ... :
 */
 /*-----------------------------------------------------------------*/
 bool DIOWEBPAGEHTMLCREATOR::Table_LineColor(int columns, ...)
 {
-	va_list arg;
+  va_list arg;
 
-	va_start(arg,columns); 
-	
-	Printf(__L("<tr>"));
+  va_start(arg,columns);
 
-	for(int c=0;c<columns;c++)
-		{		
-			int													width			= va_arg(arg, int);
-			XCHAR*											colortxt	= va_arg(arg, XCHAR*);
-			XCHAR*											colorbkg	= va_arg(arg, XCHAR*);
-			DIOWEBPAGEHTMLCREATORALIGN	align			= (DIOWEBPAGEHTMLCREATORALIGN)va_arg(arg, int);
-			XCHAR*											text			= va_arg(arg, XCHAR*);
-			XSTRING											alignstr;
-			XSTRING											textrev;
+  Printf(__L("<tr>"));
 
-			textrev.FormatArg(text, &arg, true);
+  for(int c=0;c<columns;c++)
+    {
+      int                         width     = va_arg(arg, int);
+      XCHAR*                      colortxt  = va_arg(arg, XCHAR*);
+      XCHAR*                      colorbkg  = va_arg(arg, XCHAR*);
+      DIOWEBPAGEHTMLCREATORALIGN  align     = (DIOWEBPAGEHTMLCREATORALIGN)va_arg(arg, int);
+      XCHAR*                      text      = va_arg(arg, XCHAR*);
+      XSTRING                     alignstr;
+      XSTRING                     textrev;
 
-			alignstr.Empty();
+      textrev.FormatArg(text, &arg, true);
 
-			switch(align)
-				{
-					case DIOWEBPAGEHTMLCREATORALIGN_NONE	 : alignstr = __L("");				break;
-					case DIOWEBPAGEHTMLCREATORALIGN_LEFT   : alignstr = __L("left");	  break;
-					case DIOWEBPAGEHTMLCREATORALIGN_RIGHT  : alignstr = __L("right");		break;
-					case DIOWEBPAGEHTMLCREATORALIGN_CENTER : alignstr = __L("center");  break;
-				}			
-		
-			Printf(__L("<td bgcolor=\"%s\" style=\"border: %dpx solid silver;\" width=\"%d\" align=\"%s\"><font color=\"%s\">%s</font></td>"), colorbkg, tableborder, width, alignstr.Get(), colortxt, textrev.Get());										
-		}
-	
-	Printf(__L("</tr>"));	
+      alignstr.Empty();
 
-	va_end(arg);
+      switch(align)
+        {
+          case DIOWEBPAGEHTMLCREATORALIGN_NONE   : alignstr = __L("");        break;
+          case DIOWEBPAGEHTMLCREATORALIGN_LEFT   : alignstr = __L("left");    break;
+          case DIOWEBPAGEHTMLCREATORALIGN_RIGHT  : alignstr = __L("right");   break;
+          case DIOWEBPAGEHTMLCREATORALIGN_CENTER : alignstr = __L("center");  break;
+        }
 
-	return true;
+      Printf(__L("<td bgcolor=\"%s\" style=\"border: %dpx solid silver;\" width=\"%d\" align=\"%s\"><font color=\"%s\">%s</font></td>"), colorbkg, tableborder, width, alignstr.Get(), colortxt, textrev.Get());
+    }
+
+  Printf(__L("</tr>"));
+
+  va_end(arg);
+
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIOWEBPAGEHTMLCREATOR::Table_End
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			29/11/2013 12:07:34
-//	
-//	@return 			bool : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      29/11/2013 12:07:34
+//
+//  @return       bool :
+//  */
 /*-----------------------------------------------------------------*/
 bool DIOWEBPAGEHTMLCREATOR::Table_End()
 {
-	Printf(__L("</table>"));
-	return true;
+  Printf(__L("</table>"));
+  return true;
 }
 
 
@@ -393,31 +393,31 @@ bool DIOWEBPAGEHTMLCREATOR::Table_End()
 
 /*-------------------------------------------------------------------
 //  DIOWEBPAGEHTMLCREATOR::AddAutoRefresh
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			08/01/2014 17:47:05
-//	
-//	@return 			bool : 
-//	@param				refresh : 
-//  @param				url : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      08/01/2014 17:47:05
+//
+//  @return       bool :
+//  @param        refresh :
+//  @param        url :
 */
 /*-----------------------------------------------------------------*/
 bool DIOWEBPAGEHTMLCREATOR::AddAutoRefresh(int refresh, XSTRING* url)
 {
-	if(refresh<0) return false;	
+  if(refresh<0) return false;
 
-	XSTRING meta;
-	
-	if(url)
-				meta.Format(__L("<META http-equiv=\"refresh\" content=\"%d;URL=%s\"/>"), refresh, url->Get());		
-	 else meta.Format(__L("<META http-equiv=\"refresh\" content=\"%d;\"/>")			 , refresh);	
-	
-	Add(meta.Get());
-	
-	return true;
+  XSTRING meta;
+
+  if(url)
+        meta.Format(__L("<META http-equiv=\"refresh\" content=\"%d;URL=%s\"/>"), refresh, url->Get());
+   else meta.Format(__L("<META http-equiv=\"refresh\" content=\"%d;\"/>")      , refresh);
+
+  Add(meta.Get());
+
+  return true;
 }
 
 
@@ -425,30 +425,30 @@ bool DIOWEBPAGEHTMLCREATOR::AddAutoRefresh(int refresh, XSTRING* url)
 
 /*-------------------------------------------------------------------
 //  DIOWEBPAGEHTMLCREATOR::AddFile
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			10/01/2014 9:26:03
-//	
-//	@return 			bool : 
-//	@param				xpath : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      10/01/2014 9:26:03
+//
+//  @return       bool :
+//  @param        xpath :
 */
 /*-----------------------------------------------------------------*/
 bool DIOWEBPAGEHTMLCREATOR::AddFile(XPATH& xpath)
 {
-  XFILETXT filetxt;      
+  XFILETXT filetxt;
   bool     status = true;
   bool     intag  = false;
 
   if(!filetxt.Open(xpath)) return false;
 
   if(filetxt.ReadAllFile())
-    { 
-			Empty();
+    {
+      Empty();
 
-      XBUFFER LFdata;  
+      XBUFFER LFdata;
 
       filetxt.GetLF(LFdata);
 
@@ -456,59 +456,59 @@ bool DIOWEBPAGEHTMLCREATOR::AddFile(XPATH& xpath)
         {
           XSTRING* line = filetxt.GetLine(c);
           if(line)
-            { 
+            {
               XSTRING inioutput;
               XSTRING endoutput;
               int     result;
-                                    
+
               result = CheckXTAG(line, intag, inioutput, endoutput);
               switch(result)
                 {
-                  case DIOWEBPAGEHTMLCREATORTAGXENGINESTATUS_NOTFOUND		: { if(!line->IsEmpty())
-																																							{
-																																								if(Add(*line)) Add(filetxt.GetLF()->Get());                      																																									
-																																							}                                                                             
-																																					}
-																																					break;
+                  case DIOWEBPAGEHTMLCREATORTAGXENGINESTATUS_NOTFOUND   : { if(!line->IsEmpty())
+                                                                              {
+                                                                                if(Add(*line)) Add(filetxt.GetLF()->Get());
+                                                                              }
+                                                                          }
+                                                                          break;
 
-									case DIOWEBPAGEHTMLCREATORTAGXENGINESTATUS_FOUNDEND		: { if(!inioutput.IsEmpty())
-																																							{
-																																								if(Add(inioutput)) Add(filetxt.GetLF()->Get()); 																																								
-																																							}      
+                  case DIOWEBPAGEHTMLCREATORTAGXENGINESTATUS_FOUNDEND   : { if(!inioutput.IsEmpty())
+                                                                              {
+                                                                                if(Add(inioutput)) Add(filetxt.GetLF()->Get());
+                                                                              }
 
-																																						DIOWEBPAGEHTMLCREATORXEVENT xevent(this, DIOWEBPAGEHTMLCREATORXEVENTTYPE_XTAGFOUND);							
-	
-																																						xevent.SetPageHTMLCreator(this);
-																																						xevent.SetXTAG(&lastXTAG);
-	
-																																						PostEvent(&xevent);
-																																						
-																																						if(!endoutput.IsEmpty())
-																																							{
-																																								if(Add(endoutput)) Add(filetxt.GetLF()->Get()); 																																								
-																																							}              
-																																					}	  
-																																					break;
+                                                                            DIOWEBPAGEHTMLCREATORXEVENT xevent(this, DIOWEBPAGEHTMLCREATORXEVENTTYPE_XTAGFOUND);
+
+                                                                            xevent.SetPageHTMLCreator(this);
+                                                                            xevent.SetXTAG(&lastXTAG);
+
+                                                                            PostEvent(&xevent);
+
+                                                                            if(!endoutput.IsEmpty())
+                                                                              {
+                                                                                if(Add(endoutput)) Add(filetxt.GetLF()->Get());
+                                                                              }
+                                                                          }
+                                                                          break;
 
                   case DIOWEBPAGEHTMLCREATORTAGXENGINESTATUS_FOUNDNOTEND: { if(!inioutput.IsEmpty())
-																																							{
-																																								if(Add(inioutput)) Add(filetxt.GetLF()->Get()); 																																								
-																																							} 
+                                                                              {
+                                                                                if(Add(inioutput)) Add(filetxt.GetLF()->Get());
+                                                                              }
 
-																																						if(!endoutput.IsEmpty())
-																																							{
-																																								if(Add(endoutput)) Add(filetxt.GetLF()->Get()); 																																								
-																																							}      
-																																					}
-																																					break; 
+                                                                            if(!endoutput.IsEmpty())
+                                                                              {
+                                                                                if(Add(endoutput)) Add(filetxt.GetLF()->Get());
+                                                                              }
+                                                                          }
+                                                                          break;
                 }
             }
         }
-		}
+    }
 
-  filetxt.Close(); 
+  filetxt.Close();
 
-	return status;
+  return status;
 }
 
 
@@ -517,23 +517,23 @@ bool DIOWEBPAGEHTMLCREATOR::AddFile(XPATH& xpath)
 
 /*-------------------------------------------------------------------
 //  DIOWEBPAGEHTMLCREATOR::CheckXTAG
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			09/01/2014 9:21:56
-//	
-//	@return 			DIOWEBPAGEHTMLCREATORTAGXENGINESTATUS : 
-//	@param				originalline : 
-//  @param				intag : 
-//  @param				inioutputline : 
-//  @param				endoutputline : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      09/01/2014 9:21:56
+//
+//  @return       DIOWEBPAGEHTMLCREATORTAGXENGINESTATUS :
+//  @param        originalline :
+//  @param        intag :
+//  @param        inioutputline :
+//  @param        endoutputline :
 */
 /*-----------------------------------------------------------------*/
 DIOWEBPAGEHTMLCREATORTAGXENGINESTATUS DIOWEBPAGEHTMLCREATOR::CheckXTAG(XSTRING* originalline,bool& intag, XSTRING& inioutputline,XSTRING& endoutputline)
 {
-  int index[3];   
+  int index[3];
 
   inioutputline.Empty();
   endoutputline.Empty();
@@ -555,14 +555,14 @@ DIOWEBPAGEHTMLCREATORTAGXENGINESTATUS DIOWEBPAGEHTMLCREATOR::CheckXTAG(XSTRING* 
                 {
                   XSTRING endline;
 
-                  originalline->Copy(index[1]+3,index[2],lastXTAG);                  
+                  originalline->Copy(index[1]+3,index[2],lastXTAG);
                   originalline->Copy(index[2]+2,endoutputline);
-                  
+
                   return DIOWEBPAGEHTMLCREATORTAGXENGINESTATUS_FOUNDEND;
-                  
-                } 
-               else 
-                { 
+
+                }
+               else
+                {
                   originalline->Copy(index[1]+3,lastXTAG);
                   intag = true;
                   return  DIOWEBPAGEHTMLCREATORTAGXENGINESTATUS_FOUNDNOTEND;
@@ -572,12 +572,12 @@ DIOWEBPAGEHTMLCREATORTAGXENGINESTATUS DIOWEBPAGEHTMLCREATOR::CheckXTAG(XSTRING* 
 
       inioutputline = originalline->Get();
     }
-   else 
-    {    
+   else
+    {
       index[0] = originalline->Find(__L("?>"),true);
       if(index[0]!=XSTRING_NOTFOUND)
-        {               
-          XSTRING TAGstring;     
+        {
+          XSTRING TAGstring;
 
           originalline->Copy(0,index[0],TAGstring);
           lastXTAG+=TAGstring.Get();
@@ -588,9 +588,9 @@ DIOWEBPAGEHTMLCREATORTAGXENGINESTATUS DIOWEBPAGEHTMLCREATOR::CheckXTAG(XSTRING* 
 
           return DIOWEBPAGEHTMLCREATORTAGXENGINESTATUS_FOUNDEND;
         }
-        
+
       lastXTAG += originalline->Get();
-      
+
       inioutputline.Empty();
       endoutputline.Empty();
 

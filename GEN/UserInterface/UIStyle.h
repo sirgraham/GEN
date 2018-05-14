@@ -1,29 +1,29 @@
 /*------------------------------------------------------------------------------------------
-//	UISTYLE.H
-*/	
-/**	
-// \file 
-//   
-//  basic UI drawer
-//   
-//	@author	 Imanol Celaya Ruiz de Alegria
+//  UISTYLE.H
+*/
+/**
+// \file
 //
-//	Date Of Creation	: 08/08/2016 11:41:08
-//	Last Modification	:	
-*/	
-/*	GEN  Copyright (C).  All right reserved.
+//  basic UI drawer
+//
+//  @author  Imanol Celaya Ruiz de Alegria
+//
+//  Date Of Creation  : 08/08/2016 11:41:08
+//  Last Modification :
+*/
+/*  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
+
 #ifndef _UISTYLE_H_
 #define _UISTYLE_H_
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
-	
-	
+
+
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
-	
-	
+
+
 /*---- CLASS -----------------------------------------------------------------------------*/
 class UIWIDGETCONTAINER;
 class UIMANAGER;
@@ -32,32 +32,32 @@ class UISTYLE
 {
 public:
 
-																							UISTYLE																				()
-																							{
-																								Clean();
-																							}
+                                              UISTYLE                                       ()
+                                              {
+                                                Clean();
+                                              }
 
-	virtual																		 ~UISTYLE																				()
-																							{
-																								Clean();
-																							}
+  virtual                                    ~UISTYLE                                       ()
+                                              {
+                                                Clean();
+                                              }
 
-	virtual bool																Draw																					(UIWIDGETCONTAINER* widget) = 0;
+  virtual bool                                Draw                                          (UIWIDGETCONTAINER* widget) = 0;
 
-	void																				SetUIManager																	(UIMANAGER* uimanager)													{ this->uimanager = uimanager;	}
-	UIMANAGER*																	GetUIManager																	()																							{ return this->uimanager;				}
+  void                                        SetUIManager                                  (UIMANAGER* uimanager)                          { this->uimanager = uimanager;  }
+  UIMANAGER*                                  GetUIManager                                  ()                                              { return this->uimanager;       }
 
 protected:
-	UIMANAGER*																	uimanager;
+  UIMANAGER*                                  uimanager;
 private:
-	void																				Clean																					()
-																							{
-																								uimanager = NULL;
-																							}
+  void                                        Clean                                         ()
+                                              {
+                                                uimanager = NULL;
+                                              }
 };
-	
-	
+
+
 /*---- INLINE FUNCTIONS ------------------------------------------------------------------*/
-	
+
 #endif
 

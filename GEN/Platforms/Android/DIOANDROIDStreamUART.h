@@ -1,22 +1,22 @@
 //------------------------------------------------------------------------------------------
-//	DIOANDROIDSTREAMUART.H
-//	
-/**	
-// \class 
-//   
+//  DIOANDROIDSTREAMUART.H
+//
+/**
+// \class
+//
 //  ANDROID Data IO Stream UART class
-//   
-//	@author	 Abraham J. Velez
-//	@version 02/01/2002
-*/	
-//	GEN  Copyright (C).  All right reserved.		 			 
+//
+//  @author  Abraham J. Velez
+//  @version 02/01/2002
+*/
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
+
 #ifndef _DIOANDROIDSTREAMUART_H_
 #define _DIOANDROIDSTREAMUART_H_
-	
+
 #if defined(DIO_ACTIVE) && defined(DIOUART_ACTIVE)
-	
+
 //---- INCLUDES ----------------------------------------------------------------------------
 
 #include "XBuffer.h"
@@ -28,25 +28,25 @@
 
 enum DIOANDROIDUARTFSMEVENTS
 {
-	DIOANDROIDUARTFSMEVENT_NONE							 = 0  ,
-	DIOANDROIDUARTFSMEVENT_CONNECTED							,
-	DIOANDROIDUARTFSMEVENT_WAITINGTOREAD					,
-	DIOANDROIDUARTFSMEVENT_DISCONNECTING					,		
+  DIOANDROIDUARTFSMEVENT_NONE              = 0  ,
+  DIOANDROIDUARTFSMEVENT_CONNECTED              ,
+  DIOANDROIDUARTFSMEVENT_WAITINGTOREAD          ,
+  DIOANDROIDUARTFSMEVENT_DISCONNECTING          ,
 
-	DIOANDROIDUART_LASTEVENT
+  DIOANDROIDUART_LASTEVENT
 
 };
 
 
 enum DIOANDROIDUARTFSMSTATES
 {
-	DIOANDROIDUARTFSMSTATE_NONE							 = 0  ,	
+  DIOANDROIDUARTFSMSTATE_NONE              = 0  ,
 
-	DIOANDROIDUARTFSMSTATE_CONNECTED							,
-	DIOANDROIDUARTFSMSTATE_WAITINGTOREAD					,
-	DIOANDROIDUARTFSMSTATE_DISCONNECTING					,		
+  DIOANDROIDUARTFSMSTATE_CONNECTED              ,
+  DIOANDROIDUARTFSMSTATE_WAITINGTOREAD          ,
+  DIOANDROIDUARTFSMSTATE_DISCONNECTING          ,
 
-	DIOANDROIDUART_LASTSTATE
+  DIOANDROIDUART_LASTSTATE
 };
 
 
@@ -59,46 +59,46 @@ class DIOFACTORY;
 class DIOSTREAMCONFIG;
 
 
-class DIOANDROIDSTREAMUART : public DIOSTREAMUART , public XFSMACHINE 
+class DIOANDROIDSTREAMUART : public DIOSTREAMUART , public XFSMACHINE
 {
-	public:
-													DIOANDROIDSTREAMUART						( );
-		virtual							 ~DIOANDROIDSTREAMUART						();
-		
-		DIOSTREAMSTATUS				GetConnectStatus							();		
-		
-		bool									Open													();	
-		
-		bool									Config												(XWORD mask = DIOSTREAMUARTMASK_ALL);	
+  public:
+                          DIOANDROIDSTREAMUART            ( );
+    virtual              ~DIOANDROIDSTREAMUART            ();
 
-		XDWORD								ReadDirect										(XBYTE* buffer, XDWORD size);
-		XDWORD								WriteDirect										(XBYTE* buffer, XDWORD size);
+    DIOSTREAMSTATUS       GetConnectStatus              ();
 
-		bool									Disconnect										()																{	return false; };
-		bool									Close													();	
-	
-		bool									GetCTS												();
-		bool									GetDSR												();
-		bool									GetRing												();
-		bool									GetRLSD												();
+    bool                  Open                          ();
 
-		bool									SetRTS												(bool on = true);
-		bool									SetDTR												(bool on = true); 								
+    bool                  Config                        (XWORD mask = DIOSTREAMUARTMASK_ALL);
 
-		bool									CleanBuffers									(); 											
-				
-	protected:
+    XDWORD                ReadDirect                    (XBYTE* buffer, XDWORD size);
+    XDWORD                WriteDirect                   (XBYTE* buffer, XDWORD size);
 
-    void									Clean													();
+    bool                  Disconnect                    ()                                { return false; };
+    bool                  Close                         ();
 
-		static void 					ThreadConnexion								(void* param);
-	
-		XTHREADCOLLECTED*			threadconnexion;
-    
-    int 									fd;
+    bool                  GetCTS                        ();
+    bool                  GetDSR                        ();
+    bool                  GetRing                       ();
+    bool                  GetRLSD                       ();
 
-		int										readtimeout;
-		int										writetimeout;
+    bool                  SetRTS                        (bool on = true);
+    bool                  SetDTR                        (bool on = true);
+
+    bool                  CleanBuffers                  ();
+
+  protected:
+
+    void                  Clean                         ();
+
+    static void           ThreadConnexion               (void* param);
+
+    XTHREADCOLLECTED*     threadconnexion;
+
+    int                   fd;
+
+    int                   readtimeout;
+    int                   writetimeout;
 };
 
 

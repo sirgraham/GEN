@@ -1,19 +1,19 @@
 //------------------------------------------------------------------------------------------
-//	DIOSTM32FXXXFACTORY.CPP
-//	
-//	STM32Fxxx utils platform factory class
-//   
-//	Author						: Abraham J. Velez
-//	Date Of Creation	: 08/08/2002
-//	Last Mofificacion	:	
-//	
-//	GEN  Copyright (C).  All right reserved.		 			 
+//  DIOSTM32FXXXFACTORY.CPP
+//
+//  STM32Fxxx utils platform factory class
+//
+//  Author            : Abraham J. Velez
+//  Date Of Creation  : 08/08/2002
+//  Last Mofificacion :
+//
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
 
 #ifdef DIO_ACTIVE
-	
+
 //---- INCLUDES ----------------------------------------------------------------------------
-	
+
 
 #ifdef DIOUART_ACTIVE
 #include "DIOStreamUARTConfig.h"
@@ -43,10 +43,10 @@
 
 #include "XMemory.h"
 
-	
+
 //---- GENERAL VARIABLE --------------------------------------------------------------------
-	
-	
+
+
 //---- CLASS MEMBERS -----------------------------------------------------------------------
 
 
@@ -55,54 +55,54 @@
 
 /*-------------------------------------------------------------------
 //  DIOSTM32FXXXFACTORY::CreateStreamIO
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			18/02/2013 23:19:55
-//	
-//	@return 			DIOSTREAM* : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      18/02/2013 23:19:55
+//
+//  @return       DIOSTREAM* :
 
- 
- 
-//  @param				config : 
+
+
+//  @param        config :
 */
 /*-----------------------------------------------------------------*/
 DIOSTREAM* DIOSTM32FXXXFACTORY::CreateStreamIO(DIOSTREAMCONFIG* config)
 {
-	if(!config) return NULL;
-	
-	DIOSTREAM* _class = NULL;
+  if(!config) return NULL;
 
-	switch(config->GetType())
-		{
-			case DIOSTREAMTYPE_UNKNOWN		: return NULL;
+  DIOSTREAM* _class = NULL;
 
-			#ifdef DIOUART_ACTIVE
-      case DIOSTREAMTYPE_UART				: _class = new DIOSTM32FXXXSTREAMUART();				break;
-			#endif
+  switch(config->GetType())
+    {
+      case DIOSTREAMTYPE_UNKNOWN    : return NULL;
 
-			#ifdef DIOUSB_ACTIVE	
-			case DIOSTREAMTYPE_USB				:	_class = new DIOSTM32FXXXSTREAMUSB();					break;
-			#endif
-			
-			#ifdef DIOSPI_ACTIVE
-			case DIOSTREAMTYPE_SPI				:	_class = new DIOSTM32FXXXSTREAMSPI();					break;
-			#endif
+      #ifdef DIOUART_ACTIVE
+      case DIOSTREAMTYPE_UART       : _class = new DIOSTM32FXXXSTREAMUART();        break;
+      #endif
 
-			#ifdef DIOI2C_ACTIVE
-			case DIOSTREAMTYPE_I2C				:	_class = new DIOSTM32FXXXSTREAMI2C();					break;																			
-			#endif     
-		}
-		
-  if(_class)													
-		{
-			_class->SetType(config->GetType());
-			_class->SetConfig(config);				
-		}
+      #ifdef DIOUSB_ACTIVE
+      case DIOSTREAMTYPE_USB        : _class = new DIOSTM32FXXXSTREAMUSB();         break;
+      #endif
 
-	
+      #ifdef DIOSPI_ACTIVE
+      case DIOSTREAMTYPE_SPI        : _class = new DIOSTM32FXXXSTREAMSPI();         break;
+      #endif
+
+      #ifdef DIOI2C_ACTIVE
+      case DIOSTREAMTYPE_I2C        : _class = new DIOSTM32FXXXSTREAMI2C();         break;
+      #endif
+    }
+
+  if(_class)
+    {
+      _class->SetType(config->GetType());
+      _class->SetConfig(config);
+    }
+
+
   return _class;
 }
 
@@ -112,20 +112,20 @@ DIOSTREAM* DIOSTM32FXXXFACTORY::CreateStreamIO(DIOSTREAMCONFIG* config)
 /*
 //
 //
-//	@author				Abraham J. Velez
-//	@version			03/09/2001 16:58:17
+//  @author       Abraham J. Velez
+//  @version      03/09/2001 16:58:17
 //
-//	@return 			bool :
-//	@param				streamio :
+//  @return       bool :
+//  @param        streamio :
 //
 */
 //-------------------------------------------------------------------
 bool DIOSTM32FXXXFACTORY::DeleteStreamIO(DIOSTREAM* diostream)
 {
-	if(!diostream) return false;
-	delete(diostream);
+  if(!diostream) return false;
+  delete(diostream);
 
-	return true;
+  return true;
 }
 
 
@@ -138,47 +138,47 @@ bool DIOSTM32FXXXFACTORY::DeleteStreamIO(DIOSTREAM* diostream)
 #ifdef DIOGPIO_ACTIVE
 /*-------------------------------------------------------------------
 //  DIOSTM32FXXXFACTORY::CreateGPIO
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			25/07/2009 07:27:51 p.m.
-//	
-//	@return				DIOGPIO* : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      25/07/2009 07:27:51 p.m.
+//
+//  @return       DIOGPIO* :
 
 */
 /*-----------------------------------------------------------------*/
 DIOGPIO* DIOSTM32FXXXFACTORY::CreateGPIO()
 {
-	DIOSTM32FXXXGPIO* _class = new DIOSTM32FXXXGPIO();
-	
-	return (DIOGPIO*)_class;																												
+  DIOSTM32FXXXGPIO* _class = new DIOSTM32FXXXGPIO();
+
+  return (DIOGPIO*)_class;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIOSTM32FXXXFACTORY::DeleteGPIO
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			25/07/2009 07:27:55 p.m.
-//	
-//	@return				bool : 
-//	@param				port : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      25/07/2009 07:27:55 p.m.
+//
+//  @return       bool :
+//  @param        port :
 */
 /*-----------------------------------------------------------------*/
 bool DIOSTM32FXXXFACTORY::DeleteGPIO(DIOGPIO* port)
 {
-	if(!port) return false;
+  if(!port) return false;
 
-	DIOSTM32FXXXGPIO* _port = (DIOSTM32FXXXGPIO*)port;	
-	delete _port;
-	
-	return true;
+  DIOSTM32FXXXGPIO* _port = (DIOSTM32FXXXGPIO*)port;
+  delete _port;
+
+  return true;
 }
 
 #endif

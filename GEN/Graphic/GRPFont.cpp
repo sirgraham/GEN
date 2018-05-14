@@ -1,19 +1,19 @@
 
 /*------------------------------------------------------------------------------------------
-//	GRPFONT.CPP
-//	
-//	Font 3D class
-//   
-//	Author						: Diego Martinez Ruiz de Gaona
-//	Date Of Creation	: 18/08/2014 12:41:59
-//	Last Modification	:	
-//	
-//	GEN  Copyright (C).  All right reserved.
+//  GRPFONT.CPP
+//
+//  Font 3D class
+//
+//  Author            : Diego Martinez Ruiz de Gaona
+//  Date Of Creation  : 18/08/2014 12:41:59
+//  Last Modification :
+//
+//  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
-	
+
 
 #include "GRPVector.h"
 #include "GRPObjectBuilder.h"
@@ -27,622 +27,622 @@
 #include "GRPScene.h"
 
 #include "XMemory.h"
-	
+
 /*---- GENERAL VARIABLE ------------------------------------------------------------------*/
-	
-	
+
+
 /*---- CLASS MEMBERS ---------------------------------------------------------------------*/
 
-	
+
 
 
 /*-------------------------------------------------------------------
-//	GRPFONT::GRPFONT
-*/	
-/**	
-//	
-//	Class Constructor GRPFONT
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			18/08/2014 12:44:23
-//	
+//  GRPFONT::GRPFONT
+*/
+/**
+//
+//  Class Constructor GRPFONT
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      18/08/2014 12:44:23
+//
 */
 /*-----------------------------------------------------------------*/
 GRPFONT::GRPFONT()
-{ 
-	Clean();																	
+{
+  Clean();
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	GRPFONT::~GRPFONT
-*/	
-/**	
-//	
-//	 Class Destructor GRPFONT
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			18/08/2014 12:44:29
-//	
+//  GRPFONT::~GRPFONT
+*/
+/**
+//
+//   Class Destructor GRPFONT
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      18/08/2014 12:44:29
+//
 */
 /*-----------------------------------------------------------------*/
 GRPFONT::~GRPFONT()
 {
-	shapes.DeleteElementContents();
-	shapes.DeleteAll();
+  shapes.DeleteElementContents();
+  shapes.DeleteAll();
 
-	letters.DeleteElementContents();
-	letters.DeleteAll();
+  letters.DeleteElementContents();
+  letters.DeleteAll();
 
-	if (fileTTF)	delete fileTTF;
+  if (fileTTF)  delete fileTTF;
 
-	Clean();
+  Clean();
 }
 
 
 
 /*-------------------------------------------------------------------
-//	GRPFONT::LoadTFF
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			18/08/2014 12:57:28
-//	
-//	@return 			GRPFILETTF* : 
+//  GRPFONT::LoadTFF
+*/
+/**
 //
- 
-//  @param				xpath : 
-//  @param				name : 
-//  @param				attributes : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      18/08/2014 12:57:28
+//
+//  @return       GRPFILETTF* :
+//
+
+//  @param        xpath :
+//  @param        name :
+//  @param        attributes :
 */
 /*-----------------------------------------------------------------*/
 bool GRPFONT::LoadTTF( XCHAR* xpath)
 {
-	fileTTF = new GRPFILETTF();
-	if(!fileTTF) 
-		{
-			lasterror = GRPFONTSTATUS_ERROR_FAILEDMEMORY;
-			return false;
-		}
+  fileTTF = new GRPFILETTF();
+  if(!fileTTF)
+    {
+      lasterror = GRPFONTSTATUS_ERROR_FAILEDMEMORY;
+      return false;
+    }
 
-	if (!fileTTF->LoadFile(xpath))
-		{
-			delete(fileTTF);
-			fileTTF		= NULL;
-			lasterror	= GRPFONTSTATUS_ERROR_FILENOTFOUND;
-			return false;
-		}				
+  if (!fileTTF->LoadFile(xpath))
+    {
+      delete(fileTTF);
+      fileTTF   = NULL;
+      lasterror = GRPFONTSTATUS_ERROR_FILENOTFOUND;
+      return false;
+    }
 
-	this->filename=xpath;
+  this->filename=xpath;
 
 
-	
-	XDWORD nGlyphs=fileTTF->GetInfo()->numGlyphs;
-	for(XDWORD e=0; e<(XDWORD)nGlyphs; e++)
-		{
-			GRPSHAPE* shape= fileTTF->GetGlyphShape(e);			
-			shapes.Add(e,shape);			
-		}
 
-	GetMetrics();
-	return true;
+  XDWORD nGlyphs=fileTTF->GetInfo()->numGlyphs;
+  for(XDWORD e=0; e<(XDWORD)nGlyphs; e++)
+    {
+      GRPSHAPE* shape= fileTTF->GetGlyphShape(e);
+      shapes.Add(e,shape);
+    }
+
+  GetMetrics();
+  return true;
 }
 
 /*-------------------------------------------------------------------
-//	 GRPFONT::SetAttributes
+//   GRPFONT::SetAttributes
 */
 /**
 //
-//	
 //
-//	@author		Diego Martinez Ruiz de Gaona 
-//	@version	26/01/2018 10:12:30
-//	@return		bool : 
 //
-//	@param		GRPFONTATTRIBUTES* : 
+//  @author   Diego Martinez Ruiz de Gaona
+//  @version  26/01/2018 10:12:30
+//  @return   bool :
+//
+//  @param    GRPFONTATTRIBUTES* :
 //
 *//*-----------------------------------------------------------------*/
 bool GRPFONT::SetAttributes(GRPFONTATTRIBUTES* attributes)
 {
-		this->attributes = *attributes;
-		return true;
+    this->attributes = *attributes;
+    return true;
 }
 
 
 /*-------------------------------------------------------------------
-//	 GRPFONT::GetMetrics
+//   GRPFONT::GetMetrics
 */
 /**
 //
-//	
 //
-//	@author		Diego Martinez Ruiz de Gaona 
-//	@version	25/01/2018 17:45:38
-//	@return		bool : 
 //
-//	@param		 : 
+//  @author   Diego Martinez Ruiz de Gaona
+//  @version  25/01/2018 17:45:38
+//  @return   bool :
+//
+//  @param     :
 //
 *//*-----------------------------------------------------------------*/
 bool GRPFONT::GetMetrics()
-{		
-		fileTTF->GetGlyphMetrics(__C(' '), &spaceadvance, &leftSideBearing, &ascend, &descend, &linegap);
+{
+    fileTTF->GetGlyphMetrics(__C(' '), &spaceadvance, &leftSideBearing, &ascend, &descend, &linegap);
 
-		//fileTTF->GetGlyphAdvance(__C(' '), &spaceadvance);
-		monospacewidth = spaceadvance;
+    //fileTTF->GetGlyphAdvance(__C(' '), &spaceadvance);
+    monospacewidth = spaceadvance;
 
-		// obtain the spacing we need to add between lines
-		lineheight = ascend - descend + linegap;
+    // obtain the spacing we need to add between lines
+    lineheight = ascend - descend + linegap;
 
-		// get the meximum advance of an element(useful for monospace)
-		maxadvance = spaceadvance;
+    // get the meximum advance of an element(useful for monospace)
+    maxadvance = spaceadvance;
 
-		return true;
+    return true;
 }
 
 
 
 /*-------------------------------------------------------------------
-//	GRPFONT::GetGlyphShape
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			18/08/2014 12:59:03
-//	
-//	@return 			GRPSHAPE* : 
+//  GRPFONT::GetGlyphShape
+*/
+/**
 //
-//  @param				letter : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      18/08/2014 12:59:03
+//
+//  @return       GRPSHAPE* :
+//
+//  @param        letter :
 */
 /*-----------------------------------------------------------------*/
 GRPSHAPE* GRPFONT::GetGlyphShape(XCHAR letter)
-{ 
-	int shapeIndex	=	fileTTF->FindGlyphIndex(letter);
-	int index				= shapes.Find(shapeIndex);
+{
+  int shapeIndex  = fileTTF->FindGlyphIndex(letter);
+  int index       = shapes.Find(shapeIndex);
 
-	if(index == NOTFOUND) 
-		{
-			lasterror = GRPFONTSTATUS_ERROR_GLYPH_UNDEFINED;
-			return NULL;
-		}
-	else 
-			lasterror	=	GRPFONTSTATUS_OK;
+  if(index == NOTFOUND)
+    {
+      lasterror = GRPFONTSTATUS_ERROR_GLYPH_UNDEFINED;
+      return NULL;
+    }
+  else
+      lasterror = GRPFONTSTATUS_OK;
 
-	GRPSHAPE*		shape = shapes.GetElement(index);
-	return			shape;
+  GRPSHAPE*   shape = shapes.GetElement(index);
+  return      shape;
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	GRPFONT::CreateGlyph
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			18/08/2014 13:54:20
-//	
-//	@return 			GRPELEMENT* : 
+//  GRPFONT::CreateGlyph
+*/
+/**
 //
-//  @param				letter : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      18/08/2014 13:54:20
+//
+//  @return       GRPELEMENT* :
+//
+//  @param        letter :
 */
 /*-----------------------------------------------------------------*/
 GRPELEMENT* GRPFONT::CreateGlyph(XCHAR letter)
 {
 
-	//XDEBUG_PRINTCOLOR(0,__L("Creating Glyph %c"),letter);
-	float advance = 0.0f, bearing=0.0f, height =0.0f,	descend=0.0f,	ascend =0.0f,	gap	=0.0f;
+  //XDEBUG_PRINTCOLOR(0,__L("Creating Glyph %c"),letter);
+  float advance = 0.0f, bearing=0.0f, height =0.0f, descend=0.0f, ascend =0.0f, gap =0.0f;
 
-	GRPSHAPE* glyph = GetGlyphShape(letter);									
-	if(!glyph) return NULL;
-	if(glyph->contours.IsEmpty()) 
-	{	
+  GRPSHAPE* glyph = GetGlyphShape(letter);
+  if(!glyph) return NULL;
+  if(glyph->contours.IsEmpty())
+  {
 
-		GRPELEMENT* blank=new GRPELEMENT();								
-								blank->SetMesh(new GRPMESH());
-		
-	
-		this->GetTTF()->GetGlyphMetrics(letter,&advance,&bearing,&ascend,&descend,&gap);								
-		blank->GetBoundingBox()->blocked=true;
-		blank->GetBoundingBox()->advance	= advance; 
-		
-
-		return blank;
-	}
-
-					
-	GRPOBJECTBUILDERALGORITHMTRIANGULIZATIONEAR		triangulizationearalgorimth	(GRPOBJECTBUILDER::Get());
-	GRPOBJECTBUILDERALGORITHMEXTRUDE							extruderalgorimth						(GRPOBJECTBUILDER::Get());
-	GRPOBJECTBUILDERALGORITHMSTROKE								strokeralgorimth						(GRPOBJECTBUILDER::Get());
+    GRPELEMENT* blank=new GRPELEMENT();
+                blank->SetMesh(new GRPMESH());
 
 
-	GRPSHAPE*			processedglyph  = NULL;	
-		
-
-	GRPELEMENT*		element					= NULL;
-
-	GRPELEMENT*		front						=	NULL;
-	GRPELEMENT*		back						=	NULL;
-	GRPELEMENT*		extrusion				=	NULL;
-	GRPELEMENT*		border					=	NULL;
-
-	
-	processedglyph = GRPOBJECTBUILDER::Get()->ProcessShapeToLines(glyph, attributes.quality);
-	
-	GRPSHAPE* processedglyph2=processedglyph->CreateCopy();
+    this->GetTTF()->GetGlyphMetrics(letter,&advance,&bearing,&ascend,&descend,&gap);
+    blank->GetBoundingBox()->blocked=true;
+    blank->GetBoundingBox()->advance  = advance;
 
 
-
-	GRPSHAPE*			mergedglyph;
-								mergedglyph		 = GRPOBJECTBUILDER::Get()->MergeInnerSplines(processedglyph2);
-		
-	delete(processedglyph2);
-	processedglyph2=NULL;
-
-	element=new GRPELEMENT();
-	element->SetMesh(new GRPMESH());
-
-	if (mergedglyph->contours.GetSize()>0)
-	{
+    return blank;
+  }
 
 
-	if(attributes.front)
-		{
-			triangulizationearalgorimth.normal	=	GRPVECTOR(0.0, 0.0, +1.0);
-			triangulizationearalgorimth.z				=	0.0;
-			front = GRPOBJECTBUILDER::Get()->TriangulizeShape( mergedglyph, &triangulizationearalgorimth);		
-			if (front==NULL)
-				return NULL;
-		}
+  GRPOBJECTBUILDERALGORITHMTRIANGULIZATIONEAR   triangulizationearalgorimth (GRPOBJECTBUILDER::Get());
+  GRPOBJECTBUILDERALGORITHMEXTRUDE              extruderalgorimth           (GRPOBJECTBUILDER::Get());
+  GRPOBJECTBUILDERALGORITHMSTROKE               strokeralgorimth            (GRPOBJECTBUILDER::Get());
 
 
-	if(attributes.back)
-		{
-			triangulizationearalgorimth.normal	=	GRPVECTOR(0.0, 0.0, -1.0);
-			triangulizationearalgorimth.z				=	attributes.extrude;
-			back = GRPOBJECTBUILDER::Get()->TriangulizeShape( mergedglyph, &triangulizationearalgorimth);
-			if (back==NULL)
-				return NULL;
-		}
-	}
+  GRPSHAPE*     processedglyph  = NULL;
 
-	if (processedglyph->contours.GetSize()>0)
-	{
-	if(attributes.extrude != 0.0)
-		{
-			extruderalgorimth.closeSpline		=	false;
-			extruderalgorimth.nsegments			=	1;
-			extruderalgorimth.depth					=	attributes.extrude;
-			extruderalgorimth.UnifyNormals	=	attributes.unifynormals;
-			extruderalgorimth.ReverseNormals= attributes.reversenormals;
 
-			extrusion=  GRPOBJECTBUILDER::Get()->TriangulizeShape( processedglyph,  &extruderalgorimth);			
-		}					
+  GRPELEMENT*   element         = NULL;
 
-	if (attributes.innerborder!=0.0f || attributes.outerborder!=0.0f)
-		{
-			strokeralgorimth.SetCloseSpline	(true);
-			strokeralgorimth.SetInnerWidth	(attributes.innerborder);
-			strokeralgorimth.SetOuterWidth	(attributes.outerborder);
-			strokeralgorimth.SetExtrude			(attributes.borderextrusion);
-			strokeralgorimth.SetJointType		(attributes.jointtype);
-			strokeralgorimth.SetPenType			(attributes.pentype);
-			strokeralgorimth.SetBevel				(attributes.bevel);
-			strokeralgorimth.SetMitterWidth ((attributes.innerborder+attributes.outerborder));
+  GRPELEMENT*   front           = NULL;
+  GRPELEMENT*   back            = NULL;
+  GRPELEMENT*   extrusion       = NULL;
+  GRPELEMENT*   border          = NULL;
 
-			border =GRPOBJECTBUILDER::Get()->TriangulizeShape(processedglyph, &strokeralgorimth);
-			if (border==NULL)
-				return NULL;
-		}
-	}
-													
-	GRPMAPPINGPROJECTIONCUBIC cubic;
-	
-		if(element && front)
-			element->MergeElement(front);	
 
-	if(element && back)
-			element->MergeElement(back);	
+  processedglyph = GRPOBJECTBUILDER::Get()->ProcessShapeToLines(glyph, attributes.quality);
 
-	if(element && extrusion)   
-			element->MergeElement(extrusion);													
-	
-	if(element && border)			
-			element->MergeElement(border);					
+  GRPSHAPE* processedglyph2=processedglyph->CreateCopy();
 
-	element->SetRenderMode(GRPRENDERMODE_TRIANGLES);
-	cubic.ProjectMapping(element);
 
-	this->GetTTF()->GetGlyphMetrics(letter,&advance,&bearing,&ascend,&descend,&gap);
-	
-	element->UpdateBoundingBox();
 
-	GRPBB* bb=element->GetBoundingBox();
+  GRPSHAPE*     mergedglyph;
+                mergedglyph    = GRPOBJECTBUILDER::Get()->MergeInnerSplines(processedglyph2);
 
-	/*
-	bb->rightmargin		=	(advance+bearing)-bb->maxpoint.x;
-	bb->bottommargin	= descend;	
-	bb->topmargin		  =	ascend;
-	bb->leftmargin		=	bearing;
-	*/
-	bb->rightmargin		=	0.0f;
-	bb->bottommargin	= 0.0f;	
-	bb->topmargin		  =	0.0f;
-	bb->leftmargin		=	0.0f;
+  delete(processedglyph2);
+  processedglyph2=NULL;
 
-	bb->bearing				= bearing;
-	bb->advance				= advance;
-	bb->ascend				= ascend;
-	bb->descend				= descend;
-	bb->lineheight		= lineheight;
+  element=new GRPELEMENT();
+  element->SetMesh(new GRPMESH());
 
-	bb->kerning = 0.0f;
+  if (mergedglyph->contours.GetSize()>0)
+  {
 
-	
-	delete mergedglyph;
-	delete processedglyph;
 
-	if(front)			delete front;			front				=NULL;
-	if(back)			delete back;	    back				=NULL;
-	if(extrusion) delete extrusion;	extrusion		=NULL;
-	if(border)		delete border;   	border			=NULL;
+  if(attributes.front)
+    {
+      triangulizationearalgorimth.normal  = GRPVECTOR(0.0, 0.0, +1.0);
+      triangulizationearalgorimth.z       = 0.0;
+      front = GRPOBJECTBUILDER::Get()->TriangulizeShape( mergedglyph, &triangulizationearalgorimth);
+      if (front==NULL)
+        return NULL;
+    }
 
-	element->GetName()->Format(__L("Glyph [%c]"),letter);	
-	element->GetMesh()->isprocedural=true;
-	return element;
+
+  if(attributes.back)
+    {
+      triangulizationearalgorimth.normal  = GRPVECTOR(0.0, 0.0, -1.0);
+      triangulizationearalgorimth.z       = attributes.extrude;
+      back = GRPOBJECTBUILDER::Get()->TriangulizeShape( mergedglyph, &triangulizationearalgorimth);
+      if (back==NULL)
+        return NULL;
+    }
+  }
+
+  if (processedglyph->contours.GetSize()>0)
+  {
+  if(attributes.extrude != 0.0)
+    {
+      extruderalgorimth.closeSpline   = false;
+      extruderalgorimth.nsegments     = 1;
+      extruderalgorimth.depth         = attributes.extrude;
+      extruderalgorimth.UnifyNormals  = attributes.unifynormals;
+      extruderalgorimth.ReverseNormals= attributes.reversenormals;
+
+      extrusion=  GRPOBJECTBUILDER::Get()->TriangulizeShape( processedglyph,  &extruderalgorimth);
+    }
+
+  if (attributes.innerborder!=0.0f || attributes.outerborder!=0.0f)
+    {
+      strokeralgorimth.SetCloseSpline (true);
+      strokeralgorimth.SetInnerWidth  (attributes.innerborder);
+      strokeralgorimth.SetOuterWidth  (attributes.outerborder);
+      strokeralgorimth.SetExtrude     (attributes.borderextrusion);
+      strokeralgorimth.SetJointType   (attributes.jointtype);
+      strokeralgorimth.SetPenType     (attributes.pentype);
+      strokeralgorimth.SetBevel       (attributes.bevel);
+      strokeralgorimth.SetMitterWidth ((attributes.innerborder+attributes.outerborder));
+
+      border =GRPOBJECTBUILDER::Get()->TriangulizeShape(processedglyph, &strokeralgorimth);
+      if (border==NULL)
+        return NULL;
+    }
+  }
+
+  GRPMAPPINGPROJECTIONCUBIC cubic;
+
+    if(element && front)
+      element->MergeElement(front);
+
+  if(element && back)
+      element->MergeElement(back);
+
+  if(element && extrusion)
+      element->MergeElement(extrusion);
+
+  if(element && border)
+      element->MergeElement(border);
+
+  element->SetRenderMode(GRPRENDERMODE_TRIANGLES);
+  cubic.ProjectMapping(element);
+
+  this->GetTTF()->GetGlyphMetrics(letter,&advance,&bearing,&ascend,&descend,&gap);
+
+  element->UpdateBoundingBox();
+
+  GRPBB* bb=element->GetBoundingBox();
+
+  /*
+  bb->rightmargin   = (advance+bearing)-bb->maxpoint.x;
+  bb->bottommargin  = descend;
+  bb->topmargin     = ascend;
+  bb->leftmargin    = bearing;
+  */
+  bb->rightmargin   = 0.0f;
+  bb->bottommargin  = 0.0f;
+  bb->topmargin     = 0.0f;
+  bb->leftmargin    = 0.0f;
+
+  bb->bearing       = bearing;
+  bb->advance       = advance;
+  bb->ascend        = ascend;
+  bb->descend       = descend;
+  bb->lineheight    = lineheight;
+
+  bb->kerning = 0.0f;
+
+
+  delete mergedglyph;
+  delete processedglyph;
+
+  if(front)     delete front;     front       =NULL;
+  if(back)      delete back;      back        =NULL;
+  if(extrusion) delete extrusion; extrusion   =NULL;
+  if(border)    delete border;    border      =NULL;
+
+  element->GetName()->Format(__L("Glyph [%c]"),letter);
+  element->GetMesh()->isprocedural=true;
+  return element;
 }
 
-	
+
 
 
 /*-------------------------------------------------------------------
-//	GRPFONT::TextBox
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			18/08/2014 13:59:41
-//	
-//	@return 			GRPOBJECT* : 
+//  GRPFONT::TextBox
+*/
+/**
 //
-//  @param				 : 
-//  @param				... : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      18/08/2014 13:59:41
+//
+//  @return       GRPOBJECT* :
+//
+//  @param         :
+//  @param        ... :
 */
 /*-----------------------------------------------------------------*/
-GRPTEXTBOX*	GRPFONT::TextBox(GRPSCENE* scene,int alignment_type,XCHAR* mask , ...)
+GRPTEXTBOX* GRPFONT::TextBox(GRPSCENE* scene,int alignment_type,XCHAR* mask , ...)
 {
-	XSTRING word;
+  XSTRING word;
 
-	va_list arg;			
-	va_start(arg, mask);	
+  va_list arg;
+  va_start(arg, mask);
 
-	word.FormatArg(mask, &arg);		
+  word.FormatArg(mask, &arg);
 
-	va_end(arg);
-			
-	GRPTEXTBOX* element=CreateTextBox(scene,word.Get(),alignment_type);
+  va_end(arg);
 
-	return element;
+  GRPTEXTBOX* element=CreateTextBox(scene,word.Get(),alignment_type);
+
+  return element;
 }
 
 GRPTEXTBOX* GRPFONT::TextBox(GRPSCENE* scene,XCHAR* mask , ...)
 {
-	XSTRING word;
+  XSTRING word;
 
-	va_list arg;			
-	va_start(arg, mask);	
+  va_list arg;
+  va_start(arg, mask);
 
-	word.FormatArg(mask, &arg);		
+  word.FormatArg(mask, &arg);
 
-	va_end(arg);
-							
-	return CreateTextBox(scene,word.Get());
-}							
+  va_end(arg);
+
+  return CreateTextBox(scene,word.Get());
+}
 
 
 /*-------------------------------------------------------------------
-//	GRPFONT::CreateTextBox
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			18/08/2014 14:04:38
-//	
-//	@return 			GRPOBJECT* : 
+//  GRPFONT::CreateTextBox
+*/
+/**
 //
-//  @param				word : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      18/08/2014 14:04:38
+//
+//  @return       GRPOBJECT* :
+//
+//  @param        word :
 */
 /*-----------------------------------------------------------------*/
 GRPTEXTBOX* GRPFONT::CreateTextBox(GRPSCENE* scene,XCHAR* word,int alignment_type)
-{		
-	return CreateTextBox(scene,scene->CreateNode(),word,alignment_type);
+{
+  return CreateTextBox(scene,scene->CreateNode(),word,alignment_type);
 }
 
 /*-------------------------------------------------------------------
-//	GRPFONT::CreateTextBox
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			08/03/2016 10:34:17
-//	
-//	@return 			GRPTEXTBOX* : 
+//  GRPFONT::CreateTextBox
+*/
+/**
 //
-//  @param				scene : 
-//  @param				node : 
-//  @param				word : 
-//  @param				alignment_type : (default TBOX_ALIGNRIGHT)
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      08/03/2016 10:34:17
+//
+//  @return       GRPTEXTBOX* :
+//
+//  @param        scene :
+//  @param        node :
+//  @param        word :
+//  @param        alignment_type : (default TBOX_ALIGNRIGHT)
 */
 /*-----------------------------------------------------------------*/
-GRPTEXTBOX* GRPFONT::CreateTextBox(GRPSCENE* scene,GRPNODE* node,	XCHAR* word,int alignment_type)
+GRPTEXTBOX* GRPFONT::CreateTextBox(GRPSCENE* scene,GRPNODE* node, XCHAR* word,int alignment_type)
 {
 
-	XSTRING s;
-	s.Set(word);
-	GRPTEXTBOX* text=new GRPTEXTBOX	(scene);	
+  XSTRING s;
+  s.Set(word);
+  GRPTEXTBOX* text=new GRPTEXTBOX (scene);
 
-							text->SetNode				(node);
-							text->SetFont				(this);
-							text->SetContent		(&s);
-							text->SetAlign			(alignment_type);
-						//	text->UpdateContent	();
-							
-	return text;
+              text->SetNode       (node);
+              text->SetFont       (this);
+              text->SetContent    (&s);
+              text->SetAlign      (alignment_type);
+            //  text->UpdateContent ();
+
+  return text;
 }
 
 /*-------------------------------------------------------------------
-//	 GRPFONT::CreateTextElement
+//   GRPFONT::CreateTextElement
 */
 /**
 //
-//	
 //
-//	@author		Diego Martinez Ruiz de Gaona 
-//	@version	30/01/2018 12:29:54
-//	@return		GRPTEXTELEMENT* : 
 //
-//	@param		GRPNODE* : 
-//	@param		XCHAR* : 
-//	@param		int : 
+//  @author   Diego Martinez Ruiz de Gaona
+//  @version  30/01/2018 12:29:54
+//  @return   GRPTEXTELEMENT* :
+//
+//  @param    GRPNODE* :
+//  @param    XCHAR* :
+//  @param    int :
 //
 *//*-----------------------------------------------------------------*/
-GRPTEXTELEMENT* GRPFONT::CreateTextElement(GRPNODE*	node,	XCHAR* word, int alignment_type)
+GRPTEXTELEMENT* GRPFONT::CreateTextElement(GRPNODE* node, XCHAR* word, int alignment_type)
 {
-	
-	XSTRING s;
-	s.Set(word);
-	GRPTEXTELEMENT* text=new GRPTEXTELEMENT	();
-									text->SetNode						(node);
-									text->SetFont						(this);
-									text->SetContent				(&s);
-									text->SetAlign					(alignment_type);
-									text->UpdateContent			();							
-	return text;
+
+  XSTRING s;
+  s.Set(word);
+  GRPTEXTELEMENT* text=new GRPTEXTELEMENT ();
+                  text->SetNode           (node);
+                  text->SetFont           (this);
+                  text->SetContent        (&s);
+                  text->SetAlign          (alignment_type);
+                  text->UpdateContent     ();
+  return text;
 }
 
 
 /*-------------------------------------------------------------------
-//	 GRPFONT::CreateTextBlock
+//   GRPFONT::CreateTextBlock
 */
 /**
 //
-//	
 //
-//	@author		Diego Martinez Ruiz de Gaona 
-//	@version	30/01/2018 12:30:08
-//	@return		GRPTEXTELEMENT* : 
 //
-//	@param		XCHAR* : 
-//	@param		GRPAABB* : 
+//  @author   Diego Martinez Ruiz de Gaona
+//  @version  30/01/2018 12:30:08
+//  @return   GRPTEXTELEMENT* :
+//
+//  @param    XCHAR* :
+//  @param    GRPAABB* :
 //
 *//*-----------------------------------------------------------------*/
-GRPTEXTELEMENT* GRPFONT::CreateTextBlock(GRPNODE* node,XCHAR* word, GRPAABB*	box)
+GRPTEXTELEMENT* GRPFONT::CreateTextBlock(GRPNODE* node,XCHAR* word, GRPAABB*  box)
 {
-		XSTRING s;
-		s.Set(word);
-		GRPTEXTELEMENT* text = new GRPTEXTELEMENT();
-										text->SetNode(node);
-										text->SetFont(this);
-										text->SetContent(&s);
-										text->SetAlign(GRPTEXTBOX_ALIGNLEFT);
-										text->SetBoundaries(box);
-										text->UpdateContent();
-						 return text;
+    XSTRING s;
+    s.Set(word);
+    GRPTEXTELEMENT* text = new GRPTEXTELEMENT();
+                    text->SetNode(node);
+                    text->SetFont(this);
+                    text->SetContent(&s);
+                    text->SetAlign(GRPTEXTBOX_ALIGNLEFT);
+                    text->SetBoundaries(box);
+                    text->UpdateContent();
+             return text;
 }
 
 /*-------------------------------------------------------------------
-//	GRPFONT::MeasureWidth
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			17/03/2017 18:02:27
-//	
-//	@return 			bool : 
+//  GRPFONT::MeasureWidth
+*/
+/**
 //
-//  @param				width : 
-//  @param				original : 
-//  @param				trimed : 
-//  @param				rest : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      17/03/2017 18:02:27
+//
+//  @return       bool :
+//
+//  @param        width :
+//  @param        original :
+//  @param        trimed :
+//  @param        rest :
 */
 /*-----------------------------------------------------------------*/
-bool	 GRPFONT::MeasureWidth(float width,XSTRING& original, XSTRING& trimmed, XSTRING& rest)
+bool   GRPFONT::MeasureWidth(float width,XSTRING& original, XSTRING& trimmed, XSTRING& rest)
 {
 
-	float currentWidth=0.0f;
-	int n=original.GetSize();
-	int e=0;
-	bool exit=false;
-	for (;e<n;e++)	
-	{	
-		if (original.Get()[e]==__C('\b'))		
-			e++;			
-				
-		if (original.Get()[e]==__C('\n'))
-		{			
-			e--;
-			break;
-		}		
-				
-		float advance=0.0f,kerning=0.0f;			
-		this->GetTTF()->GetGlyphMetrics(original[e],&advance);
+  float currentWidth=0.0f;
+  int n=original.GetSize();
+  int e=0;
+  bool exit=false;
+  for (;e<n;e++)
+  {
+    if (original.Get()[e]==__C('\b'))
+      e++;
 
-		if (e<n-1)
-			kerning=this->GetTTF()->GetKerning(original.Get()[e],original.Get()[e+1]);
+    if (original.Get()[e]==__C('\n'))
+    {
+      e--;
+      break;
+    }
 
-		trimmed.Add(original.Get()[e]);	
+    float advance=0.0f,kerning=0.0f;
+    this->GetTTF()->GetGlyphMetrics(original[e],&advance);
 
-		currentWidth+=(advance+kerning);
-		if (currentWidth>width) break;
-	}
+    if (e<n-1)
+      kerning=this->GetTTF()->GetKerning(original.Get()[e],original.Get()[e+1]);
 
-			original.Copy(e+1,n,rest);
-			return true;
+    trimmed.Add(original.Get()[e]);
+
+    currentWidth+=(advance+kerning);
+    if (currentWidth>width) break;
+  }
+
+      original.Copy(e+1,n,rest);
+      return true;
 }
 
 /*-------------------------------------------------------------------
-//	 GRPFONT::SetStyle
+//   GRPFONT::SetStyle
 */
 /**
 //
-//	
 //
-//	@author		Diego Martinez Ruiz de Gaona 
-//	@version	26/01/2018 10:36:12
-//	@return		GRPFONT_STYLE : 
 //
-//	@param		XCHAR* : 
+//  @author   Diego Martinez Ruiz de Gaona
+//  @version  26/01/2018 10:36:12
+//  @return   GRPFONT_STYLE :
+//
+//  @param    XCHAR* :
 //
 *//*-----------------------------------------------------------------*/
-GRPFONT_STYLE	 GRPFONT::SetStyle(XCHAR* style)
+GRPFONT_STYLE  GRPFONT::SetStyle(XCHAR* style)
 {
-		this->style = GRPFONT_STYLE_REGULAR;
+    this->style = GRPFONT_STYLE_REGULAR;
 
-		XSTRING st = style;
-		if (st.Find(__L("bold"), true)!=NOTFOUND)
-				this->style |= GRPFONT_STYLE_BOLD;
+    XSTRING st = style;
+    if (st.Find(__L("bold"), true)!=NOTFOUND)
+        this->style |= GRPFONT_STYLE_BOLD;
 
-		if (st.Find(__L("italic"), true) != NOTFOUND)
-				this->style |= GRPFONT_STYLE_ITALIC;		
+    if (st.Find(__L("italic"), true) != NOTFOUND)
+        this->style |= GRPFONT_STYLE_ITALIC;
 
-		return (GRPFONT_STYLE)this->style;
+    return (GRPFONT_STYLE)this->style;
 }
 
 

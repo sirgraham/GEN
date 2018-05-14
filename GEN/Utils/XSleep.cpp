@@ -1,16 +1,16 @@
 //------------------------------------------------------------------------------------------
-//	XSLEEP.CPP
-//	
-//	Sleep Functions
-//   
-//	Author						: Abraham J. Velez
-//	Date Of Creation	: 09/04/2007 19:46:31
-//	Last Mofificacion	:	
-//	
-//	GEN  Copyright (C).  All right reserved.			 
+//  XSLEEP.CPP
+//
+//  Sleep Functions
+//
+//  Author            : Abraham J. Velez
+//  Date Of Creation  : 09/04/2007 19:46:31
+//  Last Mofificacion :
+//
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
-	
+
+
 //---- INCLUDES ----------------------------------------------------------------------------
 
 #include <stdio.h>
@@ -18,11 +18,11 @@
 #include "XSleep.h"
 
 #include "XMemory.h"
-	
+
 //---- GENERAL VARIABLE --------------------------------------------------------------------
-	
+
 XSLEEP* xsleep = NULL;
-	
+
 /*---- CLASS MEMBERS ---------------------------------------------------------------------*/
 
 
@@ -30,38 +30,38 @@ XSLEEP* xsleep = NULL;
 
 /*-------------------------------------------------------------------
 //  XSLEEP::XSLEEP
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			22/12/2008 9:09:48
-//	
-//	@return				void : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      22/12/2008 9:09:48
+//
+//  @return       void :
+//  */
 /*-----------------------------------------------------------------*/
-XSLEEP::XSLEEP()		
-{ 
-	Clean();
+XSLEEP::XSLEEP()
+{
+  Clean();
 }
-	
+
 
 
 /*-------------------------------------------------------------------
 //  XSLEEP::~XSLEEP
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			22/12/2008 9:09:58
-//	
-//	@return				void : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      22/12/2008 9:09:58
+//
+//  @return       void :
+//  */
 /*-----------------------------------------------------------------*/
-XSLEEP::~XSLEEP()		
-{ 
-	Clean();
+XSLEEP::~XSLEEP()
+{
+  Clean();
 }
 
 

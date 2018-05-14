@@ -1,32 +1,32 @@
-/*------------------------------------------------------------------------------------------ 
-//	GRPBUFFEROPENGLRENDER.H
-*/	
-/**	
-// \class 
-//   
-//  Creates a Render Target Buffer (Render to texture and offscreen rendering)
-//   
-//	@author	 Diego Martinez Ruiz de Gaona
+/*------------------------------------------------------------------------------------------
+//  GRPBUFFEROPENGLRENDER.H
+*/
+/**
+// \class
 //
-//	Date Of Creation	: 25/06/2014 17:52:52
-//	Last Modification	:	
-*/	
-/*	GEN  Copyright (C).  All right reserved.
+//  Creates a Render Target Buffer (Render to texture and offscreen rendering)
+//
+//  @author  Diego Martinez Ruiz de Gaona
+//
+//  Date Of Creation  : 25/06/2014 17:52:52
+//  Last Modification :
+*/
+/*  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
+
 #ifndef _GRPBUFFEROPENGLRENDER_H_
 #define _GRPBUFFEROPENGLRENDER_H_
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
 #include "XBase.h"
 
 #include "GRPOpenGL.h"
-	
+
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
-	
-	
+
+
 /*---- CLASS -----------------------------------------------------------------------------*/
 
 class XFACTORY;
@@ -36,70 +36,70 @@ class GRPFACTORY;
 
 class GRPBUFFEROPENGLRENDER
 {
-	public:
+  public:
 
-															GRPBUFFEROPENGLRENDER			();
-		virtual									 ~GRPBUFFEROPENGLRENDER			();
+                              GRPBUFFEROPENGLRENDER     ();
+    virtual                  ~GRPBUFFEROPENGLRENDER     ();
 
-		bool											Ini												(int width, int height, int nchannels = 4);
-		
-		bool											SetActive									(bool t);
+    bool                      Ini                       (int width, int height, int nchannels = 4);
 
-		GRPBITMAP*								GetBitmap									() 
-															{
-																if(!GetFrameBuffer()) return NULL;
-																return bitmap;
-															}
+    bool                      SetActive                 (bool t);
 
-		XBYTE*										GetFrameBuffer						();
+    GRPBITMAP*                GetBitmap                 ()
+                              {
+                                if(!GetFrameBuffer()) return NULL;
+                                return bitmap;
+                              }
 
-		bool											End												();
+    XBYTE*                    GetFrameBuffer            ();
 
-		GRPSCENE*									GetScene									()									{ return this->scene;			}
-		void											SetScene									(GRPSCENE* scn)			{ this->scene=scn;				}
+    bool                      End                       ();
 
-		
-		GLUINT										textureID;
-		
-	private:
+    GRPSCENE*                 GetScene                  ()                  { return this->scene;     }
+    void                      SetScene                  (GRPSCENE* scn)     { this->scene=scn;        }
 
-		void											Clean                    ()
-															{																
-																isini                 = false;
 
-																width									= 0;
-																height								= 0;
-																nchannels							= 0;
-																size									= 0;
+    GLUINT                    textureID;
 
-																framebufferID					= 0;
-																colorbufferID					= 0;
-																depthbufferID					= 0;
-													
-																scene									= NULL;														
-																bitmap								= NULL;
-															}	
+  private:
 
-		bool											CheckFramebuffer			();
-	
-		
-		bool											isini;	
-		
-		int												width;
-		int												height;
-		int												nchannels;
-		int												size;
-		
-		GLUINT										framebufferID;
-		GLUINT										colorbufferID;
-		GLUINT										depthbufferID;
+    void                      Clean                    ()
+                              {
+                                isini                 = false;
 
-		GRPSCENE*									scene;
-		GRPBITMAP*								bitmap;
+                                width                 = 0;
+                                height                = 0;
+                                nchannels             = 0;
+                                size                  = 0;
+
+                                framebufferID         = 0;
+                                colorbufferID         = 0;
+                                depthbufferID         = 0;
+
+                                scene                 = NULL;
+                                bitmap                = NULL;
+                              }
+
+    bool                      CheckFramebuffer      ();
+
+
+    bool                      isini;
+
+    int                       width;
+    int                       height;
+    int                       nchannels;
+    int                       size;
+
+    GLUINT                    framebufferID;
+    GLUINT                    colorbufferID;
+    GLUINT                    depthbufferID;
+
+    GRPSCENE*                 scene;
+    GRPBITMAP*                bitmap;
 };
-	
-	
+
+
 /*---- INLINE FUNCTIONS ------------------------------------------------------------------*/
-	
+
 #endif
 

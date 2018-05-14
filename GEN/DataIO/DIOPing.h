@@ -1,21 +1,21 @@
 /*------------------------------------------------------------------------------------------
-//	DIOPING.H
-*/	
-/**	
-// \class 
-//   
+//  DIOPING.H
+*/
+/**
+// \class
+//
 //  Data IO Ping class
-//   
-//	@author	 Abraham J. Velez
-//	@version 30/08/2012 9:13:13
-*/	
-/*	GEN  Copyright (C).  All right reserved.	
+//
+//  @author  Abraham J. Velez
+//  @version 30/08/2012 9:13:13
+*/
+/*  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
+
 #ifndef _DIOPING_H_
 #define _DIOPING_H_
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
 #include "XBase.h"
@@ -25,54 +25,54 @@
 
 #include "DIOURL.h"
 #include "DIOStreamICMPConfig.h"
-	
+
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
 
 enum DIOPINGXEVENTTYPE
 {
-	DIOPINGXEVENTTYPE_UNKNOWN		   						= XEVENTTYPE_PING				,	
-	DIOPINGXEVENTTYPE_DOPING																					,	
+  DIOPINGXEVENTTYPE_UNKNOWN                 = XEVENTTYPE_PING       ,
+  DIOPINGXEVENTTYPE_DOPING                                          ,
 };
 
 
-#define DIOPING_DEFAULTNRETRYS							3				
-#define DIOPING_DEFAULTTIMEBETWEENCHECKS    500				// Milliseconds
+#define DIOPING_DEFAULTNRETRYS              3
+#define DIOPING_DEFAULTTIMEBETWEENCHECKS    500       // Milliseconds
 
-#define DIOPING_ICMP_ECHOREPLY							0
-#define DIOPING_ICMP_ECHOREQ								8
-#define DIOPING_REQ_DATASIZE								32				// Echo Request Data size
+#define DIOPING_ICMP_ECHOREPLY              0
+#define DIOPING_ICMP_ECHOREQ                8
+#define DIOPING_REQ_DATASIZE                32        // Echo Request Data size
 
 
 
-typedef struct 
-{			
-	XBYTE s_b1;
-	XBYTE s_b2;
-	XBYTE s_b3;
-	XBYTE s_b4; 
-		
+typedef struct
+{
+  XBYTE s_b1;
+  XBYTE s_b2;
+  XBYTE s_b3;
+  XBYTE s_b4;
+
 } DIOPING_ADDR_BYTE;
 
 
 
-typedef struct 			
+typedef struct
 {
-	XWORD s_w1;
-	XWORD s_w2; 
+  XWORD s_w1;
+  XWORD s_w2;
 
 } DIOPING_ADDR_WORD;
 
 
 
-typedef struct 
+typedef struct
 {
-	union 
-		{		    
-			DIOPING_ADDR_BYTE		addrbyte;
-			DIOPING_ADDR_WORD		addrword;
-			XDWORD							addr;
+  union
+    {
+      DIOPING_ADDR_BYTE   addrbyte;
+      DIOPING_ADDR_WORD   addrword;
+      XDWORD              addr;
 
-		} INADDR_UNION;
+    } INADDR_UNION;
 
 } DIOPING_INADDR;
 
@@ -81,18 +81,18 @@ typedef struct
 
 //--------------------------------------------------------
 // IP Header -- RFC 791
-typedef struct 
+typedef struct
 {
-	XBYTE														VIHL;			     // Version and IHL
-	XBYTE														typeservice;	 // Type Of Service
-	short														fulllen;			 // Total Length
-	short														ID;				     // Identification
-	short													  flagoff;		   // Flags and Fragment Offset
-	XBYTE													  TTL;			     // Time To Live
-	XBYTE														protocol;		   // Protocol
-	XWORD														checksum;		   // Checksum
-	DIOPING_INADDR									iasource;	     // Internet Address - Source
-	DIOPING_INADDR									iatarget;	     // Internet Address - Destination
+  XBYTE                           VIHL;          // Version and IHL
+  XBYTE                           typeservice;   // Type Of Service
+  short                           fulllen;       // Total Length
+  short                           ID;            // Identification
+  short                           flagoff;       // Flags and Fragment Offset
+  XBYTE                           TTL;           // Time To Live
+  XBYTE                           protocol;      // Protocol
+  XWORD                           checksum;      // Checksum
+  DIOPING_INADDR                  iasource;      // Internet Address - Source
+  DIOPING_INADDR                  iatarget;      // Internet Address - Destination
 
 } DIOPING_IPHDR;
 
@@ -100,14 +100,14 @@ typedef struct
 
 //--------------------------------------------------------
 // ICMP Header - RFC 792
-typedef struct 
+typedef struct
 {
-	XBYTE														type;			     // Type
-	XBYTE         									code;			     // Code
-	XWORD														checksum;		   // Checksum
-	XWORD														ID;				     // Identification
-	XWORD														seq;			     // Sequence
-	char														data;			     // Data
+  XBYTE                           type;          // Type
+  XBYTE                           code;          // Code
+  XWORD                           checksum;      // Checksum
+  XWORD                           ID;            // Identification
+  XWORD                           seq;           // Sequence
+  char                            data;          // Data
 
 } DIOPING_ICMPHDR;
 
@@ -115,12 +115,12 @@ typedef struct
 
 //--------------------------------------------------------
 // ICMP Echo Request
-typedef struct 
-{ 
-	DIOPING_ICMPHDR									icmphdr;
-	XDWORD                          applicationID;
-	XDWORD													time;
-	char														cdata[DIOPING_REQ_DATASIZE];
+typedef struct
+{
+  DIOPING_ICMPHDR                 icmphdr;
+  XDWORD                          applicationID;
+  XDWORD                          time;
+  char                            cdata[DIOPING_REQ_DATASIZE];
 
 } DIOPING_ECHOREQUEST;
 
@@ -130,9 +130,9 @@ typedef struct
 // ICMP Echo Reply
 typedef struct
 {
-	DIOPING_IPHDR										iphdr;
-	DIOPING_ECHOREQUEST							echorequest;
-//char														cfiller[256];
+  DIOPING_IPHDR                   iphdr;
+  DIOPING_ECHOREQUEST             echorequest;
+//char                            cfiller[256];
 
 } DIOPING_ECHOREPLY;
 
@@ -140,7 +140,7 @@ typedef struct
 
 
 /*---- CLASS -----------------------------------------------------------------------------*/
-	
+
 class XFACTORY;
 class XTIMER;
 class XPUBLISHER;
@@ -153,67 +153,67 @@ class DIOSTREAMICMP;
 
 class DIOPINGXEVENT : public XEVENT
 {
-	public:
-																	DIOPINGXEVENT								(XSUBJECT* subject, XDWORD type = DIOPINGXEVENTTYPE_UNKNOWN, XDWORD family = XEVENTTYPE_PING) : XEVENT(subject, type, family)
-																	{
-																		Clean();
-																	}
+  public:
+                                  DIOPINGXEVENT               (XSUBJECT* subject, XDWORD type = DIOPINGXEVENTTYPE_UNKNOWN, XDWORD family = XEVENTTYPE_PING) : XEVENT(subject, type, family)
+                                  {
+                                    Clean();
+                                  }
 
-		virtual			 							   ~DIOPINGXEVENT								()																{	Clean();																												}
+    virtual                      ~DIOPINGXEVENT               ()                                { Clean();                                                        }
 
-		DIOPINGREPLY*									GetPingReply								()																{ return pingreply;																								}
-		void													SetPingReply	 							(DIOPINGREPLY* pingreply)					{ this->pingreply = pingreply;																		}
-		
-	private:
+    DIOPINGREPLY*                 GetPingReply                ()                                { return pingreply;                                               }
+    void                          SetPingReply                (DIOPINGREPLY* pingreply)         { this->pingreply = pingreply;                                    }
 
-		void													Clean												()
-																	{
-																		pingreply = NULL;		
-																	}
-		
-		DIOPINGREPLY*									pingreply;
-};	
+  private:
+
+    void                          Clean                       ()
+                                  {
+                                    pingreply = NULL;
+                                  }
+
+    DIOPINGREPLY*                 pingreply;
+};
 
 
 
 
 class DIOPINGREPLY
 {
-	public:
-																	DIOPINGREPLY	       				()                                { Clean();                                                      }    
-		virtual											 ~DIOPINGREPLY	   						()																{ Clean();                                                      }  
+  public:
+                                  DIOPINGREPLY                ()                                { Clean();                                                      }
+    virtual                      ~DIOPINGREPLY                ()                                { Clean();                                                      }
 
-		XDWORD                        GetSequence									()																{ return sequence;																							}
-		void		                      SetSequence									(XDWORD sequence)									{ this->sequence	= sequence;                                   }							
+    XDWORD                        GetSequence                 ()                                { return sequence;                                              }
+    void                          SetSequence                 (XDWORD sequence)                 { this->sequence  = sequence;                                   }
 
-		XSTRING*                      GetFromIP										()																{ return &fromIP;                                               }
-		
-		XDWORD                        GetSizeRequest							()																{ return sizerequest;                                           }
-		void													SetSizeRequest							(XDWORD sizerequest)							{ this->sizerequest = sizerequest;                              } 
+    XSTRING*                      GetFromIP                   ()                                { return &fromIP;                                               }
 
-		XDWORD	                      GetTimeElapsed							()																{ return timeelapsed;                                           }
-		void   	                      SetTimeElapsed							(XDWORD timeelapsed)						  { this->timeelapsed = timeelapsed;                              }
+    XDWORD                        GetSizeRequest              ()                                { return sizerequest;                                           }
+    void                          SetSizeRequest              (XDWORD sizerequest)              { this->sizerequest = sizerequest;                              }
 
-		XBYTE                         GetTTL											()																{ return TTL;                                                   }	
-		void                          SetTTL											(XBYTE TTL)												{ this->TTL = TTL;                                              }
+    XDWORD                        GetTimeElapsed              ()                                { return timeelapsed;                                           }
+    void                          SetTimeElapsed              (XDWORD timeelapsed)              { this->timeelapsed = timeelapsed;                              }
+
+    XBYTE                         GetTTL                      ()                                { return TTL;                                                   }
+    void                          SetTTL                      (XBYTE TTL)                       { this->TTL = TTL;                                              }
 
   private:
 
-    void													Clean												()
-																	{
-																		sequence			= 0;
+    void                          Clean                       ()
+                                  {
+                                    sequence      = 0;
 
-																		fromIP.Empty();
+                                    fromIP.Empty();
 
-																		sizerequest		= 0;
-																		timeelapsed		= 0;
-																		TTL						= 0;
-																	}
-		
-		XDWORD                        sequence;
+                                    sizerequest   = 0;
+                                    timeelapsed   = 0;
+                                    TTL           = 0;
+                                  }
+
+    XDWORD                        sequence;
     XSTRING                       fromIP;
     XDWORD                        sizerequest;
-    XDWORD	                      timeelapsed;
+    XDWORD                        timeelapsed;
     XBYTE                         TTL;
 };
 
@@ -222,64 +222,64 @@ class DIOPINGREPLY
 
 class DIOPING :  public XSUBJECT
 {
-	public:
+  public:
 
-																	DIOPING       							();                                  
-		virtual											 ~DIOPING   									();
+                                  DIOPING                     ();
+    virtual                      ~DIOPING                     ();
 
-		DIOURL*												GetTarget                   ()																{ return urltarget;                                            }
+    DIOURL*                       GetTarget                   ()                                { return urltarget;                                            }
 
     bool                          Set                         (XCHAR* urltarget , XCHAR* IPLocal = NULL);
     bool                          Set                         (DIOURL& urltarget, XCHAR* IPLocal = NULL);
 
-		virtual bool									Do				                  (XDWORD nretries = DIOPING_DEFAULTNRETRYS, XDWORD timebetweenchecks = DIOPING_DEFAULTTIMEBETWEENCHECKS, bool exitfirstgoodreply = false);	
-    
-		
-    XVECTOR<DIOPINGREPLY*>*				GetReplys										();
-		bool                          WasConnected                ();  
-    int                           CalculateMeanTime           ();  
-		
-		bool                          DeleteAllReplys             (); 
-   		
-	protected: 
-		bool                          AddReply                    (XWORD sequence, XCHAR* IPfrom, XDWORD sizerequest, XDWORD elapsed, XBYTE TTL);
-		XWORD													CalculeCheckSum							(XWORD *addr, int len); 		
+    virtual bool                  Do                          (XDWORD nretries = DIOPING_DEFAULTNRETRYS, XDWORD timebetweenchecks = DIOPING_DEFAULTTIMEBETWEENCHECKS, bool exitfirstgoodreply = false);
 
-		XTIMER*                       xtimer;
 
-		XDWORD                        applicationID;
-		
-    DIOURL*                       urltarget;    
-    XSTRING                       IPLocal; 
-		
-		XVECTOR<DIOPINGREPLY*>		    replys;
-		XMUTEX*												xmutexreplys;
+    XVECTOR<DIOPINGREPLY*>*       GetReplys                   ();
+    bool                          WasConnected                ();
+    int                           CalculateMeanTime           ();
 
-		XDWORD												nretries;
-		XDWORD												timebetweenchecks;		
+    bool                          DeleteAllReplys             ();
 
-	private: 
+  protected:
+    bool                          AddReply                    (XWORD sequence, XCHAR* IPfrom, XDWORD sizerequest, XDWORD elapsed, XBYTE TTL);
+    XWORD                         CalculeCheckSum             (XWORD *addr, int len);
 
-		void													Clean												()
-																	{
-																		xtimer							= NULL;
+    XTIMER*                       xtimer;
 
-																		urltarget						= NULL;
+    XDWORD                        applicationID;
 
-																		applicationID				= 0;
-																		
-																		IPLocal.Empty();
+    DIOURL*                       urltarget;
+    XSTRING                       IPLocal;
 
-																		xmutexreplys				= NULL;
+    XVECTOR<DIOPINGREPLY*>        replys;
+    XMUTEX*                       xmutexreplys;
 
-																		nretries						= 0;
-																		timebetweenchecks		= 0;																		
-																	}   
+    XDWORD                        nretries;
+    XDWORD                        timebetweenchecks;
+
+  private:
+
+    void                          Clean                       ()
+                                  {
+                                    xtimer              = NULL;
+
+                                    urltarget           = NULL;
+
+                                    applicationID       = 0;
+
+                                    IPLocal.Empty();
+
+                                    xmutexreplys        = NULL;
+
+                                    nretries            = 0;
+                                    timebetweenchecks   = 0;
+                                  }
 };
 
 
-	
+
 /*---- INLINE FUNCTIONS ------------------------------------------------------------------*/
-	
+
 #endif
 

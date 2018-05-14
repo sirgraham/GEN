@@ -1,17 +1,18 @@
 
+
 /*------------------------------------------------------------------------------------------
-//	SNDFILEOGG.CPP
-//	
-//	Loads and decodes an ogg file
-//   
-//	Author						: Imanol Celaya Ruiz de Alegria
-//	Date Of Creation	: 03/11/2015 10:40:46
-//	Last Modification	:	
-//	
-//	GEN  Copyright (C).  All right reserved.
+//  SNDFILEOGG.CPP
+//
+//  Loads and decodes an ogg file
+//
+//  Author            : Imanol Celaya Ruiz de Alegria
+//  Date Of Creation  : 03/11/2015 10:40:46
+//  Last Modification :
+//
+//  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
 #include "XFactory.h"
@@ -24,129 +25,129 @@
 #include "XMemory.h"
 
 /*---- GENERAL VARIABLE ------------------------------------------------------------------*/
-	
-	
+
+
 /*---- CLASS MEMBERS ---------------------------------------------------------------------*/
 
 
 
 
 /*-------------------------------------------------------------------
-//	SNDFILEOGG::LoadFile
-*/	
-/**	
-//	
-//	loads an ogg file from disk and decodes in memory
-//	
-//	@author				Imanol Celaya Ruiz de Alegria
-//	@version			03/11/2015 13:20:03
-//	
-//	@return 			bool : 
+//  SNDFILEOGG::LoadFile
+*/
+/**
 //
-//  @param				path : 
-//  @param				name : 
+//  loads an ogg file from disk and decodes in memory
+//
+//  @author       Imanol Celaya Ruiz de Alegria
+//  @version      03/11/2015 13:20:03
+//
+//  @return       bool :
+//
+//  @param        path :
+//  @param        name :
 */
 /*-----------------------------------------------------------------*/
 bool SNDFILEOGG::LoadFile(XCHAR* path, XCHAR* name, bool streaming)
 {
-	XFILE* xfile = NULL;
+  XFILE* xfile = NULL;
 
-	xbuffer = new XBUFFER(false);
-	if(!xbuffer)
-		{
-			return false;
-		}
+  xbuffer = new XBUFFER(false);
+  if(!xbuffer)
+    {
+      return false;
+    }
 
-  bool		status = false; 
+  bool    status = false;
 
-	xfile = xfactory->Create_File();
-	if(!xfile) 
-		{
-			xbuffer->Delete();
-			delete xbuffer;
-			xbuffer = NULL;
-			return false; 
-		}
-  	
-	if(!xfile->Open(path))		
-		{
-			xbuffer->Delete();
-			delete xbuffer;
-			xbuffer = NULL;
+  xfile = xfactory->Create_File();
+  if(!xfile)
+    {
+      xbuffer->Delete();
+      delete xbuffer;
+      xbuffer = NULL;
+      return false;
+    }
 
-			delete xfile;
-			xfile = NULL;
+  if(!xfile->Open(path))
+    {
+      xbuffer->Delete();
+      delete xbuffer;
+      xbuffer = NULL;
 
-			return false;
-		}
+      delete xfile;
+      xfile = NULL;
 
-	//XDEBUG_PRINTCOLOR(0,__L("Loading file %s"), xfile->GetPathNameFile());
+      return false;
+    }
 
-	xbuffer->Resize(xfile->GetSize());
+  //XDEBUG_PRINTCOLOR(0,__L("Loading file %s"), xfile->GetPathNameFile());
+
+  xbuffer->Resize(xfile->GetSize());
   status = xfile->Read(xbuffer->Get(), xbuffer->GetSize());
   xfile->Close();
 
   xfactory->Delete_File(xfile);
 
-	// now perform decoding
-	stb_vorbis_info info;
+  // now perform decoding
+  stb_vorbis_info info;
 
-	stream = stb_vorbis_open_memory(xbuffer->Get(), xbuffer->GetSize(), NULL, NULL);
-	if(!stream)
-		{
-			XDEBUG_PRINTCOLOR(4,__L("File Load Failed"), xfile->GetPathNameFile());
-			return false; // need to check the specific error
-		}
+  stream = stb_vorbis_open_memory(xbuffer->Get(), xbuffer->GetSize(), NULL, NULL);
+  if(!stream)
+    {
+      XDEBUG_PRINTCOLOR(4,__L("File Load Failed"), xfile->GetPathNameFile());
+      return false; // need to check the specific error
+    }
 
-	info = stb_vorbis_get_info(stream);
-	
-	channels = info.channels;
-	samplerate = info.sample_rate;
-	samples = stb_vorbis_stream_length_in_samples(stream)*channels; // this product is possibly redundant
+  info = stb_vorbis_get_info(stream);
 
-	duration = stb_vorbis_stream_length_in_seconds(stream);
+  channels = info.channels;
+  samplerate = info.sample_rate;
+  samples = stb_vorbis_stream_length_in_samples(stream)*channels; // this product is possibly redundant
 
-	xbufferdecodeddata=new XBUFFER(false);
-	if(!xbufferdecodeddata)
-		{
-			return false;
-		}
+  duration = stb_vorbis_stream_length_in_seconds(stream);
 
-	xbufferdecodeddata->Resize(samples*2); // we must multiply by 2 because ogg expects shorts
+  xbufferdecodeddata=new XBUFFER(false);
+  if(!xbufferdecodeddata)
+    {
+      return false;
+    }
 
-	// perform the actual decoding
-	int read = stb_vorbis_get_samples_short_interleaved(stream, channels, (short*)(xbufferdecodeddata->Get()), samples);
+  xbufferdecodeddata->Resize(samples*2); // we must multiply by 2 because ogg expects shorts
 
-	// try to deallocate the allocacated memory
-	stb_vorbis_close(stream);
+  // perform the actual decoding
+  int read = stb_vorbis_get_samples_short_interleaved(stream, channels, (short*)(xbufferdecodeddata->Get()), samples);
 
-	this->name.Set(name);
+  // try to deallocate the allocacated memory
+  stb_vorbis_close(stream);
 
-	return true;
+  this->name.Set(name);
+
+  return true;
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	SNDFILEOGG::LoadFile
-*/	
-/**	
-//	
-//	loads an ogg file from disk and decodes in memory
-//	
-//	@author				Imanol Celaya Ruiz de Alegria
-//	@version			03/11/2015 13:20:27
-//	
-//	@return 			bool : 
+//  SNDFILEOGG::LoadFile
+*/
+/**
 //
-//  @param				xpath : 
-//  @param				name : 
+//  loads an ogg file from disk and decodes in memory
+//
+//  @author       Imanol Celaya Ruiz de Alegria
+//  @version      03/11/2015 13:20:27
+//
+//  @return       bool :
+//
+//  @param        xpath :
+//  @param        name :
 */
 /*-----------------------------------------------------------------*/
 bool SNDFILEOGG::LoadFile(XPATH& xpath, XCHAR* name, bool streaming)
 {
-	return LoadFile(xpath.Get(), name, streaming);
+  return LoadFile(xpath.Get(), name, streaming);
 }
 
 

@@ -1,16 +1,16 @@
 /*------------------------------------------------------------------------------------------
-//	DIONTP.CPP
-//	
-//	Data IO Network Time Protocol Class
-//   
-//	Author						: Abraham J. Velez
-//	Date Of Creation	: 09/02/2013 15:28:15
-//	Last Mofificacion	:	
-//	
-//	GEN  Copyright (C).  All right reserved.
+//  DIONTP.CPP
+//
+//  Data IO Network Time Protocol Class
+//
+//  Author            : Abraham J. Velez
+//  Date Of Creation  : 09/02/2013 15:28:15
+//  Last Mofificacion :
+//
+//  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
 #include "XFactory.h"
@@ -25,10 +25,10 @@
 
 #include "XMemory.h"
 
-	
+
 /*---- GENERAL VARIABLE ------------------------------------------------------------------*/
-	
-	
+
+
 /*---- CLASS MEMBERS ---------------------------------------------------------------------*/
 
 
@@ -38,66 +38,66 @@
 
 /*-------------------------------------------------------------------
 //  DIONTP::DIONTP
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			10/02/2013 18:34:32
-//	
-//	@return 		
+//
+//
+//  @author       Abraham J. Velez
+//  @version      10/02/2013 18:34:32
+//
+//  @return
 
- 
-//  @param				publisher : 
+
+//  @param        publisher :
 */
 /*-----------------------------------------------------------------*/
 DIONTP::DIONTP()
 {
   Clean();
 
-	xtimer = xfactory->CreateTimer();
-		
-	if(diofactory)
-		{
-			diostreamudpcfg = new DIOSTREAMUDPCONFIG();
-			diostreamudp		= (DIOSTREAMUDP*)diofactory->CreateStreamIO(diostreamudpcfg);
-		}
+  xtimer = xfactory->CreateTimer();
+
+  if(diofactory)
+    {
+      diostreamudpcfg = new DIOSTREAMUDPCONFIG();
+      diostreamudp    = (DIOSTREAMUDP*)diofactory->CreateStreamIO(diostreamudpcfg);
+    }
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIONTP::~DIONTP
-*/ 
+*/
 /**
-//  
-//  
+//
+//
 //  @author       Abraham J. Velez
 //  @version      25/09/2012 11:21:17
-//  
-//  @return       virtual : 
+//
+//  @return       virtual :
 //  */
 /*-----------------------------------------------------------------*/
 DIONTP::~DIONTP()
 {
 
-	xfactory->DeleteTimer(xtimer);
-	xtimer = NULL;
-	
-	if(diofactory)
-		{
-			if(diostreamudpcfg)
-				{
-					delete diostreamudpcfg; 
-					diostreamudpcfg = NULL;
-				}
+  xfactory->DeleteTimer(xtimer);
+  xtimer = NULL;
 
-			if(diostreamudp)
-				{
-					diofactory->DeleteStreamIO(diostreamudp);
-					diostreamudp    = NULL;
-				}
-		}
+  if(diofactory)
+    {
+      if(diostreamudpcfg)
+        {
+          delete diostreamudpcfg;
+          diostreamudpcfg = NULL;
+        }
+
+      if(diostreamudp)
+        {
+          diofactory->DeleteStreamIO(diostreamudp);
+          diostreamudp    = NULL;
+        }
+    }
 
   Clean();
 }
@@ -107,82 +107,82 @@ DIONTP::~DIONTP()
 
 /*-------------------------------------------------------------------
 //  DIONTP::GetTimeReponse
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			12/02/2013 19:39:47
-//	
-//	@return 			bool : 
-//	@param				urlntpserver : 
-//  @param				timeout : 
-//  @param				hardwareuselittleendian : 
-//  @param				response : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      12/02/2013 19:39:47
+//
+//  @return       bool :
+//  @param        urlntpserver :
+//  @param        timeout :
+//  @param        hardwareuselittleendian :
+//  @param        response :
 */
 /*-----------------------------------------------------------------*/
 bool DIONTP::GetTimeResponse(XCHAR* urlntpserver, int timeout, bool hardwareuselittleendian, DIONTPRESPONSE& response)
 {
-	if(!xtimer)																return false;
-	if((!diostreamudpcfg) || (!diostreamudp)) return false;
+  if(!xtimer)                               return false;
+  if((!diostreamudpcfg) || (!diostreamudp)) return false;
 
-	bool status  = false;
+  bool status  = false;
 
-	memset(&response, 0, sizeof(DIONTPRESPONSE));
+  memset(&response, 0, sizeof(DIONTPRESPONSE));
 
-	diostreamudpcfg->SetMode(DIOSTREAMMODE_CLIENT);
-	diostreamudpcfg->SetIsUsedDatagrams(false);
-	diostreamudpcfg->GetRemoteURL()->Set(urlntpserver);
-	diostreamudpcfg->SetRemotePort(DIONTP_DEFAULTPORT);
-	
-	if(!diostreamudp->Open()) return false;
+  diostreamudpcfg->SetMode(DIOSTREAMMODE_CLIENT);
+  diostreamudpcfg->SetIsUsedDatagrams(false);
+  diostreamudpcfg->GetRemoteURL()->Set(urlntpserver);
+  diostreamudpcfg->SetRemotePort(DIONTP_DEFAULTPORT);
 
-	DIONTPBASICINFO basicinfo;
+  if(!diostreamudp->Open()) return false;
 
-	memset((XBYTE*)&basicinfo, 0, sizeof(DIONTPBASICINFO));
-	
-	basicinfo.livnmode = 27; //Encoded representation which represents NTP Client Request & NTP version 3.0
+  DIONTPBASICINFO basicinfo;
 
-	if(diostreamudp->Write((XBYTE*)&basicinfo,sizeof(DIONTPBASICINFO))) 
-		{
-			xtimer->Reset();
+  memset((XBYTE*)&basicinfo, 0, sizeof(DIONTPBASICINFO));
 
-			DIONTPFULLPACKET fullpacket;
+  basicinfo.livnmode = 27; //Encoded representation which represents NTP Client Request & NTP version 3.0
 
-			XDWORD br = 0;
-			while(!br)
-				{					
-					memset((XBYTE*)&fullpacket,0 ,sizeof(DIONTPFULLPACKET));
+  if(diostreamudp->Write((XBYTE*)&basicinfo,sizeof(DIONTPBASICINFO)))
+    {
+      xtimer->Reset();
 
-					br = diostreamudp->Read((XBYTE*)&fullpacket, sizeof(DIONTPBASICINFO));												
-					if(br>=sizeof(DIONTPBASICINFO)) 
-						{							
-							response.stratum					 = fullpacket.basic.stratum;
-							response.leapindicator		 = (fullpacket.basic.livnmode & 0xC0) >> 6;
-							response.originatetime		 = ConvertTimePacket(fullpacket.basic.originatetimestamp	, hardwareuselittleendian);
-							response.receivetime			 = ConvertTimePacket(fullpacket.basic.receivetimestamp		, hardwareuselittleendian);
-							response.transmittime			 = ConvertTimePacket(fullpacket.basic.transmittimestamp	, hardwareuselittleendian);
+      DIONTPFULLPACKET fullpacket;
 
-							long long roundtripdelay   = (long long)(response.destinationtime - response.originatetime) - (long long)(response.receivetime - response.transmittime);
-							long long localclockoffset = (long long)(response.receivetime - response.originatetime)			+ (long long)(response.transmittime - response.destinationtime);
-							response.roundtripdelay		 = (double)(roundtripdelay);
-							response.localclockoffset  = (double)(localclockoffset/2);
+      XDWORD br = 0;
+      while(!br)
+        {
+          memset((XBYTE*)&fullpacket,0 ,sizeof(DIONTPFULLPACKET));
 
-							status  = true;				
-							break;
-						}			
+          br = diostreamudp->Read((XBYTE*)&fullpacket, sizeof(DIONTPBASICINFO));
+          if(br>=sizeof(DIONTPBASICINFO))
+            {
+              response.stratum           = fullpacket.basic.stratum;
+              response.leapindicator     = (fullpacket.basic.livnmode & 0xC0) >> 6;
+              response.originatetime     = ConvertTimePacket(fullpacket.basic.originatetimestamp  , hardwareuselittleendian);
+              response.receivetime       = ConvertTimePacket(fullpacket.basic.receivetimestamp    , hardwareuselittleendian);
+              response.transmittime      = ConvertTimePacket(fullpacket.basic.transmittimestamp , hardwareuselittleendian);
 
-					if((int)xtimer->GetMeasureSeconds()>= timeout) 
-						{
-							status = false;
-							break;
-						}
-				}
-		}
+              long long roundtripdelay   = (long long)(response.destinationtime - response.originatetime) - (long long)(response.receivetime - response.transmittime);
+              long long localclockoffset = (long long)(response.receivetime - response.originatetime)     + (long long)(response.transmittime - response.destinationtime);
+              response.roundtripdelay    = (double)(roundtripdelay);
+              response.localclockoffset  = (double)(localclockoffset/2);
 
-	diostreamudp->Close();
-			
-	return status;
+              status  = true;
+              break;
+            }
+
+          if((int)xtimer->GetMeasureSeconds()>= timeout)
+            {
+              status = false;
+              break;
+            }
+        }
+    }
+
+  diostreamudp->Close();
+
+  return status;
 }
 
 
@@ -190,23 +190,23 @@ bool DIONTP::GetTimeResponse(XCHAR* urlntpserver, int timeout, bool hardwareusel
 
 /*-------------------------------------------------------------------
 //  DIONTP::GetTimeReponse
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			12/02/2013 19:39:58
-//	
-//	@return 			bool : 
-//	@param				urlntpserver : 
-//  @param				timeout : 
-//  @param				hardwareuselittleendian : 
-//  @param				response : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      12/02/2013 19:39:58
+//
+//  @return       bool :
+//  @param        urlntpserver :
+//  @param        timeout :
+//  @param        hardwareuselittleendian :
+//  @param        response :
 */
 /*-----------------------------------------------------------------*/
 bool DIONTP::GetTimeResponse(DIOURL& urlntpserver, int timeout, bool hardwareuselittleendian, DIONTPRESPONSE& response)
 {
-	return GetTimeResponse(urlntpserver.Get(), timeout, hardwareuselittleendian, response);
+  return GetTimeResponse(urlntpserver.Get(), timeout, hardwareuselittleendian, response);
 }
 
 
@@ -214,33 +214,33 @@ bool DIONTP::GetTimeResponse(DIOURL& urlntpserver, int timeout, bool hardwareuse
 
 /*-------------------------------------------------------------------
 //  DIONTP::GetTimeSeconds
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			10/02/2013 19:27:25
-//	
-//	@return 			bool : 
-//	@param				urlntpserver : 
-//  @param				timeout : 
-//  @param				hardwareuselittleendian : 
-//  @param				timeseconds : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      10/02/2013 19:27:25
+//
+//  @return       bool :
+//  @param        urlntpserver :
+//  @param        timeout :
+//  @param        hardwareuselittleendian :
+//  @param        timeseconds :
 */
 /*-----------------------------------------------------------------*/
 bool DIONTP::GetTimeSeconds(XCHAR* urlntpserver, int timeout, bool hardwareuselittleendian, XQWORD& timeseconds)
 {
-	DIONTPRESPONSE response;
+  DIONTPRESPONSE response;
 
-	timeseconds = 0;
+  timeseconds = 0;
 
-	if(GetTimeResponse(urlntpserver,timeout, hardwareuselittleendian, response))
-		{			
-			timeseconds = (response.receivetime >> 32);
+  if(GetTimeResponse(urlntpserver,timeout, hardwareuselittleendian, response))
+    {
+      timeseconds = (response.receivetime >> 32);
 
-		} else return false;
-			
-	return timeseconds?true:false;
+    } else return false;
+
+  return timeseconds?true:false;
 }
 
 
@@ -249,68 +249,68 @@ bool DIONTP::GetTimeSeconds(XCHAR* urlntpserver, int timeout, bool hardwareuseli
 
 /*-------------------------------------------------------------------
 //  DIONTP::GetTimeSeconds
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			10/02/2013 19:27:39
-//	
-//	@return 			bool : 
-//	@param				urlntpserver : 
-//  @param				timeout : 
-//  @param				hardwareuselittleendian : 
-//  @param				timeseconds : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      10/02/2013 19:27:39
+//
+//  @return       bool :
+//  @param        urlntpserver :
+//  @param        timeout :
+//  @param        hardwareuselittleendian :
+//  @param        timeseconds :
 */
 /*-----------------------------------------------------------------*/
 bool DIONTP::GetTimeSeconds(DIOURL& urlntpserver, int timeout, bool hardwareuselittleendian, XQWORD& timeseconds)
 {
-	return GetTimeSeconds(urlntpserver.Get(), timeout, hardwareuselittleendian, timeseconds);
+  return GetTimeSeconds(urlntpserver.Get(), timeout, hardwareuselittleendian, timeseconds);
 }
 
 
 
 /*-------------------------------------------------------------------
-//	DIONTP::GetTime
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			17/09/2014 9:50:00
-//	
-//	@return 			bool : 
+//  DIONTP::GetTime
+*/
+/**
 //
-//  @param				urlntpserver : 
-//  @param				timeout : 
-//  @param				hardwareuselittleendian : 
-//  @param				xdatetime : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      17/09/2014 9:50:00
+//
+//  @return       bool :
+//
+//  @param        urlntpserver :
+//  @param        timeout :
+//  @param        hardwareuselittleendian :
+//  @param        xdatetime :
 */
 /*-----------------------------------------------------------------*/
 bool DIONTP::GetTime(XCHAR* urlntpserver, int timeout, bool hardwareuselittleendian, XDATETIME& xdatetime)
 {
-	XQWORD timeseconds;
+  XQWORD timeseconds;
 
-	bool status = GetTimeSeconds(urlntpserver, timeout, hardwareuselittleendian, timeseconds);
-	if(status) 
-		{
-			XDWORD sec = (XDWORD)timeseconds;
-	
-			if(xdatetime.IsDayLigthSavingTime()) sec += 3600;
+  bool status = GetTimeSeconds(urlntpserver, timeout, hardwareuselittleendian, timeseconds);
+  if(status)
+    {
+      XDWORD sec = (XDWORD)timeseconds;
 
-			sec += (xdatetime.GetDifferenceGMT()*3600);
-			
-			xdatetime.SetSeconds((XWORD)(sec % 60));   sec /= 60;
-			xdatetime.SetMinutes((XWORD)(sec % 60));   sec /= 60;
-			xdatetime.SetHours((XWORD)(sec % 24));     sec /= 24;
-  
-			long JD = sec + DIONTP_JAN1ST1900;
-		
-			xdatetime.GetDateFromNDays(JD,false);			
-		}
+      if(xdatetime.IsDayLigthSavingTime()) sec += 3600;
 
-	return status;
+      sec += (xdatetime.GetDifferenceGMT()*3600);
+
+      xdatetime.SetSeconds((XWORD)(sec % 60));   sec /= 60;
+      xdatetime.SetMinutes((XWORD)(sec % 60));   sec /= 60;
+      xdatetime.SetHours((XWORD)(sec % 24));     sec /= 24;
+
+      long JD = sec + DIONTP_JAN1ST1900;
+
+      xdatetime.GetDateFromNDays(JD,false);
+    }
+
+  return status;
 }
 
 
@@ -318,44 +318,44 @@ bool DIONTP::GetTime(XCHAR* urlntpserver, int timeout, bool hardwareuselittleend
 
 /*-------------------------------------------------------------------
 //  DIONTP::GetTime
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			11/02/2013 20:12:25
-//	
-//	@return 			bool : 
-//	@param				urlntpserver : 
-//  @param				timeout : 
-//  @param				hardwareuselittleendian : 
-//  @param				xtime : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      11/02/2013 20:12:25
+//
+//  @return       bool :
+//  @param        urlntpserver :
+//  @param        timeout :
+//  @param        hardwareuselittleendian :
+//  @param        xtime :
 */
 /*-----------------------------------------------------------------*/
 bool DIONTP::GetTime(DIOURL& urlntpserver, int timeout, bool hardwareuselittleendian, XDATETIME& xtime)
 {
-	return GetTime(urlntpserver.Get(), timeout, hardwareuselittleendian, xtime);	
+  return GetTime(urlntpserver.Get(), timeout, hardwareuselittleendian, xtime);
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIONTP::Clean
-*/ 
+*/
 /**
-//  
-//  
+//
+//
 //  @author       Abraham J. Velez
 //  @version      25/09/2012 11:22:15
-//  
-//  @return       void : 
+//
+//  @return       void :
 //  */
 /*-----------------------------------------------------------------*/
 void DIONTP::Clean()
 {
-  	
-	diostreamudpcfg = NULL;
-	diostreamudp		= NULL; 
+
+  diostreamudpcfg = NULL;
+  diostreamudp    = NULL;
 }
 
 
@@ -363,26 +363,26 @@ void DIONTP::Clean()
 
 /*-------------------------------------------------------------------
 //  DIONTP::ConvertTimePacket
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			12/02/2013 19:50:45
-//	
-//	@return 			XQWORD : 
-//	@param				timepacket : 
-//  @param				hardwareuselittleendian : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      12/02/2013 19:50:45
+//
+//  @return       XQWORD :
+//  @param        timepacket :
+//  @param        hardwareuselittleendian :
 */
 /*-----------------------------------------------------------------*/
 XQWORD DIONTP::ConvertTimePacket(DIOTIMEPACKET& timepacket, bool hardwareuselittleendian)
 {
-	XDWORD  dwhigh   =  (hardwareuselittleendian)?SwapDWORD(timepacket.integer)    : timepacket.integer;	
-  XDWORD  dwlow		 =  (hardwareuselittleendian)?SwapDWORD(timepacket.fractional) : timepacket.fractional;									
-	XQWORD	timedata;
+  XDWORD  dwhigh   =  (hardwareuselittleendian)?SwapDWORD(timepacket.integer)    : timepacket.integer;
+  XDWORD  dwlow    =  (hardwareuselittleendian)?SwapDWORD(timepacket.fractional) : timepacket.fractional;
+  XQWORD  timedata;
 
-	timedata  = ((XQWORD) dwhigh) << 32;
-	timedata |= dwlow;
+  timedata  = ((XQWORD) dwhigh) << 32;
+  timedata |= dwlow;
 
-	return timedata;
+  return timedata;
 }

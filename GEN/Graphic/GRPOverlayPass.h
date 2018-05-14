@@ -1,17 +1,17 @@
 /*------------------------------------------------------------------------------------------
-//	GRPOVERLAYPASS.H
+//  GRPOVERLAYPASS.H
 */
 /**
 // \class
 //
 //  Overlay stencil pass
 //
-//	@author	 Diego Martinez Ruiz de Gaona
+//  @author  Diego Martinez Ruiz de Gaona
 //
-//	Date Of Creation	: 13/ Octubre /2017
-//	Last Modification	:
+//  Date Of Creation  : 13/ Octubre /2017
+//  Last Modification :
 */
-/*	GEN  Copyright (C).  All right reserved.
+/*  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
 
 #ifndef _GRPOVERLAYPASS_H_
@@ -31,21 +31,21 @@ class GRPMATERIAL;
 class  GRPOVERLAYPASS : public GRPBACKGROUNDPASS
 {
 public:
-		GRPOVERLAYPASS(XCHAR* name = __L("overlay"));
-		~GRPOVERLAYPASS();
+    GRPOVERLAYPASS(XCHAR* name = __L("overlay"));
+    ~GRPOVERLAYPASS();
 
-		void							Begin			();
-		void							End				();		
-		bool							OnAdded		();
+    void              Begin     ();
+    void              End       ();
+    bool              OnAdded   ();
 
-protected:		
+protected:
 
 private:
 
-		void		Clean()
-		{
-						
-		}
+    void    Clean()
+    {
+
+    }
 
 
 

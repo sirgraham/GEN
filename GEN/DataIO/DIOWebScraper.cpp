@@ -1,16 +1,16 @@
 /*------------------------------------------------------------------------------------------
-//	DIOWEBSCRAPER.CPP
-//	
-//	Web Scraper Class
-//   
-//	Author						: Abraham J. Velez
-//	Date Of Creation	: 05/11/2007 16:26:37
-//	Last Mofificacion	:	
-//	
-//	GEN  Copyright (C).  All right reserved.			 
+//  DIOWEBSCRAPER.CPP
+//
+//  Web Scraper Class
+//
+//  Author            : Abraham J. Velez
+//  Date Of Creation  : 05/11/2007 16:26:37
+//  Last Mofificacion :
+//
+//  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
 #include "XFactory.h"
@@ -29,47 +29,47 @@
 #include "DIOStreamTCPIP.h"
 #include "DIOWebClient.h"
 #include "DIOCheckInternetConnexion.h"
-	
+
 #include "DIOWebScraper.h"
 
 #include "XMemory.h"
-	
+
 /*---- GENERAL VARIABLE ------------------------------------------------------------------*/
 
-	
+
 /*---- CLASS MEMBERS ---------------------------------------------------------------------*/
 
 
 
 /*-------------------------------------------------------------------
 //  DIOWEBSCRAPER::DIOWEBSCRAPER
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			08/02/2014 16:17:12
-//	
-//	@return 			
-//  @param				xpublisher : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      08/02/2014 16:17:12
+//
+//  @return
+//  @param        xpublisher :
 */
 /*-----------------------------------------------------------------*/
 DIOWEBSCRAPER::DIOWEBSCRAPER()
 {
-	Clean();
-			
-	xml = new XFILEXML();
-	if(!xml)  return;
+  Clean();
 
-	xmutexdo = xfactory->Create_Mutex();
-	if(!xmutexdo) return;
-	
-	if(diofactory) webclient = new DIOWEBCLIENT;		
-			
-	cache = new DIOWEBSCRAPERCACHE();
-	if(!cache) return;
+  xml = new XFILEXML();
+  if(!xml)  return;
 
-	URLdownload = diofactory->CreateURL();
+  xmutexdo = xfactory->Create_Mutex();
+  if(!xmutexdo) return;
+
+  if(diofactory) webclient = new DIOWEBCLIENT;
+
+  cache = new DIOWEBSCRAPERCACHE();
+  if(!cache) return;
+
+  URLdownload = diofactory->CreateURL();
 }
 
 
@@ -77,42 +77,42 @@ DIOWEBSCRAPER::DIOWEBSCRAPER()
 
 /*-------------------------------------------------------------------
 //  DIOWEBSCRAPER::~DIOWEBSCRAPER
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			05/11/2007 16:28:53
-//	
-//	@return
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      05/11/2007 16:28:53
+//
+//  @return
+//  */
 /*-----------------------------------------------------------------*/
 DIOWEBSCRAPER::~DIOWEBSCRAPER()
-{	
-	DeleteAllValues();
+{
+  DeleteAllValues();
 
-	if(URLdownload)
-		{	 
-			diofactory->DeleteURL(URLdownload);
-		}
+  if(URLdownload)
+    {
+      diofactory->DeleteURL(URLdownload);
+    }
 
-	if(cache)
-		{
-			cache->DeleteAll();
-			delete cache;
-		}
+  if(cache)
+    {
+      cache->DeleteAll();
+      delete cache;
+    }
 
-	if(xml) 
-		{
-			if(xml->IsOpen()) xml->Close();
-			delete xml;
-		}
- 
-	if(webclient) delete webclient;
+  if(xml)
+    {
+      if(xml->IsOpen()) xml->Close();
+      delete xml;
+    }
 
-	if(xmutexdo) xfactory->Delete_Mutex(xmutexdo);
-		
-	Clean();
+  if(webclient) delete webclient;
+
+  if(xmutexdo) xfactory->Delete_Mutex(xmutexdo);
+
+  Clean();
 }
 
 
@@ -120,50 +120,50 @@ DIOWEBSCRAPER::~DIOWEBSCRAPER()
 
 /*-------------------------------------------------------------------
 //  DIOWEBSCRAPER::Load
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			27/03/2013 23:00:52
-//	
-//	@return 			bool : 
-//	@param				namefile : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      27/03/2013 23:00:52
+//
+//  @return       bool :
+//  @param        namefile :
 */
 /*-----------------------------------------------------------------*/
 bool DIOWEBSCRAPER::Load(XCHAR* namefile)
 {
-	static bool webupdate = false;
+  static bool webupdate = false;
 
-	if(!xml)	return false;
-	
-	XPATH xpath;
+  if(!xml)  return false;
 
-	xpath.Empty();
+  XPATH xpath;
 
-	XPATHSMANAGER::GetInstance().GetPathOfSection(XPATHSMANAGERSECTIONTYPE_WEBSCRAPER, xpath);
-	if(!xpath.IsEmpty()) xpath.Slash_Add();
-	xpath += DIOWEBSCRAPER_NAMEFILE;
+  xpath.Empty();
 
-	if((!webupdate) && (URLdownload))
-		{
-			webupdate = Download((*URLdownload), xpath);
-		}
-	
-	if(!xml->Open(xpath, true)) 
-		{
-			XPATHSMANAGER::GetInstance().GetPathOfSection(XPATHSMANAGERSECTIONTYPE_WEBSCRAPER, xpath);
-			if(!xpath.IsEmpty()) xpath.Slash_Add();
-			xpath += namefile;
+  XPATHSMANAGER::GetInstance().GetPathOfSection(XPATHSMANAGERSECTIONTYPE_WEBSCRAPER, xpath);
+  if(!xpath.IsEmpty()) xpath.Slash_Add();
+  xpath += DIOWEBSCRAPER_NAMEFILE;
 
-			if(!xml->Open(xpath, true)) return false;
-		}	
+  if((!webupdate) && (URLdownload))
+    {
+      webupdate = Download((*URLdownload), xpath);
+    }
 
-	xml->ReadAndDecodeAllLines();
+  if(!xml->Open(xpath, true))
+    {
+      XPATHSMANAGER::GetInstance().GetPathOfSection(XPATHSMANAGERSECTIONTYPE_WEBSCRAPER, xpath);
+      if(!xpath.IsEmpty()) xpath.Slash_Add();
+      xpath += namefile;
 
-	xml->Close();
+      if(!xml->Open(xpath, true)) return false;
+    }
 
-	return true;
+  xml->ReadAndDecodeAllLines();
+
+  xml->Close();
+
+  return true;
 }
 
 
@@ -171,59 +171,59 @@ bool DIOWEBSCRAPER::Load(XCHAR* namefile)
 
 /*-------------------------------------------------------------------
 //  DIOWEBSCRAPER::Load
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			27/03/2013 18:46:10
-//	
-//	@return 			bool : 
-//	@param				path : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      27/03/2013 18:46:10
+//
+//  @return       bool :
+//  @param        path :
 */
 /*-----------------------------------------------------------------*/
 bool DIOWEBSCRAPER::Load(XPATH& namefile)
 {
-	return Load(namefile.Get());
+  return Load(namefile.Get());
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	 DIOWEBSCRAPER::Download
+//   DIOWEBSCRAPER::Download
 */
 /**
 //
-//	
 //
-//	@author		Abraham J. Velez 
-//	@version	25/01/2018 13:50:57
-//	@return		bool : 
 //
-//	@param		DIOURL& : 
-//	@param		XPATH& : 
+//  @author   Abraham J. Velez
+//  @version  25/01/2018 13:50:57
+//  @return   bool :
+//
+//  @param    DIOURL& :
+//  @param    XPATH& :
 //
 *//*-----------------------------------------------------------------*/
 bool DIOWEBSCRAPER::Download(DIOURL& URL, XPATH& xpath)
 {
-	if(URL.IsEmpty())   return false;
+  if(URL.IsEmpty())   return false;
 
-	DIOURL downloadURL;
-	bool	 status;
+  DIOURL downloadURL;
+  bool   status;
 
-	DIOWEBCLIENT* webclient = new DIOWEBCLIENT();
-	if(!webclient)  return false;	
-	
-	downloadURL.Set(URL.Get());	
-	downloadURL.Slash_Add();			
-	downloadURL.Add(DIOWEBSCRAPER_NAMEFILE);
-					
-	status = webclient->Get(downloadURL, xpath);
+  DIOWEBCLIENT* webclient = new DIOWEBCLIENT();
+  if(!webclient)  return false;
 
-	delete webclient;
-		
-	return status;
+  downloadURL.Set(URL.Get());
+  downloadURL.Slash_Add();
+  downloadURL.Add(DIOWEBSCRAPER_NAMEFILE);
+
+  status = webclient->Get(downloadURL, xpath);
+
+  delete webclient;
+
+  return status;
 }
 
 
@@ -231,280 +231,280 @@ bool DIOWEBSCRAPER::Download(DIOURL& URL, XPATH& xpath)
 
 /*-------------------------------------------------------------------
 //  DIOWEBSCRAPER::Do
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			14/02/2014 12:49:43
-//	
-//	@return 			bool : 
-//	@param				namewebservice : 
-//  @param				timeoutforurl : 
-//  @param				localIP : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      14/02/2014 12:49:43
+//
+//  @return       bool :
+//  @param        namewebservice :
+//  @param        timeoutforurl :
+//  @param        localIP :
 */
 /*-----------------------------------------------------------------*/
 bool DIOWEBSCRAPER::Do(XCHAR* namewebservice, int timeoutforurl, XSTRING* localIP)
 {
-	if(!xml) return false;	
+  if(!xml) return false;
 
-	XFILEXMLELEMENT* root = xml->GetRoot();
-	if(!root) return false;
-		
-	XSTRING namews;	
+  XFILEXMLELEMENT* root = xml->GetRoot();
+  if(!root) return false;
 
-	XFILEXMLELEMENT* nodewebservice = NULL;
+  XSTRING namews;
 
-	for(int c=0; c<root->GetNElements(); c++)
-		{
-			nodewebservice = root->GetElement(c);
-			if(nodewebservice)
-				{
-					namews = nodewebservice->GetValueAttribute(__L("name"));
-					if(!namews.Compare(namewebservice)) break;
+  XFILEXMLELEMENT* nodewebservice = NULL;
 
-					nodewebservice = NULL;
-				}
-		}
+  for(int c=0; c<root->GetNElements(); c++)
+    {
+      nodewebservice = root->GetElement(c);
+      if(nodewebservice)
+        {
+          namews = nodewebservice->GetValueAttribute(__L("name"));
+          if(!namews.Compare(namewebservice)) break;
 
-	if(nodewebservice)
-		{		
-			DeleteAllValues();
+          nodewebservice = NULL;
+        }
+    }
 
-			for(int c=0; c<nodewebservice->GetNElements(); c++)
-				{
-					bool priorityvaluesobtain = true;
+  if(nodewebservice)
+    {
+      DeleteAllValues();
 
-					XFILEXMLELEMENT* nodeweb = nodewebservice->GetElement(c);
-					if(nodeweb)
-						{
-							XBUFFER  webpage;
-							DIOURL   url;
+      for(int c=0; c<nodewebservice->GetNElements(); c++)
+        {
+          bool priorityvaluesobtain = true;
 
-							if(!ChangeURL(nodeweb->GetValueAttribute(__L("url")), url)) 
-								{
-									return false;
-								}
+          XFILEXMLELEMENT* nodeweb = nodewebservice->GetElement(c);
+          if(nodeweb)
+            {
+              XBUFFER  webpage;
+              DIOURL   url;
 
-							if(webclient->Get(url, webpage, DIOWEBSCRAPER_DEFAULTUSERAGENT, timeoutforurl, localIP))
-								{
-									if(webpage.GetSize())
-										{							
-											XSTRING format;
+              if(!ChangeURL(nodeweb->GetValueAttribute(__L("url")), url))
+                {
+                  return false;
+                }
 
-											format = nodeweb->GetValueAttribute(__L("format"));
+              if(webclient->Get(url, webpage, DIOWEBSCRAPER_DEFAULTUSERAGENT, timeoutforurl, localIP))
+                {
+                  if(webpage.GetSize())
+                    {
+                      XSTRING format;
 
-											if(!format.Compare(__L("JSON"),true))
-												{
-													XFILEJSON* json = new XFILEJSON();
-													if(json)
-														{											
-															json->DeleteAllLines();																						
-															json->AddBufferLines(XFILETXTFORMATCHAR_ASCII, webpage);																		
-															json->DecodeAllLines();
-																						
-															for(int d=0; d<nodeweb->GetNElements(); d++)
-																{		
-																	XFILEXMLELEMENT* nodevalue = nodeweb->GetElement(d);
-																	if(nodevalue)
-																		{
-																			XSTRING	 name;																	
-																			XSTRING	 prioritystring;
-																			int			 priority;
-																			XSTRING	 namevalue;		
+                      format = nodeweb->GetValueAttribute(__L("format"));
 
-																			name					 = nodevalue->GetValueAttribute(__L("name"));
+                      if(!format.Compare(__L("JSON"),true))
+                        {
+                          XFILEJSON* json = new XFILEJSON();
+                          if(json)
+                            {
+                              json->DeleteAllLines();
+                              json->AddBufferLines(XFILETXTFORMATCHAR_ASCII, webpage);
+                              json->DecodeAllLines();
 
-																			prioritystring = nodevalue->GetValueAttribute(__L("priority"));  
-																			priority			 = prioritystring.ConvertToInt();
+                              for(int d=0; d<nodeweb->GetNElements(); d++)
+                                {
+                                  XFILEXMLELEMENT* nodevalue = nodeweb->GetElement(d);
+                                  if(nodevalue)
+                                    {
+                                      XSTRING  name;
+                                      XSTRING  prioritystring;
+                                      int      priority;
+                                      XSTRING  namevalue;
 
-																			namevalue			 = nodevalue->GetValueAttribute(__L("namevalue"));
-																											
-																			XFILEJSONVALUE* jsonvalue = json->GetValue(namevalue,NULL);
-																			if(jsonvalue) 
-																				{
-																					switch(jsonvalue->GetType())
-																						{
-																							case XFILEJSONVALUETYPE_UNKNOWN          : break;
+                                      name           = nodevalue->GetValueAttribute(__L("name"));
 
-																							case XFILEJSONVALUETYPE_NUMBER          : { int			pvalue = (int)jsonvalue->GetValueInteger();
-																																													XSTRING	string;
+                                      prioritystring = nodevalue->GetValueAttribute(__L("priority"));
+                                      priority       = prioritystring.ConvertToInt();
 
-																																													string.Format(__L("%d"),pvalue);
-																																										 
-																																													AddValue(name, string);		
-																																												}																						
-																																												break;
+                                      namevalue      = nodevalue->GetValueAttribute(__L("namevalue"));
 
-																							case XFILEJSONVALUETYPE_NUMBERSPECIAL   : { float		pvalue = (float)jsonvalue->GetValueFloating();
-																																													XSTRING	string;
+                                      XFILEJSONVALUE* jsonvalue = json->GetValue(namevalue,NULL);
+                                      if(jsonvalue)
+                                        {
+                                          switch(jsonvalue->GetType())
+                                            {
+                                              case XFILEJSONVALUETYPE_UNKNOWN          : break;
 
-																																													string.Format(__L("%f"),pvalue);
-																																										 
-																																													AddValue(name, string);		
-																																												}				
-																																												break;
+                                              case XFILEJSONVALUETYPE_NUMBER          : { int     pvalue = (int)jsonvalue->GetValueInteger();
+                                                                                          XSTRING string;
 
-																							case XFILEJSONVALUETYPE_STRING					:	{ XSTRING* pvalue = (XSTRING*)jsonvalue->GetValuePointer();
-																																													if(pvalue) AddValue(name, (*pvalue));		
-																																												}
-																																												break;
+                                                                                          string.Format(__L("%d"),pvalue);
 
-																							case XFILEJSONVALUETYPE_OBJECT          : break;
-																							case XFILEJSONVALUETYPE_ARRAY           : break;
-																							case XFILEJSONVALUETYPE_BOOLEAN         : break;
-																							case XFILEJSONVALUETYPE_NULL            : break;
-																																					
-																						}
-																				} 
-																			 else																					
-																				{
-																					if(priority) priorityvaluesobtain = false;
-																				}
-																		}
-																}
-																																									
-															delete json;
-														}
-												}
+                                                                                          AddValue(name, string);
+                                                                                        }
+                                                                                        break;
 
-											if(!format.Compare(__L("HTML"),true))
-												{
-													for(int d=0; d<nodeweb->GetNElements(); d++)
-														{		
-															XFILEXMLELEMENT* nodevalue = nodeweb->GetElement(d);
-															if(nodevalue)
-																{
-																	XSTRING	 searchini;
-																	XSTRING	 searchend;
-																	XSTRING	 namevalue;
-																	XSTRING	 prioritystring;
-																	int			 priority;
+                                              case XFILEJSONVALUETYPE_NUMBERSPECIAL   : { float   pvalue = (float)jsonvalue->GetValueFloating();
+                                                                                          XSTRING string;
 
-																	XSTRING	 value;
+                                                                                          string.Format(__L("%f"),pvalue);
 
-																	namevalue = nodevalue->GetValueAttribute(__L("name"));  
-																	namevalue.ConvertHexFormatChars();
+                                                                                          AddValue(name, string);
+                                                                                        }
+                                                                                        break;
 
-																	prioritystring = nodevalue->GetValueAttribute(__L("priority"));  
-																	priority = prioritystring.ConvertToInt();
+                                              case XFILEJSONVALUETYPE_STRING          : { XSTRING* pvalue = (XSTRING*)jsonvalue->GetValuePointer();
+                                                                                          if(pvalue) AddValue(name, (*pvalue));
+                                                                                        }
+                                                                                        break;
 
-																	searchini = nodevalue->GetValueAttribute(__L("start")); 
-																	searchini.ConvertHexFormatChars();
+                                              case XFILEJSONVALUETYPE_OBJECT          : break;
+                                              case XFILEJSONVALUETYPE_ARRAY           : break;
+                                              case XFILEJSONVALUETYPE_BOOLEAN         : break;
+                                              case XFILEJSONVALUETYPE_NULL            : break;
 
-																	searchend = nodevalue->GetValueAttribute(__L("end"));;	
-																	searchend.ConvertHexFormatChars();
+                                            }
+                                        }
+                                       else
+                                        {
+                                          if(priority) priorityvaluesobtain = false;
+                                        }
+                                    }
+                                }
 
-																	if(ExtractString(searchini, searchend, &webpage, false, value))
-																		{ 
-																			if(!GetValue(namevalue))
-																				{
-																					AddValue(namevalue, value);
-																				}
-																		}
-																	 else
-																		{
-																			if(priority) priorityvaluesobtain = false;
-																		}
-																}
-														}
-												}
+                              delete json;
+                            }
+                        }
 
-											if(values.GetSize() && priorityvaluesobtain)  
-												{
-													return true;
-												}
-										}
-								}
-						}			
-				}
-		}
+                      if(!format.Compare(__L("HTML"),true))
+                        {
+                          for(int d=0; d<nodeweb->GetNElements(); d++)
+                            {
+                              XFILEXMLELEMENT* nodevalue = nodeweb->GetElement(d);
+                              if(nodevalue)
+                                {
+                                  XSTRING  searchini;
+                                  XSTRING  searchend;
+                                  XSTRING  namevalue;
+                                  XSTRING  prioritystring;
+                                  int      priority;
 
-	return false;
+                                  XSTRING  value;
+
+                                  namevalue = nodevalue->GetValueAttribute(__L("name"));
+                                  namevalue.ConvertHexFormatChars();
+
+                                  prioritystring = nodevalue->GetValueAttribute(__L("priority"));
+                                  priority = prioritystring.ConvertToInt();
+
+                                  searchini = nodevalue->GetValueAttribute(__L("start"));
+                                  searchini.ConvertHexFormatChars();
+
+                                  searchend = nodevalue->GetValueAttribute(__L("end"));;
+                                  searchend.ConvertHexFormatChars();
+
+                                  if(ExtractString(searchini, searchend, &webpage, false, value))
+                                    {
+                                      if(!GetValue(namevalue))
+                                        {
+                                          AddValue(namevalue, value);
+                                        }
+                                    }
+                                   else
+                                    {
+                                      if(priority) priorityvaluesobtain = false;
+                                    }
+                                }
+                            }
+                        }
+
+                      if(values.GetSize() && priorityvaluesobtain)
+                        {
+                          return true;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+  return false;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIOWEBSCRAPER::Do
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			05/02/2014 17:26:05
-//	
-//	@return 			bool : 
-//	@param				namewebservice : 
-//  @param				timeout : 
-//  @param				localIP : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      05/02/2014 17:26:05
+//
+//  @return       bool :
+//  @param        namewebservice :
+//  @param        timeout :
+//  @param        localIP :
 */
 /*-----------------------------------------------------------------*/
 bool DIOWEBSCRAPER::Do(XSTRING& namewebservice, int timeoutforurl, XSTRING* localIP)
 {
-	return Do(namewebservice.Get(), timeoutforurl, localIP);
+  return Do(namewebservice.Get(), timeoutforurl, localIP);
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIOWEBSCRAPER::ChangeURL
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/03/2013 13:38:58
-//	
-//	@return 			bool : 
-//	@param				maskurl : 
-//  @param				url : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/03/2013 13:38:58
+//
+//  @return       bool :
+//  @param        maskurl :
+//  @param        url :
 */
 /*-----------------------------------------------------------------*/
 bool DIOWEBSCRAPER::ChangeURL(XCHAR* maskurl, DIOURL& url)
 {
-	url = maskurl;
+  url = maskurl;
 
-	if(url.GetSize()) return true;
+  if(url.GetSize()) return true;
 
-	return false;
+  return false;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIOWEBSCRAPER::AddValue
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/03/2013 12:54:50
-//	
-//	@return 			bool : 
-//	@param				name : 
-//  @param				value : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/03/2013 12:54:50
+//
+//  @return       bool :
+//  @param        name :
+//  @param        value :
 */
 /*-----------------------------------------------------------------*/
 bool DIOWEBSCRAPER::AddValue(XCHAR* name, XCHAR* value)
 {
-	XSTRING* _name  = new XSTRING();
-	XSTRING* _value = new XSTRING();
+  XSTRING* _name  = new XSTRING();
+  XSTRING* _value = new XSTRING();
 
-	if((!_name )||(!_value))
-		{
-			delete _name;
-			delete _value;
+  if((!_name )||(!_value))
+    {
+      delete _name;
+      delete _value;
 
-			return false;
-		}
+      return false;
+    }
 
-	(*_name)  = name;
-	(*_value) = value;
+  (*_name)  = name;
+  (*_value) = value;
 
-	values.Add(_name,_value);
+  values.Add(_name,_value);
 
-	return true;
+  return true;
 }
 
 
@@ -512,230 +512,230 @@ bool DIOWEBSCRAPER::AddValue(XCHAR* name, XCHAR* value)
 
 /*-------------------------------------------------------------------
 //  DIOWEBSCRAPER::AddValue
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/03/2013 12:54:57
-//	
-//	@return 			bool : 
-//	@param				name : 
-//  @param				value : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/03/2013 12:54:57
+//
+//  @return       bool :
+//  @param        name :
+//  @param        value :
 */
 /*-----------------------------------------------------------------*/
 bool DIOWEBSCRAPER::AddValue(XCHAR* name, XSTRING& value)
 {
-	return AddValue(name, value.Get());
+  return AddValue(name, value.Get());
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIOWEBSCRAPER::AddValue
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/03/2013 12:55:01
-//	
-//	@return 			bool : 
-//	@param				name : 
-//  @param				value : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/03/2013 12:55:01
+//
+//  @return       bool :
+//  @param        name :
+//  @param        value :
 */
 /*-----------------------------------------------------------------*/
 bool DIOWEBSCRAPER::AddValue(XSTRING& name,XCHAR*  value)
 {
-	return AddValue(name.Get(), value);
+  return AddValue(name.Get(), value);
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIOWEBSCRAPER::AddValue
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/03/2013 12:55:06
-//	
-//	@return 			bool : 
-//	@param				name : 
-//  @param				value : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/03/2013 12:55:06
+//
+//  @return       bool :
+//  @param        name :
+//  @param        value :
 */
 /*-----------------------------------------------------------------*/
 bool DIOWEBSCRAPER::AddValue(XSTRING& name, XSTRING& value)
 {
-	return AddValue(name.Get(), value.Get());
+  return AddValue(name.Get(), value.Get());
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIOWEBSCRAPER::GetValue
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/03/2013 12:36:07
-//	
-//	@return 			XCHAR* : 
-//	@param				namevalue : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/03/2013 12:36:07
+//
+//  @return       XCHAR* :
+//  @param        namevalue :
 */
 /*-----------------------------------------------------------------*/
 XCHAR* DIOWEBSCRAPER::GetValue(XCHAR* namevalue)
 {
-	for(XDWORD c=0;c<values.GetSize();c++)
-		{
-			XSTRING* name = (XSTRING*)values.GetKey(c);
-			if(name)
-				{
-					if(!name->Compare(namevalue))			
-						{
-							XSTRING* value	= values.GetElement(c);
+  for(XDWORD c=0;c<values.GetSize();c++)
+    {
+      XSTRING* name = (XSTRING*)values.GetKey(c);
+      if(name)
+        {
+          if(!name->Compare(namevalue))
+            {
+              XSTRING* value  = values.GetElement(c);
 
-							if(value) 
-								{
-									value->ConvertHexFormatChars();
-									return value->Get();
-								}
+              if(value)
+                {
+                  value->ConvertHexFormatChars();
+                  return value->Get();
+                }
 
-							return NULL;
-						}
-				}
-		}
+              return NULL;
+            }
+        }
+    }
 
-	return NULL;
+  return NULL;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIOWEBSCRAPER::GetValue
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/03/2013 12:35:58
-//	
-//	@return 			XCHAR* : 
-//	@param				namevalue : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/03/2013 12:35:58
+//
+//  @return       XCHAR* :
+//  @param        namevalue :
 */
 /*-----------------------------------------------------------------*/
 XCHAR* DIOWEBSCRAPER::GetValue(XSTRING& namevalue)
 {
-	return DIOWEBSCRAPER::GetValue(namevalue.Get());
+  return DIOWEBSCRAPER::GetValue(namevalue.Get());
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIOWEBSCRAPER::DeleteAllValues
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/03/2013 12:35:54
-//	
-//	@return 			bool : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/03/2013 12:35:54
+//
+//  @return       bool :
+//  */
 /*-----------------------------------------------------------------*/
 bool DIOWEBSCRAPER::DeleteAllValues()
 {
-	if(values.IsEmpty())  return false;
+  if(values.IsEmpty())  return false;
 
-	values.DeleteKeyContents();
-	values.DeleteElementContents();	
-	values.DeleteAll();
+  values.DeleteKeyContents();
+  values.DeleteElementContents();
+  values.DeleteAll();
 
-	return true;
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIOWEBSCRAPER::GetWebClient
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			23/03/2013 16:00:52
+//
+//
+//  @author       Abraham J. Velez
+//  @version      23/03/2013 16:00:52
 
-//	
-//	@return 			DIOWEBCLIENT* : 
-//	*/
+//
+//  @return       DIOWEBCLIENT* :
+//  */
 /*-----------------------------------------------------------------*/
 DIOWEBCLIENT* DIOWEBSCRAPER::GetWebClient()
 {
-	return webclient;
+  return webclient;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIOWEBSCRAPER::ExtractString
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			14/02/2012 18:05:01
-//	
-//	@return				bool : 
-//	@param				searchini : 
-//  @param				searchend : 
-//  @param				xbuffer : 
-//  @param				usebufferpos : 
-//  @param				result : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      14/02/2012 18:05:01
+//
+//  @return       bool :
+//  @param        searchini :
+//  @param        searchend :
+//  @param        xbuffer :
+//  @param        usebufferpos :
+//  @param        result :
 */
 /*-----------------------------------------------------------------*/
 bool DIOWEBSCRAPER::ExtractString(XCHAR* searchini,XCHAR* searchend,XBUFFER* xbuffer,bool usebufferpos,XSTRING& result)
 {
-	if((!searchini) || (!searchend)) return false;
+  if((!searchini) || (!searchend)) return false;
 
-	XSTRING _searchini;
-	XSTRING _searchend;
+  XSTRING _searchini;
+  XSTRING _searchend;
 
-	_searchini = searchini;
-	_searchend = searchend;
+  _searchini = searchini;
+  _searchend = searchend;
 
-	return ExtractString(_searchini,_searchend,xbuffer,usebufferpos,result);
+  return ExtractString(_searchini,_searchend,xbuffer,usebufferpos,result);
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIOWEBSCRAPER::ExtractString
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			14/02/2012 18:05:45
-//	
-//	@return				bool : 
-//	@param				searchini : 
-//  @param				searchend : 
-//  @param				xbuffer : 
-//  @param				usebufferpos : 
-//  @param				result : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      14/02/2012 18:05:45
+//
+//  @return       bool :
+//  @param        searchini :
+//  @param        searchend :
+//  @param        xbuffer :
+//  @param        usebufferpos :
+//  @param        result :
 */
 /*-----------------------------------------------------------------*/
 bool DIOWEBSCRAPER::ExtractString(XCHAR* searchini,XSTRING& searchend,XBUFFER* xbuffer,bool usebufferpos,XSTRING& result)
 {
-	if(!searchini) return false;
+  if(!searchini) return false;
 
-	XSTRING _searchini;
-	
-	_searchini = searchini;
-	
-	return ExtractString(_searchini,searchend,xbuffer,usebufferpos,result);
+  XSTRING _searchini;
+
+  _searchini = searchini;
+
+  return ExtractString(_searchini,searchend,xbuffer,usebufferpos,result);
 }
 
 
@@ -743,30 +743,30 @@ bool DIOWEBSCRAPER::ExtractString(XCHAR* searchini,XSTRING& searchend,XBUFFER* x
 
 /*-------------------------------------------------------------------
 //  DIOWEBSCRAPER::ExtractString
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			14/02/2012 18:06:24
-//	
-//	@return				bool : 
-//	@param				searchini : 
-//  @param				searchend : 
-//  @param				xbuffer : 
-//  @param				usebufferpos : 
-//  @param				result : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      14/02/2012 18:06:24
+//
+//  @return       bool :
+//  @param        searchini :
+//  @param        searchend :
+//  @param        xbuffer :
+//  @param        usebufferpos :
+//  @param        result :
 */
 /*-----------------------------------------------------------------*/
 bool DIOWEBSCRAPER::ExtractString(XSTRING& searchini,XCHAR* searchend,XBUFFER* xbuffer,bool usebufferpos,XSTRING& result)
 {
-	if(!searchend) return false;
-	
-	XSTRING _searchend;
+  if(!searchend) return false;
 
-	_searchend = searchend;
+  XSTRING _searchend;
 
-	return ExtractString(searchini,_searchend,xbuffer,usebufferpos,result);
+  _searchend = searchend;
+
+  return ExtractString(searchini,_searchend,xbuffer,usebufferpos,result);
 
 }
 
@@ -774,53 +774,53 @@ bool DIOWEBSCRAPER::ExtractString(XSTRING& searchini,XCHAR* searchend,XBUFFER* x
 
 /*-------------------------------------------------------------------
 //  DIOWEBSCRAPER::ExtractString
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			03/04/2011 22:05:13
-//	
-//	@return				bool : 
-//	@param				searchini : 
-//  @param				searchend : 
-//  @param				xbuffer : 
-//  @param				usebufferpos : 
-//  @param				result : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      03/04/2011 22:05:13
+//
+//  @return       bool :
+//  @param        searchini :
+//  @param        searchend :
+//  @param        xbuffer :
+//  @param        usebufferpos :
+//  @param        result :
 */
 /*-----------------------------------------------------------------*/
 bool DIOWEBSCRAPER::ExtractString(XSTRING& searchini,XSTRING& searchend,XBUFFER* xbuffer,bool usebufferpos,XSTRING& result)
 {
-	result.Empty();
-	
-	if(!xbuffer)						return false;	
+  result.Empty();
 
-	if(searchini.IsEmpty()) return false;
-	if(searchend.IsEmpty())	return false;	
+  if(!xbuffer)            return false;
 
-	XSTRING html;
-	int				 indexini;
-	int				 indexend;
+  if(searchini.IsEmpty()) return false;
+  if(searchend.IsEmpty()) return false;
 
-	//html = (char*)xbuffer->Get();
-	html = *xbuffer; // #Imanol, changed to avoid a buffer overrun
+  XSTRING html;
+  int        indexini;
+  int        indexend;
 
-	indexini = html.Find(searchini,false,usebufferpos?xbuffer->GetPosition():0);
-	if(indexini==XSTRING_NOTFOUND) return false;
+  //html = (char*)xbuffer->Get();
+  html = *xbuffer; // #Imanol, changed to avoid a buffer overrun
 
-	indexend = html.Find(searchend,false,indexini + searchini.GetSize());
-	if(indexend==XSTRING_NOTFOUND) return false;
+  indexini = html.Find(searchini,false,usebufferpos?xbuffer->GetPosition():0);
+  if(indexini==XSTRING_NOTFOUND) return false;
 
-	if((int)(indexini + searchini.GetSize())>=indexend) return false;
+  indexend = html.Find(searchend,false,indexini + searchini.GetSize());
+  if(indexend==XSTRING_NOTFOUND) return false;
 
-	html.Copy(indexini + searchini.GetSize(),indexend,result);
-	
-	result.DeleteCharacter(__C(' '),XSTRINGCONTEXT_ATFIRST);
-	result.DeleteCharacter(__C(' '),XSTRINGCONTEXT_ATEND);
+  if((int)(indexini + searchini.GetSize())>=indexend) return false;
 
-	if(result.IsEmpty()) return false;
+  html.Copy(indexini + searchini.GetSize(),indexend,result);
 
-	return true;
+  result.DeleteCharacter(__C(' '),XSTRINGCONTEXT_ATFIRST);
+  result.DeleteCharacter(__C(' '),XSTRINGCONTEXT_ATEND);
+
+  if(result.IsEmpty()) return false;
+
+  return true;
 }
 
 
@@ -828,20 +828,20 @@ bool DIOWEBSCRAPER::ExtractString(XSTRING& searchini,XSTRING& searchend,XBUFFER*
 
 /*-------------------------------------------------------------------
 //  DIOWEBSCRAPER::HandleEvent
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			24/03/2013 17:18:47
-//	
-//	@return 			void : 
-//	@param				xevent : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      24/03/2013 17:18:47
+//
+//  @return       void :
+//  @param        xevent :
 */
 /*-----------------------------------------------------------------*/
 void DIOWEBSCRAPER::HandleEvent(XEVENT* xevent)
 {
-	if(!xevent) return;
+  if(!xevent) return;
 }
 
 

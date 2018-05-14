@@ -1,23 +1,23 @@
 /*------------------------------------------------------------------------------------------
-//	DIOWEBPAGEHTMLCREATOR.H
-*/	
-/**	
-// \class 
-//   
+//  DIOWEBPAGEHTMLCREATOR.H
+*/
+/**
+// \class
+//
 //  DIO Web Page HTML Creator class
-//   
-//	@author	 Abraham J. Velez
-//	@version 08/01/2014 17:52:51
-*/	
-/*	GEN  Copyright (C).  All right reserved.
+//
+//  @author  Abraham J. Velez
+//  @version 08/01/2014 17:52:51
+*/
+/*  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
+
 #ifndef _DIOWEBPAGEHTMLCREATOR_H_
 #define _DIOWEBPAGEHTMLCREATOR_H_
-	
-		
+
+
 //---- INCLUDES ----------------------------------------------------------------------------
-	
+
 #include "XString.h"
 #include "XPath.h"
 #include "XEvent.h"
@@ -28,30 +28,30 @@
 
 enum DIOWEBPAGEHTMLCREATORXEVENTTYPE
 {
-	DIOWEBPAGEHTMLCREATORXEVENTTYPE_UNKNOW				        = XEVENTTYPE_WEBSERVER	,
-	DIOWEBPAGEHTMLCREATORXEVENTTYPE_XTAGFOUND  																		,		
+  DIOWEBPAGEHTMLCREATORXEVENTTYPE_UNKNOW                = XEVENTTYPE_WEBSERVER  ,
+  DIOWEBPAGEHTMLCREATORXEVENTTYPE_XTAGFOUND                                     ,
 };
 
-	
+
 enum DIOWEBPAGEHTMLCREATORALIGN
 {
-	DIOWEBPAGEHTMLCREATORALIGN_NONE												=											0	,
-	DIOWEBPAGEHTMLCREATORALIGN_LEFT																								,		
-	DIOWEBPAGEHTMLCREATORALIGN_RIGHT																							,
-	DIOWEBPAGEHTMLCREATORALIGN_CENTER																							,  
-};	
+  DIOWEBPAGEHTMLCREATORALIGN_NONE                       =                     0 ,
+  DIOWEBPAGEHTMLCREATORALIGN_LEFT                                               ,
+  DIOWEBPAGEHTMLCREATORALIGN_RIGHT                                              ,
+  DIOWEBPAGEHTMLCREATORALIGN_CENTER                                             ,
+};
 
 
 
 enum DIOWEBPAGEHTMLCREATORTAGXENGINESTATUS
 {
-  DIOWEBPAGEHTMLCREATORTAGXENGINESTATUS_NOTFOUND				=											0 ,  
-  DIOWEBPAGEHTMLCREATORTAGXENGINESTATUS_FOUNDNOTEND														  ,
-  DIOWEBPAGEHTMLCREATORTAGXENGINESTATUS_FOUNDEND               
+  DIOWEBPAGEHTMLCREATORTAGXENGINESTATUS_NOTFOUND        =                     0 ,
+  DIOWEBPAGEHTMLCREATORTAGXENGINESTATUS_FOUNDNOTEND                             ,
+  DIOWEBPAGEHTMLCREATORTAGXENGINESTATUS_FOUNDEND
 };
 
 
-#define DIOWEBPAGEHTMLCREATOR_TAGXENGINE					__L("GEN")
+#define DIOWEBPAGEHTMLCREATOR_TAGXENGINE          __L("GEN")
 
 
 
@@ -69,25 +69,25 @@ class DIOWEBPAGEHTMLCREATOR;
 
 class DIOWEBPAGEHTMLCREATORXEVENT : public XEVENT
 {
-	public:
-																						DIOWEBPAGEHTMLCREATORXEVENT		(XSUBJECT* subject, XDWORD type = DIOWEBPAGEHTMLCREATORXEVENTTYPE_UNKNOW) : XEVENT(subject,type)			{  Clean();																		}
-		virtual			 													 ~DIOWEBPAGEHTMLCREATORXEVENT		()																																																		{  Clean();																		}		
+  public:
+                                            DIOWEBPAGEHTMLCREATORXEVENT   (XSUBJECT* subject, XDWORD type = DIOWEBPAGEHTMLCREATORXEVENTTYPE_UNKNOW) : XEVENT(subject,type)      {  Clean();                                   }
+    virtual                                ~DIOWEBPAGEHTMLCREATORXEVENT   ()                                                                                                    {  Clean();                                   }
 
-		DIOWEBPAGEHTMLCREATOR*									GetPageHTMLCreator						()																																																		{ return pageHTMLcreator;											}
-		void																		SetPageHTMLCreator						(DIOWEBPAGEHTMLCREATOR* pageHTMLcreator)																															{ this->pageHTMLcreator = pageHTMLcreator;		} 
+    DIOWEBPAGEHTMLCREATOR*                  GetPageHTMLCreator            ()                                                                                                    { return pageHTMLcreator;                     }
+    void                                    SetPageHTMLCreator            (DIOWEBPAGEHTMLCREATOR* pageHTMLcreator)                                                              { this->pageHTMLcreator = pageHTMLcreator;    }
 
-		XSTRING*	    													GetXTAG   				      			()																																																		{ return &XTAG;																}	
-		void	   	    													SetXTAG   										(XSTRING* XTAG)																																												{ this->XTAG = XTAG->Get();										}
+    XSTRING*                                GetXTAG                       ()                                                                                                    { return &XTAG;                               }
+    void                                    SetXTAG                       (XSTRING* XTAG)                                                                                       { this->XTAG = XTAG->Get();                   }
 
-	private:
+  private:
 
-		void																		Clean													()
-																						{
-																							pageHTMLcreator = NULL;
-																						}
+    void                                    Clean                         ()
+                                            {
+                                              pageHTMLcreator = NULL;
+                                            }
 
-		DIOWEBPAGEHTMLCREATOR*									pageHTMLcreator;
-		XSTRING																	XTAG;
+    DIOWEBPAGEHTMLCREATOR*                  pageHTMLcreator;
+    XSTRING                                 XTAG;
 };
 
 
@@ -95,76 +95,76 @@ class DIOWEBPAGEHTMLCREATORXEVENT : public XEVENT
 
 class DIOWEBPAGEHTMLCREATOR : public XSTRING, public XSUBJECT
 {
-	public:
-																						DIOWEBPAGEHTMLCREATOR					(DIOWEBSERVER_CONNEXION* connexion = NULL);														
-		virtual																 ~DIOWEBPAGEHTMLCREATOR					();
-		
-		void																		operator =										(const char* htlmpage)							{ Set(htlmpage);														}
-		void																		operator =										(const XCHAR* htlmpage)							{ Set(htlmpage);														}
-		void																		operator =										(DIOWEBPAGEHTMLCREATOR& htlmpage)		{ Set(htlmpage);														}
-		void																		operator =										(XSTRING& string)										{ Set(string);															}
-		void																		operator =										(XWORD* htlmpage)										{ Set(htlmpage);														}
-		
-		void																		operator +=										(const char* htlmpage)							{ Add(htlmpage);														}
-		void																		operator +=										(const XCHAR* htlmpage)							{ Add(htlmpage);														}
-		void																		operator +=										(XPATH& htlmpage)										{ Add(htlmpage);														}
-		void																		operator +=										(XSTRING& string)										{ Add(string);															}
-		void																		operator +=										(XCHAR htlmpage)										{ Add(htlmpage);														}
+  public:
+                                            DIOWEBPAGEHTMLCREATOR         (DIOWEBSERVER_CONNEXION* connexion = NULL);
+    virtual                                ~DIOWEBPAGEHTMLCREATOR         ();
 
-		bool																		operator <										(DIOWEBPAGEHTMLCREATOR& htlmpage)		{ return (bool)(Compare(htlmpage) == -1);		}
-		bool																		operator >										(DIOWEBPAGEHTMLCREATOR& htlmpage)		{ return (bool)(Compare(htlmpage) ==  1);		}
-		bool																		operator <=										(DIOWEBPAGEHTMLCREATOR& htlmpage)		{ return (bool)(Compare(htlmpage) !=  1);		}
-		bool																		operator >=										(DIOWEBPAGEHTMLCREATOR& htlmpage)		{ return (bool)(Compare(htlmpage) != -1);		}
-		bool																		operator ==										(DIOWEBPAGEHTMLCREATOR& htlmpage)		{ return (bool)(Compare(htlmpage) ==  0);		}
-		bool																		operator !=										(DIOWEBPAGEHTMLCREATOR& htlmpage)	  { return (bool)(Compare(htlmpage) !=  0);		}
+    void                                    operator =                    (const char* htlmpage)              { Set(htlmpage);                            }
+    void                                    operator =                    (const XCHAR* htlmpage)             { Set(htlmpage);                            }
+    void                                    operator =                    (DIOWEBPAGEHTMLCREATOR& htlmpage)   { Set(htlmpage);                            }
+    void                                    operator =                    (XSTRING& string)                   { Set(string);                              }
+    void                                    operator =                    (XWORD* htlmpage)                   { Set(htlmpage);                            }
 
-		bool																		operator <										(XSTRING& string) 									{ return (bool)(Compare(string) == -1);	}
-		bool																		operator >										(XSTRING& string)										{ return (bool)(Compare(string) ==  1);	}
-		bool																		operator <=										(XSTRING& string) 									{ return (bool)(Compare(string) !=  1);	}
-		bool																		operator >=										(XSTRING& string)										{ return (bool)(Compare(string) != -1);	}
-		bool																		operator ==										(XSTRING& string)										{ return (bool)(Compare(string) ==  0);	}
-		bool																		operator !=										(XSTRING& string)										{ return (bool)(Compare(string) !=  0);	}
+    void                                    operator +=                   (const char* htlmpage)              { Add(htlmpage);                            }
+    void                                    operator +=                   (const XCHAR* htlmpage)             { Add(htlmpage);                            }
+    void                                    operator +=                   (XPATH& htlmpage)                   { Add(htlmpage);                            }
+    void                                    operator +=                   (XSTRING& string)                   { Add(string);                              }
+    void                                    operator +=                   (XCHAR htlmpage)                    { Add(htlmpage);                            }
 
-		XCHAR																		operator []										(int position)								
-																						{ 
-																							if(IsEmpty())						return 0;
-																							if(position<0)					return text[0];
-																							if(position>=(int)size)	return text[size-1];	
-																							return text[position];																																			
-																						}
-			
-		bool																		Printf												(XCHAR* mask,...);
-		bool																		Print													(XCHAR* text);
-		
-		bool																		Table_Ini											(int border = 0);
-		bool																		Table_Line										(int columns,...);
-		bool																		Table_Line										(XSTRING& colorbackground, int columns,...);
-		bool																		Table_Line										(XCHAR* colorbackground, int columns,...);
-		bool																		Table_LineColor								(int columns, ...);
-		bool																		Table_End											();
+    bool                                    operator <                    (DIOWEBPAGEHTMLCREATOR& htlmpage)   { return (bool)(Compare(htlmpage) == -1);   }
+    bool                                    operator >                    (DIOWEBPAGEHTMLCREATOR& htlmpage)   { return (bool)(Compare(htlmpage) ==  1);   }
+    bool                                    operator <=                   (DIOWEBPAGEHTMLCREATOR& htlmpage)   { return (bool)(Compare(htlmpage) !=  1);   }
+    bool                                    operator >=                   (DIOWEBPAGEHTMLCREATOR& htlmpage)   { return (bool)(Compare(htlmpage) != -1);   }
+    bool                                    operator ==                   (DIOWEBPAGEHTMLCREATOR& htlmpage)   { return (bool)(Compare(htlmpage) ==  0);   }
+    bool                                    operator !=                   (DIOWEBPAGEHTMLCREATOR& htlmpage)   { return (bool)(Compare(htlmpage) !=  0);   }
 
-		bool																		AddAutoRefresh								(int refresh, XSTRING* url = NULL);
-		
-		bool																		AddFile												(XPATH& xpath);
-	
-	private:
-		
-		void																		Clean													()
-																						{																				
-																							tableborder = false;
-																						}
+    bool                                    operator <                    (XSTRING& string)                   { return (bool)(Compare(string) == -1); }
+    bool                                    operator >                    (XSTRING& string)                   { return (bool)(Compare(string) ==  1); }
+    bool                                    operator <=                   (XSTRING& string)                   { return (bool)(Compare(string) !=  1); }
+    bool                                    operator >=                   (XSTRING& string)                   { return (bool)(Compare(string) != -1); }
+    bool                                    operator ==                   (XSTRING& string)                   { return (bool)(Compare(string) ==  0); }
+    bool                                    operator !=                   (XSTRING& string)                   { return (bool)(Compare(string) !=  0); }
 
-		DIOWEBPAGEHTMLCREATORTAGXENGINESTATUS		CheckXTAG											(XSTRING* originalline,bool& intag, XSTRING& inioutputline,XSTRING& endoutputline);
+    XCHAR                                   operator []                   (int position)
+                                            {
+                                              if(IsEmpty())           return 0;
+                                              if(position<0)          return text[0];
+                                              if(position>=(int)size) return text[size-1];
+                                              return text[position];
+                                            }
 
-		DIOWEBSERVER_CONNEXION*									connexion;
+    bool                                    Printf                        (XCHAR* mask,...);
+    bool                                    Print                         (XCHAR* text);
 
-		XSTRING																	lastXTAG;
-		int																			tableborder;
+    bool                                    Table_Ini                     (int border = 0);
+    bool                                    Table_Line                    (int columns,...);
+    bool                                    Table_Line                    (XSTRING& colorbackground, int columns,...);
+    bool                                    Table_Line                    (XCHAR* colorbackground, int columns,...);
+    bool                                    Table_LineColor               (int columns, ...);
+    bool                                    Table_End                     ();
+
+    bool                                    AddAutoRefresh                (int refresh, XSTRING* url = NULL);
+
+    bool                                    AddFile                       (XPATH& xpath);
+
+  private:
+
+    void                                    Clean                         ()
+                                            {
+                                              tableborder = false;
+                                            }
+
+    DIOWEBPAGEHTMLCREATORTAGXENGINESTATUS   CheckXTAG                     (XSTRING* originalline,bool& intag, XSTRING& inioutputline,XSTRING& endoutputline);
+
+    DIOWEBSERVER_CONNEXION*                 connexion;
+
+    XSTRING                                 lastXTAG;
+    int                                     tableborder;
 
 };
 
 
 //---- INLINE FUNCTIONS --------------------------------------------------------------------
-	
+
 #endif
 

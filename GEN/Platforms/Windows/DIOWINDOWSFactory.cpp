@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------------------
-//	DIOWINDOWSFACTORY.CPP
+//  DIOWINDOWSFACTORY.CPP
 //
-//	WINDOWS Utils Platform Factory class
+//  WINDOWS Utils Platform Factory class
 //
-//	Author						: Abraham J. Velez
-//	Date Of Creation	: 08/08/2002
-//	Last Mofificacion	:
+//  Author            : Abraham J. Velez
+//  Date Of Creation  : 08/08/2002
+//  Last Mofificacion :
 //
-//	GEN  Copyright (C).  All right reserved.
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
 
 #ifdef DIO_ACTIVE
@@ -86,57 +86,57 @@
 #include "DIOWINDOWSFactory.h"
 
 #include "XMemory.h"
-	
+
 //---- GENERAL VARIABLE --------------------------------------------------------------------
-	
-	
+
+
 //---- CLASS MEMBERS -----------------------------------------------------------------------
 
 
 
 /*-------------------------------------------------------------------
 //  DIOWINDOWSFACTORY::CreateURL
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			12/02/2013 22:51:06
-//	
-//	@return 			DIOURL* : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      12/02/2013 22:51:06
+//
+//  @return       DIOURL* :
+//  */
 /*-----------------------------------------------------------------*/
 DIOURL* DIOWINDOWSFACTORY::CreateURL()
-{ 
-	DIOWINDOWSURL* _class = new DIOWINDOWSURL();
-	
-	return (DIOURL*)_class;		
+{
+  DIOWINDOWSURL* _class = new DIOWINDOWSURL();
+
+  return (DIOURL*)_class;
 };
-		
+
 
 
 /*-------------------------------------------------------------------
 //  DIOWINDOWSFACTORY::DeleteURL
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			12/02/2013 22:51:15
-//	
-//	@return 			bool : 
-//	@param				url : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      12/02/2013 22:51:15
+//
+//  @return       bool :
+//  @param        url :
 */
 /*-----------------------------------------------------------------*/
 bool DIOWINDOWSFACTORY::DeleteURL(DIOURL* url)
-{ 
-	if(!url) return false;
+{
+  if(!url) return false;
 
-	DIOWINDOWSURL* _url = (DIOWINDOWSURL*)url;	
-	delete _url;
-	
-	return true;
-};		
+  DIOWINDOWSURL* _url = (DIOWINDOWSURL*)url;
+  delete _url;
+
+  return true;
+};
 
 
 
@@ -146,76 +146,76 @@ bool DIOWINDOWSFACTORY::DeleteURL(DIOURL* url)
 
 /*-------------------------------------------------------------------
 //  DIOWINDOWSFACTORY::CreateStreamEnumDevices
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			05/05/2013 1:20:06
-//	
-//	@return 			DIOSTREAMENUMDEVICES* : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      05/05/2013 1:20:06
+//
+//  @return       DIOSTREAMENUMDEVICES* :
 
- 
-//  @param				type : 
+
+//  @param        type :
 */
 /*-----------------------------------------------------------------*/
 DIOSTREAMENUMDEVICES* DIOWINDOWSFACTORY::CreateStreamEnumDevices(DIOSTREAMENUMTYPE type)
 {
-	DIOSTREAMENUMDEVICES* _class = NULL;
+  DIOSTREAMENUMDEVICES* _class = NULL;
 
-	switch(type)
-		{
-			case DIOSTREAMENUMTYPE_UNKNOWN						: return NULL;
- 
-			#ifdef DIOUART_ACTIVE
-			case DIOSTREAMENUMTYPE_UART_LOCAL					:	_class = new DIOWINDOWSSTREAMUARTLOCALENUMDEVICES();								break;
-			#endif
+  switch(type)
+    {
+      case DIOSTREAMENUMTYPE_UNKNOWN            : return NULL;
 
-			#ifdef DIOUSB_ACTIVE
-			case DIOSTREAMENUMTYPE_USB_LOCAL					:	_class = new DIOWINDOWSSTREAMUSBLOCALENUMDEVICES();									break;
-			#endif
+      #ifdef DIOUART_ACTIVE
+      case DIOSTREAMENUMTYPE_UART_LOCAL         : _class = new DIOWINDOWSSTREAMUARTLOCALENUMDEVICES();                break;
+      #endif
 
-			#if defined(DIOUDP_ACTIVE) || defined(DIOTCPIP_ACTIVE)
-			case DIOSTREAMENUMTYPE_IP_LOCAL						:	_class = new DIOWINDOWSSTREAMIPLOCALENUMDEVICES();									break;																									
-			#endif
+      #ifdef DIOUSB_ACTIVE
+      case DIOSTREAMENUMTYPE_USB_LOCAL          : _class = new DIOWINDOWSSTREAMUSBLOCALENUMDEVICES();                 break;
+      #endif
 
-			#ifdef DIOBLUETOOTH_ACTIVE
-			case DIOSTREAMENUMTYPE_BLUETOOTH_LOCAL		: _class = new DIOWINDOWSSTREAMBLUETOOTHLOCALENUMDEVICES();						break;		
-			case DIOSTREAMENUMTYPE_BLUETOOTH_REMOTE		: _class = new DIOWINDOWSSTREAMBLUETOOTHREMOTEENUMDEVICES();					break;		
-			#endif
+      #if defined(DIOUDP_ACTIVE) || defined(DIOTCPIP_ACTIVE)
+      case DIOSTREAMENUMTYPE_IP_LOCAL           : _class = new DIOWINDOWSSTREAMIPLOCALENUMDEVICES();                  break;
+      #endif
 
-			#ifdef DIOWIFI_ACTIVE		
-			case DIOSTREAMENUMTYPE_WIFI_REMOTE				: _class = new DIOWINDOWSSTREAMWIFIREMOTEENUMDEVICES();								break;		
-			#endif
-		}	
-	
-	if(_class)_class->SetType(type);				
-			
-	return _class;	
+      #ifdef DIOBLUETOOTH_ACTIVE
+      case DIOSTREAMENUMTYPE_BLUETOOTH_LOCAL    : _class = new DIOWINDOWSSTREAMBLUETOOTHLOCALENUMDEVICES();           break;
+      case DIOSTREAMENUMTYPE_BLUETOOTH_REMOTE   : _class = new DIOWINDOWSSTREAMBLUETOOTHREMOTEENUMDEVICES();          break;
+      #endif
+
+      #ifdef DIOWIFI_ACTIVE
+      case DIOSTREAMENUMTYPE_WIFI_REMOTE        : _class = new DIOWINDOWSSTREAMWIFIREMOTEENUMDEVICES();               break;
+      #endif
+    }
+
+  if(_class)_class->SetType(type);
+
+  return _class;
 };
 
 
 
 /*-------------------------------------------------------------------
 //  DIOWINDOWSFACTORY::DeleteStreamEnumDevices
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			05/05/2013 1:20:13
 //
-//	@return 			bool :
-//	@param				enumdevices :
+//
+//  @author       Abraham J. Velez
+//  @version      05/05/2013 1:20:13
+//
+//  @return       bool :
+//  @param        enumdevices :
 */
 /*-----------------------------------------------------------------*/
 bool DIOWINDOWSFACTORY::DeleteStreamEnumDevices(DIOSTREAMENUMDEVICES* enumdevices)
 {
-	if(!enumdevices)	return false;
-	
-	delete enumdevices;
+  if(!enumdevices)  return false;
 
-	return true;
+  delete enumdevices;
+
+  return true;
 };
 
 
@@ -223,69 +223,69 @@ bool DIOWINDOWSFACTORY::DeleteStreamEnumDevices(DIOSTREAMENUMDEVICES* enumdevice
 
 /*-------------------------------------------------------------------
 //  DIOWINDOWSFACTORY::CreateStreamIO
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			21/06/2011 16:52:26
-//	
-//	@return				DIOSTREAM* : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      21/06/2011 16:52:26
+//
+//  @return       DIOSTREAM* :
 
- 
-//  @param				config : 
+
+//  @param        config :
 */
 /*-----------------------------------------------------------------*/
 DIOSTREAM* DIOWINDOWSFACTORY::CreateStreamIO(DIOSTREAMCONFIG* config)
 {
-	if(!config) return NULL;
-	
-	DIOSTREAM* _class = NULL;
+  if(!config) return NULL;
 
-	switch(config->GetType())
-		{
-			case DIOSTREAMTYPE_UNKNOWN		: return NULL;
+  DIOSTREAM* _class = NULL;
 
-			#ifdef DIOUART_ACTIVE
-			case DIOSTREAMTYPE_UART				: _class = new DIOWINDOWSSTREAMUART();				break;
-			#endif
+  switch(config->GetType())
+    {
+      case DIOSTREAMTYPE_UNKNOWN    : return NULL;
 
-			#ifdef DIOUSB_ACTIVE	
-			case DIOSTREAMTYPE_USB				: _class = new DIOWINDOWSSTREAMUSB();					break;
-			#endif
+      #ifdef DIOUART_ACTIVE
+      case DIOSTREAMTYPE_UART       : _class = new DIOWINDOWSSTREAMUART();        break;
+      #endif
 
-			#ifdef DIOICMP_ACTIVE
-			case DIOSTREAMTYPE_ICMP				: _class = new DIOWINDOWSSTREAMICMP();				break;
-			#endif
-	
-			#ifdef DIOUDP_ACTIVE
-			case DIOSTREAMTYPE_UDP				: _class = new DIOWINDOWSSTREAMUDP();					break;
-			#endif
+      #ifdef DIOUSB_ACTIVE
+      case DIOSTREAMTYPE_USB        : _class = new DIOWINDOWSSTREAMUSB();         break;
+      #endif
 
-			#ifdef DIOTCPIP_ACTIVE
-			case DIOSTREAMTYPE_TCPIP			:	_class = new DIOWINDOWSSTREAMTCPIP();				break; 																			
-			#endif
+      #ifdef DIOICMP_ACTIVE
+      case DIOSTREAMTYPE_ICMP       : _class = new DIOWINDOWSSTREAMICMP();        break;
+      #endif
 
-			#ifdef DIOBLUETOOTH_ACTIVE
-			case DIOSTREAMTYPE_BLUETOOTH  :	_class = new DIOWINDOWSSTREAMBLUETOOTH();		break;
-			#endif
+      #ifdef DIOUDP_ACTIVE
+      case DIOSTREAMTYPE_UDP        : _class = new DIOWINDOWSSTREAMUDP();         break;
+      #endif
 
-			#ifdef DIOSPI_ACTIVE
-			case DIOSTREAMTYPE_SPI				: _class = new DIOWINDOWSSTREAMSPI();					break;
-			#endif
+      #ifdef DIOTCPIP_ACTIVE
+      case DIOSTREAMTYPE_TCPIP      : _class = new DIOWINDOWSSTREAMTCPIP();       break;
+      #endif
 
-			#ifdef DIOI2C_ACTIVE
-			case DIOSTREAMTYPE_I2C				: _class = new DIOWINDOWSSTREAMI2C();					break;																			
-			#endif     
-		}
-		
-	if(_class)													
-		{
-			_class->SetType(config->GetType());
-			_class->SetConfig(config);				
-		}
+      #ifdef DIOBLUETOOTH_ACTIVE
+      case DIOSTREAMTYPE_BLUETOOTH  : _class = new DIOWINDOWSSTREAMBLUETOOTH();   break;
+      #endif
 
-	return _class;		
+      #ifdef DIOSPI_ACTIVE
+      case DIOSTREAMTYPE_SPI        : _class = new DIOWINDOWSSTREAMSPI();         break;
+      #endif
+
+      #ifdef DIOI2C_ACTIVE
+      case DIOSTREAMTYPE_I2C        : _class = new DIOWINDOWSSTREAMI2C();         break;
+      #endif
+    }
+
+  if(_class)
+    {
+      _class->SetType(config->GetType());
+      _class->SetConfig(config);
+    }
+
+  return _class;
 }
 
 
@@ -294,20 +294,20 @@ DIOSTREAM* DIOWINDOWSFACTORY::CreateStreamIO(DIOSTREAMCONFIG* config)
 /**
 //
 //
-//	@author				Abraham J. Velez
-//	@version			03/09/2001 16:58:17
+//  @author       Abraham J. Velez
+//  @version      03/09/2001 16:58:17
 //
-//	@return 			bool :
-//	@param				diostream :
+//  @return       bool :
+//  @param        diostream :
 */
 //-------------------------------------------------------------------
 bool DIOWINDOWSFACTORY::DeleteStreamIO(DIOSTREAM* diostream)
 {
-	if(!diostream)	return false;
-	
-	delete diostream;
+  if(!diostream)  return false;
 
-	return true;
+  delete diostream;
+
+  return true;
 }
 
 #endif
@@ -317,50 +317,50 @@ bool DIOWINDOWSFACTORY::DeleteStreamIO(DIOSTREAM* diostream)
 
 #ifdef DIOPING_ACTIVE
 /*-------------------------------------------------------------------
-//	DIOWINDOWSFACTORY::CreatePing
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			30/03/2016 12:50:04
-//	
-//	@return 			DIOPING* : 
+//  DIOWINDOWSFACTORY::CreatePing
+*/
+/**
+//
+//
+//
+//  @author       Abraham J. Velez
+//  @version      30/03/2016 12:50:04
+//
+//  @return       DIOPING* :
 //
 */
 /*-----------------------------------------------------------------*/
 DIOPING* DIOWINDOWSFACTORY::CreatePing()
 {
-	DIOWINDOWSPING* _class = new DIOWINDOWSPING();
-	
-	return (DIOPING*)_class;																												
+  DIOWINDOWSPING* _class = new DIOWINDOWSPING();
+
+  return (DIOPING*)_class;
 }
-	
+
 
 /*-------------------------------------------------------------------
-//	DIOWINDOWSFACTORY::DeletePing
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			30/03/2016 12:50:23
-//	
-//	@return 			bool : 
+//  DIOWINDOWSFACTORY::DeletePing
+*/
+/**
 //
-//  @param				ping : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      30/03/2016 12:50:23
+//
+//  @return       bool :
+//
+//  @param        ping :
 */
 /*-----------------------------------------------------------------*/
 bool DIOWINDOWSFACTORY::DeletePing(DIOPING* ping)
 {
-	if(!ping) return false;
+  if(!ping) return false;
 
-	DIOWINDOWSPING* _ping = (DIOWINDOWSPING*)ping;	
-	delete _ping;
-	
-	return true;
+  DIOWINDOWSPING* _ping = (DIOWINDOWSPING*)ping;
+  delete _ping;
+
+  return true;
 
 }
 #endif
@@ -370,47 +370,47 @@ bool DIOWINDOWSFACTORY::DeletePing(DIOPING* ping)
 #ifdef DIOPCAP_ACTIVE
 /*-------------------------------------------------------------------
 //  DIOWINDOWSFACTORY::CreatePCap
-*/ 
+*/
 /**
-//  
-//  
+//
+//
 //  @author       Abraham J. Velez
 //  @version      26/10/2012 13:11:14
-//  
-//  @return       DIOPCAP* : 
-//  @param        xfactory : 
+//
+//  @return       DIOPCAP* :
+//  @param        xfactory :
 */
 /*-----------------------------------------------------------------*/
 DIOPCAP* DIOWINDOWSFACTORY::CreatePCap()
 {
-	DIOWINDOWSPCAP* _class = new DIOWINDOWSPCAP();
-	
-	return (DIOPCAP*)_class;																												
+  DIOWINDOWSPCAP* _class = new DIOWINDOWSPCAP();
+
+  return (DIOPCAP*)_class;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIOWINDOWSFACTORY::DeleteGPIO
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			25/07/2009 07:27:55 p.m.
-//	
-//	@return				bool : 
-//	@param				port : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      25/07/2009 07:27:55 p.m.
+//
+//  @return       bool :
+//  @param        port :
 */
 /*-----------------------------------------------------------------*/
 bool DIOWINDOWSFACTORY::DeletePCap(DIOPCAP* pcap)
 {
-	if(!pcap) return false;
+  if(!pcap) return false;
 
-	DIOWINDOWSPCAP* _pcap = (DIOWINDOWSPCAP*)pcap;	
-	delete _pcap;
-	
-	return true;
+  DIOWINDOWSPCAP* _pcap = (DIOWINDOWSPCAP*)pcap;
+  delete _pcap;
+
+  return true;
 }
 #endif
 
@@ -420,47 +420,47 @@ bool DIOWINDOWSFACTORY::DeletePCap(DIOPCAP* pcap)
 #ifdef DIOGPIO_ACTIVE
 /*-------------------------------------------------------------------
 //  DIOWINDOWSFACTORY::CreateGPIO
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			25/07/2009 07:27:51 p.m.
-//	
-//	@return				DIOGPIO* : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      25/07/2009 07:27:51 p.m.
+//
+//  @return       DIOGPIO* :
 
 */
 /*-----------------------------------------------------------------*/
 DIOGPIO* DIOWINDOWSFACTORY::CreateGPIO()
 {
-	DIOWINDOWSGPIO* _class = new DIOWINDOWSGPIO();
-	
-	return (DIOGPIO*)_class;																												
+  DIOWINDOWSGPIO* _class = new DIOWINDOWSGPIO();
+
+  return (DIOGPIO*)_class;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIOWINDOWSFACTORY::DeleteGPIO
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			25/07/2009 07:27:55 p.m.
-//	
-//	@return				bool : 
-//	@param				port : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      25/07/2009 07:27:55 p.m.
+//
+//  @return       bool :
+//  @param        port :
 */
 /*-----------------------------------------------------------------*/
 bool DIOWINDOWSFACTORY::DeleteGPIO(DIOGPIO* port)
 {
-	if(!port) return false;
+  if(!port) return false;
 
-	DIOWINDOWSGPIO* _port = (DIOWINDOWSGPIO*)port;	
-	delete _port;
-	
-	return true;
+  DIOWINDOWSGPIO* _port = (DIOWINDOWSGPIO*)port;
+  delete _port;
+
+  return true;
 }
 
 #endif

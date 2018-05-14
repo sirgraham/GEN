@@ -1,101 +1,101 @@
 /*------------------------------------------------------------------------------------------
-//	DIOWEBSCRAPERUSERAGENTID.CPP
-//	
-//	User Agent ID (Web Service)
-//   
-//	Author						: Abraham J. Velez
-//	Date Of Creation	: 05/11/2007 16:26:37
-//	Last Mofificacion	:	
-//	
-//	GEN  Copyright (C).  All right reserved.			 
+//  DIOWEBSCRAPERUSERAGENTID.CPP
+//
+//  User Agent ID (Web Service)
+//
+//  Author            : Abraham J. Velez
+//  Date Of Creation  : 05/11/2007 16:26:37
+//  Last Mofificacion :
+//
+//  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
-	
+
 #include "XThread.h"
 #include "DIOWebScraperUserAgentID.h"
 
 #include "XMemory.h"
-	
+
 /*---- GENERAL VARIABLE ------------------------------------------------------------------*/
 
-	
+
 /*---- CLASS MEMBERS ---------------------------------------------------------------------*/
 
 
 
 /*-------------------------------------------------------------------
 //  DIOUSERAGENTIDRESULT:: DIOUSERAGENTIDRESULT
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			23/06/2013 19:47:38
-//	
-//	@return 			
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      23/06/2013 19:47:38
+//
+//  @return
+//  */
 /*-----------------------------------------------------------------*/
  DIOUSERAGENTIDRESULT:: DIOUSERAGENTIDRESULT()
 {
-	Clean();
+  Clean();
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIOUSERAGENTIDRESULT::~ DIOUSERAGENTIDRESULT
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			23/06/2013 19:47:57
-//	
-//	@return 			
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      23/06/2013 19:47:57
+//
+//  @return
+//  */
 /*-----------------------------------------------------------------*/
  DIOUSERAGENTIDRESULT::~ DIOUSERAGENTIDRESULT()
 {
-	Clean();
+  Clean();
 }
 
 
 /*-------------------------------------------------------------------
 //  DIOUSERAGENTIDRESULT::Get
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			23/06/2013 19:48:19
-//	
-//	@return 			XSTRING* : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      23/06/2013 19:48:19
+//
+//  @return       XSTRING* :
+//  */
 /*-----------------------------------------------------------------*/
 XSTRING* DIOUSERAGENTIDRESULT::GetBrowser()
 {
-	return &browser;
+  return &browser;
 }
-	
-		
+
+
 
 /*-------------------------------------------------------------------
 //  DIOUSERAGENTIDRESULT::GetSO
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			24/06/2013 20:18:38
-//	
-//	@return 			XSTRING* : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      24/06/2013 20:18:38
+//
+//  @return       XSTRING* :
+//  */
 /*-----------------------------------------------------------------*/
 XSTRING* DIOUSERAGENTIDRESULT::GetSO()
 {
-	return &systemoperative;
+  return &systemoperative;
 }
 
 
@@ -103,15 +103,15 @@ XSTRING* DIOUSERAGENTIDRESULT::GetSO()
 
 /*-------------------------------------------------------------------
 //  DIOUSERAGENTIDRESULT::Clean
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			23/06/2013 19:48:36
-//	
-//	@return 			void : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      23/06/2013 19:48:36
+//
+//  @return       void :
+//  */
 /*-----------------------------------------------------------------*/
 void DIOUSERAGENTIDRESULT::Clean()
 {
@@ -124,23 +124,23 @@ void DIOUSERAGENTIDRESULT::Clean()
 
 /*-------------------------------------------------------------------
 //  DIOWEBSCRAPERUSERAGENTID::DIOWEBSCRAPERUSERAGENTID
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			08/02/2014 16:20:40
-//	
-//	@return 			void : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      08/02/2014 16:20:40
+//
+//  @return       void :
 
- 
- 
-//  @param				xpublisher : 
+
+
+//  @param        xpublisher :
 */
 /*-----------------------------------------------------------------*/
 DIOWEBSCRAPERUSERAGENTID::DIOWEBSCRAPERUSERAGENTID(  ) : DIOWEBSCRAPER()
 {
-	Clean();
+  Clean();
 }
 
 
@@ -148,19 +148,19 @@ DIOWEBSCRAPERUSERAGENTID::DIOWEBSCRAPERUSERAGENTID(  ) : DIOWEBSCRAPER()
 
 /*-------------------------------------------------------------------
 //  DIOWEBSCRAPERUSERAGENTID::~DIOWEBSCRAPERUSERAGENTID
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			05/11/2007 16:28:53
-//	
-//	@return
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      05/11/2007 16:28:53
+//
+//  @return
+//  */
 /*-----------------------------------------------------------------*/
 DIOWEBSCRAPERUSERAGENTID::~DIOWEBSCRAPERUSERAGENTID()
-{		
-	Clean();
+{
+  Clean();
 }
 
 
@@ -168,131 +168,131 @@ DIOWEBSCRAPERUSERAGENTID::~DIOWEBSCRAPERUSERAGENTID()
 
 /*-------------------------------------------------------------------
 //  DIOWEBSCRAPERUSERAGENTID::ChangeURL
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/04/2013 22:29:13
-//	
-//	@return 			bool : 
-//	@param				maskurl : 
-//  @param				url : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      02/04/2013 22:29:13
+//
+//  @return       bool :
+//  @param        maskurl :
+//  @param        url :
 */
 /*-----------------------------------------------------------------*/
 bool DIOWEBSCRAPERUSERAGENTID::ChangeURL(XCHAR* maskurl, DIOURL& url)
-{		
-	DIOURL urluseragent;
+{
+  DIOURL urluseragent;
 
-	urluseragent = useragent.Get();
-	urluseragent.EncodeUnsafeChars();
+  urluseragent = useragent.Get();
+  urluseragent.EncodeUnsafeChars();
 
-	url.Format(maskurl, urluseragent.Get());
+  url.Format(maskurl, urluseragent.Get());
 
-	//url.EncodeUnsafeChars();
+  //url.EncodeUnsafeChars();
 
-	return true;
+  return true;
 }
 
 
 /*-------------------------------------------------------------------
-//	DIOWEBSCRAPERUSERAGENTID::Get
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			12/05/2014 16:50:17
-//	
-//	@return 			bool : 
+//  DIOWEBSCRAPERUSERAGENTID::Get
+*/
+/**
 //
-//  @param				useragent : 
-//  @param				browser : 
-//  @param				systemoperative : 
-//  @param				timeout : 
-//  @param				localIP : 
-//  @param				usecache : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      12/05/2014 16:50:17
+//
+//  @return       bool :
+//
+//  @param        useragent :
+//  @param        browser :
+//  @param        systemoperative :
+//  @param        timeout :
+//  @param        localIP :
+//  @param        usecache :
 */
 /*-----------------------------------------------------------------*/
 bool DIOWEBSCRAPERUSERAGENTID::Get(XCHAR* useragent, XSTRING& browser, XSTRING& systemoperative, int timeout, XSTRING* localIP, bool usecache)
 {
-	bool status = false;
-	if(xmutexdo) xmutexdo->Lock();
+  bool status = false;
+  if(xmutexdo) xmutexdo->Lock();
 
-	this->useragent = useragent;	
-	if(this->useragent.IsEmpty()) 
-		{
-			if(xmutexdo) xmutexdo->UnLock();
-			return false;
-		}
-	
-	DIOUSERAGENTIDRESULT* useragentresult;	
-	if(usecache)
-		{
-			useragentresult= (DIOUSERAGENTIDRESULT*)cache->Get(this->useragent);
-			if(useragentresult)  
-				{
-					browser					= (*useragentresult->GetBrowser());
-					systemoperative = (*useragentresult->GetSO());
+  this->useragent = useragent;
+  if(this->useragent.IsEmpty())
+    {
+      if(xmutexdo) xmutexdo->UnLock();
+      return false;
+    }
 
-					if(xmutexdo) xmutexdo->UnLock();
-					return true;
-				}	
-		}
+  DIOUSERAGENTIDRESULT* useragentresult;
+  if(usecache)
+    {
+      useragentresult= (DIOUSERAGENTIDRESULT*)cache->Get(this->useragent);
+      if(useragentresult)
+        {
+          browser         = (*useragentresult->GetBrowser());
+          systemoperative = (*useragentresult->GetSO());
 
-	if(Load(DIOWEBSCRAPERUSERAGENTID_NAMEFILE)) 
-		{	
-			if(Do(DIOWEBSCRAPERUSERAGENTID_NAMESERVICE, timeout, localIP)) 
-				{
-					browser					= GetValue(__L("BROWSER"));
-					systemoperative = GetValue(__L("SO"));	
+          if(xmutexdo) xmutexdo->UnLock();
+          return true;
+        }
+    }
 
-					if(usecache)
-						{
-							useragentresult = new DIOUSERAGENTIDRESULT();
-							if(useragentresult)
-								{
-									useragentresult->GetBrowser()->Set(browser);	
-									useragentresult->GetSO()->Set(systemoperative);	
+  if(Load(DIOWEBSCRAPERUSERAGENTID_NAMEFILE))
+    {
+      if(Do(DIOWEBSCRAPERUSERAGENTID_NAMESERVICE, timeout, localIP))
+        {
+          browser         = GetValue(__L("BROWSER"));
+          systemoperative = GetValue(__L("SO"));
 
-									cache->Add(this->useragent, useragentresult);							
-								} 
-						}
-					
-					status = true;
-				} 
-		} 
+          if(usecache)
+            {
+              useragentresult = new DIOUSERAGENTIDRESULT();
+              if(useragentresult)
+                {
+                  useragentresult->GetBrowser()->Set(browser);
+                  useragentresult->GetSO()->Set(systemoperative);
 
-	if(xmutexdo) xmutexdo->UnLock();
-	
-	return status;
+                  cache->Add(this->useragent, useragentresult);
+                }
+            }
+
+          status = true;
+        }
+    }
+
+  if(xmutexdo) xmutexdo->UnLock();
+
+  return status;
 }
 
 
 /*-------------------------------------------------------------------
-//	DIOWEBSCRAPERUSERAGENTID::Get
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			12/05/2014 16:50:09
-//	
-//	@return 			bool : 
+//  DIOWEBSCRAPERUSERAGENTID::Get
+*/
+/**
 //
-//  @param				useragent : 
-//  @param				browser : 
-//  @param				systemoperative : 
-//  @param				timeoutforurl : 
-//  @param				localIP : 
-//  @param				usecache : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      12/05/2014 16:50:09
+//
+//  @return       bool :
+//
+//  @param        useragent :
+//  @param        browser :
+//  @param        systemoperative :
+//  @param        timeoutforurl :
+//  @param        localIP :
+//  @param        usecache :
 */
 /*-----------------------------------------------------------------*/
 bool DIOWEBSCRAPERUSERAGENTID::Get(XSTRING& useragent, XSTRING& browser, XSTRING& systemoperative, int timeoutforurl, XSTRING* localIP, bool usecache)
 {
-	return Get(useragent.Get(), browser, systemoperative, timeoutforurl, localIP, usecache);
+  return Get(useragent.Get(), browser, systemoperative, timeoutforurl, localIP, usecache);
 }
 
 
@@ -302,13 +302,13 @@ bool DIOWEBSCRAPERUSERAGENTID::Get(XSTRING& useragent, XSTRING& browser, XSTRING
 //  DIOWEBSCRAPERUSERAGENTID::Clean
 */
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			05/11/2007 16:28:12
-//	
-//	@return				void : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      05/11/2007 16:28:12
+//
+//  @return       void :
+//  */
 /*-----------------------------------------------------------------*/
 void DIOWEBSCRAPERUSERAGENTID::Clean()
 {

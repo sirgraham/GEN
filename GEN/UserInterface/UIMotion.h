@@ -6,10 +6,10 @@
 //
 // describes an input motion in the UI
 //
-//	@author: Imanol Celaya Ruiz de Alegria 
+//  @author: Imanol Celaya Ruiz de Alegria
 //
-//	Date of Creation : 17/10/2017 10:45:19 
-//	Last Modification : 
+//  Date of Creation : 17/10/2017 10:45:19
+//  Last Modification :
 */
 /* GEN  Copyright (C).  All right reserved.
 /*------------------------------------------------------------------------------------------*/
@@ -27,63 +27,63 @@
 
 enum UIMOTION_TYPE
 {
-	UIMOTION_TYPE_UNKNOWN = 0	,
-	UIMOTION_TYPE_NONE				,
-	UIMOTION_TYPE_DOWN				,
-	UIMOTION_TYPE_MOVE				,
-	UIMOTION_TYPE_UP					,
-	UIMOTION_TYPE_END
+  UIMOTION_TYPE_UNKNOWN = 0 ,
+  UIMOTION_TYPE_NONE        ,
+  UIMOTION_TYPE_DOWN        ,
+  UIMOTION_TYPE_MOVE        ,
+  UIMOTION_TYPE_UP          ,
+  UIMOTION_TYPE_END
 };
 
 class UIMOTION
 {
 public:
-	struct UIMOTIONENTRY
-	{
-		UIMOTION_TYPE														type;
-		float																		x;
-		float																		y;
-		XQWORD																	timestamp;
-	};
+  struct UIMOTIONENTRY
+  {
+    UIMOTION_TYPE                           type;
+    float                                   x;
+    float                                   y;
+    XQWORD                                  timestamp;
+  };
 
-																						UIMOTION																	();
-	virtual																	 ~UIMOTION																	();
+                                            UIMOTION                                  ();
+  virtual                                  ~UIMOTION                                  ();
 
-	bool																			AddMotion																	(UIMOTIONENTRY* entry);
+  bool                                      AddMotion                                 (UIMOTIONENTRY* entry);
 
-	UIMOTIONENTRY*														GetLastMotion															();
-	XDWORD																		GetMotionNumber														();
-	UIMOTIONENTRY*														GetMotion																	(XDWORD index);
+  UIMOTIONENTRY*                            GetLastMotion                             ();
+  XDWORD                                    GetMotionNumber                           ();
+  UIMOTIONENTRY*                            GetMotion                                 (XDWORD index);
 
-	float																			GetCurrentX																();
-	float																			GetCurrentY																();
-	XQWORD																		GetCurrentTimeStamp												();
+  float                                     GetCurrentX                               ();
+  float                                     GetCurrentY                               ();
+  XQWORD                                    GetCurrentTimeStamp                       ();
 
-	float																			GetMotionDiffX														();
-	float																			GetMotionDiffY														();
-	XQWORD																		GetTimeStampDiffX													();
+  float                                     GetMotionDiffX                            ();
+  float                                     GetMotionDiffY                            ();
+  XQWORD                                    GetTimeStampDiffX                         ();
 
-	void																			SetCurrentX																(float x);
-	void																			SetCurrentY																(float y);
-	void																			SetCurrentTimeStamp												(XQWORD timestamp);
+  void                                      SetCurrentX                               (float x);
+  void                                      SetCurrentY                               (float y);
+  void                                      SetCurrentTimeStamp                       (XQWORD timestamp);
 
-	void																			Clear																			();
+  void                                      Clear                                     ();
 
 protected:
 
-	XVECTOR<UIMOTIONENTRY*>										entries;
+  XVECTOR<UIMOTIONENTRY*>                   entries;
 
-	float																			x;
-	float																			y;
-	XQWORD																		timestamp;
+  float                                     x;
+  float                                     y;
+  XQWORD                                    timestamp;
 
 private:
-	void																			Clean																			()
-																						{
-																							x = 0.0f;
-																							y = 0.0f;
-																							timestamp = 0;
-																						}
+  void                                      Clean                                     ()
+                                            {
+                                              x = 0.0f;
+                                              y = 0.0f;
+                                              timestamp = 0;
+                                            }
 };
 /*---- INLINE FUNCTIONS ------------------------------------------------------------------*/
 

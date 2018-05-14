@@ -1,16 +1,16 @@
 /*------------------------------------------------------------------------------------------
-//	HASHMD5.CPP
-//	
-//	Hash MD5 class
-//   
-//	Author						: Abraham J. Velez
-//	Date Of Creation	: 02/03/2013 12:07:38
-//	Last Mofificacion	:	
-//	
-//	GEN  Copyright (C).  All right reserved.
+//  HASHMD5.CPP
+//
+//  Hash MD5 class
+//
+//  Author            : Abraham J. Velez
+//  Date Of Creation  : 02/03/2013 12:07:38
+//  Last Mofificacion :
+//
+//  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
 #include <string.h>
@@ -24,26 +24,26 @@
 
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
 
-#define S11		7
-#define S12		12
-#define S13		17
-#define S14		22
-#define S21	  5
-#define S22		9
-#define S23		14
-#define S24		20
-#define S31		4
-#define S32		11
-#define S33		16
-#define S34		23
-#define S41		6
-#define S42		10
-#define S43		15
-#define S44		21
+#define S11   7
+#define S12   12
+#define S13   17
+#define S14   22
+#define S21   5
+#define S22   9
+#define S23   14
+#define S24   20
+#define S31   4
+#define S32   11
+#define S33   16
+#define S34   23
+#define S41   6
+#define S42   10
+#define S43   15
+#define S44   21
 
 
 /*---- GENERAL VARIABLE ------------------------------------------------------------------*/
-	
+
 
 /*---- CLASS MEMBERS ---------------------------------------------------------------------*/
 
@@ -51,107 +51,107 @@
 
 /*-------------------------------------------------------------------
 //  HASHMD5::HASHMD5
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/03/2013 12:43:10
-//	
-//	@return 			
+//
+//
+//  @author       Abraham J. Velez
+//  @version      02/03/2013 12:43:10
+//
+//  @return
 */
 /*-----------------------------------------------------------------*/
 HASHMD5::HASHMD5() : HASH()
 {
-	Clean();	
+  Clean();
 
-	type = HASHTYPE_MD5;
+  type = HASHTYPE_MD5;
 
-	Ini();
+  Ini();
 }
 
 
 
 /*-------------------------------------------------------------------
 //  HASHMD5::~HASHMD5
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/03/2013 12:09:01
-//	
-//	@return 			
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      02/03/2013 12:09:01
+//
+//  @return
+//  */
 /*-----------------------------------------------------------------*/
 HASHMD5::~HASHMD5()
 {
-	Clean();
+  Clean();
 }
-		
-	
+
+
 
 /*-------------------------------------------------------------------
 //  HASHMD5::Do
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			03/03/2013 16:26:19
-//	
-//	@return 			bool : 
-//	@param				input : 
-//  @param				size : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      03/03/2013 16:26:19
+//
+//  @return       bool :
+//  @param        input :
+//  @param        size :
 */
 /*-----------------------------------------------------------------*/
 bool HASHMD5::Do(XBYTE* input, int size)
 {
-	if(!result) return false;
+  if(!result) return false;
 
-	result->Delete();
+  result->Delete();
 
   Update(input,size);
-  
-	End();
 
-	result->Add(digest,16);
-	
-	return true;
+  End();
+
+  result->Add(digest,16);
+
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  HASHMD5::GetDefaultSize
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			21/04/2013 0:55:35
-//	
-//	@return 			int : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      21/04/2013 0:55:35
+//
+//  @return       int :
+//  */
 /*-----------------------------------------------------------------*/
 int HASHMD5::GetDefaultSize()
 {
-	return 16;
+  return 16;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  HASHMD5::Clean
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/03/2013 12:09:56
-//	
-//	@return 			void : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      02/03/2013 12:09:56
+//
+//  @return       void :
+//  */
 /*-----------------------------------------------------------------*/
 void HASHMD5::Clean()
 {
@@ -163,15 +163,15 @@ void HASHMD5::Clean()
 
 /*-------------------------------------------------------------------
 //  HASHMD5::Ini
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/03/2013 17:03:10
-//	
-//	@return 			void : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      02/03/2013 17:03:10
+//
+//  @return       void :
+//  */
 /*-----------------------------------------------------------------*/
 void HASHMD5::Ini()
 {
@@ -192,16 +192,16 @@ void HASHMD5::Ini()
 
 /*-------------------------------------------------------------------
 //  HASHMD5::Update
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/03/2013 20:37:01
-//	
-//	@return 			void : 
-//	@param				buffer : 
-//  @param				size : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      02/03/2013 20:37:01
+//
+//  @return       void :
+//  @param        buffer :
+//  @param        size :
 */
 /*-----------------------------------------------------------------*/
 void HASHMD5::Update(XBYTE* input, XDWORD size)
@@ -211,8 +211,8 @@ void HASHMD5::Update(XBYTE* input, XDWORD size)
 
   // Update number of bits
   if ((count[0] += (size << 3)) < (size << 3)) count[1]++;
-  
-	count[1] += (size >> 29);
+
+  count[1] += (size >> 29);
 
   // number of bytes we need to fill in buffer
   XDWORD firstpart = 64 - index;
@@ -221,17 +221,17 @@ void HASHMD5::Update(XBYTE* input, XDWORD size)
 
   // transform as many times as possible.
   if(size >= firstpart)
-		{
-			// fill buffer first, transform
-			memcpy(&buffer[index], input, firstpart);
-			
-			Transform(buffer);
+    {
+      // fill buffer first, transform
+      memcpy(&buffer[index], input, firstpart);
+
+      Transform(buffer);
 
     // transform chunks of HASHMD5_BLOCKSIZE (64 bytes)
     for(i = firstpart; i + HASHMD5_BLOCKSIZE <= size; i += HASHMD5_BLOCKSIZE)
-			{		
-				Transform(&input[i]);
-			}
+      {
+        Transform(&input[i]);
+      }
 
     index = 0;
 
@@ -246,26 +246,26 @@ void HASHMD5::Update(XBYTE* input, XDWORD size)
 
 /*-------------------------------------------------------------------
 //  HASHMD5::Transform
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/03/2013 20:56:30
-//	
-//	@return 			void : 
-//	@param				block[HASHMD5_BLOCKSIZE] : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      02/03/2013 20:56:30
+//
+//  @return       void :
+//  @param        block[HASHMD5_BLOCKSIZE] :
 */
 /*-----------------------------------------------------------------*/
 void HASHMD5::Transform(XBYTE block[HASHMD5_BLOCKSIZE])
 {
   XDWORD a = state[0];
-	XDWORD b = state[1];
-	XDWORD c = state[2];
-	XDWORD d = state[3];
-	XDWORD x[16];
-  
-	Decode(x, block, HASHMD5_BLOCKSIZE);
+  XDWORD b = state[1];
+  XDWORD c = state[2];
+  XDWORD d = state[3];
+  XDWORD x[16];
+
+  Decode(x, block, HASHMD5_BLOCKSIZE);
 
   /* Round 1 */
   FF (a, b, c, d, x[ 0], S11, 0xd76aa478); /* 1 */
@@ -352,53 +352,53 @@ void HASHMD5::Transform(XBYTE block[HASHMD5_BLOCKSIZE])
 
 /*-------------------------------------------------------------------
 //  HASHMD5::Decode
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/03/2013 20:59:30
-//	
-//	@return 			void : 
-//	@param				output[] : 
-//  @param				input[] : 
-//  @param				size : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      02/03/2013 20:59:30
+//
+//  @return       void :
+//  @param        output[] :
+//  @param        input[] :
+//  @param        size :
 */
 /*-----------------------------------------------------------------*/
 void HASHMD5::Decode(XDWORD* output, XBYTE* input, XDWORD size)
 {
   for(XDWORD i=0, j=0; j<size; i++, j+=4)
-		{
-			output[i] = ((XDWORD)input[j]) | (((XDWORD)input[j+1]) << 8) | (((XDWORD)input[j+2]) << 16) | (((XDWORD)input[j+3]) << 24);
-		}
+    {
+      output[i] = ((XDWORD)input[j]) | (((XDWORD)input[j+1]) << 8) | (((XDWORD)input[j+2]) << 16) | (((XDWORD)input[j+3]) << 24);
+    }
 }
 
 
 
 /*-------------------------------------------------------------------
 //  HASHMD5::Encode
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/03/2013 20:59:26
-//	
-//	@return 			void : 
-//	@param				output[] : 
-//  @param				input[] : 
-//  @param				size : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      02/03/2013 20:59:26
+//
+//  @return       void :
+//  @param        output[] :
+//  @param        input[] :
+//  @param        size :
 */
 /*-----------------------------------------------------------------*/
 void HASHMD5::Encode(XBYTE* output, XDWORD* input, XDWORD size)
 {
-  for(XDWORD i=0, j=0; j<size; i++, j+= 4) 
-		{
-			output[j] = input[i] & 0xff;
-			output[j+1] = (input[i] >> 8) & 0xff;
-			output[j+2] = (input[i] >> 16) & 0xff;
-			output[j+3] = (input[i] >> 24) & 0xff;
-		}
+  for(XDWORD i=0, j=0; j<size; i++, j+= 4)
+    {
+      output[j] = input[i] & 0xff;
+      output[j+1] = (input[i] >> 8) & 0xff;
+      output[j+2] = (input[i] >> 16) & 0xff;
+      output[j+3] = (input[i] >> 24) & 0xff;
+    }
 }
 
 
@@ -406,36 +406,36 @@ void HASHMD5::Encode(XBYTE* output, XDWORD* input, XDWORD size)
 
 /*-------------------------------------------------------------------
 //  HASHMD5::End
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/03/2013 20:50:06
-//	
-//	@return 			void : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      02/03/2013 20:50:06
+//
+//  @return       void :
+//  */
 /*-----------------------------------------------------------------*/
 void HASHMD5::End()
 {
-  unsigned char padding[64] = { 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
-																			 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
-																			 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
-																			 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-																		 };
+  unsigned char padding[64] = { 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                       0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                       0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                       0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+                                     };
 
   if(finalized) return;
 
     // Save number of bits
   XBYTE bits[8];
-    
-	Encode(bits, count, 8);
+
+  Encode(bits, count, 8);
 
     // pad out to 56 mod 64.
   XDWORD index = count[0] / 8 % 64;
   XDWORD padLen = (index < 56) ? (56 - index) : (120 - index);
-    
-	Update(padding, padLen);
+
+  Update(padding, padLen);
 
     // Append size (before padding)
   Update(bits, 8);
@@ -447,7 +447,7 @@ void HASHMD5::End()
   memset(buffer, 0, sizeof buffer);
   memset(count, 0, sizeof count);
 
-  finalized=true;  
+  finalized=true;
 }
 
 
@@ -455,17 +455,17 @@ void HASHMD5::End()
 
 /*-------------------------------------------------------------------
 //  XDWORD HASHMD5::F
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/03/2013 16:36:11
-//	
-//	@return 			inline : 
-//	@param				x : 
-//  @param				y : 
-//  @param				z : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      02/03/2013 16:36:11
+//
+//  @return       inline :
+//  @param        x :
+//  @param        y :
+//  @param        z :
 */
 /*-----------------------------------------------------------------*/
 inline XDWORD HASHMD5::F(XDWORD x, XDWORD y, XDWORD z)
@@ -477,20 +477,20 @@ inline XDWORD HASHMD5::F(XDWORD x, XDWORD y, XDWORD z)
 
 /*-------------------------------------------------------------------
 //  XDWORD HASHMD5::G
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/03/2013 16:36:17
-//	
-//	@return 			inline : 
-//	@param				x : 
-//  @param				y : 
-//  @param				z : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      02/03/2013 16:36:17
+//
+//  @return       inline :
+//  @param        x :
+//  @param        y :
+//  @param        z :
 */
 /*-----------------------------------------------------------------*/
-inline XDWORD HASHMD5::G(XDWORD x, XDWORD y, XDWORD z) 
+inline XDWORD HASHMD5::G(XDWORD x, XDWORD y, XDWORD z)
 {
   return x&z | y&~z;
 }
@@ -499,17 +499,17 @@ inline XDWORD HASHMD5::G(XDWORD x, XDWORD y, XDWORD z)
 
 /*-------------------------------------------------------------------
 //  XDWORD HASHMD5::H
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/03/2013 16:36:29
-//	
-//	@return 			inline : 
-//	@param				x : 
-//  @param				y : 
-//  @param				z : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      02/03/2013 16:36:29
+//
+//  @return       inline :
+//  @param        x :
+//  @param        y :
+//  @param        z :
 */
 /*-----------------------------------------------------------------*/
 inline XDWORD HASHMD5::H(XDWORD x, XDWORD y, XDWORD z)
@@ -522,20 +522,20 @@ inline XDWORD HASHMD5::H(XDWORD x, XDWORD y, XDWORD z)
 
 /*-------------------------------------------------------------------
 //  XDWORD HASHMD5::I
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/03/2013 16:37:11
-//	
-//	@return 			inline : 
-//	@param				x : 
-//  @param				y : 
-//  @param				z : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      02/03/2013 16:37:11
+//
+//  @return       inline :
+//  @param        x :
+//  @param        y :
+//  @param        z :
 */
 /*-----------------------------------------------------------------*/
-inline XDWORD HASHMD5::I(XDWORD x, XDWORD y, XDWORD z) 
+inline XDWORD HASHMD5::I(XDWORD x, XDWORD y, XDWORD z)
 {
   return y ^ (x | ~z);
 }
@@ -544,19 +544,19 @@ inline XDWORD HASHMD5::I(XDWORD x, XDWORD y, XDWORD z)
 
 /*-------------------------------------------------------------------
 //  XDWORD HASHMD5::RotateLeft
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/03/2013 16:44:28
-//	
-//	@return 			inline : 
-//	@param				x : 
-//  @param				n : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      02/03/2013 16:44:28
+//
+//  @return       inline :
+//  @param        x :
+//  @param        n :
 */
 /*-----------------------------------------------------------------*/
-inline XDWORD HASHMD5::RotateLeft(XDWORD x, int n) 
+inline XDWORD HASHMD5::RotateLeft(XDWORD x, int n)
 {
   return (x << n) | (x >> (32-n));
 }
@@ -565,21 +565,21 @@ inline XDWORD HASHMD5::RotateLeft(XDWORD x, int n)
 
 /*-------------------------------------------------------------------
 //  void HASHMD5::FF
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/03/2013 16:37:34
-//	
-//	@return 			inline : 
-//	@param				&a : 
-//  @param				b : 
-//  @param				c : 
-//  @param				d : 
-//  @param				x : 
-//  @param				s : 
-//  @param				ac : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      02/03/2013 16:37:34
+//
+//  @return       inline :
+//  @param        &a :
+//  @param        b :
+//  @param        c :
+//  @param        d :
+//  @param        x :
+//  @param        s :
+//  @param        ac :
 */
 /*-----------------------------------------------------------------*/
 inline void HASHMD5::FF(XDWORD &a, XDWORD b, XDWORD c, XDWORD d, XDWORD x, XDWORD s, XDWORD ac)
@@ -591,24 +591,24 @@ inline void HASHMD5::FF(XDWORD &a, XDWORD b, XDWORD c, XDWORD d, XDWORD x, XDWOR
 
 /*-------------------------------------------------------------------
 //  void HASHMD5::GG
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/03/2013 16:37:47
-//	
-//	@return 			inline : 
-//	@param				&a : 
-//  @param				b : 
-//  @param				c : 
-//  @param				d : 
-//  @param				x : 
-//  @param				s : 
-//  @param				ac : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      02/03/2013 16:37:47
+//
+//  @return       inline :
+//  @param        &a :
+//  @param        b :
+//  @param        c :
+//  @param        d :
+//  @param        x :
+//  @param        s :
+//  @param        ac :
 */
 /*-----------------------------------------------------------------*/
-inline void HASHMD5::GG(XDWORD &a, XDWORD b, XDWORD c, XDWORD d, XDWORD x, XDWORD s, XDWORD ac) 
+inline void HASHMD5::GG(XDWORD &a, XDWORD b, XDWORD c, XDWORD d, XDWORD x, XDWORD s, XDWORD ac)
 {
   a = RotateLeft(a + G(b,c,d) + x + ac, s) + b;
 }
@@ -617,24 +617,24 @@ inline void HASHMD5::GG(XDWORD &a, XDWORD b, XDWORD c, XDWORD d, XDWORD x, XDWOR
 
 /*-------------------------------------------------------------------
 //  void HASHMD5::HH
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/03/2013 16:38:06
-//	
-//	@return 			inline : 
-//	@param				&a : 
-//  @param				b : 
-//  @param				c : 
-//  @param				d : 
-//  @param				x : 
-//  @param				s : 
-//  @param				ac : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      02/03/2013 16:38:06
+//
+//  @return       inline :
+//  @param        &a :
+//  @param        b :
+//  @param        c :
+//  @param        d :
+//  @param        x :
+//  @param        s :
+//  @param        ac :
 */
 /*-----------------------------------------------------------------*/
-inline void HASHMD5::HH(XDWORD &a, XDWORD b, XDWORD c, XDWORD d, XDWORD x, XDWORD s, XDWORD ac) 
+inline void HASHMD5::HH(XDWORD &a, XDWORD b, XDWORD c, XDWORD d, XDWORD x, XDWORD s, XDWORD ac)
 {
   a = RotateLeft(a + H(b,c,d) + x + ac, s) + b;
 }
@@ -643,24 +643,24 @@ inline void HASHMD5::HH(XDWORD &a, XDWORD b, XDWORD c, XDWORD d, XDWORD x, XDWOR
 
 /*-------------------------------------------------------------------
 //  void HASHMD5::II
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/03/2013 16:38:12
-//	
-//	@return 			inline : 
-//	@param				&a : 
-//  @param				b : 
-//  @param				c : 
-//  @param				d : 
-//  @param				x : 
-//  @param				s : 
-//  @param				ac : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      02/03/2013 16:38:12
+//
+//  @return       inline :
+//  @param        &a :
+//  @param        b :
+//  @param        c :
+//  @param        d :
+//  @param        x :
+//  @param        s :
+//  @param        ac :
 */
 /*-----------------------------------------------------------------*/
-inline void HASHMD5::II(XDWORD &a, XDWORD b, XDWORD c, XDWORD d, XDWORD x, XDWORD s, XDWORD ac) 
+inline void HASHMD5::II(XDWORD &a, XDWORD b, XDWORD c, XDWORD d, XDWORD x, XDWORD s, XDWORD ac)
 {
   a = RotateLeft(a + I(b,c,d) + x + ac, s) + b;
 }

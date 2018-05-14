@@ -1,16 +1,16 @@
 /*------------------------------------------------------------------------------------------
-//	HASH.CPP
-//	
-//	Hash CRC 32 class
-//   
-//	Author						: Abraham J. Velez
-//	Date Of Creation	: 02/03/2013 12:07:38
-//	Last Mofificacion	:	
-//	
-//	GEN  Copyright (C).  All right reserved.
+//  HASH.CPP
+//
+//  Hash CRC 32 class
+//
+//  Author            : Abraham J. Velez
+//  Date Of Creation  : 02/03/2013 12:07:38
+//  Last Mofificacion :
+//
+//  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
 #include <string.h>
@@ -26,7 +26,7 @@
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
 
 #define  HASHCRC32_INI      0xEDB88320
-	
+
 
 /*---- GENERAL VARIABLE ------------------------------------------------------------------*/
 
@@ -37,156 +37,156 @@
 
 /*-------------------------------------------------------------------
 //  HASHCRC32::HASHCRC32
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/03/2013 12:43:10
-//	
-//	@return 			
+//
+//
+//  @author       Abraham J. Velez
+//  @version      02/03/2013 12:43:10
+//
+//  @return
 */
 /*-----------------------------------------------------------------*/
 HASHCRC32::HASHCRC32() : HASH()
 {
-	Clean();
+  Clean();
 
-	type = HASHTYPE_CRC32;
+  type = HASHTYPE_CRC32;
 
-	resulttmp = new XBUFFER();
-	
-	XDWORD value = 0xffffffff;
-	resulttmp->Add((XDWORD)value);
+  resulttmp = new XBUFFER();
 
-	Ini();	
+  XDWORD value = 0xffffffff;
+  resulttmp->Add((XDWORD)value);
+
+  Ini();
 }
 
 
 
 /*-------------------------------------------------------------------
 //  HASHCRC32::~HASHCRC32
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/03/2013 12:09:01
-//	
-//	@return 			
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      02/03/2013 12:09:01
+//
+//  @return
+//  */
 /*-----------------------------------------------------------------*/
 HASHCRC32::~HASHCRC32()
 {
-	if(resulttmp) 
-		{
-			delete resulttmp;
-			resulttmp = NULL;
-		}
+  if(resulttmp)
+    {
+      delete resulttmp;
+      resulttmp = NULL;
+    }
 
-	Clean();
+  Clean();
 }
-		
-	
+
+
 
 
 
 /*-------------------------------------------------------------------
 //  HASHCRC32::Do
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			03/03/2013 16:30:03
-//	
-//	@return 			bool : 
-//	@param				input : 
-//  @param				size : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      03/03/2013 16:30:03
+//
+//  @return       bool :
+//  @param        input :
+//  @param        size :
 */
 /*-----------------------------------------------------------------*/
 bool HASHCRC32::Do(XBYTE* input, int size)
-{	
-	if(!size) return false;
+{
+  if(!size) return false;
 
-	XDWORD	value = 0;
-	
-	resulttmp->Extract(value);
+  XDWORD  value = 0;
 
-	for(int c=0;c<size;c++)
-		{				
-			value = Update(value, (*input));	
-			input++;
-		}
+  resulttmp->Extract(value);
 
-	resulttmp->Add((XDWORD)value);
+  for(int c=0;c<size;c++)
+    {
+      value = Update(value, (*input));
+      input++;
+    }
 
-	return true;
+  resulttmp->Add((XDWORD)value);
+
+  return true;
 }
 
 
 /*-------------------------------------------------------------------
-//	HASHCRC32::ResetResult
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			21/11/2014 13:48:58
-//	
-//	@return 			bool : 
+//  HASHCRC32::ResetResult
+*/
+/**
+//
+//
+//
+//  @author       Abraham J. Velez
+//  @version      21/11/2014 13:48:58
+//
+//  @return       bool :
 //
 */
 /*-----------------------------------------------------------------*/
 bool HASHCRC32::ResetResult()
 {
-	HASH::ResetResult();
+  HASH::ResetResult();
 
-	resulttmp->Delete();
-	XDWORD value = 0xffffffff;
-	resulttmp->Add((XDWORD)value);
+  resulttmp->Delete();
+  XDWORD value = 0xffffffff;
+  resulttmp->Add((XDWORD)value);
 
-	return true;
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  HASHCRC32::GetDefaultSize
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			21/04/2013 0:54:19
-//	
-//	@return 			int : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      21/04/2013 0:54:19
+//
+//  @return       int :
+//  */
 /*-----------------------------------------------------------------*/
 int HASHCRC32::GetDefaultSize()
 {
-	return sizeof(XDWORD);
+  return sizeof(XDWORD);
 }
 
 
 
 /*-------------------------------------------------------------------
 //  HASHCRC32::GetResult
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			03/03/2013 23:30:36
-//	
-//	@return 			XBUFFER* : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      03/03/2013 23:30:36
+//
+//  @return       XBUFFER* :
+//  */
 /*-----------------------------------------------------------------*/
 XBUFFER* HASHCRC32::GetResult()
 {
-	GetResultCRC32();
+  GetResultCRC32();
 
-	return result;
+  return result;
 }
 
 
@@ -194,53 +194,53 @@ XBUFFER* HASHCRC32::GetResult()
 
 /*-------------------------------------------------------------------
 //  HASHCRC32::GetResult
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			03/03/2013 23:30:44
-//	
-//	@return 			XBYTE* : 
-//	@param				resultsize : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      03/03/2013 23:30:44
+//
+//  @return       XBYTE* :
+//  @param        resultsize :
 */
 /*-----------------------------------------------------------------*/
 XBYTE* HASHCRC32::GetResult(int& resultsize)
 {
-	GetResultCRC32();
+  GetResultCRC32();
 
-	resultsize	= result->GetSize();
+  resultsize  = result->GetSize();
 
-	return result->Get();
+  return result->Get();
 }
 
 
 
 /*-------------------------------------------------------------------
 //  HASHCRC32::GetResultCRC32
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/03/2013 14:04:01
-//	
-//	@return 			XDWORD : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      02/03/2013 14:04:01
+//
+//  @return       XDWORD :
+//  */
 /*-----------------------------------------------------------------*/
 XDWORD HASHCRC32::GetResultCRC32()
 {
-	XDWORD value = 0;
+  XDWORD value = 0;
 
-	result->Delete();
+  result->Delete();
 
-	resulttmp->Extract(value);
+  resulttmp->Extract(value);
 
-	value ^= 0xffffffff;
-	
-	result->Add((XDWORD)value);
+  value ^= 0xffffffff;
 
-	return value;
+  result->Add((XDWORD)value);
+
+  return value;
 }
 
 
@@ -248,56 +248,56 @@ XDWORD HASHCRC32::GetResultCRC32()
 
 /*-------------------------------------------------------------------
 //  HASHCRC32::Clean
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/03/2013 12:09:56
-//	
-//	@return 			void : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      02/03/2013 12:09:56
+//
+//  @return       void :
+//  */
 /*-----------------------------------------------------------------*/
 void HASHCRC32::Clean()
-{	
-	resulttmp = NULL;
+{
+  resulttmp = NULL;
 }
-	
+
 
 
 
 
 /*-------------------------------------------------------------------
 //  HASHCRC32::Ini
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			03/03/2013 18:45:46
-//	
-//	@return 			void : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      03/03/2013 18:45:46
+//
+//  @return       void :
+//  */
 /*-----------------------------------------------------------------*/
 void HASHCRC32::Ini()
-{	
-	XDWORD crc; 
-	int		 i;
-	int		 j;
+{
+  XDWORD crc;
+  int    i;
+  int    j;
 
-  for(i=0; i<256; i++) 
-		{
-	    crc = (XDWORD) i;
+  for(i=0; i<256; i++)
+    {
+      crc = (XDWORD) i;
 
-      for(j=0; j<8; j++) 
-				{
-           if(crc & 0x00000001) 
-									crc = ( crc >> 1 ) ^ HASHCRC32_INI;
+      for(j=0; j<8; j++)
+        {
+           if(crc & 0x00000001)
+                  crc = ( crc >> 1 ) ^ HASHCRC32_INI;
             else  crc =   crc >> 1;
         }
 
       table[i] = crc;
-    }    
+    }
 }
 
 
@@ -305,28 +305,28 @@ void HASHCRC32::Ini()
 
 /*-------------------------------------------------------------------
 //  UpdateCRC32
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			03/03/2013 18:45:51
-//	
-//	@return 			XDWORD : 
-//	@param				crc : 
-//  @param				c : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      03/03/2013 18:45:51
+//
+//  @return       XDWORD :
+//  @param        crc :
+//  @param        c :
 */
 /*-----------------------------------------------------------------*/
-XDWORD HASHCRC32::Update(XDWORD CRC32, XBYTE data) 
+XDWORD HASHCRC32::Update(XDWORD CRC32, XBYTE data)
 {
-	XDWORD tmp;		
-	XDWORD long_c;
+  XDWORD tmp;
+  XDWORD long_c;
 
-  long_c = 0x000000FF & (XDWORD) data;  
-  tmp		 = CRC32 ^ long_c;
-    
-	CRC32 = (CRC32 >> 8) ^ table[ tmp & 0xff ];
+  long_c = 0x000000FF & (XDWORD) data;
+  tmp    = CRC32 ^ long_c;
+
+  CRC32 = (CRC32 >> 8) ^ table[ tmp & 0xff ];
 
   return CRC32;
 
-} 
+}

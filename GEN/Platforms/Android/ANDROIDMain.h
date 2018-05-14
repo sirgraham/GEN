@@ -1,21 +1,21 @@
 //------------------------------------------------------------------------------------------
-//	ANDROIDMAIN.H
-//	
-/**	
+//  ANDROIDMAIN.H
+//
+/**
 // \class ANDROIDMAIN
-//   
+//
 //  Android Main function for C++
-//   
-//	@author	 Abraham J. Velez
-//	@version 10/01/2010
-*/	
-//	GEN  Copyright (C).  All right reserved.		 			 
+//
+//  @author  Abraham J. Velez
+//  @version 10/01/2010
+*/
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
+
 #ifndef _ANDROIDMAIN_H_
 #define _ANDROIDMAIN_H_
-	
-	
+
+
 //---- INCLUDES ----------------------------------------------------------------------------
 
 #include "XBase.h"
@@ -50,101 +50,101 @@ class INPDEVICE;
 
 class ANDROIDMAIN : public ANDROIDNATIVEACTIVITY_HANDLER, public ANDROIDNATIVEINPUT_HANDLER, public MAIN
 {
-	public:
-																		ANDROIDMAIN													();
-		virtual									 			 ~ANDROIDMAIN													();
+  public:
+                                    ANDROIDMAIN                         ();
+    virtual                        ~ANDROIDMAIN                         ();
 
-		bool														Ini																	(XSTRING* apkpath, XSTRING* xpath);			
-		bool														Update															();
-		bool														End																	();
+    bool                            Ini                                 (XSTRING* apkpath, XSTRING* xpath);
+    bool                            Update                              ();
+    bool                            End                                 ();
 
-		GRPAPPLICATION*	 								GetXApplication											();
+    GRPAPPLICATION*                 GetXApplication                     ();
 
-		#ifdef INP_ACTIVE
-		INPDEVICE*											GetKeyboard													();
-		INPDEVICE*											GetTouchscreen											();		
-		#endif	
+    #ifdef INP_ACTIVE
+    INPDEVICE*                      GetKeyboard                         ();
+    INPDEVICE*                      GetTouchscreen                      ();
+    #endif
 
-		void														SetAndroidApplication								(android_app*	application)         
-																		{ 
-																			this->application = application;       																			
-																		}
+    void                            SetAndroidApplication               (android_app* application)
+                                    {
+                                      this->application = application;
+                                    }
 
-		android_app*										GetAndroidApplication()
-																		{
-																			return this->application;
-																		}
+    android_app*                    GetAndroidApplication()
+                                    {
+                                      return this->application;
+                                    }
 
-	protected:
-			
-		bool														OnTouchEvent												(AInputEvent* event);
-    bool														OnKeyboardEvent											(AInputEvent* event);
-    bool														OnTrackballEvent										(AInputEvent* event);
+  protected:
 
-		STATUS													OnActivate													();
-		void														OnDeactivate												();
-		STATUS													OnStep															();
+    bool                            OnTouchEvent                        (AInputEvent* event);
+    bool                            OnKeyboardEvent                     (AInputEvent* event);
+    bool                            OnTrackballEvent                    (AInputEvent* event);
 
-		void														OnStart															();
-		void														OnResume														();
-		void														OnPause															();
-		void														OnStop															();
-		void														OnDestroy														();
+    STATUS                          OnActivate                          ();
+    void                            OnDeactivate                        ();
+    STATUS                          OnStep                              ();
 
-		void														OnSaveState													(void** data, size_t* size);
-		void														OnConfigurationChanged							();
-		void														OnLowMemory													();
+    void                            OnStart                             ();
+    void                            OnResume                            ();
+    void                            OnPause                             ();
+    void                            OnStop                              ();
+    void                            OnDestroy                           ();
 
-		void														OnCreateWindow											();
-		void														OnDestroyWindow											();
-		void														OnGainFocus													();
-		void														OnLostFocus													();
-		
-		bool														GetPackageResourcePath							(struct android_app* app, XSTRING& path);	
-		bool														GetAbsolutePath											(struct android_app* app, XSTRING& path);
-		bool														GetDPI															(struct android_app* app);
+    void                            OnSaveState                         (void** data, size_t* size);
+    void                            OnConfigurationChanged              ();
+    void                            OnLowMemory                         ();
 
-	private:
+    void                            OnCreateWindow                      ();
+    void                            OnDestroyWindow                     ();
+    void                            OnGainFocus                         ();
+    void                            OnLostFocus                         ();
 
-		void														Clean																();	
-		
-		bool														OverturnAssetsToExternalLocation		(XPATH& origin ,XPATH& target);
-		bool														OverturnAssetsToExternalLocation		(XPATH& origin ,XCHAR* target);
-		bool														OverturnAssetsToExternalLocation		(XCHAR* origin ,XPATH& target);
-		bool														OverturnAssetsToExternalLocation		(XCHAR* origin ,XCHAR* target);
+    bool                            GetPackageResourcePath              (struct android_app* app, XSTRING& path);
+    bool                            GetAbsolutePath                     (struct android_app* app, XSTRING& path);
+    bool                            GetDPI                              (struct android_app* app);
 
-		#ifdef INP_ACTIVE
-		bool														InputDevices												(INPMANAGER* inpmanager, GRPANDROIDSCREEN* screen, bool create);
-		#endif
+  private:
 
-		XANDROIDSYSTEM*									xsystem;
-					
-		#ifdef INP_ACTIVE
-		//INPANDROIDDEVICEKEYBOARD*				keyboard;
-		INPDEVICE* keyboard;
-		//INPANDROIDDEVICEMOUSE*					mouse;
-		INPDEVICE* mouse;
-		#endif
-		
+    void                            Clean                               ();
 
-		android_app*										application;
+    bool                            OverturnAssetsToExternalLocation    (XPATH& origin ,XPATH& target);
+    bool                            OverturnAssetsToExternalLocation    (XPATH& origin ,XCHAR* target);
+    bool                            OverturnAssetsToExternalLocation    (XCHAR* origin ,XPATH& target);
+    bool                            OverturnAssetsToExternalLocation    (XCHAR* origin ,XCHAR* target);
 
-		bool														initialized;
-		
-		XAPPLICATION*										xapplication;
-		XTIMER*													timer;
+    #ifdef INP_ACTIVE
+    bool                            InputDevices                        (INPMANAGER* inpmanager, GRPANDROIDSCREEN* screen, bool create);
+    #endif
 
-		
+    XANDROIDSYSTEM*                 xsystem;
+
+    #ifdef INP_ACTIVE
+    //INPANDROIDDEVICEKEYBOARD*       keyboard;
+    INPDEVICE* keyboard;
+    //INPANDROIDDEVICEMOUSE*          mouse;
+    INPDEVICE* mouse;
+    #endif
+
+
+    android_app*                    application;
+
+    bool                            initialized;
+
+    XAPPLICATION*                   xapplication;
+    XTIMER*                         timer;
+
+
 };
 
 
 //---- DEFINITIONS -------------------------------------------------------------------------------
 
 #ifdef XDEBUG
-extern XANDROIDDEBUGCTRL	debug;
+extern XANDROIDDEBUGCTRL  debug;
 #endif
 
-extern ANDROIDMAIN				androidmain;
+extern ANDROIDMAIN        androidmain;
 
 #endif
 

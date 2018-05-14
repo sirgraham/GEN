@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------------------
-//	DIOANDROIDSTREAMTCPIP.H
+//  DIOANDROIDSTREAMTCPIP.H
 //
 /**
 // \class
 //
 //  ANDROID Data IO Stream TCP/IP class
 //
-//	@author	 Abraham J. Velez
-//	@version 02/01/2002
+//  @author  Abraham J. Velez
+//  @version 02/01/2002
 */
-//	GEN  Copyright (C).  All right reserved.
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
 
 #ifndef _DIOANDROIDSTREAMTCPIP_H_
@@ -30,29 +30,29 @@
 
 enum DIOANDROIDTCPIPFSMEVENTS
 {
-	DIOANDROIDTCPIPFSMEVENT_NONE								= 0 ,
+  DIOANDROIDTCPIPFSMEVENT_NONE                = 0 ,
 
-	DIOANDROIDTCPIPFSMEVENT_GETTINGCONNEXION				,
-	DIOANDROIDTCPIPFSMEVENT_CONNECTED							,
-	DIOANDROIDTCPIPFSMEVENT_WAITINGTOREAD					,
-	DIOANDROIDTCPIPFSMEVENT_SENDINGDATA						,
-	DIOANDROIDTCPIPFSMEVENT_DISCONNECTING					,		
+  DIOANDROIDTCPIPFSMEVENT_GETTINGCONNEXION        ,
+  DIOANDROIDTCPIPFSMEVENT_CONNECTED             ,
+  DIOANDROIDTCPIPFSMEVENT_WAITINGTOREAD         ,
+  DIOANDROIDTCPIPFSMEVENT_SENDINGDATA           ,
+  DIOANDROIDTCPIPFSMEVENT_DISCONNECTING         ,
 
-	DIOANDROIDTCPIP_LASTEVENT
+  DIOANDROIDTCPIP_LASTEVENT
 };
 
 
 enum DIOANDROIDTCPIPFSMSTATES
 {
-	DIOANDROIDTCPIPFSMSTATE_NONE								= 0 ,	
+  DIOANDROIDTCPIPFSMSTATE_NONE                = 0 ,
 
-	DIOANDROIDTCPIPFSMSTATE_GETTINGCONNEXION				,
-	DIOANDROIDTCPIPFSMSTATE_CONNECTED								,
-	DIOANDROIDTCPIPFSMSTATE_WAITINGTOREAD						,
-	DIOANDROIDTCPIPFSMSTATE_SENDINGDATA							,
-	DIOANDROIDTCPIPFSMSTATE_DISCONNECTING						,			
+  DIOANDROIDTCPIPFSMSTATE_GETTINGCONNEXION        ,
+  DIOANDROIDTCPIPFSMSTATE_CONNECTED               ,
+  DIOANDROIDTCPIPFSMSTATE_WAITINGTOREAD           ,
+  DIOANDROIDTCPIPFSMSTATE_SENDINGDATA             ,
+  DIOANDROIDTCPIPFSMSTATE_DISCONNECTING           ,
 
-	DIOANDROIDTCPIP_LASTSTATE
+  DIOANDROIDTCPIP_LASTSTATE
 };
 
 
@@ -63,43 +63,43 @@ class XPUBLISHER;
 class DIOFACTORY;
 
 
-class DIOANDROIDSTREAMTCPIP : public DIOSTREAMTCPIP , public XFSMACHINE 
+class DIOANDROIDSTREAMTCPIP : public DIOSTREAMTCPIP , public XFSMACHINE
 {
-	public:
-															DIOANDROIDSTREAMTCPIP											();
-		virtual									 ~DIOANDROIDSTREAMTCPIP											();		
+  public:
+                              DIOANDROIDSTREAMTCPIP                     ();
+    virtual                  ~DIOANDROIDSTREAMTCPIP                     ();
 
-		bool											Open																		();
-		bool											Disconnect															();
-		bool											Close																		();
+    bool                      Open                                    ();
+    bool                      Disconnect                              ();
+    bool                      Close                                   ();
 
-	protected:
-		
-		int												Accept																	(int socket, void* addr, void* addrlen, XDWORD usec);
-		int 											IsReadyConnect													(int socket);
-		bool											SetPropertysHandle											(int socket);
-		
-	private:
-		
-		void											Clean																		()
-															{
-																threadconnexion		=	NULL;														
+  protected:
 
-																handlesocket 			= -1;
-																
-																memset(buffer, 0, DIOSTREAM_MAXBUFFER);
-															}
+    int                       Accept                                  (int socket, void* addr, void* addrlen, XDWORD usec);
+    int                       IsReadyConnect                          (int socket);
+    bool                      SetPropertysHandle                      (int socket);
 
-		bool											GetHandleServer                         ();
-		bool											GetHandleClient                         ();
+  private:
+
+    void                      Clean                                   ()
+                              {
+                                threadconnexion   = NULL;
+
+                                handlesocket      = -1;
+
+                                memset(buffer, 0, DIOSTREAM_MAXBUFFER);
+                              }
+
+    bool                      GetHandleServer                         ();
+    bool                      GetHandleClient                         ();
 
 
-		static void 							ThreadConnexion													(void* data);
+    static void               ThreadConnexion                         (void* data);
 
-		XTHREADCOLLECTED*					threadconnexion;
-		
-		int 											handlesocket;		
-		XBYTE											buffer[DIOSTREAM_MAXBUFFER];		
+    XTHREADCOLLECTED*         threadconnexion;
+
+    int                       handlesocket;
+    XBYTE                     buffer[DIOSTREAM_MAXBUFFER];
 };
 
 

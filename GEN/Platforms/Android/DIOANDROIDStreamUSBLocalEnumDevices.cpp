@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------------------
-//	DIOANDROIDSTREAMUSBLOCALENUMDEVICES.CPP
-//	
-//	ANDROID Data IO Stream USB Local Enum Devices class
-//   
-//	Author						: Abraham J. Velez
-//	Date Of Creation	: 02/01/2002
-//	Last Mofificacion	:	
+//  DIOANDROIDSTREAMUSBLOCALENUMDEVICES.CPP
 //
-//	GEN  Copyright (C).  All right reserved.		 			 
+//  ANDROID Data IO Stream USB Local Enum Devices class
+//
+//  Author            : Abraham J. Velez
+//  Date Of Creation  : 02/01/2002
+//  Last Mofificacion :
+//
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
 
 #if defined(DIO_ACTIVE) && defined(DIOUSB_ACTIVE)
@@ -30,46 +30,46 @@
 #include "DIOANDROIDStreamUSBLocalEnumDevices.h"
 
 #include "XMemory.h"
-	
-//---- GENERAL VARIABLE --------------------------------------------------------------------
-	
 
-	
+//---- GENERAL VARIABLE --------------------------------------------------------------------
+
+
+
 //---- CLASS MEMBERS -----------------------------------------------------------------------
 
 
 /*-------------------------------------------------------------------
 //  DIOANDROIDSTREAMUSBLOCALENUMDEVICES::DIOANDROIDSTREAMUSBLOCALENUMDEVICES
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/04/2013 19:00:01
-//	
-//	@return 			
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/04/2013 19:00:01
+//
+//  @return
 
- 
+
 */
 /*-----------------------------------------------------------------*/
 DIOANDROIDSTREAMUSBLOCALENUMDEVICES::DIOANDROIDSTREAMUSBLOCALENUMDEVICES() : DIOSTREAMUSBLOCALENUMDEVICES()
 {
 
 }
-	
+
 
 
 /*-------------------------------------------------------------------
 //  DIOANDROIDSTREAMUSBLOCALENUMDEVICES::~DIOANDROIDSTREAMUSBLOCALENUMDEVICES
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/04/2013 19:00:12
-//	
-//	@return 			
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/04/2013 19:00:12
+//
+//  @return
+//  */
 /*-----------------------------------------------------------------*/
 DIOANDROIDSTREAMUSBLOCALENUMDEVICES::~DIOANDROIDSTREAMUSBLOCALENUMDEVICES()
 {
@@ -80,127 +80,127 @@ DIOANDROIDSTREAMUSBLOCALENUMDEVICES::~DIOANDROIDSTREAMUSBLOCALENUMDEVICES()
 
 /*-------------------------------------------------------------------
 //  DIOANDROIDSTREAMUSBLOCALENUMDEVICES::Search
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/04/2013 19:00:27
-//	
-//	@return 			bool : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/04/2013 19:00:27
+//
+//  @return       bool :
+//  */
 /*-----------------------------------------------------------------*/
 bool DIOANDROIDSTREAMUSBLOCALENUMDEVICES::Search()
-{			
-	DelAllDevices();
+{
+  DelAllDevices();
 
-  struct udev*							udev								= NULL;
-	struct udev_enumerate*		udevenumerate				= NULL;
-	struct udev_list_entry*		udevdeviceslist			= NULL;
-	struct udev_list_entry*		udevdevicelistentry = NULL;	
-	int                       index = 0;
+  struct udev*              udev                = NULL;
+  struct udev_enumerate*    udevenumerate       = NULL;
+  struct udev_list_entry*   udevdeviceslist     = NULL;
+  struct udev_list_entry*   udevdevicelistentry = NULL;
+  int                       index = 0;
 
-	// Create the udev object 
-	udev = udev_new();
-	if (!udev) return false;
+  // Create the udev object
+  udev = udev_new();
+  if (!udev) return false;
 
-	udevenumerate		= udev_enumerate_new(udev);		
+  udevenumerate   = udev_enumerate_new(udev);
 //udev_enumerate_add_match_subsystem(udev_enumerate, "usb");
-	udev_enumerate_scan_devices(udevenumerate);
+  udev_enumerate_scan_devices(udevenumerate);
 
-	udevdeviceslist = udev_enumerate_get_list_entry(udevenumerate);
+  udevdeviceslist = udev_enumerate_get_list_entry(udevenumerate);
 
-	udev_list_entry_foreach(udevdevicelistentry, udevdeviceslist) 
-		{
-			struct udev_device*	udevdevice					= NULL;
-			struct udev_device*	udevdeviceinterface = NULL;
-			struct udev_device*	udevsearchdevice		= NULL;	
-			const char*					path;
-			XSTRING							classstr;
-			
-			path			 				= udev_list_entry_get_name(udevdevicelistentry);			
-			udevsearchdevice	= udev_device_new_from_syspath(udev, path); 
-			
-			udevdeviceinterface =  udev_device_get_parent_with_subsystem_devtype(udevsearchdevice, "usb", "usb_interface");						
-			if(udevdeviceinterface) classstr	= udev_device_get_sysattr_value(udevdeviceinterface, "bInterfaceClass");
-			
-			udevdevice = udev_device_get_parent_with_subsystem_devtype(udevsearchdevice, "usb", "usb_device");
-			if(udevdevice) 
-				{	
-					XSTRING		devicepath;				
-					XSTRING		typestr;	
-					XSTRING		hubstr;
-					XSTRING		resource;								
-					XSTRING		vid;
-					XSTRING		pid;									
-					int				vendorID	= 0;
-					int				productID = 0;																
-					
-					devicepath = path;
-														
-					typestr		= udev_device_get_devtype(udevdevice);	
-					hubstr		= udev_device_get_sysattr_value(udevdevice, "busnum");				
-					resource	= udev_device_get_devnode(udevsearchdevice);
-					vid				= udev_device_get_sysattr_value(udevdevice, "idVendor");
-					pid				= udev_device_get_sysattr_value(udevdevice, "idProduct");
-		
-					if(!resource.IsEmpty())
-						{														
-							if(resource.Find(__L("/dev/bus/"), true) == XSTRING_NOTFOUND)
-								{	
-									int				port;
-									int				empty[2];									
-									XSTRING   string[2];					
+  udev_list_entry_foreach(udevdevicelistentry, udevdeviceslist)
+    {
+      struct udev_device* udevdevice          = NULL;
+      struct udev_device* udevdeviceinterface = NULL;
+      struct udev_device* udevsearchdevice    = NULL;
+      const char*         path;
+      XSTRING             classstr;
 
-									string[0].AdjustSize(_MAXSTR);
-									string[1].AdjustSize(_MAXSTR);
+      path              = udev_list_entry_get_name(udevdevicelistentry);
+      udevsearchdevice  = udev_device_new_from_syspath(udev, path);
 
-									devicepath.UnFormat(__L("%s-%d.%d:%d%s"), string[0].Get(), &empty[0], &port, &empty[1], string[1].Get());
+      udevdeviceinterface =  udev_device_get_parent_with_subsystem_devtype(udevsearchdevice, "usb", "usb_interface");
+      if(udevdeviceinterface) classstr  = udev_device_get_sysattr_value(udevdeviceinterface, "bInterfaceClass");
 
-									string[0].AdjustSize();
-									string[1].AdjustSize();
+      udevdevice = udev_device_get_parent_with_subsystem_devtype(udevsearchdevice, "usb", "usb_device");
+      if(udevdevice)
+        {
+          XSTRING   devicepath;
+          XSTRING   typestr;
+          XSTRING   hubstr;
+          XSTRING   resource;
+          XSTRING   vid;
+          XSTRING   pid;
+          int       vendorID  = 0;
+          int       productID = 0;
 
-									//XDEBUG_PRINTCOLOR(2, __L("%s - [port %d] class[%s]"), devicepath.Get(), port, classstr.Get());													
+          devicepath = path;
 
-									DIOSTREAMDEVICEUSB* device = new DIOSTREAMDEVICEUSB();
-									if(device)
-										{		
-											vid.UnFormat(__L("%08X"), &vendorID);
-											pid.UnFormat(__L("%08X"), &productID);																							
+          typestr   = udev_device_get_devtype(udevdevice);
+          hubstr    = udev_device_get_sysattr_value(udevdevice, "busnum");
+          resource  = udev_device_get_devnode(udevsearchdevice);
+          vid       = udev_device_get_sysattr_value(udevdevice, "idVendor");
+          pid       = udev_device_get_sysattr_value(udevdevice, "idProduct");
 
-											device->SetIndex(index);
-											device->SetType(DIOSTREAMDEVICE_TYPE_USB);																																							
+          if(!resource.IsEmpty())
+            {
+              if(resource.Find(__L("/dev/bus/"), true) == XSTRING_NOTFOUND)
+                {
+                  int       port;
+                  int       empty[2];
+                  XSTRING   string[2];
 
-											device->GetLocation()->Format(__L("Port_#%04d.Hub_#%04d"), port, hubstr.ConvertToInt());
-											device->GetDescription()->Set(udev_device_get_sysattr_value(udevdevice, "product"));																				
-											device->GetResource()->Set(resource);										
+                  string[0].AdjustSize(_MAXSTR);
+                  string[1].AdjustSize(_MAXSTR);
 
-											device->SetVendorID(vendorID); 
-											device->SetProductID(productID);
+                  devicepath.UnFormat(__L("%s-%d.%d:%d%s"), string[0].Get(), &empty[0], &port, &empty[1], string[1].Get());
 
-											device->SetClass((DIOSTREAMDEVICEUSBCLASS)classstr.ConvertToInt());
-											device->GetSerialString()->Set(udev_device_get_sysattr_value(udevdevice, "serial"));
-																		
-											devices.Add(device);			
-						
-											index++;
-										}														
-								}
-						}										
-				}	
+                  string[0].AdjustSize();
+                  string[1].AdjustSize();
 
-			if(udevsearchdevice)
-				{
-					udev_device_unref(udevsearchdevice);														
-					udevsearchdevice    = NULL;				
-				}
-		}
+                  //XDEBUG_PRINTCOLOR(2, __L("%s - [port %d] class[%s]"), devicepath.Get(), port, classstr.Get());
 
-	// Free the enumerator object 
-	if(udevenumerate) udev_enumerate_unref(udevenumerate);
-	if(udev)					udev_unref(udev);
+                  DIOSTREAMDEVICEUSB* device = new DIOSTREAMDEVICEUSB();
+                  if(device)
+                    {
+                      vid.UnFormat(__L("%08X"), &vendorID);
+                      pid.UnFormat(__L("%08X"), &productID);
 
-	return true;
+                      device->SetIndex(index);
+                      device->SetType(DIOSTREAMDEVICE_TYPE_USB);
+
+                      device->GetLocation()->Format(__L("Port_#%04d.Hub_#%04d"), port, hubstr.ConvertToInt());
+                      device->GetDescription()->Set(udev_device_get_sysattr_value(udevdevice, "product"));
+                      device->GetResource()->Set(resource);
+
+                      device->SetVendorID(vendorID);
+                      device->SetProductID(productID);
+
+                      device->SetClass((DIOSTREAMDEVICEUSBCLASS)classstr.ConvertToInt());
+                      device->GetSerialString()->Set(udev_device_get_sysattr_value(udevdevice, "serial"));
+
+                      devices.Add(device);
+
+                      index++;
+                    }
+                }
+            }
+        }
+
+      if(udevsearchdevice)
+        {
+          udev_device_unref(udevsearchdevice);
+          udevsearchdevice    = NULL;
+        }
+    }
+
+  // Free the enumerator object
+  if(udevenumerate) udev_enumerate_unref(udevenumerate);
+  if(udev)          udev_unref(udev);
+
+  return true;
 }
 
 
@@ -208,79 +208,79 @@ bool DIOANDROIDSTREAMUSBLOCALENUMDEVICES::Search()
 
 /*-------------------------------------------------------------------
 //  DIOANDROIDSTREAMUSBLOCALENUMDEVICES::IsDeviceAvailable
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/04/2013 19:00:32
-//	
-//	@return 			bool : 
-//	@param				resource : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/04/2013 19:00:32
+//
+//  @return       bool :
+//  @param        resource :
 */
 /*-----------------------------------------------------------------*/
 bool DIOANDROIDSTREAMUSBLOCALENUMDEVICES::IsDeviceAvailable(XCHAR* resource)
 {
-	
-	return true;
+
+  return true;
 }
-				    
+
 
 
 
 
 /*-------------------------------------------------------------------
-//	DIOANDROIDSTREAMUSBLOCALENUMDEVICES::SearchAndDeleteEqualDevices
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			11/11/2014 13:41:56
-//	
-//	@return 			bool : 
+//  DIOANDROIDSTREAMUSBLOCALENUMDEVICES::SearchAndDeleteEqualDevices
+*/
+/**
+//
+//
+//
+//  @author       Abraham J. Velez
+//  @version      11/11/2014 13:41:56
+//
+//  @return       bool :
 //
 */
 /*-----------------------------------------------------------------*/
 bool DIOANDROIDSTREAMUSBLOCALENUMDEVICES::SearchAndDeleteEqualDevices()
 {
-	if(devices.IsEmpty()) return false;
+  if(devices.IsEmpty()) return false;
 
-	bool found;
+  bool found;
 
-	do{ found = false;
+  do{ found = false;
 
-			for(int c=0; c<devices.GetSize(); c++)
-				{
-					DIOSTREAMDEVICEUSB* device1 = (DIOSTREAMDEVICEUSB*)devices.Get(c);
-					if(device1)
-						{
-							for(int d=0; d<devices.GetSize(); d++)
-								{
-									DIOSTREAMDEVICEUSB* device2 = (DIOSTREAMDEVICEUSB*)devices.Get(d);
-									if(device2 && (c!=d))
-										{
-											if(!device1->GetName()->Compare(device2->GetName()->Get()))
-												{
-													delete device1;
-													devices.Delete(device1);
+      for(int c=0; c<devices.GetSize(); c++)
+        {
+          DIOSTREAMDEVICEUSB* device1 = (DIOSTREAMDEVICEUSB*)devices.Get(c);
+          if(device1)
+            {
+              for(int d=0; d<devices.GetSize(); d++)
+                {
+                  DIOSTREAMDEVICEUSB* device2 = (DIOSTREAMDEVICEUSB*)devices.Get(d);
+                  if(device2 && (c!=d))
+                    {
+                      if(!device1->GetName()->Compare(device2->GetName()->Get()))
+                        {
+                          delete device1;
+                          devices.Delete(device1);
 
-													found = true;
-													break;
-												}
-										}
-								}
+                          found = true;
+                          break;
+                        }
+                    }
+                }
 
-							if(found) break;													
-						}
-				}
+              if(found) break;
+            }
+        }
 
-			if(!found) break;
+      if(!found) break;
 
-		} while(1);
+    } while(1);
 
-	return true;
+  return true;
 }
 
 

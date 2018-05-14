@@ -1,66 +1,66 @@
 //------------------------------------------------------------------------------------------
-//	XERRORMSG.CPP
-//	
-//	MGERROR Class
-//   
-//	Author						: Abraham J. Velez
-//	Date Of Creation	: 17/11/2001
-//	Last Mofificacion	:	
-//	
-//	GEN  Copyright (C).  All right reserved. 
+//  XERRORMSG.CPP
+//
+//  MGERROR Class
+//
+//  Author            : Abraham J. Velez
+//  Date Of Creation  : 17/11/2001
+//  Last Mofificacion :
+//
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
 
 
-	
-	
+
+
 //---- INCLUDES ----------------------------------------------------------------------------
-	
+
 #include "XErrorMsg.h"
 
 #include "XMemory.h"
-	
+
 //---- GENERAL VARIABLE --------------------------------------------------------------------
-	
-	
+
+
 //---- CLASS MEMBERS -----------------------------------------------------------------------
 
 
 //-------------------------------------------------------------------
 //  XERRORMSG::XERRORMSG
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			17/11/2001 11:53:59
-//	
-//	@return 			
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      17/11/2001 11:53:59
+//
+//  @return
+//  */
 //-------------------------------------------------------------------
-XERRORMSG::XERRORMSG()																				  
-{	
-  Clean();														
+XERRORMSG::XERRORMSG()
+{
+  Clean();
 }
 
 
 //-------------------------------------------------------------------
 //  XERRORMSG::XERRORMSG
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			17/11/2001 11:54:28
-//	
-//	@return 			
-//	@param				code : 
-//  @param				title : 
-//  @param				msg : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      17/11/2001 11:54:28
+//
+//  @return
+//  @param        code :
+//  @param        title :
+//  @param        msg :
 */
 //-------------------------------------------------------------------
-XERRORMSG::XERRORMSG(int code,XCHAR* title,XCHAR* msg)            
-{ 
-  Clean(); 
+XERRORMSG::XERRORMSG(int code,XCHAR* title,XCHAR* msg)
+{
+  Clean();
 
-  Set(code,title,msg);	      
+  Set(code,title,msg);
 }
 
 
@@ -68,80 +68,80 @@ XERRORMSG::XERRORMSG(int code,XCHAR* title,XCHAR* msg)
 //-------------------------------------------------------------------
 //  XERRORMSG::~XERRORMSG
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			17/11/2001 11:55:15
-//	
-//	@return 			
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      17/11/2001 11:55:15
+//
+//  @return
+//  */
 //-------------------------------------------------------------------
-XERRORMSG::~XERRORMSG()																				  
-{	
-  Clean();														
+XERRORMSG::~XERRORMSG()
+{
+  Clean();
 }
 
 
 //-------------------------------------------------------------------
 //  XERRORMSG::Get
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			17/11/2001 12:01:35
-//	
-//	@return 			XERRORMSG* : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      17/11/2001 12:01:35
+//
+//  @return       XERRORMSG* :
+//  */
 //-------------------------------------------------------------------
 XERRORMSG* XERRORMSG::Get()
-{ 
-  return this;												
+{
+  return this;
 }
 
 
 //-------------------------------------------------------------------
 //  XERRORMSG::GetCode
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			17/11/2001 12:01:38
-//	
-//	@return 			int : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      17/11/2001 12:01:38
+//
+//  @return       int :
+//  */
 //-------------------------------------------------------------------
 int XERRORMSG::GetCode()
-{	
+{
   return code;
 }
 
 //-------------------------------------------------------------------
 //  XERRORMSG::GetLevel
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			17/11/2001 12:01:40
-//	
-//	@return 			int : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      17/11/2001 12:01:40
+//
+//  @return       int :
+//  */
 //-------------------------------------------------------------------
-int XERRORMSG::GetLevel()																					
-{ 
-  return level;												
+int XERRORMSG::GetLevel()
+{
+  return level;
 }
 
 
 //-------------------------------------------------------------------
 //  XERRORMSG::GetImage
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			17/11/2001 12:01:44
-//	
-//	@return 			int : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      17/11/2001 12:01:44
+//
+//  @return       int :
+//  */
 //-------------------------------------------------------------------
 int XERRORMSG::GetImage()
 {
@@ -152,76 +152,76 @@ int XERRORMSG::GetImage()
 //-------------------------------------------------------------------
 //  XERRORMSG::GetSound
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			17/11/2001 12:02:07
-//	
-//	@return 			int : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      17/11/2001 12:02:07
+//
+//  @return       int :
+//  */
 //-------------------------------------------------------------------
 int XERRORMSG::GetSound()
-{ 
+{
   return sound;
 }
 
 
 /*-------------------------------------------------------------------
 //  XERRORMSG::GetTitle
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			20/09/2011 10:19:51
-//	
-//	@return				XSTRING* : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      20/09/2011 10:19:51
+//
+//  @return       XSTRING* :
+//  */
 /*-----------------------------------------------------------------*/
 XSTRING* XERRORMSG::GetTitle()
-{	
-  return &title;												
+{
+  return &title;
 }
 
 
 /*-------------------------------------------------------------------
 //  XERRORMSG::GetMsg
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			20/09/2011 10:20:20
-//	
-//	@return				XSTRING* : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      20/09/2011 10:20:20
+//
+//  @return       XSTRING* :
+//  */
 /*-----------------------------------------------------------------*/
 XSTRING* XERRORMSG::GetMsg()
-{	
-  return &msg;													
+{
+  return &msg;
 }
 
 
 //-------------------------------------------------------------------
 //  XERRORMSG::Set
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			17/11/2001 12:02:18
-//	
-//	@return 			bool : 
-//	@param				code : 
-//  @param				title : 
-//  @param				msg : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      17/11/2001 12:02:18
+//
+//  @return       bool :
+//  @param        code :
+//  @param        title :
+//  @param        msg :
 */
 //-------------------------------------------------------------------
 bool XERRORMSG::Set(int code,XCHAR* title,XCHAR* msg)
-{	
+{
   if(!SetCode(code))   return false;
   if(!SetTitle(title)) return false;
-  if(!SetMsg(msg))	   return false;
-	
+  if(!SetMsg(msg))     return false;
+
   return true;
 }
 
@@ -229,29 +229,29 @@ bool XERRORMSG::Set(int code,XCHAR* title,XCHAR* msg)
 //-------------------------------------------------------------------
 //  XERRORMSG::Set
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			17/11/2001 12:02:22
-//	
-//	@return 			bool : 
-//	@param				code : 
-//  @param				level : 
-//  @param				image : 
-//  @param				sound : 
-//  @param				title : 
-//  @param				msg : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      17/11/2001 12:02:22
+//
+//  @return       bool :
+//  @param        code :
+//  @param        level :
+//  @param        image :
+//  @param        sound :
+//  @param        title :
+//  @param        msg :
 */
 //-------------------------------------------------------------------
 bool XERRORMSG::Set(int code,int level,int image,int sound,XCHAR* title,XCHAR* msg)
-{	
+{
   if(!SetCode(code))   return false;
   if(!SetLevel(level)) return false;
   if(!SetImage(image)) return false;
   if(!SetSound(sound)) return false;
   if(!SetTitle(title)) return false;
-  if(!SetMsg(msg))	   return false;
-	
+  if(!SetMsg(msg))     return false;
+
   return true;
 }
 
@@ -259,13 +259,13 @@ bool XERRORMSG::Set(int code,int level,int image,int sound,XCHAR* title,XCHAR* m
 //-------------------------------------------------------------------
 //  XERRORMSG::SetCode
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			17/11/2001 12:02:26
-//	
-//	@return 			bool : 
-//	@param				code : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      17/11/2001 12:02:26
+//
+//  @return       bool :
+//  @param        code :
 */
 //-------------------------------------------------------------------
 bool XERRORMSG::SetCode(int code)
@@ -279,13 +279,13 @@ bool XERRORMSG::SetCode(int code)
 //-------------------------------------------------------------------
 //  XERRORMSG::SetLevel
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			17/11/2001 12:02:29
-//	
-//	@return 			bool : 
-//	@param				level : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      17/11/2001 12:02:29
+//
+//  @return       bool :
+//  @param        level :
 */
 //-------------------------------------------------------------------
 bool XERRORMSG::SetLevel(int level)
@@ -299,13 +299,13 @@ bool XERRORMSG::SetLevel(int level)
 //-------------------------------------------------------------------
 //  XERRORMSG::SetImage
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			17/11/2001 12:02:32
-//	
-//	@return 			bool : 
-//	@param				image : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      17/11/2001 12:02:32
+//
+//  @return       bool :
+//  @param        image :
 */
 //-------------------------------------------------------------------
 bool XERRORMSG::SetImage(int image)
@@ -320,13 +320,13 @@ bool XERRORMSG::SetImage(int image)
 //-------------------------------------------------------------------
 //  XERRORMSG::SetSound
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			17/11/2001 12:02:36
-//	
-//	@return 			bool : 
-//	@param				sound : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      17/11/2001 12:02:36
+//
+//  @return       bool :
+//  @param        sound :
 */
 //-------------------------------------------------------------------
 bool XERRORMSG::SetSound(int sound)
@@ -341,18 +341,18 @@ bool XERRORMSG::SetSound(int sound)
 //-------------------------------------------------------------------
 //  XERRORMSG::SetTitle
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			17/11/2001 12:02:40
-//	
-//	@return 			bool : 
-//	@param				title : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      17/11/2001 12:02:40
+//
+//  @return       bool :
+//  @param        title :
 */
 //-------------------------------------------------------------------
 bool XERRORMSG::SetTitle(XCHAR* title)
 {
-	if(!title) return false;
+  if(!title) return false;
 
   this->title = title;
 
@@ -363,20 +363,20 @@ bool XERRORMSG::SetTitle(XCHAR* title)
 
 /*-------------------------------------------------------------------
 //  XERRORMSG::SetTitle
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			20/09/2011 10:23:50
-//	
-//	@return				bool : 
-//	@param				title : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      20/09/2011 10:23:50
+//
+//  @return       bool :
+//  @param        title :
 */
 /*-----------------------------------------------------------------*/
 bool XERRORMSG::SetTitle(XSTRING& title)
 {
-  return SetTitle(title.Get()); 
+  return SetTitle(title.Get());
 }
 
 
@@ -384,18 +384,18 @@ bool XERRORMSG::SetTitle(XSTRING& title)
 //-------------------------------------------------------------------
 //  XERRORMSG::SetMsg
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			17/11/2001 12:02:43
-//	
-//	@return 			bool : 
-//	@param				msg : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      17/11/2001 12:02:43
+//
+//  @return       bool :
+//  @param        msg :
 */
 //-------------------------------------------------------------------
 bool XERRORMSG::SetMsg(XCHAR* msg)
 {
-	if(!msg) return false;
+  if(!msg) return false;
 
   this->msg = msg;
 
@@ -406,15 +406,15 @@ bool XERRORMSG::SetMsg(XCHAR* msg)
 
 /*-------------------------------------------------------------------
 //  XERRORMSG::SetMsg
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			20/09/2011 10:24:32
-//	
-//	@return				bool : 
-//	@param				msg : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      20/09/2011 10:24:32
+//
+//  @return       bool :
+//  @param        msg :
 */
 /*-----------------------------------------------------------------*/
 bool XERRORMSG::SetMsg(XSTRING& msg)
@@ -427,13 +427,13 @@ bool XERRORMSG::SetMsg(XSTRING& msg)
 //-------------------------------------------------------------------
 //  XERRORMSG::Clean
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			17/11/2001 12:02:47
-//	
-//	@return 			bool : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      17/11/2001 12:02:47
+//
+//  @return       bool :
+//  */
 //-------------------------------------------------------------------
 bool XERRORMSG::Clean()
 {
@@ -453,13 +453,13 @@ bool XERRORMSG::Clean()
 //-------------------------------------------------------------------
 //  XERRORSMSG::XERRORSMSG
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			17/11/2001 12:02:53
-//	
-//	@return 			
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      17/11/2001 12:02:53
+//
+//  @return
+//  */
 //-------------------------------------------------------------------
 XERRORSMSG::XERRORSMSG()
 {
@@ -470,22 +470,22 @@ XERRORSMSG::XERRORSMSG()
 //-------------------------------------------------------------------
 //  XERRORSMSG::XERRORSMSG
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			17/11/2001 12:03:07
-//	
-//	@return 			
-//	@param				titleapp : 
-//  @param				version : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      17/11/2001 12:03:07
+//
+//  @return
+//  @param        titleapp :
+//  @param        version :
 */
 //-------------------------------------------------------------------
 XERRORSMSG::XERRORSMSG(XCHAR* titleapp,XCHAR* version)
 {
   Clean();
 
-	SetTitleApplication(titleapp);
-	SetVersion(version);
+  SetTitleApplication(titleapp);
+  SetVersion(version);
 }
 
 
@@ -493,13 +493,13 @@ XERRORSMSG::XERRORSMSG(XCHAR* titleapp,XCHAR* version)
 //-------------------------------------------------------------------
 //  XERRORSMSG::~XERRORSMSG
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			17/11/2001 12:03:17
-//	
-//	@return 			
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      17/11/2001 12:03:17
+//
+//  @return
+//  */
 //-------------------------------------------------------------------
 XERRORSMSG::~XERRORSMSG()
 {
@@ -512,15 +512,15 @@ XERRORSMSG::~XERRORSMSG()
 
 /*-------------------------------------------------------------------
 //  XERRORSMSG::GetTitleApplication
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			20/09/2011 10:29:22
-//	
-//	@return				XSTRING* : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      20/09/2011 10:29:22
+//
+//  @return       XSTRING* :
+//  */
 /*-----------------------------------------------------------------*/
 XSTRING* XERRORSMSG::GetTitleApplication()
 {
@@ -532,13 +532,13 @@ XSTRING* XERRORSMSG::GetTitleApplication()
 //-------------------------------------------------------------------
 //  XERRORSMSG::GetVersion
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			17/11/2001 12:03:30
-//	
-//	@return 			char* : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      17/11/2001 12:03:30
+//
+//  @return       char* :
+//  */
 //-------------------------------------------------------------------
 XSTRING* XERRORSMSG::GetVersion()
 {
@@ -550,20 +550,20 @@ XSTRING* XERRORSMSG::GetVersion()
 //-------------------------------------------------------------------
 //  XERRORSMSG::SetTitleApplication
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			17/11/2001 12:03:45
-//	
-//	@return 			bool : 
-//	@param				titleapp : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      17/11/2001 12:03:45
+//
+//  @return       bool :
+//  @param        titleapp :
 */
 //-------------------------------------------------------------------
 bool XERRORSMSG::SetTitleApplication(XCHAR* titleapp)
 {
-	if(!titleapp) return false;
+  if(!titleapp) return false;
 
-	this->titleapp = titleapp;
+  this->titleapp = titleapp;
 
   return true;
 }
@@ -571,20 +571,20 @@ bool XERRORSMSG::SetTitleApplication(XCHAR* titleapp)
 
 /*-------------------------------------------------------------------
 //  XERRORSMSG::SetTitleApplication
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			20/09/2011 10:30:39
-//	
-//	@return				bool : 
-//	@param				titleapp : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      20/09/2011 10:30:39
+//
+//  @return       bool :
+//  @param        titleapp :
 */
 /*-----------------------------------------------------------------*/
 bool XERRORSMSG::SetTitleApplication(XSTRING& titleapp)
 {
-	return SetTitleApplication(titleapp.Get());
+  return SetTitleApplication(titleapp.Get());
 }
 
 
@@ -593,20 +593,20 @@ bool XERRORSMSG::SetTitleApplication(XSTRING& titleapp)
 //-------------------------------------------------------------------
 //  XERRORSMSG::SetVersion
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			17/11/2001 12:03:48
-//	
-//	@return 			bool : 
-//	@param				version : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      17/11/2001 12:03:48
+//
+//  @return       bool :
+//  @param        version :
 */
 //-------------------------------------------------------------------
 bool XERRORSMSG::SetVersion(XCHAR* version)
 {
-	if(!version) return false;
+  if(!version) return false;
 
-	this->version = version;
+  this->version = version;
 
   return true;
 }
@@ -615,20 +615,20 @@ bool XERRORSMSG::SetVersion(XCHAR* version)
 
 /*-------------------------------------------------------------------
 //  XERRORSMSG::SetVersion
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			20/09/2011 10:31:53
-//	
-//	@return				bool : 
-//	@param				version : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      20/09/2011 10:31:53
+//
+//  @return       bool :
+//  @param        version :
 */
 /*-----------------------------------------------------------------*/
 bool XERRORSMSG::SetVersion(XSTRING& version)
 {
-	return SetVersion(version.Get());
+  return SetVersion(version.Get());
 }
 
 
@@ -638,23 +638,23 @@ bool XERRORSMSG::SetVersion(XSTRING& version)
 /**
 //
 //
-//	@author				Abraham J. Velez
-//	@version			17/11/2001 12:03:53
+//  @author       Abraham J. Velez
+//  @version      17/11/2001 12:03:53
 //
-//	@return 			XERRORMSG* :
-//	@param				code :
+//  @return       XERRORMSG* :
+//  @param        code :
 */
 //-------------------------------------------------------------------
 XERRORMSG* XERRORSMSG::FindMsg(int code)
-{	
-	for(XDWORD c=0;c<errors.GetSize();c++)
-		{
-			XERRORMSG* error = errors.Get(c);
-			if(error)
-				{
-					if(error->GetCode()==code) return error;
-				}
-		}
+{
+  for(XDWORD c=0;c<errors.GetSize();c++)
+    {
+      XERRORMSG* error = errors.Get(c);
+      if(error)
+        {
+          if(error->GetCode()==code) return error;
+        }
+    }
 
   return NULL;
 }
@@ -665,16 +665,16 @@ XERRORMSG* XERRORSMSG::FindMsg(int code)
 /**
 //
 //
-//	@author				Abraham J. Velez
-//	@version			17/11/2001 12:03:58
+//  @author       Abraham J. Velez
+//  @version      17/11/2001 12:03:58
 //
-//	@return 			bool :
-//	@param				code :
-//  @param				level :
-//  @param				image :
-//  @param				sound :
-//  @param				title :
-//  @param				msg :
+//  @return       bool :
+//  @param        code :
+//  @param        level :
+//  @param        image :
+//  @param        sound :
+//  @param        title :
+//  @param        msg :
 */
 //-------------------------------------------------------------------
 bool XERRORSMSG::AddMsg(int code,int level,int image,int sound, XCHAR* title,XCHAR* msg)
@@ -690,7 +690,7 @@ bool XERRORSMSG::AddMsg(int code,int level,int image,int sound, XCHAR* title,XCH
   error->SetImage(image);
   error->SetSound(sound);
 
-	errors.Add(error);
+  errors.Add(error);
 
   return true;
 }
@@ -701,33 +701,33 @@ bool XERRORSMSG::AddMsg(int code,int level,int image,int sound, XCHAR* title,XCH
 /**
 //
 //
-//	@author				Abraham J. Velez
-//	@version			17/11/2001 12:04:02
+//  @author       Abraham J. Velez
+//  @version      17/11/2001 12:04:02
 //
-//	@return 			bool :
-//	@param				code :
+//  @return       bool :
+//  @param        code :
 */
 //-------------------------------------------------------------------
 bool XERRORSMSG::EraseMsg(int code)
 {
-	if(errors.IsEmpty()) return false;
+  if(errors.IsEmpty()) return false;
 
-	for(XDWORD c=0; c<errors.GetSize(); c++)
-		{
-  	  XERRORMSG* error = errors.Get(c);
+  for(XDWORD c=0; c<errors.GetSize(); c++)
+    {
+      XERRORMSG* error = errors.Get(c);
 
-			if(!error)
-				{
-					if(error->GetCode()==code)
-						{
-							errors.Delete(error);
-							
-							delete error;
+      if(!error)
+        {
+          if(error->GetCode()==code)
+            {
+              errors.Delete(error);
 
-						  return true;
-						}
-				}
-		}
+              delete error;
+
+              return true;
+            }
+        }
+    }
 
   return false;
 }
@@ -740,19 +740,19 @@ bool XERRORSMSG::EraseMsg(int code)
 /**
 //
 //
-//	@author				Abraham J. Velez
-//	@version			17/11/2001 12:04:28
+//  @author       Abraham J. Velez
+//  @version      17/11/2001 12:04:28
 //
-//	@return 			bool :
-//	*/
+//  @return       bool :
+//  */
 //-------------------------------------------------------------------
 bool XERRORSMSG::EraseAllMsg()
 {
-	if(errors.IsEmpty()) return false;
+  if(errors.IsEmpty()) return false;
 
-	errors.DeleteContents();
+  errors.DeleteContents();
 
-	errors.DeleteAll();
+  errors.DeleteAll();
 
   return true;
 }
@@ -763,14 +763,14 @@ bool XERRORSMSG::EraseAllMsg()
 /**
 //
 //
-//	@author				Abraham J. Velez
-//	@version			17/11/2001 12:04:33
+//  @author       Abraham J. Velez
+//  @version      17/11/2001 12:04:33
 //
-//	@return 			XERRORMSG_RETURN :
-//	@param				code :
-//  @param				returns :
-//  @param				addstr :
-//  @param				sound :
+//  @return       XERRORMSG_RETURN :
+//  @param        code :
+//  @param        returns :
+//  @param        addstr :
+//  @param        sound :
 */
 //-------------------------------------------------------------------
 XERRORMSG_RETURN XERRORSMSG::ShowMsg(int code,bool statusline,XBYTE returns,XCHAR* addstr,bool sound)
@@ -783,19 +783,19 @@ XERRORMSG_RETURN XERRORSMSG::ShowMsg(int code,bool statusline,XBYTE returns,XCHA
 //-------------------------------------------------------------------
 //  XERRORSMSG::Clean
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			17/11/2001 12:04:37
-//	
-//	@return 			bool : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      17/11/2001 12:04:37
+//
+//  @return       bool :
+//  */
 //-------------------------------------------------------------------
 bool XERRORSMSG::Clean()
 {
-	titleapp.Empty();
-	version.Empty();
-  
-  return true; 
+  titleapp.Empty();
+  version.Empty();
+
+  return true;
 }
-	
+

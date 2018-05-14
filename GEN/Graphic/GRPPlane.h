@@ -6,10 +6,10 @@
 //
 // Manages plane class
 //
-//	@author: Diego Martinez Ruiz de Gaona 
+//  @author: Diego Martinez Ruiz de Gaona
 //
-//	Date of Creation : 08/11/2017 16:44:34 
-//	Last Modification : 
+//  Date of Creation : 08/11/2017 16:44:34
+//  Last Modification :
 */
 /* GEN  Copyright (C).  All right reserved.
 /*------------------------------------------------------------------------------------------*/
@@ -31,63 +31,63 @@ class GRPPLANE
 {
 public:
 
-		double a, b, c, d;
-		GRPVECTOR normal;
+    double a, b, c, d;
+    GRPVECTOR normal;
 
 
-		void Set(GRPVECTOR v1, GRPVECTOR v2, GRPVECTOR v3);
-		float distance(GRPVECTOR v);
-		void Normalize();
+    void Set(GRPVECTOR v1, GRPVECTOR v2, GRPVECTOR v3);
+    float distance(GRPVECTOR v);
+    void Normalize();
 
-		/*
-		GRPVECTOR normal, point;
+    /*
+    GRPVECTOR normal, point;
 
-		GRPPLANE::GRPPLANE	(GRPVECTOR &v1, GRPVECTOR &v2, GRPVECTOR &v3)	{	Set(v1, v2, v3);		}
-		GRPPLANE::GRPPLANE	()																						{}
-		GRPPLANE::~GRPPLANE	()																						{}
-		
-		void GRPPLANE::Set(GRPVECTOR &v1, GRPVECTOR &v2, GRPVECTOR &v3)
-		{
-				GRPVECTOR aux1, aux2;
+    GRPPLANE::GRPPLANE  (GRPVECTOR &v1, GRPVECTOR &v2, GRPVECTOR &v3) { Set(v1, v2, v3);    }
+    GRPPLANE::GRPPLANE  ()                                            {}
+    GRPPLANE::~GRPPLANE ()                                            {}
 
-				aux1 = v1 - v2;
-				aux2 = v3 - v2;
+    void GRPPLANE::Set(GRPVECTOR &v1, GRPVECTOR &v2, GRPVECTOR &v3)
+    {
+        GRPVECTOR aux1, aux2;
 
-				normal = aux2 * aux1;
+        aux1 = v1 - v2;
+        aux2 = v3 - v2;
 
-				normal.Normalize();
-				point=v2;
+        normal = aux2 * aux1;
 
-				d = -(normal.InnerProduct(normal,point));
-		}
+        normal.Normalize();
+        point=v2;
 
-		void GRPPLANE::setNormalAndPoint(GRPVECTOR &normal, GRPVECTOR &point) 
-		{
-				this->normal=normal;
-				this->normal.Normalize();
-				d = -(this->normal.InnerProduct(this->normal,point));
-		}
+        d = -(normal.InnerProduct(normal,point));
+    }
 
-		void GRPPLANE::setCoefficients(float a, float b, float c, float d) 
-		{
-				// set the normal vector
-				normal = GRPVECTOR(a, b, c); 
+    void GRPPLANE::setNormalAndPoint(GRPVECTOR &normal, GRPVECTOR &point)
+    {
+        this->normal=normal;
+        this->normal.Normalize();
+        d = -(this->normal.InnerProduct(this->normal,point));
+    }
 
-				//compute the lenght of the vector
-				float l = normal.GetLengthf();
+    void GRPPLANE::setCoefficients(float a, float b, float c, float d)
+    {
+        // set the normal vector
+        normal = GRPVECTOR(a, b, c);
 
-				// normalize the vector
-				normal=GRPVECTOR(a / l, b / l, c / l);
+        //compute the lenght of the vector
+        float l = normal.GetLengthf();
 
-				// and divide d by th length as well
-				this->d = d / l;
-		}
+        // normalize the vector
+        normal=GRPVECTOR(a / l, b / l, c / l);
 
-		float GRPPLANE::distance(GRPVECTOR &p) 
-		{
-				return (d + normal.InnerProduct(normal,p));
-		}	
-		*/
+        // and divide d by th length as well
+        this->d = d / l;
+    }
+
+    float GRPPLANE::distance(GRPVECTOR &p)
+    {
+        return (d + normal.InnerProduct(normal,p));
+    }
+    */
 };
 
 

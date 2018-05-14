@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+
+<Type Name="XVECTOR&lt;*&gt;">
+    <DisplayString>{{ size={nelements} }}</DisplayString>
+    <Expand>
+    	<Item Name="[ismulti]">ismulti</Item>
+    	<Item Name="[addinlimit]">addinlimit</Item>
+        <Item Name="[nelements]">nelements</Item>
+        <Item Name="[narray]">narray</Item>
+        <ArrayItems>
+            <Size>nelements</Size>
+            <ValuePointer>array</ValuePointer>
+        </ArrayItems>
+    </Expand>
+</Type>
+
+<Type Name="XLIST&lt;*&gt;">
+    <DisplayString>{{ size={nelements} }}</DisplayString>
+    <Expand>
+    	<Item Name="[ismulti]">ismulti</Item>
+        <Item Name="[nelements]">nelements</Item>
+        <LinkedListItems>
+        	<Size>nelements</Size>
+        	<HeadPointer>firstelement</HeadPointer>
+            <NextPointer>next</NextPointer>
+            <ValueNode>data</ValueNode>
+        </LinkedListItems>
+    </Expand>
+</Type>
+
+<Type Name="XSTRING">
+    <DisplayString>{{ text={text} }}</DisplayString>
+    <Expand>
+    	<Item Name="[text]">text</Item>
+    	<Item Name="[size]">size</Item>
+        <Item Name="[sizemem]">sizemem</Item>
+        <Item Name="[intvalue]">intvalue</Item>
+        <Item Name="[doublevalue]">doublevalue</Item>
+        <Item Name="[xcharvalue]">xcharvalue</Item>
+    </Expand>
+</Type>
+
+<Type Name="XFSTRING">
+    <DisplayString>{{ text={text} }}</DisplayString>
+    <Expand>
+    	<Item Name="[text]">text</Item>
+    	<Item Name="[size]">size</Item>
+        <Item Name="[sizemem]">sizemem</Item>
+        <Item Name="[intvalue]">intvalue</Item>
+        <Item Name="[doublevalue]">doublevalue</Item>
+        <Item Name="[xcharvalue]">xcharvalue</Item>
+    </Expand>
+</Type>
+<!--<Type Name="XMAP&lt;*&gt;">
+    <Expand>
+    	<Item Name="[nelements]">keys.nelements</Item>
+        <IndexListItems>
+        	<Size>keys.nelements</Size>
+            <ValueNode Name="[keys]">{keys.array[$i] , elements.array[$i]}</ValueNode>
+        </IndexListItems>
+    </Expand>
+</Type>-->
+
+</AutoVisualizer>

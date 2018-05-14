@@ -1,33 +1,33 @@
 //------------------------------------------------------------------------------------------
-//	DIOWEBSERVERXEVENT.H
-//	
-/**	
-// \class 
-//   
+//  DIOWEBSERVERXEVENT.H
+//
+/**
+// \class
+//
 //  WEB Server Event class
-//   
-//	@author	 Abraham J. Velez
-//	@version 20/01/2007 21:05:48
-*/	
-//	GEN  Copyright (C).  All right reserved.			 
+//
+//  @author  Abraham J. Velez
+//  @version 20/01/2007 21:05:48
+*/
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
+
 #ifndef _DIOWEBSERVERXEVENT_H_
 #define _DIOWEBSERVERXEVENT_H_
-	
-	
+
+
 //---- INCLUDES ----------------------------------------------------------------------------
-	
+
 #include "XEvent.h"
 #include "XString.h"
-	
+
 //---- DEFINES & ENUMS  --------------------------------------------------------------------
 
 enum DIOWEBSERVERXEVENTTYPE
 {
-	DIOWEBSERVERXEVENTTYPE_UNKNOWN				         = XEVENTTYPE_WEBSERVER ,
-	DIOWEBSERVERXEVENTTYPE_REQUEST							               						,		
-  DIOWEBSERVERXEVENTTYPE_TAGFOUND  																			,		
+  DIOWEBSERVERXEVENTTYPE_UNKNOWN                 = XEVENTTYPE_WEBSERVER ,
+  DIOWEBSERVERXEVENTTYPE_REQUEST                                        ,
+  DIOWEBSERVERXEVENTTYPE_TAGFOUND                                       ,
 };
 
 //---- CLASS -------------------------------------------------------------------------------
@@ -40,56 +40,56 @@ class DIOWEBSERVER;
 
 class DIOWEBSERVERXEVENT : public XEVENT
 {
-	public:
-																		DIOWEBSERVERXEVENT							  (XSUBJECT* subject, XDWORD type = DIOWEBSERVERXEVENTTYPE_UNKNOWN, XDWORD family = XEVENTTYPE_WEBSERVER) : XEVENT(subject, type, family)  
-																		{ 
-																			Clean();											
-																		}
+  public:
+                                    DIOWEBSERVERXEVENT                (XSUBJECT* subject, XDWORD type = DIOWEBSERVERXEVENTTYPE_UNKNOWN, XDWORD family = XEVENTTYPE_WEBSERVER) : XEVENT(subject, type, family)
+                                    {
+                                      Clean();
+                                    }
 
-		virtual			 									 ~DIOWEBSERVERXEVENT							  ()																																												{ Clean();											}
+    virtual                        ~DIOWEBSERVERXEVENT                ()                                                                                        { Clean();                      }
 
-		DIOWEBSERVER*										GetServer													()																																												{ return server;								}
-		void 														SetServer													(DIOWEBSERVER* server)																																		{ this->server = server;				}	
+    DIOWEBSERVER*                   GetServer                         ()                                                                                        { return server;                }
+    void                            SetServer                         (DIOWEBSERVER* server)                                                                    { this->server = server;        }
 
-		DIOWEBSERVER_CONNEXION*					GetConnexion											()																																												{ return connexion;							}		
-		void														SetConnexion											(DIOWEBSERVER_CONNEXION* connexion)																												{ this->connexion = connexion;	}			
-				
-		DIOWEBSERVER_REQUEST*						GetRequest												()																																												{ return request;								}
-		void 														SetRequest												(DIOWEBSERVER_REQUEST* request)																														{ this->request = request;			}												
+    DIOWEBSERVER_CONNEXION*         GetConnexion                      ()                                                                                        { return connexion;             }
+    void                            SetConnexion                      (DIOWEBSERVER_CONNEXION* connexion)                                                       { this->connexion = connexion;  }
 
-		XSTRING*                        GetDataTAG                        ()                                                                                        { return &dataTAG;              }
+    DIOWEBSERVER_REQUEST*           GetRequest                        ()                                                                                        { return request;               }
+    void                            SetRequest                        (DIOWEBSERVER_REQUEST* request)                                                           { this->request = request;      }
 
-		int                             GetTimeOut                        ()                                                                                        { return timeout;               }
-		void                            SetTimeOut                        (int timeout)                                                                             { this->timeout = timeout;      } 
+    XSTRING*                        GetDataTAG                        ()                                                                                        { return &dataTAG;              }
 
-		XSTRING*												GetOutput													()																																												{ return &output;								}
+    int                             GetTimeOut                        ()                                                                                        { return timeout;               }
+    void                            SetTimeOut                        (int timeout)                                                                             { this->timeout = timeout;      }
 
-	private:
+    XSTRING*                        GetOutput                         ()                                                                                        { return &output;               }
 
-		void														Clean														  ()
-																		{
-																			server		= NULL;
-																			connexion = NULL;		
-																			request   = NULL;
+  private:
 
-																			timeout   = 0;																			
-																		}
+    void                            Clean                             ()
+                                    {
+                                      server    = NULL;
+                                      connexion = NULL;
+                                      request   = NULL;
 
-		DIOWEBSERVER*										server;
-		DIOWEBSERVER_CONNEXION*					connexion;		
-		DIOWEBSERVER_REQUEST*						request;
+                                      timeout   = 0;
+                                    }
 
-		XSTRING                         dataTAG;
-		XSTRING                         output;
-		int                             timeout;
+    DIOWEBSERVER*                   server;
+    DIOWEBSERVER_CONNEXION*         connexion;
+    DIOWEBSERVER_REQUEST*           request;
+
+    XSTRING                         dataTAG;
+    XSTRING                         output;
+    int                             timeout;
 };
 
 
 
 
 
-	
+
 //---- INLINE FUNCTIONS --------------------------------------------------------------------
-	
+
 #endif
 

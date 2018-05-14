@@ -1,26 +1,26 @@
 
 /*------------------------------------------------------------------------------------------
-//	GRPCONTEXT.CPP
-//	
-//	Graphics Context
-//   
-//	Author						: Imanol Celaya Ruiz de Alegria
-//	Date Of Creation	: 04/04/2016 14:24:17
-//	Last Modification	:	
-//	
-//	GEN  Copyright (C).  All right reserved.
+//  GRPCONTEXT.CPP
+//
+//  Graphics Context
+//
+//  Author            : Imanol Celaya Ruiz de Alegria
+//  Date Of Creation  : 04/04/2016 14:24:17
+//  Last Modification :
+//
+//  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
-	
+
 #include "GRPContext.h"
 
 #include "XMemory.h"
-	
+
 /*---- GENERAL VARIABLE ------------------------------------------------------------------*/
-	
-	
+
+
 /*---- CLASS MEMBERS ---------------------------------------------------------------------*/
 
 
@@ -28,22 +28,22 @@
 
 
 /*-------------------------------------------------------------------
-//	GRPCONTEXT::GRPCONTEXT
-*/	
-/**	
-//	
-//	Class Constructor GRPCONTEXT
-//	
-//	@author				Imanol Celaya Ruiz de Alegria
-//	@version			04/04/2016 14:28:14
-//	
+//  GRPCONTEXT::GRPCONTEXT
+*/
+/**
+//
+//  Class Constructor GRPCONTEXT
+//
+//  @author       Imanol Celaya Ruiz de Alegria
+//  @version      04/04/2016 14:28:14
+//
 */
 /*-----------------------------------------------------------------*/
 GRPCONTEXT::GRPCONTEXT()
 {
-	Clean();
+  Clean();
 
-	this->mustrebuild = true;
+  this->mustrebuild = true;
 }
 
 
@@ -51,20 +51,20 @@ GRPCONTEXT::GRPCONTEXT()
 
 
 /*-------------------------------------------------------------------
-//	GRPCONTEXT::~GRPCONTEXT
-*/	
-/**	
-//	
-//	 Class Destructor GRPCONTEXT
-//	
-//	@author				Imanol Celaya Ruiz de Alegria
-//	@version			04/04/2016 14:28:20
-//	
+//  GRPCONTEXT::~GRPCONTEXT
+*/
+/**
+//
+//   Class Destructor GRPCONTEXT
+//
+//  @author       Imanol Celaya Ruiz de Alegria
+//  @version      04/04/2016 14:28:20
+//
 */
 /*-----------------------------------------------------------------*/
 GRPCONTEXT::~GRPCONTEXT()
 {
-	Clean();
+  Clean();
 }
 
 
@@ -73,21 +73,21 @@ GRPCONTEXT::~GRPCONTEXT()
 
 
 /*-------------------------------------------------------------------
-//	GRPCONTEXT::SetScreen
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Imanol Celaya Ruiz de Alegria
-//	@version			04/04/2016 14:28:28
-//	
-//  @param				screen : 
+//  GRPCONTEXT::SetScreen
+*/
+/**
+//
+//
+//
+//  @author       Imanol Celaya Ruiz de Alegria
+//  @version      04/04/2016 14:28:28
+//
+//  @param        screen :
 */
 /*-----------------------------------------------------------------*/
 void GRPCONTEXT::SetScreen(GRPSCREEN* screen)
 {
-	this->screen = screen;
+  this->screen = screen;
 }
 
 
@@ -95,22 +95,22 @@ void GRPCONTEXT::SetScreen(GRPSCREEN* screen)
 
 
 /*-------------------------------------------------------------------
-//	GRPCONTEXT::GetScreen
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Imanol Celaya Ruiz de Alegria
-//	@version			04/04/2016 14:28:36
-//	
-//	@return 			GRPSCREEN* : 
+//  GRPCONTEXT::GetScreen
+*/
+/**
+//
+//
+//
+//  @author       Imanol Celaya Ruiz de Alegria
+//  @version      04/04/2016 14:28:36
+//
+//  @return       GRPSCREEN* :
 //
 */
 /*-----------------------------------------------------------------*/
 GRPSCREEN* GRPCONTEXT::GetScreen()
 {
-	return this->screen;
+  return this->screen;
 }
 
 
@@ -118,22 +118,22 @@ GRPSCREEN* GRPCONTEXT::GetScreen()
 
 
 /*-------------------------------------------------------------------
-//	GRPCONTEXT::Create
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Imanol Celaya Ruiz de Alegria
-//	@version			04/04/2016 14:28:43
-//	
-//	@return 			bool : 
+//  GRPCONTEXT::Create
+*/
+/**
+//
+//
+//
+//  @author       Imanol Celaya Ruiz de Alegria
+//  @version      04/04/2016 14:28:43
+//
+//  @return       bool :
 //
 */
 /*-----------------------------------------------------------------*/
 bool GRPCONTEXT::Create(void* handle)
 {
-	return true;
+  return true;
 }
 
 
@@ -141,22 +141,22 @@ bool GRPCONTEXT::Create(void* handle)
 
 
 /*-------------------------------------------------------------------
-//	GRPCONTEXT::Destroy
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Imanol Celaya Ruiz de Alegria
-//	@version			04/04/2016 14:28:49
-//	
-//	@return 			bool : 
+//  GRPCONTEXT::Destroy
+*/
+/**
+//
+//
+//
+//  @author       Imanol Celaya Ruiz de Alegria
+//  @version      04/04/2016 14:28:49
+//
+//  @return       bool :
 //
 */
 /*-----------------------------------------------------------------*/
 bool GRPCONTEXT::Destroy()
 {
-	return true;
+  return true;
 }
 
 
@@ -164,22 +164,22 @@ bool GRPCONTEXT::Destroy()
 
 
 /*-------------------------------------------------------------------
-//	GRPCONTEXT::IsLost
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Imanol Celaya Ruiz de Alegria
-//	@version			04/04/2016 14:28:56
-//	
-//	@return 			bool : 
+//  GRPCONTEXT::IsLost
+*/
+/**
+//
+//
+//
+//  @author       Imanol Celaya Ruiz de Alegria
+//  @version      04/04/2016 14:28:56
+//
+//  @return       bool :
 //
 */
 /*-----------------------------------------------------------------*/
 bool GRPCONTEXT::IsLost()
 {
-	return false;
+  return false;
 }
 
 
@@ -187,40 +187,40 @@ bool GRPCONTEXT::IsLost()
 
 
 /*-------------------------------------------------------------------
-//	GRPCONTEXT::Update
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Imanol Celaya Ruiz de Alegria
-//	@version			05/04/2016 13:53:19
-//	
+//  GRPCONTEXT::Update
+*/
+/**
+//
+//
+//
+//  @author       Imanol Celaya Ruiz de Alegria
+//  @version      05/04/2016 13:53:19
+//
 */
 /*-----------------------------------------------------------------*/
 bool GRPCONTEXT::Update()
 {
-	return true;
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
-//	GRPCONTEXT::SetMustRebuild
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Imanol Celaya Ruiz de Alegria
-//	@version			04/04/2016 14:29:03
-//	
-//  @param				mustrebuild : 
+//  GRPCONTEXT::SetMustRebuild
+*/
+/**
+//
+//
+//
+//  @author       Imanol Celaya Ruiz de Alegria
+//  @version      04/04/2016 14:29:03
+//
+//  @param        mustrebuild :
 */
 /*-----------------------------------------------------------------*/
 void GRPCONTEXT::SetMustRebuild(bool mustrebuild)
 {
-	this->mustrebuild = mustrebuild;
+  this->mustrebuild = mustrebuild;
 }
 
 
@@ -228,22 +228,22 @@ void GRPCONTEXT::SetMustRebuild(bool mustrebuild)
 
 
 /*-------------------------------------------------------------------
-//	GRPCONTEXT::IsMustRebuild
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Imanol Celaya Ruiz de Alegria
-//	@version			04/04/2016 14:29:09
-//	
-//	@return 			bool : 
+//  GRPCONTEXT::IsMustRebuild
+*/
+/**
+//
+//
+//
+//  @author       Imanol Celaya Ruiz de Alegria
+//  @version      04/04/2016 14:29:09
+//
+//  @return       bool :
 //
 */
 /*-----------------------------------------------------------------*/
 bool GRPCONTEXT::IsMustRebuild()
 {
-	return this->mustrebuild;
+  return this->mustrebuild;
 }
 
 
@@ -251,21 +251,21 @@ bool GRPCONTEXT::IsMustRebuild()
 
 
 /*-------------------------------------------------------------------
-//	GRPCONTEXT::SetMultiSampling
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Imanol Celaya Ruiz de Alegria
-//	@version			06/04/2016 13:17:22
-//	
-//  @param				multisampling : 
+//  GRPCONTEXT::SetMultiSampling
+*/
+/**
+//
+//
+//
+//  @author       Imanol Celaya Ruiz de Alegria
+//  @version      06/04/2016 13:17:22
+//
+//  @param        multisampling :
 */
 /*-----------------------------------------------------------------*/
 void GRPCONTEXT::SetMultiSampling(XDWORD multisampling)
 {
-	this->multisampling = multisampling;
+  this->multisampling = multisampling;
 }
 
 
@@ -274,22 +274,22 @@ void GRPCONTEXT::SetMultiSampling(XDWORD multisampling)
 
 
 /*-------------------------------------------------------------------
-//	GRPCONTEXT::GetMultisampling
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Imanol Celaya Ruiz de Alegria
-//	@version			06/04/2016 13:17:30
-//	
-//	@return 			XDWORD : 
+//  GRPCONTEXT::GetMultisampling
+*/
+/**
+//
+//
+//
+//  @author       Imanol Celaya Ruiz de Alegria
+//  @version      06/04/2016 13:17:30
+//
+//  @return       XDWORD :
 //
 */
 /*-----------------------------------------------------------------*/
 XDWORD GRPCONTEXT::GetMultisampling()
 {
-	return this->multisampling;
+  return this->multisampling;
 }
 
 

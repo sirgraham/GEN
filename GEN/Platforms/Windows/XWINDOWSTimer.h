@@ -1,21 +1,21 @@
 //------------------------------------------------------------------------------------------
-//	XWINDOWSTIMER.H
-//	
-/**	
-// \class 
-//   
+//  XWINDOWSTIMER.H
+//
+/**
+// \class
+//
 //  WINDOWS timer class
-//   
-//	@author	 Abraham J. Velez
-//	@version 04/04/2002
-*/	
-//	GEN  Copyright (C).  All right reserved.		 			 
+//
+//  @author  Abraham J. Velez
+//  @version 04/04/2002
+*/
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
+
 #ifndef _XWINDOWSTIMER_H_
 #define _XWINDOWSTIMER_H_
-	
-						
+
+
 //---- INCLUDES ----------------------------------------------------------------------------
 
 #include <windows.h>
@@ -32,29 +32,29 @@
 
 class XWINDOWSTIMER : public XTIMER
 {
-	public:
+  public:
 
-																XWINDOWSTIMER											();
-		virtual										 ~XWINDOWSTIMER											();
+                                XWINDOWSTIMER                     ();
+    virtual                    ~XWINDOWSTIMER                     ();
 
-		XQWORD											GetMicroSecondsTickCounter				();
+    XQWORD                      GetMicroSecondsTickCounter        ();
 
-		void												Clean															()
-																{																
-																	PCfrequencymilliseconds = 0.0;
-																	PCfrequencymicroseconds	= 0.0;
-																}
+    void                        Clean                             ()
+                                {
+                                  PCfrequencymilliseconds = 0.0;
+                                  PCfrequencymicroseconds = 0.0;
+                                }
 
-	private:
+  private:
 
-		LARGE_INTEGER								frequency;
-		double											PCfrequencymilliseconds;
-		double											PCfrequencymicroseconds;
+    LARGE_INTEGER               frequency;
+    double                      PCfrequencymilliseconds;
+    double                      PCfrequencymicroseconds;
 };
 
 
 
 //---- INLINE FUNCTIONS --------------------------------------------------------------------
-										
+
 #endif
 

@@ -1,23 +1,23 @@
 //------------------------------------------------------------------------------------------
-//	GRPSCREEN.H
-//	
-/**	
-// \class 
-//   
+//  GRPSCREEN.H
+//
+/**
+// \class
+//
 //  Graphics Screen Class
-//   
-//	@author	 Diego Martinez Ruiz de Gaona
-//	@version 28/06/2002
-*/	
-//	GEN  Copyright (C).  All right reserved.		 			 
+//
+//  @author  Diego Martinez Ruiz de Gaona
+//  @version 28/06/2002
+*/
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
+
 #ifndef _GRPSCREEN_H_
 #define _GRPSCREEN_H_
-	
-	
+
+
 //---- INCLUDES ----------------------------------------------------------------------------
-	
+
 #include <stdio.h>
 
 #include "XBase.h"
@@ -37,17 +37,17 @@
 
 enum GRPSCREENTYPE
 {
-	GRPSCREENTYPE_UNKNOW										 =  0								,
-	
-	GRPSCREENTYPE_WINDOWS																				,
-	
-	GRPSCREENTYPE_LINUX_X11_GL																	,
-	GRPSCREENTYPE_LINUX_X11_GLES																,
-	GRPSCREENTYPE_LINUX_FRAMEBUFFER															,
-	GRPSCREENTYPE_LINUX_FRAMEBUFFER_GLES												,
-	GRPSCREENTYPE_LINUX_DISPMAN                                 ,
+  GRPSCREENTYPE_UNKNOW                     =  0               ,
 
-	GRPSCREENTYPE_ANDROID																				
+  GRPSCREENTYPE_WINDOWS                                       ,
+
+  GRPSCREENTYPE_LINUX_X11_GL                                  ,
+  GRPSCREENTYPE_LINUX_X11_GLES                                ,
+  GRPSCREENTYPE_LINUX_FRAMEBUFFER                             ,
+  GRPSCREENTYPE_LINUX_FRAMEBUFFER_GLES                        ,
+  GRPSCREENTYPE_LINUX_DISPMAN                                 ,
+
+  GRPSCREENTYPE_ANDROID
 };
 
 
@@ -58,67 +58,67 @@ class GRPVIEWPORT;
 
 class GRPSCREEN : public GRPPROPERTIES, public XSUBJECT
 {
-	public:
-																	GRPSCREEN											();
-		virtual						 					 ~GRPSCREEN											();
+  public:
+                                  GRPSCREEN                     ();
+    virtual                      ~GRPSCREEN                     ();
 
-		GRPSCREENTYPE									GetType												();	
-		bool													IsValid												();
-		bool													IsActive											();
-					
-		bool													SetPropertys									(int width, int height, int stride, GRPPROPERTYMODE mode);
+    GRPSCREENTYPE                 GetType                       ();
+    bool                          IsValid                       ();
+    bool                          IsActive                      ();
 
-		bool													IsFullScreen									();
-		void													SetIsFullScreen								(bool isfullscreen);
-			
-		virtual bool									Create												(void* handle = NULL)					= 0;				
-		virtual bool									Update												()														= 0;	
-		virtual bool									Delete												()														= 0;
+    bool                          SetPropertys                  (int width, int height, int stride, GRPPROPERTYMODE mode);
 
-		virtual	bool									Resize												(int width, int height);
-		bool													UpdateSize										(int width, int height);
-																		
-		void*													GetHandle											();
-		GRPVIEWPORT*									GetViewport										(int index);
+    bool                          IsFullScreen                  ();
+    void                          SetIsFullScreen               (bool isfullscreen);
 
-		bool													AddViewport										(GRPVIEWPORT* viewport);
-		bool													UseViewport										(int n, GRPVIEWPORT& viewport);
+    virtual bool                  Create                        (void* handle = NULL)         = 0;
+    virtual bool                  Update                        ()                            = 0;
+    virtual bool                  Delete                        ()                            = 0;
 
-		XVECTOR<GRPVIEWPORT*>*				GetViewports									();
-		bool													UpdateViewports								(int width, int height);		
-		void													SetDPI												(float dpi);
-		float													GetDPI												();
+    virtual bool                  Resize                        (int width, int height);
+    bool                          UpdateSize                    (int width, int height);
 
-		virtual	void									ShowCursor										(bool) {}
+    void*                         GetHandle                     ();
+    GRPVIEWPORT*                  GetViewport                   (int index);
 
-  protected:	
-		
-		GRPSCREENTYPE									type;
-		bool													isvalid;
-		bool													isactive;		
-		bool													isfullscreen;						
-		void*													handle;
-		float													dpi;
-		XVECTOR<GRPVIEWPORT*>					viewports;
-		
-	private:
+    bool                          AddViewport                   (GRPVIEWPORT* viewport);
+    bool                          UseViewport                   (int n, GRPVIEWPORT& viewport);
 
-		void Clean()
-		{						
-				type						= GRPSCREENTYPE_UNKNOW;
-				isvalid					= false;
-				isactive				= false;																		
-				isfullscreen		= false;	
+    XVECTOR<GRPVIEWPORT*>*        GetViewports                  ();
+    bool                          UpdateViewports               (int width, int height);
+    void                          SetDPI                        (float dpi);
+    float                         GetDPI                        ();
 
-				positionx				= 0;
-				positiony				= 0;
+    virtual void                  ShowCursor                    (bool) {}
 
-				handle					= NULL;
-				dpi							= 0.0f;
-		}
+  protected:
 
-};	
-	
+    GRPSCREENTYPE                 type;
+    bool                          isvalid;
+    bool                          isactive;
+    bool                          isfullscreen;
+    void*                         handle;
+    float                         dpi;
+    XVECTOR<GRPVIEWPORT*>         viewports;
+
+  private:
+
+    void Clean()
+    {
+        type            = GRPSCREENTYPE_UNKNOW;
+        isvalid         = false;
+        isactive        = false;
+        isfullscreen    = false;
+
+        positionx       = 0;
+        positiony       = 0;
+
+        handle          = NULL;
+        dpi             = 0.0f;
+    }
+
+};
+
 
 //---- INLINE FUNCTIONS --------------------------------------------------------------------
 

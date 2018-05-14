@@ -1,20 +1,20 @@
 //------------------------------------------------------------------------------------------
-//	XSUBJECT.H
-//	
-/**	
-// \class 
-//   
+//  XSUBJECT.H
+//
+/**
+// \class
+//
 //  Basic eXtender Subject class
-//   
-//	@author	 Abraham J. Velez
-//	@version 09/01/2004 15:36:14
-*/	
-//	GEN  Copyright (C).  All right reserved.			 
+//
+//  @author  Abraham J. Velez
+//  @version 09/01/2004 15:36:14
+*/
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
+
 #ifndef _XSUBJECT_H_
 #define _XSUBJECT_H_
-	
+
 
 //---- INCLUDES ----------------------------------------------------------------------------
 
@@ -32,25 +32,25 @@ class XEVENT;
 
 class XSUBJECT
 {
-	public:	
-											XSUBJECT										()												{ Clean();																															}
-		virtual					 ~XSUBJECT										()												{ Clean();																														  }
-		
-		bool							RegisterEvent								(XDWORD type)							{ return XPUBLISHER::GetInstance().RegisterEvent(type, this);           }
-		bool							DeRegisterEvent							(XDWORD type)             { return XPUBLISHER::GetInstance().DeRegisterEvent(type, this);         }			
-		bool							DeRegisterAllEvents					()												{ return XPUBLISHER::GetInstance().DeRegisterAllEvents();								}
-		
-		bool							PostEvent										(XEVENT* event)						
-											{ 
-												return XPUBLISHER::GetInstance().PostEvent(event, this);										
-											}
+  public:
+                      XSUBJECT                    ()                        { Clean();                                                              }
+    virtual          ~XSUBJECT                    ()                        { Clean();                                                              }
 
-	private:
+    bool              RegisterEvent               (XDWORD type)             { return XPUBLISHER::GetInstance().RegisterEvent(type, this);           }
+    bool              DeRegisterEvent             (XDWORD type)             { return XPUBLISHER::GetInstance().DeRegisterEvent(type, this);         }
+    bool              DeRegisterAllEvents         ()                        { return XPUBLISHER::GetInstance().DeRegisterAllEvents();               }
 
-		void							Clean												()
-											{
+    bool              PostEvent                   (XEVENT* event)
+                      {
+                        return XPUBLISHER::GetInstance().PostEvent(event, this);
+                      }
 
-											}
+  private:
+
+    void              Clean                       ()
+                      {
+
+                      }
 
 };
 

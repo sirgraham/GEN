@@ -1,32 +1,32 @@
 /*------------------------------------------------------------------------------------------
-//	GRPBEZIERSPLINE.H
-*/	
-/**	
-// \class 
-//   
-//  Holds bezier spline data
-//   
-//	@author	 Diego Martinez Ruiz de Gaona
+//  GRPBEZIERSPLINE.H
+*/
+/**
+// \class
 //
-//	Date Of Creation	: 16/02/2015 17:19:00
-//	Last Modification	:	
-*/	
-//*	GEN  Copyright (C).  All right reserved.
+//  Holds bezier spline data
+//
+//  @author  Diego Martinez Ruiz de Gaona
+//
+//  Date Of Creation  : 16/02/2015 17:19:00
+//  Last Modification :
+*/
+//* GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
+
 #ifndef _GRPBEZIERSPLINE_H_
 #define _GRPBEZIERSPLINE_H_
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
-	
+
 #include "GRPSpline.h"
 #include "GRPProfiler.h"
-#include <math.h>	
+#include <math.h>
 
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
-	
-	
+
+
 /*---- CLASS -----------------------------------------------------------------------------*/
 
 
@@ -34,170 +34,170 @@ class GRPBEZIERANCHORS
 {
 public:
 
-	GRPBEZIERANCHORS(GRPPOINT StA,GRPPOINT AA,GRPPOINT AB,GRPPOINT Eb) : StartA(StA),AnchorA(AA),AnchorB(AB),EndB(Eb) 
-	{
-	
-	};
+  GRPBEZIERANCHORS(GRPPOINT StA,GRPPOINT AA,GRPPOINT AB,GRPPOINT Eb) : StartA(StA),AnchorA(AA),AnchorB(AB),EndB(Eb)
+  {
 
-	GRPPOINT StartA;
-	GRPPOINT AnchorA;
-	GRPPOINT AnchorB;
-	GRPPOINT EndB;
+  };
+
+  GRPPOINT StartA;
+  GRPPOINT AnchorA;
+  GRPPOINT AnchorB;
+  GRPPOINT EndB;
 };
 
 
 
 class GRPBEZIERSPLINE
 {
-	public:
+  public:
 
-																		GRPBEZIERSPLINE							()														{		}
-		virtual												 ~GRPBEZIERSPLINE							() 
-																		{
-																			for(XDWORD e=0; e<points.GetSize(); e++)
-																				{
-																					points.FastGet(e)->DeleteContents();
-																					points.FastGet(e)->DeleteAll();
-																				}
+                                    GRPBEZIERSPLINE             ()                            {   }
+    virtual                        ~GRPBEZIERSPLINE             ()
+                                    {
+                                      for(XDWORD e=0; e<points.GetSize(); e++)
+                                        {
+                                          points.FastGet(e)->DeleteContents();
+                                          points.FastGet(e)->DeleteAll();
+                                        }
 
-																			points.DeleteContents();
-																			points.DeleteAll();										
-																		}
+                                      points.DeleteContents();
+                                      points.DeleteAll();
+                                    }
 
-		void														Debug()
-		{
-			XSTRING s;
-			XSTRING v;
-			for  (float e=0;e<1.0f;e+=0.01f)
-			{
-				float value=GetStep(e);
-				v.ConvertFromFloat(value);
-				s.Add(v);
-				s.Add(__L(","));
-			}
-			XDEBUG_PRINTCOLOR(0,s.Get());
-		}
+    void                            Debug()
+    {
+      XSTRING s;
+      XSTRING v;
+      for  (float e=0;e<1.0f;e+=0.01f)
+      {
+        float value=GetStep(e);
+        v.ConvertFromFloat(value);
+        s.Add(v);
+        s.Add(__L(","));
+      }
+      XDEBUG_PRINTCOLOR(0,s.Get());
+    }
 
-		bool														GetAnchor										(XDWORD index, GRPPOINT* StartA,GRPPOINT* AnchorA, GRPPOINT* AnchorB, GRPPOINT* StartB);
+    bool                            GetAnchor                   (XDWORD index, GRPPOINT* StartA,GRPPOINT* AnchorA, GRPPOINT* AnchorB, GRPPOINT* StartB);
 
-		GRPSPLINE*											ResolveCubicBezier					(GRPSPLINE* inputsp, int nsegments);
-		virtual GRPPOINT								InterpolateBezier						(XVECTOR<GRPPOINT*>* points, float t);
-		inline	GRPPOINT								InterpolateBezier						(float t) 
-		{
-			//return InterpolateBezier(points.FastGet(0),t);
-			if (first)
-			return InterpolateBezier(first,t);
-			
-			//return GRPPOINT();
-			return InterpolateBezier(t);
-		}
+    GRPSPLINE*                      ResolveCubicBezier          (GRPSPLINE* inputsp, int nsegments);
+    virtual GRPPOINT                InterpolateBezier           (XVECTOR<GRPPOINT*>* points, float t);
+    inline  GRPPOINT                InterpolateBezier           (float t)
+    {
+      //return InterpolateBezier(points.FastGet(0),t);
+      if (first)
+      return InterpolateBezier(first,t);
 
-			float InterpolateBezierAmplitude(float t)
-			{
-				if (!first) return 0.0f;
+      //return GRPPOINT();
+      return InterpolateBezier(t);
+    }
 
-				float a=0.0f;	
-				int	 len = (int)this->first->GetSize();
+      float InterpolateBezierAmplitude(float t)
+      {
+        if (!first) return 0.0f;
 
-				for(int i=0; i<len; i++)
-					{
-						GRPPOINT* pointtempo	= this->first->FastGet(i);
-						if (pointtempo==NULL)
-						{
-							XDEBUG_PRINTCOLOR(0,__L("float InterpolateBezierAmplitude(float) : pointtempo is null"));
-							continue;
-						}
-			
-						float	 mult	= 1.0;
-						if ((t==0.0f && i<=0) || (t==1 && (len - 1 - i)<=0))		 //  excepcion de dominio : Domain error occurs if base is 0 and exp is less than or equal to 0. Nan is returned
-						{
-									 mult=0.0;
-									 GRPPROFILER::DomainChecks++;
-						}
-						else
-						{
-										//mult = CombinatorialPermutation((float)(len - 1), (float)i);
-										mult	= CombinatorialPermutation((float)(len - 1), (float)i) * (float)pow(1 - t, int(len - 1 - i)) * (float)pow(t, int(i));
-										/*
-									 if ((1-t)!=0 || (t==0 && int(len - 1 - i)>0))
-									 {
-										mult = mult * pow(1 - t, int(len - 1 - i));
-										GRPPROFILER::DomainChecks++;
-									 }
+        float a=0.0f;
+        int  len = (int)this->first->GetSize();
 
-									 if (t!=0 || (t==0 && i>0)) 
-									 {
-										mult = mult * pow(t, int(i));
-										GRPPROFILER::DomainChecks++;
-									 }*/
-						}
-			
-						a += pointtempo->y * mult;
-					}
+        for(int i=0; i<len; i++)
+          {
+            GRPPOINT* pointtempo  = this->first->FastGet(i);
+            if (pointtempo==NULL)
+            {
+              XDEBUG_PRINTCOLOR(0,__L("float InterpolateBezierAmplitude(float) : pointtempo is null"));
+              continue;
+            }
 
-				return a;
-			}
-		
+            float  mult = 1.0;
+            if ((t==0.0f && i<=0) || (t==1 && (len - 1 - i)<=0))     //  excepcion de dominio : Domain error occurs if base is 0 and exp is less than or equal to 0. Nan is returned
+            {
+                   mult=0.0;
+                   GRPPROFILER::DomainChecks++;
+            }
+            else
+            {
+                    //mult = CombinatorialPermutation((float)(len - 1), (float)i);
+                    mult  = CombinatorialPermutation((float)(len - 1), (float)i) * (float)pow(1 - t, int(len - 1 - i)) * (float)pow(t, int(i));
+                    /*
+                   if ((1-t)!=0 || (t==0 && int(len - 1 - i)>0))
+                   {
+                    mult = mult * pow(1 - t, int(len - 1 - i));
+                    GRPPROFILER::DomainChecks++;
+                   }
 
-		float														CombinatorialPermutation		(float a, float b);
-		float														Factorial										(float num);
+                   if (t!=0 || (t==0 && i>0))
+                   {
+                    mult = mult * pow(t, int(i));
+                    GRPPROFILER::DomainChecks++;
+                   }*/
+            }
 
-		virtual void										Init												(GRPSPLINE* inputsp);
-		virtual float										GetStep											(float t);
+            a += pointtempo->y * mult;
+          }
 
-		XVECTOR<XVECTOR<GRPPOINT*>*>*		GetPoints										()										{ return &points;}
-		XVECTOR<GRPBEZIERANCHORS*>*			GetAnchors									()										{ return &Anchors;}
+        return a;
+      }
+
+
+    float                           CombinatorialPermutation    (float a, float b);
+    float                           Factorial                   (float num);
+
+    virtual void                    Init                        (GRPSPLINE* inputsp);
+    virtual float                   GetStep                     (float t);
+
+    XVECTOR<XVECTOR<GRPPOINT*>*>*   GetPoints                   ()                    { return &points;}
+    XVECTOR<GRPBEZIERANCHORS*>*     GetAnchors                  ()                    { return &Anchors;}
 
 protected:
 
-		XVECTOR<XVECTOR<GRPPOINT*>*>		points;	
-		XVECTOR<GRPBEZIERANCHORS*>			Anchors;
+    XVECTOR<XVECTOR<GRPPOINT*>*>    points;
+    XVECTOR<GRPBEZIERANCHORS*>      Anchors;
 
-		XVECTOR<GRPPOINT*>*							first;
+    XVECTOR<GRPPOINT*>*             first;
 
-		void Clean()
-		{
-			first=NULL;
-		}
+    void Clean()
+    {
+      first=NULL;
+    }
 
 
 
 };
-	
-	
+
+
 
 class GRPBEZIERCURVE : public GRPBEZIERSPLINE
 {
 public:
 
-																		GRPBEZIERCURVE							(){		}
-		virtual												 ~GRPBEZIERCURVE							() 
-																		{
-																			for(XDWORD e=0; e<points.GetSize(); e++)
-																				{
-																					points.Get(e)->DeleteContents();
-																					points.Get(e)->DeleteAll();
-																				}
+                                    GRPBEZIERCURVE              (){   }
+    virtual                        ~GRPBEZIERCURVE              ()
+                                    {
+                                      for(XDWORD e=0; e<points.GetSize(); e++)
+                                        {
+                                          points.Get(e)->DeleteContents();
+                                          points.Get(e)->DeleteAll();
+                                        }
 
-																			points.DeleteContents();
-																			points.DeleteAll();										
-																		}
+                                      points.DeleteContents();
+                                      points.DeleteAll();
+                                    }
 
-		GRPPOINT												InterpolateBezier						(XVECTOR<GRPPOINT*>* points, float t);
-		GRPPOINT												InterpolateBezier						(float t);
-		void														Init												(GRPSPLINE* inputsp);
-		void														Init												(float p0x, float p0y, float p1x, float p1y, float p2x, float p2y,  float p3x, float p3y);
+    GRPPOINT                        InterpolateBezier           (XVECTOR<GRPPOINT*>* points, float t);
+    GRPPOINT                        InterpolateBezier           (float t);
+    void                            Init                        (GRPSPLINE* inputsp);
+    void                            Init                        (float p0x, float p0y, float p1x, float p1y, float p2x, float p2y,  float p3x, float p3y);
 
 private:
-	
-		GRPPOINT Sa,ab,bE;
-		GRPPOINT p0,p1,p2,p3;
-		GRPPOINT Sab,abE;
-		GRPPOINT Result;
+
+    GRPPOINT Sa,ab,bE;
+    GRPPOINT p0,p1,p2,p3;
+    GRPPOINT Sab,abE;
+    GRPPOINT Result;
 
 };
 
-	/*---- INLINE FUNCTIONS ------------------------------------------------------------------*/
+  /*---- INLINE FUNCTIONS ------------------------------------------------------------------*/
 
 #endif
 
@@ -212,19 +212,19 @@ private:
  * Dependancies: matrix4, vector2 class, STL vector, STL list
  ***************************************
 
-#pragma once 
+#pragma once
 
-#include <vector> 
-#include <list> 
-#include "vector2.h" 
-#include "matrix4.h" 
+#include <vector>
+#include <list>
+#include "vector2.h"
+#include "matrix4.h"
 
-#ifdef WIN32 
-#pragma warning(disable:4786) // STL expands to beyond 256 chars in windows 
-#endif 
+#ifdef WIN32
+#pragma warning(disable:4786) // STL expands to beyond 256 chars in windows
+#endif
 
 
-#define ARCLEN_GENERATION_ERROR  0.001f  //!< error for adaptive arclen table generation 
+#define ARCLEN_GENERATION_ERROR  0.001f  //!< error for adaptive arclen table generation
 
 
 template <class Vector>
@@ -256,18 +256,18 @@ public:
     ArclenTable arclentable; //!< the arclength table
 
 
-    void Mode(SplineMode m); //!< set the spline mode 
+    void Mode(SplineMode m); //!< set the spline mode
 
     SplineMode Mode() const  //!< get the current spline mode
     {  return mode;  }
 
-    unsigned int Step() const 
+    unsigned int Step() const
     {  return step;  } //!< returns the stepping value
 
-    Spline() 
+    Spline()
     {  Mode(Bezier);  }
 
-    ~Spline() 
+    ~Spline()
     { }
 
     //! returns the interpolated value of the spline at a time value in a particular dimension
@@ -277,17 +277,17 @@ public:
     void  ArclenTableNormalize(void)
     {
         for (unsigned int i= 0; i < arclentable.size(); ++i)
-             arclentable[i].arclen/=arclentable.back().arclen;	
+             arclentable[i].arclen/=arclentable.back().arclen;
     }
 
     //! returns the time on the space curve given a partial arclength value
-    float ArcTime(float arc_val) const;    
+    float ArcTime(float arc_val) const;
 
     //! builds the arclength table
-    virtual void  ArclenTableBuild()= 0;     
+    virtual void  ArclenTableBuild()= 0;
 
     //! returns approximated space curve point given a partial arclength value
-    virtual Vector ArcPoint(float arc_val)= 0; 
+    virtual Vector ArcPoint(float arc_val)= 0;
 };
 
 
@@ -298,7 +298,7 @@ private:
     std::list<ArclenTableEntry>::iterator InternalBuildArclenTable(std::list<ArclenTableEntry> &templist, std::list<ArclenTableEntry>::iterator curr, unsigned int ctrlpt_offset);
 
 public:
-    void  ArclenTableBuild();     	
+    void  ArclenTableBuild();
     float ArcPoint(float arc_val);
 };
 
@@ -351,7 +351,7 @@ static matrix4 MatCatMullRom(-.5f,  1.5f, -1.5f,  .5f,
 // C2 continuous
 // each 4 consecutive control points define a curve (ex: 0123, 1234, 2345...)
 // step = 1
-static matrix4 MatBSpline(-1.f/6,  3.f/6, -3.f/6, 1.f/6,  
+static matrix4 MatBSpline(-1.f/6,  3.f/6, -3.f/6, 1.f/6,
                            3.f/6, -6.f/6,  3.f/6, 0,
                           -3.f/6,      0,  3.f/6, 0,
                            1.f/6,  4.f/6,  1.f/6, 0);
@@ -363,24 +363,24 @@ template <class Vector>
 inline float Spline<Vector>::InterpCtrlPt(float p1, float p2, float p3, float p4, float t)
 {
     static float t2, t3;
-    
+
     t2= t*t; // precalculations
     t3= t2*t;
-  
+
     return (basis[0][0]*t3 + basis[1][0]*t2 + basis[2][0]*t + basis[3][0])*p1 +
-            (basis[0][1]*t3 + basis[1][1]*t2 + basis[2][1]*t + basis[3][1])*p2 + 
-            (basis[0][2]*t3 + basis[1][2]*t2 + basis[2][2]*t + basis[3][2])*p3 + 
-            (basis[0][3]*t3 + basis[1][3]*t2 + basis[2][3]*t + basis[3][3])*p4; 
+            (basis[0][1]*t3 + basis[1][1]*t2 + basis[2][1]*t + basis[3][1])*p2 +
+            (basis[0][2]*t3 + basis[1][2]*t2 + basis[2][2]*t + basis[3][2])*p3 +
+            (basis[0][3]*t3 + basis[1][3]*t2 + basis[2][3]*t + basis[3][3])*p4;
    // optimally you want to do something like the following but the ++'s in C are ambiguous in the operation order and won't generate the correct ASM
-	 //  You'd need to write the corresponding assembly code for the following to work.
-   // ptr= (float *)&basis;	
-  //  --ptr;  
-   // return t3*((p1 * *++ptr) + (p2 * *++ptr) + (p3 * *++ptr) + (p4 * *++ptr)) + 
- //           t2*((p1 * *++ptr) + (p2 * *++ptr) + (p3 * *++ptr) + (p4 * *++ptr)) + 
- //           t* ((p1 * *++ptr) + (p2 * *++ptr) + (p3 * *++ptr) + (p4 * *++ptr)) + 
+   //  You'd need to write the corresponding assembly code for the following to work.
+   // ptr= (float *)&basis;
+  //  --ptr;
+   // return t3*((p1 * *++ptr) + (p2 * *++ptr) + (p3 * *++ptr) + (p4 * *++ptr)) +
+ //           t2*((p1 * *++ptr) + (p2 * *++ptr) + (p3 * *++ptr) + (p4 * *++ptr)) +
+ //           t* ((p1 * *++ptr) + (p2 * *++ptr) + (p3 * *++ptr) + (p4 * *++ptr)) +
   //             ((p1 * *++ptr) + (p2 * *++ptr) + (p3 * *++ptr) + (p4 * *++ptr));
    //
-	
+
 }
 
 
@@ -422,14 +422,14 @@ float Spline<Vector>::ArcTime(float arc_val) const
 {
     // trivial cases
     if (arc_val==arclentable.front().arclen) return arclentable.front().time;
-    else 
+    else
     if (arc_val==arclentable.back().arclen) return arclentable.back().time;
 
-    unsigned int lower= ArcTableBisectionSearch(arc_val);	
+    unsigned int lower= ArcTableBisectionSearch(arc_val);
 
     // perform a linear interpolation of 2 nearest time values
-    return ( (arclentable[lower+1].arclen-arc_val)*arclentable[lower].time + 
-              (arc_val-arclentable[lower].arclen)*arclentable[lower+1].time ) / 
+    return ( (arclentable[lower+1].arclen-arc_val)*arclentable[lower].time +
+              (arc_val-arclentable[lower].arclen)*arclentable[lower+1].time ) /
               (arclentable[lower+1].time - arclentable[lower].time);
 }
 
@@ -650,8 +650,8 @@ Here are some usage examples
 Spline2D spline;
 spline.Mode(Spline2D::CatMullRom);  // set it to Cat Mull Rom mode (spline will actually go through the control points)
 spline.ctrlpts.push_back(vector2f(x1, y1));  // add 3 new control points to the spline (you need at least 3 to render a spline)
-spline.ctrlpts.push_back(vector2f(x2, y2));  
-spline.ctrlpts.push_back(vector2f(x3, y3));  
+spline.ctrlpts.push_back(vector2f(x2, y2));
+spline.ctrlpts.push_back(vector2f(x3, y3));
 spline.ctrlpts.erase(spline.ctrlpts.begin() + ctrlpt_to_erase); // erase a point from the spline
 spline.ArclenTableBuild();     // build the arc length table
 spline.ArclenTableNormalize(); // normalize the arc length table to be 0 - 1
@@ -666,8 +666,8 @@ if (spline.ctrlpts.size() >= 3) // only draw the spline if it has enough control
 
     // draw curves
     glBegin(GL_LINES);
-    glColor3f(1,0,0);	
-    unsigned int max= spline.ctrlpts.size()-(spline.Step()-1);		
+    glColor3f(1,0,0);
+    unsigned int max= spline.ctrlpts.size()-(spline.Step()-1);
     unsigned int size= spline.ctrlpts.size();
     for (i= 0; i < max; i+= spline.Step())
     for (t= 0; t < 1; t+=0.01f)

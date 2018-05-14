@@ -1,25 +1,25 @@
 //------------------------------------------------------------------------------------------
-//	CIPHERBLOWFISH.H
-//	
-/**	
-// \class 
-//   
+//  CIPHERBLOWFISH.H
+//
+/**
+// \class
+//
 //  Cipher / Uncipher Blowfish Class
-//   
-//	@author	 Abraham J. Velez
-//	@version 25/04/2002
-*/	
-//	GEN  Copyright (C).  All right reserved.		 			 
+//
+//  @author  Abraham J. Velez
+//  @version 25/04/2002
+*/
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
+
 #ifndef _CIPHERBLOWFISH_H_
 #define _CIPHERBLOWFISH_H_
-	
-	
+
+
 //---- INCLUDES ----------------------------------------------------------------------------
 
-#include "Cipher.h"	
-	
+#include "Cipher.h"
+
 //---- DEFINES & ENUMS  --------------------------------------------------------------------
 
 #define CIPHERBLOWFISH_ENCRYPT     1
@@ -30,49 +30,49 @@
 #define CIPHERBLOWFISH_BLOCKSIZE   8          /* Blowfish uses 64 bit blocks */
 
 
-typedef struct	{	XDWORD	P[CIPHERBLOWFISH_ROUNDS + 2];    /*!<  Blowfish round keys    */
-									XDWORD	S[4][256];                 /*!<  key dependent S-boxes  */
+typedef struct  { XDWORD  P[CIPHERBLOWFISH_ROUNDS + 2];    /*!<  Blowfish round keys    */
+                  XDWORD  S[4][256];                 /*!<  key dependent S-boxes  */
 
-								} CIPHERBLOWFISH_CONTEXT;
+                } CIPHERBLOWFISH_CONTEXT;
 
 //---- CLASS -------------------------------------------------------------------------------
-	
+
 
 class CIPHERBLOWFISH : public CIPHER
 {
-	public:
+  public:
 
-													CIPHERBLOWFISH					();												
-		virtual							 ~CIPHERBLOWFISH					();
+                          CIPHERBLOWFISH          ();
+    virtual              ~CIPHERBLOWFISH          ();
 
-		using									CIPHER::Cipher;
-		using									CIPHER::Uncipher;
+    using                 CIPHER::Cipher;
+    using                 CIPHER::Uncipher;
 
-		bool									Cipher									(XBYTE* input, int size);		
-		bool									Uncipher								(XBYTE* input, int size);		
-	
-	private:
+    bool                  Cipher                  (XBYTE* input, int size);
+    bool                  Uncipher                (XBYTE* input, int size);
 
-		void									Clean										();
+  private:
 
-		static XDWORD					P[CIPHERBLOWFISH_ROUNDS + 2];
-		static XDWORD					S[4][256];
-		
-		XDWORD								F												(CIPHERBLOWFISH_CONTEXT* ctx, XDWORD x);
-		
-		void									BlowfishCipher					(CIPHERBLOWFISH_CONTEXT* ctx, XDWORD* xl, XDWORD* xr);
-		void									BlowfishUncipher				(CIPHERBLOWFISH_CONTEXT* ctx, XDWORD* xl, XDWORD* xr) ;
+    void                  Clean                   ();
 
-		bool									BlowfishSetKey					(CIPHERBLOWFISH_CONTEXT* ctx, XBYTE* key, XDWORD keysize);
+    static XDWORD         P[CIPHERBLOWFISH_ROUNDS + 2];
+    static XDWORD         S[4][256];
 
-		bool									BlowfishCipher_ECB			(CIPHERBLOWFISH_CONTEXT* ctx, int mode, XBYTE input[CIPHERBLOWFISH_BLOCKSIZE], XBYTE output[CIPHERBLOWFISH_BLOCKSIZE]);
-		bool									BlowfishCipher_CBC			(CIPHERBLOWFISH_CONTEXT* ctx, int mode, int size, XBYTE iv[CIPHERBLOWFISH_BLOCKSIZE], XBYTE* input, XBYTE* output);
-		bool									BlowfishCipher_CFB64		(CIPHERBLOWFISH_CONTEXT* ctx, int mode, int size, int* iv_off, XBYTE iv[CIPHERBLOWFISH_BLOCKSIZE], XBYTE* input, XBYTE* output);
-		bool									BlowfishCipher_CTR			(CIPHERBLOWFISH_CONTEXT* ctx, int size, int* nc_off, XBYTE nonce_counter[CIPHERBLOWFISH_BLOCKSIZE], XBYTE stream_block[CIPHERBLOWFISH_BLOCKSIZE], XBYTE* input, XBYTE* output);
+    XDWORD                F                       (CIPHERBLOWFISH_CONTEXT* ctx, XDWORD x);
+
+    void                  BlowfishCipher          (CIPHERBLOWFISH_CONTEXT* ctx, XDWORD* xl, XDWORD* xr);
+    void                  BlowfishUncipher        (CIPHERBLOWFISH_CONTEXT* ctx, XDWORD* xl, XDWORD* xr) ;
+
+    bool                  BlowfishSetKey          (CIPHERBLOWFISH_CONTEXT* ctx, XBYTE* key, XDWORD keysize);
+
+    bool                  BlowfishCipher_ECB      (CIPHERBLOWFISH_CONTEXT* ctx, int mode, XBYTE input[CIPHERBLOWFISH_BLOCKSIZE], XBYTE output[CIPHERBLOWFISH_BLOCKSIZE]);
+    bool                  BlowfishCipher_CBC      (CIPHERBLOWFISH_CONTEXT* ctx, int mode, int size, XBYTE iv[CIPHERBLOWFISH_BLOCKSIZE], XBYTE* input, XBYTE* output);
+    bool                  BlowfishCipher_CFB64    (CIPHERBLOWFISH_CONTEXT* ctx, int mode, int size, int* iv_off, XBYTE iv[CIPHERBLOWFISH_BLOCKSIZE], XBYTE* input, XBYTE* output);
+    bool                  BlowfishCipher_CTR      (CIPHERBLOWFISH_CONTEXT* ctx, int size, int* nc_off, XBYTE nonce_counter[CIPHERBLOWFISH_BLOCKSIZE], XBYTE stream_block[CIPHERBLOWFISH_BLOCKSIZE], XBYTE* input, XBYTE* output);
 };
-	
+
 //---- INLINE FUNCTIONS --------------------------------------------------------------------
-	
+
 #endif
 
 

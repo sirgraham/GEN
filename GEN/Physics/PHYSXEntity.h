@@ -1,25 +1,25 @@
 /*------------------------------------------------------------------------------------------
-//	PHYSXENTITY.H
-*/	
-/**	
-// \class 
-//   
-//  PhyX concrete entity
-//   
-//	@author	 Diego Martinez Ruiz de Gaona
+//  PHYSXENTITY.H
+*/
+/**
+// \class
 //
-//	Date Of Creation	: 26/05/2016 19:29:49
-//	Last Modification	:	
-*/	
-/*	(C) Copyright GEN. All right reserved.
+//  PhyX concrete entity
+//
+//  @author  Diego Martinez Ruiz de Gaona
+//
+//  Date Of Creation  : 26/05/2016 19:29:49
+//  Last Modification :
+*/
+/*  (C) Copyright GEN. All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
+
 #ifdef PHY_ACTIVE
 
 #ifndef _PHYSXENTITY_H_
 #define _PHYSXENTITY_H_
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
 #include <math.h>
@@ -33,35 +33,35 @@
 /*---- CLASS -----------------------------------------------------------------------------*/
 class PHYSXENTITY : public PHYENTITY
 {
-public:		
+public:
 
-						void Update					();
-		virtual void SetMass				(float mass);
-		virtual void SetFriction		(float friction);
-		virtual void Destroy				();
+            void Update         ();
+    virtual void SetMass        (float mass);
+    virtual void SetFriction    (float friction);
+    virtual void Destroy        ();
 
-		virtual void AddForce				(GRPVECTOR& vector);
-		virtual void AddForce				(GRPVECTOR& vector,GRPVECTOR& position);
+    virtual void AddForce       (GRPVECTOR& vector);
+    virtual void AddForce       (GRPVECTOR& vector,GRPVECTOR& position);
 
-		physx::PxRigidActor*		envelope;
-		physx::PxMaterial*			mMaterial;
+    physx::PxRigidActor*    envelope;
+    physx::PxMaterial*      mMaterial;
 
-		physx::PxVec3						position;
-		physx::PxQuat						rotation;
+    physx::PxVec3           position;
+    physx::PxQuat           rotation;
 
 
 private:
 
-		void Clean()
-		{
-				envelope=NULL;
-		}
+    void Clean()
+    {
+        envelope=NULL;
+    }
 
 };
-	
-	
+
+
 /*---- INLINE FUNCTIONS ------------------------------------------------------------------*/
-	
+
 #endif
 
 #endif

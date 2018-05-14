@@ -1,23 +1,23 @@
 /*------------------------------------------------------------------------------------------
-//	SNDOPENALSOURCE.H
-*/	
-/**	
-// \file 
-//   
-//  source of a sound
-//   
-//	@author	 Imanol Celaya Ruiz de Alegria
+//  SNDOPENALSOURCE.H
+*/
+/**
+// \file
 //
-//	Date Of Creation	: 05/11/2015 10:16:28
-//	Last Modification	:	
-*/	
-/*	GEN  Copyright (C).  All right reserved.
+//  source of a sound
+//
+//  @author  Imanol Celaya Ruiz de Alegria
+//
+//  Date Of Creation  : 05/11/2015 10:16:28
+//  Last Modification :
+*/
+/*  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
+
 #ifndef _SNDOPENALSOURCE_H_
 #define _SNDOPENALSOURCE_H_
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
 #include <stdlib.h>
@@ -30,8 +30,8 @@
 #include "XList.h"
 
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
-	
-	
+
+
 /*---- CLASS -----------------------------------------------------------------------------*/
 
 class SNDOPENALBUFFER;
@@ -40,76 +40,76 @@ class SNDOPENAL;
 
 class SNDOPENALSOURCE : public SNDSOURCE
 {
-	friend class SNDOPENAL;
-	friend class SNDOPENALELEMENT;
-	friend class SNDOPENALSTREAMELEMENT;
+  friend class SNDOPENAL;
+  friend class SNDOPENALELEMENT;
+  friend class SNDOPENALSTREAMELEMENT;
 
-	public:
+  public:
 
-		void												Stop																();
-		void												Pause																();
-		void												UnPause															();
+    void                        Stop                                ();
+    void                        Pause                               ();
+    void                        UnPause                             ();
 
-		void												SetLoop															(bool loop);
+    void                        SetLoop                             (bool loop);
 
-		bool												IsPLaying														();
-		bool												IsStopped														();
-		bool												IsPaused														();
+    bool                        IsPLaying                           ();
+    bool                        IsStopped                           ();
+    bool                        IsPaused                            ();
 
-		void												SetVolume														(float volume);
-		float												GetVolume														();
+    void                        SetVolume                           (float volume);
+    float                       GetVolume                           ();
 
-		void												SetPitch														(float pitch);
-		float												GetPitch														();
+    void                        SetPitch                            (float pitch);
+    float                       GetPitch                            ();
 
-		void												SetElement													(SNDELEMENT* element)						{ this->element = element;	}
-		SNDELEMENT*									GetElement													()															{ return this->element;			}
+    void                        SetElement                          (SNDELEMENT* element)           { this->element = element;  }
+    SNDELEMENT*                 GetElement                          ()                              { return this->element;     }
 
-		void												SetSecondsOffset										(float seconds);
-		void												SetSamplesOffset										(int samples);
-			
-		void												SetAquired													(bool aquired)									{ this->aquired = aquired;	}
-		bool												IsAquired														()															{ return this->aquired;			}
+    void                        SetSecondsOffset                    (float seconds);
+    void                        SetSamplesOffset                    (int samples);
 
-		void												Aquire															()															{ this->aquired = true;			}
-		void												Release															()															{ this->aquired = false;		}
+    void                        SetAquired                          (bool aquired)                  { this->aquired = aquired;  }
+    bool                        IsAquired                           ()                              { return this->aquired;     }
 
-	protected:
+    void                        Aquire                              ()                              { this->aquired = true;     }
+    void                        Release                             ()                              { this->aquired = false;    }
 
-		ALuint											source;
-		SNDOPENAL*									openalsystem;
+  protected:
 
-		bool												isplaying;
+    ALuint                      source;
+    SNDOPENAL*                  openalsystem;
 
-		bool												aquired;
+    bool                        isplaying;
 
-		XLIST<SNDOPENALBUFFER*>			bufferlist;
+    bool                        aquired;
 
-	private:
-																SNDOPENALSOURCE											(SNDOPENAL* openalsystem);
-		virtual										 ~SNDOPENALSOURCE											();
-		
-		void												Play																();
-		void												Play																(SNDOPENALBUFFER* buffer);
-		void												Queue																(SNDOPENALBUFFER* buffer);
-		void												UnQueue															(SNDOPENALBUFFER* buffer);
+    XLIST<SNDOPENALBUFFER*>     bufferlist;
 
-		int													GetQueueLength											();
-		int													GetProcessedBuffers									();
+  private:
+                                SNDOPENALSOURCE                     (SNDOPENAL* openalsystem);
+    virtual                    ~SNDOPENALSOURCE                     ();
+
+    void                        Play                                ();
+    void                        Play                                (SNDOPENALBUFFER* buffer);
+    void                        Queue                               (SNDOPENALBUFFER* buffer);
+    void                        UnQueue                             (SNDOPENALBUFFER* buffer);
+
+    int                         GetQueueLength                      ();
+    int                         GetProcessedBuffers                 ();
 
 
-		void												Clean																()
-																{
-																	source				= 0;
-																	element				= NULL;
-																	openalsystem	= NULL;
-																	isplaying			= false;
-																	aquired				= false;
-																}
+    void                        Clean                               ()
+                                {
+                                  source        = 0;
+                                  element       = NULL;
+                                  openalsystem  = NULL;
+                                  isplaying     = false;
+                                  aquired       = false;
+                                }
 };
-	
-	
+
+
 /*---- INLINE FUNCTIONS ------------------------------------------------------------------*/
-	
+
 #endif
 

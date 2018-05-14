@@ -6,10 +6,10 @@
 //
 // Manages viewport renderers
 //
-//	@author: Diego Martinez Ruiz de Gaona 
+//  @author: Diego Martinez Ruiz de Gaona
 //
-//	Date of Creation : 11/10/2017 17:35:05 
-//	Last Modification : 
+//  Date of Creation : 11/10/2017 17:35:05
+//  Last Modification :
 */
 /* (C) Copyright . All right reserved.
 /*------------------------------------------------------------------------------------------*/
@@ -29,21 +29,21 @@ class GRPCAMERA;
 class GRPVIEWPORTPASS : public GRPPASS
 {
 public:
-		GRPVIEWPORTPASS(XCHAR* name = __L("background"));
-		~GRPVIEWPORTPASS();
+    GRPVIEWPORTPASS(XCHAR* name = __L("background"));
+    ~GRPVIEWPORTPASS();
 
-		virtual bool OnAdded();
-		virtual void Begin();
-		virtual void End();
-		
+    virtual bool OnAdded();
+    virtual void Begin();
+    virtual void End();
+
 protected:
 
 private:
 
-		void		Clean()
-		{
+    void    Clean()
+    {
 
-		}
+    }
 
 
 

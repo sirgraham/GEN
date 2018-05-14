@@ -1,21 +1,21 @@
 //------------------------------------------------------------------------------------------
-//	DIOSTREAMDEVICEWIFI.H
-//	
-/**	
-// \class 
-//   
+//  DIOSTREAMDEVICEWIFI.H
+//
+/**
+// \class
+//
 //  Data IO Stream Device WIFI class
-//   
-//	@author	 Abraham J. Velez
-//	@version 23/05/2002
-*/	
-//	GEN  Copyright (C).  All right reserved.		 			 
+//
+//  @author  Abraham J. Velez
+//  @version 23/05/2002
+*/
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
+
 #ifndef _DIOSTREAMDEVICEWIFI_H_
 #define _DIOSTREAMDEVICEWIFI_H_
-	
-	
+
+
 //---- INCLUDES ----------------------------------------------------------------------------
 
 #include "DIOStreamDeviceIP.h"
@@ -30,28 +30,28 @@
 
 class DIOSTREAMDEVICEWIFI : public DIOSTREAMDEVICEIP
 {
-	public:
+  public:
 
-																	DIOSTREAMDEVICEWIFI			();
-		virtual											 ~DIOSTREAMDEVICEWIFI			();
+                                  DIOSTREAMDEVICEWIFI     ();
+    virtual                      ~DIOSTREAMDEVICEWIFI     ();
 
-		int														GetTransmisionPower			()															{	return transmisionpower;									          }
-		void 													SetTransmisionPower			(int transmisionpower)					{	this->transmisionpower = transmisionpower;          }
-		
-	
-		bool													DebugPrintInfo					(XCONSOLE* xconsole);
+    int                           GetTransmisionPower     ()                              { return transmisionpower;                            }
+    void                          SetTransmisionPower     (int transmisionpower)          { this->transmisionpower = transmisionpower;          }
 
-	protected:
 
-		int													  transmisionpower;
+    bool                          DebugPrintInfo          (XCONSOLE* xconsole);
 
-	
-	private:
+  protected:
 
-		void													Clean										()
-																	{
-																		transmisionpower = 0;
-																	}
+    int                           transmisionpower;
+
+
+  private:
+
+    void                          Clean                   ()
+                                  {
+                                    transmisionpower = 0;
+                                  }
 };
 
 

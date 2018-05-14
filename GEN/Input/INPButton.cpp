@@ -1,52 +1,52 @@
 //------------------------------------------------------------------------------------------
-//	INPBUTTON.CPP
-//	
-//	Input Button class
-//   
-//	Author						: Abraham J. Velez
-//	Date Of Creation	: 11/02/2003
-//	Last Mofificacion	:	
-//	
-//	GEN  Copyright (C).  All right reserved.		 			 
+//  INPBUTTON.CPP
+//
+//  Input Button class
+//
+//  Author            : Abraham J. Velez
+//  Date Of Creation  : 11/02/2003
+//  Last Mofificacion :
+//
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
-	
+
+
 //---- INCLUDES ----------------------------------------------------------------------------
 
 #include <string.h>
 
 #include "XTimer.h"
 #include "XFactory.h"
-	
+
 #include "INPButton.h"
 
 #include "XDebug.h"
 #include "XMemory.h"
-	
+
 //---- GENERAL VARIABLE --------------------------------------------------------------------
 
-	
-	
+
+
 //---- CLASS MEMBERS -----------------------------------------------------------------------
 
 
 //-------------------------------------------------------------------
 //  INPBUTTON::INPBUTTON
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			11/02/2003 17:34:42
-//	
-//	@return 			
-//	
+//
+//
+//  @author       Abraham J. Velez
+//  @version      11/02/2003 17:34:42
+//
+//  @return
+//
 */
 //-------------------------------------------------------------------
 INPBUTTON::INPBUTTON()
 {
-	Clean();
+  Clean();
 
-	xtimer=xfactory->CreateTimer();
+  xtimer=xfactory->CreateTimer();
 }
 
 
@@ -55,19 +55,19 @@ INPBUTTON::INPBUTTON()
 //-------------------------------------------------------------------
 //  INPBUTTON::~INPBUTTON
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			11/02/2003 17:35:03
-//	
-//	@return 			
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      11/02/2003 17:35:03
+//
+//  @return
+//  */
 //-------------------------------------------------------------------
 INPBUTTON::~INPBUTTON()
 {
-	if(xtimer) xfactory->DeleteTimer(xtimer);
-			
-	Clean();
+  if(xtimer) xfactory->DeleteTimer(xtimer);
+
+  Clean();
 }
 
 
@@ -75,35 +75,35 @@ INPBUTTON::~INPBUTTON()
 //-------------------------------------------------------------------
 //  INPBUTTON::GetID
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			11/02/2003 17:35:27
-//	
-//	@return 			char* : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      11/02/2003 17:35:27
+//
+//  @return       char* :
+//  */
 //-------------------------------------------------------------------
 INPBUTTON_ID INPBUTTON::GetID()
 {
-	return ID;
+  return ID;
 }
 
 
 //-------------------------------------------------------------------
 //  INPBUTTON::SetID
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			11/02/2003 17:40:21
-//	
-//	@return 			void : 
-//	@param				ID : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      11/02/2003 17:40:21
+//
+//  @return       void :
+//  @param        ID :
 */
 //-------------------------------------------------------------------
 void INPBUTTON::SetID(INPBUTTON_ID ID)
 {
-	this->ID = ID;
+  this->ID = ID;
 }
 
 
@@ -111,133 +111,133 @@ void INPBUTTON::SetID(INPBUTTON_ID ID)
 
 /*-------------------------------------------------------------------
 //  INPBUTTON::GetKeyCode
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/11/2009 12:51:55 p.m.
-//	
-//	@return				XWORD : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/11/2009 12:51:55 p.m.
+//
+//  @return       XWORD :
+//  */
 /*-----------------------------------------------------------------*/
 XWORD INPBUTTON::GetKeyCode()
 {
-	return keycode;
+  return keycode;
 }
 
 
 /*-------------------------------------------------------------------
 //  INPBUTTON::SetCode
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/11/2009 12:52:16 p.m.
-//	
-//	@return				void : 
-//	@param				keycode : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/11/2009 12:52:16 p.m.
+//
+//  @return       void :
+//  @param        keycode :
 */
 /*-----------------------------------------------------------------*/
 void INPBUTTON::SetKeyCode(XWORD keycode)
 {
-	this->keycode = keycode;
+  this->keycode = keycode;
 }
 
 
 /*-------------------------------------------------------------------
 //  INPBUTTON::GetSymbol
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/11/2009 12:53:15 p.m.
-//	
-//	@return				XCHAR : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/11/2009 12:53:15 p.m.
+//
+//  @return       XCHAR :
+//  */
 /*-----------------------------------------------------------------*/
 XCHAR INPBUTTON::GetSymbol()
 {
-	return symbol;
+  return symbol;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  INPBUTTON::SetSymbol
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/11/2009 12:53:07 p.m.
-//	
-//	@return				void : 
-//	@param				symbol : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/11/2009 12:53:07 p.m.
+//
+//  @return       void :
+//  @param        symbol :
 */
 /*-----------------------------------------------------------------*/
 void INPBUTTON::SetSymbol(XCHAR symbol)
 {
-	this->symbol = symbol;
+  this->symbol = symbol;
 }
 
-float	 INPBUTTON::GetPressure						()
+float  INPBUTTON::GetPressure           ()
 {
 return pressure;
 }
 
-void	 INPBUTTON::SetPressure						(float p)
+void   INPBUTTON::SetPressure           (float p)
 {
-	this->pressure=p;
+  this->pressure=p;
 }
 
 
 //-------------------------------------------------------------------
 //  INPBUTTON::IsPressed
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			11/02/2003 17:36:12
-//	
-//	@return 			bool : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      11/02/2003 17:36:12
+//
+//  @return       bool :
+//  */
 //-------------------------------------------------------------------
 bool INPBUTTON::IsPressed()
 {
-	isread		= true;
-	
-	bool pbtn = pressed;
+  isread    = true;
 
-	if(marktorelase) 
-		{
-			SetPressed(false);
-			marktorelase = false;
-		}
+  bool pbtn = pressed;
 
-	return pbtn;
+  if(marktorelase)
+    {
+      SetPressed(false);
+      marktorelase = false;
+    }
+
+  return pbtn;
 }
 
 
 //-------------------------------------------------------------------
 //  INPBUTTON::IsPressedWithRelease()
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			11/02/2003 17:36:12
-//	
-//	@return 			bool : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      11/02/2003 17:36:12
+//
+//  @return       bool :
+//  */
 //-------------------------------------------------------------------
 bool INPBUTTON::IsPressedWithRelease()
 {
   if(!IsPressed()) return false;
 
-	SetPressed(false);			
-		
+  SetPressed(false);
+
   return true;
 }
 
@@ -245,106 +245,106 @@ bool INPBUTTON::IsPressedWithRelease()
 //-------------------------------------------------------------------
 //  INPBUTTON::IsRead
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			15/07/2004 12:42:48
-//	
-//	@return				bool : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      15/07/2004 12:42:48
+//
+//  @return       bool :
+//  */
 //-------------------------------------------------------------------
 bool INPBUTTON::IsRead()
 {
-	return isread;
+  return isread;
 }
 
 
 //-------------------------------------------------------------------
 //  INPBUTTON::SetPressed
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			11/02/2003 17:36:36
-//	
-//	@return 			void : 
-//	@param				on : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      11/02/2003 17:36:36
+//
+//  @return       void :
+//  @param        on :
 */
 //-------------------------------------------------------------------
 void INPBUTTON::SetPressed(bool on)
 {
-	/*
-	if (on)
-	{
-		switch(state)
-		{
-		case INPBUTTON_STATE_UNKNOWN:					state=INPBUTTON_STATE_PRESSED;					XDEBUG_PRINTCOLOR(0,__L("INPBUTTON_STATE_PRESSED %d"),this->GetKeyCode());break;
-		case INPBUTTON_STATE_RELEASED:				state=INPBUTTON_STATE_PRESSED;					XDEBUG_PRINTCOLOR(0,__L("INPBUTTON_STATE_PRESSED %d"),this->GetKeyCode());break;
-		case INPBUTTON_STATE_UP:					    state=INPBUTTON_STATE_PRESSED;					XDEBUG_PRINTCOLOR(0,__L("INPBUTTON_STATE_PRESSED %d"),this->GetKeyCode()); break;
-		case INPBUTTON_STATE_PRESSED:					state=INPBUTTON_STATE_HOLD;							break;			
-		case INPBUTTON_STATE_HOLD:						state=INPBUTTON_STATE_HOLD;							break;			
-		}
-	}
-	else
-	{
-		switch(state)
-		{
-		case INPBUTTON_STATE_UNKNOWN:					state=INPBUTTON_STATE_RELEASED;					XDEBUG_PRINTCOLOR(0,__L("INPBUTTON_STATE_RELEASED %d"),this->GetKeyCode());;break;
-		case INPBUTTON_STATE_RELEASED:				state=INPBUTTON_STATE_UP;								break;
-		case INPBUTTON_STATE_UP:					    state=INPBUTTON_STATE_UP;								break;
-		case INPBUTTON_STATE_PRESSED:					state=INPBUTTON_STATE_RELEASED;					XDEBUG_PRINTCOLOR(0,__L("INPBUTTON_STATE_RELEASED %d"),this->GetKeyCode());;break;			
-		case INPBUTTON_STATE_HOLD:						state=INPBUTTON_STATE_RELEASED;					XDEBUG_PRINTCOLOR(0,__L("INPBUTTON_STATE_RELEASED %d"),this->GetKeyCode());;break;			
-		}
-	}
+  /*
+  if (on)
+  {
+    switch(state)
+    {
+    case INPBUTTON_STATE_UNKNOWN:         state=INPBUTTON_STATE_PRESSED;          XDEBUG_PRINTCOLOR(0,__L("INPBUTTON_STATE_PRESSED %d"),this->GetKeyCode());break;
+    case INPBUTTON_STATE_RELEASED:        state=INPBUTTON_STATE_PRESSED;          XDEBUG_PRINTCOLOR(0,__L("INPBUTTON_STATE_PRESSED %d"),this->GetKeyCode());break;
+    case INPBUTTON_STATE_UP:              state=INPBUTTON_STATE_PRESSED;          XDEBUG_PRINTCOLOR(0,__L("INPBUTTON_STATE_PRESSED %d"),this->GetKeyCode()); break;
+    case INPBUTTON_STATE_PRESSED:         state=INPBUTTON_STATE_HOLD;             break;
+    case INPBUTTON_STATE_HOLD:            state=INPBUTTON_STATE_HOLD;             break;
+    }
+  }
+  else
+  {
+    switch(state)
+    {
+    case INPBUTTON_STATE_UNKNOWN:         state=INPBUTTON_STATE_RELEASED;         XDEBUG_PRINTCOLOR(0,__L("INPBUTTON_STATE_RELEASED %d"),this->GetKeyCode());;break;
+    case INPBUTTON_STATE_RELEASED:        state=INPBUTTON_STATE_UP;               break;
+    case INPBUTTON_STATE_UP:              state=INPBUTTON_STATE_UP;               break;
+    case INPBUTTON_STATE_PRESSED:         state=INPBUTTON_STATE_RELEASED;         XDEBUG_PRINTCOLOR(0,__L("INPBUTTON_STATE_RELEASED %d"),this->GetKeyCode());;break;
+    case INPBUTTON_STATE_HOLD:            state=INPBUTTON_STATE_RELEASED;         XDEBUG_PRINTCOLOR(0,__L("INPBUTTON_STATE_RELEASED %d"),this->GetKeyCode());;break;
+    }
+  }
 */
 
-	if(pressed != on)
-		{
-			if(on)
-				{
-					if(xtimer) ResetTimePressed();
-				}
-		}
+  if(pressed != on)
+    {
+      if(on)
+        {
+          if(xtimer) ResetTimePressed();
+        }
+    }
 
-	pressed = on;
-	if(on) isread = false;
+  pressed = on;
+  if(on) isread = false;
 }
 
 
 //-------------------------------------------------------------------
 //  INPBUTTON::IsMarkToRelase
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			15/07/2004 13:27:53
-//	
-//	@return				bool : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      15/07/2004 13:27:53
+//
+//  @return       bool :
+//  */
 //-------------------------------------------------------------------
 bool INPBUTTON::IsMarkToRelase()
 {
-	return marktorelase;
+  return marktorelase;
 }
 
 
 //-------------------------------------------------------------------
 //  INPBUTTON::SetMarkToRelase
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			15/07/2004 13:28:07
-//	
-//	@return				bool : 
-//	@param				on : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      15/07/2004 13:28:07
+//
+//  @return       bool :
+//  @param        on :
 */
 //-------------------------------------------------------------------
 bool INPBUTTON::SetMarkToRelase(bool on)
 {
-	marktorelase = on;
+  marktorelase = on;
 
-	return true;
+  return true;
 }
 
 
@@ -352,100 +352,100 @@ bool INPBUTTON::SetMarkToRelase(bool on)
 //-------------------------------------------------------------------
 //  INPBUTTON::GetTimePressed
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			03/03/2004 17:10:41
-//	
-//	@return				double : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      03/03/2004 17:10:41
+//
+//  @return       double :
+//  */
 //-------------------------------------------------------------------
 XQWORD INPBUTTON::GetTimePressed()
 {
-	if(!pressed) return 0;
-	if(!xtimer)  return 0;
+  if(!pressed) return 0;
+  if(!xtimer)  return 0;
 
-	return xtimer->GetMeasureMilliSeconds();	
+  return xtimer->GetMeasureMilliSeconds();
 }
 
 
 //-------------------------------------------------------------------
 //  INPBUTTON::SetTimePressed
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			14/07/2004 13:12:41
-//	
-//	@return				bool : 
-//	@param				time : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      14/07/2004 13:12:41
+//
+//  @return       bool :
+//  @param        time :
 */
 //-------------------------------------------------------------------
 bool INPBUTTON::SetTimePressed(XDWORD time)
 {
-	if(!xtimer) return false;
+  if(!xtimer) return false;
 
-	xtimer->Reset();
-	xtimer->AddMilliSeconds(time);
+  xtimer->Reset();
+  xtimer->AddMilliSeconds(time);
 
-	return true;
+  return true;
 }
 
 
 //-------------------------------------------------------------------
 //  INPBUTTON::ResetTimePressed
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			19/05/2004 21:12:27
-//	
-//	@return				bool : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      19/05/2004 21:12:27
+//
+//  @return       bool :
+//  */
 //-------------------------------------------------------------------
 bool INPBUTTON::ResetTimePressed()
 {
-	if(!xtimer) return false;
+  if(!xtimer) return false;
 
-	xtimer->Reset();
+  xtimer->Reset();
 
-	return true;
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  INPBUTTON::CreateButton
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			09/01/2012 11:39:04
-//	
-//	@return				bool : 
-//	@param				buttons : 
-//  @param				keycode : 
-//  @param				ID : 
-//  @param				symbol : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      09/01/2012 11:39:04
+//
+//  @return       bool :
+//  @param        buttons :
+//  @param        keycode :
+//  @param        ID :
+//  @param        symbol :
 */
 /*-----------------------------------------------------------------*/
 bool INPBUTTON::CreateButton( XVECTOR<INPBUTTON*>* buttons, int keycode, INPBUTTON_ID ID, XCHAR symbol)
 {
-	if(!buttons) return false;
+  if(!buttons) return false;
 
-	INPBUTTON* button;
-			
-	button = new INPBUTTON();
-	if(!button) return false;
+  INPBUTTON* button;
 
-	button->SetKeyCode(keycode);
-	button->SetID(ID);
-	button->SetSymbol(symbol);
+  button = new INPBUTTON();
+  if(!button) return false;
 
-	buttons->Add(button);					
+  button->SetKeyCode(keycode);
+  button->SetID(ID);
+  button->SetSymbol(symbol);
 
-	return true;
+  buttons->Add(button);
+
+  return true;
 }
 
 
@@ -454,27 +454,27 @@ bool INPBUTTON::CreateButton( XVECTOR<INPBUTTON*>* buttons, int keycode, INPBUTT
 //-------------------------------------------------------------------
 //  INPBUTTON::Clean
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			11/02/2003 17:37:08
-//	
-//	@return 			void : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      11/02/2003 17:37:08
+//
+//  @return       void :
+//  */
 //-------------------------------------------------------------------
 void INPBUTTON::Clean()
-{	
-	keycode				= 0;
-	symbol				= 0x00;
-	
-	pressed				= false;
-	xtimer				= NULL;
-	isread				= true;
-	marktorelase	= false;
+{
+  keycode       = 0;
+  symbol        = 0x00;
 
-	pressure			=	0.0f;
+  pressed       = false;
+  xtimer        = NULL;
+  isread        = true;
+  marktorelase  = false;
 
-	state					= INPBUTTON_STATE_UP;
+  pressure      = 0.0f;
+
+  state         = INPBUTTON_STATE_UP;
 };
 
 

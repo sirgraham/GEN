@@ -1,21 +1,21 @@
 /*------------------------------------------------------------------------------------------
-//	HASH.H
-*/	
-/**	
-// \class 
-//   
+//  HASH.H
+*/
+/**
+// \class
+//
 //  Hash Generic Class
-//   
-//	@author	 Abraham J. Velez
-//	@version 02/03/2013 12:02:40
-*/	
-/*	GEN  Copyright (C).  All right reserved.
+//
+//  @author  Abraham J. Velez
+//  @version 02/03/2013 12:02:40
+*/
+/*  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
+
 #ifndef _HASHH_
 #define _HASHH_
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
 #include "XFactory.h"
@@ -23,27 +23,27 @@
 #include "XPath.h"
 #include "XString.h"
 
-	
+
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
-	
-#define HASHMAXFILESIZEBUFFER	(1024*8)	
-#define HASHALLFILESIZE				-1
+
+#define HASHMAXFILESIZEBUFFER (1024*8)
+#define HASHALLFILESIZE       -1
 
 enum HASHTYPE
 {
-	HASHTYPE_NONE			=	0	,
-	HASHTYPE_CKS16				,
-	HASHTYPE_CRC16				,
-	HASHTYPE_CRC32        ,
-  HASHTYPE_MD2					,
-  HASHTYPE_MD4					,
-  HASHTYPE_MD5					,
-  HASHTYPE_SHA1					,
-  HASHTYPE_SHA224				,
-  HASHTYPE_SHA256				,
-  HASHTYPE_SHA384				,
-  HASHTYPE_SHA512				,
-  HASHTYPE_RIPEMD160		,
+  HASHTYPE_NONE     = 0 ,
+  HASHTYPE_CKS16        ,
+  HASHTYPE_CRC16        ,
+  HASHTYPE_CRC32        ,
+  HASHTYPE_MD2          ,
+  HASHTYPE_MD4          ,
+  HASHTYPE_MD5          ,
+  HASHTYPE_SHA1         ,
+  HASHTYPE_SHA224       ,
+  HASHTYPE_SHA256       ,
+  HASHTYPE_SHA384       ,
+  HASHTYPE_SHA512       ,
+  HASHTYPE_RIPEMD160    ,
 };
 
 /*---- CLASS -----------------------------------------------------------------------------*/
@@ -51,43 +51,43 @@ enum HASHTYPE
 class XFACTORY;
 class XFILE;
 
-class HASH 
+class HASH
 {
-	public:
-																	HASH													();
-		virtual										   ~HASH													();
+  public:
+                                  HASH                          ();
+    virtual                      ~HASH                          ();
 
-		HASHTYPE											GetType												()										{	return type;									}		
-		XSTRING*											GetOUINoSign                  ()										{ return &OUInosignstring;	    };
-			
-		virtual bool									Do														(XBYTE* input, int size);			
-		bool											    Do														(XBUFFER& input);		
-		
-		bool											    Do														(XPATH& xpath, int size = HASHALLFILESIZE, int pos = 0);	
-		bool											    Do														(XFILE* xfile, int size = HASHALLFILESIZE, int pos = 0);				
+    HASHTYPE                      GetType                       ()                    { return type;                  }
+    XSTRING*                      GetOUINoSign                  ()                    { return &OUInosignstring;      };
 
-		virtual bool									ResetResult										();
+    virtual bool                  Do                            (XBYTE* input, int size);
+    bool                          Do                            (XBUFFER& input);
 
-		virtual int										GetDefaultSize								();
-		
-		virtual XBUFFER*							GetResult											();						
-		virtual XBYTE*								GetResult											(int& resultsize);
+    bool                          Do                            (XPATH& xpath, int size = HASHALLFILESIZE, int pos = 0);
+    bool                          Do                            (XFILE* xfile, int size = HASHALLFILESIZE, int pos = 0);
 
-		bool											    GetResultString								(XSTRING& stringhex);										
-		
-	protected:
-		
-		HASHTYPE											type;
-		XSTRING												OUInosignstring;		
-		XBUFFER*										  result;				
+    virtual bool                  ResetResult                   ();
 
-	private:
+    virtual int                   GetDefaultSize                ();
 
-		void													Clean													();
-};		
+    virtual XBUFFER*              GetResult                     ();
+    virtual XBYTE*                GetResult                     (int& resultsize);
 
-	
+    bool                          GetResultString               (XSTRING& stringhex);
+
+  protected:
+
+    HASHTYPE                      type;
+    XSTRING                       OUInosignstring;
+    XBUFFER*                      result;
+
+  private:
+
+    void                          Clean                         ();
+};
+
+
 /*---- INLINE FUNCTIONS ------------------------------------------------------------------*/
-	
+
 #endif
 

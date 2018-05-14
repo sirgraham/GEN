@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------------------
-//	MAIN.CPP
-//	
-//	2 Main Function + Main Loop
-//   
-//	Author						: Abraham J. Velez
-//	Date Of Creation	: 10/01/2001
-//	Last Mofificacion	:	
-//	
-//	GEN  Copyright (C).  All right reserved.		 			 
+//  MAIN.CPP
+//
+//  2 Main Function + Main Loop
+//
+//  Author            : Abraham J. Velez
+//  Date Of Creation  : 10/01/2001
+//  Last Mofificacion :
+//
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
+
 //---- INCLUDES ----------------------------------------------------------------------------
 
 #include "XString.h"
@@ -19,7 +19,7 @@
 #include "XMemory.h"
 
 //---- GENERAL VARIABLE --------------------------------------------------------------------
-	
+
 
 
 //---- CLASS MEMBERS -----------------------------------------------------------------------
@@ -29,16 +29,16 @@
 //-------------------------------------------------------------------
 //  MAIN::MAIN
 /**
-//	
-//	@author        Abraham J. Velez
-//	@version       12/3/2003   12:27:35
-//	
-//	@return        
+//
+//  @author        Abraham J. Velez
+//  @version       12/3/2003   12:27:35
+//
+//  @return
 */
 //-------------------------------------------------------------------
 MAIN::MAIN()
 {
-	Clean();
+  Clean();
 }
 
 
@@ -46,17 +46,17 @@ MAIN::MAIN()
 //  MAIN::~MAIN
 /**
 //
-//	@author        Abraham J. Velez
-//	@version       12/3/2003   12:27:35
-//	
-//	@return        
+//  @author        Abraham J. Velez
+//  @version       12/3/2003   12:27:35
+//
+//  @return
 */
 //-------------------------------------------------------------------
 MAIN::~MAIN()
-{ 
-	End();
+{
+  End();
 
-	Clean();
+  Clean();
 }
 
 
@@ -64,15 +64,15 @@ MAIN::~MAIN()
 //-------------------------------------------------------------------
 //  MAIN::Update
 /**
-//	
-//	@author        Abraham J. Velez
-//	@version       12/3/2003   11:17:1
-//	
-//	@return        bool : 
+//
+//  @author        Abraham J. Velez
+//  @version       12/3/2003   11:17:1
+//
+//  @return        bool :
 */
 //-------------------------------------------------------------------
 bool MAIN::Update()
-{	
+{
   return true;
 }
 
@@ -81,16 +81,16 @@ bool MAIN::Update()
 //-------------------------------------------------------------------
 //  MAIN::End
 /**
-//	
-//	@author        Abraham J. Velez
-//	@version       12/3/2003   11:10:57
-//	
-//	@return        bool : 
+//
+//  @author        Abraham J. Velez
+//  @version       12/3/2003   11:10:57
+//
+//  @return        bool :
 */
 //-------------------------------------------------------------------
 bool MAIN::End()
 {
-	return true;
+  return true;
 }
 
 
@@ -98,19 +98,19 @@ bool MAIN::End()
 
 /*-------------------------------------------------------------------
 //  MAIN::GetExecParams
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			03/06/2012 10:12:38
-//	
-//	@return 			XVECTOR<XSTRING*>* : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      03/06/2012 10:12:38
+//
+//  @return       XVECTOR<XSTRING*>* :
+//  */
 /*-----------------------------------------------------------------*/
 XVECTOR<XSTRING*>* MAIN::GetExecParams()
 {
-	return &execparams;
+  return &execparams;
 }
 
 
@@ -120,25 +120,25 @@ XVECTOR<XSTRING*>* MAIN::GetExecParams()
 
 /*-------------------------------------------------------------------
 //  MAIN::DeleteAllExecParams
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			01/06/2012 19:07:14
-//	
-//	@return 			bool : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      01/06/2012 19:07:14
+//
+//  @return       bool :
+//  */
 /*-----------------------------------------------------------------*/
 bool MAIN::DeleteAllExecParams()
 {
-	if(execparams.IsEmpty()) return false;
+  if(execparams.IsEmpty()) return false;
 
-	execparams.DeleteContents();
-	
-	execparams.DeleteAll();
+  execparams.DeleteContents();
 
-	return true;
+  execparams.DeleteAll();
+
+  return true;
 }
 
 
@@ -146,17 +146,17 @@ bool MAIN::DeleteAllExecParams()
 //-------------------------------------------------------------------
 //  MAIN::Clean
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			13/08/2003 12:09:01
-//	
-//	@return 			
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      13/08/2003 12:09:01
+//
+//  @return
+//  */
 //-------------------------------------------------------------------
 void MAIN::Clean()
 {
-	typesystem		= MAIN_SYSTEM_UNKNOWN;	
-	xlogexception = NULL;
+  typesystem    = MAIN_SYSTEM_UNKNOWN;
+  xlogexception = NULL;
 }
 

@@ -1,23 +1,23 @@
 /*------------------------------------------------------------------------------------------
-//	UIWIDGETWINDOW.H
-*/	
-/**	
-// \file 
-//   
-//  Base Window class for the rest of the controls
-//   
-//	@author	 Imanol Celaya Ruiz de Alegria
+//  UIWIDGETWINDOW.H
+*/
+/**
+// \file
 //
-//	Date Of Creation	: 02/10/2015 16:43:55
-//	Last Modification	:	
-*/	
-/*	GEN  Copyright (C).  All right reserved.
+//  Base Window class for the rest of the controls
+//
+//  @author  Imanol Celaya Ruiz de Alegria
+//
+//  Date Of Creation  : 02/10/2015 16:43:55
+//  Last Modification :
+*/
+/*  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
+
 #ifndef _UIWIDGETWINDOW_H_
 #define _UIWIDGETWINDOW_H_
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
 #include "XVector.h"
 #include "XMap.h"
@@ -26,70 +26,70 @@
 #include "UIWidgetContainer.h"
 
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
-	
 
-	
+
+
 /*---- CLASS -----------------------------------------------------------------------------*/
 class XSTRING;
 class UIFACTORY;
 
 class UIWIDGETFORM: public UIWIDGETCONTAINER
 {
-	friend class UIFACTORY;
+  friend class UIFACTORY;
 
-	public:
-																									UIWIDGETFORM						(XCHAR* name, UIMANAGER * uimanagerarg) : UIWIDGETCONTAINER(name, uimanagerarg)
-																									{
-																										Clean();
-																										widgettype = UI_WIDGET_TYPE_FORM;
-																									}
-	
-																									UIWIDGETFORM						(UIWIDGETFORM* rhs) : UIWIDGETCONTAINER(rhs)
-																									{
-																										Clean();
+  public:
+                                                  UIWIDGETFORM            (XCHAR* name, UIMANAGER * uimanagerarg) : UIWIDGETCONTAINER(name, uimanagerarg)
+                                                  {
+                                                    Clean();
+                                                    widgettype = UI_WIDGET_TYPE_FORM;
+                                                  }
 
-																										title = rhs->title;
-																									}
+                                                  UIWIDGETFORM            (UIWIDGETFORM* rhs) : UIWIDGETCONTAINER(rhs)
+                                                  {
+                                                    Clean();
 
-		virtual																			 ~UIWIDGETFORM						()
-																									{
-																										Clean();
-																									}
-	
-		virtual				UIWIDGET*												Clone										()
-																									{
-																										return new UIWIDGETFORM(this);
-																									}
+                                                    title = rhs->title;
+                                                  }
 
-		virtual void																	SetType									()												{ this->widgettype = UI_WIDGET_TYPE_FORM; }
+    virtual                                      ~UIWIDGETFORM            ()
+                                                  {
+                                                    Clean();
+                                                  }
 
-		// Event Handling
-		virtual				bool														HandleInternalEvent			(XEVENT* event);
-	
-		virtual				void														SetActive								(bool active);
+    virtual       UIWIDGET*                       Clone                   ()
+                                                  {
+                                                    return new UIWIDGETFORM(this);
+                                                  }
 
-									void														SetTitle								(XSTRING* title)					{ this->title.Set(title->Get());					}
-									void														SetTitle								(XCHAR* title)						{ this->title.Set(title);									}
-									XSTRING*												GetTitle								()												{ return &title;													}
+    virtual void                                  SetType                 ()                        { this->widgettype = UI_WIDGET_TYPE_FORM; }
 
-	protected:
-		virtual				bool														InternalDraw						(XDWORD& widgetlevel);
-		virtual				bool														InternalUpdate					(XDWORD widgetlevel);
+    // Event Handling
+    virtual       bool                            HandleInternalEvent     (XEVENT* event);
+
+    virtual       void                            SetActive               (bool active);
+
+                  void                            SetTitle                (XSTRING* title)          { this->title.Set(title->Get());          }
+                  void                            SetTitle                (XCHAR* title)            { this->title.Set(title);                 }
+                  XSTRING*                        GetTitle                ()                        { return &title;                          }
+
+  protected:
+    virtual       bool                            InternalDraw            (XDWORD& widgetlevel);
+    virtual       bool                            InternalUpdate          (XDWORD widgetlevel);
 
 
-									XSTRING													title;
+                  XSTRING                         title;
 
-	private:
+  private:
 
-									void														Clean										()
-																									{
-																									}
+                  void                            Clean                   ()
+                                                  {
+                                                  }
 
-									
+
 
 };
-	
-	
+
+
 /*---- INLINE FUNCTIONS ------------------------------------------------------------------*/
 
 #endif

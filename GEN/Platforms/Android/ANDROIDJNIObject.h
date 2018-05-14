@@ -1,37 +1,37 @@
 /*------------------------------------------------------------------------------------------
-//	ANDROIDJNIOBJECT.H
-*/	
-/**	
-// \file 
-//   
-//  wrapper around a java class accessed through JNI
-//   
-//	@author	 Imanol Celaya Ruiz de Alegria
+//  ANDROIDJNIOBJECT.H
+*/
+/**
+// \file
 //
-//	Date Of Creation	: 27/04/2016 16:21:44
-//	Last Modification	:	
-*/	
-/*	GEN  Copyright (C).  All right reserved.
+//  wrapper around a java class accessed through JNI
+//
+//  @author  Imanol Celaya Ruiz de Alegria
+//
+//  Date Of Creation  : 27/04/2016 16:21:44
+//  Last Modification :
+*/
+/*  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
+
 #ifndef _ANDROIDJNIOBJECT_H_
 #define _ANDROIDJNIOBJECT_H_
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
 #include <jni.h>
 #include "XString.h"
 
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
-	
-	
+
+
 /*---- CLASS -----------------------------------------------------------------------------*/
 struct ANDROIDJNIMETHOD
 {
-	XSTRING name;
-	XSTRING signature;
-	jmethodID method;
+  XSTRING name;
+  XSTRING signature;
+  jmethodID method;
 };
 
 
@@ -39,35 +39,35 @@ class ANDROIDJNIOBJECT
 {
 public:
 
-	ANDROIDJNIOBJECT(XSTRING name, XSTRING constructorsignature, ...);
-	virtual ~ANDROIDJNIOBJECT();
+  ANDROIDJNIOBJECT(XSTRING name, XSTRING constructorsignature, ...);
+  virtual ~ANDROIDJNIOBJECT();
 
-	ANDROIDJNIMETHOD GetClassMethod(XSTRING method, XSTRING signature);
-	
-	template<typename T>
-	T CallMethod(ANDROIDJNIMETHOD method, ...);
+  ANDROIDJNIMETHOD GetClassMethod(XSTRING method, XSTRING signature);
 
-	jobject GetObject() { return jniobject; }
+  template<typename T>
+  T CallMethod(ANDROIDJNIMETHOD method, ...);
 
-	static jstring GetJString(const XSTRING& str);
+  jobject GetObject() { return jniobject; }
+
+  static jstring GetJString(const XSTRING& str);
 
 protected:
 
-	jobject			jniobject;
-	jclass			jniclass;
+  jobject     jniobject;
+  jclass      jniclass;
 
 private:
-	void Clean()
-	{
-		jniobject = 0;
-		jniclass  = 0;
-	}
+  void Clean()
+  {
+    jniobject = 0;
+    jniclass  = 0;
+  }
 
-	ANDROIDJNIOBJECT(const ANDROIDJNIOBJECT& rhs);
-	ANDROIDJNIOBJECT& operator = (const ANDROIDJNIOBJECT& rhs);
+  ANDROIDJNIOBJECT(const ANDROIDJNIOBJECT& rhs);
+  ANDROIDJNIOBJECT& operator = (const ANDROIDJNIOBJECT& rhs);
 };
-	
-	
+
+
 /*---- INLINE FUNCTIONS ------------------------------------------------------------------*/
 
 //template<void>
@@ -86,7 +86,7 @@ private:
 //long long ANDROIDJNIOBJECT::CallMethod<long long>(ANDROIDJNIOBJECT Method, ...);
 //
 //template<XSTRING>
-//XSTRING ANDROIDJNIOBJECT::CallMethod<XSTRING>(ANDROIDJNIOBJECT Method, ...);	
+//XSTRING ANDROIDJNIOBJECT::CallMethod<XSTRING>(ANDROIDJNIOBJECT Method, ...);
 
 #endif
 

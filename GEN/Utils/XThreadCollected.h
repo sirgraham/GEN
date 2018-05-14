@@ -1,18 +1,18 @@
 //------------------------------------------------------------------------------------------
-//	XTHREADCOLLECTED.H
-//	
-/**	
-// \class 
-//   
+//  XTHREADCOLLECTED.H
+//
+/**
+// \class
+//
 //  Thread Collection for Utils
-//   
-//	@author	 Abraham J. Velez
-//	@version 06/03/2006 11:41:39
-*/	
-//	GEN  Copyright (C).  All right reserved.			 
+//
+//  @author  Abraham J. Velez
+//  @version 06/03/2006 11:41:39
+*/
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
 
-#ifdef XTHREADCOLLECTION_ACTIVE	
+#ifdef XTHREADCOLLECTION_ACTIVE
 
 #ifndef _XTHREADCOLLECTION_H_
 #define _XTHREADCOLLECTION_H_
@@ -33,253 +33,253 @@
 
 //---- DEFINES & ENUMS  --------------------------------------------------------------------
 
-#define CREATEXTHREAD							XTHREADSCOLLECTEDMANAGER::GetInstance().CreateThread
-#define DELETEXTHREAD							XTHREADSCOLLECTEDMANAGER::GetInstance().DeleteThread
-#define ACTIVATEXTHREADGROUP			XTHREADSCOLLECTEDMANAGER::GetInstance().ActivateGroup		
-#define DEACTIVATEXTHREADGROUP		XTHREADSCOLLECTEDMANAGER::GetInstance().DeactivateGroup		
+#define CREATEXTHREAD             XTHREADSCOLLECTEDMANAGER::GetInstance().CreateThread
+#define DELETEXTHREAD             XTHREADSCOLLECTEDMANAGER::GetInstance().DeleteThread
+#define ACTIVATEXTHREADGROUP      XTHREADSCOLLECTEDMANAGER::GetInstance().ActivateGroup
+#define DEACTIVATEXTHREADGROUP    XTHREADSCOLLECTEDMANAGER::GetInstance().DeactivateGroup
 
 //---- CLASS -------------------------------------------------------------------------------
 
 
 class XTHREADCOLLECTED
 {
-	public:		
-																						XTHREADCOLLECTED								()							
-																						{
-																							Clean();		
+  public:
+                                            XTHREADCOLLECTED                ()
+                                            {
+                                              Clean();
 
-																							xtimerout = xfactory->CreateTimer();
-																						}
+                                              xtimerout = xfactory->CreateTimer();
+                                            }
 
-																						XTHREADCOLLECTED								(XTHREADGROUPID groupID, XCHAR* ID, XTHREADFUNCTION function, void* param)																
-																						{ 
-																							Clean();
+                                            XTHREADCOLLECTED                (XTHREADGROUPID groupID, XCHAR* ID, XTHREADFUNCTION function, void* param)
+                                            {
+                                              Clean();
 
-																							directxthread = xfactory->CreateThread(groupID, ID, function, param);
-																							if(directxthread)
-																								{
-																									this->ID			 = ID;
-																									this->function = function;
-																									this->param    = param;
-																								}
-																						}
+                                              directxthread = xfactory->CreateThread(groupID, ID, function, param);
+                                              if(directxthread)
+                                                {
+                                                  this->ID       = ID;
+                                                  this->function = function;
+                                                  this->param    = param;
+                                                }
+                                            }
 
-		virtual																 ~XTHREADCOLLECTED								()																
-																						{ 	
-																							if(xtimerout)     xfactory->DeleteTimer(xtimerout);
-																							if(directxthread) xfactory->DeleteThread(groupID, directxthread);
-																						
-																							Clean();																																	
-																						}
-		
-		bool																		Ini															(bool run = true)									
-																						{ 
-																							if(directxthread) return directxthread->Ini(run);
-																							
-																							if(run)
-																								{
-																									if(!Run(true)) return false;
-																								}
-																							 else 
-																								{
-																									status = XTHREADSTATUS_STOP;																							
-																								}
+    virtual                                ~XTHREADCOLLECTED                ()
+                                            {
+                                              if(xtimerout)     xfactory->DeleteTimer(xtimerout);
+                                              if(directxthread) xfactory->DeleteThread(groupID, directxthread);
 
-																							return true;
-																						}	
+                                              Clean();
+                                            }
 
-		void																		Wait														(int milliseconds = XTHREAD_DEFAULTWAITYIELD)						
-																						{ 
-																							if(directxthread) 
-																								{
-																									directxthread->Wait(milliseconds);
-																									return;
-																								}					
+    bool                                    Ini                             (bool run = true)
+                                            {
+                                              if(directxthread) return directxthread->Ini(run);
 
-																							xsleep->MilliSeconds(milliseconds);
-																						}	
+                                              if(run)
+                                                {
+                                                  if(!Run(true)) return false;
+                                                }
+                                               else
+                                                {
+                                                  status = XTHREADSTATUS_STOP;
+                                                }
 
-		bool																		End															()																
-																						{ 
-																							if(directxthread) return directxthread->End();
-																							
-																							if(status == XTHREADSTATUS_END) return false;
-																							status = XTHREADSTATUS_EXIT;
+                                              return true;
+                                            }
 
-																							WaitToEnd();
-																							
-																							return true;
-																						}			
-		 		 
-		bool																		IsRunning												()
-																						{
-																							if(directxthread) return directxthread->IsRunning();
-																							
-																							if(status == XTHREADSTATUS_RUN) return true;
-																							return false;																							
-																						}
-	
-		bool																		Run															(bool activate)
-																						{
-																							if(directxthread) return directxthread->Run(activate);
-																							
-																							if(activate)
-																								{
-																									if(IsRunning()) return false;	
-																									status = XTHREADSTATUS_RUN;
-																								}
-																							 else
-																								{
-																									if(!IsRunning()) return false;
-																									status = XTHREADSTATUS_STOP;																							
-																								}
+    void                                    Wait                            (int milliseconds = XTHREAD_DEFAULTWAITYIELD)
+                                            {
+                                              if(directxthread)
+                                                {
+                                                  directxthread->Wait(milliseconds);
+                                                  return;
+                                                }
 
-																							return true;
-																						}
+                                              xsleep->MilliSeconds(milliseconds);
+                                            }
 
-		bool																		Exit														()
-																						{
-																							if(directxthread) return directxthread->Exit();
+    bool                                    End                             ()
+                                            {
+                                              if(directxthread) return directxthread->End();
 
-																							status = XTHREADSTATUS_EXIT;																																																
-																							return true;
-																						}
+                                              if(status == XTHREADSTATUS_END) return false;
+                                              status = XTHREADSTATUS_EXIT;
 
-		XTHREADGROUPID													GetGroupID        ()																		{ return groupID;																													}
-		void																		SetGroupID        (XTHREADGROUPID groupID)							{ this->groupID = groupID;																								}
-		 		
-		XSTRING*																GetID														()																
-																						{ 
-																							if(directxthread)
-																								{																									
-																									return directxthread->GetID();
-																								}
-																							 else
-																								{
-																									return &ID;																																
-																								}
-																						}
+                                              WaitToEnd();
 
-		XTHREADFUNCTION													GetFunction                     ()															  
-																						{ 
-																							if(directxthread)
-																								{																									
-																									return directxthread->GetFunction();
-																								}
-																							 else
-																							  {		
-																									return function;                                                          
-																								}
-																						}
+                                              return true;
+                                            }
 
-		void 																		SetFunction                     (XTHREADFUNCTION function)				
-																						{ 
-																							this->function = function;                                                																							
-																						}
+    bool                                    IsRunning                       ()
+                                            {
+                                              if(directxthread) return directxthread->IsRunning();
 
-		void*																		GetParam                        ()																
-																						{ 
-																							if(directxthread) return directxthread->GetParam();
-																							return param;                                                             																							
-																						}
+                                              if(status == XTHREADSTATUS_RUN) return true;
+                                              return false;
+                                            }
 
-		void																		SetParam                        (void* param)											
-																						{ 																							
-																							this->param = param;                                                      																							
-																						}
+    bool                                    Run                             (bool activate)
+                                            {
+                                              if(directxthread) return directxthread->Run(activate);
 
-		 XDWORD																	GetWaitYield										()															
-																						{ 
-																							if(directxthread) return directxthread->GetWaitYield();
-																							return waityield;										
-																						}
+                                              if(activate)
+                                                {
+                                                  if(IsRunning()) return false;
+                                                  status = XTHREADSTATUS_RUN;
+                                                }
+                                               else
+                                                {
+                                                  if(!IsRunning()) return false;
+                                                  status = XTHREADSTATUS_STOP;
+                                                }
 
-		 void																		SetWaitYield										(XDWORD waityield = XTHREAD_DEFAULTWAITYIELD)						  
-																						{ 
-																							if(directxthread) return directxthread->SetWaitYield(priority);																								
-																							this->waityield = waityield;   
-																						}
-	 
-		XTHREADPRIORITY													GetPriority											()																
-																						{ 
-																							if(directxthread) return directxthread->GetPriority();
-																							return priority;																																																				
-																						}
+                                              return true;
+                                            }
 
-		void																		SetPriority											(XTHREADPRIORITY priority)				
-																						{ 
-																							if(directxthread) return directxthread->SetPriority(priority);																								
-																							this->priority = priority;																																															
-																						}
+    bool                                    Exit                            ()
+                                            {
+                                              if(directxthread) return directxthread->Exit();
 
-		XDWORD																	GetStackSize										()											{ return stacksize;																												}	
-		void																		SetStackSize										(XDWORD stacksize)			{ this->stacksize = stacksize;																						}
+                                              status = XTHREADSTATUS_EXIT;
+                                              return true;
+                                            }
+
+    XTHREADGROUPID                          GetGroupID        ()                                    { return groupID;                                                         }
+    void                                    SetGroupID        (XTHREADGROUPID groupID)              { this->groupID = groupID;                                                }
+
+    XSTRING*                                GetID                           ()
+                                            {
+                                              if(directxthread)
+                                                {
+                                                  return directxthread->GetID();
+                                                }
+                                               else
+                                                {
+                                                  return &ID;
+                                                }
+                                            }
+
+    XTHREADFUNCTION                         GetFunction                     ()
+                                            {
+                                              if(directxthread)
+                                                {
+                                                  return directxthread->GetFunction();
+                                                }
+                                               else
+                                                {
+                                                  return function;
+                                                }
+                                            }
+
+    void                                    SetFunction                     (XTHREADFUNCTION function)
+                                            {
+                                              this->function = function;
+                                            }
+
+    void*                                   GetParam                        ()
+                                            {
+                                              if(directxthread) return directxthread->GetParam();
+                                              return param;
+                                            }
+
+    void                                    SetParam                        (void* param)
+                                            {
+                                              this->param = param;
+                                            }
+
+     XDWORD                                 GetWaitYield                    ()
+                                            {
+                                              if(directxthread) return directxthread->GetWaitYield();
+                                              return waityield;
+                                            }
+
+     void                                   SetWaitYield                    (XDWORD waityield = XTHREAD_DEFAULTWAITYIELD)
+                                            {
+                                              if(directxthread) return directxthread->SetWaitYield(priority);
+                                              this->waityield = waityield;
+                                            }
+
+    XTHREADPRIORITY                         GetPriority                     ()
+                                            {
+                                              if(directxthread) return directxthread->GetPriority();
+                                              return priority;
+                                            }
+
+    void                                    SetPriority                     (XTHREADPRIORITY priority)
+                                            {
+                                              if(directxthread) return directxthread->SetPriority(priority);
+                                              this->priority = priority;
+                                            }
+
+    XDWORD                                  GetStackSize                    ()                      { return stacksize;                                                       }
+    void                                    SetStackSize                    (XDWORD stacksize)      { this->stacksize = stacksize;                                            }
 
 
-		bool																		IsInFunction										()																
-																						{ 
-																							if(directxthread) return directxthread->IsInFunction();
-																							return isinfunction;																																																		
-																						}
+    bool                                    IsInFunction                    ()
+                                            {
+                                              if(directxthread) return directxthread->IsInFunction();
+                                              return isinfunction;
+                                            }
 
-		void																		SetIsInFunction									(bool isinfunction)		  { this->isinfunction = isinfunction;																			}
+    void                                    SetIsInFunction                 (bool isinfunction)     { this->isinfunction = isinfunction;                                      }
 
-		XTHREADSTATUS	 													GetStatus												()																
-																						{ 
-																							if(directxthread) return directxthread->GetStatusFunc();
-																							//if(status == XTHREADSTATUS_EXIT) return XTHREADSTATUS_UNKNOWN; // #Imanol
-																							return status;																																																					
-																						}
-	
-		void																		SetStatus												(XTHREADSTATUS status)	{ this->status = status;																									}
+    XTHREADSTATUS                           GetStatus                       ()
+                                            {
+                                              if(directxthread) return directxthread->GetStatusFunc();
+                                              //if(status == XTHREADSTATUS_EXIT) return XTHREADSTATUS_UNKNOWN; // #Imanol
+                                              return status;
+                                            }
 
-	private:
-		
-		void																		Clean														()		
-																						{			
-																							groupID					= XTHREADGROUPID_UNKNOWN;
-																							ID.Empty();
-																							function				= NULL;
-																							param						= NULL;
+    void                                    SetStatus                       (XTHREADSTATUS status)  { this->status = status;                                                  }
 
-																							waityield				= XTHREAD_DEFAULTWAITYIELD;
+  private:
 
-																							priority				= XTHREADPRIORITY_UNKNOWN;
-																							stacksize				= 0;
+    void                                    Clean                           ()
+                                            {
+                                              groupID         = XTHREADGROUPID_UNKNOWN;
+                                              ID.Empty();
+                                              function        = NULL;
+                                              param           = NULL;
 
-																							isinfunction		= false;
-																							status					= XTHREADSTATUS_NONE;																		
+                                              waityield       = XTHREAD_DEFAULTWAITYIELD;
 
-																							xtimerout				= NULL;
-																						
-																							directxthread		= NULL;
-																						} 
+                                              priority        = XTHREADPRIORITY_UNKNOWN;
+                                              stacksize       = 0;
 
-		bool																		WaitToEnd()
-																						{																								
-																							while(GetStatus() != XTHREADSTATUS_END)
-																							 {	
-																								 Wait();
-																							 }
-	
-																							return true;
-																						}
-		
-		XTHREADGROUPID													groupID;
-		XSTRING		   														ID;	
-		XTHREADFUNCTION  												function;
-		void*																		param; 
+                                              isinfunction    = false;
+                                              status          = XTHREADSTATUS_NONE;
 
-		XDWORD																	waityield;
-		 
-		XTHREADPRIORITY													priority;	
-		XDWORD																	stacksize;
-		 
-		bool																		isinfunction;
-		XTHREADSTATUS	 													status;
+                                              xtimerout       = NULL;
 
-		XTIMER*                                 xtimerout;
-		XTHREAD*																directxthread;
+                                              directxthread   = NULL;
+                                            }
+
+    bool                                    WaitToEnd()
+                                            {
+                                              while(GetStatus() != XTHREADSTATUS_END)
+                                               {
+                                                 Wait();
+                                               }
+
+                                              return true;
+                                            }
+
+    XTHREADGROUPID                          groupID;
+    XSTRING                                 ID;
+    XTHREADFUNCTION                         function;
+    void*                                   param;
+
+    XDWORD                                  waityield;
+
+    XTHREADPRIORITY                         priority;
+    XDWORD                                  stacksize;
+
+    bool                                    isinfunction;
+    XTHREADSTATUS                           status;
+
+    XTIMER*                                 xtimerout;
+    XTHREAD*                                directxthread;
 };
 
 
@@ -287,259 +287,259 @@ class XTHREADCOLLECTED
 
 class XTHREADSCOLLECTED
 {
-	public:				
-																						XTHREADSCOLLECTED								(XTHREADGROUPID groupID)																
-																						{ 
-																							Clean();																											
+  public:
+                                            XTHREADSCOLLECTED               (XTHREADGROUPID groupID)
+                                            {
+                                              Clean();
 
-																							this->groupID = groupID;
+                                              this->groupID = groupID;
 
-																							xthreadsvectormutex = xfactory->Create_Mutex();
+                                              xthreadsvectormutex = xfactory->Create_Mutex();
 
-																							XSTRING stringID;
+                                              XSTRING stringID;
 
-																							GetGroupThreadIDString(stringID);
+                                              GetGroupThreadIDString(stringID);
 
-																							if(xthreadsvectormutex)
-																								{
-																									xthread = xfactory->CreateThread(groupID, stringID.Get(), ThreadRunFunction, (void*)this);																				
-																									if(xthread) xthread->Ini();
-																								}
-																						}
+                                              if(xthreadsvectormutex)
+                                                {
+                                                  xthread = xfactory->CreateThread(groupID, stringID.Get(), ThreadRunFunction, (void*)this);
+                                                  if(xthread) xthread->Ini();
+                                                }
+                                            }
 
-																						XTHREADSCOLLECTED								()																
-																						{ 
-																							Clean();																																																																																								
-																						}
+                                            XTHREADSCOLLECTED               ()
+                                            {
+                                              Clean();
+                                            }
 
-		virtual																 ~XTHREADSCOLLECTED								()																
-																						{ 
-																							ExitAll();
+    virtual                                ~XTHREADSCOLLECTED               ()
+                                            {
+                                              ExitAll();
 
-																							if(xthread) 
-																								{
-																									xthread->End();
-																									xfactory->DeleteThread(groupID, xthread);																						
-																								}
+                                              if(xthread)
+                                                {
+                                                  xthread->End();
+                                                  xfactory->DeleteThread(groupID, xthread);
+                                                }
 
-																							DeleteAll();
+                                              DeleteAll();
 
-																							if(xthreadsvectormutex) xfactory->Delete_Mutex(xthreadsvectormutex);																						
+                                              if(xthreadsvectormutex) xfactory->Delete_Mutex(xthreadsvectormutex);
 
-																							Clean();																																	
-																						}
+                                              Clean();
+                                            }
 
-		XTHREADGROUPID													GetGroupID                      ()																{ return groupID;																														}
-		void																		SetGroupID                      (XTHREADGROUPID groupID)	
-																						{ 
-																							this->groupID = groupID;																									
-																						}
-	
-		XTHREADCOLLECTED*												Create													(XTHREADGROUPID groupID, XCHAR* ID, XTHREADFUNCTION function, void* param)
-																						{
-																							XTHREADCOLLECTED* xthreadcollected = NULL;
+    XTHREADGROUPID                          GetGroupID                      ()                                { return groupID;                                                           }
+    void                                    SetGroupID                      (XTHREADGROUPID groupID)
+                                            {
+                                              this->groupID = groupID;
+                                            }
 
-																							if(xthread)
-																								{																							
-																									if(!xthreadsvectormutex) return NULL;
+    XTHREADCOLLECTED*                       Create                          (XTHREADGROUPID groupID, XCHAR* ID, XTHREADFUNCTION function, void* param)
+                                            {
+                                              XTHREADCOLLECTED* xthreadcollected = NULL;
 
-																									xthreadsvectormutex->Lock();
-																			
-																									xthreadcollected = new XTHREADCOLLECTED();
-																									if(xthreadcollected)
-																										{									
-																											xthreadcollected->SetGroupID(groupID);
-																											xthreadcollected->GetID()->Set(ID);
-																											xthreadcollected->SetFunction(function);
-																											xthreadcollected->SetParam(param);																									
+                                              if(xthread)
+                                                {
+                                                  if(!xthreadsvectormutex) return NULL;
 
-																											xthreadsvector.Add(xthreadcollected);
-																										}
-																									
-																									/*
-																									#ifdef XDEBUG
-																									XSTRING groupID;
-																									GetGroupThreadIDString(groupID);																									
-																									XDEBUG_PRINTCOLOR(XDEBUG_COLORINFO, __L("Create THREAD COLLECTED (%02d) grupo %s: %s"), xthreadsvector.GetSize(), groupID.Get(), ID);
-																									#endif	
-																									*/
-																									
-																									xthreadsvectormutex->UnLock();	
-																								}
-																							 else
-																								{
-																									xthreadcollected = new XTHREADCOLLECTED(groupID, ID, function, param);
-																									if(xthreadcollected)
-																										{
+                                                  xthreadsvectormutex->Lock();
 
-																										}
-																								}
+                                                  xthreadcollected = new XTHREADCOLLECTED();
+                                                  if(xthreadcollected)
+                                                    {
+                                                      xthreadcollected->SetGroupID(groupID);
+                                                      xthreadcollected->GetID()->Set(ID);
+                                                      xthreadcollected->SetFunction(function);
+                                                      xthreadcollected->SetParam(param);
 
-																							return xthreadcollected;																							
-																						}
+                                                      xthreadsvector.Add(xthreadcollected);
+                                                    }
 
-		bool																		Delete													(XTHREADGROUPID groupID, XTHREADCOLLECTED* xthreadcollected)
-																						{	
-																							bool status = false;
+                                                  /*
+                                                  #ifdef XDEBUG
+                                                  XSTRING groupID;
+                                                  GetGroupThreadIDString(groupID);
+                                                  XDEBUG_PRINTCOLOR(XDEBUG_COLORINFO, __L("Create THREAD COLLECTED (%02d) grupo %s: %s"), xthreadsvector.GetSize(), groupID.Get(), ID);
+                                                  #endif
+                                                  */
 
-																							if(xthread)
-																								{
- 																									if(!xthreadsvectormutex) return false;
+                                                  xthreadsvectormutex->UnLock();
+                                                }
+                                               else
+                                                {
+                                                  xthreadcollected = new XTHREADCOLLECTED(groupID, ID, function, param);
+                                                  if(xthreadcollected)
+                                                    {
 
-																									xthreadsvectormutex->Lock();																									
-																				
-																									XDWORD index = 0;
+                                                    }
+                                                }
 
-																									do{ XTHREADCOLLECTED* _xthreadcollected = xthreadsvector.Get(index);
-																											if(xthreadcollected == _xthreadcollected) 
-																												{
-																													/*
-																													#ifdef XDEBUG
-																													XSTRING groupID;
-																													GetGroupThreadIDString(groupID);																									
-																													XDEBUG_PRINTCOLOR(XDEBUG_COLORINFO, __L("Delete THREAD COLLECTED (%02d) grupo %s: %s"), xthreadsvector.GetSize(), groupID.Get(), xthreadcollected->GetID()->Get());
-																													#endif
-																													*/
+                                              return xthreadcollected;
+                                            }
 
-																													xthreadcollected->Exit();
-																													xthreadsvector.Delete(xthreadcollected);
-																													delete xthreadcollected;
-																													
-																													status = true;
-																													
-																													break;
-																												} 
+    bool                                    Delete                          (XTHREADGROUPID groupID, XTHREADCOLLECTED* xthreadcollected)
+                                            {
+                                              bool status = false;
 
-																											index++;
+                                              if(xthread)
+                                                {
+                                                  if(!xthreadsvectormutex) return false;
 
-																										}	while(index < xthreadsvector.GetSize());
-																									
-																									xthreadsvectormutex->UnLock();
-																								}
-																							 else	
-																								{																									
-																									delete xthreadcollected;
-																								}
-																																																																																																												
-																							return status;
-																						}
+                                                  xthreadsvectormutex->Lock();
 
-		bool																		ExitAll												()
-																						{
-																							if(!xthreadsvectormutex) return false;
-																				
-																							xthreadsvectormutex->Lock();
-																							
-																							for(XDWORD c=0; c<xthreadsvector.GetSize(); c++)
-																								{
-																									XTHREADCOLLECTED* xthreadcollected  = xthreadsvector.Get(c);
-																									if(xthreadcollected) xthreadcollected->Exit();																										
-																								}
+                                                  XDWORD index = 0;
 
-																							xthreadsvectormutex->UnLock();
+                                                  do{ XTHREADCOLLECTED* _xthreadcollected = xthreadsvector.Get(index);
+                                                      if(xthreadcollected == _xthreadcollected)
+                                                        {
+                                                          /*
+                                                          #ifdef XDEBUG
+                                                          XSTRING groupID;
+                                                          GetGroupThreadIDString(groupID);
+                                                          XDEBUG_PRINTCOLOR(XDEBUG_COLORINFO, __L("Delete THREAD COLLECTED (%02d) grupo %s: %s"), xthreadsvector.GetSize(), groupID.Get(), xthreadcollected->GetID()->Get());
+                                                          #endif
+                                                          */
 
-																							return true;
-																						}
-																	
-		bool																		DeleteAll												()
-																						{
-																							if(!xthreadsvectormutex) return false;
-																				
-																							xthreadsvectormutex->Lock();
-																				
-																							xthreadsvector.DeleteContents();
-																							xthreadsvector.DeleteAll();
+                                                          xthreadcollected->Exit();
+                                                          xthreadsvector.Delete(xthreadcollected);
+                                                          delete xthreadcollected;
 
-																							xthreadsvectormutex->UnLock();
+                                                          status = true;
 
-																							return true;
-																						}
+                                                          break;
+                                                        }
 
-	private:
-						
-		void																		Clean														()		
-																						{
-																							groupID             = XTHREADGROUPID_UNKNOWN;
-																							xthreadsvectormutex	= NULL;
-																							xthread							= NULL;
-																						}
+                                                      index++;
 
-		static void															ThreadRunFunction								(void* param)
-																						{
-																							XTHREADSCOLLECTED* xthreadscollected = (XTHREADSCOLLECTED*)param;
-																							if(!xthreadscollected) return;
+                                                    } while(index < xthreadsvector.GetSize());
 
-																							if(!xthreadscollected->xthreadsvectormutex) return;
-																					
-																							xthreadscollected->xthreadsvectormutex->Lock();
+                                                  xthreadsvectormutex->UnLock();
+                                                }
+                                               else
+                                                {
+                                                  delete xthreadcollected;
+                                                }
 
-																							for(XDWORD c=0; c<xthreadscollected->xthreadsvector.GetSize(); c++)
-																								{
-																									XTHREADCOLLECTED* xthreadcollected  = xthreadscollected->xthreadsvector.Get(c);
-																									if(xthreadcollected) 
-																										{
-																											switch(xthreadcollected->GetStatus())
-																												{
-																													case XTHREADSTATUS_RUN		:	xthreadcollected->SetIsInFunction(true);
-																																											xthreadcollected->GetFunction()(xthreadcollected->GetParam());
-																																											xthreadcollected->SetIsInFunction(false);	
-																																											
-																																											xthreadscollected->xthread->Wait();
-																																											break;		
+                                              return status;
+                                            }
 
-																													case XTHREADSTATUS_EXIT		:	xthreadcollected->SetStatus(XTHREADSTATUS_END);
-																																											break;
-																												}																																																					
-																										}
-																								}
+    bool                                    ExitAll                       ()
+                                            {
+                                              if(!xthreadsvectormutex) return false;
 
-																							xthreadscollected->xthreadsvectormutex->UnLock();
-																						}
+                                              xthreadsvectormutex->Lock();
 
-		bool																		GetGroupThreadIDString					(XSTRING& stringID)
-																						{
-																							stringID = __L("TGRP_");
+                                              for(XDWORD c=0; c<xthreadsvector.GetSize(); c++)
+                                                {
+                                                  XTHREADCOLLECTED* xthreadcollected  = xthreadsvector.Get(c);
+                                                  if(xthreadcollected) xthreadcollected->Exit();
+                                                }
 
-																							switch(groupID)
-																								{
-																									case XTHREADGROUPID_UNKNOWN							 				: stringID.Add(__L("UNKNOWN"));												break;
-																									case XTHREADGROUPID_SCHEDULER								 		: stringID.Add(__L("SCHEDULE"));											break; 
-																									case XTHREADGROUPID_SCRIPT											: stringID.Add(__L("SCRIPT"));												break; 
-																									case XTHREADGROUPID_DIOSTREAM										: stringID.Add(__L("DIOSTREAM"));											break; 
-																									case XTHREADGROUPID_DIOSTREAMUART								: stringID.Add(__L("DIOSTREAMUART"));									break; 
-																									case XTHREADGROUPID_DIOSTREAMUDP								: stringID.Add(__L("DIOSTREAMUDP"));									break; 
-																									case XTHREADGROUPID_DIOSTREAMTCPIP							: stringID.Add(__L("DIOSTREAMTCPIP"));								break; 
-																									case XTHREADGROUPID_DIOSTREAMWIFI								: stringID.Add(__L("DIOSTREAMWIFI"));									break; 
-																									case XTHREADGROUPID_DIOSTREAMBLUETOOTH					: stringID.Add(__L("DIOSTREAMBLUETOOTH"));						break; 
-																									case XTHREADGROUPID_DIOSTREAMUSB								: stringID.Add(__L("DIOSTREAMUSB"));									break; 
-																									case XTHREADGROUPID_DIOSTREAMICMP								: stringID.Add(__L("DIOSTREAMICMP"));									break; 
-																									case XTHREADGROUPID_DIOSTREAMSPI								: stringID.Add(__L("DIOSTREAMSPI"));									break; 
-																									case XTHREADGROUPID_DIOSTREAMCIPHER							: stringID.Add(__L("DIOSTREAMCIPHER"));								break; 
-																									case XTHREADGROUPID_DIOCHECKCONNEXIONS					: stringID.Add(__L("DIOCHECKCONNEXIONS"));						break; 
-																									case XTHREADGROUPID_DIOPROTOCOL									: stringID.Add(__L("DIOPROTOCOL"));										break; 
-																									case XTHREADGROUPID_DIOPROTOCOLCONNEXIONMANAGER	: stringID.Add(__L("DIOPROTOCOLCONNEXIONMANAGER"));		break; 
-																									case XTHREADGROUPID_DIOWEBSERVER                : stringID.Add(__L("DIOWEBSERVER"));									break; 
-																									case XTHREADGROUPID_DIOATCMS                    : stringID.Add(__L("DIOATCMS"));											break; 
-																									case XTHREADGROUPID_DIOALERTS                   : stringID.Add(__L("DIOALERTS"));											break; 
-																									case XTHREADGROUPID_DIOPCAP											: stringID.Add(__L("DIOPCAP"));												break; 
-																									case XTHREADGROUPID_VIDEO												: stringID.Add(__L("VIDEO"));													break; 
-																									case XTHREADGROUPID_APPOWNER										:	
-																																					default                 :	{ XSTRING IDlocal;
-																																																			IDlocal.Format(__L("APPOWNER[%d]"), groupID); 
+                                              xthreadsvectormutex->UnLock();
 
-																																																			stringID.Add(IDlocal);
-																																																		}	
-																																																		break;
-																								}
+                                              return true;
+                                            }
 
-																							return true;
-																						}
+    bool                                    DeleteAll                       ()
+                                            {
+                                              if(!xthreadsvectormutex) return false;
 
-		
-		XTHREADGROUPID													groupID;	
-		XMUTEX*																	xthreadsvectormutex;
-		XVECTOR<XTHREADCOLLECTED*>							xthreadsvector;
-		XTHREAD*																xthread;
+                                              xthreadsvectormutex->Lock();
+
+                                              xthreadsvector.DeleteContents();
+                                              xthreadsvector.DeleteAll();
+
+                                              xthreadsvectormutex->UnLock();
+
+                                              return true;
+                                            }
+
+  private:
+
+    void                                    Clean                           ()
+                                            {
+                                              groupID             = XTHREADGROUPID_UNKNOWN;
+                                              xthreadsvectormutex = NULL;
+                                              xthread             = NULL;
+                                            }
+
+    static void                             ThreadRunFunction               (void* param)
+                                            {
+                                              XTHREADSCOLLECTED* xthreadscollected = (XTHREADSCOLLECTED*)param;
+                                              if(!xthreadscollected) return;
+
+                                              if(!xthreadscollected->xthreadsvectormutex) return;
+
+                                              xthreadscollected->xthreadsvectormutex->Lock();
+
+                                              for(XDWORD c=0; c<xthreadscollected->xthreadsvector.GetSize(); c++)
+                                                {
+                                                  XTHREADCOLLECTED* xthreadcollected  = xthreadscollected->xthreadsvector.Get(c);
+                                                  if(xthreadcollected)
+                                                    {
+                                                      switch(xthreadcollected->GetStatus())
+                                                        {
+                                                          case XTHREADSTATUS_RUN    : xthreadcollected->SetIsInFunction(true);
+                                                                                      xthreadcollected->GetFunction()(xthreadcollected->GetParam());
+                                                                                      xthreadcollected->SetIsInFunction(false);
+
+                                                                                      xthreadscollected->xthread->Wait();
+                                                                                      break;
+
+                                                          case XTHREADSTATUS_EXIT   : xthreadcollected->SetStatus(XTHREADSTATUS_END);
+                                                                                      break;
+                                                        }
+                                                    }
+                                                }
+
+                                              xthreadscollected->xthreadsvectormutex->UnLock();
+                                            }
+
+    bool                                    GetGroupThreadIDString          (XSTRING& stringID)
+                                            {
+                                              stringID = __L("TGRP_");
+
+                                              switch(groupID)
+                                                {
+                                                  case XTHREADGROUPID_UNKNOWN                     : stringID.Add(__L("UNKNOWN"));                       break;
+                                                  case XTHREADGROUPID_SCHEDULER                   : stringID.Add(__L("SCHEDULE"));                      break;
+                                                  case XTHREADGROUPID_SCRIPT                      : stringID.Add(__L("SCRIPT"));                        break;
+                                                  case XTHREADGROUPID_DIOSTREAM                   : stringID.Add(__L("DIOSTREAM"));                     break;
+                                                  case XTHREADGROUPID_DIOSTREAMUART               : stringID.Add(__L("DIOSTREAMUART"));                 break;
+                                                  case XTHREADGROUPID_DIOSTREAMUDP                : stringID.Add(__L("DIOSTREAMUDP"));                  break;
+                                                  case XTHREADGROUPID_DIOSTREAMTCPIP              : stringID.Add(__L("DIOSTREAMTCPIP"));                break;
+                                                  case XTHREADGROUPID_DIOSTREAMWIFI               : stringID.Add(__L("DIOSTREAMWIFI"));                 break;
+                                                  case XTHREADGROUPID_DIOSTREAMBLUETOOTH          : stringID.Add(__L("DIOSTREAMBLUETOOTH"));            break;
+                                                  case XTHREADGROUPID_DIOSTREAMUSB                : stringID.Add(__L("DIOSTREAMUSB"));                  break;
+                                                  case XTHREADGROUPID_DIOSTREAMICMP               : stringID.Add(__L("DIOSTREAMICMP"));                 break;
+                                                  case XTHREADGROUPID_DIOSTREAMSPI                : stringID.Add(__L("DIOSTREAMSPI"));                  break;
+                                                  case XTHREADGROUPID_DIOSTREAMCIPHER             : stringID.Add(__L("DIOSTREAMCIPHER"));               break;
+                                                  case XTHREADGROUPID_DIOCHECKCONNEXIONS          : stringID.Add(__L("DIOCHECKCONNEXIONS"));            break;
+                                                  case XTHREADGROUPID_DIOPROTOCOL                 : stringID.Add(__L("DIOPROTOCOL"));                   break;
+                                                  case XTHREADGROUPID_DIOPROTOCOLCONNEXIONMANAGER : stringID.Add(__L("DIOPROTOCOLCONNEXIONMANAGER"));   break;
+                                                  case XTHREADGROUPID_DIOWEBSERVER                : stringID.Add(__L("DIOWEBSERVER"));                  break;
+                                                  case XTHREADGROUPID_DIOATCMS                    : stringID.Add(__L("DIOATCMS"));                      break;
+                                                  case XTHREADGROUPID_DIOALERTS                   : stringID.Add(__L("DIOALERTS"));                     break;
+                                                  case XTHREADGROUPID_DIOPCAP                     : stringID.Add(__L("DIOPCAP"));                       break;
+                                                  case XTHREADGROUPID_VIDEO                       : stringID.Add(__L("VIDEO"));                         break;
+                                                  case XTHREADGROUPID_APPOWNER                    :
+                                                                          default                 : { XSTRING IDlocal;
+                                                                                                      IDlocal.Format(__L("APPOWNER[%d]"), groupID);
+
+                                                                                                      stringID.Add(IDlocal);
+                                                                                                    }
+                                                                                                    break;
+                                                }
+
+                                              return true;
+                                            }
+
+
+    XTHREADGROUPID                          groupID;
+    XMUTEX*                                 xthreadsvectormutex;
+    XVECTOR<XTHREADCOLLECTED*>              xthreadsvector;
+    XTHREAD*                                xthread;
 };
 
 
@@ -547,202 +547,202 @@ class XTHREADSCOLLECTED
 
 class XTHREADSCOLLECTEDMANAGER
 {
-	public:		
-		
-		static XTHREADSCOLLECTEDMANAGER&				GetInstance											()
-																						{
-																							if(!instance) instance = new XTHREADSCOLLECTEDMANAGER();
-																						
-																							return (*instance);	
-																						}						
+  public:
 
-		static bool															DelInstance											()
-																						{
-																							if(instance)
-																								{																						
-																									delete instance;
-																									instance = NULL;
+    static XTHREADSCOLLECTEDMANAGER&        GetInstance                     ()
+                                            {
+                                              if(!instance) instance = new XTHREADSCOLLECTEDMANAGER();
 
-																									return true;
-																								} 
-																				
-																							return false;
-																						}		
+                                              return (*instance);
+                                            }
 
-		bool																		ActivateGroup										(XTHREADGROUPID groupID)
-																						{
-																							groupthreadsactivate.Add(groupID);
-																							return true;		
-																						}
+    static bool                             DelInstance                     ()
+                                            {
+                                              if(instance)
+                                                {
+                                                  delete instance;
+                                                  instance = NULL;
+
+                                                  return true;
+                                                }
+
+                                              return false;
+                                            }
+
+    bool                                    ActivateGroup                   (XTHREADGROUPID groupID)
+                                            {
+                                              groupthreadsactivate.Add(groupID);
+                                              return true;
+                                            }
 
 
-		bool																		DeactivateGroup                 (XTHREADGROUPID groupID)
-																						{
-																							groupthreadsactivate.Delete(groupID);
-																							return true;		
-																						}
+    bool                                    DeactivateGroup                 (XTHREADGROUPID groupID)
+                                            {
+                                              groupthreadsactivate.Delete(groupID);
+                                              return true;
+                                            }
 
-		bool																		IsActivateGroup                 (XTHREADGROUPID groupID)
-																						{
-																							for(XDWORD c=0; c<groupthreadsactivate.GetSize(); c++)
-																								{
-																									XTHREADGROUPID _groupID = groupthreadsactivate.Get(c);
-																									if(groupID == _groupID) return true;
-																								}
+    bool                                    IsActivateGroup                 (XTHREADGROUPID groupID)
+                                            {
+                                              for(XDWORD c=0; c<groupthreadsactivate.GetSize(); c++)
+                                                {
+                                                  XTHREADGROUPID _groupID = groupthreadsactivate.Get(c);
+                                                  if(groupID == _groupID) return true;
+                                                }
 
-																							return false;
-																						}
+                                              return false;
+                                            }
 
-		XTHREADSCOLLECTED*											GetThreadsCollectedByGroupID   (XTHREADGROUPID groupID)
-																						{
-																							XTHREADSCOLLECTED* xthreadscollected = NULL;
-																							
-																							for(XDWORD c=0; c<groupthreadsvector.GetSize(); c++)
-																								{
-																									XTHREADSCOLLECTED* _xthreadscollected = groupthreadsvector.Get(c);
-																									if(_xthreadscollected)
-																										{
-																											if(_xthreadscollected->GetGroupID() == groupID)  
-																												{
-																													xthreadscollected = _xthreadscollected;	
-																													break;																							
-																												}
-																										}
-																								}
+    XTHREADSCOLLECTED*                      GetThreadsCollectedByGroupID   (XTHREADGROUPID groupID)
+                                            {
+                                              XTHREADSCOLLECTED* xthreadscollected = NULL;
 
-																							return xthreadscollected;
-																						}
+                                              for(XDWORD c=0; c<groupthreadsvector.GetSize(); c++)
+                                                {
+                                                  XTHREADSCOLLECTED* _xthreadscollected = groupthreadsvector.Get(c);
+                                                  if(_xthreadscollected)
+                                                    {
+                                                      if(_xthreadscollected->GetGroupID() == groupID)
+                                                        {
+                                                          xthreadscollected = _xthreadscollected;
+                                                          break;
+                                                        }
+                                                    }
+                                                }
 
-	
-		XTHREADCOLLECTED*												CreateThread										(XTHREADGROUPID groupID, XCHAR* ID, XTHREADFUNCTION function, void* param)
-																						{		
-																							XTHREADCOLLECTED*  xthreadcollected = NULL;						
-																							bool							 isactivategroup	= IsActivateGroup(groupID);
-																							
-																							if(isactivategroup)
-																								{
-																									if(!groupthreadsmutex) return NULL;
-																									
-																									groupthreadsmutex->Lock();
+                                              return xthreadscollected;
+                                            }
 
-																									XTHREADSCOLLECTED* xthreadscollected = GetThreadsCollectedByGroupID(groupID);																																																
-																									if(!xthreadscollected) 
-																										{
-																											xthreadscollected = new XTHREADSCOLLECTED(groupID);																											
-																											if(xthreadscollected) groupthreadsvector.Add(xthreadscollected);																										
-																										}	
 
-																									if(xthreadscollected) xthreadcollected = xthreadscollected->Create(groupID, ID, function, param);
-																																																																								
-																									groupthreadsmutex->UnLock();
-																								}
-																							 else
-																								{
-																									XTHREADSCOLLECTED* xthreadscollected = new XTHREADSCOLLECTED();																								
-																									if(xthreadscollected) 
-																										{
-																											xthreadcollected = xthreadscollected->Create(groupID, ID, function, param);
-																											delete xthreadscollected;
-																										}
-																								}
-																									
-																							return xthreadcollected;																																															
-																						}
+    XTHREADCOLLECTED*                       CreateThread                    (XTHREADGROUPID groupID, XCHAR* ID, XTHREADFUNCTION function, void* param)
+                                            {
+                                              XTHREADCOLLECTED*  xthreadcollected = NULL;
+                                              bool               isactivategroup  = IsActivateGroup(groupID);
 
-		bool																		DeleteThread										(XTHREADGROUPID groupID, XTHREADCOLLECTED* xthreadcollected)
-																						{	
-																							bool isactivategroup = IsActivateGroup(groupID);
-																							bool status          = false;
-																							
-																							if(isactivategroup)
-																								{
-																									if(!groupthreadsmutex) return false; 
-																									
-																									groupthreadsmutex->Lock();																			
+                                              if(isactivategroup)
+                                                {
+                                                  if(!groupthreadsmutex) return NULL;
 
-																									XTHREADSCOLLECTED* xthreadscollected = GetThreadsCollectedByGroupID(isactivategroup?groupID:XTHREADGROUPID_UNGROUP);																																															
-																									if(xthreadscollected) 
-																										{																											
-																											status = xthreadscollected->Delete(groupID, xthreadcollected);
-																										}
-																								
-																									groupthreadsmutex->UnLock();
-																								}
-																							 else
-																								{
-																									XTHREADSCOLLECTED* xthreadscollected = new XTHREADSCOLLECTED();																								
-																									if(xthreadscollected) 
-																										{
-																											status = xthreadscollected->Delete(groupID, xthreadcollected);
-																											delete xthreadscollected;
-																										}
-																								}
-																							
-																							return status;
-																						}
-																	
-		bool																		DeleteAll												()
-																						{
-																							if(!groupthreadsmutex) return false;
-																				
-																							groupthreadsmutex->Lock();
-																																											
-																							groupthreadsvector.DeleteContents();
-																							groupthreadsvector.DeleteAll();
-																							
-																							groupthreadsmutex->UnLock();
+                                                  groupthreadsmutex->Lock();
 
-																							return true;
-																						}
+                                                  XTHREADSCOLLECTED* xthreadscollected = GetThreadsCollectedByGroupID(groupID);
+                                                  if(!xthreadscollected)
+                                                    {
+                                                      xthreadscollected = new XTHREADSCOLLECTED(groupID);
+                                                      if(xthreadscollected) groupthreadsvector.Add(xthreadscollected);
+                                                    }
 
-	
-	private:
-																						XTHREADSCOLLECTEDMANAGER				()																
-																						{ 
-																							Clean();																																																					
-																							
-																							groupthreadsmutex = xfactory->Create_Mutex();
-																							
-																						}
+                                                  if(xthreadscollected) xthreadcollected = xthreadscollected->Create(groupID, ID, function, param);
 
-		virtual																 ~XTHREADSCOLLECTEDMANAGER				()																
-																						{ 																							
-																							DeleteAll();
+                                                  groupthreadsmutex->UnLock();
+                                                }
+                                               else
+                                                {
+                                                  XTHREADSCOLLECTED* xthreadscollected = new XTHREADSCOLLECTED();
+                                                  if(xthreadscollected)
+                                                    {
+                                                      xthreadcollected = xthreadscollected->Create(groupID, ID, function, param);
+                                                      delete xthreadscollected;
+                                                    }
+                                                }
 
-																							groupthreadsactivate.DeleteAll();
+                                              return xthreadcollected;
+                                            }
 
-																							if(groupthreadsmutex) xfactory->Delete_Mutex(groupthreadsmutex);																						
+    bool                                    DeleteThread                    (XTHREADGROUPID groupID, XTHREADCOLLECTED* xthreadcollected)
+                                            {
+                                              bool isactivategroup = IsActivateGroup(groupID);
+                                              bool status          = false;
 
-																							Clean();																																	
-																						}
+                                              if(isactivategroup)
+                                                {
+                                                  if(!groupthreadsmutex) return false;
 
-		void																		Clean														()		
-																						{
-																							nogroupthread			= NULL;
-																							groupthreadsmutex	= NULL;																							
-																						}
+                                                  groupthreadsmutex->Lock();
 
-		
-		static XTHREADSCOLLECTEDMANAGER*				instance;
+                                                  XTHREADSCOLLECTED* xthreadscollected = GetThreadsCollectedByGroupID(isactivategroup?groupID:XTHREADGROUPID_UNGROUP);
+                                                  if(xthreadscollected)
+                                                    {
+                                                      status = xthreadscollected->Delete(groupID, xthreadcollected);
+                                                    }
 
-		XTHREAD*																nogroupthread;
-		XVECTOR<XTHREADGROUPID>									groupthreadsactivate;	
-		XMUTEX*																	groupthreadsmutex;
-		XVECTOR<XTHREADSCOLLECTED*>							groupthreadsvector;	
+                                                  groupthreadsmutex->UnLock();
+                                                }
+                                               else
+                                                {
+                                                  XTHREADSCOLLECTED* xthreadscollected = new XTHREADSCOLLECTED();
+                                                  if(xthreadscollected)
+                                                    {
+                                                      status = xthreadscollected->Delete(groupID, xthreadcollected);
+                                                      delete xthreadscollected;
+                                                    }
+                                                }
+
+                                              return status;
+                                            }
+
+    bool                                    DeleteAll                       ()
+                                            {
+                                              if(!groupthreadsmutex) return false;
+
+                                              groupthreadsmutex->Lock();
+
+                                              groupthreadsvector.DeleteContents();
+                                              groupthreadsvector.DeleteAll();
+
+                                              groupthreadsmutex->UnLock();
+
+                                              return true;
+                                            }
+
+
+  private:
+                                            XTHREADSCOLLECTEDMANAGER        ()
+                                            {
+                                              Clean();
+
+                                              groupthreadsmutex = xfactory->Create_Mutex();
+
+                                            }
+
+    virtual                                ~XTHREADSCOLLECTEDMANAGER        ()
+                                            {
+                                              DeleteAll();
+
+                                              groupthreadsactivate.DeleteAll();
+
+                                              if(groupthreadsmutex) xfactory->Delete_Mutex(groupthreadsmutex);
+
+                                              Clean();
+                                            }
+
+    void                                    Clean                           ()
+                                            {
+                                              nogroupthread     = NULL;
+                                              groupthreadsmutex = NULL;
+                                            }
+
+
+    static XTHREADSCOLLECTEDMANAGER*        instance;
+
+    XTHREAD*                                nogroupthread;
+    XVECTOR<XTHREADGROUPID>                 groupthreadsactivate;
+    XMUTEX*                                 groupthreadsmutex;
+    XVECTOR<XTHREADSCOLLECTED*>             groupthreadsvector;
 };
 
 
-	
+
 //---- INLINE FUNCTIONS --------------------------------------------------------------------
-	
+
 #endif
 
 #else
 
-#define CREATEXTHREAD							  xfactory->CreateThread
-#define DELETEXTHREAD								xfactory->DeleteThread
-#define XTHREADCOLLECTED						XTHREAD
-#define ACTIVATEXTHREADGROUP				//
-#define DEACTIVATEXTHREADGROUP			//
+#define CREATEXTHREAD               xfactory->CreateThread
+#define DELETEXTHREAD               xfactory->DeleteThread
+#define XTHREADCOLLECTED            XTHREAD
+#define ACTIVATEXTHREADGROUP        //
+#define DEACTIVATEXTHREADGROUP      //
 
 #endif

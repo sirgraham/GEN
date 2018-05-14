@@ -1,25 +1,25 @@
 /*------------------------------------------------------------------------------------------
-//	INPLINUXDEVICEMOUSEDIRECT.H
-*/	
-/**	
-// \class 
-//   
-//  Input LINUX device mouse class
-//   
-//	@author	 Abraham J. Velez
+//  INPLINUXDEVICEMOUSEDIRECT.H
+*/
+/**
+// \class
 //
-//	Date Of Creation	: 10/04/2014 12:54:27
-//	Last Modification	:	
-*/	
-/*	GEN  Copyright (C).  All right reserved.
+//  Input LINUX device mouse class
+//
+//  @author  Abraham J. Velez
+//
+//  Date Of Creation  : 10/04/2014 12:54:27
+//  Last Modification :
+*/
+/*  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
+
 #ifndef _INPLINUXDEVICEMOUSEDIRECT_H_
 #define _INPLINUXDEVICEMOUSEDIRECT_H_
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
-	
+
 #include "XVector.h"
 
 #include "INPCursor.h"
@@ -29,8 +29,8 @@
 #include "GRPScreen.h"
 
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
-	
-	
+
+
 /*---- CLASS -----------------------------------------------------------------------------*/
 
 class XFACTORY;
@@ -38,74 +38,74 @@ class XFACTORY;
 
 class INPLINUXDEVICEMOUSEDIRECT : public INPDEVICE
 {
-	public:
+  public:
 
-																	INPLINUXDEVICEMOUSEDIRECT		( GRPSCREEN* grpscreen);
-	virtual												 ~INPLINUXDEVICEMOUSEDIRECT		();
-	bool														SetScreen(void* screenpointer);
+                                  INPLINUXDEVICEMOUSEDIRECT   ( GRPSCREEN* grpscreen);
+  virtual                        ~INPLINUXDEVICEMOUSEDIRECT   ();
+  bool                            SetScreen(void* screenpointer);
 
 
-	XVECTOR<INPBUTTON*>*						GetButtons									()							{ return &buttons;		}
-	XVECTOR<INPCURSOR*>*						GetCursors									()							{ return &cursors;		}
+  XVECTOR<INPBUTTON*>*            GetButtons                  ()              { return &buttons;    }
+  XVECTOR<INPCURSOR*>*            GetCursors                  ()              { return &cursors;    }
 
 protected:
-		
-		bool													Update											();
 
-	private:
+    bool                          Update                      ();
 
-		void													Clean												()
-																	{
-																		grpscreen	=  NULL;
+  private:
 
-																		mousex		= 0;
-																		minx			= 0;
-																		maxx			= 0;
+    void                          Clean                       ()
+                                  {
+                                    grpscreen =  NULL;
 
-																		mousey		= 0;
-																		miny			= 0;
-																		maxy			= 0;
+                                    mousex    = 0;
+                                    minx      = 0;
+                                    maxx      = 0;
 
-																		mousez		= 0;
-																		minz			= 0;
-																		maxz			= 0;
-																	}
-				
-		bool 													CreateAllButtons						();
-		bool													DeleteAllButtons						();
-		
-		bool 													CreateAllCursors						();
-		bool													DeleteAllCursors						();
-		
-		bool													OpenAllDevicesID						();
-		bool													CloseAllDevicesID						();
+                                    mousey    = 0;
+                                    miny      = 0;
+                                    maxy      = 0;
 
-		bool													UpdateMouseData							();
+                                    mousez    = 0;
+                                    minz      = 0;
+                                    maxz      = 0;
+                                  }
 
-		GRPSCREEN*										grpscreen;
+    bool                          CreateAllButtons            ();
+    bool                          DeleteAllButtons            ();
 
-		XVECTOR<INPBUTTON*>						buttons;
-		XVECTOR<INPCURSOR*>						cursors;
+    bool                          CreateAllCursors            ();
+    bool                          DeleteAllCursors            ();
 
-		XVECTOR<INPLINUXDEVICEID*>		mice;
+    bool                          OpenAllDevicesID            ();
+    bool                          CloseAllDevicesID           ();
 
-		int														mousex;
-		int														minx;
-		int														maxx;
+    bool                          UpdateMouseData             ();
 
-		int														mousey;
-		int														miny;
-		int														maxy;
+    GRPSCREEN*                    grpscreen;
 
-		int														mousez;
-		int														minz;
-		int														maxz;
+    XVECTOR<INPBUTTON*>           buttons;
+    XVECTOR<INPCURSOR*>           cursors;
 
-		
+    XVECTOR<INPLINUXDEVICEID*>    mice;
+
+    int                           mousex;
+    int                           minx;
+    int                           maxx;
+
+    int                           mousey;
+    int                           miny;
+    int                           maxy;
+
+    int                           mousez;
+    int                           minz;
+    int                           maxz;
+
+
 };
-	
-	
+
+
 /*---- INLINE FUNCTIONS ------------------------------------------------------------------*/
-	
+
 
 #endif

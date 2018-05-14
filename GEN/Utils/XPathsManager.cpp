@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------------------
-//	XPATH.CPP
-//	
-//	Path Functions
-//   
-//	Author						: Abraham J. Velez
-//	Date Of Creation	: 28/06/2002
-//	Last Mofificacion	:	
-//	
-//	GEN  Copyright (C).  All right reserved.		 			 
+//  XPATH.CPP
+//
+//  Path Functions
+//
+//  Author            : Abraham J. Velez
+//  Date Of Creation  : 28/06/2002
+//  Last Mofificacion :
+//
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-		
+
 //---- INCLUDES ----------------------------------------------------------------------------
 
 #include "XFactory.h"
@@ -19,56 +19,56 @@
 #include "XPathsManager.h"
 
 #include "XMemory.h"
-	
+
 //---- GENERAL VARIABLE --------------------------------------------------------------------
-	
-XPATHSMANAGER*	XPATHSMANAGER::instance = NULL;
+
+XPATHSMANAGER*  XPATHSMANAGER::instance = NULL;
 
 //---- CLASS MEMBERS -----------------------------------------------------------------------
 
 
 /*-------------------------------------------------------------------
-//	XPATHSMANAGERSECTION::XPATHSMANAGERSECTION
-*/	
-/**	
-//	
-//	Class Constructor XPATHSMANAGERSECTION
-//	
-//	@author				Abraham J. Velez
-//	@version			28/02/2016 19:16:47
-//	
+//  XPATHSMANAGERSECTION::XPATHSMANAGERSECTION
+*/
+/**
+//
+//  Class Constructor XPATHSMANAGERSECTION
+//
+//  @author       Abraham J. Velez
+//  @version      28/02/2016 19:16:47
+//
 */
 /*-----------------------------------------------------------------*/
 XPATHSMANAGERSECTION::XPATHSMANAGERSECTION()
-{	
-	Clean();															
+{
+  Clean();
 
-	xpath = new XPATH();
+  xpath = new XPATH();
 
 }
 
 
 
 /*-------------------------------------------------------------------
-//	XPATHSMANAGERSECTION::~XPATHSMANAGERSECTION
-*/	
-/**	
-//	
-//	 Class Destructor XPATHSMANAGERSECTION
-//	
-//	@author				Abraham J. Velez
-//	@version			28/02/2016 19:16:54
-//	
+//  XPATHSMANAGERSECTION::~XPATHSMANAGERSECTION
+*/
+/**
+//
+//   Class Destructor XPATHSMANAGERSECTION
+//
+//  @author       Abraham J. Velez
+//  @version      28/02/2016 19:16:54
+//
 */
 /*-----------------------------------------------------------------*/
 XPATHSMANAGERSECTION::~XPATHSMANAGERSECTION()
-{ 
-	if(xpath)
-		{
-			delete xpath;
-		}
+{
+  if(xpath)
+    {
+      delete xpath;
+    }
 
-	Clean();															
+  Clean();
 }
 
 
@@ -78,19 +78,19 @@ XPATHSMANAGERSECTION::~XPATHSMANAGERSECTION()
 //-------------------------------------------------------------------
 //  XPATHSMANAGER::XPATHSMANAGER
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			12/08/2003 10:14:53
-//	
-//	@return 			
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      12/08/2003 10:14:53
+//
+//  @return
+//  */
 //-------------------------------------------------------------------
 XPATHSMANAGER::XPATHSMANAGER()
 {
-	Clean();
+  Clean();
 
-	appexecpath = new XPATH;
+  appexecpath = new XPATH;
 }
 
 
@@ -98,24 +98,24 @@ XPATHSMANAGER::XPATHSMANAGER()
 //-------------------------------------------------------------------
 //  XPATHSMANAGER::~XPATHSMANAGER
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			12/08/2003 10:14:53
-//	
-//	@return 			
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      12/08/2003 10:14:53
+//
+//  @return
+//  */
 //-------------------------------------------------------------------
 XPATHSMANAGER::~XPATHSMANAGER()
 {
-	DeleteAllPathSections();
+  DeleteAllPathSections();
 
-	if(appexecpath)
-		{
-			delete appexecpath;
-		}
-	
-	Clean();
+  if(appexecpath)
+    {
+      delete appexecpath;
+    }
+
+  Clean();
 }
 
 
@@ -123,156 +123,156 @@ XPATHSMANAGER::~XPATHSMANAGER()
 
 /*-------------------------------------------------------------------
 //  XPATHSMANAGER::GetPathOfSection
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			10/02/2014 10:42:09
-//	
-//	@return 			bool : 
-//	@param				sectiontype : 
-//  @param				xpath : 
-//  @param				addroot : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      10/02/2014 10:42:09
+//
+//  @return       bool :
+//  @param        sectiontype :
+//  @param        xpath :
+//  @param        addroot :
 */
 /*-----------------------------------------------------------------*/
 bool XPATHSMANAGER::GetPathOfSection(XPATHSMANAGERSECTIONTYPE sectiontype, XPATH& xpath, bool addroot)
 {
-	xpath.Empty();
+  xpath.Empty();
 
-	if(addroot && (sectiontype!=XPATHSMANAGERSECTIONTYPE_ROOT))
-		{
-			for(XDWORD c=0; c<pathsections.GetSize(); c++)
-				{
-					XPATHSMANAGERSECTION* pathsection = pathsections.Get(c);
-					if(pathsection)
-						{
-							if(pathsection->type == XPATHSMANAGERSECTIONTYPE_ROOT)
-								{
-									xpath = pathsection->xpath->Get();
-									xpath.Slash_Add();
-									break;
-								}
-						}
-				}
-		}
+  if(addroot && (sectiontype!=XPATHSMANAGERSECTIONTYPE_ROOT))
+    {
+      for(XDWORD c=0; c<pathsections.GetSize(); c++)
+        {
+          XPATHSMANAGERSECTION* pathsection = pathsections.Get(c);
+          if(pathsection)
+            {
+              if(pathsection->type == XPATHSMANAGERSECTIONTYPE_ROOT)
+                {
+                  xpath = pathsection->xpath->Get();
+                  xpath.Slash_Add();
+                  break;
+                }
+            }
+        }
+    }
 
-	for(XDWORD c=0; c<pathsections.GetSize(); c++)
-		{
-			XPATHSMANAGERSECTION* pathsection = pathsections.Get(c);
-			if(pathsection)
-				{
-					if(pathsection->type == sectiontype)
-						{
-							xpath += pathsection->xpath->Get();
-							break;
-						}
-				}
-		}
+  for(XDWORD c=0; c<pathsections.GetSize(); c++)
+    {
+      XPATHSMANAGERSECTION* pathsection = pathsections.Get(c);
+      if(pathsection)
+        {
+          if(pathsection->type == sectiontype)
+            {
+              xpath += pathsection->xpath->Get();
+              break;
+            }
+        }
+    }
 
-	return xpath.IsEmpty()?false:true;
+  return xpath.IsEmpty()?false:true;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XPATHSMANAGER::GetPathSection
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			12/12/2013 13:57:30
-//	
-//	@return 			XPATHSMANAGERSECTION* : 
-//	@param				sectiontype : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      12/12/2013 13:57:30
+//
+//  @return       XPATHSMANAGERSECTION* :
+//  @param        sectiontype :
 */
 /*-----------------------------------------------------------------*/
 XPATHSMANAGERSECTION* XPATHSMANAGER::GetPathSection(XPATHSMANAGERSECTIONTYPE sectiontype)
 {
-	if(pathsections.IsEmpty()) return NULL; 
+  if(pathsections.IsEmpty()) return NULL;
 
-	for(XDWORD c=0; c<pathsections.GetSize(); c++)
-		{
-			XPATHSMANAGERSECTION* pathsection = pathsections.Get(c);
-			if(pathsection)
-				{
-					if(pathsection->type == sectiontype)
-						{
-							return pathsection; 
-						}
-				}
-		}
+  for(XDWORD c=0; c<pathsections.GetSize(); c++)
+    {
+      XPATHSMANAGERSECTION* pathsection = pathsections.Get(c);
+      if(pathsection)
+        {
+          if(pathsection->type == sectiontype)
+            {
+              return pathsection;
+            }
+        }
+    }
 
-	return NULL;
+  return NULL;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XPATHSMANAGER::AddPathSection
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			12/12/2013 13:34:21
-//	
-//	@return 			bool : 
-//	@param				sectiontype : 
-//  @param				path : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      12/12/2013 13:34:21
+//
+//  @return       bool :
+//  @param        sectiontype :
+//  @param        path :
 */
 /*-----------------------------------------------------------------*/
 bool XPATHSMANAGER::AddPathSection(XPATHSMANAGERSECTIONTYPE sectiontype, XSTRING& xpath)
 {
-	XPATHSMANAGERSECTION* xpathsection = GetPathSection(sectiontype);
-	if(!xpathsection) 
-		{
-			xpathsection = new XPATHSMANAGERSECTION();
-			if(!xpathsection) return false;
+  XPATHSMANAGERSECTION* xpathsection = GetPathSection(sectiontype);
+  if(!xpathsection)
+    {
+      xpathsection = new XPATHSMANAGERSECTION();
+      if(!xpathsection) return false;
 
-			xpathsection->type	= sectiontype;
-			(*xpathsection->xpath) = xpath.Get();
+      xpathsection->type  = sectiontype;
+      (*xpathsection->xpath) = xpath.Get();
 
-			if(!xpathsection->xpath->IsEmpty()) 
-				{	
-					xpathsection->xpath->Slash_Add();    
-					xpathsection->xpath->Slash_Normalize();
-				}
+      if(!xpathsection->xpath->IsEmpty())
+        {
+          xpathsection->xpath->Slash_Add();
+          xpathsection->xpath->Slash_Normalize();
+        }
 
-			pathsections.Add(xpathsection);
-		}
-	 else
-		{
-			(*xpathsection->xpath) = xpath;
-			xpathsection->xpath->Slash_Add();    
-			xpathsection->xpath->Slash_Normalize();
-		}
+      pathsections.Add(xpathsection);
+    }
+   else
+    {
+      (*xpathsection->xpath) = xpath;
+      xpathsection->xpath->Slash_Add();
+      xpathsection->xpath->Slash_Normalize();
+    }
 
-	return true;
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XPATHSMANAGER::AddPathSection
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			12/12/2013 13:25:18
-//	
-//	@return 			bool : 
-//	@param				sectiontype : 
-//  @param				string : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      12/12/2013 13:25:18
+//
+//  @return       bool :
+//  @param        sectiontype :
+//  @param        string :
 */
 /*-----------------------------------------------------------------*/
 bool XPATHSMANAGER::AddPathSection(XPATHSMANAGERSECTIONTYPE sectiontype,const XCHAR* string)
 {
-	XSTRING path(string);
-	
-	return AddPathSection(sectiontype,path);
+  XSTRING path(string);
+
+  return AddPathSection(sectiontype,path);
 }
 
 
@@ -280,147 +280,147 @@ bool XPATHSMANAGER::AddPathSection(XPATHSMANAGERSECTIONTYPE sectiontype,const XC
 
 /*-------------------------------------------------------------------
 //  XPATHSMANAGER::DeleteAllPathSections
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			12/12/2013 13:36:39
-//	
-//	@return 			bool : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      12/12/2013 13:36:39
+//
+//  @return       bool :
+//  */
 /*-----------------------------------------------------------------*/
 bool XPATHSMANAGER::DeleteAllPathSections()
 {
-	if(pathsections.IsEmpty()) return false;
+  if(pathsections.IsEmpty()) return false;
 
-	pathsections.DeleteContents();
+  pathsections.DeleteContents();
 
-	pathsections.DeleteAll();
+  pathsections.DeleteAll();
 
-	return true;
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
-//	XPATHSMANAGER::CreateAllPathSectionOnDisk
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/03/2014 9:03:38
-//	
-//	@return 			bool : 
+//  XPATHSMANAGER::CreateAllPathSectionOnDisk
+*/
+/**
+//
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/03/2014 9:03:38
+//
+//  @return       bool :
 //
 */
 /*-----------------------------------------------------------------*/
 bool XPATHSMANAGER::CreateAllPathSectionOnDisk()
-{	
-	XDIR* xdir = xfactory->Create_Dir();
-	if(!xdir) return false;
-	
-	bool status = true;
-	
-	for(XDWORD c=0; c<pathsections.GetSize(); c++)
-		{
-			XPATHSMANAGERSECTION* pathsection = pathsections.Get(c);
-			if(pathsection)
-				{
-					XPATH xpath;
-									
-					if(GetPathOfSection(pathsection->type, xpath, true)) 
-						{
-							if(!xdir->Exist(xpath.Get()))
-								{
-									if(!xdir->Make(xpath.Get())) 
-										{
-											status = false;
-										}
+{
+  XDIR* xdir = xfactory->Create_Dir();
+  if(!xdir) return false;
 
-									//XDEBUG_PRINTCOLOR((status?2:4), __L("Dir Create: %s "), xpath->Get());
-								}
-							 else
-							  {
-									//XDEBUG_PRINTCOLOR(2, __L("Dir Exist: %s "), xpath->Get());
-								}
-						}
-				}
-		}
+  bool status = true;
 
-	xfactory->Delete_Dir(xdir);	
+  for(XDWORD c=0; c<pathsections.GetSize(); c++)
+    {
+      XPATHSMANAGERSECTION* pathsection = pathsections.Get(c);
+      if(pathsection)
+        {
+          XPATH xpath;
 
-	return status;
+          if(GetPathOfSection(pathsection->type, xpath, true))
+            {
+              if(!xdir->Exist(xpath.Get()))
+                {
+                  if(!xdir->Make(xpath.Get()))
+                    {
+                      status = false;
+                    }
+
+                  //XDEBUG_PRINTCOLOR((status?2:4), __L("Dir Create: %s "), xpath->Get());
+                }
+               else
+                {
+                  //XDEBUG_PRINTCOLOR(2, __L("Dir Exist: %s "), xpath->Get());
+                }
+            }
+        }
+    }
+
+  xfactory->Delete_Dir(xdir);
+
+  return status;
 }
 
 
 
 /*-------------------------------------------------------------------
-//	XPATHSMANAGER::AdjustRootPathDefault
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			23/08/2016 11:15:32
-//	
-//	@return 			bool : 
+//  XPATHSMANAGER::AdjustRootPathDefault
+*/
+/**
 //
-//  @param				nameapp : 
-//  @param				recopilatedir : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      23/08/2016 11:15:32
+//
+//  @return       bool :
+//
+//  @param        nameapp :
+//  @param        recopilatedir :
 */
 /*-----------------------------------------------------------------*/
 bool XPATHSMANAGER::AdjustRootPathDefault(XCHAR* nameapp, XCHAR* recopilatedir)
-{		
-	XDIR* xdir = xfactory->Create_Dir();
-	if(!xdir) return false;
-	
-	XPATH xpathroot;
-	bool	status;
-		
-	GetPathOfSection(XPATHSMANAGERSECTIONTYPE_ROOT, xpathroot);
-	status = xdir->Exist(xpathroot);		
+{
+  XDIR* xdir = xfactory->Create_Dir();
+  if(!xdir) return false;
 
-	if(status && recopilatedir)
-		{
-			xpathroot.Add(recopilatedir);
-			xpathroot.Slash_Add();
-			status = xdir->Exist(xpathroot);		
-		}		
-	
-	if(status) 
-		{
-			AddPathSection(XPATHSMANAGERSECTIONTYPE_ROOT, xpathroot.Get());
-		}
-	 else
-		{
-			XPATH developedpath;
+  XPATH xpathroot;
+  bool  status;
 
-			GetPathOfSection(XPATHSMANAGERSECTIONTYPE_ROOT, developedpath);
+  GetPathOfSection(XPATHSMANAGERSECTIONTYPE_ROOT, xpathroot);
+  status = xdir->Exist(xpathroot);
 
-			developedpath += __L("../../");
+  if(status && recopilatedir)
+    {
+      xpathroot.Add(recopilatedir);
+      xpathroot.Slash_Add();
+      status = xdir->Exist(xpathroot);
+    }
 
-			#ifdef WINDOWS			
-			developedpath += __L("../");
-			#endif
+  if(status)
+    {
+      AddPathSection(XPATHSMANAGERSECTIONTYPE_ROOT, xpathroot.Get());
+    }
+   else
+    {
+      XPATH developedpath;
 
-			if(recopilatedir)
-				{									
-					developedpath += recopilatedir;
-					developedpath.Slash_Add();					
-				}
+      GetPathOfSection(XPATHSMANAGERSECTIONTYPE_ROOT, developedpath);
 
-			status = xdir->Exist(developedpath);
-						
-			if(status) AddPathSection(XPATHSMANAGERSECTIONTYPE_ROOT, developedpath.Get());													
-		}
-	
-	xfactory->Delete_Dir(xdir);	
-	
-	return status;
+      developedpath += __L("../../");
+
+      #ifdef WINDOWS
+      developedpath += __L("../");
+      #endif
+
+      if(recopilatedir)
+        {
+          developedpath += recopilatedir;
+          developedpath.Slash_Add();
+        }
+
+      status = xdir->Exist(developedpath);
+
+      if(status) AddPathSection(XPATHSMANAGERSECTIONTYPE_ROOT, developedpath.Get());
+    }
+
+  xfactory->Delete_Dir(xdir);
+
+  return status;
 }
 
 
@@ -428,24 +428,24 @@ bool XPATHSMANAGER::AdjustRootPathDefault(XCHAR* nameapp, XCHAR* recopilatedir)
 
 
 /*-------------------------------------------------------------------
-//	XPATHSMANAGER::AdjustRootPathDefault
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			23/08/2016 11:15:20
-//	
-//	@return 			bool : 
+//  XPATHSMANAGER::AdjustRootPathDefault
+*/
+/**
 //
-//  @param				nameapp : 
-//  @param				recopilatedir : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      23/08/2016 11:15:20
+//
+//  @return       bool :
+//
+//  @param        nameapp :
+//  @param        recopilatedir :
 */
 /*-----------------------------------------------------------------*/
 bool XPATHSMANAGER::AdjustRootPathDefault(XSTRING& nameapp, XCHAR* recopilatedir)
 {
-	return AdjustRootPathDefault(nameapp.Get(), recopilatedir);
+  return AdjustRootPathDefault(nameapp.Get(), recopilatedir);
 }
 
 

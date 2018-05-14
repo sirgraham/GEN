@@ -1,21 +1,21 @@
 //------------------------------------------------------------------------------------------
-//	XLINUXFILE.H
-//	
-/**	
-// \class 
-//   
+//  XLINUXFILE.H
+//
+/**
+// \class
+//
 //  LINUX file class
-//   
-//	@author	 Abraham J. Velez
-//	@version 13/03/2002
-*/	
-//	GEN  Copyright (C).  All right reserved.		 			 
+//
+//  @author  Abraham J. Velez
+//  @version 13/03/2002
+*/
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
+
 #ifndef _XLINUXFILE_H_
 #define _XLINUXFILE_H_
-	
-	
+
+
 //---- INCLUDES ----------------------------------------------------------------------------
 
 #include <stdio.h>
@@ -26,7 +26,7 @@
 
 //---- DEFINES & ENUMS  --------------------------------------------------------------------
 
-	
+
 //---- CLASS -------------------------------------------------------------------------------
 
 class CIPHER;
@@ -34,52 +34,52 @@ class XLINUXFACTORY;
 
 class XLINUXFILE : public XFILE
 {
-	public:
-											XLINUXFILE						();											
-		virtual					 ~XLINUXFILE						();		
+  public:
+                      XLINUXFILE            ();
+    virtual          ~XLINUXFILE            ();
 
-		bool							Exist									(XCHAR* xpath);
+    bool              Exist                 (XCHAR* xpath);
 
-		bool							Open								  (XCHAR* xpath, bool readonly = true);
-		bool							Create							  (XCHAR* xpath);
-		
-		bool							SetSize							  (int size);
+    bool              Open                  (XCHAR* xpath, bool readonly = true);
+    bool              Create                (XCHAR* xpath);
 
-		bool							GetPosition					  (int& position);
-		bool							SetPosition						(int position);
-		
-		bool							Read									(XBYTE* buffer, int size , CIPHER* cipher = NULL);
-		bool							Read									(XBYTE* buffer, int* size, CIPHER* cipher = NULL);
+    bool              SetSize               (int size);
 
-		bool							Write				 					(XBYTE* buffer, int size , CIPHER* cipher = NULL);
-		
-		bool							Flush									();
+    bool              GetPosition           (int& position);
+    bool              SetPosition           (int position);
 
-		bool							Close									();
+    bool              Read                  (XBYTE* buffer, int size , CIPHER* cipher = NULL);
+    bool              Read                  (XBYTE* buffer, int* size, CIPHER* cipher = NULL);
 
-		bool							Erase									(XCHAR* xpath, bool overwrite = false);
-		bool							Rename								(XCHAR* xpathold, XCHAR* xpathnew);
+    bool              Write                 (XBYTE* buffer, int size , CIPHER* cipher = NULL);
 
-		FILE*							GetFileStructHandle		()																						{ return filehandle;    };
+    bool              Flush                 ();
 
-		virtual void			ChangeAttributes			(XCHAR* attributes);
+    bool              Close                 ();
 
-	protected:
+    bool              Erase                 (XCHAR* xpath, bool overwrite = false);
+    bool              Rename                (XCHAR* xpathold, XCHAR* xpathnew);
 
-		bool							ActualizeSize					();
-						
-	private:
+    FILE*             GetFileStructHandle   ()                                            { return filehandle;    };
 
-		void							Clean									()
-											{
-												filehandle  = NULL;
-											}
+    virtual void      ChangeAttributes      (XCHAR* attributes);
 
-		bool							ExtendedOpen				(XCHAR* xpath, XCHAR* mode);
-		
-		FILE*							filehandle;
-};	
-	
+  protected:
+
+    bool              ActualizeSize         ();
+
+  private:
+
+    void              Clean                 ()
+                      {
+                        filehandle  = NULL;
+                      }
+
+    bool              ExtendedOpen        (XCHAR* xpath, XCHAR* mode);
+
+    FILE*             filehandle;
+};
+
 
 //---- INLINE FUNCTIONS --------------------------------------------------------------------
 

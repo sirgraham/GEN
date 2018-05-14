@@ -1,55 +1,55 @@
 
 /*------------------------------------------------------------------------------------------
-//	SNDANDROIDFACTORY.CPP
-//	
-//	windows sound system
-//   
-//	Author						: Imanol Celaya Ruiz de Alegria
-//	Date Of Creation	: 11/11/2015 10:52:15
-//	Last Modification	:	
-//	
-//	GEN  Copyright (C).  All right reserved.
+//  SNDANDROIDFACTORY.CPP
+//
+//  windows sound system
+//
+//  Author            : Imanol Celaya Ruiz de Alegria
+//  Date Of Creation  : 11/11/2015 10:52:15
+//  Last Modification :
+//
+//  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
-	
+
 #include "SNDAndroidFactory.h"
-#include "SNDOpenAL.h"	
+#include "SNDOpenAL.h"
 #include "SNDFileOGG.h"
 #include "SNDDummyResampler.h"
 
 #include "XMemory.h"
 
 /*---- GENERAL VARIABLE ------------------------------------------------------------------*/
-	
-	
+
+
 /*---- CLASS MEMBERS ---------------------------------------------------------------------*/
 
 
 
 
 /*-------------------------------------------------------------------
-//	SNDANDROIDFACTORY::SNDANDROIDFACTORY
-*/	
-/**	
-//	
-//	Class Constructor SNDANDROIDFACTORY
-//	
-//	@author				Imanol Celaya Ruiz de Alegria
-//	@version			11/11/2015 10:57:23
-//	
- 
- 
-//  @param				SNDFACTORY(xfactory : 
- 
- 
+//  SNDANDROIDFACTORY::SNDANDROIDFACTORY
+*/
+/**
+//
+//  Class Constructor SNDANDROIDFACTORY
+//
+//  @author       Imanol Celaya Ruiz de Alegria
+//  @version      11/11/2015 10:57:23
+//
+
+
+//  @param        SNDFACTORY(xfactory :
+
+
 */
 /*-----------------------------------------------------------------*/
 SNDANDROIDFACTORY::SNDANDROIDFACTORY() : SNDFACTORY()
 {
-	Clean();
-	sndopenal = new SNDOPENAL(this);
+  Clean();
+  sndopenal = new SNDOPENAL(this);
 }
 
 
@@ -58,198 +58,198 @@ SNDANDROIDFACTORY::SNDANDROIDFACTORY() : SNDFACTORY()
 
 
 /*-------------------------------------------------------------------
-//	SNDANDROIDFACTORY::~SNDANDROIDFACTORY
-*/	
-/**	
-//	
-//	 Class Destructor SNDANDROIDFACTORY
-//	
-//	@author				Imanol Celaya Ruiz de Alegria
-//	@version			11/11/2015 10:57:28
-//	
+//  SNDANDROIDFACTORY::~SNDANDROIDFACTORY
+*/
+/**
+//
+//   Class Destructor SNDANDROIDFACTORY
+//
+//  @author       Imanol Celaya Ruiz de Alegria
+//  @version      11/11/2015 10:57:28
+//
 */
 /*-----------------------------------------------------------------*/
 SNDANDROIDFACTORY::~SNDANDROIDFACTORY()
 {
-	delete sndopenal;
-	Clean();
+  delete sndopenal;
+  Clean();
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	 SNDANDROIDFACTORY::AddFile
+//   SNDANDROIDFACTORY::AddFile
 */
 /**
-//	
 //
-//	@author		Abraham J. Velez 
-//	@version	22/02/2018 9:59:02
 //
-//	@return		SNDELEMENT* : 
+//  @author   Abraham J. Velez
+//  @version  22/02/2018 9:59:02
 //
-//	@param		XPATH& : 
-//	@param		XSTRING* : 
-//	@param		bool : 
+//  @return   SNDELEMENT* :
+//
+//  @param    XPATH& :
+//  @param    XSTRING* :
+//  @param    bool :
 //
 *//*-----------------------------------------------------------------*/
 SNDELEMENT* SNDANDROIDFACTORY::AddFile(XPATH& xpath, XSTRING* namefile, bool stream)
 {
-	return sndopenal->AddFile(xpath, namefile, stream);
+  return sndopenal->AddFile(xpath, namefile, stream);
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	 SNDANDROIDFACTORY::AddFile
+//   SNDANDROIDFACTORY::AddFile
 */
 /**
-//	
 //
-//	@author		Abraham J. Velez 
-//	@version	22/02/2018 9:59:35
 //
-//	@return		SNDELEMENT* : 
+//  @author   Abraham J. Velez
+//  @version  22/02/2018 9:59:35
 //
-//	@param		XPATH& : 
-//	@param		XCHAR* : 
-//	@param		bool : 
+//  @return   SNDELEMENT* :
+//
+//  @param    XPATH& :
+//  @param    XCHAR* :
+//  @param    bool :
 //
 *//*-----------------------------------------------------------------*/
 SNDELEMENT* SNDANDROIDFACTORY::AddFile(XPATH& xpath, XCHAR* namefile, bool stream)
 {
-	return sndopenal->AddFile(xpath, namefile, stream);
+  return sndopenal->AddFile(xpath, namefile, stream);
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	SNDANDROIDFACTORY::GetFile
-*/	
-/**	
-//	
-//	gets an already loaded file
-//	
-//	@author				Imanol Celaya Ruiz de Alegria
-//	@version			11/11/2015 10:58:08
-//	
-//	@return 			SNDELEMENT* : 
+//  SNDANDROIDFACTORY::GetFile
+*/
+/**
 //
-//  @param				namefile : 
+//  gets an already loaded file
+//
+//  @author       Imanol Celaya Ruiz de Alegria
+//  @version      11/11/2015 10:58:08
+//
+//  @return       SNDELEMENT* :
+//
+//  @param        namefile :
 */
 /*-----------------------------------------------------------------*/
 SNDELEMENT* SNDANDROIDFACTORY::GetFile(XSTRING* namefile, bool stream)
 {
-	return sndopenal->GetFile(namefile, stream);
+  return sndopenal->GetFile(namefile, stream);
 }
 
 
 
 /*-------------------------------------------------------------------
-//	SNDANDROIDFACTORY::GetFile
-*/	
-/**	
-//	
-//	gets an already loaded file
-//	
-//	@author				Imanol Celaya Ruiz de Alegria
-//	@version			11/11/2015 10:58:18
-//	
-//	@return 			SNDELEMENT* : 
+//  SNDANDROIDFACTORY::GetFile
+*/
+/**
 //
-//  @param				file : 
+//  gets an already loaded file
+//
+//  @author       Imanol Celaya Ruiz de Alegria
+//  @version      11/11/2015 10:58:18
+//
+//  @return       SNDELEMENT* :
+//
+//  @param        file :
 */
 /*-----------------------------------------------------------------*/
 SNDELEMENT* SNDANDROIDFACTORY::GetFile(XCHAR* namefile, bool stream)
 {
-	return sndopenal->GetFile(namefile, stream);
+  return sndopenal->GetFile(namefile, stream);
 }
 
 
 
 /*-------------------------------------------------------------------
-//	 SNDANDROIDFACTORY::RemoveFile
+//   SNDANDROIDFACTORY::RemoveFile
 */
 /**
 //
-//	
 //
-//	@author		Imanol Celaya Ruiz de Alegria 
-//	@version		
+//
+//  @author   Imanol Celaya Ruiz de Alegria
+//  @version
 
-//	@return		bool : 
+//  @return   bool :
 //
-//	@param		SNDELEMENT* : 
+//  @param    SNDELEMENT* :
 //
 *//*-----------------------------------------------------------------*/
 bool SNDANDROIDFACTORY::RemoveFile(SNDELEMENT* element)
 {
-	return sndopenal->RemoveFile(element);
+  return sndopenal->RemoveFile(element);
 }
 
 
 /*-------------------------------------------------------------------
-//	SNDANDROIDFACTORY::GetStreamer
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Imanol Celaya Ruiz de Alegria
-//	@version			20/07/2016 11:56:58
-//	
-//	@return 			SNDSTREAMELEMENT* : 
+//  SNDANDROIDFACTORY::GetStreamer
+*/
+/**
+//
+//
+//
+//  @author       Imanol Celaya Ruiz de Alegria
+//  @version      20/07/2016 11:56:58
+//
+//  @return       SNDSTREAMELEMENT* :
 //
 */
 /*-----------------------------------------------------------------*/
 SNDSTREAMELEMENT* SNDANDROIDFACTORY::GetStreamer()
 {
-	return sndopenal->GetStreamer();
+  return sndopenal->GetStreamer();
 }
 
 
 
 /*-------------------------------------------------------------------
-//	SNDANDROIDFACTORY::PlaySound
-*/	
-/**	
-//	
-//	plays a sund
-//	
-//	@author				Imanol Celaya Ruiz de Alegria
-//	@version			11/11/2015 10:58:27
-//	
-//	@return 			SNDSOURCE* : 
+//  SNDANDROIDFACTORY::PlaySound
+*/
+/**
 //
-//  @param				element : 
+//  plays a sund
+//
+//  @author       Imanol Celaya Ruiz de Alegria
+//  @version      11/11/2015 10:58:27
+//
+//  @return       SNDSOURCE* :
+//
+//  @param        element :
 */
 /*-----------------------------------------------------------------*/
 SNDINSTANCE* SNDANDROIDFACTORY::PlaySound(SNDELEMENT* element)
 {
-	return sndopenal->PlaySound(element);
+  return sndopenal->PlaySound(element);
 }
 
 
 
 /*-------------------------------------------------------------------
-//	SNDANDROIDFACTORY::StopSound
-*/	
-/**	
-//	
-//	stops a sound
-//	
-//	@author				Imanol Celaya Ruiz de Alegria
-//	@version			11/11/2015 10:58:38
-//	
-//  @param				element : 
+//  SNDANDROIDFACTORY::StopSound
+*/
+/**
+//
+//  stops a sound
+//
+//  @author       Imanol Celaya Ruiz de Alegria
+//  @version      11/11/2015 10:58:38
+//
+//  @param        element :
 */
 /*-----------------------------------------------------------------*/
 void SNDANDROIDFACTORY::StopSound(SNDELEMENT* element)
 {
-	sndopenal->StopSound(element);
+  sndopenal->StopSound(element);
 }
 
 
@@ -257,43 +257,43 @@ void SNDANDROIDFACTORY::StopSound(SNDELEMENT* element)
 
 
 /*-------------------------------------------------------------------
-//	SNDANDROIDFACTORY::PauseSound
-*/	
-/**	
-//	
-//	pauses a sound
-//	
-//	@author				Imanol Celaya Ruiz de Alegria
-//	@version			11/11/2015 10:58:47
-//	
-//	@return 			SNDSOURCE* : 
+//  SNDANDROIDFACTORY::PauseSound
+*/
+/**
 //
-//  @param				element : 
+//  pauses a sound
+//
+//  @author       Imanol Celaya Ruiz de Alegria
+//  @version      11/11/2015 10:58:47
+//
+//  @return       SNDSOURCE* :
+//
+//  @param        element :
 */
 /*-----------------------------------------------------------------*/
 SNDINSTANCE* SNDANDROIDFACTORY::PauseSound(SNDELEMENT* element)
 {
-	return sndopenal->PauseSound(element);
+  return sndopenal->PauseSound(element);
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	SNDANDROIDFACTORY::Update
-*/	
-/**	
-//	
-//	system update
-//	
-//	@author				Imanol Celaya Ruiz de Alegria
-//	@version			11/11/2015 10:58:55
-//	
+//  SNDANDROIDFACTORY::Update
+*/
+/**
+//
+//  system update
+//
+//  @author       Imanol Celaya Ruiz de Alegria
+//  @version      11/11/2015 10:58:55
+//
 */
 /*-----------------------------------------------------------------*/
 void SNDANDROIDFACTORY::ImpUpdate()
 {
-	sndopenal->Update();
+  sndopenal->Update();
 }
 
 
@@ -301,145 +301,145 @@ void SNDANDROIDFACTORY::ImpUpdate()
 
 
 /*-------------------------------------------------------------------
-//	SNDANDROIDFACTORY::IsAnyPlaying
-*/	
-/**	
-//	
-//	checks if any sound is playing
-//	
-//	@author				Imanol Celaya Ruiz de Alegria
-//	@version			11/11/2015 10:59:06
-//	
-//	@return 			bool : 
+//  SNDANDROIDFACTORY::IsAnyPlaying
+*/
+/**
+//
+//  checks if any sound is playing
+//
+//  @author       Imanol Celaya Ruiz de Alegria
+//  @version      11/11/2015 10:59:06
+//
+//  @return       bool :
 //
 */
 /*-----------------------------------------------------------------*/
 bool SNDANDROIDFACTORY::IsAnyPlaying()
 {
-	return sndopenal->IsAnyPlaying();
+  return sndopenal->IsAnyPlaying();
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	SNDANDROIDFACTORY::StopAll
-*/	
-/**	
-//	
-//	stops all sounds
-//	
-//	@author				Imanol Celaya Ruiz de Alegria
-//	@version			11/11/2015 10:59:15
-//	
+//  SNDANDROIDFACTORY::StopAll
+*/
+/**
+//
+//  stops all sounds
+//
+//  @author       Imanol Celaya Ruiz de Alegria
+//  @version      11/11/2015 10:59:15
+//
 */
 /*-----------------------------------------------------------------*/
 void SNDANDROIDFACTORY::StopAll()
 {
-	sndopenal->StopAll();
+  sndopenal->StopAll();
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	SNDANDROIDFACTORY::SetMasterVolume
-*/	
-/**	
-//	
-//	sets the master volume
-//	
-//	@author				Imanol Celaya Ruiz de Alegria
-//	@version			11/11/2015 10:59:25
-//	
-//  @param				mastervolume : 
+//  SNDANDROIDFACTORY::SetMasterVolume
+*/
+/**
+//
+//  sets the master volume
+//
+//  @author       Imanol Celaya Ruiz de Alegria
+//  @version      11/11/2015 10:59:25
+//
+//  @param        mastervolume :
 */
 /*-----------------------------------------------------------------*/
 void SNDANDROIDFACTORY::SetMasterVolume(float mastervolume)
 {
-	sndopenal->SetMasterVolume(mastervolume);
+  sndopenal->SetMasterVolume(mastervolume);
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	SNDANDROIDFACTORY::GetMasterVolume
-*/	
-/**	
-//	
-//	gets the master volume
-//	
-//	@author				Imanol Celaya Ruiz de Alegria
-//	@version			11/11/2015 10:59:33
-//	
-//	@return 			float : 
+//  SNDANDROIDFACTORY::GetMasterVolume
+*/
+/**
+//
+//  gets the master volume
+//
+//  @author       Imanol Celaya Ruiz de Alegria
+//  @version      11/11/2015 10:59:33
+//
+//  @return       float :
 //
 */
 /*-----------------------------------------------------------------*/
 float SNDANDROIDFACTORY::GetMasterVolume()
 {
-	return sndopenal->GetMasterVolume();
+  return sndopenal->GetMasterVolume();
 }
 
 
 
 /*-------------------------------------------------------------------
-//	SNDANDROIDFACTORY::GetResampler
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Imanol Celaya Ruiz de Alegria
-//	@version			16/03/2017 16:24:48
-//	
-//	@return 			SNDRESAMPLER* : 
+//  SNDANDROIDFACTORY::GetResampler
+*/
+/**
+//
+//
+//
+//  @author       Imanol Celaya Ruiz de Alegria
+//  @version      16/03/2017 16:24:48
+//
+//  @return       SNDRESAMPLER* :
 //
 */
 /*-----------------------------------------------------------------*/
 SNDRESAMPLER* SNDANDROIDFACTORY::GetResampler()
 {
-	return new SNDDUMMYRESAMPLER();
+  return new SNDDUMMYRESAMPLER();
 }
 
 
 
 /*-------------------------------------------------------------------
-//	SNDANDROIDFACTORY::CreateFile
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Imanol Celaya Ruiz de Alegria
-//	@version			16/03/2017 16:24:43
-//	
-//	@return 			SNDFILE* : 
+//  SNDANDROIDFACTORY::CreateFile
+*/
+/**
+//
+//
+//
+//  @author       Imanol Celaya Ruiz de Alegria
+//  @version      16/03/2017 16:24:43
+//
+//  @return       SNDFILE* :
 //
 */
 /*-----------------------------------------------------------------*/
 SNDFILE* SNDANDROIDFACTORY::CreateSNDFile()
 {
-	return new SNDFILEOGG();
+  return new SNDFILEOGG();
 }
 
 
 
 /*-------------------------------------------------------------------
-//	SNDANDROIDFACTORY::DeleteFile
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Imanol Celaya Ruiz de Alegria
-//	@version			16/03/2017 16:24:36
-//	
-//  @param				file : 
+//  SNDANDROIDFACTORY::DeleteFile
+*/
+/**
+//
+//
+//
+//  @author       Imanol Celaya Ruiz de Alegria
+//  @version      16/03/2017 16:24:36
+//
+//  @param        file :
 */
 /*-----------------------------------------------------------------*/
 void SNDANDROIDFACTORY::DeleteSNDFile(SNDFILE* file)
 {
-	delete file;
+  delete file;
 }

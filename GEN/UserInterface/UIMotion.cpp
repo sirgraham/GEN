@@ -6,10 +6,10 @@
 //
 // implements UI Motions
 //
-//	@author: Imanol Celaya Ruiz de Alegria 
+//  @author: Imanol Celaya Ruiz de Alegria
 //
-//	Date of Creation : 17/10/2017 10:52:26 
-//	Last Modification : 
+//  Date of Creation : 17/10/2017 10:52:26
+//  Last Modification :
 */
 /* GEN  Copyright (C).  All right reserved.
 /*------------------------------------------------------------------------------------------*/
@@ -25,386 +25,386 @@
 
 
 /*-------------------------------------------------------------------
-//	UIMOTION::UIMOTION
+//  UIMOTION::UIMOTION
 */
 /**
 //
-//	constructor
+//  constructor
 //
-//	@author		Imanol Celaya Ruiz de Alegria 
-//	@version	17/10/2017 10:53:59
-//	@return		 : 
+//  @author   Imanol Celaya Ruiz de Alegria
+//  @version  17/10/2017 10:53:59
+//  @return    :
 //
-//	@param		 : 
+//  @param     :
 //
 *//*-----------------------------------------------------------------*/
 UIMOTION::UIMOTION()
 {
-	Clean();
+  Clean();
 }
 
 
 
 /*-------------------------------------------------------------------
-//	UIMOTION::~UIMOTION
+//  UIMOTION::~UIMOTION
 */
 /**
 //
-//	destructor
+//  destructor
 //
-//	@author		Imanol Celaya Ruiz de Alegria 
-//	@version	17/10/2017 10:54:04
-//	@return		 : 
+//  @author   Imanol Celaya Ruiz de Alegria
+//  @version  17/10/2017 10:54:04
+//  @return    :
 //
-//	@param		 : 
+//  @param     :
 //
 *//*-----------------------------------------------------------------*/
 UIMOTION::~UIMOTION()
 {
-	XDWORD size = entries.GetSize();
-	for(XDWORD i = 0; i < size; i++)
-		{
-			delete entries.FastGet(i);
-		}
+  XDWORD size = entries.GetSize();
+  for(XDWORD i = 0; i < size; i++)
+    {
+      delete entries.FastGet(i);
+    }
 
-	Clean();
+  Clean();
 }
 
 
 
 /*-------------------------------------------------------------------
-//	 UIMOTION::AddMotion
+//   UIMOTION::AddMotion
 */
 /**
 //
-//	
 //
-//	@author		Imanol Celaya Ruiz de Alegria 
-//	@version	17/10/2017 10:54:10
-//	@return		bool : 
 //
-//	@param		UIMOTIONENTRY* : 
+//  @author   Imanol Celaya Ruiz de Alegria
+//  @version  17/10/2017 10:54:10
+//  @return   bool :
+//
+//  @param    UIMOTIONENTRY* :
 //
 *//*-----------------------------------------------------------------*/
 bool UIMOTION::AddMotion(UIMOTIONENTRY* entry)
 {
-	if(entry == NULL)
-		{
-			return false;
-		}
+  if(entry == NULL)
+    {
+      return false;
+    }
 
-	return entries.Add(entry);
+  return entries.Add(entry);
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	 UIMOTION::GetLastMotion
+//   UIMOTION::GetLastMotion
 */
 /**
 //
-//	
 //
-//	@author		Imanol Celaya Ruiz de Alegria 
-//	@version	17/10/2017 10:54:16
-//	@return		UIMOTION::UIMOTIONENTRY* : 
 //
-//	@param		 : 
+//  @author   Imanol Celaya Ruiz de Alegria
+//  @version  17/10/2017 10:54:16
+//  @return   UIMOTION::UIMOTIONENTRY* :
+//
+//  @param     :
 //
 *//*-----------------------------------------------------------------*/
 UIMOTION::UIMOTIONENTRY* UIMOTION::GetLastMotion()
 {
-	if(entries.GetSize() == 0)
-		{
-			return NULL;
-		}
+  if(entries.GetSize() == 0)
+    {
+      return NULL;
+    }
 
-	return entries.GetLast();
+  return entries.GetLast();
 }
 
 
 
 /*-------------------------------------------------------------------
-//	 UIMOTION::GetMotionNumber
+//   UIMOTION::GetMotionNumber
 */
 /**
 //
-//	
 //
-//	@author		Imanol Celaya Ruiz de Alegria 
-//	@version	17/10/2017 10:54:22
-//	@return		XDWORD : 
 //
-//	@param		 : 
+//  @author   Imanol Celaya Ruiz de Alegria
+//  @version  17/10/2017 10:54:22
+//  @return   XDWORD :
+//
+//  @param     :
 //
 *//*-----------------------------------------------------------------*/
 XDWORD UIMOTION::GetMotionNumber()
 {
-	return entries.GetSize();
+  return entries.GetSize();
 }
 
 
 
 /*-------------------------------------------------------------------
-//	 UIMOTION::GetMotion
+//   UIMOTION::GetMotion
 */
 /**
 //
-//	
 //
-//	@author		Imanol Celaya Ruiz de Alegria 
-//	@version	17/10/2017 10:54:28
-//	@return		UIMOTION::UIMOTIONENTRY* : 
 //
-//	@param		XDWORD : 
+//  @author   Imanol Celaya Ruiz de Alegria
+//  @version  17/10/2017 10:54:28
+//  @return   UIMOTION::UIMOTIONENTRY* :
+//
+//  @param    XDWORD :
 //
 *//*-----------------------------------------------------------------*/
 UIMOTION::UIMOTIONENTRY* UIMOTION::GetMotion(XDWORD index)
 {
-	return entries.Get(index);
+  return entries.Get(index);
 }
 
 
 
 /*-------------------------------------------------------------------
-//	 UIMOTION::Clear
+//   UIMOTION::Clear
 */
 /**
 //
-//	
 //
-//	@author		Imanol Celaya Ruiz de Alegria 
-//	@version	17/10/2017 13:24:10
-//	@return		void : 
 //
-//	@param		 : 
+//  @author   Imanol Celaya Ruiz de Alegria
+//  @version  17/10/2017 13:24:10
+//  @return   void :
+//
+//  @param     :
 //
 *//*-----------------------------------------------------------------*/
 void UIMOTION::Clear()
 {
-	XDWORD size = entries.GetSize();
-	for(XDWORD i = 0; i < size; i++)
-		{
-			delete entries.FastGet(i);
-		}
+  XDWORD size = entries.GetSize();
+  for(XDWORD i = 0; i < size; i++)
+    {
+      delete entries.FastGet(i);
+    }
 
-	entries.DeleteAll();
+  entries.DeleteAll();
 }
 
 
 
 /*-------------------------------------------------------------------
-//	 UIMOTION::GetCurrentX
+//   UIMOTION::GetCurrentX
 */
 /**
 //
-//	
 //
-//	@author		Imanol Celaya Ruiz de Alegria 
-//	@version		
+//
+//  @author   Imanol Celaya Ruiz de Alegria
+//  @version
 
-//	@return		float : 
+//  @return   float :
 //
-//	@param		 : 
+//  @param     :
 //
 *//*-----------------------------------------------------------------*/
 float UIMOTION::GetCurrentX()
 {
-	return x;
+  return x;
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	 UIMOTION::GetCurrentY
+//   UIMOTION::GetCurrentY
 */
 /**
 //
-//	
 //
-//	@author		Imanol Celaya Ruiz de Alegria 
-//	@version		
+//
+//  @author   Imanol Celaya Ruiz de Alegria
+//  @version
 
-//	@return		float : 
+//  @return   float :
 //
-//	@param		 : 
+//  @param     :
 //
 *//*-----------------------------------------------------------------*/
 float UIMOTION::GetCurrentY()
 {
-	return y;
+  return y;
 }
 
 
 
 /*-------------------------------------------------------------------
-//	 UIMOTION::GetCurrentTimeStamp
+//   UIMOTION::GetCurrentTimeStamp
 */
 /**
 //
-//	
 //
-//	@author		Imanol Celaya Ruiz de Alegria 
-//	@version		
+//
+//  @author   Imanol Celaya Ruiz de Alegria
+//  @version
 
-//	@return		XQWORD : 
+//  @return   XQWORD :
 //
-//	@param		 : 
+//  @param     :
 //
 *//*-----------------------------------------------------------------*/
 XQWORD UIMOTION::GetCurrentTimeStamp()
 {
-	return timestamp;
+  return timestamp;
 }
 
 
 
 /*-------------------------------------------------------------------
-//	 UIMOTION::GetMotionDiffX
+//   UIMOTION::GetMotionDiffX
 */
 /**
 //
-//	
 //
-//	@author		Imanol Celaya Ruiz de Alegria 
-//	@version		
+//
+//  @author   Imanol Celaya Ruiz de Alegria
+//  @version
 
-//	@return		float : 
+//  @return   float :
 //
-//	@param		 : 
+//  @param     :
 //
 *//*-----------------------------------------------------------------*/
 float UIMOTION::GetMotionDiffX()
 {
-	if(entries.GetSize())
-		{
-			return x - entries.GetLast()->x;
-		}
+  if(entries.GetSize())
+    {
+      return x - entries.GetLast()->x;
+    }
 
-	return x;
+  return x;
 }
 
 
 
 /*-------------------------------------------------------------------
-//	 UIMOTION::GetMotionDiffY
+//   UIMOTION::GetMotionDiffY
 */
 /**
 //
-//	
 //
-//	@author		Imanol Celaya Ruiz de Alegria 
-//	@version		
+//
+//  @author   Imanol Celaya Ruiz de Alegria
+//  @version
 
-//	@return		float : 
+//  @return   float :
 //
-//	@param		 : 
+//  @param     :
 //
 *//*-----------------------------------------------------------------*/
 float UIMOTION::GetMotionDiffY()
 {
-	if(entries.GetSize())
-		{
-			return y - entries.GetLast()->y;
-		}
+  if(entries.GetSize())
+    {
+      return y - entries.GetLast()->y;
+    }
 
-	return y;
+  return y;
 }
 
 
 
 /*-------------------------------------------------------------------
-//	 UIMOTION::GetTimeStampDiffX
+//   UIMOTION::GetTimeStampDiffX
 */
 /**
 //
-//	
 //
-//	@author		Imanol Celaya Ruiz de Alegria 
-//	@version		
+//
+//  @author   Imanol Celaya Ruiz de Alegria
+//  @version
 
-//	@return		XQWORD : 
+//  @return   XQWORD :
 //
-//	@param		 : 
+//  @param     :
 //
 *//*-----------------------------------------------------------------*/
 XQWORD UIMOTION::GetTimeStampDiffX()
 {
-	if(entries.GetSize())
-		{
-			return timestamp - entries.GetLast()->timestamp;
-		}
+  if(entries.GetSize())
+    {
+      return timestamp - entries.GetLast()->timestamp;
+    }
 
-	return timestamp;
+  return timestamp;
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	 UIMOTION::SetCurrentX
+//   UIMOTION::SetCurrentX
 */
 /**
 //
-//	
 //
-//	@author		Imanol Celaya Ruiz de Alegria 
-//	@version		
+//
+//  @author   Imanol Celaya Ruiz de Alegria
+//  @version
 
-//	@return		void : 
+//  @return   void :
 //
-//	@param		float : 
+//  @param    float :
 //
 *//*-----------------------------------------------------------------*/
 void UIMOTION::SetCurrentX(float x)
 {
-	this->x = x;
+  this->x = x;
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	 UIMOTION::SetCurrentY
+//   UIMOTION::SetCurrentY
 */
 /**
 //
-//	
 //
-//	@author		Imanol Celaya Ruiz de Alegria 
-//	@version		
+//
+//  @author   Imanol Celaya Ruiz de Alegria
+//  @version
 
-//	@return		void : 
+//  @return   void :
 //
-//	@param		float : 
+//  @param    float :
 //
 *//*-----------------------------------------------------------------*/
 void UIMOTION::SetCurrentY(float y)
 {
-	this->y = y;
+  this->y = y;
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	 UIMOTION::SetCurrentTimeStamp
+//   UIMOTION::SetCurrentTimeStamp
 */
 /**
 //
-//	
 //
-//	@author		Imanol Celaya Ruiz de Alegria 
-//	@version		
+//
+//  @author   Imanol Celaya Ruiz de Alegria
+//  @version
 
-//	@return		void : 
+//  @return   void :
 //
-//	@param		XQWORD : 
+//  @param    XQWORD :
 //
 *//*-----------------------------------------------------------------*/
 void UIMOTION::SetCurrentTimeStamp(XQWORD timestamp)
 {
-	this->timestamp = timestamp;
+  this->timestamp = timestamp;
 }

@@ -1,17 +1,17 @@
 
 /*------------------------------------------------------------------------------------------
-//	DIOSMTP.CPP
-//	
-//	Data IO SMTP (Simple Mail Transfer Protocol) class
-//   
-//	Author						: Abraham J. Velez
-//	Date Of Creation	: 26/05/2014 16:05:49
-//	Last Modification	:	
-//	
-//	GEN  Copyright (C).  All right reserved.
+//  DIOSMTP.CPP
+//
+//  Data IO SMTP (Simple Mail Transfer Protocol) class
+//
+//  Author            : Abraham J. Velez
+//  Date Of Creation  : 26/05/2014 16:05:49
+//  Last Modification :
+//
+//  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
 #include "XBuffer.h"
@@ -24,834 +24,834 @@
 #include "DIOSMTP.h"
 
 #include "XMemory.h"
-	
+
 /*---- GENERAL VARIABLE ------------------------------------------------------------------*/
-	
-	
+
+
 /*---- CLASS MEMBERS ---------------------------------------------------------------------*/
 
 
 /*-------------------------------------------------------------------
-//	DIOSMTP::DIOSMTP
-*/	
-/**	
-//	
-//	Class Constructor DIOSMTP
-//	
-//	@author				Abraham J. Velez
-//	@version			28/05/2014 10:28:26
-//	
-//  @param				diostream : 
+//  DIOSMTP::DIOSMTP
+*/
+/**
+//
+//  Class Constructor DIOSMTP
+//
+//  @author       Abraham J. Velez
+//  @version      28/05/2014 10:28:26
+//
+//  @param        diostream :
 */
 /*-----------------------------------------------------------------*/
 DIOSMTP::DIOSMTP(DIOSTREAM* diostream)
 {
-	Clean();
+  Clean();
 
-	
-	this->diostream		= diostream;
+
+  this->diostream   = diostream;
 }
 
 
 
 /*-------------------------------------------------------------------
-//	DIOSMTP::~DIOSMTP
-*/	
-/**	
-//	
-//	 Class Destructor DIOSMTP
-//	
-//	@author				Abraham J. Velez
-//	@version			26/05/2014 16:07:06
-//	
+//  DIOSMTP::~DIOSMTP
+*/
+/**
+//
+//   Class Destructor DIOSMTP
+//
+//  @author       Abraham J. Velez
+//  @version      26/05/2014 16:07:06
+//
 */
 /*-----------------------------------------------------------------*/
 DIOSMTP::~DIOSMTP()
 {
-	Clean();
+  Clean();
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	DIOSMTP::Ini
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			30/05/2014 17:15:23
-//	
-//	@return 			bool : 
+//  DIOSMTP::Ini
+*/
+/**
+//
+//
+//
+//  @author       Abraham J. Velez
+//  @version      30/05/2014 17:15:23
+//
+//  @return       bool :
 //
 */
 /*-----------------------------------------------------------------*/
 bool DIOSMTP::Ini()
-{	
-	if(!diostream)								return false;
-	if(!diostream->GetConfig())		return false;
-	
-	message = new XFILETXT();
-	if(!message) return false;
+{
+  if(!diostream)                return false;
+  if(!diostream->GetConfig())   return false;
 
-	this->contenttype = contenttype;	
-	serverconnexiontimeout	= DIOSMTP_DEFAULTTIMEOUT;
+  message = new XFILETXT();
+  if(!message) return false;
 
-	return true;
+  this->contenttype = contenttype;
+  serverconnexiontimeout  = DIOSMTP_DEFAULTTIMEOUT;
+
+  return true;
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	DIOSMTP::Server_IsAvailable
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			30/05/2014 17:13:21
-//	
-//	@return 			bool : 
+//  DIOSMTP::Server_IsAvailable
+*/
+/**
+//
+//
+//
+//  @author       Abraham J. Velez
+//  @version      30/05/2014 17:13:21
+//
+//  @return       bool :
 //
 */
 /*-----------------------------------------------------------------*/
 bool DIOSMTP::Server_IsAvailable()
 {
-	int  attempts		= DIOSMTP_MAXNATTEMPTSCONNECT;
-	bool status			= false;
+  int  attempts   = DIOSMTP_MAXNATTEMPTSCONNECT;
+  bool status     = false;
 
-	UpdateConnexionConfig();	
+  UpdateConnexionConfig();
 
-	while(attempts)
-		{
-			if(diostream->Open()) 
-				{
-					status = diostream->WaitToConnected(serverconnexiontimeout);									
-					diostream->Close();
-				}	
-						
-			attempts--;
-			if(status) break;
-		}
+  while(attempts)
+    {
+      if(diostream->Open())
+        {
+          status = diostream->WaitToConnected(serverconnexiontimeout);
+          diostream->Close();
+        }
 
-	return status;
+      attempts--;
+      if(status) break;
+    }
+
+  return status;
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	DIOSMTP::AddRecipient
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/05/2014 15:58:27
-//	
-//	@return 			bool : 
+//  DIOSMTP::AddRecipient
+*/
+/**
 //
-//  @param				type : 
-//  @param				name : 
-//  @param				email : 
-//  @param				check : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/05/2014 15:58:27
+//
+//  @return       bool :
+//
+//  @param        type :
+//  @param        name :
+//  @param        email :
+//  @param        check :
 */
 /*-----------------------------------------------------------------*/
 bool DIOSMTP::AddRecipient(DIOSMTPRECIPIENTTYPE type, XCHAR* name, XCHAR* email, bool check)
 {
-	DIOEMAILADDRESS _email;
+  DIOEMAILADDRESS _email;
 
-	_email = email;
+  _email = email;
 
-	if(check) 
-		{
-			if(!_email.IsValid()) return false;
-		}
+  if(check)
+    {
+      if(!_email.IsValid()) return false;
+    }
 
-	DIOSMTPRECIPIENT* recipient = new DIOSMTPRECIPIENT();
-	if(!recipient) return false;
+  DIOSMTPRECIPIENT* recipient = new DIOSMTPRECIPIENT();
+  if(!recipient) return false;
 
-	recipient->SetType(type);
-	if(name) recipient->GetName()->Set(name);
-	recipient->GetEmail()->Set(_email);
+  recipient->SetType(type);
+  if(name) recipient->GetName()->Set(name);
+  recipient->GetEmail()->Set(_email);
 
-	return recipients.Add(recipient);	
+  return recipients.Add(recipient);
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	DIOSMTP::AddRecipient
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/05/2014 15:59:02
-//	
-//	@return 			bool : 
+//  DIOSMTP::AddRecipient
+*/
+/**
 //
-//  @param				type : 
-//  @param				name : 
-//  @param				email : 
-//  @param				check : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/05/2014 15:59:02
+//
+//  @return       bool :
+//
+//  @param        type :
+//  @param        name :
+//  @param        email :
+//  @param        check :
 */
 /*-----------------------------------------------------------------*/
 bool DIOSMTP::AddRecipient(DIOSMTPRECIPIENTTYPE type, XSTRING& name, XSTRING& email, bool check)
 {
-	return AddRecipient(type, name.Get(), email.Get(), check);
+  return AddRecipient(type, name.Get(), email.Get(), check);
 }
 
-		
+
 
 /*-------------------------------------------------------------------
-//	DIOSMTP::AddRecipient
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/05/2014 15:59:57
-//	
-//	@return 			bool : 
+//  DIOSMTP::AddRecipient
+*/
+/**
 //
-//  @param				type : 
-//  @param				name : 
-//  @param				email : 
-//  @param				check : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/05/2014 15:59:57
+//
+//  @return       bool :
+//
+//  @param        type :
+//  @param        name :
+//  @param        email :
+//  @param        check :
 */
 /*-----------------------------------------------------------------*/
 bool DIOSMTP::AddRecipient(DIOSMTPRECIPIENTTYPE type, XCHAR* name, DIOEMAILADDRESS& email, bool check)
 {
-	return AddRecipient(type, name, email.Get(), check);
+  return AddRecipient(type, name, email.Get(), check);
 }
 
 
 
 /*-------------------------------------------------------------------
-//	DIOSMTP::AddRecipient
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/05/2014 16:00:28
-//	
-//	@return 			bool : 
+//  DIOSMTP::AddRecipient
+*/
+/**
 //
-//  @param				type : 
-//  @param				name : 
-//  @param				email : 
-//  @param				check : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/05/2014 16:00:28
+//
+//  @return       bool :
+//
+//  @param        type :
+//  @param        name :
+//  @param        email :
+//  @param        check :
 */
 /*-----------------------------------------------------------------*/
 bool DIOSMTP::AddRecipient(DIOSMTPRECIPIENTTYPE type, XSTRING& name, DIOEMAILADDRESS& email, bool check)
 {
-	return AddRecipient(type, name.Get(), email.Get(), check);
+  return AddRecipient(type, name.Get(), email.Get(), check);
 }
 
 
 
 /*-------------------------------------------------------------------
-//	DIOSMTP::DelRecipient
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			27/05/2014 16:21:13
-//	
-//	@return 			bool : 
+//  DIOSMTP::DelRecipient
+*/
+/**
 //
-//  @param				email : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      27/05/2014 16:21:13
+//
+//  @return       bool :
+//
+//  @param        email :
 */
 /*-----------------------------------------------------------------*/
 bool DIOSMTP::DelRecipient(DIOEMAILADDRESS& email)
 {
-	if(recipients.IsEmpty()) return false;
+  if(recipients.IsEmpty()) return false;
 
-	for(XDWORD c=0; c<recipients.GetSize(); c++)
-		{
-			DIOSMTPRECIPIENT* recipient = recipients.Get(c);
-			if(recipient)
-				{
-					if((*recipient->GetEmail()) == email) 
-						{
-							recipients.Delete(recipient);
-							delete recipient;
+  for(XDWORD c=0; c<recipients.GetSize(); c++)
+    {
+      DIOSMTPRECIPIENT* recipient = recipients.Get(c);
+      if(recipient)
+        {
+          if((*recipient->GetEmail()) == email)
+            {
+              recipients.Delete(recipient);
+              delete recipient;
 
-							return true;
-						}
-				}
-		}
+              return true;
+            }
+        }
+    }
 
-	return false;
+  return false;
 }
 
 
 
 /*-------------------------------------------------------------------
-//	DIOSMTP::DelAllRecipients
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			27/05/2014 13:44:50
-//	
-//	@return 			bool : 
+//  DIOSMTP::DelAllRecipients
+*/
+/**
+//
+//
+//
+//  @author       Abraham J. Velez
+//  @version      27/05/2014 13:44:50
+//
+//  @return       bool :
 //
 */
 /*-----------------------------------------------------------------*/
 bool DIOSMTP::DelAllRecipients()
 {
-	if(recipients.IsEmpty()) return false;
+  if(recipients.IsEmpty()) return false;
 
-	recipients.DeleteContents();	
-	recipients.DeleteAll();
+  recipients.DeleteContents();
+  recipients.DeleteAll();
 
-	return true;
+  return true;
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	DIOSMTP::AddAttachment
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/05/2014 9:09:46
-//	
-//	@return 			bool : 
+//  DIOSMTP::AddAttachment
+*/
+/**
 //
-//  @param				path : 
-//  @param				check : 
-//  @param				sizelimit : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/05/2014 9:09:46
+//
+//  @return       bool :
+//
+//  @param        path :
+//  @param        check :
+//  @param        sizelimit :
 */
 /*-----------------------------------------------------------------*/
 bool DIOSMTP::AddAttachment(XCHAR* path, bool check, int sizelimit)
 {
-	if(!path) return false;
+  if(!path) return false;
 
-	DIOSMTPATTACHMENT* attachment = new DIOSMTPATTACHMENT();
-	if(!attachment) return false;
+  DIOSMTPATTACHMENT* attachment = new DIOSMTPATTACHMENT();
+  if(!attachment) return false;
 
-	attachment->GetXPath()->Set(path);
-	
-	if(check) 
-		{
-			if(!attachment->FileExists()) 
-				{
-					delete attachment;
-					return false;
-				}
-		}
-	
-	if(attachment->GetSize()>sizelimit)
-		{
-			delete attachment;
-			return false;
-		}
+  attachment->GetXPath()->Set(path);
 
-	attachments.Add(attachment);
+  if(check)
+    {
+      if(!attachment->FileExists())
+        {
+          delete attachment;
+          return false;
+        }
+    }
 
-	return true;
+  if(attachment->GetSize()>sizelimit)
+    {
+      delete attachment;
+      return false;
+    }
+
+  attachments.Add(attachment);
+
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
-//	DIOSMTP::AddAttachment
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/05/2014 9:09:55
-//	
-//	@return 			bool : 
+//  DIOSMTP::AddAttachment
+*/
+/**
 //
-//  @param				xpath : 
-//  @param				check : 
-//  @param				sizelimit : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/05/2014 9:09:55
+//
+//  @return       bool :
+//
+//  @param        xpath :
+//  @param        check :
+//  @param        sizelimit :
 */
 /*-----------------------------------------------------------------*/
 bool DIOSMTP::AddAttachment(XPATH& xpath, bool check, int sizelimit)
 {
-	return AddAttachment(xpath.Get(), check, sizelimit);
+  return AddAttachment(xpath.Get(), check, sizelimit);
 }
 
 
 
 /*-------------------------------------------------------------------
-//	DIOSMTP::DelAttachment
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/05/2014 9:03:50
-//	
-//	@return 			bool : 
+//  DIOSMTP::DelAttachment
+*/
+/**
 //
-//  @param				path : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/05/2014 9:03:50
+//
+//  @return       bool :
+//
+//  @param        path :
 */
 /*-----------------------------------------------------------------*/
 bool DIOSMTP::DelAttachment(XCHAR* path)
 {
-	if(attachments.IsEmpty()) return false;
+  if(attachments.IsEmpty()) return false;
 
-	for(XDWORD c=0; c<attachments.GetSize(); c++)
-		{
-			DIOSMTPATTACHMENT* attachment = attachments.Get(c);
-			if(attachment)
-				{
-					if(!attachment->GetXPath()->Compare(path)) 
-						{
-							attachments.Delete(attachment);
-							delete attachment;
+  for(XDWORD c=0; c<attachments.GetSize(); c++)
+    {
+      DIOSMTPATTACHMENT* attachment = attachments.Get(c);
+      if(attachment)
+        {
+          if(!attachment->GetXPath()->Compare(path))
+            {
+              attachments.Delete(attachment);
+              delete attachment;
 
-							return true;
-						}
-				}
-		}
+              return true;
+            }
+        }
+    }
 
-	return false;
+  return false;
 }
 
 
 /*-------------------------------------------------------------------
-//	DIOSMTP::DelAttachment
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/05/2014 9:03:53
-//	
-//	@return 			bool : 
+//  DIOSMTP::DelAttachment
+*/
+/**
 //
-//  @param				xpath : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/05/2014 9:03:53
+//
+//  @return       bool :
+//
+//  @param        xpath :
 */
 /*-----------------------------------------------------------------*/
 bool DIOSMTP::DelAttachment(XPATH& xpath)
 {
-	return DelAttachment(xpath.Get());
+  return DelAttachment(xpath.Get());
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	DIOSMTP::DelAllAttachments
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/05/2014 9:03:58
-//	
-//	@return 			bool : 
+//  DIOSMTP::DelAllAttachments
+*/
+/**
+//
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/05/2014 9:03:58
+//
+//  @return       bool :
 //
 */
 /*-----------------------------------------------------------------*/
 bool DIOSMTP::DelAllAttachments()
 {
-	attachments.DeleteContents();
-	attachments.DeleteAll();
+  attachments.DeleteContents();
+  attachments.DeleteAll();
 
-	return true;
+  return true;
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	DIOSMTP::Send
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			27/05/2014 12:54:31
-//	
-//	@return 			bool : 
+//  DIOSMTP::Send
+*/
+/**
 //
-//  @param				login : 
-//  @param				password : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      27/05/2014 12:54:31
+//
+//  @return       bool :
+//
+//  @param        login :
+//  @param        password :
 */
 /*-----------------------------------------------------------------*/
 bool DIOSMTP::Send()
 {
-	if(!diostream)								return false;
+  if(!diostream)                return false;
 
-	if(!diostream->GetConfig())		return false;
+  if(!diostream->GetConfig())   return false;
 
-	if(recipients.IsEmpty())      return false;
+  if(recipients.IsEmpty())      return false;
 
-	if(!UpdateConnexionConfig())	return false;
-	
-	int  attempts	= DIOSMTP_MAXNATTEMPTSCONNECT;
-	bool status   = false; 
+  if(!UpdateConnexionConfig())  return false;
 
-	while(attempts)
-		{
-			if(diostream->Open()) status = diostream->WaitToConnected(serverconnexiontimeout);									
-						
-			attempts--;
-			if(status) break;
-		}
+  int  attempts = DIOSMTP_MAXNATTEMPTSCONNECT;
+  bool status   = false;
 
-	if(!status) 
-		{ 
-			diostream->Close(); 
-			return false; 
-		}		
-	
-	XSTRING response;
+  while(attempts)
+    {
+      if(diostream->Open()) status = diostream->WaitToConnected(serverconnexiontimeout);
 
-	if(!diostream->ReadStr(response, serverconnexiontimeout))  
-		{ 
-			diostream->Close(); 
-			return false; 
-		}
-	
-	int code = GetCodeResult(response);
-	if(code!=220) 
-		{ 
-			diostream->Close(); 
-			return false; 
-		}
+      attempts--;
+      if(status) break;
+    }
 
-	XSTRING domain;
-	senderemail.GetDomain(domain);
+  if(!status)
+    {
+      diostream->Close();
+      return false;
+    }
 
-	response.Format(__L("EHLO %s\r\n") ,domain.Get());
-	if(!SendResponse(response, 250))
-		{ 
-			diostream->Close(); 
-			return false; 
-		}
-									
-	response.Format(__L("AUTH LOGIN\r\n"));
-	if(!SendResponseAndWait(response, 334, 250)) 
-		{
-			diostream->Close(); 
-			return false; 
-		}
-																		
-	XSTRING encoded64login;
-	XSTRING encoded64password;
+  XSTRING response;
 
-	serverlogin.ConvertToBase64(encoded64login);
-	serverpassword.ConvertToBase64(encoded64password);
+  if(!diostream->ReadStr(response, serverconnexiontimeout))
+    {
+      diostream->Close();
+      return false;
+    }
 
-	response.Format(__L("%s\r\n"), encoded64login.Get());
-	if(!SendResponse(response, 334)) 
-		{ 
-			diostream->Close(); 
-			return false; 
-		}
-	
-	response.Format(__L("%s\r\n"), encoded64password.Get());
-	if(!SendResponseAndWait(response, 235, 334)) 
-		{ 
-			diostream->Close(); 
-			return false; 
-		}
+  int code = GetCodeResult(response);
+  if(code!=220)
+    {
+      diostream->Close();
+      return false;
+    }
 
-	if(sendername.GetSize())
-		{		
-			response.Format(__L("MAIL FROM:<%s>\r\n"), sendername.Get());
-			if(!SendResponse(response, 250))
-				{ 
-					diostream->Close(); 
-					return false; 
-				}
-		}
+  XSTRING domain;
+  senderemail.GetDomain(domain);
 
-	bool atleastonereceiver =false;
+  response.Format(__L("EHLO %s\r\n") ,domain.Get());
+  if(!SendResponse(response, 250))
+    {
+      diostream->Close();
+      return false;
+    }
 
-	for(XDWORD c=0; c<recipients.GetSize(); c++)
-		{
-			DIOSMTPRECIPIENT* recipient = recipients.Get(c);
-			if(recipient)
-				{
-					response.Format(__L("RCPT TO:<%s>\r\n"), recipient->GetEmail()->Get());
-					if(!SendResponse(response, 250))
-						{ 
+  response.Format(__L("AUTH LOGIN\r\n"));
+  if(!SendResponseAndWait(response, 334, 250))
+    {
+      diostream->Close();
+      return false;
+    }
 
-						} else atleastonereceiver = true;
-				}
-		}
+  XSTRING encoded64login;
+  XSTRING encoded64password;
 
-	if(!atleastonereceiver)
-		{
-			diostream->Close(); 
-			return false; 
-		}
+  serverlogin.ConvertToBase64(encoded64login);
+  serverpassword.ConvertToBase64(encoded64password);
 
-	response.Format(__L("DATA\r\n"), encoded64password.Get());
-	if(!SendResponseAndWait(response, 354, 250)) 
-		{ 
-			diostream->Close(); 
-			return false; 
-		}
+  response.Format(__L("%s\r\n"), encoded64login.Get());
+  if(!SendResponse(response, 334))
+    {
+      diostream->Close();
+      return false;
+    }
 
-	if(!CreateHeader(response))
-		{ 
-			diostream->Close(); 
-			return false; 
-		}
+  response.Format(__L("%s\r\n"), encoded64password.Get());
+  if(!SendResponseAndWait(response, 235, 334))
+    {
+      diostream->Close();
+      return false;
+    }
 
-	diostream->WriteStr(response);		
-	if(!diostream->WaitToFlushOutXBuffer(serverconnexiontimeout)) 
-		{ 
-			diostream->Close(); 
-			return false; 
-		}
+  if(sendername.GetSize())
+    {
+      response.Format(__L("MAIL FROM:<%s>\r\n"), sendername.Get());
+      if(!SendResponse(response, 250))
+        {
+          diostream->Close();
+          return false;
+        }
+    }
 
-	if(GetMessage()->GetNLines())
-		{	
-			switch(contenttype)
-				{
-					case DIOSSMPTCONTENTTYPE_PLAINTTEXT	:	response.Empty();
-																								for(int c=0; c<GetMessage()->GetNLines(); c++)
-																									{
-																										XSTRING line;
-																										line.Format(__L("%s\r\n"), GetMessage()->GetLine(c)->Get());
-																										response  += line.Get();
-																									}
+  bool atleastonereceiver =false;
 
-																								if(response.IsEmpty()) response  += __L(" \r\n");
-					
-																								diostream->WriteStr(response);		
-																								if(!diostream->WaitToFlushOutXBuffer(serverconnexiontimeout)) 
-																									{ 
-																										diostream->Close(); 
-																										return false; 
-																									}
-																								break;
+  for(XDWORD c=0; c<recipients.GetSize(); c++)
+    {
+      DIOSMTPRECIPIENT* recipient = recipients.Get(c);
+      if(recipient)
+        {
+          response.Format(__L("RCPT TO:<%s>\r\n"), recipient->GetEmail()->Get());
+          if(!SendResponse(response, 250))
+            {
 
-						case DIOSSMPTCONTENTTYPE_UTF8			:	for(int c=0; c<GetMessage()->GetNLines(); c++)
-																									{
-																										XBUFFER xbufferline;
-																										XSTRING line;
+            } else atleastonereceiver = true;
+        }
+    }
 
-																										line  = GetMessage()->GetLine(c)->Get();
-																										line += __L("\r\n");
-																										
-																										line.ConvertToUTF8(xbufferline);
-																										
-																										diostream->Write(xbufferline);		
-																										if(!diostream->WaitToFlushOutXBuffer(serverconnexiontimeout)) 
-																											{ 
-																												diostream->Close(); 
-																												return false; 
-																											}																										
-																									}
-																								break;
-					}			
-		}
-	 else
-		{
-			response  += __L(" \r\n");
-					
-			diostream->WriteStr(response);		
-			if(!diostream->WaitToFlushOutXBuffer(serverconnexiontimeout)) 
-				{ 
-					diostream->Close(); 
-					return false; 
-				}
-		}
+  if(!atleastonereceiver)
+    {
+      diostream->Close();
+      return false;
+    }
 
-	if(!attachments.IsEmpty())
-	  {
-			for(XDWORD c=0; c<attachments.GetSize() ;c++)
-				{
-					DIOSMTPATTACHMENT* attachment = attachments.Get(c);
-					if(attachment)
-						{							
-							XBUFFER datafile;
-							XSTRING datafileenconded64;
-							int			filesize;
+  response.Format(__L("DATA\r\n"), encoded64password.Get());
+  if(!SendResponseAndWait(response, 354, 250))
+    {
+      diostream->Close();
+      return false;
+    }
 
-							if(attachment->FileExists(&filesize))
-								{	
-									XSTRING filenameext;
+  if(!CreateHeader(response))
+    {
+      diostream->Close();
+      return false;
+    }
 
-									attachment->GetXPath()->GetNamefileExt(filenameext);
+  diostream->WriteStr(response);
+  if(!diostream->WaitToFlushOutXBuffer(serverconnexiontimeout))
+    {
+      diostream->Close();
+      return false;
+    }
 
-									response.Format(__L("--%s\r\n"), DIOSMTP_BOUNDARYTEXT);
-									response += __L("Content-Type: application/octect-stream\r\n");
-									response += __L("Content-Transfer-Encoding: base64\r\n");
-									response += __L("Content-Disposition: attachment;\r\n filename=\"");
-									response += filenameext.Get();
-									response += __L("\"\r\n");
-									response += __L("\r\n");
+  if(GetMessage()->GetNLines())
+    {
+      switch(contenttype)
+        {
+          case DIOSSMPTCONTENTTYPE_PLAINTTEXT : response.Empty();
+                                                for(int c=0; c<GetMessage()->GetNLines(); c++)
+                                                  {
+                                                    XSTRING line;
+                                                    line.Format(__L("%s\r\n"), GetMessage()->GetLine(c)->Get());
+                                                    response  += line.Get();
+                                                  }
 
-									diostream->WriteStr(response);
-									if(!diostream->WaitToFlushOutXBuffer(serverconnexiontimeout)) 
-										{ 
-											diostream->Close(); 
-											return false; 
-										}
+                                                if(response.IsEmpty()) response  += __L(" \r\n");
 
-									XFILE* xfile = xfactory->Create_File();
-									if(xfile)
-										{
-											int br = filesize;
+                                                diostream->WriteStr(response);
+                                                if(!diostream->WaitToFlushOutXBuffer(serverconnexiontimeout))
+                                                  {
+                                                    diostream->Close();
+                                                    return false;
+                                                  }
+                                                break;
 
-											if(xfile->Open((*attachment->GetXPath())))
-												{
-													datafile.Resize(filesize);
+            case DIOSSMPTCONTENTTYPE_UTF8     : for(int c=0; c<GetMessage()->GetNLines(); c++)
+                                                  {
+                                                    XBUFFER xbufferline;
+                                                    XSTRING line;
 
-													if(xfile->Read(datafile.Get(), &br)) datafile.ConvertToBase64(datafileenconded64);
+                                                    line  = GetMessage()->GetLine(c)->Get();
+                                                    line += __L("\r\n");
 
-													xfile->Close();
-												}		
+                                                    line.ConvertToUTF8(xbufferline);
 
-											#define MAXSIZEPARTENCODED64 64 												
+                                                    diostream->Write(xbufferline);
+                                                    if(!diostream->WaitToFlushOutXBuffer(serverconnexiontimeout))
+                                                      {
+                                                        diostream->Close();
+                                                        return false;
+                                                      }
+                                                  }
+                                                break;
+          }
+    }
+   else
+    {
+      response  += __L(" \r\n");
 
-											XSTRING partstring;
-											int			index		 = 0;
-											int			sizepart;
+      diostream->WriteStr(response);
+      if(!diostream->WaitToFlushOutXBuffer(serverconnexiontimeout))
+        {
+          diostream->Close();
+          return false;
+        }
+    }
 
-											response.Empty();
+  if(!attachments.IsEmpty())
+    {
+      for(XDWORD c=0; c<attachments.GetSize() ;c++)
+        {
+          DIOSMTPATTACHMENT* attachment = attachments.Get(c);
+          if(attachment)
+            {
+              XBUFFER datafile;
+              XSTRING datafileenconded64;
+              int     filesize;
 
-											do{ sizepart = MAXSIZEPARTENCODED64;
-													if((index+MAXSIZEPARTENCODED64)>=(int)datafileenconded64.GetSize()) sizepart = datafileenconded64.GetSize()-index;
+              if(attachment->FileExists(&filesize))
+                {
+                  XSTRING filenameext;
 
-													datafileenconded64.Copy(index, index+sizepart, partstring);													
-													
-													response += partstring;
-													response += __L("\r\n");
-																										
-													index += sizepart;
-														
-												} while(sizepart == MAXSIZEPARTENCODED64);		
+                  attachment->GetXPath()->GetNamefileExt(filenameext);
 
-											diostream->WriteStr(response);
-											if(!diostream->WaitToFlushOutXBuffer(serverconnexiontimeout)) 
-												{ 
-													diostream->Close(); 
-													return false; 
-												}
-										}
-								}
-						}
-				}
-		
-			response.Format(__L("--%s--\r\n"), DIOSMTP_BOUNDARYTEXT);
-			diostream->WriteStr(response);		
-			if(!diostream->WaitToFlushOutXBuffer(serverconnexiontimeout)) 
-				{ 
-					diostream->Close(); 
-					return false; 
-				}			
-		}
-	
-	response = __L("\r\n.\r\n");	
-	if(!SendResponse(response, 250)) 
-		{ 
-			diostream->Close(); 
-			return false; 
-		}
+                  response.Format(__L("--%s\r\n"), DIOSMTP_BOUNDARYTEXT);
+                  response += __L("Content-Type: application/octect-stream\r\n");
+                  response += __L("Content-Transfer-Encoding: base64\r\n");
+                  response += __L("Content-Disposition: attachment;\r\n filename=\"");
+                  response += filenameext.Get();
+                  response += __L("\"\r\n");
+                  response += __L("\r\n");
 
-	response = __L("QUIT\r\n");
-	if(!SendResponse(response, 221)) 
-		{ 
-			diostream->Close(); 
-			return false; 
-		}
+                  diostream->WriteStr(response);
+                  if(!diostream->WaitToFlushOutXBuffer(serverconnexiontimeout))
+                    {
+                      diostream->Close();
+                      return false;
+                    }
 
-	diostream->Close();
+                  XFILE* xfile = xfactory->Create_File();
+                  if(xfile)
+                    {
+                      int br = filesize;
 
-	return true;
+                      if(xfile->Open((*attachment->GetXPath())))
+                        {
+                          datafile.Resize(filesize);
+
+                          if(xfile->Read(datafile.Get(), &br)) datafile.ConvertToBase64(datafileenconded64);
+
+                          xfile->Close();
+                        }
+
+                      #define MAXSIZEPARTENCODED64 64
+
+                      XSTRING partstring;
+                      int     index    = 0;
+                      int     sizepart;
+
+                      response.Empty();
+
+                      do{ sizepart = MAXSIZEPARTENCODED64;
+                          if((index+MAXSIZEPARTENCODED64)>=(int)datafileenconded64.GetSize()) sizepart = datafileenconded64.GetSize()-index;
+
+                          datafileenconded64.Copy(index, index+sizepart, partstring);
+
+                          response += partstring;
+                          response += __L("\r\n");
+
+                          index += sizepart;
+
+                        } while(sizepart == MAXSIZEPARTENCODED64);
+
+                      diostream->WriteStr(response);
+                      if(!diostream->WaitToFlushOutXBuffer(serverconnexiontimeout))
+                        {
+                          diostream->Close();
+                          return false;
+                        }
+                    }
+                }
+            }
+        }
+
+      response.Format(__L("--%s--\r\n"), DIOSMTP_BOUNDARYTEXT);
+      diostream->WriteStr(response);
+      if(!diostream->WaitToFlushOutXBuffer(serverconnexiontimeout))
+        {
+          diostream->Close();
+          return false;
+        }
+    }
+
+  response = __L("\r\n.\r\n");
+  if(!SendResponse(response, 250))
+    {
+      diostream->Close();
+      return false;
+    }
+
+  response = __L("QUIT\r\n");
+  if(!SendResponse(response, 221))
+    {
+      diostream->Close();
+      return false;
+    }
+
+  diostream->Close();
+
+  return true;
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	DIOSMTP::End
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			26/05/2014 16:28:08
-//	
-//	@return 			bool : 
+//  DIOSMTP::End
+*/
+/**
+//
+//
+//
+//  @author       Abraham J. Velez
+//  @version      26/05/2014 16:28:08
+//
+//  @return       bool :
 //
 */
 /*-----------------------------------------------------------------*/
 bool DIOSMTP::End()
 {
-	DelAllRecipients();
+  DelAllRecipients();
 
-	DelAllAttachments();
+  DelAllAttachments();
 
-	if(message) 
-		{
-			delete message;
-			message = NULL;
-		}
+  if(message)
+    {
+      delete message;
+      message = NULL;
+    }
 
-	return true;
+  return true;
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	DIOSSMTP::UpdateConnexionConfig
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			30/05/2014 16:25:26
-//	
-//	@return 			bool : 
+//  DIOSSMTP::UpdateConnexionConfig
+*/
+/**
+//
+//
+//
+//  @author       Abraham J. Velez
+//  @version      30/05/2014 16:25:26
+//
+//  @return       bool :
 //
 */
 /*-----------------------------------------------------------------*/
 bool DIOSMTP::UpdateConnexionConfig()
 {
-	DIOSTREAMTCPIPCONFIG* diostreamcfg = (DIOSTREAMTCPIPCONFIG*)diostream->GetConfig();
+  DIOSTREAMTCPIPCONFIG* diostreamcfg = (DIOSTREAMTCPIPCONFIG*)diostream->GetConfig();
 
-	if(!diostreamcfg) return false;
+  if(!diostreamcfg) return false;
 
-	diostreamcfg->SetMode(DIOSTREAMMODE_CLIENT);
-	if(serverconnexionlocalIP)  diostreamcfg->GetLocalIP()->Set(serverconnexionlocalIP->Get());
-	
-	diostreamcfg->GetRemoteURL()->Set(serverURL.Get());	
-	diostreamcfg->SetRemotePort(serverport);
-	
-	return true;	
+  diostreamcfg->SetMode(DIOSTREAMMODE_CLIENT);
+  if(serverconnexionlocalIP)  diostreamcfg->GetLocalIP()->Set(serverconnexionlocalIP->Get());
+
+  diostreamcfg->GetRemoteURL()->Set(serverURL.Get());
+  diostreamcfg->SetRemotePort(serverport);
+
+  return true;
 }
 
 
@@ -859,288 +859,288 @@ bool DIOSMTP::UpdateConnexionConfig()
 
 
 /*-------------------------------------------------------------------
-//	DIOSMTP::GetCodeResult
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/05/2014 12:42:59
-//	
-//	@return 			int : 
+//  DIOSMTP::GetCodeResult
+*/
+/**
 //
-//  @param				answer : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/05/2014 12:42:59
+//
+//  @return       int :
+//
+//  @param        answer :
 */
 /*-----------------------------------------------------------------*/
 int DIOSMTP::GetCodeResult(XSTRING& answer)
-{	
-	XSTRING  codestring;
-	int			 code = 0;
+{
+  XSTRING  codestring;
+  int      code = 0;
 
-	answer.Copy(0, 3, codestring);
+  answer.Copy(0, 3, codestring);
 
-	code = codestring.ConvertToInt();
+  code = codestring.ConvertToInt();
 
-	return code;
+  return code;
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	DIOSMTP::SendResponse
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/05/2014 13:57:49
-//	
-//	@return 			bool : 
+//  DIOSMTP::SendResponse
+*/
+/**
 //
-//  @param				response : 
-//  @param				codevalid : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/05/2014 13:57:49
+//
+//  @return       bool :
+//
+//  @param        response :
+//  @param        codevalid :
 */
 /*-----------------------------------------------------------------*/
 bool DIOSMTP::SendResponse(XSTRING& response, int codevalid)
 {
-	int code = 0;
+  int code = 0;
 
-	diostream->WriteStr(response);		
-	if(!diostream->WaitToFlushOutXBuffer(serverconnexiontimeout)) return false; 
-	
-	if(!diostream->ReadStr(response, serverconnexiontimeout)) return false; 
-	
-	code = GetCodeResult(response);
-	if(code!=codevalid) return false; 
+  diostream->WriteStr(response);
+  if(!diostream->WaitToFlushOutXBuffer(serverconnexiontimeout)) return false;
 
-	return true;
+  if(!diostream->ReadStr(response, serverconnexiontimeout)) return false;
+
+  code = GetCodeResult(response);
+  if(code!=codevalid) return false;
+
+  return true;
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	DIOSMTP::SendResponseAndWait
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/05/2014 14:13:31
-//	
-//	@return 			bool : 
+//  DIOSMTP::SendResponseAndWait
+*/
+/**
 //
-//  @param				response : 
-//  @param				codevalid : 
-//  @param				codecontinue : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/05/2014 14:13:31
+//
+//  @return       bool :
+//
+//  @param        response :
+//  @param        codevalid :
+//  @param        codecontinue :
 */
 /*-----------------------------------------------------------------*/
 bool DIOSMTP::SendResponseAndWait(XSTRING& response, int codevalid, int codecontinue)
 {
-	diostream->WriteStr(response);		
-	if(!diostream->WaitToFlushOutXBuffer(serverconnexiontimeout)) return false; 
-	
-	int  code     = 0;
-	bool accepted = false;
-	bool status   = false;
+  diostream->WriteStr(response);
+  if(!diostream->WaitToFlushOutXBuffer(serverconnexiontimeout)) return false;
 
-	do{ status = diostream->ReadStr(response, serverconnexiontimeout);
-			if(!status) break;
-			
-			code = GetCodeResult(response);			
-			if(code == codevalid)  
-				{
-					accepted = true;
-				}
-			 else
-			  {
-					if(code != codecontinue)  status = false;
-				}
-			 			
-			if(!status) break;
+  int  code     = 0;
+  bool accepted = false;
+  bool status   = false;
 
-		} while(!accepted);
+  do{ status = diostream->ReadStr(response, serverconnexiontimeout);
+      if(!status) break;
 
-	return status;
+      code = GetCodeResult(response);
+      if(code == codevalid)
+        {
+          accepted = true;
+        }
+       else
+        {
+          if(code != codecontinue)  status = false;
+        }
+
+      if(!status) break;
+
+    } while(!accepted);
+
+  return status;
 }
 
 
 
 /*-------------------------------------------------------------------
-//	DIOSMTP::CreateHeader
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/05/2014 15:53:40
-//	
-//	@return 			bool : 
+//  DIOSMTP::CreateHeader
+*/
+/**
 //
-//  @param				header : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/05/2014 15:53:40
+//
+//  @return       bool :
+//
+//  @param        header :
 */
 /*-----------------------------------------------------------------*/
 bool DIOSMTP::CreateHeader(XSTRING& header)
 {
-	XCHAR*	month[] = { __L("Jan") , __L("Feb"), __L("Mar"), __L("Apr"), __L("May"), __L("Jun"), __L("Jul") , __L("Aug"), __L("Sep"), __L("Oct"), __L("Nov"), __L("Dec") };
-	XSTRING to_line;
-	XSTRING cc_line;
-	XSTRING bcc_line;
-	XSTRING string;
+  XCHAR*  month[] = { __L("Jan") , __L("Feb"), __L("Mar"), __L("Apr"), __L("May"), __L("Jun"), __L("Jul") , __L("Aug"), __L("Sep"), __L("Oct"), __L("Nov"), __L("Dec") };
+  XSTRING to_line;
+  XSTRING cc_line;
+  XSTRING bcc_line;
+  XSTRING string;
 
-	header.Empty();
+  header.Empty();
 
-	if(!recipients.IsEmpty())
-		{
-			for(XDWORD c=0; c<recipients.GetSize(); c++)
-				{
-					DIOSMTPRECIPIENT* recipient = recipients.Get(c);
-					if(recipient)
-						{
-							string.Format(__L("%s<%s>"), recipient->GetName()->Get(), recipient->GetEmail()->Get());
+  if(!recipients.IsEmpty())
+    {
+      for(XDWORD c=0; c<recipients.GetSize(); c++)
+        {
+          DIOSMTPRECIPIENT* recipient = recipients.Get(c);
+          if(recipient)
+            {
+              string.Format(__L("%s<%s>"), recipient->GetName()->Get(), recipient->GetEmail()->Get());
 
-							switch(recipient->GetType())
-								{
-									case DIOSMTPRECIPIENTTYPE_UNKNOWN : break;
+              switch(recipient->GetType())
+                {
+                  case DIOSMTPRECIPIENTTYPE_UNKNOWN : break;
 
-									case DIOSMTPRECIPIENTTYPE_TO			: if(!to_line.IsEmpty()) to_line+= __L(",");
-																											to_line += string.Get();
-																											break;
+                  case DIOSMTPRECIPIENTTYPE_TO      : if(!to_line.IsEmpty()) to_line+= __L(",");
+                                                      to_line += string.Get();
+                                                      break;
 
-									case DIOSMTPRECIPIENTTYPE_CC			:	if(!cc_line.IsEmpty()) cc_line+= __L(",");
-																											cc_line += string.Get();
-																											break;
+                  case DIOSMTPRECIPIENTTYPE_CC      : if(!cc_line.IsEmpty()) cc_line+= __L(",");
+                                                      cc_line += string.Get();
+                                                      break;
 
-									case DIOSMTPRECIPIENTTYPE_BCC			: if(!bcc_line.IsEmpty()) bcc_line+= __L(",");
-																											bcc_line += string.Get();
-																											break;
-								}
-						}
-				}
-		}
+                  case DIOSMTPRECIPIENTTYPE_BCC     : if(!bcc_line.IsEmpty()) bcc_line+= __L(",");
+                                                      bcc_line += string.Get();
+                                                      break;
+                }
+            }
+        }
+    }
 
-	string.Empty();
+  string.Empty();
 
-	/*
-	XDATETIME* datetime = xfactory->CreateTime();
-	if(datetime)
-		{
-			datetime->Read();
+  /*
+  XDATETIME* datetime = xfactory->CreateTime();
+  if(datetime)
+    {
+      datetime->Read();
 
-			string.Format(__L("Date: %d %s %d %d:%d:%d\r\n"), datetime->GetDay()
-																											, month[datetime->GetMonth()-1]
-																											, datetime->GetYear()
-																											, datetime->GetHours()
-																											, datetime->GetMinutes()
-																											, datetime->GetSeconds());
-																												
-
-			xfactory->DeleteTime(datetime);
-		}
-
-	if(string.IsEmpty()) return false;
-	header+= string;
-	*/
-
-	string.Format(__L("From: %s <%s>\r\n"), 	GetSenderName()->Get(), GetSenderEmail()->Get());
-	header+= string;
+      string.Format(__L("Date: %d %s %d %d:%d:%d\r\n"), datetime->GetDay()
+                                                      , month[datetime->GetMonth()-1]
+                                                      , datetime->GetYear()
+                                                      , datetime->GetHours()
+                                                      , datetime->GetMinutes()
+                                                      , datetime->GetSeconds());
 
 
-	if(!GetReplytoEmail()->IsEmpty())
-		{
-			string.Format(__L("Reply-To: %s\r\n"), 	GetReplytoEmail()->Get());
-			header+= string;			
-		}
+      xfactory->DeleteTime(datetime);
+    }
 
-	XSTRING defaultxmailer;
+  if(string.IsEmpty()) return false;
+  header+= string;
+  */
 
-	defaultxmailer  = FRAMEWORKNAME;
-	defaultxmailer += __L(" ");
-	defaultxmailer += FRAMEWORKVERSION;
-
-	string.Format(__L("X-Mailer: %s\r\n"), 	GetXMailer()->IsEmpty()? defaultxmailer.Get() : GetXMailer()->Get());
-	header+= string;
-
-	switch(xpriority)
-		{		
-			case DIOSMTPXPRIORITY_HIGH		:	string = __L("X-Priority: 2 (High)\r\n");			break;
-			case DIOSMTPXPRIORITY_UNKNOWN	:
-			case DIOSMTPXPRIORITY_NORMAL	:	string = __L("X-Priority: 3 (Normal)\r\n");		break;
-			case DIOSMTPXPRIORITY_LOW			:	string = __L("X-Priority: 4 (Low)\r\n");			break;		
-		}
-	
-	if(string.IsEmpty()) return false;
-	header+= string;
-
-	if(!to_line.IsEmpty())
-		{
-			string.Format(__L("To: %s\r\n"), 	to_line.Get());
-			header+= string;
-		}
-
-	if(!cc_line.IsEmpty())
-		{
-			string.Format(__L("Cc: %s\r\n"), 	cc_line.Get());
-			header+= string;
-		}
-
-	if(!bcc_line.IsEmpty())
-		{
-			string.Format(__L("Bcc: %s\r\n"), bcc_line.Get());
-			header+= string;
-		}
+  string.Format(__L("From: %s <%s>\r\n"),   GetSenderName()->Get(), GetSenderEmail()->Get());
+  header+= string;
 
 
-	string.Empty();
-	switch(contenttype)
-		{
-			case DIOSSMPTCONTENTTYPE_PLAINTTEXT	:	string.Format(__L("Subject: %s\r\n"), GetSubject()->IsEmpty()?__L(" "):GetSubject()->Get());
-																						header+= string;
-																						break;
+  if(!GetReplytoEmail()->IsEmpty())
+    {
+      string.Format(__L("Reply-To: %s\r\n"),  GetReplytoEmail()->Get());
+      header+= string;
+    }
 
-			case DIOSSMPTCONTENTTYPE_UTF8				: { XBUFFER subjectUTF8;
-																							XSTRING subjectbase64;
-	
-																							GetSubject()->ConvertToUTF8(subjectUTF8);
+  XSTRING defaultxmailer;
 
-																							subjectUTF8.ConvertToBase64(subjectbase64);
+  defaultxmailer  = FRAMEWORKNAME;
+  defaultxmailer += __L(" ");
+  defaultxmailer += FRAMEWORKVERSION;
 
-																							string = __L("Subject: =?UTF-8?B?");
-																							string += subjectbase64;																							
-																							string += __L("?=\r\n");
-																						}
-																						break;
-		}
-	
-	header += string;
+  string.Format(__L("X-Mailer: %s\r\n"),  GetXMailer()->IsEmpty()? defaultxmailer.Get() : GetXMailer()->Get());
+  header+= string;
+
+  switch(xpriority)
+    {
+      case DIOSMTPXPRIORITY_HIGH    : string = __L("X-Priority: 2 (High)\r\n");     break;
+      case DIOSMTPXPRIORITY_UNKNOWN :
+      case DIOSMTPXPRIORITY_NORMAL  : string = __L("X-Priority: 3 (Normal)\r\n");   break;
+      case DIOSMTPXPRIORITY_LOW     : string = __L("X-Priority: 4 (Low)\r\n");      break;
+    }
+
+  if(string.IsEmpty()) return false;
+  header+= string;
+
+  if(!to_line.IsEmpty())
+    {
+      string.Format(__L("To: %s\r\n"),  to_line.Get());
+      header+= string;
+    }
+
+  if(!cc_line.IsEmpty())
+    {
+      string.Format(__L("Cc: %s\r\n"),  cc_line.Get());
+      header+= string;
+    }
+
+  if(!bcc_line.IsEmpty())
+    {
+      string.Format(__L("Bcc: %s\r\n"), bcc_line.Get());
+      header+= string;
+    }
 
 
-	string = __L("MIME-Version: 1.0\r\n");   
+  string.Empty();
+  switch(contenttype)
+    {
+      case DIOSSMPTCONTENTTYPE_PLAINTTEXT : string.Format(__L("Subject: %s\r\n"), GetSubject()->IsEmpty()?__L(" "):GetSubject()->Get());
+                                            header+= string;
+                                            break;
 
-	if(attachments.GetSize())
-		{	
-			XSTRING string2;
-			string2.Format(__L("Content-Type: multipart/mixed; boundary=\"%s\"\r\n\r\n--%s\n\r"), DIOSMTP_BOUNDARYTEXT, DIOSMTP_BOUNDARYTEXT);
-			string += string2;			
-		}
-	
-	switch(contenttype)
-		{
-			case DIOSSMPTCONTENTTYPE_PLAINTTEXT	: string += __L("Content-type: text/plain; charset=utf-8\r\n");	break;
-			case DIOSSMPTCONTENTTYPE_UTF8				: string += __L("Content-type: text/plain; charset=utf-8\r\n");	break;	
-		}
+      case DIOSSMPTCONTENTTYPE_UTF8       : { XBUFFER subjectUTF8;
+                                              XSTRING subjectbase64;
+
+                                              GetSubject()->ConvertToUTF8(subjectUTF8);
+
+                                              subjectUTF8.ConvertToBase64(subjectbase64);
+
+                                              string = __L("Subject: =?UTF-8?B?");
+                                              string += subjectbase64;
+                                              string += __L("?=\r\n");
+                                            }
+                                            break;
+    }
+
+  header += string;
+
+
+  string = __L("MIME-Version: 1.0\r\n");
+
+  if(attachments.GetSize())
+    {
+      XSTRING string2;
+      string2.Format(__L("Content-Type: multipart/mixed; boundary=\"%s\"\r\n\r\n--%s\n\r"), DIOSMTP_BOUNDARYTEXT, DIOSMTP_BOUNDARYTEXT);
+      string += string2;
+    }
+
+  switch(contenttype)
+    {
+      case DIOSSMPTCONTENTTYPE_PLAINTTEXT : string += __L("Content-type: text/plain; charset=utf-8\r\n"); break;
+      case DIOSSMPTCONTENTTYPE_UTF8       : string += __L("Content-type: text/plain; charset=utf-8\r\n"); break;
+    }
 
 //string += __L("Content-Transfer-Encoding: 7bit\r\n");
-	string += __L("\r\n");																								
-	
-	header += string;		
+  string += __L("\r\n");
 
-	return true;
+  header += string;
+
+  return true;
 }
 
 

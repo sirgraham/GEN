@@ -1,20 +1,20 @@
 //------------------------------------------------------------------------------------------
-//	XPUBLISHER.H
-//	
-/**	
-// \class 
-//   
+//  XPUBLISHER.H
+//
+/**
+// \class
+//
 //  Basic eXtender Publisher
-//   
-//	@author	 Abraham J. Velez
-//	@version 09/01/2004 15:21:34
-*/	
-//	GEN  Copyright (C).  All right reserved.			 
+//
+//  @author  Abraham J. Velez
+//  @version 09/01/2004 15:21:34
+*/
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
+
 #ifndef _XPUBLISHER_H_
 #define _XPUBLISHER_H_
-	
+
 //---- INCLUDES ----------------------------------------------------------------------------
 
 #include "XVector.h"
@@ -32,22 +32,22 @@ class  XPUBLISHER;
 
 class XPUBLISHERENTRY
 {
-	public:
-																				XPUBLISHERENTRY							()					{ Clean();                          }							
-		virtual														 ~XPUBLISHERENTRY							()					{ Clean();                          }							 	
+  public:
+                                        XPUBLISHERENTRY             ()          { Clean();                          }
+    virtual                            ~XPUBLISHERENTRY             ()          { Clean();                          }
 
-		XDWORD                              type;
-		XSUBJECT*														subject;
-		XOBSERVER*                          observer;
-		
-	private:
+    XDWORD                              type;
+    XSUBJECT*                           subject;
+    XOBSERVER*                          observer;
 
-		void																Clean												()
-																				{
-																					type			= 0;
-																					subject		= NULL;
-											                    observer	= NULL;
-																				}
+  private:
+
+    void                                Clean                       ()
+                                        {
+                                          type      = 0;
+                                          subject   = NULL;
+                                          observer  = NULL;
+                                        }
 };
 
 
@@ -55,63 +55,63 @@ class XPUBLISHERENTRY
 
 class XPUBLISHER
 {
-	public:				
-			static XPUBLISHER&								GetInstance									()
-																				{
-																					if(!instance) instance = new XPUBLISHER();
-																						
-																					return (*instance);	
-																				}						
+  public:
+      static XPUBLISHER&                GetInstance                 ()
+                                        {
+                                          if(!instance) instance = new XPUBLISHER();
 
-		static bool													DelInstance									()
-																				{
-																					if(instance)
-																						{
-																							delete instance;
-																							instance = NULL;
+                                          return (*instance);
+                                        }
 
-																							return true;
-																						} 
-																				
-																					return false;
-																				}						
+    static bool                         DelInstance                 ()
+                                        {
+                                          if(instance)
+                                            {
+                                              delete instance;
+                                              instance = NULL;
 
-	
-		bool																RegisterEvent								(XDWORD type, XSUBJECT* subject);
-		bool																DeRegisterEvent							(XDWORD type, XSUBJECT* subject);
-		bool																DeRegisterAllEvents					();
-				
-		bool																SubscribeEvent	  					(XDWORD type, XSUBJECT* subject, XOBSERVER* observer);
-		bool																UnSubscribeEvent						(XDWORD type, XSUBJECT* subject, XOBSERVER* observer);
+                                              return true;
+                                            }
+
+                                          return false;
+                                        }
 
 
-		void																Active                      (bool on)																												{ this->on  = on;										}
-		bool																IsInEvent                   ()                                                              { return inevent;                   } 	
-		
-		bool																PostEvent										(XEVENT* event, XSUBJECT* subject);
-		
+    bool                                RegisterEvent               (XDWORD type, XSUBJECT* subject);
+    bool                                DeRegisterEvent             (XDWORD type, XSUBJECT* subject);
+    bool                                DeRegisterAllEvents         ();
 
-	private:
-																				XPUBLISHER									(); 	
-																				XPUBLISHER									(XPUBLISHER const&);				// Don't implement  
-		virtual														 ~XPUBLISHER									(); 		
+    bool                                SubscribeEvent              (XDWORD type, XSUBJECT* subject, XOBSERVER* observer);
+    bool                                UnSubscribeEvent            (XDWORD type, XSUBJECT* subject, XOBSERVER* observer);
 
-		void																operator =									(XPUBLISHER const&);				// Don't implement
 
-		void																Clean												()
-																				{
-																					on           = true;
-																					inevent			 = false;
-																					xmutexevents = NULL;
-																				}																			
-													
-		static XPUBLISHER*									instance;		
-		
-		bool																on;
-		bool															  inevent;
-		XMUTEX*															xmutexevents;
-		XMAP<XDWORD, XSUBJECT*>             subjectsmap;
-		XVECTOR<XPUBLISHERENTRY*>						eventsvector;
+    void                                Active                      (bool on)                                                       { this->on  = on;                   }
+    bool                                IsInEvent                   ()                                                              { return inevent;                   }
+
+    bool                                PostEvent                   (XEVENT* event, XSUBJECT* subject);
+
+
+  private:
+                                        XPUBLISHER                  ();
+                                        XPUBLISHER                  (XPUBLISHER const&);        // Don't implement
+    virtual                            ~XPUBLISHER                  ();
+
+    void                                operator =                  (XPUBLISHER const&);        // Don't implement
+
+    void                                Clean                       ()
+                                        {
+                                          on           = true;
+                                          inevent      = false;
+                                          xmutexevents = NULL;
+                                        }
+
+    static XPUBLISHER*                  instance;
+
+    bool                                on;
+    bool                                inevent;
+    XMUTEX*                             xmutexevents;
+    XMAP<XDWORD, XSUBJECT*>             subjectsmap;
+    XVECTOR<XPUBLISHERENTRY*>           eventsvector;
 };
 
 

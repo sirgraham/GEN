@@ -1,25 +1,25 @@
 /*------------------------------------------------------------------------------------------
-//	GRPFONTMANAGER.H
-*/	
-/**	
-// \class 
-//   
-//  Manages TTF font 3d vbos
-//   
-//	@author	 Diego Martinez Ruiz de Gaona
+//  GRPFONTMANAGER.H
+*/
+/**
+// \class
 //
-//	Date Of Creation	: 28/07/2014 13:18:46
-//	Last Modification	:	
-*/	
-/*	GEN  Copyright (C).  All right reserved.
+//  Manages TTF font 3d vbos
+//
+//  @author  Diego Martinez Ruiz de Gaona
+//
+//  Date Of Creation  : 28/07/2014 13:18:46
+//  Last Modification :
+*/
+/*  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
+
 #ifndef _GRPFONTMANAGER_H_
 #define _GRPFONTMANAGER_H_
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
-	
+
 #include "GRPOpenGL.h"
 #include "GRPFont.h"
 
@@ -35,42 +35,42 @@
 
 class GRPFONTMANAGER
 {
-	public:		
-																		GRPFONTMANAGER					();
-		virtual													~GRPFONTMANAGER					();
-																	
-		bool														Init										();
+  public:
+                                    GRPFONTMANAGER          ();
+    virtual                         ~GRPFONTMANAGER         ();
 
-		bool														Load										(XCHAR* fname,XCHAR* name, GRPFONTATTRIBUTES* attributes=NULL);
-		GRPFONT*												GetFont									(const XCHAR* name);						
-		GRPFONT*												GetFontByFamily					(XCHAR* familyname, GRPFONT_STYLE style);
-						
-		int															GetLastError						()												{ return lasterror;										}
-		void														SetLastError						(XDWORD error)						{ this->lasterror = error;						}
+    bool                            Init                    ();
 
-		XMAP<XSTRING*,GRPFONT*>*				GetFonts								()												{ return &fonts;}
-		XSTRING*												GetDefaultFont					()												{ return &defaultfont; }
+    bool                            Load                    (XCHAR* fname,XCHAR* name, GRPFONTATTRIBUTES* attributes=NULL);
+    GRPFONT*                        GetFont                 (const XCHAR* name);
+    GRPFONT*                        GetFontByFamily         (XCHAR* familyname, GRPFONT_STYLE style);
 
-		bool														IndexFont								(XCHAR* filename);
+    int                             GetLastError            ()                        { return lasterror;                   }
+    void                            SetLastError            (XDWORD error)            { this->lasterror = error;            }
 
-	protected:
-	 
-		XSTRING													defaultfont;
-		XDWORD													lasterror;
-		XMAP<XSTRING*, GRPFONT*>				fonts;
-		XMAP<XSTRING*, GRPFONTFAMILY*>	families;
+    XMAP<XSTRING*,GRPFONT*>*        GetFonts                ()                        { return &fonts;}
+    XSTRING*                        GetDefaultFont          ()                        { return &defaultfont; }
 
-	private:
+    bool                            IndexFont               (XCHAR* filename);
 
-		void														Clean										()
-																		{
-																				lasterror		= GRPFONTSTATUS_OK;			
-																				defaultfont	= GRPFONTMANAGER_DEFAULTFONT;
-																			}		
+  protected:
+
+    XSTRING                         defaultfont;
+    XDWORD                          lasterror;
+    XMAP<XSTRING*, GRPFONT*>        fonts;
+    XMAP<XSTRING*, GRPFONTFAMILY*>  families;
+
+  private:
+
+    void                            Clean                   ()
+                                    {
+                                        lasterror   = GRPFONTSTATUS_OK;
+                                        defaultfont = GRPFONTMANAGER_DEFAULTFONT;
+                                      }
 };
-	
-	
+
+
 /*---- INLINE FUNCTIONS ------------------------------------------------------------------*/
-	
+
 #endif
 

@@ -1,23 +1,23 @@
 //------------------------------------------------------------------------------------------
-//	DIOANDROIDSTREAMUSB.H
-//	
-/**	
-// \class 
-//   
+//  DIOANDROIDSTREAMUSB.H
+//
+/**
+// \class
+//
 //  ANDROID Data IO Stream USB class
-//   
-//	@author	 Abraham J. Velez
-//	@version 02/01/2002
-*/	
-//	GEN  Copyright (C).  All right reserved.		 			 
+//
+//  @author  Abraham J. Velez
+//  @version 02/01/2002
+*/
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
+
 #ifndef _DIOANDROIDSTREAMUSB_H_
 #define _DIOANDROIDSTREAMUSB_H_
-	
+
 
 #if defined(DIO_ACTIVE) && defined(DIOUSB_ACTIVE)
-	
+
 //---- INCLUDES ----------------------------------------------------------------------------
 
 #include "XBuffer.h"
@@ -29,27 +29,27 @@
 
 enum DIOANDROIDUSBFSMEVENTS
 {
-	DIOANDROIDUSBFSMEVENT_NONE							 = 0  ,
-	DIOANDROIDUSBFSMEVENT_CONNECTED							,
-	DIOANDROIDUSBFSMEVENT_WAITINGTOREAD					,
-	DIOANDROIDUSBFSMEVENT_SENDINGDATA						,
-	DIOANDROIDUSBFSMEVENT_DISCONNECTING					,		
+  DIOANDROIDUSBFSMEVENT_NONE               = 0  ,
+  DIOANDROIDUSBFSMEVENT_CONNECTED             ,
+  DIOANDROIDUSBFSMEVENT_WAITINGTOREAD         ,
+  DIOANDROIDUSBFSMEVENT_SENDINGDATA           ,
+  DIOANDROIDUSBFSMEVENT_DISCONNECTING         ,
 
-	DIOANDROIDUSB_LASTEVENT
+  DIOANDROIDUSB_LASTEVENT
 
 };
 
 
 enum DIOANDROIDUSBFSMSTATES
 {
-	DIOANDROIDUSBFSMSTATE_NONE							 = 0  ,	
+  DIOANDROIDUSBFSMSTATE_NONE               = 0  ,
 
-	DIOANDROIDUSBFSMSTATE_CONNECTED							,
-	DIOANDROIDUSBFSMSTATE_WAITINGTOREAD					,
-	DIOANDROIDUSBFSMSTATE_SENDINGDATA						,
-	DIOANDROIDUSBFSMSTATE_DISCONNECTING					,		
+  DIOANDROIDUSBFSMSTATE_CONNECTED             ,
+  DIOANDROIDUSBFSMSTATE_WAITINGTOREAD         ,
+  DIOANDROIDUSBFSMSTATE_SENDINGDATA           ,
+  DIOANDROIDUSBFSMSTATE_DISCONNECTING         ,
 
-	DIOANDROIDUSB_LASTSTATE
+  DIOANDROIDUSB_LASTSTATE
 };
 
 
@@ -62,36 +62,36 @@ class DIOFACTORY;
 class DIOSTREAMCONFIG;
 
 
-class DIOANDROIDSTREAMUSB : public DIOSTREAMUSB , public XFSMACHINE 
+class DIOANDROIDSTREAMUSB : public DIOSTREAMUSB , public XFSMACHINE
 {
-	public:
-													DIOANDROIDSTREAMUSB							( );
-		virtual							 ~DIOANDROIDSTREAMUSB							();
+  public:
+                          DIOANDROIDSTREAMUSB             ( );
+    virtual              ~DIOANDROIDSTREAMUSB             ();
 
-		DIOSTREAMSTATUS				GetConnectStatus							();		
-		
-		bool									Open													();		
+    DIOSTREAMSTATUS       GetConnectStatus              ();
 
-		bool									Disconnect										()																{	return false; };
-		bool									Close													();	
+    bool                  Open                          ();
 
-		bool									CleanBuffers									(); 											
-				
-	protected:
+    bool                  Disconnect                    ()                                { return false; };
+    bool                  Close                         ();
 
-    void									Clean													();
+    bool                  CleanBuffers                  ();
 
-		static void 					ThreadConnexion								(void* data);
+  protected:
 
-		XDWORD								ReadBuffer										(XBYTE* buffer,XDWORD size);
-		XDWORD								WriteBuffer										(XBYTE* buffer,XDWORD size);
+    void                  Clean                         ();
 
-		XTHREAD*							threadconnexion;
-    
-    int 									fd;
+    static void           ThreadConnexion               (void* data);
 
-		int										readtimeout;
-		int										writetimeout;
+    XDWORD                ReadBuffer                    (XBYTE* buffer,XDWORD size);
+    XDWORD                WriteBuffer                   (XBYTE* buffer,XDWORD size);
+
+    XTHREAD*              threadconnexion;
+
+    int                   fd;
+
+    int                   readtimeout;
+    int                   writetimeout;
 };
 
 

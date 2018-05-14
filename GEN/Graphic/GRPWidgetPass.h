@@ -6,10 +6,10 @@
 //
 // Manages widget pass
 //
-//	@author: Diego Martinez Ruiz de Gaona 
+//  @author: Diego Martinez Ruiz de Gaona
 //
-//	Date of Creation : 12/12/2017 11:20:36 
-//	Last Modification : 
+//  Date of Creation : 12/12/2017 11:20:36
+//  Last Modification :
 */
 /* GEN  Copyright (C).  All right reserved.
 /*------------------------------------------------------------------------------------------*/
@@ -31,32 +31,32 @@ class GRPWIDGETPAGE;
 class GRPWIDGETPASS : public GRPPASS
 {
 public:
-														GRPWIDGETPASS		();
-														~GRPWIDGETPASS	();
-		virtual bool						OnAdded					();
+                            GRPWIDGETPASS   ();
+                            ~GRPWIDGETPASS  ();
+    virtual bool            OnAdded         ();
 
-		virtual	bool						Add							(INPDEVICE* device);
-		GRPWIDGETPAGE*					AddPage					(XCHAR* toload);
-		GRPWIDGETPAGE*					GetPage					();
+    virtual bool            Add             (INPDEVICE* device);
+    GRPWIDGETPAGE*          AddPage         (XCHAR* toload);
+    GRPWIDGETPAGE*          GetPage         ();
 
-		void										SetCurrentPage	(XDWORD page);
-		
-		bool										DrawRenderOrder	();
-		float										GetScale				();
-		void										SetScale				(float sc);
-		GRPSCREEN*							GetScreen				();
+    void                    SetCurrentPage  (XDWORD page);
 
-		XVECTOR<GRPWIDGETPAGE*>*GetPages				();
+    bool                    DrawRenderOrder ();
+    float                   GetScale        ();
+    void                    SetScale        (float sc);
+    GRPSCREEN*              GetScreen       ();
+
+    XVECTOR<GRPWIDGETPAGE*>*GetPages        ();
 
 
 protected:
 
-		float										width, height,scale;
+    float                   width, height,scale;
 
-		XVECTOR<GRPWIDGETPAGE*> pages;
-		XDWORD									active_page;
+    XVECTOR<GRPWIDGETPAGE*> pages;
+    XDWORD                  active_page;
 
-		GRPSCREEN*							screen;
+    GRPSCREEN*              screen;
 };
 
 /*---- INLINE FUNCTIONS ------------------------------------------------------------------*/

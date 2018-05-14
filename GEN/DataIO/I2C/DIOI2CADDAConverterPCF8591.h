@@ -1,31 +1,31 @@
 /*------------------------------------------------------------------------------------------
-//	DIOI2CADDACONVERTERPCF8591.H
-*/	
-/**	
-// \class 
-//   
-//  Data IO I2C PCF8591 (AD/DA converter) class
-//   
-//	@author	 Abraham J. Velez
+//  DIOI2CADDACONVERTERPCF8591.H
+*/
+/**
+// \class
 //
-//	Date Of Creation	: 03/05/2014 16:12:18
-//	Last Modification	:	
-*/	
-/*	GEN  Copyright (C).  All right reserved.
+//  Data IO I2C PCF8591 (AD/DA converter) class
+//
+//  @author  Abraham J. Velez
+//
+//  Date Of Creation  : 03/05/2014 16:12:18
+//  Last Modification :
+*/
+/*  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
+
 #ifndef _DIOI2CADDACONVERTERPCF8591_H_
 #define _DIOI2CADDACONVERTERPCF8591_H_
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
-	
+
 #include <stdio.h>
 
 #include "XBase.h"
 
 #include "DIODeviceI2C.h"
-	
+
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
 
 
@@ -42,32 +42,32 @@ class DIOSTREAMI2C;
 
 class DIOI2CADDACONVERTERPCF8591 : public DIODEVICEI2C
 {
-	public:
+  public:
 
-															DIOI2CADDACONVERTERPCF8591	();
-		virtual									 ~DIOI2CADDACONVERTERPCF8591	();
+                              DIOI2CADDACONVERTERPCF8591  ();
+    virtual                  ~DIOI2CADDACONVERTERPCF8591  ();
 
-		bool											ReadADChannels              (XBYTE values[4]);
-		bool											WriteDAChannel              (XBYTE value);
+    bool                      ReadADChannels              (XBYTE values[4]);
+    bool                      WriteDAChannel              (XBYTE value);
 
-		bool											End													();
+    bool                      End                         ();
 
-	protected:
-			
-		DIOSTREAMI2C*							diostream;
-			
-	private:
+  protected:
 
-		bool											IniDevice										();
+    DIOSTREAMI2C*             diostream;
 
-		void											Clean												()
-															{																
-																diostream				= NULL;																																																
-															}		
+  private:
+
+    bool                      IniDevice                   ();
+
+    void                      Clean                       ()
+                              {
+                                diostream       = NULL;
+                              }
 };
-	
-	
+
+
 /*---- INLINE FUNCTIONS ------------------------------------------------------------------*/
-	
+
 #endif
 

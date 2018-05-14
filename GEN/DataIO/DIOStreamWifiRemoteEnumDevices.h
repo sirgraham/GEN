@@ -1,21 +1,21 @@
 //------------------------------------------------------------------------------------------
-//	DIOSTREAMWIFIREMOTEENUMDEVICES.H
-//	
-/**	
-// \class 
-//   
+//  DIOSTREAMWIFIREMOTEENUMDEVICES.H
+//
+/**
+// \class
+//
 //  Data IO Stream WIFI REMOTE Enum Devices class
-//   
-//	@author	 Abraham J. Velez
-//	@version 23/05/2002
-*/	
-//	GEN  Copyright (C).  All right reserved.		 			 
+//
+//  @author  Abraham J. Velez
+//  @version 23/05/2002
+*/
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
+
 #ifndef _DIOSTREAMWIFIREMOTEENUMDEVICES_H_
 #define _DIOSTREAMWIFIREMOTEENUMDEVICES_H_
-	
-	
+
+
 //---- INCLUDES ----------------------------------------------------------------------------
 
 #include "XFSMachine.h"
@@ -31,19 +31,19 @@ class XPUBLISHER;
 
 class DIOSTREAMWIFIREMOTEENUMDEVICES :  public DIOSTREAMENUMDEVICES
 {
-	public:
-														DIOSTREAMWIFIREMOTEENUMDEVICES						();
-		virtual								 ~DIOSTREAMWIFIREMOTEENUMDEVICES						();
-		
-		virtual bool						Search																		()																	{ return false;		};
-		virtual bool						StopSearch																(bool waitend)											{ return false;		};
-		virtual bool						IsSearching																()																	{ return false;	  };
+  public:
+                            DIOSTREAMWIFIREMOTEENUMDEVICES            ();
+    virtual                ~DIOSTREAMWIFIREMOTEENUMDEVICES            ();
 
-		virtual bool						IsDeviceAvailable													(XCHAR* resource)										{ return false;		};			
-				    
-	private:
+    virtual bool            Search                                    ()                                  { return false;   };
+    virtual bool            StopSearch                                (bool waitend)                      { return false;   };
+    virtual bool            IsSearching                               ()                                  { return false;   };
 
-		void										Clean																			();		
+    virtual bool            IsDeviceAvailable                         (XCHAR* resource)                   { return false;   };
+
+  private:
+
+    void                    Clean                                     ();
 };
 
 

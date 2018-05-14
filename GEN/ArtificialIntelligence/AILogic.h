@@ -1,70 +1,70 @@
 /*------------------------------------------------------------------------------------------
-//	AILOGIC.H
-*/	
-/**	
-// \class 
-//   
-//  Manages engine logic
-//   
-//	@author	 Diego Martinez Ruiz de Gaona
+//  AILOGIC.H
+*/
+/**
+// \class
 //
-//	Date Of Creation	: 01/12/2016 13:15:08
-//	Last Modification	:	
-*/	
-/*	GEN  Copyright (C).  All right reserved.
+//  Manages engine logic
+//
+//  @author  Diego Martinez Ruiz de Gaona
+//
+//  Date Of Creation  : 01/12/2016 13:15:08
+//  Last Modification :
+*/
+/*  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
+
 #ifndef _AILOGIC_H_
 #define _AILOGIC_H_
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
-	
+
 #include "XVector.h"
 #include "GRPSubject.h"
 #include "AIController.h"
-	
+
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
-	
+
 class INPDEVICE;
-	
+
 /*---- CLASS -----------------------------------------------------------------------------*/
 
 namespace AI
 {
 
-	class LOGIC : public GRPOBSERVER, public GRPSUBJECT
-	{
-	public:
+  class LOGIC : public GRPOBSERVER, public GRPSUBJECT
+  {
+  public:
 
-																				LOGIC						();
-		virtual															~LOGIC					();
-				
-						void												Add							(AI::CONTROLLER*		controller);
-		virtual bool												Update					(INPDEVICE*					device=NULL);
+                                        LOGIC           ();
+    virtual                             ~LOGIC          ();
 
-		virtual XDWORD											GetSubjectType	();
-		virtual bool												Notify					(GRPMSGTYPE					msg,				GRPSUBJECT* subject);
+            void                        Add             (AI::CONTROLLER*    controller);
+    virtual bool                        Update          (INPDEVICE*         device=NULL);
 
-						XVECTOR<AI::CONTROLLER*>*		GetControllers();
+    virtual XDWORD                      GetSubjectType  ();
+    virtual bool                        Notify          (GRPMSGTYPE         msg,        GRPSUBJECT* subject);
 
-	protected:
+            XVECTOR<AI::CONTROLLER*>*   GetControllers();
 
-		XVECTOR<AI::CONTROLLER*> controllers;
+  protected:
 
-	private:
+    XVECTOR<AI::CONTROLLER*> controllers;
 
-		void Clean()
-		{
-			
-		}
+  private:
 
-	};
+    void Clean()
+    {
+
+    }
+
+  };
 
 };
-	
-	
+
+
 /*---- INLINE FUNCTIONS ------------------------------------------------------------------*/
-	
+
 #endif
 

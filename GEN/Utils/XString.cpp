@@ -1,16 +1,16 @@
 /*------------------------------------------------------------------------------------------
-//	XSTRING.CPP
-//	
-//	Unicode String Class
-//   
-//	Author						: Diego Martinez Ruiz de Gaona
-//	Date Of Creation	: 23/11/2010 9:54:11
-//	Last Mofificacion	:	
-//	
-//	GEN  Copyright (C).  All right reserved.			 
+//  XSTRING.CPP
+//
+//  Unicode String Class
+//
+//  Author            : Diego Martinez Ruiz de Gaona
+//  Date Of Creation  : 23/11/2010 9:54:11
+//  Last Mofificacion :
+//
+//  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
 #include <stdio.h>
@@ -26,447 +26,447 @@
 #include "XString.h"
 
 #include "XMemory.h"
-	
+
 
 /*---- GENERAL VARIABLE ------------------------------------------------------------------*/
-	
-	
+
+
 /*---- CLASS MEMBERS ---------------------------------------------------------------------*/
 
 
-XCHAR	XSTRING::table64bits[XSTRING_SIZETABLE64BITS];
-bool	XSTRING::istable64bitsinit=false;
+XCHAR XSTRING::table64bits[XSTRING_SIZETABLE64BITS];
+bool  XSTRING::istable64bitsinit=false;
 
 /*-------------------------------------------------------------------
 //  XSTRING::XSTRING
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			23/11/2010 9:55:01
-//	
-//	@return				
-//	*/
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      23/11/2010 9:55:01
+//
+//  @return
+//  */
 /*-----------------------------------------------------------------*/
 XSTRING::XSTRING()
 {
-	Clean();
+  Clean();
 
-	//AllocBuffer(0);
+  //AllocBuffer(0);
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::XSTRING
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			13/01/2011 9:49:59
-//	
-//	@return			
-//	@param				initsize : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      13/01/2011 9:49:59
+//
+//  @return
+//  @param        initsize :
 */
 /*-----------------------------------------------------------------*/
 XSTRING::XSTRING(int initsize)
 {
-	Clean();
+  Clean();
 
-	ReAllocBuffer(initsize);	
+  ReAllocBuffer(initsize);
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::XSTRING
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			23/11/2010 9:57:03
-//	
-//	@return			
-//	@param				string : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      23/11/2010 9:57:03
+//
+//  @return
+//  @param        string :
 */
 /*-----------------------------------------------------------------*/
 XSTRING::XSTRING(const char* string)
 {
-	Clean();
+  Clean();
 
-	Set(string);
+  Set(string);
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::XSTRING
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			23/11/2010 9:57:03
-//	
-//	@return			
-//	@param				string : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      23/11/2010 9:57:03
+//
+//  @return
+//  @param        string :
 */
 /*-----------------------------------------------------------------*/
 XSTRING::XSTRING(const XCHAR* string)
 {
-	Clean();
+  Clean();
 
-	Set(string);
+  Set(string);
 }
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::XSTRING
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			01/02/2011 19:58:00
-//	
-//	@return				
-//	@param				string : 
-//  @param				size : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      01/02/2011 19:58:00
+//
+//  @return
+//  @param        string :
+//  @param        size :
 */
 /*-----------------------------------------------------------------*/
 XSTRING::XSTRING(const XCHAR* string,int size)
 {
-	Clean();
+  Clean();
 
-	Set(string,size);
+  Set(string,size);
 }
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::XSTRING
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			15/10/2011 12:03:22
-//	
-//	@return				
-//	@param				string : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      15/10/2011 12:03:22
+//
+//  @return
+//  @param        string :
 */
 /*-----------------------------------------------------------------*/
 XSTRING::XSTRING(const XSTRING& string)
 {
-	Clean();
+  Clean();
 
-	Set(string);
+  Set(string);
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::XSTRING
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			12/05/2011 18:57:50
-//	
-//	@return				
-//	@param				string : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      12/05/2011 18:57:50
+//
+//  @return
+//  @param        string :
 */
 /*-----------------------------------------------------------------*/
 XSTRING::XSTRING(XWORD* string)
 {
-	Clean();
+  Clean();
 
-	Set(string);
+  Set(string);
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::~XSTRING
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			23/11/2010 10:00:06
-//	
-//	@return				
-//	*/
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      23/11/2010 10:00:06
+//
+//  @return
+//  */
 /*-----------------------------------------------------------------*/
 XSTRING::~XSTRING()
 {
-	FreeBuffer();
-	
-	Clean();
+  FreeBuffer();
+
+  Clean();
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::Get
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			23/11/2010 10:06:17
-//	
-//	@return				XCHAR* : 
-//	*/
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      23/11/2010 10:06:17
+//
+//  @return       XCHAR* :
+//  */
 /*-----------------------------------------------------------------*/
 XCHAR* XSTRING::Get() const
 {
   //if(!text) ReAllocBuffer(0);
-	if(!text) return __L("");
+  if(!text) return __L("");
 
-	return text;
+  return text;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::GetSize
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			23/11/2010 10:06:39
-//	
-//	@return				XDWORD : 
-//	*/
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      23/11/2010 10:06:39
+//
+//  @return       XDWORD :
+//  */
 /*-----------------------------------------------------------------*/
 XDWORD XSTRING::GetSize() const
 {
-	if(!text) return 0;
+  if(!text) return 0;
 
-	return size;
+  return size;
 }
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::GetSize
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			27/04/2011 12:10:06
-//	
-//	@return				XDWORD : 
-//	@param				string : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      27/04/2011 12:10:06
+//
+//  @return       XDWORD :
+//  @param        string :
 */
 /*-----------------------------------------------------------------*/
 XDWORD XSTRING::GetSize(const XCHAR* string)
 {
-	int size = 0;
+  int size = 0;
 
-	while(string[size])
-		{
-			size++;
-		}
+  while(string[size])
+    {
+      size++;
+    }
 
-	return size;
+  return size;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::GetSize
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			12/05/2011 19:04:39
-//	
-//	@return				XDWORD : 
-//	@param				string : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      12/05/2011 19:04:39
+//
+//  @return       XDWORD :
+//  @param        string :
 */
 /*-----------------------------------------------------------------*/
 XDWORD XSTRING::GetSize(XWORD* string)
 {
-	int size = 0;
+  int size = 0;
 
-	while(string[size])
-		{
-			size++;
-		}
+  while(string[size])
+    {
+      size++;
+    }
 
-	return size;
+  return size;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::IsOEM
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			09/05/2013 18:46:57
-//	
-//	@return 			bool : 
-//	*/
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      09/05/2013 18:46:57
+//
+//  @return       bool :
+//  */
 /*-----------------------------------------------------------------*/
 bool XSTRING::IsOEM()
 {
-	for(int c=0;c<(int)size;c++)
-		{
-			if((text[c]<0x20) || (text[c]>0x7F)) return false;
-		}
+  for(int c=0;c<(int)size;c++)
+    {
+      if((text[c]<0x20) || (text[c]>0x7F)) return false;
+    }
 
-	return true;
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::CreateOEM
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			14/02/2014 13:09:13
-//	
-//	@return 			bool : 
-//	@param				text : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      14/02/2014 13:09:13
+//
+//  @return       bool :
+//  @param        text :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::CreateOEM(char*& _textOEM) const
-{	
-	int sizeOEM = GetSize();
+{
+  int sizeOEM = GetSize();
 
-	_textOEM = new char[sizeOEM+1];
-	if(!_textOEM) return false;
+  _textOEM = new char[sizeOEM+1];
+  if(!_textOEM) return false;
 
-	for(int c=sizeOEM-1;c>=0;c--)
-		{
-			_textOEM[c] = (XBYTE)text[c];
-		}
-		
-	_textOEM[sizeOEM]=0;
+  for(int c=sizeOEM-1;c>=0;c--)
+    {
+      _textOEM[c] = (XBYTE)text[c];
+    }
 
-	return true;
+  _textOEM[sizeOEM]=0;
+
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::CreateNormalize
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			14/02/2014 13:12:15
-//	
-//	@return 			bool : 
-//	@param				_textnormalize : 
-//  @param				inverse : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      14/02/2014 13:12:15
+//
+//  @return       bool :
+//  @param        _textnormalize :
+//  @param        inverse :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::CreateNormalize(XWORD*& _textnormalize, bool inverse)
-{	
-	int sizenormalize = GetSize()+1;
+{
+  int sizenormalize = GetSize()+1;
 
-	_textnormalize = new XWORD[sizenormalize];
-	if(!_textnormalize) return false;
+  _textnormalize = new XWORD[sizenormalize];
+  if(!_textnormalize) return false;
 
-	memset(_textnormalize, 0, (sizenormalize)*sizeof(XWORD));
+  memset(_textnormalize, 0, (sizenormalize)*sizeof(XWORD));
 
-	if(sizenormalize>1)
-		{
-			for(int c=0; c<sizenormalize; c++)
-				{
-					if(inverse)
-						{
-							_textnormalize[c]  = (text[c]>>8);
-							_textnormalize[c] |= ((text[c]&0x00FF)<<8);					
-						
-						} 
-					 else 
-						{
-							_textnormalize[c] = (XWORD)text[c];	
-						}
-				}
-		}
+  if(sizenormalize>1)
+    {
+      for(int c=0; c<sizenormalize; c++)
+        {
+          if(inverse)
+            {
+              _textnormalize[c]  = (text[c]>>8);
+              _textnormalize[c] |= ((text[c]&0x00FF)<<8);
 
-	return true;
+            }
+           else
+            {
+              _textnormalize[c] = (XWORD)text[c];
+            }
+        }
+    }
+
+  return true;
 
 }
-		
+
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::Set
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			13/01/2011 10:08:47
-//	
-//	@return				bool : 
-//	@param				size : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      13/01/2011 10:08:47
+//
+//  @return       bool :
+//  @param        size :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::Set(int size)
 {
-	//if(!size) Empty();
+  //if(!size) Empty();
 
-	if(!ReAllocBuffer(size)) return false;
-	
-	FillChar(0);
+  if(!ReAllocBuffer(size)) return false;
 
-	return true;
+  FillChar(0);
+
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::Set
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			23/11/2010 21:58:51
-//	
-//	@return				bool : 
-//	@param				string : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      23/11/2010 21:58:51
+//
+//  @return       bool :
+//  @param        string :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::Set(const char* string)
 {
-	Empty();
-	if(!string) return false;
+  Empty();
+  if(!string) return false;
 
-	XDWORD tsize = (XDWORD)strlen(string);
+  XDWORD tsize = (XDWORD)strlen(string);
 
-	//if(!tsize) Empty(); //DIEGO: if tsize==0 ReAllocBuffer calls Empty wich, btw, was already called just 2 lines ago! 3 calls to freebuffer for 1 assignment, really?
-	
-	if(!ReAllocBuffer(tsize)) return false;
+  //if(!tsize) Empty(); //DIEGO: if tsize==0 ReAllocBuffer calls Empty wich, btw, was already called just 2 lines ago! 3 calls to freebuffer for 1 assignment, really?
 
-	if(tsize)
-		{
-			for(XDWORD c=0;c<tsize;c++)
-				{
-					text[c] = (XCHAR)string[c];
-				}
-		}
+  if(!ReAllocBuffer(tsize)) return false;
 
-	return true;
+  if(tsize)
+    {
+      for(XDWORD c=0;c<tsize;c++)
+        {
+          text[c] = (XCHAR)string[c];
+        }
+    }
+
+  return true;
 }
 
 
@@ -474,63 +474,63 @@ bool XSTRING::Set(const char* string)
 
 /*-------------------------------------------------------------------
 //  XSTRING::Set
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			27/03/2012 12:37:55
-//	
-//	@return 			bool : 
-//	@param				string : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      27/03/2012 12:37:55
+//
+//  @return       bool :
+//  @param        string :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::Set(const XCHAR* string)
-{	
-	/*
-	Empty();
-	if(!string) return false;
+{
+  /*
+  Empty();
+  if(!string) return false;
 
-	XDWORD c			= XSTRING::GetSize((XCHAR*)string);	
-	XDWORD tsize = c;
-	
-	if(!tsize) Empty();
+  XDWORD c      = XSTRING::GetSize((XCHAR*)string);
+  XDWORD tsize = c;
 
-	if(!ReAllocBuffer(tsize)) return false;
+  if(!tsize) Empty();
 
-	if(tsize)
-		{
-			memcpy(text, string, sizeof(XCHAR)*tsize);
+  if(!ReAllocBuffer(tsize)) return false;
 
-			
-			//for(c=0;c<tsize;c++)
-			//	{
-			//		text[c] = string[c];
-			//	}			
-		}
-	*/
-		
-	
-	if(!string)
-		{
-			Empty();
-			return false;
-		}
+  if(tsize)
+    {
+      memcpy(text, string, sizeof(XCHAR)*tsize);
 
-	XDWORD c		 = XSTRING::GetSize((XCHAR*)string);	
-	XDWORD tsize = c;
-	
-	if(tsize)
-		{
-			FreeBuffer();
 
-			if(!ReAllocBuffer(tsize)) return false;
+      //for(c=0;c<tsize;c++)
+      //  {
+      //    text[c] = string[c];
+      //  }
+    }
+  */
 
-			memcpy(text, string, sizeof(XCHAR)*tsize);
-		}	
-	 else Empty();
 
-	return true;
+  if(!string)
+    {
+      Empty();
+      return false;
+    }
+
+  XDWORD c     = XSTRING::GetSize((XCHAR*)string);
+  XDWORD tsize = c;
+
+  if(tsize)
+    {
+      FreeBuffer();
+
+      if(!ReAllocBuffer(tsize)) return false;
+
+      memcpy(text, string, sizeof(XCHAR)*tsize);
+    }
+   else Empty();
+
+  return true;
 }
 
 
@@ -538,272 +538,272 @@ bool XSTRING::Set(const XCHAR* string)
 
 /*-------------------------------------------------------------------
 //  XSTRING::Set
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			01/02/2011 19:56:30
-//	
-//	@return				bool : 
-//	@param				string : 
-//  @param				size : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      01/02/2011 19:56:30
+//
+//  @return       bool :
+//  @param        string :
+//  @param        size :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::Set(const XCHAR* string, int size)
-{	
-	Empty();
-	if(!string) return false;
+{
+  Empty();
+  if(!string) return false;
 
-	XDWORD tsize = size;
-	
-	if(!tsize) Empty();
-	
-	if(!ReAllocBuffer(tsize)) return false;
+  XDWORD tsize = size;
 
-	if(tsize)
-		{
-			memcpy(text, string, sizeof(XCHAR)*tsize);
+  if(!tsize) Empty();
 
-			/*
-			for(int c=0;c<(int)tsize;c++)
-				{
-					text[c] = string[c];
-				}
-			*/
-		}
+  if(!ReAllocBuffer(tsize)) return false;
 
-	return true;
+  if(tsize)
+    {
+      memcpy(text, string, sizeof(XCHAR)*tsize);
+
+      /*
+      for(int c=0;c<(int)tsize;c++)
+        {
+          text[c] = string[c];
+        }
+      */
+    }
+
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::Set
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			15/10/2011 12:01:40
-//	
-//	@return				bool : 
-//	@param				string : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      15/10/2011 12:01:40
+//
+//  @return       bool :
+//  @param        string :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::Set(const XSTRING& string)
 {
-	XDWORD tsize = string.GetSize();
-	
-	if(!tsize) Empty();
-	
-	if(!ReAllocBuffer(tsize)) return false;
+  XDWORD tsize = string.GetSize();
 
-	XCHAR* _text = string.Get();
+  if(!tsize) Empty();
 
-	if(tsize)
-		{
-			memcpy(text, _text, sizeof(XCHAR)*tsize);
+  if(!ReAllocBuffer(tsize)) return false;
 
-			/*
-			for(XDWORD c=0;c<tsize;c++)
-				{
-					text[c] = _text[c];
-				}
-			*/
-		}
+  XCHAR* _text = string.Get();
 
-	return true;
+  if(tsize)
+    {
+      memcpy(text, _text, sizeof(XCHAR)*tsize);
+
+      /*
+      for(XDWORD c=0;c<tsize;c++)
+        {
+          text[c] = _text[c];
+        }
+      */
+    }
+
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::Set
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			12/05/2011 18:53:53
-//	
-//	@return				bool : 
-//	@param				string : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      12/05/2011 18:53:53
+//
+//  @return       bool :
+//  @param        string :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::Set(XWORD* string)
 {
-	//Empty();
-	if(!string) 
-	{
-		Empty();
-		return false;
-	}
+  //Empty();
+  if(!string)
+  {
+    Empty();
+    return false;
+  }
 
-	XDWORD tsize = GetSize(string);
-	if(!tsize) Empty();
-	
-	if(!ReAllocBuffer(tsize)) return false;
+  XDWORD tsize = GetSize(string);
+  if(!tsize) Empty();
 
-	if(tsize)
-		{
-			for(XDWORD c=0;c<tsize;c++)
-				{
-					text[c] = (XCHAR)string[c];
-				}
-		}
+  if(!ReAllocBuffer(tsize)) return false;
 
-	return true;	
+  if(tsize)
+    {
+      for(XDWORD c=0;c<tsize;c++)
+        {
+          text[c] = (XCHAR)string[c];
+        }
+    }
+
+  return true;
 }
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::Add
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			21/09/2011 18:42:08
-//	
-//	@return				bool : 
-//	@param				character : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      21/09/2011 18:42:08
+//
+//  @return       bool :
+//  @param        character :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::Set(XCHAR character)
 {
-	XCHAR characters[2] = { 0, 0};
+  XCHAR characters[2] = { 0, 0};
 
-	characters[0] = character;
+  characters[0] = character;
 
-	return Set(characters);
+  return Set(characters);
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::Set
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			21/09/2011 19:01:09
-//	
-//	@return				bool : 
-//	@param				str1 : 
-//  @param				str2 : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      21/09/2011 19:01:09
+//
+//  @return       bool :
+//  @param        str1 :
+//  @param        str2 :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::Set(XCHAR* str1,const XCHAR* str2)
 {
-	if(!str1) return false;
-	if(!str2) return false;
+  if(!str1) return false;
+  if(!str2) return false;
 
-	int c=0;
-	while(str2[c])
-		{
-			str1[c] = str2[c];	
-			c++;	
-		}
+  int c=0;
+  while(str2[c])
+    {
+      str1[c] = str2[c];
+      c++;
+    }
 
-	str1[c] = 0;		
+  str1[c] = 0;
 
-	return true;
+  return true;
 }
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::Set
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			30/07/2012 11:12:23
-//	
-//	@return 			bool : 
-//	@param				buffer : 
-//  @param				size : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      30/07/2012 11:12:23
+//
+//  @return       bool :
+//  @param        buffer :
+//  @param        size :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::Set(const XBYTE* buffer, int size)
 {
-	Empty();
-	if(!buffer) return false;
+  Empty();
+  if(!buffer) return false;
 
-	XDWORD tsize = size;
-	
-	if(!tsize) Empty();
-	
-	if(!ReAllocBuffer(tsize)) return false;
+  XDWORD tsize = size;
 
-	if(tsize)
-		{
-			for(int c=0;c<(int)tsize;c++)
-				{
-					text[c] = buffer[c];
-				}
-		}
+  if(!tsize) Empty();
 
-	return true;
+  if(!ReAllocBuffer(tsize)) return false;
+
+  if(tsize)
+    {
+      for(int c=0;c<(int)tsize;c++)
+        {
+          text[c] = buffer[c];
+        }
+    }
+
+  return true;
 
 }
 
 /*-------------------------------------------------------------------
-//	 XSTRING::Set
+//   XSTRING::Set
 */
 /**
 //
-//	
 //
-//	@author		Diego Martinez Ruiz de Gaona 
-//	@version	26/01/2018 12:02:22
-//	@return		bool : 
 //
-//	@param		const : 
-//	@param		int : 
+//  @author   Diego Martinez Ruiz de Gaona
+//  @version  26/01/2018 12:02:22
+//  @return   bool :
+//
+//  @param    const :
+//  @param    int :
 //
 *//*-----------------------------------------------------------------*/
 bool XSTRING::Set(const XDWORD* buffer, int size)
 {
-		Empty();
-		if (!buffer) return false;
+    Empty();
+    if (!buffer) return false;
 
-		XDWORD tsize = size;
+    XDWORD tsize = size;
 
-		if (!tsize) Empty();
+    if (!tsize) Empty();
 
-		if (!ReAllocBuffer(tsize)) return false;
+    if (!ReAllocBuffer(tsize)) return false;
 
-		if (tsize)		
-				for (int c = 0; c<(int)tsize; c++)				
-						text[c] = buffer[c];				
-		
+    if (tsize)
+        for (int c = 0; c<(int)tsize; c++)
+            text[c] = buffer[c];
 
-		return true;
+
+    return true;
 
 }
 
 
 /*-------------------------------------------------------------------
-//	XSTRING::Set
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			29/05/2014 13:39:03
-//	
-//	@return 			bool : 
+//  XSTRING::Set
+*/
+/**
 //
-//  @param				buffer : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      29/05/2014 13:39:03
+//
+//  @return       bool :
+//
+//  @param        buffer :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::Set(XBUFFER& buffer)
 {
-	return Set(buffer.Get(), buffer.GetSize());
+  return Set(buffer.Get(), buffer.GetSize());
 }
 
 
@@ -811,255 +811,255 @@ bool XSTRING::Set(XBUFFER& buffer)
 
 /*-------------------------------------------------------------------
 //  XSTRING::Add
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			09/01/2011 17:14:06
-//	
-//	@return				bool : 
-//	@param				string : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      09/01/2011 17:14:06
+//
+//  @return       bool :
+//  @param        string :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::Add(const char* string)
 {
-	XDWORD tsize  = (XDWORD)strlen(string);
-	XDWORD ssize  = GetSize();
-	XDWORD	ini;
-	
-	if(!tsize) return false;
-	
-	ini = 0;
+  XDWORD tsize  = (XDWORD)strlen(string);
+  XDWORD ssize  = GetSize();
+  XDWORD  ini;
 
-	if(text)		
-		{		
-			while(text[ini]) 
-				{
-					ini++;
-					if(ini>=(ssize+tsize)) 
-						{
-							ini--;
-							break;
-						}
-				}
-		}
-	
-	if(!ReAllocBuffer(ssize+tsize)) return false;	
-		
-	int d=0;
-	for(XDWORD c=0;c<tsize;c++)
-		{
-			text[c+ini] = (XCHAR)string[d];
-			d++;
-		}
+  if(!tsize) return false;
+
+  ini = 0;
+
+  if(text)
+    {
+      while(text[ini])
+        {
+          ini++;
+          if(ini>=(ssize+tsize))
+            {
+              ini--;
+              break;
+            }
+        }
+    }
+
+  if(!ReAllocBuffer(ssize+tsize)) return false;
+
+  int d=0;
+  for(XDWORD c=0;c<tsize;c++)
+    {
+      text[c+ini] = (XCHAR)string[d];
+      d++;
+    }
 
 
-	return true;
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::Add
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			09/01/2011 17:13:29
-//	
-//	@return				bool : 
-//	@param				string : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      09/01/2011 17:13:29
+//
+//  @return       bool :
+//  @param        string :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::Add(const XCHAR* string)
 {
-	if(!string[0]) return false;
+  if(!string[0]) return false;
 
-	XSTRING* xstring = new XSTRING(string);
-	if(!xstring) return false;
+  XSTRING* xstring = new XSTRING(string);
+  if(!xstring) return false;
 
-	Add((*xstring));
+  Add((*xstring));
 
-	delete xstring;
+  delete xstring;
 
-	return true;
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::Add
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			09/01/2011 17:14:02
-//	
-//	@return				bool : 
-//	@param				string : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      09/01/2011 17:14:02
+//
+//  @return       bool :
+//  @param        string :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::Add(XSTRING& string)
 {
-	XDWORD tsize = string.GetSize();
-	XDWORD ssize = GetSize();
-	XDWORD	ini;
+  XDWORD tsize = string.GetSize();
+  XDWORD ssize = GetSize();
+  XDWORD  ini;
 
-	if(string.IsEmpty()) return false;
-	
-	if(string.Get())
-		{
-			if(!string.Get()[0]) return false;	
-		}
+  if(string.IsEmpty()) return false;
 
-	if(!tsize) return false;
-	
-	ini = 0;
+  if(string.Get())
+    {
+      if(!string.Get()[0]) return false;
+    }
 
-	if(text)		
-		{		
-			while(text[ini]) 
-				{
-					ini++;
-					if(ini>=(ssize+tsize)) 
-						{
-							ini--;
-							break;
-						}
-				}
-	}
-		
-	if(!ReAllocBuffer(ssize+tsize)) return false;	
+  if(!tsize) return false;
 
-	memcpy(&text[ini], string.Get(), sizeof(XCHAR)*tsize);
+  ini = 0;
 
-	/*
-	int d=0;
-	for(XDWORD c=0;c<tsize;c++)	
-		{
-			text[c+ini] = (XCHAR)string[d];
-			d++;
-		}
-	*/
+  if(text)
+    {
+      while(text[ini])
+        {
+          ini++;
+          if(ini>=(ssize+tsize))
+            {
+              ini--;
+              break;
+            }
+        }
+  }
 
-	return true;
+  if(!ReAllocBuffer(ssize+tsize)) return false;
+
+  memcpy(&text[ini], string.Get(), sizeof(XCHAR)*tsize);
+
+  /*
+  int d=0;
+  for(XDWORD c=0;c<tsize;c++)
+    {
+      text[c+ini] = (XCHAR)string[d];
+      d++;
+    }
+  */
+
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::Add
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			21/09/2011 18:42:08
-//	
-//	@return				bool : 
-//	@param				character : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      21/09/2011 18:42:08
+//
+//  @return       bool :
+//  @param        character :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::Add(XCHAR character)
 {
-	XCHAR characters[2] = { 0, 0};
+  XCHAR characters[2] = { 0, 0};
 
-	characters[0] = character;
+  characters[0] = character;
 
-	return Add(characters);
+  return Add(characters);
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::Add
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			21/09/2011 19:01:09
-//	
-//	@return				bool : 
-//	@param				str1 : 
-//  @param				str2 : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      21/09/2011 19:01:09
+//
+//  @return       bool :
+//  @param        str1 :
+//  @param        str2 :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::Add(XCHAR* str1,const XCHAR* str2)
-{	
-	if(!str1) return false;
-	if(!str2) return false;
+{
+  if(!str1) return false;
+  if(!str2) return false;
 
-	int sizestr1 = XSTRING::GetSize(str1);
-	int c				 = 0;
+  int sizestr1 = XSTRING::GetSize(str1);
+  int c        = 0;
 
-	while(str2[c])
-		{
-			str1[sizestr1+c] = str2[c];	
-			c++;	
-		}
+  while(str2[c])
+    {
+      str1[sizestr1+c] = str2[c];
+      c++;
+    }
 
-	str1[sizestr1+c] = 0;		
+  str1[sizestr1+c] = 0;
 
-	return true;
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
-//	XSTRING::Add
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			29/05/2014 13:40:42
-//	
-//	@return 			bool : 
+//  XSTRING::Add
+*/
+/**
 //
-//  @param				buffer : 
-//  @param				size : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      29/05/2014 13:40:42
+//
+//  @return       bool :
+//
+//  @param        buffer :
+//  @param        size :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::Add(const XBYTE* buffer, int size)
 {
-	int ini   = this->size;
-	int tsize = this->size + size;
-	
-	AdjustSize(tsize);
+  int ini   = this->size;
+  int tsize = this->size + size;
 
-	for(int c=0;c<size;c++)	
-		{
-			text[ini+c] = (XCHAR)buffer[c];			
-		}
+  AdjustSize(tsize);
 
-	return true;
+  for(int c=0;c<size;c++)
+    {
+      text[ini+c] = (XCHAR)buffer[c];
+    }
+
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
-//	XSTRING::Add
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			29/05/2014 13:41:05
-//	
-//	@return 			bool : 
+//  XSTRING::Add
+*/
+/**
 //
-//  @param				buffer : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      29/05/2014 13:41:05
+//
+//  @return       bool :
+//
+//  @param        buffer :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::Add(XBUFFER& buffer)
 {
-	return Add(buffer.Get(), buffer.GetSize());
+  return Add(buffer.Get(), buffer.GetSize());
 }
 
 
@@ -1068,129 +1068,129 @@ bool XSTRING::Add(XBUFFER& buffer)
 
 /*-------------------------------------------------------------------
 //  XSTRING::FillChar
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			13/01/2011 10:01:47
-//	
-//	@return				bool : 
-//	@param				character : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      13/01/2011 10:01:47
+//
+//  @return       bool :
+//  @param        character :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::FillChar(XCHAR character)
 {
-	if(IsEmpty()) return false;
-	
-	for(XDWORD c=0;c<size;c++)
-		{
-			text[c] = character;			
-		}
+  if(IsEmpty()) return false;
 
-	return true;
+  for(XDWORD c=0;c<size;c++)
+    {
+      text[c] = character;
+    }
+
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::Empty
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			26/11/2010 11:59:07
-//	
-//	@return				bool : 
-//	*/
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      26/11/2010 11:59:07
+//
+//  @return       bool :
+//  */
 /*-----------------------------------------------------------------*/
 bool XSTRING::Empty()
 {
-	if(IsEmpty()) return false;
-	
-	FreeBuffer();
+  if(IsEmpty()) return false;
 
-	return true;
+  FreeBuffer();
+
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::IsEmpty
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			26/11/2010 11:59:07
-//	
-//	@return				bool : 
-//	*/
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      26/11/2010 11:59:07
+//
+//  @return       bool :
+//  */
 /*-----------------------------------------------------------------*/
 bool XSTRING::IsEmpty()
 {
-	if((!text)||(!size)) return true;
-	if(!text[0])         return true; 
+  if((!text)||(!size)) return true;
+  if(!text[0])         return true;
 
-	return false;
+  return false;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::HaveCharacters
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			08/02/2011 16:36:39
-//	
-//	@return				bool : 
-//	*/
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      08/02/2011 16:36:39
+//
+//  @return       bool :
+//  */
 /*-----------------------------------------------------------------*/
 bool XSTRING::HaveCharacters()
 {
-	if(IsEmpty()) return false;
+  if(IsEmpty()) return false;
 
-	for(XDWORD c=0;c<size;c++)
-		{
-			if(!text[c]) break;
-			if(!Character_IsNOT(text[c])) return true;
-		}
-	
-	return false;	
+  for(XDWORD c=0;c<size;c++)
+    {
+      if(!text[c]) break;
+      if(!Character_IsNOT(text[c])) return true;
+    }
+
+  return false;
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	XSTRING::HaveOnlyNumbers
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			04/08/2014 10:10:42
-//	
-//	@return 			bool : 
+//  XSTRING::HaveOnlyNumbers
+*/
+/**
+//
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      04/08/2014 10:10:42
+//
+//  @return       bool :
 //
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::HaveOnlyNumbers()
 {
-	if(IsEmpty()) return false;
+  if(IsEmpty()) return false;
 
-	for(XDWORD c=0;c<size;c++)
-		{
-			if(!text[c]) break;
-			if(!Character_IsNumber(text[c])) return false;
-		}
-	
-	return true;	
+  for(XDWORD c=0;c<size;c++)
+    {
+      if(!text[c]) break;
+      if(!Character_IsNumber(text[c])) return false;
+    }
+
+  return true;
 }
 
 
@@ -1198,40 +1198,40 @@ bool XSTRING::HaveOnlyNumbers()
 
 /*-------------------------------------------------------------------
 //  XSTRING::DeleteCharacters
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			28/01/2011 19:26:04
-//	
-//	@return				bool : 
-//	@param				index : 
-//  @param				ncharacteres : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      28/01/2011 19:26:04
+//
+//  @return       bool :
+//  @param        index :
+//  @param        ncharacteres :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::DeleteCharacters(XDWORD index, XDWORD ncharacteres)
 {
-	if(!ncharacteres)			 return true;
-	if(IsEmpty())		     	 return false;
+  if(!ncharacteres)      return true;
+  if(IsEmpty())          return false;
 
-	if(index >= size) return false;
-	//if(index <0)           return false;
-	
-	//if(!text[index])       return false;
+  if(index >= size) return false;
+  //if(index <0)           return false;
 
-	int nchar = ncharacteres;	
-	if((index+nchar) > size) nchar = (int)size-index;
+  //if(!text[index])       return false;
 
-	int c = index;
-	while(text[c+nchar])
-		{
+  int nchar = ncharacteres;
+  if((index+nchar) > size) nchar = (int)size-index;
+
+  int c = index;
+  while(text[c+nchar])
+    {
       text[c] = text[c+nchar];
-			c++;
-		}
-	text[c] = text[c + nchar];
+      c++;
+    }
+  text[c] = text[c + nchar];
 
-	return ReAllocBuffer(size - nchar);
+  return ReAllocBuffer(size - nchar);
 }
 
 
@@ -1239,268 +1239,268 @@ bool XSTRING::DeleteCharacters(XDWORD index, XDWORD ncharacteres)
 
 /*-------------------------------------------------------------------
 //  XSTRING::DeleteCharacter
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			08/02/2011 12:02:58
-//	
-//	@return				bool : 
-//	@param				character : 
-//  @param				context : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      08/02/2011 12:02:58
+//
+//  @return       bool :
+//  @param        character :
+//  @param        context :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::DeleteCharacter(XCHAR character,XSTRINGCONTEXT context)
 {
-	if(IsEmpty()) return false;
+  if(IsEmpty()) return false;
 
-	switch(context)
-		{
-			case XSTRINGCONTEXT_ATFIRST		: 
-																				/*
-																				while(character == text[0])
-																				{
-																					DeleteCharacters(0,1);
-																					if(!size) break;
-																				}
-																				*/
-																				{
-																					XDWORD n=0;
-																					while(character == text[n] && n<size)
-																					{
-																					n++;
-																					}
-																					if (n)
-																					DeleteCharacters(0,n);
-																				}
-																			break;
+  switch(context)
+    {
+      case XSTRINGCONTEXT_ATFIRST   :
+                                        /*
+                                        while(character == text[0])
+                                        {
+                                          DeleteCharacters(0,1);
+                                          if(!size) break;
+                                        }
+                                        */
+                                        {
+                                          XDWORD n=0;
+                                          while(character == text[n] && n<size)
+                                          {
+                                          n++;
+                                          }
+                                          if (n)
+                                          DeleteCharacters(0,n);
+                                        }
+                                      break;
 
-			case XSTRINGCONTEXT_ATEND			: 
-																			{
-																					XDWORD n=size-1;
-																					while(character == text[n] && n)
-																					{
-																					n--;
-																					}										
-																					if (size!=n+1)
-																					ReAllocBuffer(n+1);
-																					/*
-																				while(character == text[size-1])
-																				{
-																					DeleteCharacters(size-1,1);
-																					if(!size) break;
-																				}				*/
-																			}
-																			break;
+      case XSTRINGCONTEXT_ATEND     :
+                                      {
+                                          XDWORD n=size-1;
+                                          while(character == text[n] && n)
+                                          {
+                                          n--;
+                                          }
+                                          if (size!=n+1)
+                                          ReAllocBuffer(n+1);
+                                          /*
+                                        while(character == text[size-1])
+                                        {
+                                          DeleteCharacters(size-1,1);
+                                          if(!size) break;
+                                        }       */
+                                      }
+                                      break;
 
-			case XSTRINGCONTEXT_ALLSTRING	: { XDWORD c = 0;
-																				XDWORD a = 0;
+      case XSTRINGCONTEXT_ALLSTRING : { XDWORD c = 0;
+                                        XDWORD a = 0;
 
-																				while (c < size)
-																				{					
-																						while (text[c]==character)
-																								c++;
-																						text[a] = text[c];
-																								c++;
-																								if (!text[a])
-																										break;
-																								a++;
-																				}
-																				ReAllocBuffer(a);
-																				size = a;
-																				/*
-																				while(c<size)
-																					{
-																						if(text[c]==character)
-																						     	 DeleteCharacters(c,1);
-																						  else c++;
-																					}				
-																					*/
-																			}				
-																			break;
-		}
+                                        while (c < size)
+                                        {
+                                            while (text[c]==character)
+                                                c++;
+                                            text[a] = text[c];
+                                                c++;
+                                                if (!text[a])
+                                                    break;
+                                                a++;
+                                        }
+                                        ReAllocBuffer(a);
+                                        size = a;
+                                        /*
+                                        while(c<size)
+                                          {
+                                            if(text[c]==character)
+                                                   DeleteCharacters(c,1);
+                                              else c++;
+                                          }
+                                          */
+                                      }
+                                      break;
+    }
 
-	return true;
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::DeleteNoCharacters
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			08/02/2011 16:47:05
-//	
-//	@return				bool : 
-//	@param				context : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      08/02/2011 16:47:05
+//
+//  @return       bool :
+//  @param        context :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::DeleteNoCharacters(XSTRINGCONTEXT context)
 {
   bool status = DeleteCharacter(__C('\x09'),context);
-	
-	if(status) status = DeleteCharacter(__C('\x0A'),context);
-	if(status) status = DeleteCharacter(__C('\x0D'),context);	
-	if(status) status = DeleteCharacter(__C('\x20'),context);
 
-	return status;
+  if(status) status = DeleteCharacter(__C('\x0A'),context);
+  if(status) status = DeleteCharacter(__C('\x0D'),context);
+  if(status) status = DeleteCharacter(__C('\x20'),context);
+
+  return status;
 }
 
 
 /*-------------------------------------------------------------------
-//	 XSTRING::DeleteNoCharacters
+//   XSTRING::DeleteNoCharacters
 */
 /**
 //
-//	
 //
-//	@author		Diego Martinez Ruiz de Gaona 
-//	@version	29/01/2018 12:31:08
-//	@return		bool : 
 //
-//	@param		XCHAR* : 
-//	@param		int : 
-//	@param		XSTRINGCONTEXT : 
+//  @author   Diego Martinez Ruiz de Gaona
+//  @version  29/01/2018 12:31:08
+//  @return   bool :
+//
+//  @param    XCHAR* :
+//  @param    int :
+//  @param    XSTRINGCONTEXT :
 //
 *//*-----------------------------------------------------------------*/
 int XSTRING::DeleteNoCharacters(XCHAR* n, int start, XSTRINGCONTEXT context)
 {
-		int a = 0;
-		XSTRING needle;
-		needle.Set(n);
-		if (!this->GetSize())
-				return 0;
+    int a = 0;
+    XSTRING needle;
+    needle.Set(n);
+    if (!this->GetSize())
+        return 0;
 
-		switch (context)
-		{
-		case XSTRINGCONTEXT_ATFIRST:
-		{
-				XDWORD n;
-				for (n = start; n < size; n++)
-				{
-						XCHAR character = text[n];
-						bool found = false;
+    switch (context)
+    {
+    case XSTRINGCONTEXT_ATFIRST:
+    {
+        XDWORD n;
+        for (n = start; n < size; n++)
+        {
+            XCHAR character = text[n];
+            bool found = false;
 
-						for (XDWORD e = 0; needle.Get()[e] != __C('\0'); e++)
-								if (character == needle.Get()[e])
-								{
-										found = true;
-										break;
-								}
+            for (XDWORD e = 0; needle.Get()[e] != __C('\0'); e++)
+                if (character == needle.Get()[e])
+                {
+                    found = true;
+                    break;
+                }
 
-						if (!found)
-								break;
-				}
-				this->DeleteCharacters(0, n);
-				return n;				
-		}
-		//break;
+            if (!found)
+                break;
+        }
+        this->DeleteCharacters(0, n);
+        return n;
+    }
+    //break;
 
-		case XSTRINGCONTEXT_ATEND:
-		{
-				int n;
-				for (n = size- start-1; n >=0; n--)
-				{
-						XCHAR character = text[n];
-						bool found = false;
+    case XSTRINGCONTEXT_ATEND:
+    {
+        int n;
+        for (n = size- start-1; n >=0; n--)
+        {
+            XCHAR character = text[n];
+            bool found = false;
 
-						for (XDWORD e = 0;	needle.Get()[e] != __C('\0'); e++)
-								if (character == needle.Get()[e])
-								{
-										found = true;
-										break;
-								}
+            for (XDWORD e = 0;  needle.Get()[e] != __C('\0'); e++)
+                if (character == needle.Get()[e])
+                {
+                    found = true;
+                    break;
+                }
 
-						if (!found)
-								break;
-				}
-				this->DeleteCharacters(n+1, size -1 - n);
-				return n;
-		}
-		//break;
+            if (!found)
+                break;
+        }
+        this->DeleteCharacters(n+1, size -1 - n);
+        return n;
+    }
+    //break;
 
-		case XSTRINGCONTEXT_ALLSTRING:
-				for (XDWORD n = start; n < size; n++)
-				{
-						XCHAR character = text[n];
-						bool found = false;
+    case XSTRINGCONTEXT_ALLSTRING:
+        for (XDWORD n = start; n < size; n++)
+        {
+            XCHAR character = text[n];
+            bool found = false;
 
-						for (XDWORD e = 0; needle.Get()[e] != __C('\0'); e++)
-								if (character == needle.Get()[e])
-								{
-										found = true;
-										break;
-								}
-						if (found)
-								continue;
+            for (XDWORD e = 0; needle.Get()[e] != __C('\0'); e++)
+                if (character == needle.Get()[e])
+                {
+                    found = true;
+                    break;
+                }
+            if (found)
+                continue;
 
-						text[a] = character;
-						a++;
-				}
-				text[a] = __C('\0');
-		}
-		this->AdjustSize();
-		return true;
+            text[a] = character;
+            a++;
+        }
+        text[a] = __C('\0');
+    }
+    this->AdjustSize();
+    return true;
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	XSTRING::Fast_DeleteNoCharacters
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Diego
-//	@version			18/01/2017 10:25:54
-//	
-//	@return 			bool : 
+//  XSTRING::Fast_DeleteNoCharacters
+*/
+/**
 //
-//  @param				context : 
+//
+//
+//  @author       Diego
+//  @version      18/01/2017 10:25:54
+//
+//  @return       bool :
+//
+//  @param        context :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::Fast_DeleteNoCharacters(XSTRINGCONTEXT context)
 {
-	switch(context)
-		{
-			case XSTRINGCONTEXT_ATFIRST		:
-			case XSTRINGCONTEXT_ATEND			:  return XSTRING::DeleteNoCharacters(context);
+  switch(context)
+    {
+      case XSTRINGCONTEXT_ATFIRST   :
+      case XSTRINGCONTEXT_ATEND     :  return XSTRING::DeleteNoCharacters(context);
 
-			case XSTRINGCONTEXT_ALLSTRING	:	{ XSTRING copy;
+      case XSTRINGCONTEXT_ALLSTRING : { XSTRING copy;
 
-																				copy.ReAllocBuffer(size);
+                                        copy.ReAllocBuffer(size);
 
-																				int c=0;
+                                        int c=0;
 
-																				for(XDWORD n=0; n<size; n++)
-																					{
-																						XCHAR character=text[n];
+                                        for(XDWORD n=0; n<size; n++)
+                                          {
+                                            XCHAR character=text[n];
 
-																						if(character ==__C('\x09')) continue;
-																						if(character ==__C('\x0A')) continue;
-																						if(character ==__C('\x0D')) continue;
-																						if(character ==__C('\x20')) continue;
+                                            if(character ==__C('\x09')) continue;
+                                            if(character ==__C('\x0A')) continue;
+                                            if(character ==__C('\x0D')) continue;
+                                            if(character ==__C('\x20')) continue;
 
-																						copy.Get()[c]=character;
-																						c++;
-																					}
-																				
-																				copy.Get()[c]=__C('\0');					
+                                            copy.Get()[c]=character;
+                                            c++;
+                                          }
 
-																				Set(copy);
+                                        copy.Get()[c]=__C('\0');
 
-																			}
-																			break;
+                                        Set(copy);
 
-			}
+                                      }
+                                      break;
 
-	return true;
+      }
+
+  return true;
 }
 
 
@@ -1508,268 +1508,268 @@ bool XSTRING::Fast_DeleteNoCharacters(XSTRINGCONTEXT context)
 
 /*-------------------------------------------------------------------
 //  XSTRING::Character_IsAlpha
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			26/11/2010 16:40:09
-//	
-//	@return				bool : 
-//	@param				character : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      26/11/2010 16:40:09
+//
+//  @return       bool :
+//  @param        character :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::Character_IsAlpha(XCHAR character) const
 {
-	XBYTE _char = (XBYTE)character;
-	
-	if(((_char>='a') && (_char<='z')) ||
-		 ((_char>='A') && (_char<='Z'))) return true;
+  XBYTE _char = (XBYTE)character;
 
-	return false;
+  if(((_char>='a') && (_char<='z')) ||
+     ((_char>='A') && (_char<='Z'))) return true;
+
+  return false;
 }
 
 /*-------------------------------------------------------------------
 //  XSTRING::Character_IsUpperCase
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			26/11/2010 16:40:09
-//	
-//	@return				bool : 
-//	@param				character : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      26/11/2010 16:40:09
+//
+//  @return       bool :
+//  @param        character :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::Character_IsUpperCase(XCHAR character)
 {
-	XBYTE _char = (XBYTE)character;
-	
-	if(((_char>='A') && (_char<='Z'))) return true;
+  XBYTE _char = (XBYTE)character;
 
-	return false;
+  if(((_char>='A') && (_char<='Z'))) return true;
+
+  return false;
 }
 
 /*-------------------------------------------------------------------
 //  XSTRING::Character_IsLowerCase
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			26/11/2010 16:40:09
-//	
-//	@return				bool : 
-//	@param				character : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      26/11/2010 16:40:09
+//
+//  @return       bool :
+//  @param        character :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::Character_IsLowerCase(XCHAR character)
 {
-	XBYTE _char = (XBYTE)character;
-	
-	if(((_char>='a') && (_char<='z'))) return true;
+  XBYTE _char = (XBYTE)character;
 
-	return false;
+  if(((_char>='a') && (_char<='z'))) return true;
+
+  return false;
 }
 
 /*-------------------------------------------------------------------
-//	XSTRING::Character_IsNumber
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			04/08/2014 10:08:38
-//	
-//	@return 			bool : 
+//  XSTRING::Character_IsNumber
+*/
+/**
 //
-//  @param				character : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      04/08/2014 10:08:38
+//
+//  @return       bool :
+//
+//  @param        character :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::Character_IsNumber(XCHAR character)
 {
-	XBYTE _char = (XBYTE)character;
-	
-	if((_char>='0') && (_char<='9'))  return true;
-		 
-	return false;
+  XBYTE _char = (XBYTE)character;
+
+  if((_char>='0') && (_char<='9'))  return true;
+
+  return false;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::Character_IsNOT
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			09/02/2011 13:05:48
-//	
-//	@return				bool : 
-//	@param				character : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      09/02/2011 13:05:48
+//
+//  @return       bool :
+//  @param        character :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::Character_IsNOT(XCHAR character)
 {
-	switch(character)
-		{
-			case 0x0000: return true;
-			case 0x0009: return true; // Tab
-			case 0x000A: return true; // Return
-			case 0x000D: return true; // Return
-			case 0x0020: return true; // Space			
-		}
+  switch(character)
+    {
+      case 0x0000: return true;
+      case 0x0009: return true; // Tab
+      case 0x000A: return true; // Return
+      case 0x000D: return true; // Return
+      case 0x0020: return true; // Space
+    }
 
-	return false;
+  return false;
 }
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::Character_ToUpper
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			26/11/2010 17:04:36
-//	
-//	@return				XCHAR : 
-//	@param				character : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      26/11/2010 17:04:36
+//
+//  @return       XCHAR :
+//  @param        character :
 */
 /*-----------------------------------------------------------------*/
 XCHAR XSTRING::Character_ToUpper(XCHAR character) const
 {
-	//if(!Character_IsUpperCase(character)) return character; //no hace falta, el if de abajo solo cambia la letra si es minuscula
+  //if(!Character_IsUpperCase(character)) return character; //no hace falta, el if de abajo solo cambia la letra si es minuscula
 
-	XCHAR _character = character;
-	XBYTE _char			 = (XBYTE)_character;
-	
-	if((_char>='a')&&(_char<='z')) 
-		{
-			 _char      -= 32;
-			 _character  = (XCHAR)_char;
-		}
+  XCHAR _character = character;
+  XBYTE _char      = (XBYTE)_character;
 
-	return _character;
+  if((_char>='a')&&(_char<='z'))
+    {
+       _char      -= 32;
+       _character  = (XCHAR)_char;
+    }
+
+  return _character;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::Character_ToUpper
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			26/11/2010 17:04:36
-//	
-//	@return				XCHAR : 
-//	@param				character : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      26/11/2010 17:04:36
+//
+//  @return       XCHAR :
+//  @param        character :
 */
 /*-----------------------------------------------------------------*/
 XCHAR XSTRING::Character_ToLower(XCHAR character) const
 {
-	//if(!Character_IsCase(character)) return character; //no hace falta, el if de abajo solo cambia la letra si es minuscula
+  //if(!Character_IsCase(character)) return character; //no hace falta, el if de abajo solo cambia la letra si es minuscula
 
-	XCHAR _character = character;
-	XBYTE _char			 = (XBYTE)_character;
-	
-	if((_char>='A')&&(_char<='Z')) 
-		{
-			 _char      += 32;
-			 _character  = (XCHAR)_char;
-		}
+  XCHAR _character = character;
+  XBYTE _char      = (XBYTE)_character;
 
-	return _character;
+  if((_char>='A')&&(_char<='Z'))
+    {
+       _char      += 32;
+       _character  = (XCHAR)_char;
+    }
+
+  return _character;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::Character_GetFirst
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			23/03/2011 10:15:03
-//	
-//	@return				XCHAR : 
-//	*/
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      23/03/2011 10:15:03
+//
+//  @return       XCHAR :
+//  */
 /*-----------------------------------------------------------------*/
 XCHAR XSTRING::Character_GetFirst()
 {
-	if(IsEmpty()) return 0;
+  if(IsEmpty()) return 0;
 
-	return text[0];
+  return text[0];
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::Character_GetLast
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			15/03/2011 16:16:10
-//	
-//	@return				XCHAR : 
-//	*/
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      15/03/2011 16:16:10
+//
+//  @return       XCHAR :
+//  */
 /*-----------------------------------------------------------------*/
 XCHAR XSTRING::Character_GetLast()
 {
-	int c;
+  int c;
 
-	if(IsEmpty()) return 0;
+  if(IsEmpty()) return 0;
 
-	for(c=0;c<(int)size;c++)
-		{
-			if(!text[c]) break;
-		}
+  for(c=0;c<(int)size;c++)
+    {
+      if(!text[c]) break;
+    }
 
-	if(c-1) return text[c-1];
-	
-	return 0;
+  if(c-1) return text[c-1];
+
+  return 0;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::Character_Change
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			14/03/2011 10:43:40
-//	
-//	@return				bool : 
-//	@param				source : 
-//  @param				target : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      14/03/2011 10:43:40
+//
+//  @return       bool :
+//  @param        source :
+//  @param        target :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::Character_Change(XCHAR source,XCHAR target)
 {
-	if(IsEmpty()) return false;
+  if(IsEmpty()) return false;
 
-	bool status = false;
+  bool status = false;
 
-	for(XDWORD c=0;c<size;c++)
-		{			
-			if(text[c]==source)
-				{				
-					text[c] = target;			
-					status  = true;
-				}
-		}
+  for(XDWORD c=0;c<size;c++)
+    {
+      if(text[c]==source)
+        {
+          text[c] = target;
+          status  = true;
+        }
+    }
 
-	return status;
+  return status;
 }
 
 
@@ -1777,233 +1777,233 @@ bool XSTRING::Character_Change(XCHAR source,XCHAR target)
 
 /*-------------------------------------------------------------------
 //  XSTRING::ToUpperCase
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			26/11/2010 18:24:52
-//	
-//	@return				bool : 
-//	*/
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      26/11/2010 18:24:52
+//
+//  @return       bool :
+//  */
 /*-----------------------------------------------------------------*/
-bool XSTRING::ToUpperCase() 
-{									
-	if(IsEmpty()) return false;
-	
-	for(XDWORD c=0;c<size;c++)
-		{
-			XCHAR _char = text[c];
+bool XSTRING::ToUpperCase()
+{
+  if(IsEmpty()) return false;
 
-			if(Character_IsAlpha(text[c])) _char = Character_ToUpper(text[c]);				
-				
-			text[c] = _char;			
-		}
+  for(XDWORD c=0;c<size;c++)
+    {
+      XCHAR _char = text[c];
 
-	return true;
+      if(Character_IsAlpha(text[c])) _char = Character_ToUpper(text[c]);
+
+      text[c] = _char;
+    }
+
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::ToLowerCase
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			26/11/2010 18:24:52
-//	
-//	@return				bool : 
-//	*/
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      26/11/2010 18:24:52
+//
+//  @return       bool :
+//  */
 /*-----------------------------------------------------------------*/
-bool XSTRING::ToLowerCase() 
-{									
-	if(IsEmpty()) return false;
-	
-	for(XDWORD c=0;c<size;c++)
-		{
-			XCHAR _char = text[c];
+bool XSTRING::ToLowerCase()
+{
+  if(IsEmpty()) return false;
 
-			if(Character_IsAlpha(text[c])) _char = Character_ToLower(text[c]);				
-				
-			text[c] = _char;			
-		}
+  for(XDWORD c=0;c<size;c++)
+    {
+      XCHAR _char = text[c];
 
-	return true;
+      if(Character_IsAlpha(text[c])) _char = Character_ToLower(text[c]);
+
+      text[c] = _char;
+    }
+
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::Compare
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			18/02/2011 12:30:29
-//	
-//	@return				int : 
-//	@param				string : 
-//  @param				ignorecase : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      18/02/2011 12:30:29
+//
+//  @return       int :
+//  @param        string :
+//  @param        ignorecase :
 */
 /*-----------------------------------------------------------------*/
 /*
-int XSTRING::Compare(const XCHAR* string, bool ignorecase) 
+int XSTRING::Compare(const XCHAR* string, bool ignorecase)
 {
-	XSTRING stringtemp(string);
-		
-	return Compare(stringtemp, ignorecase);
+  XSTRING stringtemp(string);
+
+  return Compare(stringtemp, ignorecase);
 }*/
 
-int XSTRING::Compare(const XCHAR* string, int csize, bool ignorecase) 
+int XSTRING::Compare(const XCHAR* string, int csize, bool ignorecase)
 {
-	XDWORD stringsize=csize;
+  XDWORD stringsize=csize;
 
-	if(size!=stringsize)
-		{
-			if(size>stringsize) return  1;
-			if(size<stringsize) return -1;
-		}
+  if(size!=stringsize)
+    {
+      if(size>stringsize) return  1;
+      if(size<stringsize) return -1;
+    }
 
-	if(!size && !stringsize) return 0;
+  if(!size && !stringsize) return 0;
 
-	XCHAR* _text = (XCHAR*)string;
-	
-	if(ignorecase)
-		{
-			for(int c=size-1;c>=0;c--)										
-				{
-					XCHAR a=_text[c];
-					XCHAR b=text[c];
+  XCHAR* _text = (XCHAR*)string;
 
-					if(Character_IsAlpha(a))
-						{
-							XCHAR c1 = Character_ToUpper(a);
-							XCHAR c2 = Character_ToUpper(b);
+  if(ignorecase)
+    {
+      for(int c=size-1;c>=0;c--)
+        {
+          XCHAR a=_text[c];
+          XCHAR b=text[c];
 
-							if(c1 == c2) continue;
-							if(c1 < c2) return  1;
-							if(c1 > c2) return -1;				
-						}
-					 else
-						{
-							if(a == b)	continue;
-							if(a < b)		return  1;
-							if(a > b)		return -1;		
-						}
-				}
-		}
-	 else
-		{
-			for(int c=size-1;c>=0;c--)						
-				{
-					if(_text[c] == text[c]) continue;
-					if(_text[c] < text[c])  return  1;
-					if(_text[c] > text[c])  return -1;		
-				}
-		}
-		
-	return 0;
+          if(Character_IsAlpha(a))
+            {
+              XCHAR c1 = Character_ToUpper(a);
+              XCHAR c2 = Character_ToUpper(b);
+
+              if(c1 == c2) continue;
+              if(c1 < c2) return  1;
+              if(c1 > c2) return -1;
+            }
+           else
+            {
+              if(a == b)  continue;
+              if(a < b)   return  1;
+              if(a > b)   return -1;
+            }
+        }
+    }
+   else
+    {
+      for(int c=size-1;c>=0;c--)
+        {
+          if(_text[c] == text[c]) continue;
+          if(_text[c] < text[c])  return  1;
+          if(_text[c] > text[c])  return -1;
+        }
+    }
+
+  return 0;
 }
 
-int XSTRING::Compare(const XCHAR* string, bool ignorecase) 
+int XSTRING::Compare(const XCHAR* string, bool ignorecase)
 {
-	XDWORD stringsize=XSTRING::GetSize(string);	
+  XDWORD stringsize=XSTRING::GetSize(string);
 
-	if(size!=stringsize)
-		{
-			if(size>stringsize) return  1;
-			if(size<stringsize) return -1;
-		}
+  if(size!=stringsize)
+    {
+      if(size>stringsize) return  1;
+      if(size<stringsize) return -1;
+    }
 
-	if(!size && !stringsize) return 0;
+  if(!size && !stringsize) return 0;
 
-	XCHAR* _text = (XCHAR*)string;
-	
-	if(ignorecase)
-		{
-			for(int c=size-1;c>=0;c--)										
-				{
-					XCHAR a=_text[c];
-					XCHAR b=text[c];
+  XCHAR* _text = (XCHAR*)string;
 
-					if(Character_IsAlpha(a))
-						{
-							XCHAR c1 = Character_ToUpper(a);
-							XCHAR c2 = Character_ToUpper(b);
+  if(ignorecase)
+    {
+      for(int c=size-1;c>=0;c--)
+        {
+          XCHAR a=_text[c];
+          XCHAR b=text[c];
 
-							if(c1 == c2) continue;
-							if(c1 < c2) return  1;
-							if(c1 > c2) return -1;				
-						}
-					 else
-						{
-							if(a == b)	continue;
-							if(a < b)		return  1;
-							if(a > b)		return -1;		
-						}
-				}
-		}
-	 else
-		{
-			for(int c=size-1;c>=0;c--)						
-				{
-					if(_text[c] == text[c]) continue;
-					if(_text[c] < text[c])  return  1;
-					if(_text[c] > text[c])  return -1;		
-				}
-		}
-		
-	return 0;
+          if(Character_IsAlpha(a))
+            {
+              XCHAR c1 = Character_ToUpper(a);
+              XCHAR c2 = Character_ToUpper(b);
+
+              if(c1 == c2) continue;
+              if(c1 < c2) return  1;
+              if(c1 > c2) return -1;
+            }
+           else
+            {
+              if(a == b)  continue;
+              if(a < b)   return  1;
+              if(a > b)   return -1;
+            }
+        }
+    }
+   else
+    {
+      for(int c=size-1;c>=0;c--)
+        {
+          if(_text[c] == text[c]) continue;
+          if(_text[c] < text[c])  return  1;
+          if(_text[c] > text[c])  return -1;
+        }
+    }
+
+  return 0;
 }
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::Compare
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			20/04/2011 0:41:41
-//	
-//	@return				int : 
-//	@param				string : 
-//  @param				ignorecase : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      20/04/2011 0:41:41
+//
+//  @return       int :
+//  @param        string :
+//  @param        ignorecase :
 */
 /*-----------------------------------------------------------------*/
 int XSTRING::Compare(const char* string, bool ignorecase)
 {
-	XSTRING stringtemp(string);
+  XSTRING stringtemp(string);
 
-	return Compare(stringtemp, ignorecase);
+  return Compare(stringtemp, ignorecase);
 }
 
 
 /*-------------------------------------------------------------------
-//	XSTRING::Compare
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			15/03/2016 10:58:15
-//	
-//	@return 			int : 
+//  XSTRING::Compare
+*/
+/**
 //
-//  @param				string : 
-//  @param				string2 : 
-//  @param				ignorecase : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      15/03/2016 10:58:15
+//
+//  @return       int :
+//
+//  @param        string :
+//  @param        string2 :
+//  @param        ignorecase :
 */
 /*-----------------------------------------------------------------*/
 int XSTRING::Compare(const XCHAR* string, const XCHAR* string2, bool ignorecase)
 {
-	XSTRING a;
-	a.Set(string);
-	return a.Compare(string2,ignorecase);		
+  XSTRING a;
+  a.Set(string);
+  return a.Compare(string2,ignorecase);
 }
 
 
@@ -2011,487 +2011,487 @@ int XSTRING::Compare(const XCHAR* string, const XCHAR* string2, bool ignorecase)
 
 /*-------------------------------------------------------------------
 //  XSTRING::Compare
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			26/11/2010 12:14:14
-//	
-//	@return				int : 
-//	@param				string : 
-//  @param				ignorecase : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      26/11/2010 12:14:14
+//
+//  @return       int :
+//  @param        string :
+//  @param        ignorecase :
 */
 /*-----------------------------------------------------------------*/
-/*int XSTRING::Compare(XSTRING& string, bool ignorecase) 
-{				
-	bool iEmpty=IsEmpty();
-	bool sempty=string.IsEmpty();
+/*int XSTRING::Compare(XSTRING& string, bool ignorecase)
+{
+  bool iEmpty=IsEmpty();
+  bool sempty=string.IsEmpty();
 
-	if(iEmpty && (!sempty))	
-		{
-			return 1;		
-		}
-	 else 
-		{ 
-			if((!iEmpty) && sempty) 
-				{
-					return -1;
-				}
-			 else 
-				{ 
-					if(iEmpty && sempty) 
-						{
-							return 0;
-						}
-				}
-		}
+  if(iEmpty && (!sempty))
+    {
+      return 1;
+    }
+   else
+    {
+      if((!iEmpty) && sempty)
+        {
+          return -1;
+        }
+       else
+        {
+          if(iEmpty && sempty)
+            {
+              return 0;
+            }
+        }
+    }
 
-	XDWORD stringsize=string.GetSize();
+  XDWORD stringsize=string.GetSize();
 
-	if(size>stringsize) return  1;
-	if(size<stringsize) return -1;
+  if(size>stringsize) return  1;
+  if(size<stringsize) return -1;
 
-	XCHAR* _text = string.Get();
-	
-	if(ignorecase)
-		{
-			for(long long c=size-1;c>=0;c--)										
-				{
-					if(Character_IsCase(_text[c]))
-						{
-							XCHAR c1 = Character_ToUpper(_text[c]);
-							XCHAR c2 = Character_ToUpper(text[c]);
+  XCHAR* _text = string.Get();
 
-							if(c1 < c2) return  1;
-							if(c1 > c2) return -1;				
-						}
-					 else
-						{
-							if(_text[c] < text[c]) return  1;
-							if(_text[c] > text[c]) return -1;		
-						}
-				}
-		}
-	 else
-		{
-			for(long long c=size-1;c>=0;c--)						
-				{
-					if(_text[c] == text[c]) continue;
-					if(_text[c] < text[c])  return  1;
-					if(_text[c] > text[c])  return -1;		
-				}
-		}
-		
-	return 0;
+  if(ignorecase)
+    {
+      for(long long c=size-1;c>=0;c--)
+        {
+          if(Character_IsCase(_text[c]))
+            {
+              XCHAR c1 = Character_ToUpper(_text[c]);
+              XCHAR c2 = Character_ToUpper(text[c]);
+
+              if(c1 < c2) return  1;
+              if(c1 > c2) return -1;
+            }
+           else
+            {
+              if(_text[c] < text[c]) return  1;
+              if(_text[c] > text[c]) return -1;
+            }
+        }
+    }
+   else
+    {
+      for(long long c=size-1;c>=0;c--)
+        {
+          if(_text[c] == text[c]) continue;
+          if(_text[c] < text[c])  return  1;
+          if(_text[c] > text[c])  return -1;
+        }
+    }
+
+  return 0;
 }*/
 
 int XSTRING::Compare(const XSTRING& string, bool ignorecase) const
-{		
-	
-	XDWORD stringsize = string.GetSize();
+{
 
-	if(size != stringsize)
-		{
-			if(size > stringsize) return  1;
-			if(size < stringsize) return -1;
-		}
+  XDWORD stringsize = string.GetSize();
 
-	if(!size && !stringsize) return 0;
+  if(size != stringsize)
+    {
+      if(size > stringsize) return  1;
+      if(size < stringsize) return -1;
+    }
 
-	XCHAR* _text = string.Get();
-	
-	if(ignorecase)
-		{
-			for(int c=size-1;c>=0;c--)										
-				{
-					if(Character_IsAlpha(_text[c]))
-						{
-							XCHAR c1 = Character_ToUpper(_text[c]);
-							XCHAR c2 = Character_ToUpper(text[c]);
+  if(!size && !stringsize) return 0;
 
-							if(c1 == c2) continue;
-							if(c1 < c2) return  1;
-							if(c1 > c2) return -1;				
-						}
-					 else
-						{
-							if(_text[c] == text[c]) continue;
-							if(_text[c] < text[c]) return  1;
-							if(_text[c] > text[c]) return -1;		
-						}
-				}
-		}
-	 else
-		{
-			for(int c=size-1;c>=0;c--)						
-				{
-					if(_text[c] == text[c]) continue;
-					if(_text[c] < text[c])  return  1;
-					if(_text[c] > text[c])  return -1;		
-				}
-		}
-		
-	return 0;
+  XCHAR* _text = string.Get();
+
+  if(ignorecase)
+    {
+      for(int c=size-1;c>=0;c--)
+        {
+          if(Character_IsAlpha(_text[c]))
+            {
+              XCHAR c1 = Character_ToUpper(_text[c]);
+              XCHAR c2 = Character_ToUpper(text[c]);
+
+              if(c1 == c2) continue;
+              if(c1 < c2) return  1;
+              if(c1 > c2) return -1;
+            }
+           else
+            {
+              if(_text[c] == text[c]) continue;
+              if(_text[c] < text[c]) return  1;
+              if(_text[c] > text[c]) return -1;
+            }
+        }
+    }
+   else
+    {
+      for(int c=size-1;c>=0;c--)
+        {
+          if(_text[c] == text[c]) continue;
+          if(_text[c] < text[c])  return  1;
+          if(_text[c] > text[c])  return -1;
+        }
+    }
+
+  return 0;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::Find
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			07/02/2011 12:45:03
-//	
-//	@return				int : 
-//	@param				string : 
-//  @param				ignorecase : 
-//  @param				startindex : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      07/02/2011 12:45:03
+//
+//  @return       int :
+//  @param        string :
+//  @param        ignorecase :
+//  @param        startindex :
 */
 /*-----------------------------------------------------------------*/
 int XSTRING::Find(const XCHAR* string, bool ignorecase, int startindex)
 {
-	XSTRING unistring(string);
+  XSTRING unistring(string);
 
-	return Find(unistring,ignorecase,startindex);
+  return Find(unistring,ignorecase,startindex);
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::Find
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			07/02/2011 11:48:39
-//	
-//	@return				int : 
-//	@param				string : 
-//  @param				ignorecase : 
-//  @param				startindex : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      07/02/2011 11:48:39
+//
+//  @return       int :
+//  @param        string :
+//  @param        ignorecase :
+//  @param        startindex :
 */
 /*-----------------------------------------------------------------*/
-int XSTRING::Find(XSTRING& string, bool ignorecase,int startindex) 
-{	
-	if(IsEmpty())											 return XSTRING_NOTFOUND;
-	if(string.IsEmpty())							 return XSTRING_NOTFOUND;
-		 
-	XCHAR* _text = string.Get();
-	XDWORD _size = string.GetSize();
+int XSTRING::Find(XSTRING& string, bool ignorecase,int startindex)
+{
+  if(IsEmpty())                      return XSTRING_NOTFOUND;
+  if(string.IsEmpty())               return XSTRING_NOTFOUND;
 
-	if(_size > size)		  						  return XSTRING_NOTFOUND;
-	if(startindex>=(int)(size-_size)+1) return XSTRING_NOTFOUND;
-	if(startindex<0)								    return XSTRING_NOTFOUND;
+  XCHAR* _text = string.Get();
+  XDWORD _size = string.GetSize();
 
-	bool found;
+  if(_size > size)                    return XSTRING_NOTFOUND;
+  if(startindex>=(int)(size-_size)+1) return XSTRING_NOTFOUND;
+  if(startindex<0)                    return XSTRING_NOTFOUND;
 
-	for(XDWORD c=startindex;c<(size-_size)+1;c++)
-		{
-			found = true;
+  bool found;
 
-			for(XDWORD d=0;d<_size;d++)
-				{
-					if(ignorecase && Character_IsAlpha(_text[d]))
-						{
-							XCHAR c1 = Character_ToUpper(_text[d]);
-							XCHAR c2 = Character_ToUpper(text[c+d]);
+  for(XDWORD c=startindex;c<(size-_size)+1;c++)
+    {
+      found = true;
 
-							if(c1!=c2)
-								{
-									found = false;
-									break;
-								}																
-						}
-					 else
-						{
-							if(_text[d]!=text[c+d]) 
-								{
-									found = false;
-									break;
-								}
-						}
-				}
+      for(XDWORD d=0;d<_size;d++)
+        {
+          if(ignorecase && Character_IsAlpha(_text[d]))
+            {
+              XCHAR c1 = Character_ToUpper(_text[d]);
+              XCHAR c2 = Character_ToUpper(text[c+d]);
 
-			if(found) return c;				
-		}
+              if(c1!=c2)
+                {
+                  found = false;
+                  break;
+                }
+            }
+           else
+            {
+              if(_text[d]!=text[c+d])
+                {
+                  found = false;
+                  break;
+                }
+            }
+        }
 
-	return XSTRING_NOTFOUND;		
+      if(found) return c;
+    }
+
+  return XSTRING_NOTFOUND;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::FindCharacter
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			08/02/2011 22:39:05
-//	
-//	@return				int : 
-//	@param				character : 
-//  @param				startindex : 
-//  @param				endtostart : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      08/02/2011 22:39:05
+//
+//  @return       int :
+//  @param        character :
+//  @param        startindex :
+//  @param        endtostart :
 */
 /*-----------------------------------------------------------------*/
 int XSTRING::FindCharacter(XCHAR character, XDWORD startindex, bool endtostart)
 {
-	if(startindex>=(XDWORD)size) 
-		return XSTRING_NOTFOUND;
+  if(startindex>=(XDWORD)size)
+    return XSTRING_NOTFOUND;
 
-//if(startindex<0)				  return XSTRING_NOTFOUND;
+//if(startindex<0)          return XSTRING_NOTFOUND;
 
-	if(endtostart)
-		{
-			
-			//---------- BUG!
-			//for(c=size-startindex;c>0;c--)
-			for(int c=size-startindex-1;c>=0;c--)
-				{
-					if(text[c]==character) return c;								
-				}
-		}
-	 else
-	  {
-			for(XDWORD c=startindex;c<size;c++)
-				{
-					if(text[c]==character) 
-						return c;								
-				}
-		}
+  if(endtostart)
+    {
 
-	return XSTRING_NOTFOUND;
+      //---------- BUG!
+      //for(c=size-startindex;c>0;c--)
+      for(int c=size-startindex-1;c>=0;c--)
+        {
+          if(text[c]==character) return c;
+        }
+    }
+   else
+    {
+      for(XDWORD c=startindex;c<size;c++)
+        {
+          if(text[c]==character)
+            return c;
+        }
+    }
+
+  return XSTRING_NOTFOUND;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::FindCharacter
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			08/02/2011 22:39:05
-//	
-//	@return				int : 
-//	@param				character : 
-//  @param				startindex : 
-//  @param				endtostart : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      08/02/2011 22:39:05
+//
+//  @return       int :
+//  @param        character :
+//  @param        startindex :
+//  @param        endtostart :
 */
 /*-----------------------------------------------------------------*/
 XDWORD XSTRING::CountCharacter(XCHAR character, int startindex, bool endtostart)
 {
-	XDWORD c;
+  XDWORD c;
 
-	XDWORD count=0;
+  XDWORD count=0;
 
-	if(startindex>=(int)size) return 0;
-	if(startindex<0)				  return 0;
+  if(startindex>=(int)size) return 0;
+  if(startindex<0)          return 0;
 
-	if(endtostart)
-		{
-			for(c=size-startindex;c>0;c--)
-				{
-					if(text[c]==character) count++;								
-				}
-		}
-	 else
-	  {
-			for(c=startindex;c<size;c++)
-				{
-					if(text[c]==character) count++;								
-				}
-		}
+  if(endtostart)
+    {
+      for(c=size-startindex;c>0;c--)
+        {
+          if(text[c]==character) count++;
+        }
+    }
+   else
+    {
+      for(c=startindex;c<size;c++)
+        {
+          if(text[c]==character) count++;
+        }
+    }
 
-	return count;
+  return count;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::FindDiferentCharacter
-*/ 
+*/
 /**
-//  
-//  
+//
+//
 //  @author       Diego Martinez Ruiz de Gaona
 //  @version      12/09/2012 10:08:42
-//  
-//  @return       int : 
-//  @param        character : 
-//  @param        startindex : 
-//  @param        endtostart : 
+//
+//  @return       int :
+//  @param        character :
+//  @param        startindex :
+//  @param        endtostart :
 */
 /*-----------------------------------------------------------------*/
 int XSTRING::FindDiferentCharacter(XCHAR character, int startindex, bool endtostart)
 {
-	XDWORD c;
+  XDWORD c;
 
-	if(startindex>=(int)size) return XSTRING_NOTFOUND;
-	if(startindex<0)				  return XSTRING_NOTFOUND;
+  if(startindex>=(int)size) return XSTRING_NOTFOUND;
+  if(startindex<0)          return XSTRING_NOTFOUND;
 
-	if(endtostart)
-		{
-			for(c=size-startindex;c>0;c--)
-				{
-					if(text[c]!=character) return c;								
-				}
-		}
-	 else
-	  {
-			for(c=startindex;c<size;c++)
-				{
-					if(text[c]!=character) return c;								
-				}
-		}
+  if(endtostart)
+    {
+      for(c=size-startindex;c>0;c--)
+        {
+          if(text[c]!=character) return c;
+        }
+    }
+   else
+    {
+      for(c=startindex;c<size;c++)
+        {
+          if(text[c]!=character) return c;
+        }
+    }
 
-	return XSTRING_NOTFOUND;
+  return XSTRING_NOTFOUND;
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	XSTRING::GetNCharacters
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			11/05/2014 11:07:29
-//	
-//	@return 			int : 
+//  XSTRING::GetNCharacters
+*/
+/**
 //
-//  @param				character : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      11/05/2014 11:07:29
+//
+//  @return       int :
+//
+//  @param        character :
 */
 /*-----------------------------------------------------------------*/
-int	XSTRING::GetNCharacters(XCHAR character)
+int XSTRING::GetNCharacters(XCHAR character)
 {
-	int count = 0;
+  int count = 0;
 
-	for(XDWORD c=0; c<GetSize(); c++)
-		{
-			if(text[c]==character) count++;
-		}
+  for(XDWORD c=0; c<GetSize(); c++)
+    {
+      if(text[c]==character) count++;
+    }
 
-	return count;
+  return count;
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	XSTRING::AreValidCharacters
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			12/09/2014 11:54:48
-//	
-//	@return 			bool : 
+//  XSTRING::AreValidCharacters
+*/
+/**
 //
-//  @param				validcharacters : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      12/09/2014 11:54:48
+//
+//  @return       bool :
+//
+//  @param        validcharacters :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::AreValidCharacters(XCHAR* validcharacterslist)
 {
-	if(!validcharacterslist) return false;
+  if(!validcharacterslist) return false;
 
-	XSTRING vcl;
+  XSTRING vcl;
 
-	vcl = validcharacterslist;
-	
-	for(int d=0; d<(int)GetSize(); d++)
-		{
-			bool isvalid = false;
+  vcl = validcharacterslist;
 
-			for(int c=0; c<(int)vcl.GetSize(); c++)
-				{
-					if(Get()[d] == vcl.Get()[c])  
-						{
-							isvalid = true;											
-							break;
-						}
-				}
+  for(int d=0; d<(int)GetSize(); d++)
+    {
+      bool isvalid = false;
 
-			if(!isvalid) 
-				return false;
-		}
-	
-	return true;
+      for(int c=0; c<(int)vcl.GetSize(); c++)
+        {
+          if(Get()[d] == vcl.Get()[c])
+            {
+              isvalid = true;
+              break;
+            }
+        }
+
+      if(!isvalid)
+        return false;
+    }
+
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::Copy
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			31/03/2013 23:14:13
-//	
-//	@return 			int : 
-//	@param				startmark : 
-//  @param				endmark : 
-//  @param				ignorecase : 
-//  @param				addstartindex : 
-//  @param				string : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      31/03/2013 23:14:13
+//
+//  @return       int :
+//  @param        startmark :
+//  @param        endmark :
+//  @param        ignorecase :
+//  @param        addstartindex :
+//  @param        string :
 */
 /*-----------------------------------------------------------------*/
 int XSTRING::Copy(const XCHAR* startmark, const XCHAR* endmark, bool ignorecase, int addstartindex, XSTRING& string)
 {
-	int startindex	= 0;
-	int endindex		= GetSize();
-	int sizeendmark = 0;
+  int startindex  = 0;
+  int endindex    = GetSize();
+  int sizeendmark = 0;
 
-	string.Empty();
+  string.Empty();
 
-	if(startmark)
-		{
-			XSTRING mark;
+  if(startmark)
+    {
+      XSTRING mark;
 
-			mark = startmark;
-			startindex = Find(startmark, ignorecase, addstartindex);
-			if(startindex==XSTRING_NOTFOUND) return XSTRING_NOTFOUND;
-			
-			startindex+= mark.GetSize();
-		}
+      mark = startmark;
+      startindex = Find(startmark, ignorecase, addstartindex);
+      if(startindex==XSTRING_NOTFOUND) return XSTRING_NOTFOUND;
 
-	if(endmark)
-		{
-			XSTRING mark;
+      startindex+= mark.GetSize();
+    }
 
-			mark = endmark;
-			endindex = Find(endmark, ignorecase, startindex);
-			if(endindex==XSTRING_NOTFOUND) endindex = size;							
+  if(endmark)
+    {
+      XSTRING mark;
 
-			sizeendmark = mark.GetSize();
-		}
+      mark = endmark;
+      endindex = Find(endmark, ignorecase, startindex);
+      if(endindex==XSTRING_NOTFOUND) endindex = size;
 
-	for(int c=startindex;c<endindex;c++)
-		{
-			XCHAR str[2] = { text[c], 0 };
+      sizeendmark = mark.GetSize();
+    }
 
-			string+=str;
-		}
+  for(int c=startindex;c<endindex;c++)
+    {
+      XCHAR str[2] = { text[c], 0 };
 
-	int indexnext = (endindex+sizeendmark);
+      string+=str;
+    }
 
-	if(indexnext>(int)size) indexnext = (int)size;
+  int indexnext = (endindex+sizeendmark);
 
-	return indexnext;	
+  if(indexnext>(int)size) indexnext = (int)size;
+
+  return indexnext;
 }
 
 
@@ -2500,52 +2500,52 @@ int XSTRING::Copy(const XCHAR* startmark, const XCHAR* endmark, bool ignorecase,
 
 /*-------------------------------------------------------------------
 //  XSTRING::Copy
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			31/03/2013 23:05:26
-//	
-//	@return 			int : 
-//	@param				startindex : 
-//  @param				endmark : 
-//  @param				ignorecase : 
-//  @param				string : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      31/03/2013 23:05:26
+//
+//  @return       int :
+//  @param        startindex :
+//  @param        endmark :
+//  @param        ignorecase :
+//  @param        string :
 */
 /*-----------------------------------------------------------------*/
 int XSTRING::Copy(int startindex, const XCHAR* endmark, bool ignorecase, XSTRING& string)
 {
-	int endindex		= GetSize();
-	int sizeendmark = 0;
+  int endindex    = GetSize();
+  int sizeendmark = 0;
 
-	string.Empty();
+  string.Empty();
 
-	if(endmark)
-		{
-			XSTRING mark;
+  if(endmark)
+    {
+      XSTRING mark;
 
-			mark = endmark;
-			endindex = Find(endmark, ignorecase, startindex);
-			if(endindex==XSTRING_NOTFOUND) endindex = size;							
+      mark = endmark;
+      endindex = Find(endmark, ignorecase, startindex);
+      if(endindex==XSTRING_NOTFOUND) endindex = size;
 
-			sizeendmark = mark.GetSize();
-		}
+      sizeendmark = mark.GetSize();
+    }
 
-	if(startindex>=endindex) return XSTRING_NOTFOUND;
+  if(startindex>=endindex) return XSTRING_NOTFOUND;
 
-	for(int c=startindex;c<endindex;c++)
-		{
-			XCHAR str[2] = { text[c], 0 };
+  for(int c=startindex;c<endindex;c++)
+    {
+      XCHAR str[2] = { text[c], 0 };
 
-			string+=str;
-		}
+      string+=str;
+    }
 
-	int indexnext = (endindex+sizeendmark);
+  int indexnext = (endindex+sizeendmark);
 
-	if(indexnext>(int)size) indexnext = (int)size;
+  if(indexnext>(int)size) indexnext = (int)size;
 
-	return indexnext;	
+  return indexnext;
 }
 
 
@@ -2554,53 +2554,53 @@ int XSTRING::Copy(int startindex, const XCHAR* endmark, bool ignorecase, XSTRING
 
 /*-------------------------------------------------------------------
 //  XSTRING::Copy
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			31/03/2013 23:16:03
-//	
-//	@return 			int : 
-//	@param				startmark : 
-//  @param				endindex : 
-//  @param				ignorecase : 
-//  @param				addstartindex : 
-//  @param				string : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      31/03/2013 23:16:03
+//
+//  @return       int :
+//  @param        startmark :
+//  @param        endindex :
+//  @param        ignorecase :
+//  @param        addstartindex :
+//  @param        string :
 */
 /*-----------------------------------------------------------------*/
 int XSTRING::Copy(const XCHAR* startmark, int endindex, bool ignorecase, int addstartindex, XSTRING& string)
 {
-	int startindex		= 0;
-	int sizeendmark = 0;
+  int startindex    = 0;
+  int sizeendmark = 0;
 
-	string.Empty();
+  string.Empty();
 
-	if(startmark)
-		{
-			XSTRING mark;
+  if(startmark)
+    {
+      XSTRING mark;
 
-			mark = startmark;
-			startindex = Find(startmark, ignorecase, addstartindex);
-			if(startindex==XSTRING_NOTFOUND) return XSTRING_NOTFOUND;
-			
-			startindex+= mark.GetSize();
-		}
+      mark = startmark;
+      startindex = Find(startmark, ignorecase, addstartindex);
+      if(startindex==XSTRING_NOTFOUND) return XSTRING_NOTFOUND;
 
-	if(startindex>=endindex) return XSTRING_NOTFOUND;
+      startindex+= mark.GetSize();
+    }
 
-	for(int c=startindex;c<endindex;c++)
-		{
-			XCHAR str[2] = { text[c], 0 };
+  if(startindex>=endindex) return XSTRING_NOTFOUND;
 
-			string+=str;
-		}
+  for(int c=startindex;c<endindex;c++)
+    {
+      XCHAR str[2] = { text[c], 0 };
 
-	int indexnext = (endindex+sizeendmark);
+      string+=str;
+    }
 
-	if(indexnext>(int)size) indexnext = (int)size;
+  int indexnext = (endindex+sizeendmark);
 
-	return indexnext;	
+  if(indexnext>(int)size) indexnext = (int)size;
+
+  return indexnext;
 }
 
 
@@ -2608,46 +2608,46 @@ int XSTRING::Copy(const XCHAR* startmark, int endindex, bool ignorecase, int add
 
 /*-------------------------------------------------------------------
 //  XSTRING::Copy
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			31/03/2013 23:16:15
-//	
-//	@return 			int : 
-//	@param				startindex : 
-//  @param				endindex : 
-//  @param				string : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      31/03/2013 23:16:15
+//
+//  @return       int :
+//  @param        startindex :
+//  @param        endindex :
+//  @param        string :
 */
 /*-----------------------------------------------------------------*/
 int XSTRING::Copy(int startindex, int endindex, XSTRING& string)
 {
-	/*
-	XCHAR str[2] = { 0 , 0 };
+  /*
+  XCHAR str[2] = { 0 , 0 };
 
-	
-	string.Empty();	
 
-	if(startindex>=endindex) return XSTRING_NOTFOUND;
-		
-	string.Empty();
-	string.ReAllocBuffer(endindex-startindex);
+  string.Empty();
 
-	for(int c=startindex;c<endindex;c++)
-		{
-			str[0] = text[c];
-			string.Add(str);
-		}	
-		*/
+  if(startindex>=endindex) return XSTRING_NOTFOUND;
 
-	if(startindex>=endindex) 
-		return XSTRING_NOTFOUND;
+  string.Empty();
+  string.ReAllocBuffer(endindex-startindex);
 
-	string.ReAllocBuffer(endindex-startindex);
-	memcpy(string.Get(),&(this->text[startindex]),(endindex-startindex)*sizeof(XCHAR));
+  for(int c=startindex;c<endindex;c++)
+    {
+      str[0] = text[c];
+      string.Add(str);
+    }
+    */
 
-	return size;
+  if(startindex>=endindex)
+    return XSTRING_NOTFOUND;
+
+  string.ReAllocBuffer(endindex-startindex);
+  memcpy(string.Get(),&(this->text[startindex]),(endindex-startindex)*sizeof(XCHAR));
+
+  return size;
 }
 
 
@@ -2655,185 +2655,185 @@ int XSTRING::Copy(int startindex, int endindex, XSTRING& string)
 
 /*-------------------------------------------------------------------
 //  XSTRING::Copy
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			31/03/2013 23:16:29
-//	
-//	@return 			int : 
-//	@param				startindex : 
-//  @param				string : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      31/03/2013 23:16:29
+//
+//  @return       int :
+//  @param        startindex :
+//  @param        string :
 */
 /*-----------------------------------------------------------------*/
 int XSTRING::Copy(int startindex, XSTRING& string)
 {
-	/*
-	XCHAR str[2]	 = { 0 , 0 };
-	int		endindex = GetSize();  
+  /*
+  XCHAR str[2]   = { 0 , 0 };
+  int   endindex = GetSize();
 
   string.Empty();
 
-	if(startindex>=endindex) return XSTRING_NOTFOUND;  
-	
-	for(int c=startindex;c<endindex;c++)
-		{
-			str[0] = text[c];
-			string.Add(str);
-		}	
+  if(startindex>=endindex) return XSTRING_NOTFOUND;
 
-	return (endindex-startindex);
-	*/
-	return Copy(startindex, GetSize(),string);
+  for(int c=startindex;c<endindex;c++)
+    {
+      str[0] = text[c];
+      string.Add(str);
+    }
+
+  return (endindex-startindex);
+  */
+  return Copy(startindex, GetSize(),string);
 }
 
 
 /*-------------------------------------------------------------------
-//	XSTRING::Replace
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			09/09/2015 12:50:16
-//	
-//	@return 			int : 
+//  XSTRING::Replace
+*/
+/**
 //
-//  @param				findWhat :
-//  @param				replaceBy :
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      09/09/2015 12:50:16
+//
+//  @return       int :
+//
+//  @param        findWhat :
+//  @param        replaceBy :
 */
 /*-----------------------------------------------------------------*/
-int	XSTRING::Replace(XCHAR* findwhat, XCHAR* replaceby)
-{
-	XSTRING what;
-	XSTRING replace;
-
-	what.Set(findwhat);
-	replace.Set(replaceby);
-
-	int found,coincidences=0;
-	do{
-			found	=	ReplaceFirst(what.Get(),replace.Get());
-			if (found!=NOTFOUND)
-				coincidences++;
-			else 
-				break;
-		} while(1);
-
-	return coincidences;
-}
-
-
-/*-------------------------------------------------------------------
-//	XSTRING::ReplaceFirst
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			09/09/2015 13:34:14
-//	
-//	@return 			int : 
-//
-//  @param				findWhat : 
-//  @param				replaceBy : 
-*/
-/*-----------------------------------------------------------------*/
-int	XSTRING::ReplaceFirst(XCHAR* findwhat, XCHAR* replaceby)
+int XSTRING::Replace(XCHAR* findwhat, XCHAR* replaceby)
 {
   XSTRING what;
-	XSTRING replace;
+  XSTRING replace;
 
-	what.Set(findwhat);
-	replace.Set(replaceby);
+  what.Set(findwhat);
+  replace.Set(replaceby);
 
-	int whatsize = what.GetSize();
-	int found	   = 0;
+  int found,coincidences=0;
+  do{
+      found = ReplaceFirst(what.Get(),replace.Get());
+      if (found!=NOTFOUND)
+        coincidences++;
+      else
+        break;
+    } while(1);
 
-	found					=	this->Find(findwhat, false, found);
-	if(found!=NOTFOUND)
-		{
-			DeleteCharacters(found, whatsize);
-			Insert(replace, found);
-		}
+  return coincidences;
+}
+
+
+/*-------------------------------------------------------------------
+//  XSTRING::ReplaceFirst
+*/
+/**
+//
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      09/09/2015 13:34:14
+//
+//  @return       int :
+//
+//  @param        findWhat :
+//  @param        replaceBy :
+*/
+/*-----------------------------------------------------------------*/
+int XSTRING::ReplaceFirst(XCHAR* findwhat, XCHAR* replaceby)
+{
+  XSTRING what;
+  XSTRING replace;
+
+  what.Set(findwhat);
+  replace.Set(replaceby);
+
+  int whatsize = what.GetSize();
+  int found    = 0;
+
+  found         = this->Find(findwhat, false, found);
+  if(found!=NOTFOUND)
+    {
+      DeleteCharacters(found, whatsize);
+      Insert(replace, found);
+    }
 
   return found;
 }
 
 
 /*-------------------------------------------------------------------
-//	XSTRING::Insert
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			09/09/2015 13:19:19
-//	
-//	@return 			int : 
+//  XSTRING::Insert
+*/
+/**
 //
-//  @param				str : 
-//  @param				position : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      09/09/2015 13:19:19
+//
+//  @return       int :
+//
+//  @param        str :
+//  @param        position :
 */
 /*-----------------------------------------------------------------*/
-bool	XSTRING::Insert (XSTRING str,XDWORD position)
+bool  XSTRING::Insert (XSTRING str,XDWORD position)
 {
-	XSTRING tmp;
-	if (position> this->size)
-	{
-		return this->Add(str);
-	}
+  XSTRING tmp;
+  if (position> this->size)
+  {
+    return this->Add(str);
+  }
 
-	this->Copy(0,position,tmp);
-	tmp.Add(str);
-	XSTRING trail;
-	this->Copy(position,trail);
-	tmp.Add(trail);
+  this->Copy(0,position,tmp);
+  tmp.Add(str);
+  XSTRING trail;
+  this->Copy(position,trail);
+  tmp.Add(trail);
 
-	this->Set(tmp);
+  this->Set(tmp);
 
-	return true;
+  return true;
 }
-	
+
 /*-------------------------------------------------------------------
 //  XSTRING::ConvertFromInt
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			03/04/2012 13:43:23
-//	
-//	@return 			bool : 
-//	@param				value : 
-//  @param				mask : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      03/04/2012 13:43:23
+//
+//  @return       bool :
+//  @param        value :
+//  @param        mask :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::ConvertFromInt(int value, const XCHAR* mask)
 {
-	char*			str;
-	XSTRING  _mask;
+  char*     str;
+  XSTRING  _mask;
 
-	str = new char[XSTRING_MAXTEMPOSTR];
-	if(!str) return false;
+  str = new char[XSTRING_MAXTEMPOSTR];
+  if(!str) return false;
 
-	memset(str,0,XSTRING_MAXTEMPOSTR);
+  memset(str,0,XSTRING_MAXTEMPOSTR);
 
-	if(mask) _mask = mask; else _mask = __L("%d");
-	
-	XSTRING_CREATEOEM(_mask, charstr)
-	SPRINTF(str, charstr, value);
-	XSTRING_DELETEOEM(charstr)
+  if(mask) _mask = mask; else _mask = __L("%d");
 
-	Set(str);
+  XSTRING_CREATEOEM(_mask, charstr)
+  SPRINTF(str, charstr, value);
+  XSTRING_DELETEOEM(charstr)
 
-	delete [] str;
+  Set(str);
 
-	return true;
+  delete [] str;
+
+  return true;
 }
 
 
@@ -2841,220 +2841,220 @@ bool XSTRING::ConvertFromInt(int value, const XCHAR* mask)
 
 /*-------------------------------------------------------------------
 //  XSTRING::ConvertFromDWord
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			03/04/2012 13:43:23
-//	
-//	@return 			bool : 
-//	@param				value : 
-//  @param				mask : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      03/04/2012 13:43:23
+//
+//  @return       bool :
+//  @param        value :
+//  @param        mask :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::ConvertFromDWord(XDWORD value,const XCHAR* mask)
 {
-	char*		 str;
-	XSTRING  _mask;
-	
-	str = new char[XSTRING_MAXTEMPOSTR];
-	if(!str) return false;
+  char*    str;
+  XSTRING  _mask;
 
-	memset(str,0,XSTRING_MAXTEMPOSTR);
+  str = new char[XSTRING_MAXTEMPOSTR];
+  if(!str) return false;
 
-	if(mask) _mask = mask; else _mask = __L("%d");
+  memset(str,0,XSTRING_MAXTEMPOSTR);
 
-	XSTRING_CREATEOEM(_mask, charstr)
-	SPRINTF(str, charstr, (XDWORD)value);
-	XSTRING_DELETEOEM(charstr)
+  if(mask) _mask = mask; else _mask = __L("%d");
 
-	Set(str);
+  XSTRING_CREATEOEM(_mask, charstr)
+  SPRINTF(str, charstr, (XDWORD)value);
+  XSTRING_DELETEOEM(charstr)
 
-	delete [] str;
+  Set(str);
 
-	return true;
+  delete [] str;
+
+  return true;
 }
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::ConvertFromDWord
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			03/04/2012 13:43:23
-//	
-//	@return 			bool : 
-//	@param				value : 
-//  @param				mask : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      03/04/2012 13:43:23
+//
+//  @return       bool :
+//  @param        value :
+//  @param        mask :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::ConvertFromQWord(XQWORD value,const XCHAR* mask)
 {
-	char*		 str;
-	XSTRING  _mask;
-	
-	str = new char[XSTRING_MAXTEMPOSTR];
-	if(!str) return false;
+  char*    str;
+  XSTRING  _mask;
 
-	memset(str,0,XSTRING_MAXTEMPOSTR);
+  str = new char[XSTRING_MAXTEMPOSTR];
+  if(!str) return false;
 
-	if(mask) _mask = mask; else _mask = __L("%u");
+  memset(str,0,XSTRING_MAXTEMPOSTR);
 
-	XSTRING_CREATEOEM(_mask, charstr)
-	SPRINTF(str, charstr, (XDWORD)value);
-	XSTRING_DELETEOEM(charstr)
+  if(mask) _mask = mask; else _mask = __L("%u");
 
-	Set(str);
+  XSTRING_CREATEOEM(_mask, charstr)
+  SPRINTF(str, charstr, (XDWORD)value);
+  XSTRING_DELETEOEM(charstr)
 
-	delete [] str;
+  Set(str);
 
-	return true;
+  delete [] str;
+
+  return true;
 }
 
 
 /*-------------------------------------------------------------------
-//	XSTRING::ConvertFromLongLong
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			04/06/2015 12:18:37
-//	
-//	@return 			bool : 
+//  XSTRING::ConvertFromLongLong
+*/
+/**
 //
-//  @param				value : 
-//  @param				NULL : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      04/06/2015 12:18:37
+//
+//  @return       bool :
+//
+//  @param        value :
+//  @param        NULL :
 */
 /*-----------------------------------------------------------------*/
-bool	 XSTRING::ConvertFromLongLong	(long long value, const XCHAR* mask)
+bool   XSTRING::ConvertFromLongLong (long long value, const XCHAR* mask)
 {
-	char*		 str;
-	XSTRING  _mask;
-	
-	str = new char[XSTRING_MAXTEMPOSTR];
-	if(!str) return false;
+  char*    str;
+  XSTRING  _mask;
 
-	memset(str,0,XSTRING_MAXTEMPOSTR);
+  str = new char[XSTRING_MAXTEMPOSTR];
+  if(!str) return false;
 
-	if(mask) _mask = mask; else _mask = __L("%lld");
+  memset(str,0,XSTRING_MAXTEMPOSTR);
 
-	XSTRING_CREATEOEM(_mask, charstr)
-	SPRINTF(str, charstr, (long long)value);
-	XSTRING_DELETEOEM(charstr)
+  if(mask) _mask = mask; else _mask = __L("%lld");
 
-	Set(str);
+  XSTRING_CREATEOEM(_mask, charstr)
+  SPRINTF(str, charstr, (long long)value);
+  XSTRING_DELETEOEM(charstr)
 
-	delete [] str;
+  Set(str);
 
-	return true;
+  delete [] str;
+
+  return true;
 }
 
 /*-------------------------------------------------------------------
 //  XSTRING::ConvertFromFloat
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			03/04/2012 13:43:30
-//	
-//	@return 			bool : 
-//	@param				value : 
-//  @param				mask : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      03/04/2012 13:43:30
+//
+//  @return       bool :
+//  @param        value :
+//  @param        mask :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::ConvertFromFloat(float value,const XCHAR* mask)
 {
-	char*		 str;
-	XSTRING  _mask;
-	
-	str = new char[XSTRING_MAXTEMPOSTR];
-	if(!str) return false;
+  char*    str;
+  XSTRING  _mask;
 
-	memset(str,0,XSTRING_MAXTEMPOSTR);
+  str = new char[XSTRING_MAXTEMPOSTR];
+  if(!str) return false;
 
-	if(mask) _mask = mask; else _mask = __L("%f");
+  memset(str,0,XSTRING_MAXTEMPOSTR);
 
-	XSTRING_CREATEOEM(_mask, charstr);
-	SPRINTF(str, charstr, value);
-	XSTRING_DELETEOEM(charstr)
+  if(mask) _mask = mask; else _mask = __L("%f");
 
-	Set(str);
+  XSTRING_CREATEOEM(_mask, charstr);
+  SPRINTF(str, charstr, value);
+  XSTRING_DELETEOEM(charstr)
 
-	delete [] str;
+  Set(str);
 
-	return true;
+  delete [] str;
+
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::ConvertFromDouble
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			28/12/2012 11:10:01
-//	
-//	@return 			bool : 
-//	@param				value : 
-//  @param				mask : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      28/12/2012 11:10:01
+//
+//  @return       bool :
+//  @param        value :
+//  @param        mask :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::ConvertFromDouble(double value,const XCHAR* mask)
 {
-	char*		 str;
-	XSTRING  _mask;
-	
-	str = new char[XSTRING_MAXTEMPOSTR];
-	if(!str) return false;
+  char*    str;
+  XSTRING  _mask;
 
-	memset(str,0,XSTRING_MAXTEMPOSTR);
+  str = new char[XSTRING_MAXTEMPOSTR];
+  if(!str) return false;
 
-	if(mask) _mask = mask; else _mask = __L("%g");
+  memset(str,0,XSTRING_MAXTEMPOSTR);
 
-	XSTRING_CREATEOEM(_mask, charstr)
-	SPRINTF(str, charstr, value);
-	XSTRING_DELETEOEM(charstr)
+  if(mask) _mask = mask; else _mask = __L("%g");
 
-	Set(str);
+  XSTRING_CREATEOEM(_mask, charstr)
+  SPRINTF(str, charstr, value);
+  XSTRING_DELETEOEM(charstr)
 
-	delete [] str;
+  Set(str);
 
-	return true;
+  delete [] str;
+
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
-//	XSTRING::ConvertFromBoolean
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			04/06/2015 11:10:16
-//	
-//	@return 			bool : 
+//  XSTRING::ConvertFromBoolean
+*/
+/**
 //
-//  @param				boolean : 
-//  @param				uppercase : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      04/06/2015 11:10:16
+//
+//  @return       bool :
+//
+//  @param        boolean :
+//  @param        uppercase :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::ConvertFromBoolean(bool boolean, bool uppercase)
 {
-	if(boolean) 
-				Set(uppercase? __L("YES") : __L("yes"));		
-	 else Set(uppercase? __L("NO")  : __L("no"));		
+  if(boolean)
+        Set(uppercase? __L("YES") : __L("yes"));
+   else Set(uppercase? __L("NO")  : __L("no"));
 
-	return true;
+  return true;
 }
 
 
@@ -3062,85 +3062,85 @@ bool XSTRING::ConvertFromBoolean(bool boolean, bool uppercase)
 
 
 /*-------------------------------------------------------------------
-//	XSTRING::ConvertFromXBUFFER
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Imanol Celaya Ruiz de Alegria
-//	@version			23/11/2015 12:45:15
-//	
-//	@return 			bool : 
+//  XSTRING::ConvertFromXBUFFER
+*/
+/**
 //
-//  @param				buffer : 
+//
+//
+//  @author       Imanol Celaya Ruiz de Alegria
+//  @version      23/11/2015 12:45:15
+//
+//  @return       bool :
+//
+//  @param        buffer :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::ConvertFromXBUFFER(XBUFFER& buffer)
 {
-	if(!this->AdjustSize(buffer.GetSize()/sizeof(XDWORD))) return false;
-	if(!buffer.Get(*this, this->size, 0)) return false;
+  if(!this->AdjustSize(buffer.GetSize()/sizeof(XDWORD))) return false;
+  if(!buffer.Get(*this, this->size, 0)) return false;
 
-	return true;
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::ConvertHexFormatChars
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			04/04/2013 7:13:36
-//	
-//	@return 			bool : 
-//	*/
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      04/04/2013 7:13:36
+//
+//  @return       bool :
+//  */
 /*-----------------------------------------------------------------*/
 bool XSTRING::ConvertHexFormatChars()
 {
-	XSTRING string;
+  XSTRING string;
 
-	string.Empty();
+  string.Empty();
 
-	if(IsEmpty()) return false;
+  if(IsEmpty()) return false;
 
-	for(int c=0;c<(int)GetSize();c++)
-		{
-			XCHAR character[3] = { 0 , 0 , 0 };
-		
-			character[0] = Get()[c];
-			character[1] = Get()[c+1];
+  for(int c=0;c<(int)GetSize();c++)
+    {
+      XCHAR character[3] = { 0 , 0 , 0 };
 
-			if((character[0]==__C('\\')) && (character[1]==__C('x')))
-				{
-					XSTRING   numberhex;
-					XCHAR part[2] = { 0 , 0 };
+      character[0] = Get()[c];
+      character[1] = Get()[c+1];
 
-					c+=2;
-          
-					for(int d=0;d<2;d++) 
-						{												
-							part[0] = Get()[c+d];   
-							numberhex.Add(part);
-						}
-					
-					numberhex.UnFormat(__L("%02X"),&part[0]);
+      if((character[0]==__C('\\')) && (character[1]==__C('x')))
+        {
+          XSTRING   numberhex;
+          XCHAR part[2] = { 0 , 0 };
 
-					part[0]&=0x00FF;
-					string.Add(part);
-					
-					c++;
-				}
-			 else string.Add((XCHAR)character[0]);
-		}
+          c+=2;
 
-	if(string.IsEmpty()) return false;
+          for(int d=0;d<2;d++)
+            {
+              part[0] = Get()[c+d];
+              numberhex.Add(part);
+            }
 
-	Set(string);
+          numberhex.UnFormat(__L("%02X"),&part[0]);
 
-	return true;
+          part[0]&=0x00FF;
+          string.Add(part);
+
+          c++;
+        }
+       else string.Add((XCHAR)character[0]);
+    }
+
+  if(string.IsEmpty()) return false;
+
+  Set(string);
+
+  return true;
 }
 
 
@@ -3148,337 +3148,337 @@ bool XSTRING::ConvertHexFormatChars()
 
 /*-------------------------------------------------------------------
 //  XSTRING::ConvertToHexString
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			12/03/2014 10:25:30
-//	
-//	@return 			bool : 
-//	@param				string : 
-//  @param				uppercase : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      12/03/2014 10:25:30
+//
+//  @return       bool :
+//  @param        string :
+//  @param        uppercase :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::ConvertToHexString(XSTRING& string, bool uppercase)
 {
-	XSTRING datastr;
+  XSTRING datastr;
 
-	string.Empty();
+  string.Empty();
 
-	for(int c=0;c<(int)GetSize(); c++)
-		{
-			datastr.Format(uppercase?__L("%02X"):__L("%02x"), Get()[c]);
-			string.Add(datastr);
-		}
+  for(int c=0;c<(int)GetSize(); c++)
+    {
+      datastr.Format(uppercase?__L("%02X"):__L("%02x"), Get()[c]);
+      string.Add(datastr);
+    }
 
-	return true;
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
-//	XSTRING::ConvertHexStringToBuffer
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			20/03/2014 10:35:16
-//	
-//	@return 			bool : 
+//  XSTRING::ConvertHexStringToBuffer
+*/
+/**
 //
-//  @param				xbuffer : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      20/03/2014 10:35:16
+//
+//  @return       bool :
+//
+//  @param        xbuffer :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::ConvertHexStringToBuffer(XBUFFER& xbuffer)
 {
-	xbuffer.Delete();
+  xbuffer.Delete();
 
-	for(int c=0; c<(int)GetSize(); c+=2)
-		{
-			XCHAR		 hexbytechar[3] = { 0, 0, 0 };
-			XSTRING  hexbytestr;
-			int			 data;
-			
-			hexbytechar[0] = Get()[c];
-			hexbytechar[1] = Get()[c+1];
-			
-			hexbytestr = hexbytechar;
+  for(int c=0; c<(int)GetSize(); c+=2)
+    {
+      XCHAR    hexbytechar[3] = { 0, 0, 0 };
+      XSTRING  hexbytestr;
+      int      data;
 
-			hexbytestr.UnFormat(__L("%02X"), &data);
-			xbuffer.Add((XBYTE)data);
-		}
+      hexbytechar[0] = Get()[c];
+      hexbytechar[1] = Get()[c+1];
 
-	return true;
+      hexbytestr = hexbytechar;
+
+      hexbytestr.UnFormat(__L("%02X"), &data);
+      xbuffer.Add((XBYTE)data);
+    }
+
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
-//	XSTRING::ConvertHexStringFromBuffer
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			20/03/2014 12:07:06
-//	
-//	@return 			bool : 
+//  XSTRING::ConvertHexStringFromBuffer
+*/
+/**
 //
-//  @param				xbuffer : 
-//  @param				uppercase : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      20/03/2014 12:07:06
+//
+//  @return       bool :
+//
+//  @param        xbuffer :
+//  @param        uppercase :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::ConvertHexStringFromBuffer(XBUFFER& xbuffer, bool uppercase)
 {
-	Empty();
+  Empty();
 
-	for(int c=0; c<(int)xbuffer.GetSize(); c++)
-		{
-			XSTRING  hexbytestr;
+  for(int c=0; c<(int)xbuffer.GetSize(); c++)
+    {
+      XSTRING  hexbytestr;
 
-			hexbytestr.Format(uppercase?__L("%02X"):__L("%02x"), xbuffer.Get()[c]);
-			Add(hexbytestr);
-		}
+      hexbytestr.Format(uppercase?__L("%02X"):__L("%02x"), xbuffer.Get()[c]);
+      Add(hexbytestr);
+    }
 
-	return true;
+  return true;
 
 }
 
 
 
 /*-------------------------------------------------------------------
-//	XSTRING::ConvertToInt
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			12/09/2014 12:43:53
-//	
-//	@return 			int : 
+//  XSTRING::ConvertToInt
+*/
+/**
 //
-//  @param				index : 
-//  @param				mask : 
-//  @param				checkvalidchars : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      12/09/2014 12:43:53
+//
+//  @return       int :
+//
+//  @param        index :
+//  @param        mask :
+//  @param        checkvalidchars :
 */
 /*-----------------------------------------------------------------*/
 int XSTRING::ConvertToInt(int index, const XCHAR* mask, bool checkvalidchars)
 {
-	if(IsEmpty()) return 0;
+  if(IsEmpty()) return 0;
 
-	if(checkvalidchars)
-		{
-			XSTRING  validcharacters;
-			validcharacters  = XSTRING_VALIDCHARSINT;
-			if(!AreValidCharacters(validcharacters.Get())) return 0;
-		}
+  if(checkvalidchars)
+    {
+      XSTRING  validcharacters;
+      validcharacters  = XSTRING_VALIDCHARSINT;
+      if(!AreValidCharacters(validcharacters.Get())) return 0;
+    }
 
-	XSTRING  _mask;	
-	int			 data	= 0;
-		
-	if(mask) 
-	       _mask = mask; 
-	  else _mask = __L("%d");
+  XSTRING  _mask;
+  int      data = 0;
 
-	XSTRING_CREATEOEM(_mask, charstr)
-	XSTRING_CREATEOEM((*this), charstr2)
+  if(mask)
+         _mask = mask;
+    else _mask = __L("%d");
 
-	SSCANF(&charstr2[index], charstr, &data);	
+  XSTRING_CREATEOEM(_mask, charstr)
+  XSTRING_CREATEOEM((*this), charstr2)
 
-	XSTRING_DELETEOEM(charstr2)	
-	XSTRING_DELETEOEM(charstr)
+  SSCANF(&charstr2[index], charstr, &data);
 
-	return data;
+  XSTRING_DELETEOEM(charstr2)
+  XSTRING_DELETEOEM(charstr)
+
+  return data;
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	XSTRING::ConvertToDWord
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			12/09/2014 12:44:23
-//	
-//	@return 			XDWORD : 
+//  XSTRING::ConvertToDWord
+*/
+/**
 //
-//  @param				index : 
-//  @param				mask : 
-//  @param				checkvalidchars : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      12/09/2014 12:44:23
+//
+//  @return       XDWORD :
+//
+//  @param        index :
+//  @param        mask :
+//  @param        checkvalidchars :
 */
 /*-----------------------------------------------------------------*/
 XDWORD XSTRING::ConvertToDWord(int index, const XCHAR* mask, bool checkvalidchars)
 {
-	if(IsEmpty()) return 0;	
+  if(IsEmpty()) return 0;
 
-	if(checkvalidchars)
-		{
-			XSTRING  validcharacters;	
-			validcharacters  = XSTRING_VALIDCHARSINT
-			if(!AreValidCharacters(validcharacters.Get())) return 0;
-		}
+  if(checkvalidchars)
+    {
+      XSTRING  validcharacters;
+      validcharacters  = XSTRING_VALIDCHARSINT
+      if(!AreValidCharacters(validcharacters.Get())) return 0;
+    }
 
-	XSTRING  _mask;
-	XDWORD	 data	= 0;
+  XSTRING  _mask;
+  XDWORD   data = 0;
 
-	if(mask) _mask = mask; else _mask = __L("%d");
+  if(mask) _mask = mask; else _mask = __L("%d");
 
-	XSTRING_CREATEOEM(_mask, charstr)
-	XSTRING_CREATEOEM((*this), charstr2)
+  XSTRING_CREATEOEM(_mask, charstr)
+  XSTRING_CREATEOEM((*this), charstr2)
 
-	SSCANF(&charstr2[index], charstr, &data);	
+  SSCANF(&charstr2[index], charstr, &data);
 
-	XSTRING_DELETEOEM(charstr2)	
-	XSTRING_DELETEOEM(charstr)
+  XSTRING_DELETEOEM(charstr2)
+  XSTRING_DELETEOEM(charstr)
 
-	return data;
+  return data;
 }
 
 
 /*-------------------------------------------------------------------
-//	XSTRING::ConvertToQWord
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			12/09/2014 12:44:23
-//	
-//	@return 			XQWORD : 
+//  XSTRING::ConvertToQWord
+*/
+/**
 //
-//  @param				index : 
-//  @param				mask : 
-//  @param				checkvalidchars : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      12/09/2014 12:44:23
+//
+//  @return       XQWORD :
+//
+//  @param        index :
+//  @param        mask :
+//  @param        checkvalidchars :
 */
 /*-----------------------------------------------------------------*/
 XQWORD XSTRING::ConvertToQWord(int index, const XCHAR* mask, bool checkvalidchars)
 {
-	if(IsEmpty()) return 0;	
+  if(IsEmpty()) return 0;
 
-	if(checkvalidchars)
-		{
-			XSTRING  validcharacters;	
-			validcharacters  = XSTRING_VALIDCHARSINT
-			if(!AreValidCharacters(validcharacters.Get())) return 0;
-		}
+  if(checkvalidchars)
+    {
+      XSTRING  validcharacters;
+      validcharacters  = XSTRING_VALIDCHARSINT
+      if(!AreValidCharacters(validcharacters.Get())) return 0;
+    }
 
-	XSTRING  _mask;
-	long long	 data	= 0;
+  XSTRING  _mask;
+  long long  data = 0;
 
-	if(mask) _mask = mask; else _mask = __L("%lld");
+  if(mask) _mask = mask; else _mask = __L("%lld");
 
-	XSTRING_CREATEOEM(_mask, charstr)
-	XSTRING_CREATEOEM((*this), charstr2)
+  XSTRING_CREATEOEM(_mask, charstr)
+  XSTRING_CREATEOEM((*this), charstr2)
 
-	SSCANF(&charstr2[index], charstr, &data);	
+  SSCANF(&charstr2[index], charstr, &data);
 
-	XSTRING_DELETEOEM(charstr2)	
-	XSTRING_DELETEOEM(charstr)
+  XSTRING_DELETEOEM(charstr2)
+  XSTRING_DELETEOEM(charstr)
 
-	return data;
+  return data;
 }
 
 
 
 /*-------------------------------------------------------------------
-//	XSTRING::ConvertToFloat
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			12/09/2014 12:45:00
-//	
-//	@return 			float : 
+//  XSTRING::ConvertToFloat
+*/
+/**
 //
-//  @param				index : 
-//  @param				mask : 
-//  @param				checkvalidchars : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      12/09/2014 12:45:00
+//
+//  @return       float :
+//
+//  @param        index :
+//  @param        mask :
+//  @param        checkvalidchars :
 */
 /*-----------------------------------------------------------------*/
 float XSTRING::ConvertToFloat(int index, const XCHAR* mask, bool checkvalidchars)
 {
-	if(IsEmpty()) return 0.0f;
+  if(IsEmpty()) return 0.0f;
 
-	if(checkvalidchars)
-		{
-			XSTRING  validcharacters;
-			validcharacters  = XSTRING_VALIDCHARSFLOAT;
-			if(!AreValidCharacters(validcharacters.Get())) return .0f;
-		}
-		
-	XSTRING  _mask;
-	float	 data	= 0;
-	
-	if(mask) _mask = mask; else _mask = __L("%f");
-	
-	XSTRING_CREATEOEM(_mask, charstr)
-	XSTRING_CREATEOEM((*this), charstr2)
+  if(checkvalidchars)
+    {
+      XSTRING  validcharacters;
+      validcharacters  = XSTRING_VALIDCHARSFLOAT;
+      if(!AreValidCharacters(validcharacters.Get())) return .0f;
+    }
 
-	SSCANF(&charstr2[index], charstr, &data);	
+  XSTRING  _mask;
+  float  data = 0;
 
-	XSTRING_DELETEOEM(charstr2)		
-	XSTRING_DELETEOEM(charstr)
-		
-	return data;		
+  if(mask) _mask = mask; else _mask = __L("%f");
+
+  XSTRING_CREATEOEM(_mask, charstr)
+  XSTRING_CREATEOEM((*this), charstr2)
+
+  SSCANF(&charstr2[index], charstr, &data);
+
+  XSTRING_DELETEOEM(charstr2)
+  XSTRING_DELETEOEM(charstr)
+
+  return data;
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	XSTRING::ConvertToDouble
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			12/09/2014 12:45:25
-//	
-//	@return 			double : 
+//  XSTRING::ConvertToDouble
+*/
+/**
 //
-//  @param				index : 
-//  @param				mask : 
-//  @param				checkvalidchars : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      12/09/2014 12:45:25
+//
+//  @return       double :
+//
+//  @param        index :
+//  @param        mask :
+//  @param        checkvalidchars :
 */
 /*-----------------------------------------------------------------*/
 double XSTRING::ConvertToDouble(int index,const XCHAR* mask, bool checkvalidchars)
 {
-	if(IsEmpty()) return 0;
+  if(IsEmpty()) return 0;
 
-	if(checkvalidchars)
-		{
-			XSTRING  validcharacters;
-			validcharacters  = XSTRING_VALIDCHARSFLOAT;
-			if(!AreValidCharacters(validcharacters.Get())) return .0f;
-		}
-	
-	XSTRING  _mask;
-	double		 data	= 0;
-	
-	if(mask) _mask = mask; else _mask = __L("%lf");
+  if(checkvalidchars)
+    {
+      XSTRING  validcharacters;
+      validcharacters  = XSTRING_VALIDCHARSFLOAT;
+      if(!AreValidCharacters(validcharacters.Get())) return .0f;
+    }
 
-	XSTRING_CREATEOEM(_mask, charstr)
-	XSTRING_CREATEOEM((*this), charstr2)
+  XSTRING  _mask;
+  double     data = 0;
 
-	SSCANF(&charstr2[index], charstr, &data);	
+  if(mask) _mask = mask; else _mask = __L("%lf");
 
-	XSTRING_DELETEOEM(charstr2)	
-	XSTRING_DELETEOEM(charstr)
-	
-	return data;
+  XSTRING_CREATEOEM(_mask, charstr)
+  XSTRING_CREATEOEM((*this), charstr2)
+
+  SSCANF(&charstr2[index], charstr, &data);
+
+  XSTRING_DELETEOEM(charstr2)
+  XSTRING_DELETEOEM(charstr)
+
+  return data;
 }
 
 
@@ -3486,67 +3486,67 @@ double XSTRING::ConvertToDouble(int index,const XCHAR* mask, bool checkvalidchar
 
 
 /*-------------------------------------------------------------------
-//	XSTRING::ConvertToXBUFFER
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Imanol Celaya Ruiz de Alegria
-//	@version			23/11/2015 12:46:42
-//	
-//	@return 			bool : 
+//  XSTRING::ConvertToXBUFFER
+*/
+/**
 //
-//  @param				buffer : 
+//
+//
+//  @author       Imanol Celaya Ruiz de Alegria
+//  @version      23/11/2015 12:46:42
+//
+//  @return       bool :
+//
+//  @param        buffer :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::ConvertToXBUFFER(XBUFFER& buffer)
 {
-	if(IsEmpty()) return true;
+  if(IsEmpty()) return true;
 
-	if(!buffer.Resize(GetSize()*sizeof(XDWORD))) return false;
-	if(!buffer.Set(*this)) return false;
+  if(!buffer.Resize(GetSize()*sizeof(XDWORD))) return false;
+  if(!buffer.Set(*this)) return false;
 
-	return true;
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
-//	XSTRING::ConvertToBoolean
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			04/06/2015 11:33:58
-//	
-//	@return 			bool : 
+//  XSTRING::ConvertToBoolean
+*/
+/**
+//
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      04/06/2015 11:33:58
+//
+//  @return       bool :
 //
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::ConvertToBoolean()
 {
-	bool result = false;
+  bool result = false;
 
-	if(!Compare(__L("yes") , true) || !Compare(__L("true") , true)) 
-		{ 
-			result = true; 
-		}
-	 else
-		{
-			if(!Compare(__L("no") , true) || !Compare(__L("false") , true))	
-				{
-					result = false;
-				}
-			 else
-			  {
-					if(Compare(__L("0")	 , true)) result = true;		
-				}
-		}
+  if(!Compare(__L("yes") , true) || !Compare(__L("true") , true))
+    {
+      result = true;
+    }
+   else
+    {
+      if(!Compare(__L("no") , true) || !Compare(__L("false") , true))
+        {
+          result = false;
+        }
+       else
+        {
+          if(Compare(__L("0")  , true)) result = true;
+        }
+    }
 
-	return result;
+  return result;
 }
 
 
@@ -3554,193 +3554,193 @@ bool XSTRING::ConvertToBoolean()
 
 /*-------------------------------------------------------------------
 //  XSTRING::ConvertFromUTF8
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			02/02/2011 11:31:28
-//	
-//	@return				bool : 
-//	@param				data : 
-//  @param				maxsize : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      02/02/2011 11:31:28
+//
+//  @return       bool :
+//  @param        data :
+//  @param        maxsize :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::ConvertFromUTF8(XBYTE* data,int size)
 {
-	//Empty();
+  //Empty();
 
-	int			sizeutf8  = 0;
-	int			index			= 0;
-	XBYTE*	ptr;
-	int			c;
+  int     sizeutf8  = 0;
+  int     index     = 0;
+  XBYTE*  ptr;
+  int     c;
 
-	c   = 0;
-	ptr = data;
-	while(c<size)
-		{
-			if(((XBYTE)*ptr)<128 || (*ptr&192)==192) sizeutf8++;
-			ptr++;
-			c++;
-		}
-			
-	if(!sizeutf8) return false;
+  c   = 0;
+  ptr = data;
+  while(c<size)
+    {
+      if(((XBYTE)*ptr)<128 || (*ptr&192)==192) sizeutf8++;
+      ptr++;
+      c++;
+    }
 
-	if(sizeutf8>size)  sizeutf8 = size;
+  if(!sizeutf8) return false;
 
-	//Set(sizeutf8);
-	if(!ReAllocBuffer(sizeutf8)) return false;
-	
-	c   = 0;
-	ptr = data;
-	while(c<size)
-		{
-			XBYTE b=*ptr;
-			//Byte represents an ASCII character. Direct copy will do.
-			if(!(b&128))	
-				{
-				  text[index]=b;
-				}	 
-			 else 
-				{ 
-					 //Byte is the middle of an encoded character. Ignore.
-					 if((b&192)==128)
-						 {
-							 ptr++;							 
-							 continue;
-						 }
-						else 
-						 {	
-							 //Byte represents the start of an encoded character in the range
-							 //U+0080 to U+07FF
-							 if((b&224)==192)	
-								 {
-									 text[index]=((*ptr&31)<<6)|ptr[1]&63;
-								 }
-								else
-								 {	
-									  //Byte represents the start of an encoded character in the range
-										//U+07FF to U+FFFF
-										if((b&240)==224)
-											{
-												text[index]=((*ptr&15)<<12)|((ptr[1]&63)<<6)|ptr[2]&63;
-											}
-										 else 
-											{
-												//Byte represents the start of an encoded character beyond the
-												//U+FFFF limit of 16-bit integers
-												if((b&248)==240)
-													{												
-														text[index]='?';
-													}
-											}
-								 }
-						 }
-				}
+  if(sizeutf8>size)  sizeutf8 = size;
 
-			index++;
-			ptr++;
-			c++;
+  //Set(sizeutf8);
+  if(!ReAllocBuffer(sizeutf8)) return false;
 
-			if(index>=sizeutf8) break;
-		}
+  c   = 0;
+  ptr = data;
+  while(c<size)
+    {
+      XBYTE b=*ptr;
+      //Byte represents an ASCII character. Direct copy will do.
+      if(!(b&128))
+        {
+          text[index]=b;
+        }
+       else
+        {
+           //Byte is the middle of an encoded character. Ignore.
+           if((b&192)==128)
+             {
+               ptr++;
+               continue;
+             }
+            else
+             {
+               //Byte represents the start of an encoded character in the range
+               //U+0080 to U+07FF
+               if((b&224)==192)
+                 {
+                   text[index]=((*ptr&31)<<6)|ptr[1]&63;
+                 }
+                else
+                 {
+                    //Byte represents the start of an encoded character in the range
+                    //U+07FF to U+FFFF
+                    if((b&240)==224)
+                      {
+                        text[index]=((*ptr&15)<<12)|((ptr[1]&63)<<6)|ptr[2]&63;
+                      }
+                     else
+                      {
+                        //Byte represents the start of an encoded character beyond the
+                        //U+FFFF limit of 16-bit integers
+                        if((b&248)==240)
+                          {
+                            text[index]='?';
+                          }
+                      }
+                 }
+             }
+        }
 
-	return true;
+      index++;
+      ptr++;
+      c++;
+
+      if(index>=sizeutf8) break;
+    }
+
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
-//	XSTRING::ConvertFromUTF8
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			30/05/2014 10:51:05
-//	
-//	@return 			bool : 
+//  XSTRING::ConvertFromUTF8
+*/
+/**
 //
-//  @param				xbuffer : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      30/05/2014 10:51:05
+//
+//  @return       bool :
+//
+//  @param        xbuffer :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::ConvertFromUTF8(XBUFFER& xbuffer)
 {
-	return ConvertFromUTF8(xbuffer.Get(), xbuffer.GetSize());
+  return ConvertFromUTF8(xbuffer.Get(), xbuffer.GetSize());
 }
 
 
 
 /*-------------------------------------------------------------------
-//	XSTRING::GetSizeConvertToUTF8
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			30/05/2014 10:53:55
-//	
-//	@return 			bool : 
+//  XSTRING::GetSizeConvertToUTF8
+*/
+/**
+//
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      30/05/2014 10:53:55
+//
+//  @return       bool :
 //
 */
 /*-----------------------------------------------------------------*/
 int XSTRING::GetSizeConvertToUTF8()
-{ 
-	int size = 0;
-	
+{
+  int size = 0;
+
   if(IsEmpty()) return size;
 
-	int	i = 0;
-	int	j = 0; 
+  int i = 0;
+  int j = 0;
   int c = (int)text[i++];
-  
-  while(c) 
-		{
-			if(c<0) 
-				{
-					j++;
-				}
-			 else 
-				{
-					if(c<128) 
-						{
-							j++;
-						}
-		 			 else 
-					  {
-								if(c< 2048) 
-									{
-										j++;
-										j++; 
-									}
-								 else 
-								  {										
-										if(c<65536) 
-											{
-												j++;
-												j++;
-												j++; 
-											}
-										 else                               
-										  {
-												j++;
-												j++;
-												j++;
-												j++; 
-											}										
-									}
-						}
-				}
 
-		  c = text[i++]; 
-		}
+  while(c)
+    {
+      if(c<0)
+        {
+          j++;
+        }
+       else
+        {
+          if(c<128)
+            {
+              j++;
+            }
+           else
+            {
+                if(c< 2048)
+                  {
+                    j++;
+                    j++;
+                  }
+                 else
+                  {
+                    if(c<65536)
+                      {
+                        j++;
+                        j++;
+                        j++;
+                      }
+                     else
+                      {
+                        j++;
+                        j++;
+                        j++;
+                        j++;
+                      }
+                  }
+            }
+        }
 
- 
-	size = j;
+      c = text[i++];
+    }
 
-	return size;
+
+  size = j;
+
+  return size;
 }
 
 
@@ -3748,154 +3748,154 @@ int XSTRING::GetSizeConvertToUTF8()
 
 /*-------------------------------------------------------------------
 //  XSTRING::ConvertToUTF8
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			04/02/2011 17:52:37
-//	
-//	@return				bool : 
-//	@param				data : 
-//  @param				size : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      04/02/2011 17:52:37
+//
+//  @return       bool :
+//  @param        data :
+//  @param        size :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::ConvertToUTF8(XBYTE* data, int& size)
-{ 
-	size = 0;
-	if(!data)	return false;
+{
+  size = 0;
+  if(!data) return false;
 
   if(IsEmpty()) return false;
 
-	int	i = 0;
-	int	j = 0; 
+  int i = 0;
+  int j = 0;
   int c = (int)text[i++];
-  
-  while(c) 
-		{
-			if(c<0) 
-				{
-					data[j++]=1;
-				}
-			 else 
-				{
-					if(c<128) 
-						{
-							data[j++] = (XBYTE)c;
-						}
-		 			 else 
-					  {
-								if(c< 2048) 
-									{
-										data[j++]= (XBYTE)(192+ c/64);
-										data[j++]= (XBYTE)(128+(c&63)); 
-									}
-								 else 
-								  {
-										if(c<65536) 
-											{
-												data[j++]=  (XBYTE)(224+ c/4096);
-												data[j++]=  (XBYTE)(128+(c&4095)/64);
-												data[j++]=  (XBYTE)(128+(c&63)); 
-											}
-										 else                               
-										  {
-												data[j++]=  (XBYTE)(240+ c/262144);
-												data[j++]=  (XBYTE)(128+(c&262143)/4096);
-												data[j++]=  (XBYTE)(128+(c&4095)/64);
-												data[j++]=  (XBYTE)(128+(c&63)); 
-											}
 
-										
-									}
-						}
-				}
+  while(c)
+    {
+      if(c<0)
+        {
+          data[j++]=1;
+        }
+       else
+        {
+          if(c<128)
+            {
+              data[j++] = (XBYTE)c;
+            }
+           else
+            {
+                if(c< 2048)
+                  {
+                    data[j++]= (XBYTE)(192+ c/64);
+                    data[j++]= (XBYTE)(128+(c&63));
+                  }
+                 else
+                  {
+                    if(c<65536)
+                      {
+                        data[j++]=  (XBYTE)(224+ c/4096);
+                        data[j++]=  (XBYTE)(128+(c&4095)/64);
+                        data[j++]=  (XBYTE)(128+(c&63));
+                      }
+                     else
+                      {
+                        data[j++]=  (XBYTE)(240+ c/262144);
+                        data[j++]=  (XBYTE)(128+(c&262143)/4096);
+                        data[j++]=  (XBYTE)(128+(c&4095)/64);
+                        data[j++]=  (XBYTE)(128+(c&63));
+                      }
 
-		  c = text[i++]; 
-		}
 
-  data[j]=0; 
+                  }
+            }
+        }
 
-	size = j;
+      c = text[i++];
+    }
 
-	return true;
+  data[j]=0;
+
+  size = j;
+
+  return true;
 }
 
 
 /*-------------------------------------------------------------------
-//	XSTRING::ConvertToUTF8
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			30/05/2014 10:55:10
-//	
-//	@return 			bool : 
+//  XSTRING::ConvertToUTF8
+*/
+/**
 //
-//  @param				xbuffer : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      30/05/2014 10:55:10
+//
+//  @return       bool :
+//
+//  @param        xbuffer :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::ConvertToUTF8(XBUFFER& xbuffer)
 {
-	if(IsEmpty()) return false;
+  if(IsEmpty()) return false;
 
-	int sizeUTF8 = GetSizeConvertToUTF8()+1;
+  int sizeUTF8 = GetSizeConvertToUTF8()+1;
 
-	xbuffer.Delete();
-	xbuffer.Resize(sizeUTF8);
-	xbuffer.FillBuffer();
-	
-	int _size  = xbuffer.GetSize();
+  xbuffer.Delete();
+  xbuffer.Resize(sizeUTF8);
+  xbuffer.FillBuffer();
 
-	return ConvertToUTF8(xbuffer.Get(),  _size);
-	
+  int _size  = xbuffer.GetSize();
+
+  return ConvertToUTF8(xbuffer.Get(),  _size);
+
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::ConvertToBase64
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			11/03/2014 16:19:52
-//	
-//	@return 			bool : 
-//	@param				string : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      11/03/2014 16:19:52
+//
+//  @return       bool :
+//  @param        string :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::ConvertToBase64(XSTRING& string)
 {
-	int sizebase64  = 4 * ((GetSize() + 2) / 3);
-	int mod_table[] = { 0, 2, 1 };
+  int sizebase64  = 4 * ((GetSize() + 2) / 3);
+  int mod_table[] = { 0, 2, 1 };
 
-	string.Empty();
-	string.ReAllocBuffer(sizebase64);
+  string.Empty();
+  string.ReAllocBuffer(sizebase64);
 
-	for(int i=0, j=0; i<(int)GetSize();) 
-		{
-			XDWORD octetA = (i < (int)GetSize()) ? (XBYTE)Get()[i++] : 0;
+  for(int i=0, j=0; i<(int)GetSize();)
+    {
+      XDWORD octetA = (i < (int)GetSize()) ? (XBYTE)Get()[i++] : 0;
       XDWORD octetB = (i < (int)GetSize()) ? (XBYTE)Get()[i++] : 0;
-			XDWORD octetC = (i < (int)GetSize()) ? (XBYTE)Get()[i++] : 0;
+      XDWORD octetC = (i < (int)GetSize()) ? (XBYTE)Get()[i++] : 0;
 
-			XDWORD triple = (octetA << 0x10) + (octetB << 0x08) + octetC;
+      XDWORD triple = (octetA << 0x10) + (octetB << 0x08) + octetC;
 
-      string.Get()[j++] = (ConvertIndexBase64ToXCHAR((triple >> 3 * 6) & 0x3F)); 
-      string.Get()[j++] = (ConvertIndexBase64ToXCHAR((triple >> 2 * 6) & 0x3F)); 
-      string.Get()[j++] = (ConvertIndexBase64ToXCHAR((triple >> 1 * 6) & 0x3F)); 
-      string.Get()[j++] = (ConvertIndexBase64ToXCHAR((triple >> 0 * 6) & 0x3F)); 
+      string.Get()[j++] = (ConvertIndexBase64ToXCHAR((triple >> 3 * 6) & 0x3F));
+      string.Get()[j++] = (ConvertIndexBase64ToXCHAR((triple >> 2 * 6) & 0x3F));
+      string.Get()[j++] = (ConvertIndexBase64ToXCHAR((triple >> 1 * 6) & 0x3F));
+      string.Get()[j++] = (ConvertIndexBase64ToXCHAR((triple >> 0 * 6) & 0x3F));
     }
 
-	for(int i = 0; i < mod_table[GetSize() % 3]; i++)
-		{			
-			string.Get()[sizebase64 - 1 - i] = __C('=');
-		}
-	 
-	return true;
+  for(int i = 0; i < mod_table[GetSize() % 3]; i++)
+    {
+      string.Get()[sizebase64 - 1 - i] = __C('=');
+    }
+
+  return true;
 }
 
 
@@ -3903,56 +3903,56 @@ bool XSTRING::ConvertToBase64(XSTRING& string)
 
 /*-------------------------------------------------------------------
 //  XSTRING::::ConvertFromBase64
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			11/03/2014 15:59:47
-//	
-//	@return 			bool : 
-//	@param				string : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      11/03/2014 15:59:47
+//
+//  @return       bool :
+//  @param        string :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::ConvertFromBase64(XSTRING& string)
-{		
-	XDWORD	data;
-	int     size  = string.GetSize();
-	int			c		  = 0;
-	int			d;
+{
+  XDWORD  data;
+  int     size  = string.GetSize();
+  int     c     = 0;
+  int     d;
 
-	Empty();
+  Empty();
 
-	if(!size) return false;
-	
-	XSTRING_CREATEOEM(string, charstr)
+  if(!size) return false;
 
-	do{ data = 0;
-						
-			for(d=0;d<4;d++)
-				{					
-					data |= ConvertXCHARToBase64Index((char)charstr[c+d]);    			
-					if(d!=3) data<<=6;
-				}
+  XSTRING_CREATEOEM(string, charstr)
 
-			
-			data<<=8;
+  do{ data = 0;
 
-			for(d=0;d<3;d++)
-				{
-					XCHAR character[2] = { 0 , 0 };
+      for(d=0;d<4;d++)
+        {
+          data |= ConvertXCHARToBase64Index((char)charstr[c+d]);
+          if(d!=3) data<<=6;
+        }
 
-					character[0]  = ((data & 0xFF000000)>>24);
-					data<<=8;
-					
-					Add(character);
-				}
 
-			c+=4;
+      data<<=8;
 
-		} while(c<size);
-	
-	XSTRING_DELETEOEM(charstr)
+      for(d=0;d<3;d++)
+        {
+          XCHAR character[2] = { 0 , 0 };
+
+          character[0]  = ((data & 0xFF000000)>>24);
+          data<<=8;
+
+          Add(character);
+        }
+
+      c+=4;
+
+    } while(c<size);
+
+  XSTRING_DELETEOEM(charstr)
 
   return true;
 }
@@ -3962,28 +3962,28 @@ bool XSTRING::ConvertFromBase64(XSTRING& string)
 
 /*-------------------------------------------------------------------
 //  XSTRING::ConvertToPascal
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			11/11/2013 10:50:13
-//	
-//	@return 			bool : 
-//	@param				pascalstring : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      11/11/2013 10:50:13
+//
+//  @return       bool :
+//  @param        pascalstring :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::ConvertToPascal(SHORTSTRING& pascalstring)
-{	
-	memset(&pascalstring, 0, sizeof(SHORTSTRING));
+{
+  memset(&pascalstring, 0, sizeof(SHORTSTRING));
 
-	pascalstring.size = (XBYTE)(GetSize()>255)?255:GetSize();
-		
-	XSTRING_CREATEOEM((*this), charstr)
-	memcpy(&pascalstring.data, charstr, pascalstring.size);
-	XSTRING_DELETEOEM(charstr)
-	
-	return true;
+  pascalstring.size = (XBYTE)(GetSize()>255)?255:GetSize();
+
+  XSTRING_CREATEOEM((*this), charstr)
+  memcpy(&pascalstring.data, charstr, pascalstring.size);
+  XSTRING_DELETEOEM(charstr)
+
+  return true;
 }
 
 
@@ -3991,27 +3991,27 @@ bool XSTRING::ConvertToPascal(SHORTSTRING& pascalstring)
 
 /*-------------------------------------------------------------------
 //  XSTRING::ConvertFromPascal
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			20/12/2013 9:39:40
-//	
-//	@return 			bool : 
-//	@param				pascalstring : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      20/12/2013 9:39:40
+//
+//  @return       bool :
+//  @param        pascalstring :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::ConvertFromPascal(SHORTSTRING& pascalstring)
 {
-	if(!pascalstring.size) return false;
+  if(!pascalstring.size) return false;
 
-	// no effect
-	//pascalstring.data[pascalstring.size];
-	
-	Set(pascalstring.data);
+  // no effect
+  //pascalstring.data[pascalstring.size];
 
-	return true;
+  Set(pascalstring.data);
+
+  return true;
 }
 
 
@@ -4019,184 +4019,184 @@ bool XSTRING::ConvertFromPascal(SHORTSTRING& pascalstring)
 
 
 /*-------------------------------------------------------------------
-//	XSTRING::ConvertFromDoubleToSpanishText
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			30/06/2015 9:52:18
-//	
-//	@return 			bool : 
+//  XSTRING::ConvertFromDoubleToSpanishText
+*/
+/**
 //
-//  @param				value : 
-//  @param				withintegerpart : 
-//  @param				withdecimalpart : 
-//  @param				integerpart : 
-//  @param				decimalpart : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      30/06/2015 9:52:18
+//
+//  @return       bool :
+//
+//  @param        value :
+//  @param        withintegerpart :
+//  @param        withdecimalpart :
+//  @param        integerpart :
+//  @param        decimalpart :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::ConvertFromDoubleToSpanishText(double value, bool withintegerpart, bool withdecimalpart, double& integerpart, double& decimalpart)
 {
-	Empty();
-	 
-	integerpart = Truncate(value);
-	decimalpart = Fraction(value);
+  Empty();
 
-	XSTRING tmp;
+  integerpart = Truncate(value);
+  decimalpart = Fraction(value);
 
-	if(withintegerpart)
-		{
-			double _integerpart;
-			double _decimalpart;
+  XSTRING tmp;
 
-			if(integerpart == 0) Set(__L("cero"));
-				else if(integerpart ==  1) Set(__L("uno"));
-				else if(integerpart ==  2) Set(__L("dos"));
-				else if(integerpart ==  3) Set(__L("tres"));
-				else if(integerpart ==  4) Set(__L("cuatro"));
-				else if(integerpart ==  5) Set(__L("cinco"));
-				else if(integerpart ==  6) Set(__L("seis"));
-				else if(integerpart ==  7) Set(__L("siete"));
-				else if(integerpart ==  8) Set(__L("ocho"));
-				else if(integerpart ==  9) Set(__L("nueve"));
-				else if(integerpart == 10) Set(__L("diez"));
-				else if(integerpart == 11) Set(__L("once"));
-				else if(integerpart == 12) Set(__L("doce"));
-				else if(integerpart == 13) Set(__L("trece"));
-				else if(integerpart == 14) Set(__L("catorce"));
-				else if(integerpart == 15) Set(__L("quince"));
-				else if(integerpart < 20) 
-							 {
-									Set(__L("dieci"));
-									tmp.ConvertFromDoubleToSpanishText(integerpart - 10, true, false, _integerpart, _decimalpart);
-									Add(tmp);
-								}
-							 else if(integerpart == 20) Set(__L("veinte"));
-											else if(integerpart < 30) 
-														{													
-															Set(__L("veinti"));
-															tmp.ConvertFromDoubleToSpanishText(integerpart - 20, true, false, _integerpart, _decimalpart);
-															Add(tmp);
-										  			 }
-														else if(integerpart == 30) Set(__L("treinta"));
-														else if(integerpart == 40) Set(__L("cuarenta"));
-														else if(integerpart == 50) Set(__L("cincuenta"));
-														else if(integerpart == 60) Set(__L("sesenta"));
-														else if(integerpart == 70) Set(__L("setenta"));
-														else if(integerpart == 80) Set(__L("ochenta"));
-														else if(integerpart == 90) Set(__L("noventa"));
-														else if(integerpart < 100) 
-																	 {
-																		 ConvertFromDoubleToSpanishText(Truncate(integerpart/10) * 10, true, false, _integerpart, _decimalpart);
-																		 Add(__L(" y "));
-																		 tmp.ConvertFromDoubleToSpanishText(fmod(integerpart, (double)10), true, false, _integerpart, _decimalpart);
-																		 Add(tmp);	
-																	 }
-																	else if(integerpart == 100) Set(__L("cien"));
-																	else if(integerpart < 200) 
-																				 {
-																		 			 Set(__L("ciento "));
-																					 tmp.ConvertFromDoubleToSpanishText(integerpart - 100, true, false, _integerpart, _decimalpart);
-																					 Add(tmp);
-																				 }
-																				else if((integerpart == 200) || (integerpart == 300) || (integerpart == 400) || (integerpart == 600) || (integerpart == 800)) 
-																							 {
-																					 			 ConvertFromDoubleToSpanishText(Truncate(integerpart / 100), true, false, _integerpart, _decimalpart);
-																								 Add(__L("cientos"));
-																				 			 }
-																							else if(integerpart == 500) Set(__L("quinientos"));
-																							else if(integerpart == 700) Set(__L("setecientos"));
-																							else if(integerpart == 900) Set(__L("novecientos"));
-  																						else if(integerpart < 1000) 
-																									 {
-																										 ConvertFromDoubleToSpanishText(Truncate(integerpart / 100) * 100, true, false, _integerpart, _decimalpart);																								 
-																										 Add(__L(" "));
-																										 tmp.ConvertFromDoubleToSpanishText(fmod(integerpart, (double)100), true, false, _integerpart, _decimalpart);
-																										 Add(tmp);
-																									 }
-																									else if(integerpart == 1000) Set(__L("mil"));
-																									else if(integerpart < 2000) 
-																												{
-																													Set(__L("mil "));
-																													tmp.ConvertFromDoubleToSpanishText(fmod(integerpart, (double)1000), true, false, _integerpart, _decimalpart);
-																													Add(tmp);
-																												}
-																											else if(integerpart < 1000000)
-																															{
-																																ConvertFromDoubleToSpanishText(Truncate(integerpart / 1000), true, false, _integerpart, _decimalpart);
-																																Add(__L(" mil"));
-																																if((fmod(integerpart, (double)1000)) > 0) 
-																																	{																																
-																																		Add(" ");
-																																		tmp.ConvertFromDoubleToSpanishText(fmod(integerpart, (double)1000), true, false, _integerpart, _decimalpart);
-																																		Add(tmp);
-																																	}
-																															}
-																														else if(integerpart == 1000000) Set(__L("un millon"));
-																														else if(integerpart < 2000000) 
-																																		{
-																																			Set(__L("un millon"));
-																																			tmp.ConvertFromDoubleToSpanishText(fmod(integerpart, (double)1000000), true, false, _integerpart, _decimalpart);
-																																			Add(tmp);
-																																		}
-																																	 else if(integerpart < 1000000000000LL)
-																																					{ 
-																																						 ConvertFromDoubleToSpanishText((integerpart / 1000000), true, false, _integerpart, _decimalpart);
-																																						 Add(__L(" millones"));
-																																						 if((integerpart - Truncate(integerpart / 1000000) * 1000000) > 0) 
-																																							 {
-																																								 Add(__L(" "));
-																																								 tmp.ConvertFromDoubleToSpanishText(integerpart - Truncate(integerpart / 1000000) * 1000000, true, false, _integerpart, _decimalpart);
-																																								 Add(tmp);
-																																							 }
-																																					}
-																																				 else 
-																																					{
-																																						if(integerpart == 1000000000000LL) Set(__L("un billon"));
-																																							else if(integerpart < 2000000000000LL) 
-																																								{
-																																									Set(__L("un billon")); 
-																																									tmp.ConvertFromDoubleToSpanishText(Truncate(integerpart / 1000000000000LL) * 1000000000000LL, true, false, _integerpart, _decimalpart);
-																																									Add(tmp);
-																																								}
-																																							 else
-																																								{
-																																									 ConvertFromDoubleToSpanishText(Truncate(integerpart / 1000000000000LL), true, false, _integerpart, _decimalpart);
-																																									 Add(__L(" billones"));
+  if(withintegerpart)
+    {
+      double _integerpart;
+      double _decimalpart;
 
-																																									 if((integerpart - Truncate(integerpart / 1000000000000LL) * 1000000000000LL) > 0) 
-																																										 {
-																																											 Add(__L(" "));
-																																											 tmp.ConvertFromDoubleToSpanishText(integerpart - Truncate(integerpart / 1000000000000LL) * 1000000000000LL, true, false, _integerpart, _decimalpart);
-																																											 Add(tmp);
-																																										 }
-																																								}
-																																					}
-			if(!integerpart) return false;
-		}
+      if(integerpart == 0) Set(__L("cero"));
+        else if(integerpart ==  1) Set(__L("uno"));
+        else if(integerpart ==  2) Set(__L("dos"));
+        else if(integerpart ==  3) Set(__L("tres"));
+        else if(integerpart ==  4) Set(__L("cuatro"));
+        else if(integerpart ==  5) Set(__L("cinco"));
+        else if(integerpart ==  6) Set(__L("seis"));
+        else if(integerpart ==  7) Set(__L("siete"));
+        else if(integerpart ==  8) Set(__L("ocho"));
+        else if(integerpart ==  9) Set(__L("nueve"));
+        else if(integerpart == 10) Set(__L("diez"));
+        else if(integerpart == 11) Set(__L("once"));
+        else if(integerpart == 12) Set(__L("doce"));
+        else if(integerpart == 13) Set(__L("trece"));
+        else if(integerpart == 14) Set(__L("catorce"));
+        else if(integerpart == 15) Set(__L("quince"));
+        else if(integerpart < 20)
+               {
+                  Set(__L("dieci"));
+                  tmp.ConvertFromDoubleToSpanishText(integerpart - 10, true, false, _integerpart, _decimalpart);
+                  Add(tmp);
+                }
+               else if(integerpart == 20) Set(__L("veinte"));
+                      else if(integerpart < 30)
+                            {
+                              Set(__L("veinti"));
+                              tmp.ConvertFromDoubleToSpanishText(integerpart - 20, true, false, _integerpart, _decimalpart);
+                              Add(tmp);
+                             }
+                            else if(integerpart == 30) Set(__L("treinta"));
+                            else if(integerpart == 40) Set(__L("cuarenta"));
+                            else if(integerpart == 50) Set(__L("cincuenta"));
+                            else if(integerpart == 60) Set(__L("sesenta"));
+                            else if(integerpart == 70) Set(__L("setenta"));
+                            else if(integerpart == 80) Set(__L("ochenta"));
+                            else if(integerpart == 90) Set(__L("noventa"));
+                            else if(integerpart < 100)
+                                   {
+                                     ConvertFromDoubleToSpanishText(Truncate(integerpart/10) * 10, true, false, _integerpart, _decimalpart);
+                                     Add(__L(" y "));
+                                     tmp.ConvertFromDoubleToSpanishText(fmod(integerpart, (double)10), true, false, _integerpart, _decimalpart);
+                                     Add(tmp);
+                                   }
+                                  else if(integerpart == 100) Set(__L("cien"));
+                                  else if(integerpart < 200)
+                                         {
+                                           Set(__L("ciento "));
+                                           tmp.ConvertFromDoubleToSpanishText(integerpart - 100, true, false, _integerpart, _decimalpart);
+                                           Add(tmp);
+                                         }
+                                        else if((integerpart == 200) || (integerpart == 300) || (integerpart == 400) || (integerpart == 600) || (integerpart == 800))
+                                               {
+                                                 ConvertFromDoubleToSpanishText(Truncate(integerpart / 100), true, false, _integerpart, _decimalpart);
+                                                 Add(__L("cientos"));
+                                               }
+                                              else if(integerpart == 500) Set(__L("quinientos"));
+                                              else if(integerpart == 700) Set(__L("setecientos"));
+                                              else if(integerpart == 900) Set(__L("novecientos"));
+                                              else if(integerpart < 1000)
+                                                   {
+                                                     ConvertFromDoubleToSpanishText(Truncate(integerpart / 100) * 100, true, false, _integerpart, _decimalpart);
+                                                     Add(__L(" "));
+                                                     tmp.ConvertFromDoubleToSpanishText(fmod(integerpart, (double)100), true, false, _integerpart, _decimalpart);
+                                                     Add(tmp);
+                                                   }
+                                                  else if(integerpart == 1000) Set(__L("mil"));
+                                                  else if(integerpart < 2000)
+                                                        {
+                                                          Set(__L("mil "));
+                                                          tmp.ConvertFromDoubleToSpanishText(fmod(integerpart, (double)1000), true, false, _integerpart, _decimalpart);
+                                                          Add(tmp);
+                                                        }
+                                                      else if(integerpart < 1000000)
+                                                              {
+                                                                ConvertFromDoubleToSpanishText(Truncate(integerpart / 1000), true, false, _integerpart, _decimalpart);
+                                                                Add(__L(" mil"));
+                                                                if((fmod(integerpart, (double)1000)) > 0)
+                                                                  {
+                                                                    Add(" ");
+                                                                    tmp.ConvertFromDoubleToSpanishText(fmod(integerpart, (double)1000), true, false, _integerpart, _decimalpart);
+                                                                    Add(tmp);
+                                                                  }
+                                                              }
+                                                            else if(integerpart == 1000000) Set(__L("un millon"));
+                                                            else if(integerpart < 2000000)
+                                                                    {
+                                                                      Set(__L("un millon"));
+                                                                      tmp.ConvertFromDoubleToSpanishText(fmod(integerpart, (double)1000000), true, false, _integerpart, _decimalpart);
+                                                                      Add(tmp);
+                                                                    }
+                                                                   else if(integerpart < 1000000000000LL)
+                                                                          {
+                                                                             ConvertFromDoubleToSpanishText((integerpart / 1000000), true, false, _integerpart, _decimalpart);
+                                                                             Add(__L(" millones"));
+                                                                             if((integerpart - Truncate(integerpart / 1000000) * 1000000) > 0)
+                                                                               {
+                                                                                 Add(__L(" "));
+                                                                                 tmp.ConvertFromDoubleToSpanishText(integerpart - Truncate(integerpart / 1000000) * 1000000, true, false, _integerpart, _decimalpart);
+                                                                                 Add(tmp);
+                                                                               }
+                                                                          }
+                                                                         else
+                                                                          {
+                                                                            if(integerpart == 1000000000000LL) Set(__L("un billon"));
+                                                                              else if(integerpart < 2000000000000LL)
+                                                                                {
+                                                                                  Set(__L("un billon"));
+                                                                                  tmp.ConvertFromDoubleToSpanishText(Truncate(integerpart / 1000000000000LL) * 1000000000000LL, true, false, _integerpart, _decimalpart);
+                                                                                  Add(tmp);
+                                                                                }
+                                                                               else
+                                                                                {
+                                                                                   ConvertFromDoubleToSpanishText(Truncate(integerpart / 1000000000000LL), true, false, _integerpart, _decimalpart);
+                                                                                   Add(__L(" billones"));
 
-	if(withdecimalpart)
-		{
-			double _integerpart;
-			double _decimalpart;
+                                                                                   if((integerpart - Truncate(integerpart / 1000000000000LL) * 1000000000000LL) > 0)
+                                                                                     {
+                                                                                       Add(__L(" "));
+                                                                                       tmp.ConvertFromDoubleToSpanishText(integerpart - Truncate(integerpart / 1000000000000LL) * 1000000000000LL, true, false, _integerpart, _decimalpart);
+                                                                                       Add(tmp);
+                                                                                     }
+                                                                                }
+                                                                          }
+      if(!integerpart) return false;
+    }
 
-			double ipart = Truncate(decimalpart*100);
-			double dpart = Fraction(decimalpart*100);
-			
-			if(dpart>=0.9f) ipart++;
-			
-			if(ipart) 
-				{		
-					if(withintegerpart) Add(__L(" con "));	
-					tmp.ConvertFromDoubleToSpanishText(ipart, true, false, _integerpart, _decimalpart);
-					Add(tmp);	
-				
-				} else return false; 
-		}
+  if(withdecimalpart)
+    {
+      double _integerpart;
+      double _decimalpart;
 
-	return true;
+      double ipart = Truncate(decimalpart*100);
+      double dpart = Fraction(decimalpart*100);
+
+      if(dpart>=0.9f) ipart++;
+
+      if(ipart)
+        {
+          if(withintegerpart) Add(__L(" con "));
+          tmp.ConvertFromDoubleToSpanishText(ipart, true, false, _integerpart, _decimalpart);
+          Add(tmp);
+
+        } else return false;
+    }
+
+  return true;
 }
 
 
@@ -4205,30 +4205,30 @@ bool XSTRING::ConvertFromDoubleToSpanishText(double value, bool withintegerpart,
 
 /*-------------------------------------------------------------------
 //  XSTRING::Swab
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			31/03/2011 13:00:31
-//	
-//	@return				bool : 
-//	*/
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      31/03/2011 13:00:31
+//
+//  @return       bool :
+//  */
 /*-----------------------------------------------------------------*/
 bool XSTRING::Swab()
 {
-	if(IsEmpty()) return false;
+  if(IsEmpty()) return false;
 
-	for(int c=0;c<(int)GetSize();c+=2)
-		{
-			XCHAR data;
+  for(int c=0;c<(int)GetSize();c+=2)
+    {
+      XCHAR data;
 
-			data			= text[c+1];
-			text[c+1] = text[c];
-			text[c]		= data;
-		}
+      data      = text[c+1];
+      text[c+1] = text[c];
+      text[c]   = data;
+    }
 
-	return true;
+  return true;
 }
 
 
@@ -4236,45 +4236,45 @@ bool XSTRING::Swab()
 
 /*-------------------------------------------------------------------
 //  XSTRING::FormatArg
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			14/02/2013 21:01:40
-//	
-//	@return 			bool : 
-//	@param				mask : 
-//  @param				arg : 
-//  @param				isspecialweb : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      14/02/2013 21:01:40
+//
+//  @return       bool :
+//  @param        mask :
+//  @param        arg :
+//  @param        isspecialweb :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::FormatArg(const XCHAR* mask, va_list* arg, bool isspecialweb)
 {
-	XSTRING str;
-	bool		openlabel = false;
+  XSTRING str;
+  bool    openlabel = false;
 
-	Empty();
+  Empty();
 
-	if(!mask) return false;
-	
-	int	c	 = 0;
-  
-  XCHAR* param = new XCHAR[16];																
-	if(param) 
-		{
+  if(!mask) return false;
+
+  int c  = 0;
+
+  XCHAR* param = new XCHAR[16];
+  if(param)
+    {
       while(mask[c])
-        {										
+        {
           switch(mask[c])
             {
-              case __C('%')		:	{ 														
-                                  int	 nparam = 1;
+              case __C('%')   : {
+                                  int  nparam = 1;
                                   bool end    = false;
 
                                   memset(param,0, 16*sizeof(XCHAR));
                                   param[0] = __C('%');
-                                    
-                                  c++;				
+
+                                  c++;
 
                                   do{ param[nparam] = mask[c];
 
@@ -4282,223 +4282,223 @@ bool XSTRING::FormatArg(const XCHAR* mask, va_list* arg, bool isspecialweb)
 
                                       switch(mask[c])
                                         {
-                                          case __C('c')		:
-                                          case __C('C')		: {	XCHAR character;
-                                                                                                        
+                                          case __C('c')   :
+                                          case __C('C')   : { XCHAR character;
+
                                                               #if defined(LINUX) || defined(ANDROID) || defined(MICROCONTROLLER)
                                                               character = (XCHAR)va_arg((*arg), XDWORD);
-                                                              #else																													
+                                                              #else
                                                               character = va_arg((*arg), XCHAR);
                                                               #endif
-                                            
-                                                              str.Set(character);	
-                                                              end  = true	;
+
+                                                              str.Set(character);
+                                                              end  = true ;
                                                             }
                                                             break;
 
-                                          case __C('d')		:
-                                          case __C('i')		:
-                                          case __C('o')		:
-                                          case __C('u')		:
-                                          case __C('x')		:
-                                          case __C('X')		: { bool large = false;
+                                          case __C('d')   :
+                                          case __C('i')   :
+                                          case __C('o')   :
+                                          case __C('u')   :
+                                          case __C('x')   :
+                                          case __C('X')   : { bool large = false;
                                                               for(int l=0; l<(int)XSTRING::GetSize(param); l++)
                                                                 {
                                                                   if(param[l] == __C('l')) large = true;
                                                                 }
 
-                                                              if(!large)																															
+                                                              if(!large)
                                                                 {
                                                                   int value = (int)va_arg((*arg), int);
 
-                                                                  str.ConvertFromInt(value, param);																													
+                                                                  str.ConvertFromInt(value, param);
                                                                 }
-                                                               else	
+                                                               else
                                                                 {
-                                                                  str.ConvertFromDouble((double)va_arg((*arg), double), param);	
+                                                                  str.ConvertFromDouble((double)va_arg((*arg), double), param);
                                                                 }
                                                               end  = true;
                                                             }
                                                             break;
 
-                                          case __C('f')		: str.ConvertFromFloat((float)va_arg((*arg), double), param);
-                                                            end  = true;
-                                                            break;
-                                          
-                                          case __C('g')		: 
-                                          case __C('G')		: str.ConvertFromDouble((double)va_arg((*arg), double), param);
+                                          case __C('f')   : str.ConvertFromFloat((float)va_arg((*arg), double), param);
                                                             end  = true;
                                                             break;
 
-                                          case __C('e')		: 
-                                          case __C('E')		: 																
-                                          
-                                          case __C('n')		:
-                                          case __C('p')		: end = true;
+                                          case __C('g')   :
+                                          case __C('G')   : str.ConvertFromDouble((double)va_arg((*arg), double), param);
+                                                            end  = true;
                                                             break;
 
-                                          case __C('s')		: 
-                                          case __C('S')		: { str = (XCHAR*)va_arg((*arg),XCHAR*);  
-                                                              
+                                          case __C('e')   :
+                                          case __C('E')   :
+
+                                          case __C('n')   :
+                                          case __C('p')   : end = true;
+                                                            break;
+
+                                          case __C('s')   :
+                                          case __C('S')   : { str = (XCHAR*)va_arg((*arg),XCHAR*);
+
                                                               XSTRING sizestr;
 
                                                               sizestr = param;
                                                               if(sizestr.GetSize()>2)
-                                                                {                                                              
+                                                                {
                                                                   sizestr.ToUpperCase();
                                                                   sizestr.DeleteCharacter(__C('%'));
-                                                                  sizestr.DeleteCharacter(__C('S'));                                                                                                                   
+                                                                  sizestr.DeleteCharacter(__C('S'));
 
-																																	///------------------ TODO : implementar la escificación de sprintf / dejar de usarlo para strings...
+                                                                  ///------------------ TODO : implementar la escificación de sprintf / dejar de usarlo para strings...
 
-                                                                  if(!sizestr.IsEmpty())                                                           
+                                                                  if(!sizestr.IsEmpty())
                                                                     {
-                                                                      int sizeadjust = sizestr.ConvertToInt(); 
+                                                                      int sizeadjust = sizestr.ConvertToInt();
                                                                       if(abs(sizeadjust)>(int)str.GetSize())
                                                                         {
                                                                           str.AdjustSize(abs(sizeadjust),(sizeadjust>0)?true:false, isspecialweb?__L("&nbsp"):__L(" "), isspecialweb);
                                                                         }
                                                                     }
                                                                 }
-                                                                                                                       
+
                                                               end = true;
                                                             }
                                                             break;
-                                                              
-                                          case __C('%')		: str = __L("%");														
-                                                            end = true;
-                                                            break;																																									
 
-                                          case __C('\x0')	: end = true;
+                                          case __C('%')   : str = __L("%");
+                                                            end = true;
                                                             break;
-        
-                                              default			: break;																	
+
+                                          case __C('\x0') : end = true;
+                                                            break;
+
+                                              default     : break;
                                         }
 
                                       c++;
-                                                            
-                                    } while(!end);															
-                                }
-                                break;				
 
-              case __C('<')	  : { openlabel = true;	
+                                    } while(!end);
+                                }
+                                break;
+
+              case __C('<')   : { openlabel = true;
                                   XCHAR character[2]={ mask[c], 0 };
                                   str.Set(character);
                                   c++;
                                 }
                                 break;
 
-              case __C('>')	  : { openlabel = false;	
+              case __C('>')   : { openlabel = false;
                                   XCHAR character[2]={ mask[c], 0 };
                                   str.Set(character);
                                   c++;
                                 }
                                 break;
 
-              case 0x0A				: if(isspecialweb && (!openlabel))
-                                  {																						 
-                                    str = __L("<br />");																															
+              case 0x0A       : if(isspecialweb && (!openlabel))
+                                  {
+                                    str = __L("<br />");
                                   }
                                  else
                                   {
                                     XCHAR character[2]={ mask[c], 0 };
-                                    str.Set(character);																
+                                    str.Set(character);
                                   }
-                                c++; 	
+                                c++;
                                 break;
-                                              
-              case 0x20				: if(isspecialweb && (!openlabel))
-                                  {																						 
-                                    str = __L("&nbsp");																															
+
+              case 0x20       : if(isspecialweb && (!openlabel))
+                                  {
+                                    str = __L("&nbsp");
                                   }
-                                 else														
+                                 else
                                   {
                                     XCHAR character[2]={ mask[c], 0 };
-                                    str.Set(character);																
+                                    str.Set(character);
                                   }
-                                c++; 	
-                                break;				  
-                                                                        
-                 default			:	{ XCHAR		character[2]={ mask[c], 0 }; 
-                                  XDWORD 	value       = (XDWORD)mask[c];
+                                c++;
+                                break;
 
-                                  if(isspecialweb && (!openlabel) && (value > 128))															
-                                        str.Format(__L("&#%d"), value);															
-                                   else str.Set(character);																	
-                                    
-                                  c++; 														
-                                }	
+                 default      : { XCHAR   character[2]={ mask[c], 0 };
+                                  XDWORD  value       = (XDWORD)mask[c];
+
+                                  if(isspecialweb && (!openlabel) && (value > 128))
+                                        str.Format(__L("&#%d"), value);
+                                   else str.Set(character);
+
+                                  c++;
+                                }
                                 break;
             }
-                
-          Add(str);						
+
+          Add(str);
         }
-      
-      delete [] param; 
+
+      delete [] param;
     }
-	
-	return true;
+
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::Format
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			07/02/2013 18:31:18
-//	
-//	@return 			bool : 
-//	@param				mask : 
-//  @param				... : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      07/02/2013 18:31:18
+//
+//  @return       bool :
+//  @param        mask :
+//  @param        ... :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::Format(const XCHAR* mask, ...)
 {
-	va_list arg;
-			
-	va_start(arg, mask);
-	
-	FormatArg(mask, &arg);
-		
-	va_end(arg);
+  va_list arg;
 
-	return 0;
+  va_start(arg, mask);
+
+  FormatArg(mask, &arg);
+
+  va_end(arg);
+
+  return 0;
 }
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::AddFormat
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			07/02/2013 18:31:18
-//	
-//	@return 			bool : 
-//	@param				mask : 
-//  @param				... : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      07/02/2013 18:31:18
+//
+//  @return       bool :
+//  @param        mask :
+//  @param        ... :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::AddFormat(const XCHAR* mask, ...)
 {
-	XSTRING concat;
+  XSTRING concat;
 
-	va_list arg;
-			
-	va_start(arg, mask);
-	
-	concat.FormatArg(mask, &arg);
-		
-	va_end(arg);
+  va_list arg;
 
-	Add(concat.Get());
+  va_start(arg, mask);
 
-	return 0;
+  concat.FormatArg(mask, &arg);
+
+  va_end(arg);
+
+  Add(concat.Get());
+
+  return 0;
 }
 
 
@@ -4506,204 +4506,204 @@ bool XSTRING::AddFormat(const XCHAR* mask, ...)
 
 /*-------------------------------------------------------------------
 //  XSTRING::UnFormat
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			31/03/2011 12:47:05
-//	
-//	@return				bool : 
-//	@param				mask : 
-//  @param				... : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      31/03/2011 12:47:05
+//
+//  @return       bool :
+//  @param        mask :
+//  @param        ... :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::UnFormat(const XCHAR* mask,...)
-{	
-  if(!size)		 return false;	
-	if(!mask)		 return false;
-	if(!mask[0]) return false;
+{
+  if(!size)    return false;
+  if(!mask)    return false;
+  if(!mask[0]) return false;
   if(!text)    return false;
-	if(!text[0]) return false;	
-		
-	va_list	arg;
-	va_start(arg, mask);	
+  if(!text[0]) return false;
 
-	XCHAR* param = new XCHAR[16];																
-	if(param) 
-		{
-			int	 	nparam;	
-			bool	end;
-			int		indextext	= 0;
-			int		c				  = 0;
-			bool	inbrackets  = false;
+  va_list arg;
+  va_start(arg, mask);
 
-			while(mask[c])
-				{										
-					switch(mask[c])
-						{
-							case __C('%')   : memset(param,0,16*sizeof(XCHAR));
-																param[0] = __C('%');
-														
-																nparam = 1;
-																end    = false;
-																		
-																c++;																		
+  XCHAR* param = new XCHAR[16];
+  if(param)
+    {
+      int   nparam;
+      bool  end;
+      int   indextext = 0;
+      int   c         = 0;
+      bool  inbrackets  = false;
 
-																do{ param[nparam] = mask[c];
+      while(mask[c])
+        {
+          switch(mask[c])
+            {
+              case __C('%')   : memset(param,0,16*sizeof(XCHAR));
+                                param[0] = __C('%');
 
-																		nparam++;
+                                nparam = 1;
+                                end    = false;
 
-																		switch(mask[c])
-																			{
-																				case __C('c')		:
-																				case __C('C')		: { xcharvalue = (XCHAR*)va_arg(arg, XCHAR*);
-																														if(xcharvalue) (*xcharvalue) = Get()[indextext];	
-																														indextext++;
-																														end  = true;																														
-																													}
-																													break;
+                                c++;
 
-																				case __C('d')		:
-																				case __C('i')		:
-																				case __C('o')		:
-																				case __C('u')		:
-																				case __C('x')		:
-																				case __C('X')		:	{ intvalue = (int*)va_arg(arg, int*);
-																						
-																														if(intvalue) (*intvalue) = ConvertToInt(indextext,(const XCHAR*)param, false);																														
-																														end  = true;
-																													}																																
-																													break;
+                                do{ param[nparam] = mask[c];
 
-																				case __C('f')		: { doublevalue = (double*)va_arg(arg, double*);
-																														
-																														if(doublevalue) (*doublevalue) = ConvertToFloat(indextext,(const XCHAR*)param, false);																													
-																													
-																														end  = true;
-																													}																																
-																													break;
+                                    nparam++;
 
-																				case __C('g')		: 
-																				case __C('G')		:	{ doublevalue = (double*)va_arg(arg, double*);
-																				
-																														if(doublevalue) (*doublevalue) = ConvertToDouble(indextext,(const XCHAR*)param, false);
-																														
-																														end  = true;
-																													}																																
-																													break; 
-																													
-																				case __C('e')		: 
-																				case __C('E')		: 																
-																				
-																				case __C('n')		:
-																				case __C('p')		: end = true;
-																													break;
- 
+                                    switch(mask[c])
+                                      {
+                                        case __C('c')   :
+                                        case __C('C')   : { xcharvalue = (XCHAR*)va_arg(arg, XCHAR*);
+                                                            if(xcharvalue) (*xcharvalue) = Get()[indextext];
+                                                            indextext++;
+                                                            end  = true;
+                                                          }
+                                                          break;
 
-																				case __C('s')		: 
-																				case __C('S')		: { xcharvalue = (XCHAR*)va_arg(arg,XCHAR*);																														
-																														if(!xcharvalue) break;
-																														
-																														XSTRING string;
-																														
-																														int d = 0; 	
-																														while(text[d+indextext]!=mask[c+1] /*&& text[d+indextext]!=__C(' ')*/)
-																															{	
-																																if(!text[indextext+d]) break;
-																																d++;
-																															}
+                                        case __C('d')   :
+                                        case __C('i')   :
+                                        case __C('o')   :
+                                        case __C('u')   :
+                                        case __C('x')   :
+                                        case __C('X')   : { intvalue = (int*)va_arg(arg, int*);
 
-																														Copy(indextext, indextext+d, string);
-																																																												 																										
-																														if(nparam>2)																														
-																															{
-																																XSTRING strsizeparam = param;
-																																int   	sizeparam;
+                                                            if(intvalue) (*intvalue) = ConvertToInt(indextext,(const XCHAR*)param, false);
+                                                            end  = true;
+                                                          }
+                                                          break;
 
-																																strsizeparam.DeleteCharacters(0,1);
-																																strsizeparam.DeleteCharacters(strsizeparam.GetSize()-1,1);
+                                        case __C('f')   : { doublevalue = (double*)va_arg(arg, double*);
 
-																																sizeparam = abs((int)strsizeparam.ConvertToInt());
-																																if(sizeparam)
-																																	{
-																																		if(string.GetSize()>(XDWORD)sizeparam)  string.DeleteCharacters(sizeparam, (string.GetSize()-sizeparam));
-																																	}		
-																															}
-																														//DIEGO: ya que aquí tenemos el XSTRING y tenemos el size... por que no comprobar si el 
-																														//string tiene tamaño para recibir el dato y hacer un realloc?
-																														memcpy((XBYTE*)xcharvalue, (XBYTE*)string.Get(), (string.GetSize()*sizeof(XCHAR)));
-																														xcharvalue[string.GetSize()] = 0;
-																														/*
-																														if(mask[c+1]!=__C('%'))
-																															{
-																																if(text[indextext+string.GetSize()]==__C(' ')) indextext++;																														
-																															}
-																														*/
-																														indextext += string.GetSize();		
-																													  
-																														end = true;																																
-																													}																																																																
-																													break;																						
-																													
-																				case __C('%')		: end = true;
-																													break;	
+                                                            if(doublevalue) (*doublevalue) = ConvertToFloat(indextext,(const XCHAR*)param, false);
 
-																				case __C('[')   : inbrackets  = true;
-																													break;	
+                                                            end  = true;
+                                                          }
+                                                          break;
 
-																				case __C(']')   : if(inbrackets)
-																														{
-																															xcharvalue = (XCHAR*)va_arg(arg, XCHAR*);
-																																	
-																															ConvertStringWithMask(param, &text[indextext], xcharvalue);					
-																															indextext += GetSize(xcharvalue);
-																																																																																												
-																															if((mask[c+1] == __C('s')) || (mask[c+1] == __C('S'))) c++;
-																															end = true;		
-																														}
-																													break;		
-																																								
-																				case __C('\x0')	: end = true;
-																													break;
-		
-																						default			: break;																	
-																			}
+                                        case __C('g')   :
+                                        case __C('G')   : { doublevalue = (double*)va_arg(arg, double*);
 
-																		c++;
-																		
-																		if(end)
-																			{
-																				if(mask[c]!=__C('%'))
-																					{
-																						while(text[indextext] != mask[c])
-																							{
-																								if(!text[indextext]) break;
-																								indextext++;
-																							}
-																					} 
-																				 else
-																				  {
-																						//if(text[indextext] ==__C(' ')) indextext++;	
-																					}
-																			} 
-																																														
-																	} while(!end);
-													
-															break;
+                                                            if(doublevalue) (*doublevalue) = ConvertToDouble(indextext,(const XCHAR*)param, false);
 
-										default :	c++; 
-															indextext++;														
-															break;
-						}						
-				} 
+                                                            end  = true;
+                                                          }
+                                                          break;
 
-	 	 delete [] param;			
-	 }
+                                        case __C('e')   :
+                                        case __C('E')   :
 
-	va_end(arg);
+                                        case __C('n')   :
+                                        case __C('p')   : end = true;
+                                                          break;
 
-	return true;
+
+                                        case __C('s')   :
+                                        case __C('S')   : { xcharvalue = (XCHAR*)va_arg(arg,XCHAR*);
+                                                            if(!xcharvalue) break;
+
+                                                            XSTRING string;
+
+                                                            int d = 0;
+                                                            while(text[d+indextext]!=mask[c+1] /*&& text[d+indextext]!=__C(' ')*/)
+                                                              {
+                                                                if(!text[indextext+d]) break;
+                                                                d++;
+                                                              }
+
+                                                            Copy(indextext, indextext+d, string);
+
+                                                            if(nparam>2)
+                                                              {
+                                                                XSTRING strsizeparam = param;
+                                                                int     sizeparam;
+
+                                                                strsizeparam.DeleteCharacters(0,1);
+                                                                strsizeparam.DeleteCharacters(strsizeparam.GetSize()-1,1);
+
+                                                                sizeparam = abs((int)strsizeparam.ConvertToInt());
+                                                                if(sizeparam)
+                                                                  {
+                                                                    if(string.GetSize()>(XDWORD)sizeparam)  string.DeleteCharacters(sizeparam, (string.GetSize()-sizeparam));
+                                                                  }
+                                                              }
+                                                            //DIEGO: ya que aquí tenemos el XSTRING y tenemos el size... por que no comprobar si el
+                                                            //string tiene tamaño para recibir el dato y hacer un realloc?
+                                                            memcpy((XBYTE*)xcharvalue, (XBYTE*)string.Get(), (string.GetSize()*sizeof(XCHAR)));
+                                                            xcharvalue[string.GetSize()] = 0;
+                                                            /*
+                                                            if(mask[c+1]!=__C('%'))
+                                                              {
+                                                                if(text[indextext+string.GetSize()]==__C(' ')) indextext++;
+                                                              }
+                                                            */
+                                                            indextext += string.GetSize();
+
+                                                            end = true;
+                                                          }
+                                                          break;
+
+                                        case __C('%')   : end = true;
+                                                          break;
+
+                                        case __C('[')   : inbrackets  = true;
+                                                          break;
+
+                                        case __C(']')   : if(inbrackets)
+                                                            {
+                                                              xcharvalue = (XCHAR*)va_arg(arg, XCHAR*);
+
+                                                              ConvertStringWithMask(param, &text[indextext], xcharvalue);
+                                                              indextext += GetSize(xcharvalue);
+
+                                                              if((mask[c+1] == __C('s')) || (mask[c+1] == __C('S'))) c++;
+                                                              end = true;
+                                                            }
+                                                          break;
+
+                                        case __C('\x0') : end = true;
+                                                          break;
+
+                                            default     : break;
+                                      }
+
+                                    c++;
+
+                                    if(end)
+                                      {
+                                        if(mask[c]!=__C('%'))
+                                          {
+                                            while(text[indextext] != mask[c])
+                                              {
+                                                if(!text[indextext]) break;
+                                                indextext++;
+                                              }
+                                          }
+                                         else
+                                          {
+                                            //if(text[indextext] ==__C(' ')) indextext++;
+                                          }
+                                      }
+
+                                  } while(!end);
+
+                              break;
+
+                    default : c++;
+                              indextext++;
+                              break;
+            }
+        }
+
+     delete [] param;
+   }
+
+  va_end(arg);
+
+  return true;
 }
 
 
@@ -4711,162 +4711,162 @@ bool XSTRING::UnFormat(const XCHAR* mask,...)
 
 
 /*-------------------------------------------------------------------
-//	 XSTRING::IsSpace
+//   XSTRING::IsSpace
 */
 /**
-//	
 //
-//	@author		Abraham J. Velez 
-//	@version	21/03/2018 9:16:26
 //
-//	@return		bool : 
+//  @author   Abraham J. Velez
+//  @version  21/03/2018 9:16:26
 //
-//	@param		XCHAR : 
+//  @return   bool :
+//
+//  @param    XCHAR :
 //
 *//*-----------------------------------------------------------------*/
-bool XSTRING::IsSpace(XCHAR xchar) 
+bool XSTRING::IsSpace(XCHAR xchar)
 {
-	if(xchar == 0x20) return true;	//  space
-	if(xchar == 0x09) return true;	//	horizontal tab(TAB)
-	if(xchar == 0x0a) return true;	//	newline(LF)
-	if(xchar == 0x0b) return true;	//	vertical tab(VT)
-	if(xchar == 0x0c) return true;	//	feed(FF)
-	if(xchar == 0x0d) return true;	//	carriage return (CR)
+  if(xchar == 0x20) return true;  //  space
+  if(xchar == 0x09) return true;  //  horizontal tab(TAB)
+  if(xchar == 0x0a) return true;  //  newline(LF)
+  if(xchar == 0x0b) return true;  //  vertical tab(VT)
+  if(xchar == 0x0c) return true;  //  feed(FF)
+  if(xchar == 0x0d) return true;  //  carriage return (CR)
 
-	return false;
+  return false;
 }
 
 
 
 /*-------------------------------------------------------------------
-//	 XSTRING::IsDigit
+//   XSTRING::IsDigit
 */
 /**
-//	
 //
-//	@author		Abraham J. Velez 
-//	@version	21/03/2018 9:17:15
 //
-//	@return		bool : 
+//  @author   Abraham J. Velez
+//  @version  21/03/2018 9:17:15
 //
-//	@param		XCHAR : 
+//  @return   bool :
+//
+//  @param    XCHAR :
 //
 *//*-----------------------------------------------------------------*/
 bool XSTRING::IsDigit(XCHAR xchar)
 {
-	return (xchar >= __C('0') && xchar <= __C('9'));
+  return (xchar >= __C('0') && xchar <= __C('9'));
 }
 
 
 
 /*-------------------------------------------------------------------
-//	 XSTRING::FindCharacterFromSet
+//   XSTRING::FindCharacterFromSet
 */
 /**
-//	
 //
-//	@author		Abraham J. Velez 
-//	@version	21/03/2018 9:16:59
 //
-//	@return		int : 
+//  @author   Abraham J. Velez
+//  @version  21/03/2018 9:16:59
 //
-//	@param		const : 
+//  @return   int :
+//
+//  @param    const :
 //
 *//*-----------------------------------------------------------------*/
 int XSTRING::FindCharacterFromSet(const XCHAR* chars)
 {
-	XCHAR					c;
-	XCHAR*				s;
-	const XCHAR*	p;
+  XCHAR         c;
+  XCHAR*        s;
+  const XCHAR*  p;
 
-	for(s = text, c = *s; c != 0; s++, c = *s) 
-		{
-			for(p = chars; *p != 0; p++) 
-				{
-					if(c == *p) 
-						{
-							return s - text;
-						}
-				}
-		}
+  for(s = text, c = *s; c != 0; s++, c = *s)
+    {
+      for(p = chars; *p != 0; p++)
+        {
+          if(c == *p)
+            {
+              return s - text;
+            }
+        }
+    }
 
-	return s - text;
+  return s - text;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::AdjustSize
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			11/09/2013 21:34:44
-//	
-//	@return 			bool : 
-//	@param				size : 
-//  @param				ahead : 
-//  @param				character : 
-//  @param				specialweb : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      11/09/2013 21:34:44
+//
+//  @return       bool :
+//  @param        size :
+//  @param        ahead :
+//  @param        character :
+//  @param        specialweb :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::AdjustSize(XDWORD size,bool ahead, XCHAR* characters, bool addstring)
 {
-	if(this->size == size) return false;
+  if(this->size == size) return false;
 
-	int diference;
+  int diference;
 
-	if(this->size > size)
-		{
-			 diference = (this->size- size);      
-			 DeleteCharacters(size,diference);
-		}
-	 else 
-		{
-			if(characters)
-				{
-					if(ahead)
-						{	          
-							XSTRING string;		
+  if(this->size > size)
+    {
+       diference = (this->size- size);
+       DeleteCharacters(size,diference);
+    }
+   else
+    {
+      if(characters)
+        {
+          if(ahead)
+            {
+              XSTRING string;
 
-							diference = (size-this->size);          
-							for(int c=0;c<diference;c++)
-		    				{
-									if(addstring) string.Add(characters);	else string.Add(characters[0]);		
-								}
+              diference = (size-this->size);
+              for(int c=0;c<diference;c++)
+                {
+                  if(addstring) string.Add(characters); else string.Add(characters[0]);
+                }
 
-							string+=Get();
+              string+=Get();
 
-							Set(string);
+              Set(string);
 
-						}
-					 else
-						{         					
-							diference = ((size)-this->size);          
-    					for(int c=0;c<diference;c++)
-		    				{
-									if(addstring) Add(characters);	else Add(characters[0]);							    
-								}    
-						}
-				}
-			 else
-				{	
-					diference = ((size)-this->size); 
+            }
+           else
+            {
+              diference = ((size)-this->size);
+              for(int c=0;c<diference;c++)
+                {
+                  if(addstring) Add(characters);  else Add(characters[0]);
+                }
+            }
+        }
+       else
+        {
+          diference = ((size)-this->size);
 
-					ReAllocBuffer(size);				
-					if(ahead)
-						{	  
-							for(int c=0;c<diference;c++)
-								{
-									text[c+diference] = text[c];
-									text[c] = __C('-');
-								}	
-						}					
-				}
-		}
+          ReAllocBuffer(size);
+          if(ahead)
+            {
+              for(int c=0;c<diference;c++)
+                {
+                  text[c+diference] = text[c];
+                  text[c] = __C('-');
+                }
+            }
+        }
+    }
 
-	return true;
+  return true;
 }
 
 
@@ -4874,29 +4874,29 @@ bool XSTRING::AdjustSize(XDWORD size,bool ahead, XCHAR* characters, bool addstri
 
 /*-------------------------------------------------------------------
 //  XSTRING::AdjustSize
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			11/09/2013 21:35:30
-//	
-//	@return 			bool : 
-//	@param				specialweb : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      11/09/2013 21:35:30
+//
+//  @return       bool :
+//  @param        specialweb :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::AdjustSize()
 {
-	int c;
+  int c;
 
-	for(c=0;c<(int)size;c++)
-		{
-			if(!text[c]) break;			
-		}
+  for(c=0;c<(int)size;c++)
+    {
+      if(!text[c]) break;
+    }
 
-	if(!c) return false;
+  if(!c) return false;
 
-	return AdjustSize(c, false, __L(" "), false);
+  return AdjustSize(c, false, __L(" "), false);
 }
 
 
@@ -4904,198 +4904,198 @@ bool XSTRING::AdjustSize()
 
 
 /*-------------------------------------------------------------------
-//	XSTRING::BinaryCompare
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Imanol Celaya Ruiz de Alegria
-//	@version			09/12/2015 15:45:06
-//	
-//	@return 			bool : 
+//  XSTRING::BinaryCompare
+*/
+/**
 //
-//  @param				string : 
+//
+//
+//  @author       Imanol Celaya Ruiz de Alegria
+//  @version      09/12/2015 15:45:06
+//
+//  @return       bool :
+//
+//  @param        string :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::BinaryCompare(XSTRING& string)
 {
-	if(size != string.size)
-		{
-			return false;
-		}
+  if(size != string.size)
+    {
+      return false;
+    }
 
-	return memcmp(text, string.text, size*sizeof(XCHAR)) == 0;
+  return memcmp(text, string.text, size*sizeof(XCHAR)) == 0;
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	XSTRING::Explode
-*/	
-/**	
-//	Explode the string in vector using token
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			11/01/2017 11:55:34
-//	
-//	@return 			bool : success 
+//  XSTRING::Explode
+*/
+/**
+//  Explode the string in vector using token
 //
-//  @param				character : XCHAR , needle to find
-//  @param				receive : XVECTOR<XSTRING*>* NOT NULL , vector to hold the tokens
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      11/01/2017 11:55:34
+//
+//  @return       bool : success
+//
+//  @param        character : XCHAR , needle to find
+//  @param        receive : XVECTOR<XSTRING*>* NOT NULL , vector to hold the tokens
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::Explode(XCHAR token, XVECTOR<XSTRING*>* receive)
-{	
-	int start=0;
-	do
-	{
-		int end=this->FindCharacter(token,start);
-		if (end==NOTFOUND)
-				end=this->size;
+{
+  int start=0;
+  do
+  {
+    int end=this->FindCharacter(token,start);
+    if (end==NOTFOUND)
+        end=this->size;
 
-		if ((end-start)>0)
-		{
-		XSTRING* tok=new XSTRING();
-		if (!tok)
-			return false;
+    if ((end-start)>0)
+    {
+    XSTRING* tok=new XSTRING();
+    if (!tok)
+      return false;
 
-		this->Copy(start,end,(*tok));
+    this->Copy(start,end,(*tok));
 
-				if (!receive->Add(tok))
-				{
-				delete(tok);
-				return false;
-				}
-		}
-		start=end+1;
-	}
-	while (start<(int)size);
+        if (!receive->Add(tok))
+        {
+        delete(tok);
+        return false;
+        }
+    }
+    start=end+1;
+  }
+  while (start<(int)size);
 
-	return true;
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::ReAllocBuffer
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			23/11/2010 21:48:59
-//	
-//	@return				bool : 
-//	@param				size : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      23/11/2010 21:48:59
+//
+//  @return       bool :
+//  @param        size :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::ReAllocBuffer(XDWORD size)
 {
-	if(!size)
-		{
-			FreeBuffer();
-		}
-	 else
-		{
-			int nblocks  = (size / XSTRING_BLOCKMEM) + 1;
+  if(!size)
+    {
+      FreeBuffer();
+    }
+   else
+    {
+      int nblocks  = (size / XSTRING_BLOCKMEM) + 1;
 
-			XDWORD sizemem = (nblocks * XSTRING_BLOCKMEM);
+      XDWORD sizemem = (nblocks * XSTRING_BLOCKMEM);
 
-			if(!text) 
-				{			
-					text = new XCHAR[sizemem+1];
-					if(!text) return false;
-	
-					memset(text, 0, (sizemem+1) * sizeof(XCHAR));				
+      if(!text)
+        {
+          text = new XCHAR[sizemem+1];
+          if(!text) return false;
 
-					this->sizemem = sizemem;
-				}
-			 else
-				{
-					if(size >= this->sizemem)
-						{
-							XCHAR* ttext = new XCHAR[sizemem+1];
-							if(!ttext) return false;
+          memset(text, 0, (sizemem+1) * sizeof(XCHAR));
 
-							memset(ttext, 0, (sizemem+1) * sizeof(XCHAR));
+          this->sizemem = sizemem;
+        }
+       else
+        {
+          if(size >= this->sizemem)
+            {
+              XCHAR* ttext = new XCHAR[sizemem+1];
+              if(!ttext) return false;
 
-							XDWORD tsize = size;
-							if(tsize>this->size) tsize = this->size;
+              memset(ttext, 0, (sizemem+1) * sizeof(XCHAR));
 
-							memcpy(ttext, text, tsize * sizeof(XCHAR));
-			
-							FreeBuffer();
+              XDWORD tsize = size;
+              if(tsize>this->size) tsize = this->size;
 
-							text = ttext;
+              memcpy(ttext, text, tsize * sizeof(XCHAR));
 
-							this->sizemem = sizemem;
-						}	
-					 else 
-						{
-							// culd we have an off by one error here?
-							// size is index zero, not reall an off by one problem here
-							 memset(&text[size], 0, (this->sizemem - size)* sizeof(XCHAR));
-							 text[size] = '\0';
-						}
-				}	
-			
-			this->size		= size;			
-		}
-	
-	return true;
+              FreeBuffer();
+
+              text = ttext;
+
+              this->sizemem = sizemem;
+            }
+           else
+            {
+              // culd we have an off by one error here?
+              // size is index zero, not reall an off by one problem here
+               memset(&text[size], 0, (this->sizemem - size)* sizeof(XCHAR));
+               text[size] = '\0';
+            }
+        }
+
+      this->size    = size;
+    }
+
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::FreeBuffer
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			23/11/2010 21:42:50
-//	
-//	@return				bool : 
-//	*/
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      23/11/2010 21:42:50
+//
+//  @return       bool :
+//  */
 /*-----------------------------------------------------------------*/
 bool XSTRING::FreeBuffer()
 {
-	if(!text) return false;
+  if(!text) return false;
 
-	delete [] text;
+  delete [] text;
 
-	text		= NULL;
-	size		= 0;
-	sizemem = 0;
+  text    = NULL;
+  size    = 0;
+  sizemem = 0;
 
-	return true;
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XSTRING::ConvertIndexBase64ToXCHAR
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			11/03/2014 17:05:29
-//	
-//	@return 			XCHAR : 
-//	@param				index : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      11/03/2014 17:05:29
+//
+//  @return       XCHAR :
+//  @param        index :
 */
 /*-----------------------------------------------------------------*/
 XCHAR XSTRING::ConvertIndexBase64ToXCHAR(int index)
-{		
-	if(index>=(int)XSTRING_SIZETABLE64BITS) return 0;
-	if(index<0)															return 0;
+{
+  if(index>=(int)XSTRING_SIZETABLE64BITS) return 0;
+  if(index<0)                             return 0;
 
-	return table64bits[index];
+  return table64bits[index];
 }
 
 
@@ -5103,88 +5103,88 @@ XCHAR XSTRING::ConvertIndexBase64ToXCHAR(int index)
 
 /*-------------------------------------------------------------------
 //  XSTRING::ConvertXCHARToBase64Index
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			11/03/2014 17:05:25
-//	
-//	@return 			XBYTE : 
-//	@param				character : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      11/03/2014 17:05:25
+//
+//  @return       XBYTE :
+//  @param        character :
 */
 /*-----------------------------------------------------------------*/
 XBYTE XSTRING::ConvertXCHARToBase64Index(XCHAR character)
-{		
-	for(XBYTE c=0;c<(XBYTE)XSTRING_SIZETABLE64BITS;c++)
-		{
-			if(table64bits[c]==character) return c; 
-		}
+{
+  for(XBYTE c=0;c<(XBYTE)XSTRING_SIZETABLE64BITS;c++)
+    {
+      if(table64bits[c]==character) return c;
+    }
 
-	return 0;
+  return 0;
 }
 
 
 
 /*-------------------------------------------------------------------
-//	XSTRING::ConvertStringWithMask
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/06/2016 11:37:35
-//	
-//	@return 			bool : 
+//  XSTRING::ConvertStringWithMask
+*/
+/**
 //
-//  @param				mask : 
-//  @param				string : 
-//  @param				result : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      02/06/2016 11:37:35
+//
+//  @return       bool :
+//
+//  @param        mask :
+//  @param        string :
+//  @param        result :
 */
 /*-----------------------------------------------------------------*/
 bool XSTRING::ConvertStringWithMask(XCHAR* mask, XCHAR* string, XCHAR* result)
-{	
+{
  #ifdef MICROCONTROLLER
-  
-	XSTRING  _mask;
-	XSTRING  _string;
-	XSTRING  _result;
 
-	_mask   = mask;
-	_string = string;
+  XSTRING  _mask;
+  XSTRING  _string;
+  XSTRING  _result;
+
+  _mask   = mask;
+  _string = string;
 
 
-	char* resultchar = new char[XSTRING_MAXTEMPOSTR];
-	if(!resultchar) return false;
+  char* resultchar = new char[XSTRING_MAXTEMPOSTR];
+  if(!resultchar) return false;
 
-	memset(resultchar, 0, XSTRING_MAXTEMPOSTR);
+  memset(resultchar, 0, XSTRING_MAXTEMPOSTR);
 
-	XSTRING_CREATEOEM(_mask   , maskchar)
-	XSTRING_CREATEOEM(_string , stringchar)
+  XSTRING_CREATEOEM(_mask   , maskchar)
+  XSTRING_CREATEOEM(_string , stringchar)
 
-	SSCANF(stringchar, maskchar, resultchar, XSTRING_MAXTEMPOSTR); 	
-	
-	XSTRING_DELETEOEM(maskchar)	
-	XSTRING_DELETEOEM(stringchar)
+  SSCANF(stringchar, maskchar, resultchar, XSTRING_MAXTEMPOSTR);
 
-	_result = resultchar;
+  XSTRING_DELETEOEM(maskchar)
+  XSTRING_DELETEOEM(stringchar)
 
-	memcpy(result, _result.Get(), ((_result.GetSize()+1)*sizeof(XCHAR)));
-  
+  _result = resultchar;
+
+  memcpy(result, _result.Get(), ((_result.GetSize()+1)*sizeof(XCHAR)));
+
   #else
 
-	XSTRING  _mask;
-	XSTRING  add;
+  XSTRING  _mask;
+  XSTRING  add;
 
-	add = __L("l");
+  add = __L("l");
 
-	_mask = mask;
-	_mask.Insert(add,1);
+  _mask = mask;
+  _mask.Insert(add,1);
 
-	UNICODESSCANF(string, _mask.Get(), result, XSTRING_STANDARDSIZE); 	
- 
+  UNICODESSCANF(string, _mask.Get(), result, XSTRING_STANDARDSIZE);
+
   #endif
 
-	return true;
+  return true;
 }

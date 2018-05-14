@@ -1,30 +1,30 @@
 /*------------------------------------------------------------------------------------------
-//	SNDANDROIDFACTORY.H
-*/	
-/**	
-// \file 
-//   
-//  sound system for linux
-//   
-//	@author	 Imanol Celaya Ruiz de Alegria
+//  SNDANDROIDFACTORY.H
+*/
+/**
+// \file
 //
-//	Date Of Creation	: 11/11/2015 10:37:51
-//	Last Modification	:	
-*/	
-/*	GEN  Copyright (C).  All right reserved.
+//  sound system for linux
+//
+//  @author  Imanol Celaya Ruiz de Alegria
+//
+//  Date Of Creation  : 11/11/2015 10:37:51
+//  Last Modification :
+*/
+/*  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
+
 #ifndef _SNDANDROIDFACTORY_H_
 #define _SNDANDROIDFACTORY_H_
-	
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
 #include "SNDFactory.h"
 #include "SNDOpenAL.h"
 
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
-	
-	
+
+
 /*---- CLASS -----------------------------------------------------------------------------*/
 
 class SNDOPENAL;
@@ -38,64 +38,64 @@ class XPUBLISHER;
 
 class SNDANDROIDFACTORY : public SNDFACTORY
 {
-	public:
+  public:
 
-																							SNDANDROIDFACTORY					();
-		virtual																	 ~SNDANDROIDFACTORY					();
+                                              SNDANDROIDFACTORY         ();
+    virtual                                  ~SNDANDROIDFACTORY         ();
 
-		virtual SNDELEMENT*												AddFile										(XPATH&			xpath,		XSTRING*		namefile,				bool stream = false);
-		virtual SNDELEMENT*												AddFile										(XPATH&			xpath,		XCHAR*			namefile,				bool stream = false);
-		virtual	SNDELEMENT*												GetFile										(XSTRING*		namefile, bool				stream = false);
-		virtual	SNDELEMENT*												GetFile										(XCHAR*			namefile,	bool				stream = false);
+    virtual SNDELEMENT*                       AddFile                   (XPATH&     xpath,    XSTRING*    namefile,       bool stream = false);
+    virtual SNDELEMENT*                       AddFile                   (XPATH&     xpath,    XCHAR*      namefile,       bool stream = false);
+    virtual SNDELEMENT*                       GetFile                   (XSTRING*   namefile, bool        stream = false);
+    virtual SNDELEMENT*                       GetFile                   (XCHAR*     namefile, bool        stream = false);
 
-		virtual bool															RemoveFile								(SNDELEMENT* element);
+    virtual bool                              RemoveFile                (SNDELEMENT* element);
 
-		virtual SNDSTREAMELEMENT*									GetStreamer								();
+    virtual SNDSTREAMELEMENT*                 GetStreamer               ();
 
-		virtual SNDINSTANCE*											PlaySound									(SNDELEMENT* element);
-		virtual void															StopSound									(SNDELEMENT* element);
-		virtual SNDINSTANCE*											PauseSound								(SNDELEMENT* element);
+    virtual SNDINSTANCE*                      PlaySound                 (SNDELEMENT* element);
+    virtual void                              StopSound                 (SNDELEMENT* element);
+    virtual SNDINSTANCE*                      PauseSound                (SNDELEMENT* element);
 
-		
-		virtual bool															IsAnyPlaying							();
-	
-		virtual void															StopAll										();
 
-		virtual void															SetMasterVolume						(float mastervolume);
-		virtual float															GetMasterVolume						();
+    virtual bool                              IsAnyPlaying              ();
 
-		void																			IniEvents									()
-																							{
-																								sndopenal->IniEvents();
-																								isinit = true;
-																							}
+    virtual void                              StopAll                   ();
 
-		void																			EndEvents									()
-																							{
-																								sndopenal->EndEvents();
-																								isinit = true;
-																							}
+    virtual void                              SetMasterVolume           (float mastervolume);
+    virtual float                             GetMasterVolume           ();
 
-		SNDRESAMPLER*															GetResampler							();
+    void                                      IniEvents                 ()
+                                              {
+                                                sndopenal->IniEvents();
+                                                isinit = true;
+                                              }
 
-		virtual SNDFILE*													CreateSNDFile							();
-		virtual void															DeleteSNDFile							(SNDFILE* file);
+    void                                      EndEvents                 ()
+                                              {
+                                                sndopenal->EndEvents();
+                                                isinit = true;
+                                              }
 
-	protected:
-		virtual void															ImpUpdate									();
-	private:
+    SNDRESAMPLER*                             GetResampler              ();
 
-		void																			Clean											()
-																							{
-																								sndopenal = NULL;
-																							}
+    virtual SNDFILE*                          CreateSNDFile             ();
+    virtual void                              DeleteSNDFile             (SNDFILE* file);
 
-		SNDOPENAL*																sndopenal;
+  protected:
+    virtual void                              ImpUpdate                 ();
+  private:
+
+    void                                      Clean                     ()
+                                              {
+                                                sndopenal = NULL;
+                                              }
+
+    SNDOPENAL*                                sndopenal;
 
 };
-	
-	
+
+
 /*---- INLINE FUNCTIONS ------------------------------------------------------------------*/
-	
+
 #endif
 

@@ -1,31 +1,31 @@
 /*------------------------------------------------------------------------------------------
-//	DIOI2CTEMHUMSENSORAM2315.H
-*/	
-/**	
-// \class 
-//   
-//  Data IO I2C Sensor AOSONG AM2315  class (Temperature and humidity module)
-//   
-//	@author	 Abraham J. Velez
+//  DIOI2CTEMHUMSENSORAM2315.H
+*/
+/**
+// \class
 //
-//	Date Of Creation	: 03/05/2014 16:12:18
-//	Last Modification	:	
-*/	
-/*	GEN  Copyright (C).  All right reserved.
+//  Data IO I2C Sensor AOSONG AM2315  class (Temperature and humidity module)
+//
+//  @author  Abraham J. Velez
+//
+//  Date Of Creation  : 03/05/2014 16:12:18
+//  Last Modification :
+*/
+/*  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
+
 #ifndef _DIOI2CTEMHUMSENSORAM2315_H_
 #define _DIOI2CTEMHUMSENSORAM2315_H_
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
-	
+
 #include <stdio.h>
 
 #include "XBase.h"
 
 #include "DIODeviceI2C.h"
-	
+
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
 
 
@@ -42,33 +42,33 @@ class DIOSTREAMI2C;
 
 class DIOI2CTEMHUMSENSORAM2315: public DIODEVICEI2C
 {
-	public:
+  public:
 
-															DIOI2CTEMHUMSENSORAM2315			();
-		virtual									 ~DIOI2CTEMHUMSENSORAM2315			();
+                              DIOI2CTEMHUMSENSORAM2315      ();
+    virtual                  ~DIOI2CTEMHUMSENSORAM2315      ();
 
-		bool											Read													(float& temperature, float& humidity);
+    bool                      Read                          (float& temperature, float& humidity);
 
-		bool											End														();
+    bool                      End                           ();
 
-	protected:
-			
-		DIOSTREAMI2C*							diostream;
-			
-	private:
+  protected:
 
-		bool											IniDevice											();
+    DIOSTREAMI2C*             diostream;
 
-		void											Clean													()
-															{																																
-																diostream			= NULL;																																																
-															}		
+  private:
 
-		bool											CalculeCRC										(XBYTE* buffer, XWORD& CRC);
+    bool                      IniDevice                     ();
+
+    void                      Clean                         ()
+                              {
+                                diostream     = NULL;
+                              }
+
+    bool                      CalculeCRC                    (XBYTE* buffer, XWORD& CRC);
 };
-	
-	
+
+
 /*---- INLINE FUNCTIONS ------------------------------------------------------------------*/
-	
+
 #endif
 

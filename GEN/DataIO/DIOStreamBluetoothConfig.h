@@ -1,21 +1,21 @@
  //------------------------------------------------------------------------------------------
-//	DIOSTREAMBLUETOOTHCONFIG.H
-//	
-/**	
-// \class 
-//   
+//  DIOSTREAMBLUETOOTHCONFIG.H
+//
+/**
+// \class
+//
 //  Data IO Stream Bluetooth Config class
-//   
-//	@author	 Abraham J. Velez
-//	@version 23/05/2002
-*/	
-//	GEN  Copyright (C).  All right reserved.		 			 
+//
+//  @author  Abraham J. Velez
+//  @version 23/05/2002
+*/
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
+
 #ifndef _DIOSTREAMBLUETOOTHCONFIG_H_
 #define _DIOSTREAMBLUETOOTHCONFIG_H_
-	
-	
+
+
 //---- INCLUDES ----------------------------------------------------------------------------
 
 #include "DIOMAC.h"
@@ -32,37 +32,37 @@ class XFACTORY;
 
 class DIOSTREAMBLUETOOTHCONFIG : public DIOSTREAMCONFIG
 {
-	public:					
-																									DIOSTREAMBLUETOOTHCONFIG			();
-		virtual																			 ~DIOSTREAMBLUETOOTHCONFIG			();
+  public:
+                                                  DIOSTREAMBLUETOOTHCONFIG      ();
+    virtual                                      ~DIOSTREAMBLUETOOTHCONFIG      ();
 
-		int																						GetDeviceSelect								();
-		bool																					SetDeviceSelect								(int deviceselect);
+    int                                           GetDeviceSelect               ();
+    bool                                          SetDeviceSelect               (int deviceselect);
 
-		DIOMAC*																				GetLocalMAC										();
-		DIOMAC*																				GetRemoteMAC									();
-		
-		int																						GetRemoteChannel							();
-		bool																					SetRemoteChannel							(int port);
+    DIOMAC*                                       GetLocalMAC                   ();
+    DIOMAC*                                       GetRemoteMAC                  ();
 
-		XSTRING*																			GetPIN												();
+    int                                           GetRemoteChannel              ();
+    bool                                          SetRemoteChannel              (int port);
 
-		void*																					GetServerPropertys						(int index);
+    XSTRING*                                      GetPIN                        ();
 
-	protected:
-			
-		int																						deviceselect;		
-		DIOMAC																				localMAC;
-		DIOMAC																				remoteMAC;
-		int 																					channel;		
-		XSTRING																				pin;
+    void*                                         GetServerPropertys            (int index);
 
-		void*																					serverproperties[3];
-		
-	private:		
+  protected:
 
-		void																					Clean													();								
-};		
+    int                                           deviceselect;
+    DIOMAC                                        localMAC;
+    DIOMAC                                        remoteMAC;
+    int                                           channel;
+    XSTRING                                       pin;
+
+    void*                                         serverproperties[3];
+
+  private:
+
+    void                                          Clean                         ();
+};
 
 
 

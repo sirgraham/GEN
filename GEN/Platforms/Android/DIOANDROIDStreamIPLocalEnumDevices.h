@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------------------
-//	DIOANDROIDSTREAMIPLOCALENUMDEVICES.H
+//  DIOANDROIDSTREAMIPLOCALENUMDEVICES.H
 //
 /**
 // \class
 //
 //  ANDROID Data IO Stream IP Local Enum Devices class
 //
-//	@author	 Abraham J. Velez
-//	@version 02/01/2002
+//  @author  Abraham J. Velez
+//  @version 02/01/2002
 */
-//	GEN  Copyright (C).  All right reserved.
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
 
 #ifndef _DIOANDROIDSTREAMIPLOCALENUMDEVICES_H_
@@ -33,11 +33,11 @@ class XPUBLISHER;
 
 class DIOANDROIDSTREAMIPLOCALENUMDEVICES :  public DIOSTREAMIPLOCALENUMDEVICES
 {
-	public:
-															DIOANDROIDSTREAMIPLOCALENUMDEVICES			( );
-		virtual									 ~DIOANDROIDSTREAMIPLOCALENUMDEVICES			();
+  public:
+                              DIOANDROIDSTREAMIPLOCALENUMDEVICES      ( );
+    virtual                  ~DIOANDROIDSTREAMIPLOCALENUMDEVICES      ();
 
-		bool											Search																();											   
+    bool                      Search                                ();
 };
 
 

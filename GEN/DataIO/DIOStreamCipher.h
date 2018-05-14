@@ -1,33 +1,33 @@
 /*------------------------------------------------------------------------------------------
-//	DIOSTREAMCIPHER.H
-*/	
-/**	
-// \class 
-//   
-//  Data IO Stream with Cipher class
-//   
-//	@author	 Abraham J. Velez
+//  DIOSTREAMCIPHER.H
+*/
+/**
+// \class
 //
-//	Date Of Creation	: 24/11/2014 10:26:28
-//	Last Modification	:	
-*/	
-/*	GEN  Copyright (C).  All right reserved.	
+//  Data IO Stream with Cipher class
+//
+//  @author  Abraham J. Velez
+//
+//  Date Of Creation  : 24/11/2014 10:26:28
+//  Last Modification :
+*/
+/*  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
+
 #ifndef _DIOSTREAMCIPHER_H_
 #define _DIOSTREAMCIPHER_H_
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
-#include "XThreadCollected.h"	
+#include "XThreadCollected.h"
 
-#include "DIOStream.h"	
+#include "DIOStream.h"
 
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
-	
-#define DIOSTREAMCIPHER_HEAD_MAGICNUMBER   0xAAE00055	
-#define DIOSTREAMCIPHER_HEAD_SIZE					 0x0e	
+
+#define DIOSTREAMCIPHER_HEAD_MAGICNUMBER   0xAAE00055
+#define DIOSTREAMCIPHER_HEAD_SIZE          0x0e
 
 
 /*---- CLASS -----------------------------------------------------------------------------*/
@@ -39,106 +39,106 @@ class HASHCRC32;
 
 class DIOSTREAMCIPHER : public DIOSTREAM
 {
-	public:
+  public:
 
-															  DIOSTREAMCIPHER									( DIOSTREAMCONFIG* config, CIPHER* cipher);
-		virtual										 ~DIOSTREAMCIPHER									();
-		
-		DIOSTREAMCONFIG*						GetConfig												()																{ return config;										}
-		bool												SetConfig												(DIOSTREAMCONFIG* config)			
-																{ 
-																	this->config = config;
-																	return true;
-																}
-		 
-		DIOSTREAMSTATUS							GetConnectStatus								()
-																{
-																	if(!diostream) return DIOSTREAMSTATUS_DISCONNECTED;
-																	return diostream->GetConnectStatus();
-																}
-		
-		bool												Open														() 
-																{
-																	if(!diostream) return false;
-																	return diostream->Open();
-																}
+                                DIOSTREAMCIPHER                 ( DIOSTREAMCONFIG* config, CIPHER* cipher);
+    virtual                    ~DIOSTREAMCIPHER                 ();
 
-    bool												Disconnect											()
-																{
-																	if(!diostream) return false;
-																	return diostream->Disconnect();
-																}
+    DIOSTREAMCONFIG*            GetConfig                       ()                                { return config;                    }
+    bool                        SetConfig                       (DIOSTREAMCONFIG* config)
+                                {
+                                  this->config = config;
+                                  return true;
+                                }
 
-		bool												Close														()
-																{
-																	if(!diostream) return false;
-																	return diostream->Close();
-																}
+    DIOSTREAMSTATUS             GetConnectStatus                ()
+                                {
+                                  if(!diostream) return DIOSTREAMSTATUS_DISCONNECTED;
+                                  return diostream->GetConnectStatus();
+                                }
 
-		
+    bool                        Open                            ()
+                                {
+                                  if(!diostream) return false;
+                                  return diostream->Open();
+                                }
 
-		XDWORD											Read														(XBYTE* buffer, XDWORD size);
-		XDWORD											Write														(XBYTE* buffer, XDWORD size);
+    bool                        Disconnect                      ()
+                                {
+                                  if(!diostream) return false;
+                                  return diostream->Disconnect();
+                                }
 
-		DIOSTREAM*									GetDIOStreamBase								()																{ return diostream;									}
-		CIPHER*											GetCipher												()                                { return cipher;                    }
+    bool                        Close                           ()
+                                {
+                                  if(!diostream) return false;
+                                  return diostream->Close();
+                                }
 
-		/*
-		XTIMER*											GetXTimerConnexion							()																
-																{
-																	if(!diostream) return NULL;
-																	return diostream->GetXTimerConnexion();
-																}
-		XTIMER*											GetXTimerNotActivity						()																
-																{ 
-																	if(!diostream) return NULL;
-																	return diostream->GetXTimerNotActivity();
-																}
 
-		XDWORD											GetNBytesRead										()																
-																{ 
-																	if(!diostream) return 0;
-																	return diostream->GetNBytesRead();
-																}
-		XDWORD											GetNBytesWrite									()																
-																{ 
-																	if(!diostream) return 0;
-																	return diostream->GetNBytesWrite();
-																}						
-		*/
 
-	private:
-		
-		void												Clean														()
-																{
-																	config						= NULL;		
-																	cipher						= NULL;
-												
-																	hashcrc32					= NULL;
-																	diostream					= NULL;	
+    XDWORD                      Read                            (XBYTE* buffer, XDWORD size);
+    XDWORD                      Write                           (XBYTE* buffer, XDWORD size);
 
-																	mutexread					= NULL;
-																	mutexwrite				= NULL;
+    DIOSTREAM*                  GetDIOStreamBase                ()                                { return diostream;                 }
+    CIPHER*                     GetCipher                       ()                                { return cipher;                    }
 
-																	xthreadconnexion	= NULL;
-																}
+    /*
+    XTIMER*                     GetXTimerConnexion              ()
+                                {
+                                  if(!diostream) return NULL;
+                                  return diostream->GetXTimerConnexion();
+                                }
+    XTIMER*                     GetXTimerNotActivity            ()
+                                {
+                                  if(!diostream) return NULL;
+                                  return diostream->GetXTimerNotActivity();
+                                }
 
-		static void									ThreadRunFunction								(void* param);	
-		
-		DIOSTREAMCONFIG*						config;
-		CIPHER*											cipher;
+    XDWORD                      GetNBytesRead                   ()
+                                {
+                                  if(!diostream) return 0;
+                                  return diostream->GetNBytesRead();
+                                }
+    XDWORD                      GetNBytesWrite                  ()
+                                {
+                                  if(!diostream) return 0;
+                                  return diostream->GetNBytesWrite();
+                                }
+    */
 
-		HASHCRC32*                  hashcrc32;
-		DIOSTREAM*									diostream;
+  private:
 
-		XMUTEX*											mutexread;
-		XMUTEX*											mutexwrite;
+    void                        Clean                           ()
+                                {
+                                  config            = NULL;
+                                  cipher            = NULL;
 
-		XTHREADCOLLECTED*						xthreadconnexion;
+                                  hashcrc32         = NULL;
+                                  diostream         = NULL;
+
+                                  mutexread         = NULL;
+                                  mutexwrite        = NULL;
+
+                                  xthreadconnexion  = NULL;
+                                }
+
+    static void                 ThreadRunFunction               (void* param);
+
+    DIOSTREAMCONFIG*            config;
+    CIPHER*                     cipher;
+
+    HASHCRC32*                  hashcrc32;
+    DIOSTREAM*                  diostream;
+
+    XMUTEX*                     mutexread;
+    XMUTEX*                     mutexwrite;
+
+    XTHREADCOLLECTED*           xthreadconnexion;
 };
-	
-	
+
+
 /*---- INLINE FUNCTIONS ------------------------------------------------------------------*/
-	
+
 #endif
 

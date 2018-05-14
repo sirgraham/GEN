@@ -1,21 +1,21 @@
 //------------------------------------------------------------------------------------------
-//	DIOSTREAMUSB.H
-//	
-/**	
-// \class 
-//   
+//  DIOSTREAMUSB.H
+//
+/**
+// \class
+//
 //  WINDOWS Data IO Stream USB class
-//   
-//	@author	 Abraham J. Velez
-//	@version 23/05/2002
-*/	
-//	GEN  Copyright (C).  All right reserved.		 			 
+//
+//  @author  Abraham J. Velez
+//  @version 23/05/2002
+*/
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
+
 #ifndef _DIOSTREAMUSB_H_
 #define _DIOSTREAMUSB_H_
-	
-	
+
+
 //---- INCLUDES ----------------------------------------------------------------------------
 
 #include "DIOStream.h"
@@ -34,27 +34,27 @@ class DIOSTREAMUSBCONFIG;
 
 class DIOSTREAMUSB : public DIOSTREAM
 {
-	public:
-																	DIOSTREAMUSB											();
-		virtual											 ~DIOSTREAMUSB											();
+  public:
+                                  DIOSTREAMUSB                      ();
+    virtual                      ~DIOSTREAMUSB                      ();
 
-		DIOSTREAMCONFIG*							GetConfig													();
-		virtual bool								  SetConfig													(DIOSTREAMCONFIG* config);
+    DIOSTREAMCONFIG*              GetConfig                         ();
+    virtual bool                  SetConfig                         (DIOSTREAMCONFIG* config);
 
-		virtual DIOSTREAMSTATUS				GetConnectStatus									() 																= 0;
-		virtual bool									Open															() 																= 0;
+    virtual DIOSTREAMSTATUS       GetConnectStatus                  ()                                = 0;
+    virtual bool                  Open                              ()                                = 0;
 
-		virtual bool									Close															() 																= 0;
-    
-		virtual bool								  CleanBuffers											() 																						{	return false;  };
+    virtual bool                  Close                             ()                                = 0;
 
-	protected:
+    virtual bool                  CleanBuffers                      ()                                            { return false;  };
 
-		DIOSTREAMUSBCONFIG*						config;
-		
-	private:
+  protected:
 
-		void												  Clean															();
+    DIOSTREAMUSBCONFIG*           config;
+
+  private:
+
+    void                          Clean                             ();
 };
 
 

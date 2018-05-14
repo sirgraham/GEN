@@ -1,69 +1,71 @@
 /*------------------------------------------------------------------------------------------
-//	SQLMYSQLCONNECTION.H
-*/	
-/**	
-// \class 
-//   
-//  Conection to Mysql
-//   
-//	@author	 Diego Martinez Ruiz de Gaona
+//  SQLMYSQLCONNECTION.H
+*/
+/**
+// \class
 //
-//	Date Of Creation	: 10/08/2015 12:15:38
-//	Last Modification	:	
-*/	
-/*	GEN  Copyright (C).  All right reserved.
+//  Conection to Mysql
+//
+//  @author  Diego Martinez Ruiz de Gaona
+//
+//  Date Of Creation  : 10/08/2015 12:15:38
+//  Last Modification :
+*/
+/*  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
+
 #if defined(DBSQL_ACTIVE) && defined(DBSQLMYSQL_ACTIVE)
 
 #ifndef _SQLMYSQLCONNECTION_H_
 #define _SQLMYSQLCONNECTION_H_
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
 #include "DBSQLConnection.h"
 #include "DBSQLDatabase.h"
 
+#include "SQLMYSQLDatabase.h"
+#include "SQLMYSQLQuery.h"
+
 #include "mysql.h"
 
-
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
-	
-	
+
+
 /*---- CLASS -----------------------------------------------------------------------------*/
 
-class SQLMYSQLQUERY;
-class SQLMYSQLDATABASE;
+//class SQLMYSQLQUERY;
+//class SQLMYSQLDATABASE;
 
 class SQLMYSQLCONNECTION : public DBSQLCONNECTION
 {
-	public:
+  public:
 
-		friend												SQLMYSQLQUERY;
-		friend												SQLMYSQLDATABASE;
+    friend class                  SQLMYSQLQUERY;
+    friend class                  SQLMYSQLDATABASE;
 
-																	SQLMYSQLCONNECTION			(DBSQLDATABASE* database) : DBSQLCONNECTION(database)			{ Clean();										}
-		virtual											 ~SQLMYSQLCONNECTION			()																												{ Clean();										}
+                                  SQLMYSQLCONNECTION      (DBSQLDATABASE* database) : DBSQLCONNECTION(database)     { Clean();                    }
+    virtual                      ~SQLMYSQLCONNECTION      ()                                                        { Clean();                    }
 
-		virtual		bool								Connect									();
-		virtual		bool								Disconnect							();
+    virtual   bool                Connect                 ();
+    virtual   bool                Disconnect              ();
 
-	protected:
+  protected:
 
-		MYSQL*												connection;
+    MYSQL*                        connection;
 
-	private:
+  private:
 
-		void													Clean										()																												
-																	{															
-																	
-																	}
+    void                          Clean                   ()
+                                  {
+
+                                  }
 };
-	
-	
+
+
 /*---- INLINE FUNCTIONS ------------------------------------------------------------------*/
-	
+
 #endif
 
 #endif

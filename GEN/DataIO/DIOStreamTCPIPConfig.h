@@ -1,21 +1,21 @@
 //------------------------------------------------------------------------------------------
-//	DIOSTREAMTCPIP.H
-//	
-/**	
-// \class 
-//   
+//  DIOSTREAMTCPIP.H
+//
+/**
+// \class
+//
 //  Data IO Stream TCP/IP Config class
-//   
-//	@author	 Abraham J. Velez
-//	@version 23/05/2002
-*/	
-//	GEN  Copyright (C).  All right reserved.		 			 
+//
+//  @author  Abraham J. Velez
+//  @version 23/05/2002
+*/
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
+
 #ifndef _DIOSTREAMTCPIPCONFIG_H_
 #define _DIOSTREAMTCPIPCONFIG_H_
-	
-	
+
+
 //---- INCLUDES ----------------------------------------------------------------------------
 
 #include "DIOIP.h"
@@ -34,59 +34,59 @@ class DIOFACTORY;
 
 class DIOSTREAMTCPIPCONFIG  : public DIOSTREAMCONFIG
 {
-	public:					
-														DIOSTREAMTCPIPCONFIG 				();
-		virtual								 ~DIOSTREAMTCPIPCONFIG 				();
+  public:
+                            DIOSTREAMTCPIPCONFIG        ();
+    virtual                ~DIOSTREAMTCPIPCONFIG        ();
 
-    DIOIP*									GetLocalIP									();		
-		DIOURL*									GetRemoteURL								();
-		
-		int											GetRemotePort								(); 
-		bool										SetRemotePort								(int port);
+    DIOIP*                  GetLocalIP                  ();
+    DIOURL*                 GetRemoteURL                ();
 
-		bool										GetToString									(XSTRING* string);
-		bool										GetToString									(XSTRING& string)									{ return GetToString(&string);														}
-		
-		bool										SetFromString								(XCHAR* string);											
-		bool										SetFromString								(XSTRING* string)                
-														{ 
-															if(!string) return false;
-															return SetFromString(string->Get());										
-														} 
-		bool										SetFromString								(XSTRING& string, bool addslash)	{ return SetFromString(&string);												  }
+    int                     GetRemotePort               ();
+    bool                    SetRemotePort               (int port);
 
-		int											GetCounterMultiServer				()																{ return countermultiserver;															}
-		void										SetCounterMultiServer				(int countermultiserver)					{ this->countermultiserver = countermultiserver;          }
+    bool                    GetToString                 (XSTRING* string);
+    bool                    GetToString                 (XSTRING& string)                 { return GetToString(&string);                            }
 
-		XMUTEX*									GetXMutexMultiServer				()																{ return xmutexmultiserver;																}
+    bool                    SetFromString               (XCHAR* string);
+    bool                    SetFromString               (XSTRING* string)
+                            {
+                              if(!string) return false;
+                              return SetFromString(string->Get());
+                            }
+    bool                    SetFromString               (XSTRING& string, bool addslash)  { return SetFromString(&string);                          }
 
-		int											GetHandleMultiServer				()																{ return handlemultiserver;																}
-		void										SetHandleMultiServer				(int handlemultiserver)						{ this->handlemultiserver = handlemultiserver;						}
-					
-	protected:
+    int                     GetCounterMultiServer       ()                                { return countermultiserver;                              }
+    void                    SetCounterMultiServer       (int countermultiserver)          { this->countermultiserver = countermultiserver;          }
 
-    DIOIP										localIP;
-		DIOURL*									remoteURL;
-		int 										remoteport;
+    XMUTEX*                 GetXMutexMultiServer        ()                                { return xmutexmultiserver;                               }
 
-		XMUTEX*									xmutexmultiserver;
-		int											countermultiserver;
-		int											handlemultiserver;
-		
-	private:
+    int                     GetHandleMultiServer        ()                                { return handlemultiserver;                               }
+    void                    SetHandleMultiServer        (int handlemultiserver)           { this->handlemultiserver = handlemultiserver;            }
 
-		void										Clean												()
-														{	
-															type 										= DIOSTREAMTYPE_TCPIP;																
+  protected:
 
-															remoteURL								= NULL;
-															remoteport							= 0;
+    DIOIP                   localIP;
+    DIOURL*                 remoteURL;
+    int                     remoteport;
 
-															xmutexmultiserver				= NULL;
+    XMUTEX*                 xmutexmultiserver;
+    int                     countermultiserver;
+    int                     handlemultiserver;
 
-															countermultiserver			= 0;
-															handlemultiserver       = -1;
-														}
+  private:
+
+    void                    Clean                       ()
+                            {
+                              type                    = DIOSTREAMTYPE_TCPIP;
+
+                              remoteURL               = NULL;
+                              remoteport              = 0;
+
+                              xmutexmultiserver       = NULL;
+
+                              countermultiserver      = 0;
+                              handlemultiserver       = -1;
+                            }
 };
 
 

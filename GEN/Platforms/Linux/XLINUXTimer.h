@@ -1,21 +1,21 @@
 //------------------------------------------------------------------------------------------
-//	XLINUXTIMER.H
-//	
-/**	
-// \class 
-//   
+//  XLINUXTIMER.H
+//
+/**
+// \class
+//
 //  LINUX timer class
-//   
-//	@author	 Abraham J. Velez
-//	@version 04/04/2002
-*/	
-//	GEN  Copyright (C).  All right reserved.		 			 
+//
+//  @author  Abraham J. Velez
+//  @version 04/04/2002
+*/
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
+
 #ifndef _XLINUXTIMER_H_
 #define _XLINUXTIMER_H_
-	
-						
+
+
 //---- INCLUDES ----------------------------------------------------------------------------
 
 #include "XTimer.h"
@@ -29,17 +29,17 @@
 
 class XLINUXTIMER : public XTIMER
 {
-	public:
+  public:
 
-												XLINUXTIMER											();
-		virtual						 ~XLINUXTIMER											();
-		        
-		XQWORD							GetMicroSecondsTickCounter			();
+                        XLINUXTIMER                     ();
+    virtual            ~XLINUXTIMER                     ();
+
+    XQWORD              GetMicroSecondsTickCounter      ();
 };
 
 
 
 //---- INLINE FUNCTIONS --------------------------------------------------------------------
-										
+
 #endif
 

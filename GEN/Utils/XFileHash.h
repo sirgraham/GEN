@@ -1,20 +1,20 @@
 //------------------------------------------------------------------------------------------
-//	XFILEHASH.H
-//	
-/**	
-// \class 
-//   
+//  XFILEHASH.H
+//
+/**
+// \class
+//
 //  File HASH funtions
-//   
-//	@author	 Abraham J. Velez
-//	@version 22/04/2002
-*/	
-//	GEN  Copyright (C).  All right reserved.		 			 
+//
+//  @author  Abraham J. Velez
+//  @version 22/04/2002
+*/
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
+
 #ifndef _XFILEHASHH_
 #define _XFILEHASHH_
-	
+
 //---- INCLUDES ----------------------------------------------------------------------------
 
 #include "Hash.h"
@@ -31,58 +31,58 @@ class XHASH32;
 
 class XFILEHASH : public XFILECONTAINER
 {
-	public:
-											XFILEHASH					(HASH* hash);				
-		virtual					 ~XFILEHASH					();
+  public:
+                      XFILEHASH         (HASH* hash);
+    virtual          ~XFILEHASH         ();
 
-		bool							Open							(XPATH& pathname, bool readonly = true, bool checkHASH = true, bool checkversion = true);
-		bool							Create						(XPATH& pathname, bool checkhash = true);
-		bool							Close							();	
+    bool              Open              (XPATH& pathname, bool readonly = true, bool checkHASH = true, bool checkversion = true);
+    bool              Create            (XPATH& pathname, bool checkhash = true);
+    bool              Close             ();
 
-		XWORD							GetID							();
-		XWORD							GetType						();
-		XWORD							GetVersion				();
-		XSTRING*					GetIDString				();	
-		
-		bool							Set								(XWORD ID, XWORD type, XWORD version, XCHAR* IDstring = NULL);
+    XWORD             GetID             ();
+    XWORD             GetType           ();
+    XWORD             GetVersion        ();
+    XSTRING*          GetIDString       ();
 
-		bool							SetID							(XWORD ID);
-		bool							SetType						(XWORD type);
-		bool							SetVersion				(XWORD version);
-		bool							SetIDString				(XCHAR* IDstring);
-		bool							SetIDString				(XSTRING& IDstring);
+    bool              Set               (XWORD ID, XWORD type, XWORD version, XCHAR* IDstring = NULL);
 
-		int								GetDataPosition		();
+    bool              SetID             (XWORD ID);
+    bool              SetType           (XWORD type);
+    bool              SetVersion        (XWORD version);
+    bool              SetIDString       (XCHAR* IDstring);
+    bool              SetIDString       (XSTRING& IDstring);
 
-		bool							UpdateHash				();
+    int               GetDataPosition   ();
 
-	private:
+    bool              UpdateHash        ();
 
-		void							Clean							()
-											{
-												hash					= NULL;
+  private:
 
-												ID						= 0;
-												type					= 0;
- 												version				= 0;
-		
-												hashisupdate  = false;
+    void              Clean             ()
+                      {
+                        hash          = NULL;
 
-												hashposition	= 0;		
-												dataposition	= 0;		
-											}
+                        ID            = 0;
+                        type          = 0;
+                        version       = 0;
 
-		HASH*							hash;
+                        hashisupdate  = false;
 
-		XWORD							ID;
-		XWORD							type;
- 		XWORD							version;
-		XSTRING						IDstring;
+                        hashposition  = 0;
+                        dataposition  = 0;
+                      }
 
-		bool							hashisupdate;
+    HASH*             hash;
 
-		int               hashposition;		
-		int               dataposition;		
+    XWORD             ID;
+    XWORD             type;
+    XWORD             version;
+    XSTRING           IDstring;
+
+    bool              hashisupdate;
+
+    int               hashposition;
+    int               dataposition;
 };
 
 

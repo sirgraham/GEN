@@ -1,55 +1,55 @@
 //------------------------------------------------------------------------------------------
-//	SCRIPTLIB.H
-//	
-/**	
-// \class 
-//   
+//  SCRIPTLIB.H
+//
+/**
+// \class
+//
 //  Script library class
-//   
-//	@author	 Abraham J. Velez
-//	@version 19/07/2007 20:06:27
-*/	
-//	GEN  Copyright (C).  All right reserved.			 
+//
+//  @author  Abraham J. Velez
+//  @version 19/07/2007 20:06:27
+*/
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
+
 #ifndef _SCRIPTLIB_H_
 #define _SCRIPTLIB_H_
-	
-	
+
+
 //---- INCLUDES ----------------------------------------------------------------------------
-	
+
 #include "XString.h"
 
 //---- DEFINES & ENUMS  --------------------------------------------------------------------
-	
-	
+
+
 //---- CLASS -------------------------------------------------------------------------------
 
 class SCRIPT;
 
 class SCRIPTLIB
 {
-	public:
-													SCRIPTLIB								(XCHAR* ID);											
-		virtual				 			 ~SCRIPTLIB								();		
+  public:
+                          SCRIPTLIB               (XCHAR* ID);
+    virtual              ~SCRIPTLIB               ();
 
-		XSTRING*							GetID										();							
-		
-		virtual bool					AddLibraryFunctions			(SCRIPT* script);
+    XSTRING*              GetID                   ();
+
+    virtual bool          AddLibraryFunctions     (SCRIPT* script);
 
 
-	protected:
-		
-		SCRIPT*								script;
+  protected:
 
-	private:
+    SCRIPT*               script;
 
-		void									Clean										();		
+  private:
 
-		XSTRING								ID;
+    void                  Clean                   ();
+
+    XSTRING               ID;
 };
 
-	
+
 //---- INLINE FUNCTIONS --------------------------------------------------------------------
 
 

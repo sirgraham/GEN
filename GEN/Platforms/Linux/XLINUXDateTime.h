@@ -1,21 +1,21 @@
 //------------------------------------------------------------------------------------------
-//	XLINUXDATETIME.H
-//	
-/**	
-// \class 
-//   
+//  XLINUXDATETIME.H
+//
+/**
+// \class
+//
 //  LINUX date time class
-//   
-//	@author	 Abraham J. Velez
-//	@version 04/04/2002
-*/	
-//	GEN  Copyright (C).  All right reserved.		 			 
+//
+//  @author  Abraham J. Velez
+//  @version 04/04/2002
+*/
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
+
 #ifndef _XLINUXDATETIME_H_
 #define _XLINUXDATETIME_H_
-	
-						
+
+
 //---- INCLUDES ----------------------------------------------------------------------------
 
 #include "XDateTime.h"
@@ -30,31 +30,31 @@
 
 class XLINUXDATETIME : public XDATETIME
 {
-	public:
-												XLINUXDATETIME									();												
-		virtual						 ~XLINUXDATETIME									();
+  public:
+                        XLINUXDATETIME                  ();
+    virtual            ~XLINUXDATETIME                  ();
 
-		bool								Read														();
-		bool								Write	  												();
-		
-		bool								FileTime												(XPATH& xpath,void* tmzip, XDWORD* dt);
-		bool								FileTime												(XPATH& xpath);
+    bool                Read                            ();
+    bool                Write                           ();
 
-		int									GetDifferenceGMT								();
+    bool                FileTime                        (XPATH& xpath,void* tmzip, XDWORD* dt);
+    bool                FileTime                        (XPATH& xpath);
 
-		bool								IsDayLigthSavingTime						(int* bias = NULL);
+    int                 GetDifferenceGMT                ();
 
-	protected:
+    bool                IsDayLigthSavingTime            (int* bias = NULL);
 
-		void								GetActualDateTime								(XLINUXDATETIME* timed);
-		void								SetActualDateTime								(XLINUXDATETIME* timed);
+  protected:
 
-		
+    void                GetActualDateTime               (XLINUXDATETIME* timed);
+    void                SetActualDateTime               (XLINUXDATETIME* timed);
+
+
 };
 
 
 
 //---- INLINE FUNCTIONS --------------------------------------------------------------------
-										
+
 #endif
 

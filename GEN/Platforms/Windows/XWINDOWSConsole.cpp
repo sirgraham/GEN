@@ -1,16 +1,16 @@
 //------------------------------------------------------------------------------------------
-//	XWINDOWSCONSOLE.CPP
-//	
-//	WINDOWSxconsole class
-//   
-//	Author						: Abraham J. Velez
-//	Date Of Creation	: 03/03/2004 12:28:40
-//	Last Mofificacion	:	
-//	
-//	GEN  Copyright (C).  All right reserved.			 
+//  XWINDOWSCONSOLE.CPP
+//
+//  WINDOWSxconsole class
+//
+//  Author            : Abraham J. Velez
+//  Date Of Creation  : 03/03/2004 12:28:40
+//  Last Mofificacion :
+//
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
 
-	
+
 //---- INCLUDES ----------------------------------------------------------------------------
 
 
@@ -29,21 +29,21 @@
 
 
 //---- GENERAL VARIABLE --------------------------------------------------------------------
-	
-	
+
+
 //---- CLASS MEMBERS -----------------------------------------------------------------------
 
 
 //-------------------------------------------------------------------
 //  XWINDOWSCONSOLE::XWINDOWSCONSOLE
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			03/03/2004 12:28:59
-//	
-//	@return				
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      03/03/2004 12:28:59
+//
+//  @return
+//  */
 //-------------------------------------------------------------------
 XWINDOWSCONSOLE::XWINDOWSCONSOLE() : XCONSOLE()
 {
@@ -55,13 +55,13 @@ XWINDOWSCONSOLE::XWINDOWSCONSOLE() : XCONSOLE()
 //-------------------------------------------------------------------
 //  XWINDOWSCONSOLE::~XWINDOWSCONSOLE
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			03/03/2004 12:29:20
-//	
-//	@return				
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      03/03/2004 12:29:20
+//
+//  @return
+//  */
 //-------------------------------------------------------------------
 XWINDOWSCONSOLE::~XWINDOWSCONSOLE()
 {
@@ -72,240 +72,240 @@ XWINDOWSCONSOLE::~XWINDOWSCONSOLE()
 
 
 /*-------------------------------------------------------------------
-//	XWINDOWSCONSOLE::GetSize
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			14/08/2014 11:11:12
-//	
-//	@return 			bool : 
+//  XWINDOWSCONSOLE::GetSize
+*/
+/**
 //
-//  @param				width : 
-//  @param				height : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      14/08/2014 11:11:12
+//
+//  @return       bool :
+//
+//  @param        width :
+//  @param        height :
 */
 /*-----------------------------------------------------------------*/
 bool XWINDOWSCONSOLE::GetSize(int& width, int& height)
-{	
-	HWND consolehandle = GetConsoleWindow();
+{
+  HWND consolehandle = GetConsoleWindow();
   RECT rect;
 
-	width  = 0;
-	height = 0;
-  	
-	if(GetWindowRect(consolehandle, &rect) == FALSE) return false; 
+  width  = 0;
+  height = 0;
 
-	width  = rect.right  - rect.left; 
-	height = rect.bottom - rect.top;
+  if(GetWindowRect(consolehandle, &rect) == FALSE) return false;
 
-	return true;
+  width  = rect.right  - rect.left;
+  height = rect.bottom - rect.top;
+
+  return true;
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	XWINDOWSCONSOLE::SetSize
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			14/08/2014 11:11:41
-//	
-//	@return 			bool : 
+//  XWINDOWSCONSOLE::SetSize
+*/
+/**
 //
-//  @param				width : 
-//  @param				height : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      14/08/2014 11:11:41
+//
+//  @return       bool :
+//
+//  @param        width :
+//  @param        height :
 */
 /*-----------------------------------------------------------------*/
 bool XWINDOWSCONSOLE::SetSize(int width, int height)
-{	
-	HWND consolehandle = GetConsoleWindow();
+{
+  HWND consolehandle = GetConsoleWindow();
   RECT rect;
-	RECT rectdesktop;
+  RECT rectdesktop;
 
-	if(GetWindowRect(GetDesktopWindow(), &rectdesktop) == FALSE) return false; 
+  if(GetWindowRect(GetDesktopWindow(), &rectdesktop) == FALSE) return false;
 
-	if(GetWindowRect(consolehandle, &rect) == FALSE) return false; 
+  if(GetWindowRect(consolehandle, &rect) == FALSE) return false;
 
-	rect.left   = (rectdesktop.right-width)/2;
-	rect.top		= (rectdesktop.bottom-height)/2;
+  rect.left   = (rectdesktop.right-width)/2;
+  rect.top    = (rectdesktop.bottom-height)/2;
 
-	if(MoveWindow(consolehandle, rect.left, rect.top, width, height, TRUE) == FALSE) return false;
+  if(MoveWindow(consolehandle, rect.left, rect.top, width, height, TRUE) == FALSE) return false;
 
-	return true;
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XWINDOWSCONSOLE::Maximize
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			27/10/2008 10:48:13
-//	
-//	@return				bool : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      27/10/2008 10:48:13
+//
+//  @return       bool :
+//  */
 /*-----------------------------------------------------------------*/
 bool XWINDOWSCONSOLE::Maximize()
 {
-	HANDLE										 hconsole	= GetStdHandle(STD_OUTPUT_HANDLE);
-	HWND											 hwindow	=	GetConsoleWindow();
-	CONSOLE_SCREEN_BUFFER_INFO csbi; 
+  HANDLE                     hconsole = GetStdHandle(STD_OUTPUT_HANDLE);
+  HWND                       hwindow  = GetConsoleWindow();
+  CONSOLE_SCREEN_BUFFER_INFO csbi;
 
   if(!hconsole) return false;
-	if(!hwindow)  return false;
+  if(!hwindow)  return false;
 
-  GetConsoleScreenBufferInfo(hconsole	, &csbi);
+  GetConsoleScreenBufferInfo(hconsole , &csbi);
 
- 	csbi.dwSize.X	= 150;
- 	csbi.dwSize.Y	= 60;
+  csbi.dwSize.X = 150;
+  csbi.dwSize.Y = 60;
 
- 	SetConsoleScreenBufferSize(hconsole,csbi.dwSize);
+  SetConsoleScreenBufferSize(hconsole,csbi.dwSize);
 
- 	ShowWindow(hwindow,SW_MAXIMIZE);
+  ShowWindow(hwindow,SW_MAXIMIZE);
 
-	return true;
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XWINDOWSCONSOLE::Minimize
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			27/10/2008 10:48:13
-//	
-//	@return				bool : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      27/10/2008 10:48:13
+//
+//  @return       bool :
+//  */
 /*-----------------------------------------------------------------*/
 bool XWINDOWSCONSOLE::Minimize()
 {
-	HANDLE										 hconsole	= GetStdHandle(STD_OUTPUT_HANDLE);
-	HWND											 hwindow	=	GetConsoleWindow();
-	CONSOLE_SCREEN_BUFFER_INFO csbi; 
+  HANDLE                     hconsole = GetStdHandle(STD_OUTPUT_HANDLE);
+  HWND                       hwindow  = GetConsoleWindow();
+  CONSOLE_SCREEN_BUFFER_INFO csbi;
 
   if(!hconsole) return false;
-	if(!hwindow)  return false;
+  if(!hwindow)  return false;
 
-  GetConsoleScreenBufferInfo(hconsole	, &csbi);
+  GetConsoleScreenBufferInfo(hconsole , &csbi);
 
- 	csbi.dwSize.X	= 120;
- 	csbi.dwSize.Y	= 50;
+  csbi.dwSize.X = 120;
+  csbi.dwSize.Y = 50;
 
- 	SetConsoleScreenBufferSize(hconsole,csbi.dwSize);
+  SetConsoleScreenBufferSize(hconsole,csbi.dwSize);
 
- 	ShowWindow(hwindow,SW_MINIMIZE);
+  ShowWindow(hwindow,SW_MINIMIZE);
 
-	return true;
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XWINDOWSCONSOLE::Hide
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			23/02/2011 11:27:28
-//	
-//	@return				bool : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      23/02/2011 11:27:28
+//
+//  @return       bool :
+//  */
 /*-----------------------------------------------------------------*/
 bool XWINDOWSCONSOLE::Hide()
 {
-	HWND hwindow	=	GetConsoleWindow();
-	if(!hwindow)  return false;
+  HWND hwindow  = GetConsoleWindow();
+  if(!hwindow)  return false;
 
-	ShowWindow(hwindow,SW_HIDE);
+  ShowWindow(hwindow,SW_HIDE);
 
-	return true;
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XWINDOWSCONSOLE::IsHide
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			23/02/2011 11:52:14
-//	
-//	@return				bool : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      23/02/2011 11:52:14
+//
+//  @return       bool :
+//  */
 /*-----------------------------------------------------------------*/
 bool XWINDOWSCONSOLE::IsHide()
 {
-	HWND hwindow	=	GetConsoleWindow();
-	if(!hwindow)  return false;
+  HWND hwindow  = GetConsoleWindow();
+  if(!hwindow)  return false;
 
-	return (IsWindowVisible(hwindow))?false:true;
+  return (IsWindowVisible(hwindow))?false:true;
 }
 
 
 
 /*-------------------------------------------------------------------
-//	XWINDOWSCONSOLE::UnHide
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			14/08/2014 11:09:10
-//	
-//	@return 			bool : 
+//  XWINDOWSCONSOLE::UnHide
+*/
+/**
+//
+//
+//
+//  @author       Abraham J. Velez
+//  @version      14/08/2014 11:09:10
+//
+//  @return       bool :
 //
 */
 /*-----------------------------------------------------------------*/
 bool XWINDOWSCONSOLE::UnHide()
 {
-	HWND hwindow	=	GetConsoleWindow();
-	if(!hwindow)  return false;
+  HWND hwindow  = GetConsoleWindow();
+  if(!hwindow)  return false;
 
-	ShowWindow(hwindow,SW_SHOW);
+  ShowWindow(hwindow,SW_SHOW);
 
-	return true;
-	
+  return true;
+
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XWINDOWSCONSOLE::Print
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			31/03/2011 9:59:30
-//	
-//	@return				bool : 
-//	@param				string : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      31/03/2011 9:59:30
+//
+//  @return       bool :
+//  @param        string :
 */
 /*-----------------------------------------------------------------*/
 bool XWINDOWSCONSOLE::Print(XCHAR* string)
 {
-	if(!string)			return false;
-	if(!string[0])  return false;
+  if(!string)     return false;
+  if(!string[0])  return false;
 
-	wprintf((wchar_t *)string);
+  wprintf((wchar_t *)string);
 
-	return true;
+  return true;
 }
 
 
@@ -314,35 +314,35 @@ bool XWINDOWSCONSOLE::Print(XCHAR* string)
 //-------------------------------------------------------------------
 //  XWINDOWSCONSOLE::Clear
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			07/01/2007 21:06:05
-//	
-//	@return				bool : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      07/01/2007 21:06:05
+//
+//  @return       bool :
+//  */
 //-------------------------------------------------------------------
 bool XWINDOWSCONSOLE::Clear()
 {
-	COORD											 coordscreen  = { 0, 0 };													// Home for the cursor 
-  DWORD											 ccharswritten;
-	CONSOLE_SCREEN_BUFFER_INFO csbi; 
-  DWORD											 dwconsize;
-  HANDLE										 hconsole		 = GetStdHandle(STD_OUTPUT_HANDLE);		// Get the number of character cells in the current buffer. 
+  COORD                      coordscreen  = { 0, 0 };                         // Home for the cursor
+  DWORD                      ccharswritten;
+  CONSOLE_SCREEN_BUFFER_INFO csbi;
+  DWORD                      dwconsize;
+  HANDLE                     hconsole    = GetStdHandle(STD_OUTPUT_HANDLE);   // Get the number of character cells in the current buffer.
 
-	if(IsHide()) return false;
+  if(IsHide()) return false;
 
-  GetConsoleScreenBufferInfo(hconsole, &csbi);   
+  GetConsoleScreenBufferInfo(hconsole, &csbi);
 
   dwconsize = csbi.dwSize.X * csbi.dwSize.Y;
 
-  FillConsoleOutputCharacter(hconsole, (TCHAR) ' ', dwconsize, coordscreen, &ccharswritten);					// Fill the entire screen with blanks.   
-	GetConsoleScreenBufferInfo(hconsole, &csbi );																											  // Get the current text attribute.
+  FillConsoleOutputCharacter(hconsole, (TCHAR) ' ', dwconsize, coordscreen, &ccharswritten);          // Fill the entire screen with blanks.
+  GetConsoleScreenBufferInfo(hconsole, &csbi );                                                       // Get the current text attribute.
 
-	FillConsoleOutputAttribute(hconsole, csbi.wAttributes,dwconsize, coordscreen, &ccharswritten );			// Set the buffer's attributes accordingly.
-  SetConsoleCursorPosition  (hconsole, coordscreen );																									// Put the cursor at its home coordinates.
+  FillConsoleOutputAttribute(hconsole, csbi.wAttributes,dwconsize, coordscreen, &ccharswritten );     // Set the buffer's attributes accordingly.
+  SetConsoleCursorPosition  (hconsole, coordscreen );                                                 // Put the cursor at its home coordinates.
 
-	return true;
+  return true;
 }
 
 
@@ -351,67 +351,67 @@ bool XWINDOWSCONSOLE::Clear()
 //-------------------------------------------------------------------
 //  XWINDOWSCONSOLE::KBHit
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			12/04/2006 11:59:47
-//	
-//	@return				bool : 
-//	@param				void : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      12/04/2006 11:59:47
+//
+//  @return       bool :
+//  @param        void :
 */
 //-------------------------------------------------------------------
 bool XWINDOWSCONSOLE::KBHit(void)
 {
   #ifdef XVISUALC
-	if(_kbhit()) return true;
+  if(_kbhit()) return true;
   #endif
 
-	return false; 
-} 
+  return false;
+}
 
 
 
 /*-------------------------------------------------------------------
 //  XWINDOWSCONSOLE::GetChar
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			01/12/2009 08:53:27 p.m.
-//	
-//	@return				
-int : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      01/12/2009 08:53:27 p.m.
+//
+//  @return
+int :
+//  */
 /*-----------------------------------------------------------------*/
 int XWINDOWSCONSOLE::GetChar()
 {
-	/*
+  /*
   DWORD mode;
-	unsigned int thechar[5] = { 0,0,0,0,0 };
-	DWORD count;
-	
-	HANDLE hstdin = GetStdHandle(STD_INPUT_HANDLE);					//get a handle to stdin	
-	if(!hstdin) return 0;
+  unsigned int thechar[5] = { 0,0,0,0,0 };
+  DWORD count;
 
-	GetConsoleMode(hstdin,&mode);														//save the current input mode...
-	
-	// Clear the mode, turn off ENABLE_ECHO_INPUT and ENABLE_LINE_INPUT
-	// so that the output will not be echoed and will not pause until the end of
-	// a line for input.
+  HANDLE hstdin = GetStdHandle(STD_INPUT_HANDLE);         //get a handle to stdin
+  if(!hstdin) return 0;
 
-	SetConsoleMode(hstdin,0);	
-		
-	ReadConsole(hstdin,&thechar,sizeof(thechar),&count,NULL); // Read in 1 char from the input buffer.
-	
-	SetConsoleMode(hstdin, mode);		//restore the current input mode.
+  GetConsoleMode(hstdin,&mode);                           //save the current input mode...
 
-	return (int)(thechar[0]&0xFF);
-	*/
+  // Clear the mode, turn off ENABLE_ECHO_INPUT and ENABLE_LINE_INPUT
+  // so that the output will not be echoed and will not pause until the end of
+  // a line for input.
 
-	if(!KBHit()) return 0;
+  SetConsoleMode(hstdin,0);
 
-	return   _getch();
+  ReadConsole(hstdin,&thechar,sizeof(thechar),&count,NULL); // Read in 1 char from the input buffer.
+
+  SetConsoleMode(hstdin, mode);   //restore the current input mode.
+
+  return (int)(thechar[0]&0xFF);
+  */
+
+  if(!KBHit()) return 0;
+
+  return   _getch();
 }
 
 

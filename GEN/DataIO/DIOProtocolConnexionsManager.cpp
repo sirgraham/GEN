@@ -1,16 +1,16 @@
 /*------------------------------------------------------------------------------------------
-//	DIOPROTOCOLCONNEXIONSMANAGER.CPP
-//	
-//	Data I/O Protocol Connexions Manager
-//   
-//	Author						: Abraham J. Velez
-//	Date Of Creation	: 30/01/2012 12:04:07
-//	Last Mofificacion	:	
-//	
-//	GEN  Copyright (C).  All right reserved.			 
+//  DIOPROTOCOLCONNEXIONSMANAGER.CPP
+//
+//  Data I/O Protocol Connexions Manager
+//
+//  Author            : Abraham J. Velez
+//  Date Of Creation  : 30/01/2012 12:04:07
+//  Last Mofificacion :
+//
+//  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
 #include "XFactory.h"
@@ -33,40 +33,40 @@
 
 #include "XMemory.h"
 
-	
+
 /*---- GENERAL VARIABLE ------------------------------------------------------------------*/
-	
-	
+
+
 /*---- CLASS MEMBERS ---------------------------------------------------------------------*/
 
 
 
 /*-------------------------------------------------------------------
 //  DIOPROTOCOLCONNEXION::DIOPROTOCOLCONNEXION
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			31/01/2012 17:30:52
-//	
-//	@return				 
-//  @param				xpublisher : 
-//  @param				diostreamcfg : 
-//  @param				password : 
-//  @param				xcipher : 
-//  @param				authenticatekey : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      31/01/2012 17:30:52
+//
+//  @return
+//  @param        xpublisher :
+//  @param        diostreamcfg :
+//  @param        password :
+//  @param        xcipher :
+//  @param        authenticatekey :
 */
 /*-----------------------------------------------------------------*/
 DIOPROTOCOLCONNEXION::DIOPROTOCOLCONNEXION(DIOSTREAMCONFIG* diostreamcfg)
 {
-	Clean();
-	
-	this->diostreamcfg	 = diostreamcfg;		
+  Clean();
 
-	xmutexinuseID = xfactory->Create_Mutex();
+  this->diostreamcfg   = diostreamcfg;
 
-	inuseID.SetIsMulti(true);
+  xmutexinuseID = xfactory->Create_Mutex();
+
+  inuseID.SetIsMulti(true);
 }
 
 
@@ -74,68 +74,68 @@ DIOPROTOCOLCONNEXION::DIOPROTOCOLCONNEXION(DIOSTREAMCONFIG* diostreamcfg)
 
 /*-------------------------------------------------------------------
 //  DIOPROTOCOLCONNEXION::~DIOPROTOCOLCONNEXION
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			30/01/2012 12:27:54
-//	
-//	@return				
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      30/01/2012 12:27:54
+//
+//  @return
+//  */
 /*-----------------------------------------------------------------*/
 DIOPROTOCOLCONNEXION::~DIOPROTOCOLCONNEXION()
-{	
-	xfactory->Delete_Mutex(xmutexinuseID);
+{
+  xfactory->Delete_Mutex(xmutexinuseID);
 
-	Clean();
+  Clean();
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIOPROTOCOLCONNEXION::Connect
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			31/01/2012 17:47:22
-//	
-//	@return				bool : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      31/01/2012 17:47:22
+//
+//  @return       bool :
+//  */
 /*-----------------------------------------------------------------*/
 bool DIOPROTOCOLCONNEXION::Connect()
 {
-	if(!dioprotocol) return false;
+  if(!dioprotocol) return false;
 
-	return dioprotocol->Connect();		
+  return dioprotocol->Connect();
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIOPROTOCOLCONNEXION::Disconected
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			31/01/2012 18:29:20
-//	
-//	@return				bool : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      31/01/2012 18:29:20
+//
+//  @return       bool :
+//  */
 /*-----------------------------------------------------------------*/
 bool DIOPROTOCOLCONNEXION::Disconected()
 {
-	if(!dioprotocol)	return false;	
-	
-	if(dioprotocol->IsConnected())  
-		{
-			dioprotocol->Disconnect();	
-		}
-	
-	return true;
+  if(!dioprotocol)  return false;
+
+  if(dioprotocol->IsConnected())
+    {
+      dioprotocol->Disconnect();
+    }
+
+  return true;
 }
 
 
@@ -146,164 +146,164 @@ bool DIOPROTOCOLCONNEXION::Disconected()
 
 /*-------------------------------------------------------------------
 //  DIOPROTOCOLCONNEXIONSMANAGER::DIOPROTOCOLCONNEXIONSMANAGER
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			31/01/2012 13:38:18
-//	
-//	@return				 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      31/01/2012 13:38:18
+//
+//  @return
 
- 
-//  @param				publisher : 
+
+//  @param        publisher :
 */
 /*-----------------------------------------------------------------*/
 DIOPROTOCOLCONNEXIONSMANAGER::DIOPROTOCOLCONNEXIONSMANAGER()
 {
-	Clean();
+  Clean();
 
-	protocolconnexionsnlimit	= DIOPROTOCOLCONNEXIONS_UNLIMITEDNCONNEXIONS;
-	
-	RegisterEvent(DIOPROTOCOLCONNEXIONSMANAGERXEVENTTYPE_CONNECTEDCONNEXION);	
-	RegisterEvent(DIOPROTOCOLCONNEXIONSMANAGERXEVENTTYPE_INITPROTOCOL);	
-	RegisterEvent(DIOPROTOCOLCONNEXIONSMANAGERXEVENTTYPE_DISCONNECTEDCONNEXION);
+  protocolconnexionsnlimit  = DIOPROTOCOLCONNEXIONS_UNLIMITEDNCONNEXIONS;
+
+  RegisterEvent(DIOPROTOCOLCONNEXIONSMANAGERXEVENTTYPE_CONNECTEDCONNEXION);
+  RegisterEvent(DIOPROTOCOLCONNEXIONSMANAGERXEVENTTYPE_INITPROTOCOL);
+  RegisterEvent(DIOPROTOCOLCONNEXIONSMANAGERXEVENTTYPE_DISCONNECTEDCONNEXION);
 }
 
 
 /*-------------------------------------------------------------------
 //  DIOPROTOCOLCONNEXIONSMANAGER::~DIOPROTOCOLCONNEXIONSMANAGER
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			30/01/2012 12:37:22
-//	
-//	@return				
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      30/01/2012 12:37:22
+//
+//  @return
+//  */
 /*-----------------------------------------------------------------*/
 DIOPROTOCOLCONNEXIONSMANAGER::~DIOPROTOCOLCONNEXIONSMANAGER()
 {
-	DeRegisterEvent(DIOPROTOCOLCONNEXIONSMANAGERXEVENTTYPE_CONNECTEDCONNEXION);
-	DeRegisterEvent(DIOPROTOCOLCONNEXIONSMANAGERXEVENTTYPE_INITPROTOCOL);
-	DeRegisterEvent(DIOPROTOCOLCONNEXIONSMANAGERXEVENTTYPE_DISCONNECTEDCONNEXION);
-	
+  DeRegisterEvent(DIOPROTOCOLCONNEXIONSMANAGERXEVENTTYPE_CONNECTEDCONNEXION);
+  DeRegisterEvent(DIOPROTOCOLCONNEXIONSMANAGERXEVENTTYPE_INITPROTOCOL);
+  DeRegisterEvent(DIOPROTOCOLCONNEXIONSMANAGERXEVENTTYPE_DISCONNECTEDCONNEXION);
 
-	Clean();
+
+  Clean();
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIOPROTOCOLCONNEXIONSMANAGER::Ini
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			04/02/2012 12:33:20
-//	
-//	@return				bool : 
-//	@param				isserver : 
-//  @param				diostreamcfg : 
-//  @param				password : 
-//  @param				cipher : 
-//  @param				authenticatekey : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      04/02/2012 12:33:20
+//
+//  @return       bool :
+//  @param        isserver :
+//  @param        diostreamcfg :
+//  @param        password :
+//  @param        cipher :
+//  @param        authenticatekey :
 */
 /*-----------------------------------------------------------------*/
 bool DIOPROTOCOLCONNEXIONSMANAGER::Ini(bool isserver, DIOSTREAMCONFIG* diostreamcfg, DIOSTREAMENUMSERVERS* diostreamenumservers)
 {
-	if(!diostreamcfg) return false;
+  if(!diostreamcfg) return false;
 
-	this->isserver							= isserver;
-	this->diostreamcfg					= diostreamcfg;	
-	this->diostreamenumservers  = diostreamenumservers;
+  this->isserver              = isserver;
+  this->diostreamcfg          = diostreamcfg;
+  this->diostreamenumservers  = diostreamenumservers;
 
-	this->diostreamcfg->SetMode(isserver?DIOSTREAMMODE_SERVER:DIOSTREAMMODE_CLIENT);	
-	
-	xtimerout = xfactory->CreateTimer();
-	if(!xtimerout)  return false;	
-	
-	xmutexprocotolconnexions = xfactory->Create_Mutex();
-	if(!xmutexprocotolconnexions) return false;
-	
-	xtimerconnexions = xfactory->CreateTimer();
-	if(xtimerconnexions)
-		{
-			xthreadconnexions = CREATEXTHREAD(XTHREADGROUPID_DIOPROTOCOLCONNEXIONMANAGER, __L("DIOPROTOCOLCONNEXIONSMANAGER::Ini"), ThreadProtocolConnexions, (void*)this);
-			if(xthreadconnexions)
-				{			
-					if(!xthreadconnexions->Ini()) return false;
-				}
-		}
+  this->diostreamcfg->SetMode(isserver?DIOSTREAMMODE_SERVER:DIOSTREAMMODE_CLIENT);
 
-	xtimerclienttry = xfactory->CreateTimer();
-	if(!xtimerclienttry) return false;
+  xtimerout = xfactory->CreateTimer();
+  if(!xtimerout)  return false;
 
-	xtimerclienttry->AddSeconds(DIOPROTOCOLCONNEXIONS_DEFAULTIMETRYCONNEXIONS+1);
+  xmutexprocotolconnexions = xfactory->Create_Mutex();
+  if(!xmutexprocotolconnexions) return false;
 
-	return true;
+  xtimerconnexions = xfactory->CreateTimer();
+  if(xtimerconnexions)
+    {
+      xthreadconnexions = CREATEXTHREAD(XTHREADGROUPID_DIOPROTOCOLCONNEXIONMANAGER, __L("DIOPROTOCOLCONNEXIONSMANAGER::Ini"), ThreadProtocolConnexions, (void*)this);
+      if(xthreadconnexions)
+        {
+          if(!xthreadconnexions->Ini()) return false;
+        }
+    }
+
+  xtimerclienttry = xfactory->CreateTimer();
+  if(!xtimerclienttry) return false;
+
+  xtimerclienttry->AddSeconds(DIOPROTOCOLCONNEXIONS_DEFAULTIMETRYCONNEXIONS+1);
+
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIOPROTOCOLCONNEXIONSMANAGER::End
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			31/01/2012 18:21:35
-//	
-//	@return				bool : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      31/01/2012 18:21:35
+//
+//  @return       bool :
+//  */
 /*-----------------------------------------------------------------*/
 bool DIOPROTOCOLCONNEXIONSMANAGER::End()
-{	  
-	WaitToAllConnexionsCanBeDeleted();	
+{
+  WaitToAllConnexionsCanBeDeleted();
 
-	if(xthreadconnexions)     
-		{		
-			xthreadconnexions->End();			
-			DELETEXTHREAD(XTHREADGROUPID_DIOPROTOCOLCONNEXIONMANAGER, xthreadconnexions);
-			xthreadconnexions = NULL;
-		}
+  if(xthreadconnexions)
+    {
+      xthreadconnexions->End();
+      DELETEXTHREAD(XTHREADGROUPID_DIOPROTOCOLCONNEXIONMANAGER, xthreadconnexions);
+      xthreadconnexions = NULL;
+    }
 
-	ProtocolConnexions_DeleteAllWaitConnections();
+  ProtocolConnexions_DeleteAllWaitConnections();
 
-	ProtocolConnexions_DisconnectAll();
+  ProtocolConnexions_DisconnectAll();
 
-	ProtocolConnexions_DeleteAll();
+  ProtocolConnexions_DeleteAll();
 
-	if(xtimerclienttry)
-		{
-			xfactory->DeleteTimer(xtimerclienttry);
-			xtimerclienttry = NULL;
-		}
-		
-	if(xtimerconnexions) 
-		{
-			xfactory->DeleteTimer(xtimerconnexions);
-			xtimerconnexions = NULL;
-		}
-	
-	if(xtimerout) 
-		{
-			xfactory->DeleteTimer(xtimerout);
-			xtimerout = NULL;
-		}
-	
-	if(xmutexprocotolconnexions) 
-		{
-			xfactory->Delete_Mutex(xmutexprocotolconnexions);
-			xmutexprocotolconnexions = NULL;
-		}
-	
-	TargetURL_DeleteAll();
+  if(xtimerclienttry)
+    {
+      xfactory->DeleteTimer(xtimerclienttry);
+      xtimerclienttry = NULL;
+    }
 
-	return true;
+  if(xtimerconnexions)
+    {
+      xfactory->DeleteTimer(xtimerconnexions);
+      xtimerconnexions = NULL;
+    }
+
+  if(xtimerout)
+    {
+      xfactory->DeleteTimer(xtimerout);
+      xtimerout = NULL;
+    }
+
+  if(xmutexprocotolconnexions)
+    {
+      xfactory->Delete_Mutex(xmutexprocotolconnexions);
+      xmutexprocotolconnexions = NULL;
+    }
+
+  TargetURL_DeleteAll();
+
+  return true;
 }
 
 
@@ -311,81 +311,81 @@ bool DIOPROTOCOLCONNEXIONSMANAGER::End()
 
 /*-------------------------------------------------------------------
 //  DIOPROTOCOLCONNEXIONSMANAGER::AddURLClientTarget
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			06/05/2011 17:20:09
-//	
-//	@return				bool : 
-//	@param				element : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      06/05/2011 17:20:09
+//
+//  @return       bool :
+//  @param        element :
 */
 /*-----------------------------------------------------------------*/
 bool DIOPROTOCOLCONNEXIONSMANAGER::TargetURL_Add(XCHAR* URL)
 {
-	if(!URL)		return false;
-	
-	DIOURL* _URL = new DIOURL();
-	if(!_URL) return false;
+  if(!URL)    return false;
 
-	(*_URL) = URL;
+  DIOURL* _URL = new DIOURL();
+  if(!_URL) return false;
 
-	targetURLs.Add(_URL);
+  (*_URL) = URL;
 
-	return true;
+  targetURLs.Add(_URL);
+
+  return true;
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	 DIOPROTOCOLCONNEXIONSMANAGER::TargetURL_Get
+//   DIOPROTOCOLCONNEXIONSMANAGER::TargetURL_Get
 */
 /**
 //
-//	
 //
-//	@author		Abraham J. Velez 
-//	@version		
 //
-//	@return		XSTRING* : 
+//  @author   Abraham J. Velez
+//  @version
 //
-//	@param		int : 
+//  @return   XSTRING* :
+//
+//  @param    int :
 //
 *//*-----------------------------------------------------------------*/
 XSTRING* DIOPROTOCOLCONNEXIONSMANAGER::TargetURL_Get(int index)
 {
-	return (XSTRING*)targetURLs.Get(index);
+  return (XSTRING*)targetURLs.Get(index);
 }
 
 
 
 /*-------------------------------------------------------------------
-//	DIOPROTOCOLCONNEXIONSMANAGER::TargetURL_Delete
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			04/09/2015 12:30:27
-//	
-//	@return 			bool : 
+//  DIOPROTOCOLCONNEXIONSMANAGER::TargetURL_Delete
+*/
+/**
 //
-//  @param				index : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      04/09/2015 12:30:27
+//
+//  @return       bool :
+//
+//  @param        index :
 */
 /*-----------------------------------------------------------------*/
 bool DIOPROTOCOLCONNEXIONSMANAGER::TargetURL_Delete(int index)
 {
-	DIOURL* URL = (DIOURL*)targetURLs.Get(index);
-	if(!URL) return false;
+  DIOURL* URL = (DIOURL*)targetURLs.Get(index);
+  if(!URL) return false;
 
-	targetURLs.Delete(URL);
+  targetURLs.Delete(URL);
 
-	delete URL;
+  delete URL;
 
-	return true;
+  return true;
 }
 
 
@@ -393,618 +393,22 @@ bool DIOPROTOCOLCONNEXIONSMANAGER::TargetURL_Delete(int index)
 
 /*-------------------------------------------------------------------
 //  DIOPROTOCOLCONNEXIONSMANAGER::DeleteAllURLClientTargets
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			06/05/2011 17:20:52
-//	
-//	@return				bool : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      06/05/2011 17:20:52
+//
+//  @return       bool :
+//  */
 /*-----------------------------------------------------------------*/
 bool DIOPROTOCOLCONNEXIONSMANAGER::TargetURL_DeleteAll()
 {
-	if(targetURLs.IsEmpty())  return false;
+  if(targetURLs.IsEmpty())  return false;
 
-	targetURLs.DeleteContents();	
+  targetURLs.DeleteContents();
   targetURLs.DeleteAll();
-
-	return true;
-}
-
-
-
-/*-------------------------------------------------------------------
-//	DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_GetNAvailable
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			08/09/2015 11:20:29
-//	
-//	@return 			int : 
-//
-*/
-/*-----------------------------------------------------------------*/
-int	DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_GetNAvailable()
-{	
-	return protocolconnexions.GetSize();
-}
-
-
-
-
-/*-------------------------------------------------------------------
-//	DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_Get
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			04/09/2015 12:19:23
-//	
-//	@return 			DIOPROTOCOLCONNEXION* : 
-//
-//  @param				index : 
-*/
-/*-----------------------------------------------------------------*/
-DIOPROTOCOLCONNEXION* DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_Get(int index)
-{	
-	if(!xmutexprocotolconnexions)  return NULL;
-
-	xmutexprocotolconnexions->Lock();
-	
-	DIOPROTOCOLCONNEXION* protocolconnexion = NULL;
-	
-	if(!protocolconnexions.IsEmpty())	
-		{
-			if(index<(int)ProtocolConnexions_GetNAvailable())	 
-				{
-					protocolconnexion = protocolconnexions.Get(index);
-				}
-		}	
-		
-	xmutexprocotolconnexions->UnLock();
-	
-	return protocolconnexion;
-}
-
-
-
-
-
-/*-------------------------------------------------------------------
-//	DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_GetFirstConnected
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			15/12/2016 11:43:33
-//	
-//	@return 			DIOPROTOCOLCONNEXION* : 
-//
-*/
-/*-----------------------------------------------------------------*/
-DIOPROTOCOLCONNEXION* DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_GetFirstConnected()
-{
-	if(!xmutexprocotolconnexions)  return NULL;
-
-	xmutexprocotolconnexions->Lock();
-	
-	DIOPROTOCOLCONNEXION* protocolconnexion = NULL;
-	if(!protocolconnexions.IsEmpty())	
-		{	
-			for(int c=0; c<(int)ProtocolConnexions_GetNAvailable(); c++)
-				{
-					protocolconnexion = protocolconnexions.Get(c);
-					if(protocolconnexion)					
-						{
-							DIOPROTOCOL* protocol = protocolconnexion->GetDIOProtocol();
-							if(protocol)
-								{
-									if(protocol->IsConnected()) 
-										{
-											protocolconnexion = protocolconnexions.Get(c);
-											break;
-
-										} else protocolconnexion = NULL;																				
-							
-								} else protocolconnexion = NULL;																				
-						} 
-				}
-		}	
-		
-	xmutexprocotolconnexions->UnLock();
-	
-	return protocolconnexion;
-}
-
-
-
-
-/*-------------------------------------------------------------------
-//	DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_GetFirstOperativeProtocol
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			15/12/2016 11:01:58
-//	
-//	@return 			DIOPROTOCOL* : 
-//
-*/
-/*-----------------------------------------------------------------*/
-DIOPROTOCOLCONNEXION* DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_GetFirstOperative()
-{
-	if(!xmutexprocotolconnexions)  return NULL;
-
-	xmutexprocotolconnexions->Lock();
-	
-	DIOPROTOCOLCONNEXION* protocolconnexion = NULL;
-	if(!protocolconnexions.IsEmpty())	
-		{	
-			for(int c=0; c<(int)ProtocolConnexions_GetNAvailable(); c++)
-				{
-					protocolconnexion = protocolconnexions.Get(c);
-					if(protocolconnexion)					
-						{
-							DIOPROTOCOL* protocol = protocolconnexion->GetDIOProtocol();
-							if(protocol)
-								{
-									if(protocol->IsOperational()) 
-										{
-											protocolconnexion = protocolconnexions.Get(c);
-											break;
-
-										} else protocolconnexion = NULL;																				
-							
-								} else protocolconnexion = NULL;																				
-						} 
-				}
-		}	
-		
-	xmutexprocotolconnexions->UnLock();
-	
-	return protocolconnexion;
-}
-
-
-/*-------------------------------------------------------------------
-//	DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_GetByDIOStream
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			04/09/2015 12:22:52
-//	
-//	@return 			DIOPROTOCOLCONNEXION* : 
-//
-//  @param				diostream : 
-*/
-/*-----------------------------------------------------------------*/
-DIOPROTOCOLCONNEXION* DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_GetByDIOStream(DIOSTREAM* diostream)
-{
-	DIOPROTOCOLCONNEXION* protocolconnexion = NULL;
-
-	if(!xmutexprocotolconnexions)  return NULL;
-
-	xmutexprocotolconnexions->Lock();
-
-	if(!protocolconnexions.IsEmpty()) 
-		{			
-			for(int index=0; index< ProtocolConnexions_GetNAvailable(); index++)
-				{
-					DIOPROTOCOLCONNEXION* _protocolconnexion = (DIOPROTOCOLCONNEXION*)protocolconnexions.Get(index);
-					if(_protocolconnexion)
-						{
-							if(_protocolconnexion->GetDIOProtocol())
-								{									
-									if(_protocolconnexion->GetDIOProtocol()->GetDIOStream() == diostream) 
-										{
-											protocolconnexion = _protocolconnexion;
-											break;										
-										}
-								}
-						}
-				}
-		}
-
-	xmutexprocotolconnexions->UnLock();
-
-	return protocolconnexion;
-}
-
-
-
-
-/*-------------------------------------------------------------------
-//	DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_GetProtocol
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			04/09/2015 12:31:20
-//	
-//	@return 			DIOPROTOCOL* : 
-//
-//  @param				index : 
-*/
-/*-----------------------------------------------------------------*/
-DIOPROTOCOL* DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_GetProtocol(int index)
-{
-	DIOPROTOCOL* protocol = NULL;
-
-	if(!xmutexprocotolconnexions)  return NULL;
-
-	xmutexprocotolconnexions->Lock();
-
-	if(index<(int)ProtocolConnexions_GetNAvailable())	
-		{
-			DIOPROTOCOLCONNEXION* protocolconnexion = (DIOPROTOCOLCONNEXION*)protocolconnexions.Get(index);
-			if(protocolconnexion)  
-				{
-					if(protocolconnexion->GetDIOProtocol())
-						{
-							if(protocolconnexion->GetDIOProtocol()->IsConnected()) 
-								{
-									protocol = protocolconnexion->GetDIOProtocol();
-								}
-						}
-				}
-		}
-
-	xmutexprocotolconnexions->UnLock();
-
-	return protocol;
-}
-
-
-
-
-/*-------------------------------------------------------------------
-//	DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_GetConnected
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			07/09/2015 10:58:51
-//	
-//	@return 			int : 
-//
-*/
-/*-----------------------------------------------------------------*/
-int	DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_GetNConnected()
-{
-	if(!xmutexprocotolconnexions)  return false;
-
-	xmutexprocotolconnexions->Lock();
-
-	int nconnexions			 = 0; 
-	int ntotalconnexions = ProtocolConnexions_GetNAvailable();
-	
-	for(int index=0; index < ntotalconnexions; index++)
-		{
-			DIOPROTOCOLCONNEXION* connexion = (DIOPROTOCOLCONNEXION*)protocolconnexions.Get(index);	
-			if(connexion)
-				{
-					if(connexion->GetDIOProtocol())
-						{
-							if(connexion->GetDIOProtocol()->IsConnected()) nconnexions++;																	
-						} 
-				} 
-		}
-
-	xmutexprocotolconnexions->UnLock();
-
-	return nconnexions;
-}
-
-
-
-
-/*-------------------------------------------------------------------
-//	DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_GetNFreeToConnect
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			07/09/2015 10:58:55
-//	
-//	@return 			int : 
-//
-*/
-/*-----------------------------------------------------------------*/
-int DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_GetNFreeToConnect()
-{
-	if(!xmutexprocotolconnexions)  return 0;
-
-	xmutexprocotolconnexions->Lock();
-
-	int nconnexions			 = 0;
-	int ntotalconnexions = ProtocolConnexions_GetNAvailable();
-	
-	for(int index=0; index < ntotalconnexions; index++)
-		{
-			DIOPROTOCOLCONNEXION* connexion = (DIOPROTOCOLCONNEXION*)protocolconnexions.Get(index);
-			if(connexion)
-				{
-					if(connexion->GetDIOProtocol())
-						{
-							if(connexion->GetDIOProtocol()->IsConnecting()) nconnexions++;															
-						} 
-				} 
-		}
-
-	xmutexprocotolconnexions->UnLock();
-
-	return nconnexions;
-}
-
-
-
-
-/*-------------------------------------------------------------------
-//	DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_SendEventConnected
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			16/03/2016 22:29:27
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
-bool DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_SendEventConnected()
-{		
-	if(!xmutexprocotolconnexions)  return false;
-
-	xmutexprocotolconnexions->Lock();
-
-	int ntotalconnexions = ProtocolConnexions_GetNAvailable();
-	
-	for(int index = 0; index < ntotalconnexions; index++)
-		{
-			DIOPROTOCOLCONNEXION* connexion = (DIOPROTOCOLCONNEXION*)protocolconnexions.Get(index);
-			if(connexion)
-				{
-					if(!connexion->IsSendEventConnected())
-						{
-							if(connexion->GetDIOProtocol())
-								{
-									if(connexion->GetDIOProtocol()->IsConnected()) 
-										{											
-											bool sendeventconnected = SendEvent(DIOPROTOCOLCONNEXIONSMANAGERXEVENTTYPE_CONNECTEDCONNEXION, connexion);	
-
-											connexion->SetIsSendEventConnected(sendeventconnected);											
-										} 
-								}
-						} 
-				}
-		}
-
-	xmutexprocotolconnexions->UnLock();
-
-	return true;
-}
-
-
-
-/*-------------------------------------------------------------------
-//	DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_DeleteAllWaitConnections
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			19/06/2016 21:17:44
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
-bool DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_DeleteAllWaitConnections()
-{
-	int index = 0;
-	
-	if(!xmutexprocotolconnexions)  return false;
-
-	xmutexprocotolconnexions->Lock();
-
-	while(index < ProtocolConnexions_GetNAvailable())
-		{			
-			DIOPROTOCOLCONNEXION* protocolconnexion = (DIOPROTOCOLCONNEXION*)protocolconnexions.Get(index);
-			if(protocolconnexion)
-				{					
-					if(protocolconnexion->GetDIOProtocol())
-						{
-							if(protocolconnexion->GetDIOProtocol()->GetDIOStream())
-								{
-									if(protocolconnexion->GetDIOProtocol()->GetDIOStream()->GetConnectStatus() == DIOSTREAMSTATUS_GETTINGCONNEXION)
-										{	
-											DeleteProtocol(protocolconnexion->GetDIOProtocol());	
-											protocolconnexion->SetDIOProtocol(NULL);
-
-											protocolconnexions.Delete(protocolconnexion);					
-											delete protocolconnexion;																										
-						
-										} else index++;	 					
-
-								} else index++;	 					
-
-						} else index++;	 					
-				} 
-		}
-	
-	xmutexprocotolconnexions->UnLock();
-
-	return true;
-}
-
-
-
-/*-------------------------------------------------------------------
-//	DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_DeleteDisconnected
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			07/09/2015 10:59:00
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
-bool DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_DeleteDisconnected()
-{
-	int index = 0;
-	
-	if(!xmutexprocotolconnexions)  return false;
-
-	xmutexprocotolconnexions->Lock();
-
-	while(index < ProtocolConnexions_GetNAvailable())
-		{			
-			DIOPROTOCOLCONNEXION* protocolconnexion = (DIOPROTOCOLCONNEXION*)protocolconnexions.Get(index);
-			if(protocolconnexion)
-				{					
-					if(protocolconnexion->GetDIOProtocol())
-						{
-							if((protocolconnexion->GetDIOProtocol()->IsDisconnected())  && (!protocolconnexion->IsInUse()))
-								{	
-									SendEvent(DIOPROTOCOLCONNEXIONSMANAGERXEVENTTYPE_DISCONNECTEDCONNEXION, protocolconnexion);											
-									protocolconnexion->Disconected();	
-
-									DeleteProtocol(protocolconnexion->GetDIOProtocol());	
-									protocolconnexion->SetDIOProtocol(NULL);
-
-									protocolconnexions.Delete(protocolconnexion);					
-									delete protocolconnexion;																										
-						
-								} else index++;	 					
-
-						} else index++;	 					
-				} 
-		}
-	
-	xmutexprocotolconnexions->UnLock();
-
-	return true;
-}
-
-
-
-/*-------------------------------------------------------------------
-//	DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_Disconnect
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			11/02/2016 11:27:13
-//	
-//	@return 			bool : 
-//
-//  @param				index : 
-*/
-/*-----------------------------------------------------------------*/
-bool DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_Disconnect(int index)
-{	
-	bool status = false;
-
-	if(!xmutexprocotolconnexions)  return false;
-	
-	xmutexprocotolconnexions->Lock();
-
-	if(index<(int)ProtocolConnexions_GetNAvailable())	
-		{
-			DIOPROTOCOLCONNEXION* protocolconnexion = (DIOPROTOCOLCONNEXION*)protocolconnexions.Get(index);
-			if(protocolconnexion)
-				{					
-					if(protocolconnexion->GetDIOProtocol())
-						{		
-							if(protocolconnexion->GetDIOProtocol()->IsConnected())						  
-								{
-									SendEvent(DIOPROTOCOLCONNEXIONSMANAGERXEVENTTYPE_DISCONNECTEDCONNEXION, protocolconnexion);							
-									protocolconnexion->Disconected();						
-														
-									status = true;
-								}
-						} 	
-				}		
-		}
-
-	xmutexprocotolconnexions->UnLock();
-
-	return status;
-}
-
-
-
-/*-------------------------------------------------------------------
-//	DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_DisconnectAll
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			17/06/2016 16:05:44
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
-bool DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_DisconnectAll()
-{		
-	if(!xmutexprocotolconnexions)  return false;
-
-	xmutexprocotolconnexions->Lock();
-
-	if(!protocolconnexions.IsEmpty()) 
-		{			
-			int ntotalconnexions = ProtocolConnexions_GetNAvailable();
-
-			for(int index=0; index < ntotalconnexions; index++)
-				{									
-					DIOPROTOCOLCONNEXION* protocolconnexion = (DIOPROTOCOLCONNEXION*)protocolconnexions.Get(index);			
-					if(protocolconnexion) 
-						{
-							if(protocolconnexion->GetDIOProtocol())
-								{
-									if(protocolconnexion->GetDIOProtocol()->IsConnected())
-										{																				
-											SendEvent(DIOPROTOCOLCONNEXIONSMANAGERXEVENTTYPE_DISCONNECTEDCONNEXION, protocolconnexion);											
-											protocolconnexion->Disconected();																
-										}
-								}
-						}
-				}
-		}
-
-	xmutexprocotolconnexions->UnLock();
 
   return true;
 }
@@ -1012,53 +416,649 @@ bool DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_DisconnectAll()
 
 
 /*-------------------------------------------------------------------
-//	DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_Delete
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			11/02/2016 12:17:20
-//	
-//	@return 			bool : 
+//  DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_GetNAvailable
+*/
+/**
 //
-//  @param				index : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      08/09/2015 11:20:29
+//
+//  @return       int :
+//
+*/
+/*-----------------------------------------------------------------*/
+int DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_GetNAvailable()
+{
+  return protocolconnexions.GetSize();
+}
+
+
+
+
+/*-------------------------------------------------------------------
+//  DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_Get
+*/
+/**
+//
+//
+//
+//  @author       Abraham J. Velez
+//  @version      04/09/2015 12:19:23
+//
+//  @return       DIOPROTOCOLCONNEXION* :
+//
+//  @param        index :
+*/
+/*-----------------------------------------------------------------*/
+DIOPROTOCOLCONNEXION* DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_Get(int index)
+{
+  if(!xmutexprocotolconnexions)  return NULL;
+
+  xmutexprocotolconnexions->Lock();
+
+  DIOPROTOCOLCONNEXION* protocolconnexion = NULL;
+
+  if(!protocolconnexions.IsEmpty())
+    {
+      if(index<(int)ProtocolConnexions_GetNAvailable())
+        {
+          protocolconnexion = protocolconnexions.Get(index);
+        }
+    }
+
+  xmutexprocotolconnexions->UnLock();
+
+  return protocolconnexion;
+}
+
+
+
+
+
+/*-------------------------------------------------------------------
+//  DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_GetFirstConnected
+*/
+/**
+//
+//
+//
+//  @author       Abraham J. Velez
+//  @version      15/12/2016 11:43:33
+//
+//  @return       DIOPROTOCOLCONNEXION* :
+//
+*/
+/*-----------------------------------------------------------------*/
+DIOPROTOCOLCONNEXION* DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_GetFirstConnected()
+{
+  if(!xmutexprocotolconnexions)  return NULL;
+
+  xmutexprocotolconnexions->Lock();
+
+  DIOPROTOCOLCONNEXION* protocolconnexion = NULL;
+  if(!protocolconnexions.IsEmpty())
+    {
+      for(int c=0; c<(int)ProtocolConnexions_GetNAvailable(); c++)
+        {
+          protocolconnexion = protocolconnexions.Get(c);
+          if(protocolconnexion)
+            {
+              DIOPROTOCOL* protocol = protocolconnexion->GetDIOProtocol();
+              if(protocol)
+                {
+                  if(protocol->IsConnected())
+                    {
+                      protocolconnexion = protocolconnexions.Get(c);
+                      break;
+
+                    } else protocolconnexion = NULL;
+
+                } else protocolconnexion = NULL;
+            }
+        }
+    }
+
+  xmutexprocotolconnexions->UnLock();
+
+  return protocolconnexion;
+}
+
+
+
+
+/*-------------------------------------------------------------------
+//  DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_GetFirstOperativeProtocol
+*/
+/**
+//
+//
+//
+//  @author       Abraham J. Velez
+//  @version      15/12/2016 11:01:58
+//
+//  @return       DIOPROTOCOL* :
+//
+*/
+/*-----------------------------------------------------------------*/
+DIOPROTOCOLCONNEXION* DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_GetFirstOperative()
+{
+  if(!xmutexprocotolconnexions)  return NULL;
+
+  xmutexprocotolconnexions->Lock();
+
+  DIOPROTOCOLCONNEXION* protocolconnexion = NULL;
+  if(!protocolconnexions.IsEmpty())
+    {
+      for(int c=0; c<(int)ProtocolConnexions_GetNAvailable(); c++)
+        {
+          protocolconnexion = protocolconnexions.Get(c);
+          if(protocolconnexion)
+            {
+              DIOPROTOCOL* protocol = protocolconnexion->GetDIOProtocol();
+              if(protocol)
+                {
+                  if(protocol->IsOperational())
+                    {
+                      protocolconnexion = protocolconnexions.Get(c);
+                      break;
+
+                    } else protocolconnexion = NULL;
+
+                } else protocolconnexion = NULL;
+            }
+        }
+    }
+
+  xmutexprocotolconnexions->UnLock();
+
+  return protocolconnexion;
+}
+
+
+/*-------------------------------------------------------------------
+//  DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_GetByDIOStream
+*/
+/**
+//
+//
+//
+//  @author       Abraham J. Velez
+//  @version      04/09/2015 12:22:52
+//
+//  @return       DIOPROTOCOLCONNEXION* :
+//
+//  @param        diostream :
+*/
+/*-----------------------------------------------------------------*/
+DIOPROTOCOLCONNEXION* DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_GetByDIOStream(DIOSTREAM* diostream)
+{
+  DIOPROTOCOLCONNEXION* protocolconnexion = NULL;
+
+  if(!xmutexprocotolconnexions)  return NULL;
+
+  xmutexprocotolconnexions->Lock();
+
+  if(!protocolconnexions.IsEmpty())
+    {
+      for(int index=0; index< ProtocolConnexions_GetNAvailable(); index++)
+        {
+          DIOPROTOCOLCONNEXION* _protocolconnexion = (DIOPROTOCOLCONNEXION*)protocolconnexions.Get(index);
+          if(_protocolconnexion)
+            {
+              if(_protocolconnexion->GetDIOProtocol())
+                {
+                  if(_protocolconnexion->GetDIOProtocol()->GetDIOStream() == diostream)
+                    {
+                      protocolconnexion = _protocolconnexion;
+                      break;
+                    }
+                }
+            }
+        }
+    }
+
+  xmutexprocotolconnexions->UnLock();
+
+  return protocolconnexion;
+}
+
+
+
+
+/*-------------------------------------------------------------------
+//  DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_GetProtocol
+*/
+/**
+//
+//
+//
+//  @author       Abraham J. Velez
+//  @version      04/09/2015 12:31:20
+//
+//  @return       DIOPROTOCOL* :
+//
+//  @param        index :
+*/
+/*-----------------------------------------------------------------*/
+DIOPROTOCOL* DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_GetProtocol(int index)
+{
+  DIOPROTOCOL* protocol = NULL;
+
+  if(!xmutexprocotolconnexions)  return NULL;
+
+  xmutexprocotolconnexions->Lock();
+
+  if(index<(int)ProtocolConnexions_GetNAvailable())
+    {
+      DIOPROTOCOLCONNEXION* protocolconnexion = (DIOPROTOCOLCONNEXION*)protocolconnexions.Get(index);
+      if(protocolconnexion)
+        {
+          if(protocolconnexion->GetDIOProtocol())
+            {
+              if(protocolconnexion->GetDIOProtocol()->IsConnected())
+                {
+                  protocol = protocolconnexion->GetDIOProtocol();
+                }
+            }
+        }
+    }
+
+  xmutexprocotolconnexions->UnLock();
+
+  return protocol;
+}
+
+
+
+
+/*-------------------------------------------------------------------
+//  DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_GetConnected
+*/
+/**
+//
+//
+//
+//  @author       Abraham J. Velez
+//  @version      07/09/2015 10:58:51
+//
+//  @return       int :
+//
+*/
+/*-----------------------------------------------------------------*/
+int DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_GetNConnected()
+{
+  if(!xmutexprocotolconnexions)  return false;
+
+  xmutexprocotolconnexions->Lock();
+
+  int nconnexions      = 0;
+  int ntotalconnexions = ProtocolConnexions_GetNAvailable();
+
+  for(int index=0; index < ntotalconnexions; index++)
+    {
+      DIOPROTOCOLCONNEXION* connexion = (DIOPROTOCOLCONNEXION*)protocolconnexions.Get(index);
+      if(connexion)
+        {
+          if(connexion->GetDIOProtocol())
+            {
+              if(connexion->GetDIOProtocol()->IsConnected()) nconnexions++;
+            }
+        }
+    }
+
+  xmutexprocotolconnexions->UnLock();
+
+  return nconnexions;
+}
+
+
+
+
+/*-------------------------------------------------------------------
+//  DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_GetNFreeToConnect
+*/
+/**
+//
+//
+//
+//  @author       Abraham J. Velez
+//  @version      07/09/2015 10:58:55
+//
+//  @return       int :
+//
+*/
+/*-----------------------------------------------------------------*/
+int DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_GetNFreeToConnect()
+{
+  if(!xmutexprocotolconnexions)  return 0;
+
+  xmutexprocotolconnexions->Lock();
+
+  int nconnexions      = 0;
+  int ntotalconnexions = ProtocolConnexions_GetNAvailable();
+
+  for(int index=0; index < ntotalconnexions; index++)
+    {
+      DIOPROTOCOLCONNEXION* connexion = (DIOPROTOCOLCONNEXION*)protocolconnexions.Get(index);
+      if(connexion)
+        {
+          if(connexion->GetDIOProtocol())
+            {
+              if(connexion->GetDIOProtocol()->IsConnecting()) nconnexions++;
+            }
+        }
+    }
+
+  xmutexprocotolconnexions->UnLock();
+
+  return nconnexions;
+}
+
+
+
+
+/*-------------------------------------------------------------------
+//  DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_SendEventConnected
+*/
+/**
+//
+//
+//
+//  @author       Abraham J. Velez
+//  @version      16/03/2016 22:29:27
+//
+//  @return       bool :
+//
+*/
+/*-----------------------------------------------------------------*/
+bool DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_SendEventConnected()
+{
+  if(!xmutexprocotolconnexions)  return false;
+
+  xmutexprocotolconnexions->Lock();
+
+  int ntotalconnexions = ProtocolConnexions_GetNAvailable();
+
+  for(int index = 0; index < ntotalconnexions; index++)
+    {
+      DIOPROTOCOLCONNEXION* connexion = (DIOPROTOCOLCONNEXION*)protocolconnexions.Get(index);
+      if(connexion)
+        {
+          if(!connexion->IsSendEventConnected())
+            {
+              if(connexion->GetDIOProtocol())
+                {
+                  if(connexion->GetDIOProtocol()->IsConnected())
+                    {
+                      bool sendeventconnected = SendEvent(DIOPROTOCOLCONNEXIONSMANAGERXEVENTTYPE_CONNECTEDCONNEXION, connexion);
+
+                      connexion->SetIsSendEventConnected(sendeventconnected);
+                    }
+                }
+            }
+        }
+    }
+
+  xmutexprocotolconnexions->UnLock();
+
+  return true;
+}
+
+
+
+/*-------------------------------------------------------------------
+//  DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_DeleteAllWaitConnections
+*/
+/**
+//
+//
+//
+//  @author       Abraham J. Velez
+//  @version      19/06/2016 21:17:44
+//
+//  @return       bool :
+//
+*/
+/*-----------------------------------------------------------------*/
+bool DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_DeleteAllWaitConnections()
+{
+  int index = 0;
+
+  if(!xmutexprocotolconnexions)  return false;
+
+  xmutexprocotolconnexions->Lock();
+
+  while(index < ProtocolConnexions_GetNAvailable())
+    {
+      DIOPROTOCOLCONNEXION* protocolconnexion = (DIOPROTOCOLCONNEXION*)protocolconnexions.Get(index);
+      if(protocolconnexion)
+        {
+          if(protocolconnexion->GetDIOProtocol())
+            {
+              if(protocolconnexion->GetDIOProtocol()->GetDIOStream())
+                {
+                  if(protocolconnexion->GetDIOProtocol()->GetDIOStream()->GetConnectStatus() == DIOSTREAMSTATUS_GETTINGCONNEXION)
+                    {
+                      DeleteProtocol(protocolconnexion->GetDIOProtocol());
+                      protocolconnexion->SetDIOProtocol(NULL);
+
+                      protocolconnexions.Delete(protocolconnexion);
+                      delete protocolconnexion;
+
+                    } else index++;
+
+                } else index++;
+
+            } else index++;
+        }
+    }
+
+  xmutexprocotolconnexions->UnLock();
+
+  return true;
+}
+
+
+
+/*-------------------------------------------------------------------
+//  DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_DeleteDisconnected
+*/
+/**
+//
+//
+//
+//  @author       Abraham J. Velez
+//  @version      07/09/2015 10:59:00
+//
+//  @return       bool :
+//
+*/
+/*-----------------------------------------------------------------*/
+bool DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_DeleteDisconnected()
+{
+  int index = 0;
+
+  if(!xmutexprocotolconnexions)  return false;
+
+  xmutexprocotolconnexions->Lock();
+
+  while(index < ProtocolConnexions_GetNAvailable())
+    {
+      DIOPROTOCOLCONNEXION* protocolconnexion = (DIOPROTOCOLCONNEXION*)protocolconnexions.Get(index);
+      if(protocolconnexion)
+        {
+          if(protocolconnexion->GetDIOProtocol())
+            {
+              if((protocolconnexion->GetDIOProtocol()->IsDisconnected())  && (!protocolconnexion->IsInUse()))
+                {
+                  SendEvent(DIOPROTOCOLCONNEXIONSMANAGERXEVENTTYPE_DISCONNECTEDCONNEXION, protocolconnexion);
+                  protocolconnexion->Disconected();
+
+                  DeleteProtocol(protocolconnexion->GetDIOProtocol());
+                  protocolconnexion->SetDIOProtocol(NULL);
+
+                  protocolconnexions.Delete(protocolconnexion);
+                  delete protocolconnexion;
+
+                } else index++;
+
+            } else index++;
+        }
+    }
+
+  xmutexprocotolconnexions->UnLock();
+
+  return true;
+}
+
+
+
+/*-------------------------------------------------------------------
+//  DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_Disconnect
+*/
+/**
+//
+//
+//
+//  @author       Abraham J. Velez
+//  @version      11/02/2016 11:27:13
+//
+//  @return       bool :
+//
+//  @param        index :
+*/
+/*-----------------------------------------------------------------*/
+bool DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_Disconnect(int index)
+{
+  bool status = false;
+
+  if(!xmutexprocotolconnexions)  return false;
+
+  xmutexprocotolconnexions->Lock();
+
+  if(index<(int)ProtocolConnexions_GetNAvailable())
+    {
+      DIOPROTOCOLCONNEXION* protocolconnexion = (DIOPROTOCOLCONNEXION*)protocolconnexions.Get(index);
+      if(protocolconnexion)
+        {
+          if(protocolconnexion->GetDIOProtocol())
+            {
+              if(protocolconnexion->GetDIOProtocol()->IsConnected())
+                {
+                  SendEvent(DIOPROTOCOLCONNEXIONSMANAGERXEVENTTYPE_DISCONNECTEDCONNEXION, protocolconnexion);
+                  protocolconnexion->Disconected();
+
+                  status = true;
+                }
+            }
+        }
+    }
+
+  xmutexprocotolconnexions->UnLock();
+
+  return status;
+}
+
+
+
+/*-------------------------------------------------------------------
+//  DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_DisconnectAll
+*/
+/**
+//
+//
+//
+//  @author       Abraham J. Velez
+//  @version      17/06/2016 16:05:44
+//
+//  @return       bool :
+//
+*/
+/*-----------------------------------------------------------------*/
+bool DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_DisconnectAll()
+{
+  if(!xmutexprocotolconnexions)  return false;
+
+  xmutexprocotolconnexions->Lock();
+
+  if(!protocolconnexions.IsEmpty())
+    {
+      int ntotalconnexions = ProtocolConnexions_GetNAvailable();
+
+      for(int index=0; index < ntotalconnexions; index++)
+        {
+          DIOPROTOCOLCONNEXION* protocolconnexion = (DIOPROTOCOLCONNEXION*)protocolconnexions.Get(index);
+          if(protocolconnexion)
+            {
+              if(protocolconnexion->GetDIOProtocol())
+                {
+                  if(protocolconnexion->GetDIOProtocol()->IsConnected())
+                    {
+                      SendEvent(DIOPROTOCOLCONNEXIONSMANAGERXEVENTTYPE_DISCONNECTEDCONNEXION, protocolconnexion);
+                      protocolconnexion->Disconected();
+                    }
+                }
+            }
+        }
+    }
+
+  xmutexprocotolconnexions->UnLock();
+
+  return true;
+}
+
+
+
+/*-------------------------------------------------------------------
+//  DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_Delete
+*/
+/**
+//
+//
+//
+//  @author       Abraham J. Velez
+//  @version      11/02/2016 12:17:20
+//
+//  @return       bool :
+//
+//  @param        index :
 */
 /*-----------------------------------------------------------------*/
 bool DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_Delete(int index)
 {
-	bool status = false;
+  bool status = false;
 
-	if(!xmutexprocotolconnexions)  return false;
-	
-	xmutexprocotolconnexions->Lock();
+  if(!xmutexprocotolconnexions)  return false;
 
-	if(index<(int)ProtocolConnexions_GetNAvailable())	
-		{
-			DIOPROTOCOLCONNEXION* protocolconnexion = (DIOPROTOCOLCONNEXION*)protocolconnexions.Get(index);
-			if(protocolconnexion)
-				{					
-					if(protocolconnexion->GetDIOProtocol()) 
-						{
-							if(!protocolconnexion->IsInUse())					
-								{						
-									DIOPROTOCOL* protocol = protocolconnexion->GetDIOProtocol();
-									
-									protocolconnexions.Delete(protocolconnexion);					
-									delete protocolconnexion;			
+  xmutexprocotolconnexions->Lock();
 
-									DeleteProtocol(protocol);																							
+  if(index<(int)ProtocolConnexions_GetNAvailable())
+    {
+      DIOPROTOCOLCONNEXION* protocolconnexion = (DIOPROTOCOLCONNEXION*)protocolconnexions.Get(index);
+      if(protocolconnexion)
+        {
+          if(protocolconnexion->GetDIOProtocol())
+            {
+              if(!protocolconnexion->IsInUse())
+                {
+                  DIOPROTOCOL* protocol = protocolconnexion->GetDIOProtocol();
 
-									status = true;
-								}			
-						}
-				}
-		}
-	
-	xmutexprocotolconnexions->UnLock();
+                  protocolconnexions.Delete(protocolconnexion);
+                  delete protocolconnexion;
 
-	return status;
+                  DeleteProtocol(protocol);
+
+                  status = true;
+                }
+            }
+        }
+    }
+
+  xmutexprocotolconnexions->UnLock();
+
+  return status;
 }
 
 
@@ -1066,45 +1066,45 @@ bool DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_Delete(int index)
 
 /*-------------------------------------------------------------------
 //  DIOPROTOCOLCONNEXIONSMANAGER::DeleteAllConnexions
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			31/01/2012 18:58:12
-//	
-//	@return				bool : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      31/01/2012 18:58:12
+//
+//  @return       bool :
+//  */
 /*-----------------------------------------------------------------*/
 bool DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_DeleteAll()
-{	  			
-	if(!xmutexprocotolconnexions)  return false;
+{
+  if(!xmutexprocotolconnexions)  return false;
 
-	xmutexprocotolconnexions->Lock();
-	
-	int index = 0;
+  xmutexprocotolconnexions->Lock();
 
-	while(index < ProtocolConnexions_GetNAvailable())
-		{			
-			DIOPROTOCOLCONNEXION* protocolconnexion = (DIOPROTOCOLCONNEXION*)protocolconnexions.Get(index);
-			if(protocolconnexion)
-				{			
-					if((!protocolconnexion->IsInUse()))
-						{
-							DIOPROTOCOL* protocol = protocolconnexion->GetDIOProtocol();
-									
-							protocolconnexions.Delete(protocolconnexion);					
-							delete protocolconnexion;			
+  int index = 0;
 
-							DeleteProtocol(protocol);																																					
+  while(index < ProtocolConnexions_GetNAvailable())
+    {
+      DIOPROTOCOLCONNEXION* protocolconnexion = (DIOPROTOCOLCONNEXION*)protocolconnexions.Get(index);
+      if(protocolconnexion)
+        {
+          if((!protocolconnexion->IsInUse()))
+            {
+              DIOPROTOCOL* protocol = protocolconnexion->GetDIOProtocol();
 
-						} else index++;	 					
+              protocolconnexions.Delete(protocolconnexion);
+              delete protocolconnexion;
 
-				} else index++;	 								
-		}
+              DeleteProtocol(protocol);
 
-	xmutexprocotolconnexions->UnLock();
-	
+            } else index++;
+
+        } else index++;
+    }
+
+  xmutexprocotolconnexions->UnLock();
+
   return true;
 }
 
@@ -1112,109 +1112,109 @@ bool DIOPROTOCOLCONNEXIONSMANAGER::ProtocolConnexions_DeleteAll()
 
 
 /*-------------------------------------------------------------------
-//	DIOPROTOCOLCONNEXIONSMANAGER::WaitToAnyConnexionIsConnected
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			24/09/2015 17:10:46
-//	
-//	@return 			bool : 
+//  DIOPROTOCOLCONNEXIONSMANAGER::WaitToAnyConnexionIsConnected
+*/
+/**
 //
-//  @param				timeout : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      24/09/2015 17:10:46
+//
+//  @return       bool :
+//
+//  @param        timeout :
 */
 /*-----------------------------------------------------------------*/
 bool DIOPROTOCOLCONNEXIONSMANAGER::WaitToAnyConnexionIsConnected(int timeout)
-{			
-	int  index  = 0;
-	bool status = true;
+{
+  int  index  = 0;
+  bool status = true;
 
-	xtimerout->Reset();
+  xtimerout->Reset();
 
-	while(1)
-		{
-			if(ProtocolConnexions_GetNConnected())
-				{
-					status = false;
-					break;				
-				}
+  while(1)
+    {
+      if(ProtocolConnexions_GetNConnected())
+        {
+          status = false;
+          break;
+        }
 
-			xsleep->MilliSeconds(10);
-					
-			if(xtimerout->GetMeasureSeconds() >= (XDWORD)timeout) 
-				{
-					status = false;
-					break;
-				}											
-		}
-	
-	return status;
+      xsleep->MilliSeconds(10);
+
+      if(xtimerout->GetMeasureSeconds() >= (XDWORD)timeout)
+        {
+          status = false;
+          break;
+        }
+    }
+
+  return status;
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	DIOPROTOCOLCONNEXIONSMANAGER::WaitToAllConnexionsCanBeDeleted
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			16/03/2016 17:07:09
-//	
-//	@return 			bool : 
+//  DIOPROTOCOLCONNEXIONSMANAGER::WaitToAllConnexionsCanBeDeleted
+*/
+/**
 //
-//  @param				timeout : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      16/03/2016 17:07:09
+//
+//  @return       bool :
+//
+//  @param        timeout :
 */
 /*-----------------------------------------------------------------*/
 bool DIOPROTOCOLCONNEXIONSMANAGER::WaitToAllConnexionsCanBeDeleted(int timeout)
-{		
-	if(!xmutexprocotolconnexions)  return false;
+{
+  if(!xmutexprocotolconnexions)  return false;
 
-	xmutexprocotolconnexions->Lock();
+  xmutexprocotolconnexions->Lock();
 
-	int  index  = 0;
-	bool status = true;
+  int  index  = 0;
+  bool status = true;
 
-	if(timeout) xtimerout->Reset();
+  if(timeout) xtimerout->Reset();
 
-	while(1)
-		{
-			bool candelete = true;
+  while(1)
+    {
+      bool candelete = true;
 
-			for(int index=0; index< ProtocolConnexions_GetNAvailable(); index++)
-				{												
-					DIOPROTOCOLCONNEXION* protocolconnexion = (DIOPROTOCOLCONNEXION*)protocolconnexions.Get(index);	
-					if(protocolconnexion) 
-						{
-							if(protocolconnexion->IsInUse()) candelete = false;
-						} 
-				}
+      for(int index=0; index< ProtocolConnexions_GetNAvailable(); index++)
+        {
+          DIOPROTOCOLCONNEXION* protocolconnexion = (DIOPROTOCOLCONNEXION*)protocolconnexions.Get(index);
+          if(protocolconnexion)
+            {
+              if(protocolconnexion->IsInUse()) candelete = false;
+            }
+        }
 
-			if(candelete) break;
+      if(candelete) break;
 
-			xsleep->MilliSeconds(10);
-					
-			if(timeout)
-				{
-					if(xtimerout->GetMeasureSeconds() > 0)
-						{
-							if(xtimerout->GetMeasureSeconds() >= (XDWORD)timeout) 
-								{
-									status = false;
-									break;
-								}											
-						}
-				}
-		}
+      xsleep->MilliSeconds(10);
 
-	xmutexprocotolconnexions->UnLock();
+      if(timeout)
+        {
+          if(xtimerout->GetMeasureSeconds() > 0)
+            {
+              if(xtimerout->GetMeasureSeconds() >= (XDWORD)timeout)
+                {
+                  status = false;
+                  break;
+                }
+            }
+        }
+    }
 
-	return status;
+  xmutexprocotolconnexions->UnLock();
+
+  return status;
 }
 
 
@@ -1222,273 +1222,273 @@ bool DIOPROTOCOLCONNEXIONSMANAGER::WaitToAllConnexionsCanBeDeleted(int timeout)
 
 /*-------------------------------------------------------------------
 //  DIOPROTOCOLCONNEXIONSMANAGER::SendEvent
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			13/02/2012 17:31:42
-//	
-//	@return				bool : 
-//	@param				type : 
-//  @param				protocolconnexion : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      13/02/2012 17:31:42
+//
+//  @return       bool :
+//  @param        type :
+//  @param        protocolconnexion :
 */
 /*-----------------------------------------------------------------*/
 bool DIOPROTOCOLCONNEXIONSMANAGER::SendEvent(DIOPROTOCOLCONNEXIONSMANAGERXEVENTTYPE type, DIOPROTOCOLCONNEXION* protocolconnexion)
-{	
-	if(!protocolconnexion) return false;
+{
+  if(!protocolconnexion) return false;
 
-	DIOPROTOCOLCONNEXIONSMANAGERXEVENT xevent(this,type);							
-	
-	xevent.SetDIOStreamEnumServers(diostreamenumservers);	
-	xevent.SetDIOStreamConfig(protocolconnexion->GetDIOStreamConfig());	
-	xevent.SetDIOProtocol(protocolconnexion->GetDIOProtocol());
-	xevent.SetProtocolConnexion(protocolconnexion);
-	xevent.SetProtocolConnexionsManager(this);
-	
-	return PostEvent(&xevent);
+  DIOPROTOCOLCONNEXIONSMANAGERXEVENT xevent(this,type);
+
+  xevent.SetDIOStreamEnumServers(diostreamenumservers);
+  xevent.SetDIOStreamConfig(protocolconnexion->GetDIOStreamConfig());
+  xevent.SetDIOProtocol(protocolconnexion->GetDIOProtocol());
+  xevent.SetProtocolConnexion(protocolconnexion);
+  xevent.SetProtocolConnexionsManager(this);
+
+  return PostEvent(&xevent);
 }
 
 
 
 /*-------------------------------------------------------------------
-//	DIOPROTOCOLCONNEXIONSMANAGER::ManageProtocolConnexionsServer
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			04/09/2015 13:01:04
-//	
+//  DIOPROTOCOLCONNEXIONSMANAGER::ManageProtocolConnexionsServer
+*/
+/**
+//
+//
+//
+//  @author       Abraham J. Velez
+//  @version      04/09/2015 13:01:04
+//
 */
 /*-----------------------------------------------------------------*/
 void DIOPROTOCOLCONNEXIONSMANAGER::ManageProtocolConnexionsServer()
 {
-	if(!xthreadconnexions)							return;
-	if(!xthreadconnexions->IsRunning())	return;
+  if(!xthreadconnexions)              return;
+  if(!xthreadconnexions->IsRunning()) return;
 
-	xtimerconnexions->Reset();
+  xtimerconnexions->Reset();
 
-	ProtocolConnexions_DeleteDisconnected();
+  ProtocolConnexions_DeleteDisconnected();
 
-	if(protocolconnexionsnlimit != DIOPROTOCOLCONNEXIONS_UNLIMITEDNCONNEXIONS)
-		{
-			if(!protocolconnexionsnlimit) return;
-			
-			if(ProtocolConnexions_GetNConnected() >= protocolconnexionsnlimit) 
-				{
-					return;
-				}																	
-		}	
+  if(protocolconnexionsnlimit != DIOPROTOCOLCONNEXIONS_UNLIMITEDNCONNEXIONS)
+    {
+      if(!protocolconnexionsnlimit) return;
 
-	ProtocolConnexions_SendEventConnected();
+      if(ProtocolConnexions_GetNConnected() >= protocolconnexionsnlimit)
+        {
+          return;
+        }
+    }
 
-	if(!ProtocolConnexions_GetNFreeToConnect()) 
-		{
-			DIOPROTOCOLCONNEXION* protocolconnexion = new DIOPROTOCOLCONNEXION(diostreamcfg);
-			if(protocolconnexion)
-				{
-					DIOPROTOCOL* protocol = CreateProtocol();
-					if(protocol) 
-						{
-							protocolconnexion->SetDIOProtocol(protocol);
+  ProtocolConnexions_SendEventConnected();
 
-							if(protocolconnexion->Connect()) 
-								{
-									if(xmutexprocotolconnexions) xmutexprocotolconnexions->Lock();
-							
-									protocol->SetConnexion(protocolconnexion);
+  if(!ProtocolConnexions_GetNFreeToConnect())
+    {
+      DIOPROTOCOLCONNEXION* protocolconnexion = new DIOPROTOCOLCONNEXION(diostreamcfg);
+      if(protocolconnexion)
+        {
+          DIOPROTOCOL* protocol = CreateProtocol();
+          if(protocol)
+            {
+              protocolconnexion->SetDIOProtocol(protocol);
 
-									protocolconnexions.Add(protocolconnexion);								
+              if(protocolconnexion->Connect())
+                {
+                  if(xmutexprocotolconnexions) xmutexprocotolconnexions->Lock();
 
-									if(xmutexprocotolconnexions) xmutexprocotolconnexions->UnLock();						
-								}
-						}
-					 else
-						{
-							DeleteProtocol(protocol);
-							protocol = NULL;
-		
-							delete protocolconnexion;
-							protocolconnexion = NULL;
-						}
-				}
-			 else
-				{
-					delete protocolconnexion;
-					protocolconnexion = NULL;
-	 			}
-		}
+                  protocol->SetConnexion(protocolconnexion);
+
+                  protocolconnexions.Add(protocolconnexion);
+
+                  if(xmutexprocotolconnexions) xmutexprocotolconnexions->UnLock();
+                }
+            }
+           else
+            {
+              DeleteProtocol(protocol);
+              protocol = NULL;
+
+              delete protocolconnexion;
+              protocolconnexion = NULL;
+            }
+        }
+       else
+        {
+          delete protocolconnexion;
+          protocolconnexion = NULL;
+        }
+    }
 }
 
 
 
 /*-------------------------------------------------------------------
-//	DIOPROTOCOLCONNEXIONSMANAGER::ManageProtocolConnexionsClient
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			04/09/2015 13:00:43
-//	
+//  DIOPROTOCOLCONNEXIONSMANAGER::ManageProtocolConnexionsClient
+*/
+/**
+//
+//
+//
+//  @author       Abraham J. Velez
+//  @version      04/09/2015 13:00:43
+//
 */
 /*-----------------------------------------------------------------*/
 void DIOPROTOCOLCONNEXIONSMANAGER::ManageProtocolConnexionsClient()
-{	
-	if(!xmutexprocotolconnexions)				return;
-	if(!xthreadconnexions)							return;
-	if(!xthreadconnexions->IsRunning())	return;
-	if(!xtimerconnexions)								return;
-	if(!xtimerclienttry)								return;
-		
-	ProtocolConnexions_DeleteDisconnected();
+{
+  if(!xmutexprocotolconnexions)       return;
+  if(!xthreadconnexions)              return;
+  if(!xthreadconnexions->IsRunning()) return;
+  if(!xtimerconnexions)               return;
+  if(!xtimerclienttry)                return;
 
-	if(protocolconnexionsnlimit != DIOPROTOCOLCONNEXIONS_UNLIMITEDNCONNEXIONS)
-		{
-			if(!protocolconnexionsnlimit) return;
-			
-			if(ProtocolConnexions_GetNConnected() >= protocolconnexionsnlimit) 
-				{
-					return;
-				}																	
-		}
+  ProtocolConnexions_DeleteDisconnected();
+
+  if(protocolconnexionsnlimit != DIOPROTOCOLCONNEXIONS_UNLIMITEDNCONNEXIONS)
+    {
+      if(!protocolconnexionsnlimit) return;
+
+      if(ProtocolConnexions_GetNConnected() >= protocolconnexionsnlimit)
+        {
+          return;
+        }
+    }
 
 
-	if(xtimerclienttry->GetMeasureSeconds() <= DIOPROTOCOLCONNEXIONS_DEFAULTIMETRYCONNEXIONS) return;
+  if(xtimerclienttry->GetMeasureSeconds() <= DIOPROTOCOLCONNEXIONS_DEFAULTIMETRYCONNEXIONS) return;
 
-	//DEBUG_PRINT(__L("---------------------------------------------------------------"));
+  //DEBUG_PRINT(__L("---------------------------------------------------------------"));
 
-	for(int c=0;c<(int)targetURLs.GetSize();c++)
-		{	
-			if(!xthreadconnexions->IsRunning())	break;
-						
-			DIOURL* URLclient = (DIOURL*)targetURLs.Get(c); 
-			if(URLclient)
-				{
-					bool haveservervalid = false;
+  for(int c=0;c<(int)targetURLs.GetSize();c++)
+    {
+      if(!xthreadconnexions->IsRunning()) break;
 
-					switch(diostreamcfg->GetType())
-						{
-							case DIOSTREAMTYPE_UNKNOWN		: break;
-							case DIOSTREAMTYPE_UART				: break;
-							case DIOSTREAMTYPE_USB				: break;
-							case DIOSTREAMTYPE_BLUETOOTH	: break;
+      DIOURL* URLclient = (DIOURL*)targetURLs.Get(c);
+      if(URLclient)
+        {
+          bool haveservervalid = false;
 
-							case DIOSTREAMTYPE_TCPIP			: { DIOSTREAMTCPIPCONFIG* scfg = (DIOSTREAMTCPIPCONFIG*)diostreamcfg;
-																								XSTRING							  address;
-																								if(scfg) 
-																									{
-																										if(URLclient->IsEmpty())																													
-																											{																																																				
-																												diostreamenumservers->Search();
-																			
-																												while(diostreamenumservers->IsSearching())
-																													{																														
-																														xsleep->MilliSeconds(1);
-																													}	
+          switch(diostreamcfg->GetType())
+            {
+              case DIOSTREAMTYPE_UNKNOWN    : break;
+              case DIOSTREAMTYPE_UART       : break;
+              case DIOSTREAMTYPE_USB        : break;
+              case DIOSTREAMTYPE_BLUETOOTH  : break;
 
-																												diostreamenumservers->StopSearch(true);
+              case DIOSTREAMTYPE_TCPIP      : { DIOSTREAMTCPIPCONFIG* scfg = (DIOSTREAMTCPIPCONFIG*)diostreamcfg;
+                                                XSTRING               address;
+                                                if(scfg)
+                                                  {
+                                                    if(URLclient->IsEmpty())
+                                                      {
+                                                        diostreamenumservers->Search();
 
-																												if(diostreamenumservers->AreDevicesAvailable())
-																													{
-																														DIOSTREAMDEVICEIP* device = (DIOSTREAMDEVICEIP*)diostreamenumservers->GetDevices()->Get(0);
-																														if(device) device->GetIP()->GetXString(address);																																																																								
-																													} 
+                                                        while(diostreamenumservers->IsSearching())
+                                                          {
+                                                            xsleep->MilliSeconds(1);
+                                                          }
 
-																											} else address = URLclient->Get();
-																										
-																										if(!address.IsEmpty())
-																											{
-																												DIOURL* url= diofactory->CreateURL();
-																												if(url)
-																													{
-																														(*url) = address.Get();
+                                                        diostreamenumservers->StopSearch(true);
 
-																														url->ResolveURL();																																																																														
-																														scfg->GetRemoteURL()->Set(address);																															
-																														diofactory->DeleteURL(url);
+                                                        if(diostreamenumservers->AreDevicesAvailable())
+                                                          {
+                                                            DIOSTREAMDEVICEIP* device = (DIOSTREAMDEVICEIP*)diostreamenumservers->GetDevices()->Get(0);
+                                                            if(device) device->GetIP()->GetXString(address);
+                                                          }
 
-																														haveservervalid = true;
-																													}
-																											}
-																									}																								
+                                                      } else address = URLclient->Get();
 
-																								break;
-																							}
-																		
-						}	
-							
-					if(haveservervalid)
-						{
-							DIOPROTOCOLCONNEXION* protocolconnexion = new DIOPROTOCOLCONNEXION(diostreamcfg);
-							if(protocolconnexion) 
-								{
-									DIOPROTOCOL* protocol = CreateProtocol();
-									if(protocol) 
-										{
-											protocolconnexion->SetDIOProtocol(protocol);
+                                                    if(!address.IsEmpty())
+                                                      {
+                                                        DIOURL* url= diofactory->CreateURL();
+                                                        if(url)
+                                                          {
+                                                            (*url) = address.Get();
 
-											if(protocolconnexion->Connect())
-												{
-													xtimerconnexions->Reset();
+                                                            url->ResolveURL();
+                                                            scfg->GetRemoteURL()->Set(address);
+                                                            diofactory->DeleteURL(url);
 
-													DIOSTREAMTCPIPCONFIG* scfg = (DIOSTREAMTCPIPCONFIG*)diostreamcfg;
-																														
-													while(1)
-														{																																	
-															if(protocolconnexion->GetDIOProtocol()->IsConnected())
-																{
-																	if(xmutexprocotolconnexions) xmutexprocotolconnexions->Lock();															
+                                                            haveservervalid = true;
+                                                          }
+                                                      }
+                                                  }
 
-																	protocol->SetConnexion(protocolconnexion);
-																	protocolconnexions.Add(protocolconnexion);
-													
-																	if(xmutexprocotolconnexions) xmutexprocotolconnexions->UnLock();			
-																																													
-																	SendEvent(DIOPROTOCOLCONNEXIONSMANAGERXEVENTTYPE_CONNECTEDCONNEXION, protocolconnexion);
-																
-																	break;																										
-																} 
-															 
-															if((xtimerconnexions->GetMeasureSeconds()>=5) || (!xthreadconnexions->IsRunning())) 
-																{																																																																					
-																	DeleteProtocol(protocol);
-																	protocol = NULL;
+                                                break;
+                                              }
 
-																	delete protocolconnexion;
-																	protocolconnexion = NULL;
-																	
-																	break;																		
-																}	
+            }
 
-															xsleep->MilliSeconds(50);
-														}
-									
-													XDEBUG_PRINTCOLOR(1, __L("Trying to connect to %s [%s]: %s (%d) seconds."),  URLclient->Get(), scfg->GetRemoteURL()->Get(), protocolconnexion?__L("Connected!."):__L("Not Connected!."), xtimerconnexions->GetMeasureSeconds());
-												}
-											 else
-												{
-													DeleteProtocol(protocol);
-													protocol = NULL;
-		
-													delete protocolconnexion;
-													protocolconnexion = NULL;
-												}
-										}	
-									 else
-										{
-											delete protocolconnexion;
-											protocolconnexion = NULL;
-										}
-								}
-						}
-				}
-		}
+          if(haveservervalid)
+            {
+              DIOPROTOCOLCONNEXION* protocolconnexion = new DIOPROTOCOLCONNEXION(diostreamcfg);
+              if(protocolconnexion)
+                {
+                  DIOPROTOCOL* protocol = CreateProtocol();
+                  if(protocol)
+                    {
+                      protocolconnexion->SetDIOProtocol(protocol);
 
-	xtimerclienttry->Reset();
+                      if(protocolconnexion->Connect())
+                        {
+                          xtimerconnexions->Reset();
+
+                          DIOSTREAMTCPIPCONFIG* scfg = (DIOSTREAMTCPIPCONFIG*)diostreamcfg;
+
+                          while(1)
+                            {
+                              if(protocolconnexion->GetDIOProtocol()->IsConnected())
+                                {
+                                  if(xmutexprocotolconnexions) xmutexprocotolconnexions->Lock();
+
+                                  protocol->SetConnexion(protocolconnexion);
+                                  protocolconnexions.Add(protocolconnexion);
+
+                                  if(xmutexprocotolconnexions) xmutexprocotolconnexions->UnLock();
+
+                                  SendEvent(DIOPROTOCOLCONNEXIONSMANAGERXEVENTTYPE_CONNECTEDCONNEXION, protocolconnexion);
+
+                                  break;
+                                }
+
+                              if((xtimerconnexions->GetMeasureSeconds()>=5) || (!xthreadconnexions->IsRunning()))
+                                {
+                                  DeleteProtocol(protocol);
+                                  protocol = NULL;
+
+                                  delete protocolconnexion;
+                                  protocolconnexion = NULL;
+
+                                  break;
+                                }
+
+                              xsleep->MilliSeconds(50);
+                            }
+
+                          XDEBUG_PRINTCOLOR(1, __L("Trying to connect to %s [%s]: %s (%d) seconds."),  URLclient->Get(), scfg->GetRemoteURL()->Get(), protocolconnexion?__L("Connected!."):__L("Not Connected!."), xtimerconnexions->GetMeasureSeconds());
+                        }
+                       else
+                        {
+                          DeleteProtocol(protocol);
+                          protocol = NULL;
+
+                          delete protocolconnexion;
+                          protocolconnexion = NULL;
+                        }
+                    }
+                   else
+                    {
+                      delete protocolconnexion;
+                      protocolconnexion = NULL;
+                    }
+                }
+            }
+        }
+    }
+
+  xtimerclienttry->Reset();
 
 }
 
@@ -1496,113 +1496,113 @@ void DIOPROTOCOLCONNEXIONSMANAGER::ManageProtocolConnexionsClient()
 
 
 /*-------------------------------------------------------------------
-//	DIOPROTOCOLCONNEXIONSMANAGER::ThreadProtocolConnexions
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			04/09/2015 13:02:57
-//	
-//  @param				param : 
+//  DIOPROTOCOLCONNEXIONSMANAGER::ThreadProtocolConnexions
+*/
+/**
+//
+//
+//
+//  @author       Abraham J. Velez
+//  @version      04/09/2015 13:02:57
+//
+//  @param        param :
 */
 /*-----------------------------------------------------------------*/
 void DIOPROTOCOLCONNEXIONSMANAGER::ThreadProtocolConnexions(void* param)
 {
-	DIOPROTOCOLCONNEXIONSMANAGER* protocolconnexions = (DIOPROTOCOLCONNEXIONSMANAGER*)param;
-	if(!protocolconnexions) return;	
-				
-	if(protocolconnexions->isserver)
-		{				
-			protocolconnexions->ManageProtocolConnexionsServer();		
-		}
-	 else 
-		{
-			protocolconnexions->ManageProtocolConnexionsClient();
-		}
+  DIOPROTOCOLCONNEXIONSMANAGER* protocolconnexions = (DIOPROTOCOLCONNEXIONSMANAGER*)param;
+  if(!protocolconnexions) return;
 
-	int c=0;
-	while(c < protocolconnexions->ProtocolConnexions_GetNAvailable())
-	  {					
-			DIOPROTOCOLCONNEXION* protocolconnexion = (DIOPROTOCOLCONNEXION*)protocolconnexions->protocolconnexions.Get(c);				
-			if(protocolconnexion)
-				{					
-					DIOPROTOCOL* protocol = protocolconnexion->GetDIOProtocol();
-					if(protocol)
-						{
-							if(protocol->IsConnected())
-								{
-									if(!protocol->IsInitialized())
-										{		
-											if(protocolconnexions->isserver)
-												{													
-													protocolconnexion->SetInUse(true, DIOPROTOCOLCONNEXIONSINUSEID_INIPROTOCOL); 
+  if(protocolconnexions->isserver)
+    {
+      protocolconnexions->ManageProtocolConnexionsServer();
+    }
+   else
+    {
+      protocolconnexions->ManageProtocolConnexionsClient();
+    }
 
-													protocol->GetDIOStream()->GetXTimerNotActivity()->Reset();
-													protocolconnexions->SendEvent(DIOPROTOCOLCONNEXIONSMANAGERXEVENTTYPE_INITPROTOCOL, protocolconnexion);																																													
-													if(protocol->IsInitialized()) protocol->CMD_SendIsInitServerProtocol(true);		
+  int c=0;
+  while(c < protocolconnexions->ProtocolConnexions_GetNAvailable())
+    {
+      DIOPROTOCOLCONNEXION* protocolconnexion = (DIOPROTOCOLCONNEXION*)protocolconnexions->protocolconnexions.Get(c);
+      if(protocolconnexion)
+        {
+          DIOPROTOCOL* protocol = protocolconnexion->GetDIOProtocol();
+          if(protocol)
+            {
+              if(protocol->IsConnected())
+                {
+                  if(!protocol->IsInitialized())
+                    {
+                      if(protocolconnexions->isserver)
+                        {
+                          protocolconnexion->SetInUse(true, DIOPROTOCOLCONNEXIONSINUSEID_INIPROTOCOL);
 
-													protocolconnexion->SetInUse(false, DIOPROTOCOLCONNEXIONSINUSEID_INIPROTOCOL); 
-												} 
-											 else
-												{
-													XTIMER* timerout = xfactory->CreateTimer();													
-													while(1)
-														{
-															if(protocolconnexion->GetDIOProtocol()->IsDisconnected()) break;
-															if(protocol->IsServerInitialized())											  break;																														
+                          protocol->GetDIOStream()->GetXTimerNotActivity()->Reset();
+                          protocolconnexions->SendEvent(DIOPROTOCOLCONNEXIONSMANAGERXEVENTTYPE_INITPROTOCOL, protocolconnexion);
+                          if(protocol->IsInitialized()) protocol->CMD_SendIsInitServerProtocol(true);
 
-															if(timerout) 
-																{
-																	if(timerout->GetMeasureSeconds() > 5) break;
-																}
-															
-															xsleep->MilliSeconds(10);
-														}
+                          protocolconnexion->SetInUse(false, DIOPROTOCOLCONNEXIONSINUSEID_INIPROTOCOL);
+                        }
+                       else
+                        {
+                          XTIMER* timerout = xfactory->CreateTimer();
+                          while(1)
+                            {
+                              if(protocolconnexion->GetDIOProtocol()->IsDisconnected()) break;
+                              if(protocol->IsServerInitialized())                       break;
 
-													xfactory->DeleteTimer(timerout);
+                              if(timerout)
+                                {
+                                  if(timerout->GetMeasureSeconds() > 5) break;
+                                }
 
-													
-													if(protocol->IsServerInitialized())
-														{
-															protocolconnexion->SetInUse(true, DIOPROTOCOLCONNEXIONSINUSEID_INIPROTOCOL); 
+                              xsleep->MilliSeconds(10);
+                            }
 
-															protocol->GetDIOStream()->GetXTimerNotActivity()->Reset();											
-															protocolconnexions->SendEvent(DIOPROTOCOLCONNEXIONSMANAGERXEVENTTYPE_INITPROTOCOL, protocolconnexion);																																													
+                          xfactory->DeleteTimer(timerout);
 
-															protocolconnexion->SetInUse(false, DIOPROTOCOLCONNEXIONSINUSEID_INIPROTOCOL); 
-														}
-												} 
-																						
-											XDEBUG_PRINTCOLOR((protocol->IsInitialized()?2:4), __L("Protocol Connexion Manager: %s Init Protocol %s") , protocolconnexions->isserver?__L("Server"):__L("Client"), protocol->IsInitialized()?__L("Ok!"):__L("Error!"));
-																																	
-											if(!protocol->IsInitialized())
-											  {				
-													protocolconnexions->ProtocolConnexions_Disconnect(c);																
-												}																					
-										}
-									 else
-									  {											
-											if(protocol->GetDIOStream()->GetXTimerNotActivity()->GetMeasureSeconds() > DIOPROTOCOLCONNEXIONS_DEFAULTIMECHECKCONNEXIONS)
-												{													
-													XDWORD milliseconds;
 
-													bool status = protocol->CMD_Ping(milliseconds);
-													if(!status) 
-														{
-															protocolconnexions->ProtocolConnexions_Disconnect(c);																														
+                          if(protocol->IsServerInitialized())
+                            {
+                              protocolconnexion->SetInUse(true, DIOPROTOCOLCONNEXIONSINUSEID_INIPROTOCOL);
 
-															XDEBUG_PRINTCOLOR(status?1:4, __L("Protocol Connexion Manager: Check connexion protocol %s"), status?__L("Ok!"):__L("Error!"));
-														}
-												}
-										}
-								}
-						}					
-				}	
+                              protocol->GetDIOStream()->GetXTimerNotActivity()->Reset();
+                              protocolconnexions->SendEvent(DIOPROTOCOLCONNEXIONSMANAGERXEVENTTYPE_INITPROTOCOL, protocolconnexion);
 
-			c++;
-		}	
+                              protocolconnexion->SetInUse(false, DIOPROTOCOLCONNEXIONSINUSEID_INIPROTOCOL);
+                            }
+                        }
+
+                      XDEBUG_PRINTCOLOR((protocol->IsInitialized()?2:4), __L("Protocol Connexion Manager: %s Init Protocol %s") , protocolconnexions->isserver?__L("Server"):__L("Client"), protocol->IsInitialized()?__L("Ok!"):__L("Error!"));
+
+                      if(!protocol->IsInitialized())
+                        {
+                          protocolconnexions->ProtocolConnexions_Disconnect(c);
+                        }
+                    }
+                   else
+                    {
+                      if(protocol->GetDIOStream()->GetXTimerNotActivity()->GetMeasureSeconds() > DIOPROTOCOLCONNEXIONS_DEFAULTIMECHECKCONNEXIONS)
+                        {
+                          XDWORD milliseconds;
+
+                          bool status = protocol->CMD_Ping(milliseconds);
+                          if(!status)
+                            {
+                              protocolconnexions->ProtocolConnexions_Disconnect(c);
+
+                              XDEBUG_PRINTCOLOR(status?1:4, __L("Protocol Connexion Manager: Check connexion protocol %s"), status?__L("Ok!"):__L("Error!"));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+      c++;
+    }
 }
 
 

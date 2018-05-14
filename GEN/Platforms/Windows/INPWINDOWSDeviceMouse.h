@@ -1,31 +1,31 @@
 /*------------------------------------------------------------------------------------------
-//	INPWINDOWSDEVICEMOUSE.H
-*/	
-/**	
-// \class 
-//   
+//  INPWINDOWSDEVICEMOUSE.H
+*/
+/**
+// \class
+//
 //  WINDOWS INPUT Device Mouse class
-//   
-//	@author	 Abraham J. Velez
-//	@version 21/12/2011 16:54:40
-*/	
-/*	GEN  Copyright (C).  All right reserved.			 
+//
+//  @author  Abraham J. Velez
+//  @version 21/12/2011 16:54:40
+*/
+/*  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
+
 #ifndef _INPWINDOWSDEVICEMOUSE_H_
 #define _INPWINDOWSDEVICEMOUSE_H_
-		
-	
+
+
 //---- INCLUDES ----------------------------------------------------------------------------
 
 #include "XVector.h"
 
 #include "INPCursor.h"
 #include "INPDevice.h"
-		
+
 //---- DEFINES & ENUMS  --------------------------------------------------------------------
-	
-	
+
+
 //---- CLASS -------------------------------------------------------------------------------
 
 class XFACTORY;
@@ -34,38 +34,38 @@ class XFACTORY;
 
 class INPWINDOWSDEVICEMOUSE : public INPDEVICE
 {
-	public:
-															INPWINDOWSDEVICEMOUSE						( GRPWINDOWSSCREEN* grpscreen=NULL);
-		virtual								 	 ~INPWINDOWSDEVICEMOUSE						();
+  public:
+                              INPWINDOWSDEVICEMOUSE           ( GRPWINDOWSSCREEN* grpscreen=NULL);
+    virtual                  ~INPWINDOWSDEVICEMOUSE           ();
 
-		virtual	bool							SetScreen												(void* screenpointer);
-		XVECTOR<INPBUTTON*>*			GetButtons											();
-		XVECTOR<INPCURSOR*>*			GetCursors 											();
-		
-		bool											Update													();
+    virtual bool              SetScreen                       (void* screenpointer);
+    XVECTOR<INPBUTTON*>*      GetButtons                      ();
+    XVECTOR<INPCURSOR*>*      GetCursors                      ();
 
-	private:
+    bool                      Update                          ();
 
-		void											Clean														();
+  private:
 
-		bool											GetWindowPosition								(int& screenx, int& screeny, int& screenw, int& screenh);
+    void                      Clean                           ();
 
-		bool 											CreateAllButtons								();
-		bool											DeleteAllButtons								();
+    bool                      GetWindowPosition               (int& screenx, int& screeny, int& screenw, int& screenh);
 
-		bool 											CreateAllCursors								();
-		bool											DeleteAllCursors								();
-		
-		GRPWINDOWSSCREEN*					grpscreen;
+    bool                      CreateAllButtons                ();
+    bool                      DeleteAllButtons                ();
 
-		XVECTOR<INPBUTTON*>				buttons;
-		XVECTOR<INPCURSOR*>				cursors;
+    bool                      CreateAllCursors                ();
+    bool                      DeleteAllCursors                ();
+
+    GRPWINDOWSSCREEN*         grpscreen;
+
+    XVECTOR<INPBUTTON*>       buttons;
+    XVECTOR<INPCURSOR*>       cursors;
 };
-	
+
 
 //---- INLINE FUNCTIONS --------------------------------------------------------------------
 
 
-	
+
 #endif
 

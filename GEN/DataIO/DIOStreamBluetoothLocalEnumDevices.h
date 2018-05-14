@@ -1,21 +1,21 @@
 //------------------------------------------------------------------------------------------
-//	DIOSTREAMBLUETOOTHLOCALENUMDEVICES.H
-//	
-/**	
-// \class 
-//   
+//  DIOSTREAMBLUETOOTHLOCALENUMDEVICES.H
+//
+/**
+// \class
+//
 //  Data IO Stream Bluetooth Local Enum Devices class
-//   
-//	@author	 Abraham J. Velez
-//	@version 23/05/2002
-*/	
-//	GEN  Copyright (C).  All right reserved.		 			 
+//
+//  @author  Abraham J. Velez
+//  @version 23/05/2002
+*/
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
+
 #ifndef _DIOSTREAMBLUETOOTHLOCALENUMDEVICES_H_
 #define _DIOSTREAMBLUETOOTHLOCALENUMDEVICES_H_
-	
-	
+
+
 //---- INCLUDES ----------------------------------------------------------------------------
 
 #include "DIOStreamEnumDevices.h"
@@ -31,21 +31,21 @@ class XPUBLISHER;
 
 class DIOSTREAMBLUETOOTHLOCALENUMDEVICES :  public DIOSTREAMENUMDEVICES
 {
-	public:
-														DIOSTREAMBLUETOOTHLOCALENUMDEVICES				();
-		virtual								 ~DIOSTREAMBLUETOOTHLOCALENUMDEVICES				();
-		
-		virtual bool						Search																		()																	{ return false;					};
-		virtual bool						StopSearch																(bool waitend)											{ return false;					};
-		bool										IsSearching																()																	{ return issearching;	  };
+  public:
+                            DIOSTREAMBLUETOOTHLOCALENUMDEVICES        ();
+    virtual                ~DIOSTREAMBLUETOOTHLOCALENUMDEVICES        ();
 
-		virtual bool						IsDeviceAvailable													(XCHAR* resource)										{ return false;					};			
-				    
-	private:
+    virtual bool            Search                                    ()                                  { return false;         };
+    virtual bool            StopSearch                                (bool waitend)                      { return false;         };
+    bool                    IsSearching                               ()                                  { return issearching;   };
 
-		void										Clean																			();
+    virtual bool            IsDeviceAvailable                         (XCHAR* resource)                   { return false;         };
 
-		bool										issearching;
+  private:
+
+    void                    Clean                                     ();
+
+    bool                    issearching;
 };
 
 

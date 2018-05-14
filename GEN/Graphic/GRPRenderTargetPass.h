@@ -6,10 +6,10 @@
 //
 // Render to offscreen pass
 //
-//	@author: Diego Martinez Ruiz de Gaona 
+//  @author: Diego Martinez Ruiz de Gaona
 //
-//	Date of Creation : 23/11/2017 13:44:39 
-//	Last Modification : 
+//  Date of Creation : 23/11/2017 13:44:39
+//  Last Modification :
 */
 /* GEN  Copyright (C).  All right reserved.
 /*------------------------------------------------------------------------------------------*/
@@ -29,26 +29,26 @@ class GRPRENDERTARGETPASS : public GRPPASS
 {
 public:
 
-														GRPRENDERTARGETPASS	();
-		virtual									~GRPRENDERTARGETPASS();
-		virtual bool						OnAdded							();		
-		virtual void						Begin								();
-		virtual void						End									();
-		virtual GRPTEXTURE*			GetTexture					();
-		virtual GRPMATERIAL*		GetMaterial					();
-		virtual void						SetViewport					(GRPVIEWPORT*	viewport);
+                            GRPRENDERTARGETPASS ();
+    virtual                 ~GRPRENDERTARGETPASS();
+    virtual bool            OnAdded             ();
+    virtual void            Begin               ();
+    virtual void            End                 ();
+    virtual GRPTEXTURE*     GetTexture          ();
+    virtual GRPMATERIAL*    GetMaterial         ();
+    virtual void            SetViewport         (GRPVIEWPORT* viewport);
 
 protected:
 
-		GRPTEXTURE* texture;
-		GRPMATERIAL* material;
+    GRPTEXTURE* texture;
+    GRPMATERIAL* material;
 
 private:
 
-		void Clean()
-		{
+    void Clean()
+    {
 
-		}
+    }
 
 };
 /*---- INLINE FUNCTIONS ------------------------------------------------------------------*/

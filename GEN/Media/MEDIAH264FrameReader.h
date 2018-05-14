@@ -1,27 +1,27 @@
 /*------------------------------------------------------------------------------------------
-//	VIDEOH264FRAMEREADER.H
-*/	
-/**	
-// \file 
-//   
-//  H264 frame reader
-//   
-//	@author	 Imanol Celaya Ruiz de Alegria
+//  VIDEOH264FRAMEREADER.H
+*/
+/**
+// \file
 //
-//	Date Of Creation	: 11/04/2016 10:41:50
-//	Last Modification	:	
-*/	
-/*	GEN  Copyright (C).  All right reserved.
+//  H264 frame reader
+//
+//  @author  Imanol Celaya Ruiz de Alegria
+//
+//  Date Of Creation  : 11/04/2016 10:41:50
+//  Last Modification :
+*/
+/*  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
+
 #ifndef _VIDEOH264FRAMEREADER_H_
 #define _VIDEOH264FRAMEREADER_H_
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
 #include "XBuffer.h"
 #include "XVector.h"
-#include "XFile.h"	
+#include "XFile.h"
 #include "XString.h"
 
 #include "MEDIAFrameReader.h"
@@ -30,92 +30,92 @@
 //#include "mp4file.h"
 
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
-	
-	
+
+
 /*---- CLASS -----------------------------------------------------------------------------*/
 
 //mp4v2::impl::MP4File*
 namespace mp4v2
 {
-	namespace impl
-	{
-		class MP4File;
-	};
+  namespace impl
+  {
+    class MP4File;
+  };
 };
 
 class MEDIAH264FRAMEREADER : public MEDIAFRAMEREADER
 {
 public:
 
-																				MEDIAH264FRAMEREADER															();
-	virtual															 ~MEDIAH264FRAMEREADER															();
+                                        MEDIAH264FRAMEREADER                              ();
+  virtual                              ~MEDIAH264FRAMEREADER                              ();
 
-	virtual bool													OpenFile																					(XCHAR* filename);
-	virtual bool													OpenFile																					(XSTRING* filename);
+  virtual bool                          OpenFile                                          (XCHAR* filename);
+  virtual bool                          OpenFile                                          (XSTRING* filename);
 
 
-	virtual bool													ReadFrame																					(XVECTOR<XBYTE> & xvector, long long* timestamp = NULL, long long* decompression = NULL);
-	virtual bool													ReadStream																				(XVECTOR<XBYTE> & xvector, XDWORD size);
+  virtual bool                          ReadFrame                                         (XVECTOR<XBYTE> & xvector, long long* timestamp = NULL, long long* decompression = NULL);
+  virtual bool                          ReadStream                                        (XVECTOR<XBYTE> & xvector, XDWORD size);
 
-	virtual bool													IsEndOfStream																			();
-	virtual void													ResetStream																				();
+  virtual bool                          IsEndOfStream                                     ();
+  virtual void                          ResetStream                                       ();
 
-	int																		NALToRBSP																					(XVECTOR<XBYTE> & NAL, XVECTOR<XBYTE>& RBSP);
+  int                                   NALToRBSP                                         (XVECTOR<XBYTE> & NAL, XVECTOR<XBYTE>& RBSP);
 
-	void																	SetReadBufferSize																	(XDWORD readbuffersize);
-	XDWORD																GetReadBufferSize																	();
+  void                                  SetReadBufferSize                                 (XDWORD readbuffersize);
+  XDWORD                                GetReadBufferSize                                 ();
 
-	XVECTOR<XBYTE>*												GetSPS																						();
-	XVECTOR<XBYTE>*												GetPPS																						();
+  XVECTOR<XBYTE>*                       GetSPS                                            ();
+  XVECTOR<XBYTE>*                       GetPPS                                            ();
 
 //protected:
-	XFILE*																xfile;
-	XVECTOR<XBYTE>												readbuffer;
-	XDWORD																lefttoread;
-	XDWORD																readbuffersize;
-	XDWORD																fileposition;
+  XFILE*                                xfile;
+  XVECTOR<XBYTE>                        readbuffer;
+  XDWORD                                lefttoread;
+  XDWORD                                readbuffersize;
+  XDWORD                                fileposition;
 
-	XDWORD																ReadValue;
-	XDWORD																ThreeBytesNAL;
-	XDWORD																FourBytesNAL;
-	XDWORD																NALUID;
-	XDWORD																EraseByte;
+  XDWORD                                ReadValue;
+  XDWORD                                ThreeBytesNAL;
+  XDWORD                                FourBytesNAL;
+  XDWORD                                NALUID;
+  XDWORD                                EraseByte;
 
-	XDWORD																isample;
-	mp4v2::impl::MP4File*									mp4file;
+  XDWORD                                isample;
+  mp4v2::impl::MP4File*                 mp4file;
 
-	XVECTOR<XBYTE>												SPS;
-	XVECTOR<XBYTE>												PPS;
+  XVECTOR<XBYTE>                        SPS;
+  XVECTOR<XBYTE>                        PPS;
 
-	XDWORD																readframes;
+  XDWORD                                readframes;
 
-	XDWORD																width;
-	XDWORD																height;
+  XDWORD                                width;
+  XDWORD                                height;
 
 private:
 
-	void																	FillReadBuffer																		();
+  void                                  FillReadBuffer                                    ();
 
-	void																	Clean																							()
-																				{
-																					xfile						= NULL;
-																					lefttoread			= 0;
-																					readbuffersize	= 0;
-																					fileposition		= 0;
-																					ThreeBytesNAL		= 0;
-																					FourBytesNAL		= 0;
-																					NALUID					= 0;
-																					EraseByte				= 0;
-																					ReadValue				= 0;
-																					mp4file					= NULL;
-																					readframes			= 0;
-																					width						= 0;
-																					height					= 0;
-																				}
+  void                                  Clean                                             ()
+                                        {
+                                          xfile           = NULL;
+                                          lefttoread      = 0;
+                                          readbuffersize  = 0;
+                                          fileposition    = 0;
+                                          ThreeBytesNAL   = 0;
+                                          FourBytesNAL    = 0;
+                                          NALUID          = 0;
+                                          EraseByte       = 0;
+                                          ReadValue       = 0;
+                                          mp4file         = NULL;
+                                          readframes      = 0;
+                                          width           = 0;
+                                          height          = 0;
+                                        }
 };
-	
-	
+
+
 /*---- INLINE FUNCTIONS ------------------------------------------------------------------*/
-	
+
 #endif
 

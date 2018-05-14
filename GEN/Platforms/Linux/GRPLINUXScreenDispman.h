@@ -1,17 +1,17 @@
 /*------------------------------------------------------------------------------------------
-//	GRPLINUXSCREENDISPMAN.H
-*/	
-/**	
-// \class 
-//   
-//  Linux Dispman Raspberry graphics screen class
-//   
-//	@author	 Diego Martinez Ruiz de Gaona
+//  GRPLINUXSCREENDISPMAN.H
+*/
+/**
+// \class
 //
-//	Date Of Creation	: 18/03/2014 17:46:05
-//	Last Modification	:	
-*/	
-/*	GEN  Copyright (C).  All right reserved.
+//  Linux Dispman Raspberry graphics screen class
+//
+//  @author  Diego Martinez Ruiz de Gaona
+//
+//  Date Of Creation  : 18/03/2014 17:46:05
+//  Last Modification :
+*/
+/*  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
 
 
@@ -23,7 +23,7 @@
 
 #include "GRPOpenGL.h"
 #include "GRPScreen.h"
-	
+
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
 
 
@@ -37,39 +37,39 @@ class XPUBLISHER;
 
 class GRPLINUXSCREENDISPMAN : public GRPSCREEN
 {
-	public:	
-																					GRPLINUXSCREENDISPMAN				();
-		virtual															 ~GRPLINUXSCREENDISPMAN				();
+  public:
+                                          GRPLINUXSCREENDISPMAN       ();
+    virtual                              ~GRPLINUXSCREENDISPMAN       ();
 
-		bool																	Create											(void* handle = NULL);
-		bool																	Update											();
-		bool																	Delete											();
-
-
-		EGL_DISPMANX_WINDOW_T*								GetDispManHandle();
-
-	private:
-		 
-		void																	Clean												();
-		
-		bool																	Init												();		
-
-	//XBYTE*																Buffer;
-					
-
-		EGL_DISPMANX_WINDOW_T									handle;
-		DISPMANX_ELEMENT_HANDLE_T							dispman_element;
-		DISPMANX_DISPLAY_HANDLE_T							dispman_display;
-		DISPMANX_UPDATE_HANDLE_T							dispman_update;
-		VC_RECT_T															dst_rect;
-		VC_RECT_T															src_rect;
+    bool                                  Create                      (void* handle = NULL);
+    bool                                  Update                      ();
+    bool                                  Delete                      ();
 
 
-		//int																		programID;
+    EGL_DISPMANX_WINDOW_T*                GetDispManHandle();
+
+  private:
+
+    void                                  Clean                       ();
+
+    bool                                  Init                        ();
+
+  //XBYTE*                                Buffer;
+
+
+    EGL_DISPMANX_WINDOW_T                 handle;
+    DISPMANX_ELEMENT_HANDLE_T             dispman_element;
+    DISPMANX_DISPLAY_HANDLE_T             dispman_display;
+    DISPMANX_UPDATE_HANDLE_T              dispman_update;
+    VC_RECT_T                             dst_rect;
+    VC_RECT_T                             src_rect;
+
+
+    //int                                   programID;
 };
 
 //---- INLINE FUNCTIONS --------------------------------------------------------------------
-	
+
 #endif
 
 

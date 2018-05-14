@@ -1,22 +1,22 @@
 //------------------------------------------------------------------------------------------
-//	DIOANDROIDSTREAMUSBLOCALENUMDEVICES.H
-//	
-/**	
-// \class 
-//   
+//  DIOANDROIDSTREAMUSBLOCALENUMDEVICES.H
+//
+/**
+// \class
+//
 //  ANDROID Data IO Stream USB Local Enum Devices class
-//   
-//	@author	 Abraham J. Velez
-//	@version 02/01/2002
-*/	
-//	GEN  Copyright (C).  All right reserved.		 			 
+//
+//  @author  Abraham J. Velez
+//  @version 02/01/2002
+*/
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
+
 #ifndef _DIOANDROIDSTREAMUSBLOCALENUMDEVICES_H_
 #define _DIOANDROIDSTREAMUSBLOCALENUMDEVICES_H_
-	
+
 #if defined(DIO_ACTIVE) && defined(DIOUSB_ACTIVE)
-	
+
 //---- INCLUDES ----------------------------------------------------------------------------
 
 #include "XString.h"
@@ -30,16 +30,16 @@
 
 class DIOANDROIDSTREAMUSBLOCALENUMDEVICES :  public DIOSTREAMUSBLOCALENUMDEVICES
 {
-	public:
-													DIOANDROIDSTREAMUSBLOCALENUMDEVICES						( );
-		virtual							 ~DIOANDROIDSTREAMUSBLOCALENUMDEVICES						();
+  public:
+                          DIOANDROIDSTREAMUSBLOCALENUMDEVICES           ( );
+    virtual              ~DIOANDROIDSTREAMUSBLOCALENUMDEVICES           ();
 
-		bool									Search																			();		
-		bool									IsDeviceAvailable														(XCHAR* resource);							   
+    bool                  Search                                      ();
+    bool                  IsDeviceAvailable                           (XCHAR* resource);
 
-	private:
+  private:
 
-		bool									SearchAndDeleteEqualDevices									();
+    bool                  SearchAndDeleteEqualDevices                 ();
 
 };
 

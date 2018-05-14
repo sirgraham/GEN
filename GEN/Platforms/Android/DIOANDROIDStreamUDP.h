@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------------------
-//	DIOANDROIDSTREAMUDP.H
+//  DIOANDROIDSTREAMUDP.H
 //
 /**
 // \class
 //
 //  ANDROID Data IO Stream UDP class
 //
-//	@author	 Abraham J. Velez
-//	@version 02/01/2002
+//  @author  Abraham J. Velez
+//  @version 02/01/2002
 */
-//	GEN  Copyright (C).  All right reserved.
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
 
 #ifndef _DIOANDROIDSTREAMUDP_H_
@@ -30,30 +30,30 @@
 
 enum DIOANDROIDUDPFSMEVENTS
 {
-	DIOANDROIDUDPFSMEVENT_NONE							= 0 ,
+  DIOANDROIDUDPFSMEVENT_NONE              = 0 ,
 
-	DIOANDROIDUDPFSMEVENT_GETTINGCONNEXION			,
-	DIOANDROIDUDPFSMEVENT_CONNECTED							,
-	DIOANDROIDUDPFSMEVENT_WAITINGTOREAD					,
-	DIOANDROIDUDPFSMEVENT_SENDINGDATA						,
-	DIOANDROIDUDPFSMEVENT_DISCONNECTING					,		
+  DIOANDROIDUDPFSMEVENT_GETTINGCONNEXION      ,
+  DIOANDROIDUDPFSMEVENT_CONNECTED             ,
+  DIOANDROIDUDPFSMEVENT_WAITINGTOREAD         ,
+  DIOANDROIDUDPFSMEVENT_SENDINGDATA           ,
+  DIOANDROIDUDPFSMEVENT_DISCONNECTING         ,
 
-	DIOANDROIDUDP_LASTEVENT
+  DIOANDROIDUDP_LASTEVENT
 
 };
 
 
 enum DIOANDROIDUDPFSMSTATES
 {
-	DIOANDROIDUDPFSMSTATE_NONE							= 0 ,	
+  DIOANDROIDUDPFSMSTATE_NONE              = 0 ,
 
-	DIOANDROIDUDPFSMSTATE_GETTINGCONNEXION			,
-	DIOANDROIDUDPFSMSTATE_CONNECTED							,
-	DIOANDROIDUDPFSMSTATE_WAITINGTOREAD					,
-	DIOANDROIDUDPFSMSTATE_SENDINGDATA						,
-	DIOANDROIDUDPFSMSTATE_DISCONNECTING					,		
+  DIOANDROIDUDPFSMSTATE_GETTINGCONNEXION      ,
+  DIOANDROIDUDPFSMSTATE_CONNECTED             ,
+  DIOANDROIDUDPFSMSTATE_WAITINGTOREAD         ,
+  DIOANDROIDUDPFSMSTATE_SENDINGDATA           ,
+  DIOANDROIDUDPFSMSTATE_DISCONNECTING         ,
 
-	DIOANDROIDUDP_LASTSTATE
+  DIOANDROIDUDP_LASTSTATE
 };
 
 
@@ -63,26 +63,26 @@ class THREAD;
 
 class DIOANDROIDSTREAMUDP : public DIOSTREAMUDP , public XFSMACHINE
 {
-	public:
-															DIOANDROIDSTREAMUDP											( );
-		virtual									 ~DIOANDROIDSTREAMUDP											();
+  public:
+                              DIOANDROIDSTREAMUDP                     ( );
+    virtual                  ~DIOANDROIDSTREAMUDP                     ();
 
-		bool											Open																	();
-		bool											Disconnect														();
-		bool											Close																	();
+    bool                      Open                                  ();
+    bool                      Disconnect                            ();
+    bool                      Close                                 ();
 
-	protected:
-		
-		int 											IsReadyConnect												(int sock);
-		    
-	private:
+  protected:
 
-		void											Clean																	();
-		static void								ThreadRunFunction											(void* thread);
-		
-		XTHREAD*									threadconnexion;
-		int 											handle; 		
-		XSTRING										remoteaddress;
+    int                       IsReadyConnect                        (int sock);
+
+  private:
+
+    void                      Clean                                 ();
+    static void               ThreadRunFunction                     (void* thread);
+
+    XTHREAD*                  threadconnexion;
+    int                       handle;
+    XSTRING                   remoteaddress;
 };
 
 

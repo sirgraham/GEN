@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------------------
-//	DIOWINDOWSSTREAMTCPIP.H
+//  DIOWINDOWSSTREAMTCPIP.H
 //
 /**
 // \class
 //
 //  WINDOWS Data IO Stream TCP/IP class
 //
-//	@author	 Abraham J. Velez
-//	@version 02/01/2002
+//  @author  Abraham J. Velez
+//  @version 02/01/2002
 */
-//	GEN  Copyright (C).  All right reserved.
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
 
 #ifndef _DIOWINDOWSSTREAMTCPIP_H_
@@ -31,29 +31,29 @@
 
 enum DIOWINDOWSTCPIPFSMEVENTS
 {
-	DIOWINDOWSTCPIPFSMEVENT_NONE								= 0 ,
+  DIOWINDOWSTCPIPFSMEVENT_NONE                = 0 ,
 
-	DIOWINDOWSTCPIPFSMEVENT_GETTINGCONNEXION				,
-	DIOWINDOWSTCPIPFSMEVENT_CONNECTED							,
-	DIOWINDOWSTCPIPFSMEVENT_WAITINGTOREAD					,
-	DIOWINDOWSTCPIPFSMEVENT_SENDINGDATA						,
-	DIOWINDOWSTCPIPFSMEVENT_DISCONNECTING					,		
+  DIOWINDOWSTCPIPFSMEVENT_GETTINGCONNEXION        ,
+  DIOWINDOWSTCPIPFSMEVENT_CONNECTED             ,
+  DIOWINDOWSTCPIPFSMEVENT_WAITINGTOREAD         ,
+  DIOWINDOWSTCPIPFSMEVENT_SENDINGDATA           ,
+  DIOWINDOWSTCPIPFSMEVENT_DISCONNECTING         ,
 
-	DIOWINDOWSTCPIP_LASTEVENT
+  DIOWINDOWSTCPIP_LASTEVENT
 };
 
 
 enum DIOWINDOWSTCPIPFSMSTATES
 {
-	DIOWINDOWSTCPIPFSMSTATE_NONE								= 0 ,	
+  DIOWINDOWSTCPIPFSMSTATE_NONE                = 0 ,
 
-	DIOWINDOWSTCPIPFSMSTATE_GETTINGCONNEXION				,
-	DIOWINDOWSTCPIPFSMSTATE_CONNECTED							,
-	DIOWINDOWSTCPIPFSMSTATE_WAITINGTOREAD					,
-	DIOWINDOWSTCPIPFSMSTATE_SENDINGDATA						,
-	DIOWINDOWSTCPIPFSMSTATE_DISCONNECTING					,		
+  DIOWINDOWSTCPIPFSMSTATE_GETTINGCONNEXION        ,
+  DIOWINDOWSTCPIPFSMSTATE_CONNECTED             ,
+  DIOWINDOWSTCPIPFSMSTATE_WAITINGTOREAD         ,
+  DIOWINDOWSTCPIPFSMSTATE_SENDINGDATA           ,
+  DIOWINDOWSTCPIPFSMSTATE_DISCONNECTING         ,
 
-	DIOWINDOWSTCPIP_LASTSTATE
+  DIOWINDOWSTCPIP_LASTSTATE
 };
 
 
@@ -64,43 +64,43 @@ class XPUBLISHER;
 class DIOFACTORY;
 
 
-class DIOWINDOWSSTREAMTCPIP : public DIOSTREAMTCPIP , public XFSMACHINE 
+class DIOWINDOWSSTREAMTCPIP : public DIOSTREAMTCPIP , public XFSMACHINE
 {
-	public:
-															DIOWINDOWSSTREAMTCPIP										();
-		virtual									 ~DIOWINDOWSSTREAMTCPIP										();		
+  public:
+                              DIOWINDOWSSTREAMTCPIP                   ();
+    virtual                  ~DIOWINDOWSSTREAMTCPIP                   ();
 
-		bool											Open																		();
-		bool											Disconnect															();
-		bool											Close																		();
+    bool                      Open                                    ();
+    bool                      Disconnect                              ();
+    bool                      Close                                   ();
 
-	protected:
-		
-		SOCKET										Accept																	(SOCKET socket, void* addr, void* addrlen, XDWORD usec);
-		int 											IsReadyConnect													(SOCKET socket);
-		bool											SetPropertysHandle											(SOCKET socket, bool isserver);
-		
-	private:
-		
-		void											Clean																		()
-															{
-																threadconnexion		=	NULL;			
+  protected:
 
-																handlesocket 			= INVALID_SOCKET;
-																
-																//memset(buffer, 0, DIOSTREAM_MAXBUFFER);
-															}
+    SOCKET                    Accept                                  (SOCKET socket, void* addr, void* addrlen, XDWORD usec);
+    int                       IsReadyConnect                          (SOCKET socket);
+    bool                      SetPropertysHandle                      (SOCKET socket, bool isserver);
 
-		bool											GetHandleServer                         ();
-		bool											GetHandleClient                         ();
+  private:
+
+    void                      Clean                                   ()
+                              {
+                                threadconnexion   = NULL;
+
+                                handlesocket      = INVALID_SOCKET;
+
+                                //memset(buffer, 0, DIOSTREAM_MAXBUFFER);
+                              }
+
+    bool                      GetHandleServer                         ();
+    bool                      GetHandleClient                         ();
 
 
-		static void 							ThreadConnexion													(void* data);
+    static void               ThreadConnexion                         (void* data);
 
-		XTHREADCOLLECTED*					threadconnexion;
-		
-		SOCKET 										handlesocket;		
-		//XBYTE											buffer[DIOSTREAM_MAXBUFFER];		
+    XTHREADCOLLECTED*         threadconnexion;
+
+    SOCKET                    handlesocket;
+    //XBYTE                     buffer[DIOSTREAM_MAXBUFFER];
 };
 
 

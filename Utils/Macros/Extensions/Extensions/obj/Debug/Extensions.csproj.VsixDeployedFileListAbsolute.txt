@@ -1,0 +1,5 @@
+C:\Users\sirgraham\AppData\Local\Microsoft\VisualStudio\14.0Exp\Extensions\Diego Martinez\GEN Extensions\3.0\\Extensions.dll
+C:\Users\sirgraham\AppData\Local\Microsoft\VisualStudio\14.0Exp\Extensions\Diego Martinez\GEN Extensions\3.0\\Extensions.pdb
+C:\Users\sirgraham\AppData\Local\Microsoft\VisualStudio\14.0Exp\Extensions\Diego Martinez\GEN Extensions\3.0\\Extensions.pkgdef
+C:\Users\sirgraham\AppData\Local\Microsoft\VisualStudio\14.0Exp\Extensions\Diego Martinez\GEN Extensions\3.0\\extension.vsixmanifest
+C:\Users\sirgraham\AppData\Local\Microsoft\VisualStudio\14.0Exp\Extensions\Diego Martinez\GEN Extensions\3.0\\gen_logo.jpg

@@ -1,16 +1,16 @@
 //------------------------------------------------------------------------------------------
-//	XFILESENTENCES.CPP
-//	
-//	XFile Sentences Class
-//   
-//	Author						: Abraham J. Velez
-//	Date Of Creation	: 25/05/2004 18:55:54
-//	Last Mofificacion	:	
-//	
-//	GEN  Copyright (C).  All right reserved.			 
+//  XFILESENTENCES.CPP
+//
+//  XFile Sentences Class
+//
+//  Author            : Abraham J. Velez
+//  Date Of Creation  : 25/05/2004 18:55:54
+//  Last Mofificacion :
+//
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
-	
+
+
 //---- INCLUDES ----------------------------------------------------------------------------
 
 #include <stdlib.h>
@@ -23,10 +23,10 @@
 #include "XFileSentences.h"
 
 #include "XMemory.h"
-	
+
 //---- GENERAL VARIABLE --------------------------------------------------------------------
-	
-	
+
+
 //---- CLASS MEMBERS -----------------------------------------------------------------------
 
 
@@ -35,11 +35,11 @@
 /**
 //
 //
-//	@author				Abraham J. Velez
-//	@version			25/05/2004 19:08:46
+//  @author       Abraham J. Velez
+//  @version      25/05/2004 19:08:46
 //
-//	@return
-//	*/
+//  @return
+//  */
 //-------------------------------------------------------------------
 /*
 XSENTENCE::XSENTENCE()
@@ -55,28 +55,28 @@ XSENTENCE::XSENTENCE()
 /**
 //
 //
-//	@author				Abraham J. Velez
-//	@version			25/05/2004 19:08:46
+//  @author       Abraham J. Velez
+//  @version      25/05/2004 19:08:46
 //
-//	@return
-//	*/
+//  @return
+//  */
 //-------------------------------------------------------------------
 XFILESENTENCES::XFILESENTENCES(HASH* hash, XPATH& xpath) : XFILEXDB(hash, xpath)
 {
-	Set(XFILE_SEN_ID, XFILESENTENCES_TYPE, XFILESENTENCES_VERSION, XFILESENTENCES_IDSTRING);
+  Set(XFILE_SEN_ID, XFILESENTENCES_TYPE, XFILESENTENCES_VERSION, XFILESENTENCES_IDSTRING);
 }
 
 
 //-------------------------------------------------------------------
 //  XFILESENTENCES::~XFILESENTENCES
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			25/05/2004 19:09:18
-//	
-//	@return				void : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      25/05/2004 19:09:18
+//
+//  @return       void :
+//  */
 //-------------------------------------------------------------------
 XFILESENTENCES::~XFILESENTENCES()
 {
@@ -87,122 +87,122 @@ XFILESENTENCES::~XFILESENTENCES()
 //-------------------------------------------------------------------
 //  XFILESENTENCES::ConvertFileFromDBF
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			26/05/2004 10:31:31
-//	
-//	@return				bool : 
-//	@param				path : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      26/05/2004 10:31:31
+//
+//  @return       bool :
+//  @param        path :
 */
 //-------------------------------------------------------------------
 bool XFILESENTENCES::ConvertFileFromDBF(XPATH& xpath)
-{	
-	XFILEDBF*		 filedbf;
-	XDWORD c;
+{
+  XFILEDBF*    filedbf;
+  XDWORD c;
 
-	if(!xfactory) return false;
-	
-	CloseFile();
+  if(!xfactory) return false;
 
-	filedbf = new XFILEDBF();
-	if(!filedbf) return false;
+  CloseFile();
 
-	if(!filedbf->Open(xpath)) 
-		{
-			delete filedbf;
-			return false;
-		}
+  filedbf = new XFILEDBF();
+  if(!filedbf) return false;
 
-	XFILEDBF_HEADER*	header = filedbf->GetHeader();
+  if(!filedbf->Open(xpath))
+    {
+      delete filedbf;
+      return false;
+    }
 
-	if((!header)||(!header->Load(filedbf->GetPrimaryFile())))
-		{
-			delete filedbf;
-			return false;
-		}
+  XFILEDBF_HEADER*  header = filedbf->GetHeader();
 
-	XDWORD nrecords = header->GetNRecords();
+  if((!header)||(!header->Load(filedbf->GetPrimaryFile())))
+    {
+      delete filedbf;
+      return false;
+    }
 
-	if(!nrecords)
-		{
-			delete filedbf;
-			return false;
-		}
+  XDWORD nrecords = header->GetNRecords();
 
-	int initablepos;
+  if(!nrecords)
+    {
+      delete filedbf;
+      return false;
+    }
 
-	Create(this->xpath);
+  int initablepos;
 
-	GetPrimaryFile()->Write((XBYTE*)&nrecords,sizeof(XDWORD));
+  Create(this->xpath);
 
-	GetPrimaryFile()->GetPosition(initablepos);				
+  GetPrimaryFile()->Write((XBYTE*)&nrecords,sizeof(XDWORD));
 
-	for(c=0;c<nrecords;c++)
-		{	
-			XDWORD idx=0;
-			for(int d=0;d<2;d++)
-				{
-					GetPrimaryFile()->Write((XBYTE*)&idx,sizeof(XDWORD));
-				}
-		}
+  GetPrimaryFile()->GetPosition(initablepos);
 
-	XDWORD	index;
-	int			fpos  = 0;
+  for(c=0;c<nrecords;c++)
+    {
+      XDWORD idx=0;
+      for(int d=0;d<2;d++)
+        {
+          GetPrimaryFile()->Write((XBYTE*)&idx,sizeof(XDWORD));
+        }
+    }
 
-	for(c=0;c<nrecords;c++)
-		{			
-			XFILEDBF_RECORD* record    = filedbf->ReadRecord(c);			
-			XSTRING*         fsentence = new XSTRING(_MAXSTR);
-		
-			if(fsentence)
-				{					
-					fsentence->FillChar();
-					memcpy(fsentence->Get(),(char*)record->GetData(0),record->GetSizeField(0));			
-					index = fsentence->ConvertToInt();
-					
-					fsentence->FillChar();
-					memcpy(fsentence->Get(),(char*)record->GetData(1),record->GetSizeField(1));
-										
-					fsentence->DeleteCharacter(__C(' '),XSTRINGCONTEXT_ATEND);				
-					
-					GetPrimaryFile()->GetPosition(fpos);		
+  XDWORD  index;
+  int     fpos  = 0;
 
-					indexmap.Add(index,fpos);
+  for(c=0;c<nrecords;c++)
+    {
+      XFILEDBF_RECORD* record    = filedbf->ReadRecord(c);
+      XSTRING*         fsentence = new XSTRING(_MAXSTR);
 
-					XDWORD size = (XDWORD)fsentence->GetSize();
-					GetPrimaryFile()->Write((XBYTE*)&size,sizeof(XDWORD));
+      if(fsentence)
+        {
+          fsentence->FillChar();
+          memcpy(fsentence->Get(),(char*)record->GetData(0),record->GetSizeField(0));
+          index = fsentence->ConvertToInt();
 
-					XSTRING_CREATENORMALIZE((*fsentence), buffnormalize, false)
-					GetPrimaryFile()->Write((XBYTE*)buffnormalize, (fsentence->GetSize()+1)*sizeof(XWORD));
-					XSTRING_DELETENORMALIZE(buffnormalize)
-					
-					delete fsentence;
-				}
-			
-			delete record;
-		}
+          fsentence->FillChar();
+          memcpy(fsentence->Get(),(char*)record->GetData(1),record->GetSizeField(1));
 
-	GetPrimaryFile()->SetPosition(initablepos);	
+          fsentence->DeleteCharacter(__C(' '),XSTRINGCONTEXT_ATEND);
 
-	XDWORD ifilepos = 0;
-	XDWORD	filepos  = 0;
+          GetPrimaryFile()->GetPosition(fpos);
 
-	for(XDWORD c=0;c<nrecords;c++)
-		{
-			ifilepos = indexmap.GetKey(c);					
-			filepos  = indexmap.GetElement(c);
+          indexmap.Add(index,fpos);
 
-			GetPrimaryFile()->Write((XBYTE*)&ifilepos ,sizeof(XDWORD));
-			GetPrimaryFile()->Write((XBYTE*)&filepos	 ,sizeof(XDWORD));
-		}
-		
-	filedbf->Close();
-	delete filedbf;
+          XDWORD size = (XDWORD)fsentence->GetSize();
+          GetPrimaryFile()->Write((XBYTE*)&size,sizeof(XDWORD));
 
-	CloseFile();
+          XSTRING_CREATENORMALIZE((*fsentence), buffnormalize, false)
+          GetPrimaryFile()->Write((XBYTE*)buffnormalize, (fsentence->GetSize()+1)*sizeof(XWORD));
+          XSTRING_DELETENORMALIZE(buffnormalize)
 
-	return OpenFile();
+          delete fsentence;
+        }
+
+      delete record;
+    }
+
+  GetPrimaryFile()->SetPosition(initablepos);
+
+  XDWORD ifilepos = 0;
+  XDWORD  filepos  = 0;
+
+  for(XDWORD c=0;c<nrecords;c++)
+    {
+      ifilepos = indexmap.GetKey(c);
+      filepos  = indexmap.GetElement(c);
+
+      GetPrimaryFile()->Write((XBYTE*)&ifilepos ,sizeof(XDWORD));
+      GetPrimaryFile()->Write((XBYTE*)&filepos   ,sizeof(XDWORD));
+    }
+
+  filedbf->Close();
+  delete filedbf;
+
+  CloseFile();
+
+  return OpenFile();
 }
 
 
@@ -210,47 +210,47 @@ bool XFILESENTENCES::ConvertFileFromDBF(XPATH& xpath)
 //-------------------------------------------------------------------
 //  XFILESENTENCES::GetNumberSentences
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			27/05/2004 17:50:11
-//	
-//	@return				int : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      27/05/2004 17:50:11
+//
+//  @return       int :
+//  */
 //-------------------------------------------------------------------
 int XFILESENTENCES::GetNumberSentences()
 {
-	return GetNumberRecords();
+  return GetNumberRecords();
 }
 
 
 
 /*-------------------------------------------------------------------
 //  XFILESENTENCES::GetSentence
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			06/05/2011 11:56:11
-//	
-//	@return				bool : 
-//	@param				index : 
-//  @param				sentence : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      06/05/2011 11:56:11
+//
+//  @return       bool :
+//  @param        index :
+//  @param        sentence :
 */
 /*-----------------------------------------------------------------*/
 bool XFILESENTENCES::GetSentence(XDWORD index,XSTRING& sentence)
-{	
-	sentence.Empty();
+{
+  sentence.Empty();
 
-	XBUFFER* xbuffer = GetRecord(index);
-	if(!xbuffer) return false;	
-	
-	sentence.Set((XWORD*)xbuffer->Get());
+  XBUFFER* xbuffer = GetRecord(index);
+  if(!xbuffer) return false;
 
-	delete xbuffer;
-	
-	return true;
+  sentence.Set((XWORD*)xbuffer->Get());
+
+  delete xbuffer;
+
+  return true;
 }
 
 

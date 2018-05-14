@@ -1,18 +1,18 @@
 //------------------------------------------------------------------------------------------
-//	CIPHER3DES.CPP
-//	
-//	Cipher / Uncipher DES
-//   
-//	Author						: Abraham J. Velez
-//	Date Of Creation	: 25/04/2002
-//	Last Mofificacion	:	
-//	
-//	GEN  Copyright (C).  All right reserved.		 			 
+//  CIPHER3DES.CPP
+//
+//  Cipher / Uncipher DES
+//
+//  Author            : Abraham J. Velez
+//  Date Of Creation  : 25/04/2002
+//  Last Mofificacion :
+//
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
-	
+
+
 //---- INCLUDES ----------------------------------------------------------------------------
-	
+
 #include <string.h>
 
 #include "XFactory.h"
@@ -25,7 +25,7 @@
 
 //---- DEFINES & ENUMS  --------------------------------------------------------------------
 
-								
+
 //---- CLASS MEMBERS -----------------------------------------------------------------------
 
 
@@ -34,33 +34,33 @@
 //-------------------------------------------------------------------
 //  CIPHER3DES::CIPHER3DES
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			30/04/2006 19:42:40
-//	
-//	@return				
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      30/04/2006 19:42:40
+//
+//  @return
+//  */
 //-------------------------------------------------------------------
 CIPHER3DES::CIPHER3DES() : CIPHERDES()
 {
-	type						 = CIPHERTYPE_3DES;
-	paddingadjustsize = 16;
+  type             = CIPHERTYPE_3DES;
+  paddingadjustsize = 16;
 }
 
 
-		
+
 
 //-------------------------------------------------------------------
 //  CIPHER3DES::~CIPHER3DES
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			30/04/2006 19:42:37
-//	
-//	@return				
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      30/04/2006 19:42:37
+//
+//  @return
+//  */
 //-------------------------------------------------------------------
 CIPHER3DES::~CIPHER3DES()
 {
@@ -73,50 +73,50 @@ CIPHER3DES::~CIPHER3DES()
 //-------------------------------------------------------------------
 //  CIPHER3DES::Cipher
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			25/04/2002 10:22:59
-//	
-//	@return 			bool : 
-//	@param				input : 
-//  @param				size : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      25/04/2002 10:22:59
+//
+//  @return       bool :
+//  @param        input :
+//  @param        size :
 */
 //-------------------------------------------------------------------
 bool CIPHER3DES::Cipher(XBYTE* input, int size)
-{	
-	if(!size) return false;
+{
+  if(!size) return false;
 
-	XBUFFER							inputpadding;
-	CIPHER3DES_CONTEXT ctx;
-	XBYTE								iv[8];
-	int									sizecipher = size;
+  XBUFFER             inputpadding;
+  CIPHER3DES_CONTEXT ctx;
+  XBYTE               iv[8];
+  int                 sizecipher = size;
 
-	memset(iv,0,8);
-	if(inivector && inivector->GetSize()>=8) memcpy(iv, inivector->Get() ,8);
+  memset(iv,0,8);
+  if(inivector && inivector->GetSize()>=8) memcpy(iv, inivector->Get() ,8);
 
-	inputpadding.Add(input, size);
-	inputpadding.Padding_Add(paddingadjustsize, paddingtype);
+  inputpadding.Add(input, size);
+  inputpadding.Padding_Add(paddingadjustsize, paddingtype);
 
-	result->Delete();
-	result->Add(input, size);
-	result->Padding_Add(paddingadjustsize, paddingtype);
+  result->Delete();
+  result->Add(input, size);
+  result->Padding_Add(paddingadjustsize, paddingtype);
 
-	CIPHERKEYSYMMETRICAL* key	= (CIPHERKEYSYMMETRICAL*)GetKey();
-	if(!key)							 return false;
-	if(!key->Get()->Get()) return false;
+  CIPHERKEYSYMMETRICAL* key = (CIPHERKEYSYMMETRICAL*)GetKey();
+  if(!key)               return false;
+  if(!key->Get()->Get()) return false;
 
-	if(key->Get()->GetSize() <= 16)
-				DES3Set2KeyCipher(&ctx, (XBYTE *)key->Get()->Get());		
-	 else DES3Set3KeyCipher(&ctx, (XBYTE *)key->Get()->Get());			
-	
-	bool status;
+  if(key->Get()->GetSize() <= 16)
+        DES3Set2KeyCipher(&ctx, (XBYTE *)key->Get()->Get());
+   else DES3Set3KeyCipher(&ctx, (XBYTE *)key->Get()->Get());
 
-	if(this->GetChainingMode() == CIPHERCHAININGMODE_ECB)
-				 status = DES3Cipher_ECB(&ctx, CIPHERDES_ENCRYPT, result->GetSize(), iv, inputpadding.Get(),  result->Get());	
-		else status = DES3Cipher_CBC(&ctx, CIPHERDES_ENCRYPT, result->GetSize(), iv, inputpadding.Get(),  result->Get());	
+  bool status;
 
-	return status;
+  if(this->GetChainingMode() == CIPHERCHAININGMODE_ECB)
+         status = DES3Cipher_ECB(&ctx, CIPHERDES_ENCRYPT, result->GetSize(), iv, inputpadding.Get(),  result->Get());
+    else status = DES3Cipher_CBC(&ctx, CIPHERDES_ENCRYPT, result->GetSize(), iv, inputpadding.Get(),  result->Get());
+
+  return status;
 }
 
 
@@ -124,49 +124,49 @@ bool CIPHER3DES::Cipher(XBYTE* input, int size)
 
 /*-------------------------------------------------------------------
 //  CIPHER3DES::Uncipher
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			11/03/2013 23:44:01
-//	
-//	@return 			bool : 
-//	@param				input : 
-//  @param				size : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      11/03/2013 23:44:01
+//
+//  @return       bool :
+//  @param        input :
+//  @param        size :
 */
 /*-----------------------------------------------------------------*/
 bool CIPHER3DES::Uncipher(XBYTE* input, int size)
-{	
-	if(!size) return false;
+{
+  if(!size) return false;
 
-	CIPHER3DES_CONTEXT ctx;
-	XBYTE								iv[8];
-	int									sizecipher = size;
+  CIPHER3DES_CONTEXT ctx;
+  XBYTE               iv[8];
+  int                 sizecipher = size;
 
-	memset(iv,0,8);
-	if(inivector && inivector->GetSize()>=8) memcpy(iv, inivector->Get() ,8);
+  memset(iv,0,8);
+  if(inivector && inivector->GetSize()>=8) memcpy(iv, inivector->Get() ,8);
 
-	result->Delete();
-	result->Add(input, size);
+  result->Delete();
+  result->Add(input, size);
 
-	CIPHERKEYSYMMETRICAL* key	= (CIPHERKEYSYMMETRICAL*)GetKey();
-	if(!key)							 return false;
-	if(!key->Get()->Get()) return false;
+  CIPHERKEYSYMMETRICAL* key = (CIPHERKEYSYMMETRICAL*)GetKey();
+  if(!key)               return false;
+  if(!key->Get()->Get()) return false;
 
-	if(key->Get()->GetSize() <= 16)
-				DES3Set2KeyUncipher(&ctx, (XBYTE *)key->Get()->Get());		
-	 else DES3Set3KeyUncipher(&ctx, (XBYTE *)key->Get()->Get());			
-	
-	bool status;
+  if(key->Get()->GetSize() <= 16)
+        DES3Set2KeyUncipher(&ctx, (XBYTE *)key->Get()->Get());
+   else DES3Set3KeyUncipher(&ctx, (XBYTE *)key->Get()->Get());
 
-	if(this->GetChainingMode() == CIPHERCHAININGMODE_ECB)
-				 status = DES3Cipher_ECB(&ctx,  CIPHERDES_DECRYPT, size, iv, input,  result->Get());
-		else status = DES3Cipher_CBC(&ctx,  CIPHERDES_DECRYPT, size, iv, input,  result->Get());
+  bool status;
 
-	result->Padding_Delete();
-	
-	return status;
+  if(this->GetChainingMode() == CIPHERCHAININGMODE_ECB)
+         status = DES3Cipher_ECB(&ctx,  CIPHERDES_DECRYPT, size, iv, input,  result->Get());
+    else status = DES3Cipher_CBC(&ctx,  CIPHERDES_DECRYPT, size, iv, input,  result->Get());
+
+  result->Padding_Delete();
+
+  return status;
 }
 
 
@@ -174,15 +174,15 @@ bool CIPHER3DES::Uncipher(XBYTE* input, int size)
 
 /*-------------------------------------------------------------------
 //  CIPHER3DES::Clean
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			10/03/2013 23:51:12
-//	
-//	@return 			void : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      10/03/2013 23:51:12
+//
+//  @return       void :
+//  */
 /*-----------------------------------------------------------------*/
 void CIPHER3DES::Clean()
 {
@@ -194,22 +194,22 @@ void CIPHER3DES::Clean()
 
 /*-------------------------------------------------------------------
 //  CIPHER3DES::DES3Set2Key
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			11/03/2013 23:16:44
-//	
-//	@return 			void : 
-//	@param				esk[96] : 
-//  @param				dsk[96] : 
-//  @param				key[CIPHERDES_KEYSIZE*2] : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      11/03/2013 23:16:44
+//
+//  @return       void :
+//  @param        esk[96] :
+//  @param        dsk[96] :
+//  @param        key[CIPHERDES_KEYSIZE*2] :
 */
 /*-----------------------------------------------------------------*/
 void CIPHER3DES::DES3Set2Key(XDWORD esk[96], XDWORD dsk[96], XBYTE key[CIPHERDES_KEYSIZE*2])
 {
-	DESSetKey(esk, key);
+  DESSetKey(esk, key);
 
   DESSetKey(dsk + 32, key + 8);
 
@@ -233,21 +233,21 @@ void CIPHER3DES::DES3Set2Key(XDWORD esk[96], XDWORD dsk[96], XBYTE key[CIPHERDES
 
 /*-------------------------------------------------------------------
 //  CIPHER3DES::DES3Set2KeyCipher
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			11/03/2013 23:16:50
-//	
-//	@return 			int : 
-//	@param				ctx : 
-//  @param				key[CIPHERDES_KEYSIZE*2] : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      11/03/2013 23:16:50
+//
+//  @return       int :
+//  @param        ctx :
+//  @param        key[CIPHERDES_KEYSIZE*2] :
 */
 /*-----------------------------------------------------------------*/
 int CIPHER3DES::DES3Set2KeyCipher(CIPHER3DES_CONTEXT* ctx, XBYTE key[CIPHERDES_KEYSIZE*2])
 {
-	XDWORD sk[96];
+  XDWORD sk[96];
 
   DES3Set2Key(ctx->sk, sk, key);
 
@@ -260,25 +260,25 @@ int CIPHER3DES::DES3Set2KeyCipher(CIPHER3DES_CONTEXT* ctx, XBYTE key[CIPHERDES_K
 
 /*-------------------------------------------------------------------
 //  CIPHER3DES::DES3Set2KeyUncipher
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			11/03/2013 23:16:55
-//	
-//	@return 			int : 
-//	@param				*ctx : 
-//  @param				key[CIPHERDES_KEYSIZE*2] : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      11/03/2013 23:16:55
+//
+//  @return       int :
+//  @param        *ctx :
+//  @param        key[CIPHERDES_KEYSIZE*2] :
 */
 /*-----------------------------------------------------------------*/
 int CIPHER3DES::DES3Set2KeyUncipher(CIPHER3DES_CONTEXT *ctx, XBYTE key[CIPHERDES_KEYSIZE*2])
 {
-	XDWORD sk[96];
+  XDWORD sk[96];
 
   DES3Set2Key(sk, ctx->sk, key);
-  
-	memset(sk,  0, sizeof(sk));
+
+  memset(sk,  0, sizeof(sk));
 
   return 0;
 }
@@ -288,22 +288,22 @@ int CIPHER3DES::DES3Set2KeyUncipher(CIPHER3DES_CONTEXT *ctx, XBYTE key[CIPHERDES
 
 /*-------------------------------------------------------------------
 //  CIPHER3DES::DES3Set3Key
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			11/03/2013 23:17:01
-//	
-//	@return 			void : 
-//	@param				esk[96] : 
-//  @param				dsk[96] : 
-//  @param				key[24] : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      11/03/2013 23:17:01
+//
+//  @return       void :
+//  @param        esk[96] :
+//  @param        dsk[96] :
+//  @param        key[24] :
 */
 /*-----------------------------------------------------------------*/
 void CIPHER3DES::DES3Set3Key(XDWORD esk[96], XDWORD dsk[96], XBYTE key[24])
 {
-	DESSetKey(esk, key);
+  DESSetKey(esk, key);
   DESSetKey(dsk + 32, key +  8);
   DESSetKey(esk + 64, key + 16);
 
@@ -324,21 +324,21 @@ void CIPHER3DES::DES3Set3Key(XDWORD esk[96], XDWORD dsk[96], XBYTE key[24])
 
 /*-------------------------------------------------------------------
 //  CIPHER3DES::DES3Set3KeyCipher
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			11/03/2013 23:17:07
-//	
-//	@return 			int : 
-//	@param				ctx : 
-//  @param				key[CIPHERDES_KEYSIZE*3] : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      11/03/2013 23:17:07
+//
+//  @return       int :
+//  @param        ctx :
+//  @param        key[CIPHERDES_KEYSIZE*3] :
 */
 /*-----------------------------------------------------------------*/
 int CIPHER3DES::DES3Set3KeyCipher(CIPHER3DES_CONTEXT* ctx, XBYTE key[CIPHERDES_KEYSIZE*3])
 {
-	XDWORD sk[96];
+  XDWORD sk[96];
 
   DES3Set3Key(ctx->sk, sk, key);
 
@@ -352,21 +352,21 @@ int CIPHER3DES::DES3Set3KeyCipher(CIPHER3DES_CONTEXT* ctx, XBYTE key[CIPHERDES_K
 
 /*-------------------------------------------------------------------
 //  CIPHER3DES::DES3Set3KeyUncipher
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			11/03/2013 23:17:13
-//	
-//	@return 			int : 
-//	@param				ctx : 
-//  @param				key[CIPHERDES_KEYSIZE*3] : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      11/03/2013 23:17:13
+//
+//  @return       int :
+//  @param        ctx :
+//  @param        key[CIPHERDES_KEYSIZE*3] :
 */
 /*-----------------------------------------------------------------*/
 int CIPHER3DES::DES3Set3KeyUncipher(CIPHER3DES_CONTEXT* ctx, XBYTE key[CIPHERDES_KEYSIZE*3])
 {
-	XDWORD sk[96];
+  XDWORD sk[96];
 
   DES3Set3Key(sk, ctx->sk, key);
 
@@ -381,25 +381,25 @@ int CIPHER3DES::DES3Set3KeyUncipher(CIPHER3DES_CONTEXT* ctx, XBYTE key[CIPHERDES
 
 /*-------------------------------------------------------------------
 //  CIPHER3DES::DES3Cipher
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			11/03/2013 23:17:47
-//	
-//	@return 			int : 
-//	@param				ctx : 
-//  @param				input[8] : 
-//  @param				output[8] : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      11/03/2013 23:17:47
+//
+//  @return       int :
+//  @param        ctx :
+//  @param        input[8] :
+//  @param        output[8] :
 */
 /*-----------------------------------------------------------------*/
 int CIPHER3DES::DES3Cipher(CIPHER3DES_CONTEXT* ctx, XBYTE input[8], XBYTE output[8])
 {
-	XDWORD	X;
-	XDWORD	Y;
-	XDWORD	T;
-	XDWORD* SK;
+  XDWORD  X;
+  XDWORD  Y;
+  XDWORD  T;
+  XDWORD* SK;
 
   SK = ctx->sk;
 
@@ -438,32 +438,32 @@ int CIPHER3DES::DES3Cipher(CIPHER3DES_CONTEXT* ctx, XBYTE input[8], XBYTE output
 
 /*-------------------------------------------------------------------
 //  CIPHER3DES::DES3Cipher_ECB
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			11/03/2013 23:17:57
-//	
-//	@return 			int : 
-//	@param				ctx : 
-//  @param				mode : 
-//  @param				length : 
-//  @param				iv[8] : 
-//  @param				input : 
-//  @param				output : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      11/03/2013 23:17:57
+//
+//  @return       int :
+//  @param        ctx :
+//  @param        mode :
+//  @param        length :
+//  @param        iv[8] :
+//  @param        input :
+//  @param        output :
 */
 /*-----------------------------------------------------------------*/
 bool CIPHER3DES::DES3Cipher_ECB(CIPHER3DES_CONTEXT* ctx, int mode, size_t length, XBYTE iv[8], XBYTE* input, XBYTE* output)
 {
-	XBYTE temp[8];
+  XBYTE temp[8];
 
   if(length % 8) return false;
 
   if(mode == CIPHERDES_ENCRYPT)
     {
       while(length > 0)
-        {       
+        {
           DES3Cipher( ctx, output, output);
 
           memcpy( iv, output, 8 );
@@ -477,10 +477,10 @@ bool CIPHER3DES::DES3Cipher_ECB(CIPHER3DES_CONTEXT* ctx, int mode, size_t length
     {
       while(length > 0)
         {
-					memcpy(temp, input, 8);
-           
-					DES3Cipher( ctx, input, output );
-        
+          memcpy(temp, input, 8);
+
+          DES3Cipher( ctx, input, output );
+
           memcpy( iv, temp, 8 );
 
           input  += 8;
@@ -489,32 +489,32 @@ bool CIPHER3DES::DES3Cipher_ECB(CIPHER3DES_CONTEXT* ctx, int mode, size_t length
         }
     }
 
-	return true;
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  CIPHER3DES::DES3Cipher_CBC
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			11/03/2013 23:17:57
-//	
-//	@return 			int : 
-//	@param				ctx : 
-//  @param				mode : 
-//  @param				length : 
-//  @param				iv[8] : 
-//  @param				input : 
-//  @param				output : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      11/03/2013 23:17:57
+//
+//  @return       int :
+//  @param        ctx :
+//  @param        mode :
+//  @param        length :
+//  @param        iv[8] :
+//  @param        input :
+//  @param        output :
 */
 /*-----------------------------------------------------------------*/
 bool CIPHER3DES::DES3Cipher_CBC(CIPHER3DES_CONTEXT* ctx, int mode, size_t length, XBYTE iv[8], XBYTE* input, XBYTE* output)
 {
-	XBYTE temp[8];
+  XBYTE temp[8];
 
   if(length % 8) return false;
 
@@ -523,9 +523,9 @@ bool CIPHER3DES::DES3Cipher_CBC(CIPHER3DES_CONTEXT* ctx, int mode, size_t length
       while(length > 0)
         {
           for(int c=0; c<8; c++)
-						{
+            {
               output[c] = (XBYTE)(input[c] ^ iv[c]);
-						}
+            }
 
           DES3Cipher( ctx, output, output);
 
@@ -540,14 +540,14 @@ bool CIPHER3DES::DES3Cipher_CBC(CIPHER3DES_CONTEXT* ctx, int mode, size_t length
     {
       while(length > 0)
         {
-					memcpy(temp, input, 8);
-           
-					DES3Cipher( ctx, input, output );
+          memcpy(temp, input, 8);
+
+          DES3Cipher( ctx, input, output );
 
           for(int c=0; c<8; c++ )
-						{
+            {
               output[c] = (XBYTE)( output[c] ^ iv[c]);
-						}
+            }
 
           memcpy( iv, temp, 8 );
 
@@ -557,7 +557,7 @@ bool CIPHER3DES::DES3Cipher_CBC(CIPHER3DES_CONTEXT* ctx, int mode, size_t length
         }
     }
 
-	return true;
+  return true;
 }
 
 

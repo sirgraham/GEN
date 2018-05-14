@@ -1,20 +1,20 @@
 /*------------------------------------------------------------------------------------------
-//	DIOCHECKCONNEXIONS.H
-*/	
-/**	
-// \class 
-//   
+//  DIOCHECKCONNEXIONS.H
+*/
+/**
+// \class
+//
 //  Data IO Check Connexions class
-//   
-//	@author	 Abraham J. Velez
-//	@version 05/11/2007 16:20:28
-*/	
-/*	GEN  Copyright (C).  All right reserved.	
+//
+//  @author  Abraham J. Velez
+//  @version 05/11/2007 16:20:28
+*/
+/*  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
+
 #ifndef _DIOCHECKCONNEXIONS_H_
 #define _DIOCHECKCONNEXIONS_H_
-		
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
 #include "XFactory.h"
@@ -25,24 +25,24 @@
 #include "XString.h"
 #include "XThreadCollected.h"
 
-#include "HashCRC32.h"	
+#include "HashCRC32.h"
 
 #include "DIOFactory.h"
 #include "DIOURL.h"
 
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
 
-#define DIOCHECKCONNEXIONS_DEFAULTTIMECONNEXIONCHECKS			 10   // seconds 
+#define DIOCHECKCONNEXIONS_DEFAULTTIMECONNEXIONCHECKS      10   // seconds
 
-#define DIOCHECKCONNEXIONS_DEFAULTNCHECKSFOREVERYCONNEXION				  5  
-#define DIOCHECKCONNEXIONS_DEFAULTTIMERCONNEXIONCHECK			100   // milliseconds
+#define DIOCHECKCONNEXIONS_DEFAULTNCHECKSFOREVERYCONNEXION          5
+#define DIOCHECKCONNEXIONS_DEFAULTTIMERCONNEXIONCHECK     100   // milliseconds
 
-#define DIOCHECKCONNEXIONS_MAXNCONNEXIONCUTS											250
+#define DIOCHECKCONNEXIONS_MAXNCONNEXIONCUTS                      250
 
-#define DIOCHECKCONNEXIONS_INFINITECUT														 -1
+#define DIOCHECKCONNEXIONS_INFINITECUT                             -1
 
 /*---- CLASS -----------------------------------------------------------------------------*/
-	
+
 class XFACTORY;
 class XPUBLISHER;
 class XRAND;
@@ -53,69 +53,69 @@ class DIOPING;
 
 class DIOCHECKCONNEXIONCUT
 {
-	public:	
-																						DIOCHECKCONNEXIONCUT									()																
-																						{ 
-																							Clean();																				
-																							
-																							startdatetime = xfactory->CreateDateTime();
-																						}	
+  public:
+                                            DIOCHECKCONNEXIONCUT                  ()
+                                            {
+                                              Clean();
 
-		virtual																 ~DIOCHECKCONNEXIONCUT									()																
-																						{ 
-																							if(startdatetime) xfactory->DeleteDateTime(startdatetime);
-																							
-																							Clean();																				
-																						}
-		
-		XDATETIME*															GetStartDateTime											()																{ return startdatetime;														}
+                                              startdatetime = xfactory->CreateDateTime();
+                                            }
 
-		int																			GetMeasureNSeconds										()																{ return nseconds;																}	
-		void																		SetMeasureNSeconds										(XDWORD nseconds)									{ this->nseconds = nseconds;											}
+    virtual                                ~DIOCHECKCONNEXIONCUT                  ()
+                                            {
+                                              if(startdatetime) xfactory->DeleteDateTime(startdatetime);
 
-		bool																		GetMeasureTimeString									(XSTRING& measuretime, bool large = false)
-																						{
-																							XTIMER xtimer;
+                                              Clean();
+                                            }
 
-																							xtimer.Reset();
-																							xtimer.AddSeconds(GetMeasureNSeconds());
+    XDATETIME*                              GetStartDateTime                      ()                                { return startdatetime;                           }
 
-																							xtimer.GetMeasureString(measuretime, large);
+    int                                     GetMeasureNSeconds                    ()                                { return nseconds;                                }
+    void                                    SetMeasureNSeconds                    (XDWORD nseconds)                 { this->nseconds = nseconds;                      }
 
-																							return true;	
-																						}
-		
+    bool                                    GetMeasureTimeString                  (XSTRING& measuretime, bool large = false)
+                                            {
+                                              XTIMER xtimer;
 
-		bool																		CopyFrom															(DIOCHECKCONNEXIONCUT* connexioncut)
-																						{
-																							if(!connexioncut)		return false;
+                                              xtimer.Reset();
+                                              xtimer.AddSeconds(GetMeasureNSeconds());
 
-																							startdatetime->CopyTo(connexioncut->GetStartDateTime());
-																							nseconds		= connexioncut->GetMeasureNSeconds();	
-		
-																							return true;
-																						}
+                                              xtimer.GetMeasureString(measuretime, large);
 
-		bool																		CopyTo																(DIOCHECKCONNEXIONCUT* connexioncut)
-																						{
-																							if(!connexioncut)		return false;
-																						
-																							connexioncut->GetStartDateTime()->CopyFrom(startdatetime);	
-																							connexioncut->SetMeasureNSeconds(nseconds);	
+                                              return true;
+                                            }
 
-																							return true;
-																						}
 
-	private:
+    bool                                    CopyFrom                              (DIOCHECKCONNEXIONCUT* connexioncut)
+                                            {
+                                              if(!connexioncut)   return false;
 
-		void																		Clean																	()
-																						{				
-																							startdatetime		= NULL;		
-																							nseconds				= 0;
-																						}
-				
-		XDATETIME*															startdatetime;
-		int																			nseconds;
+                                              startdatetime->CopyTo(connexioncut->GetStartDateTime());
+                                              nseconds    = connexioncut->GetMeasureNSeconds();
+
+                                              return true;
+                                            }
+
+    bool                                    CopyTo                                (DIOCHECKCONNEXIONCUT* connexioncut)
+                                            {
+                                              if(!connexioncut)   return false;
+
+                                              connexioncut->GetStartDateTime()->CopyFrom(startdatetime);
+                                              connexioncut->SetMeasureNSeconds(nseconds);
+
+                                              return true;
+                                            }
+
+  private:
+
+    void                                    Clean                                 ()
+                                            {
+                                              startdatetime   = NULL;
+                                              nseconds        = 0;
+                                            }
+
+    XDATETIME*                              startdatetime;
+    int                                     nseconds;
 };
 
 
@@ -125,70 +125,70 @@ class DIOCHECKCONNEXIONCUT
 
 class DIOCHECKCONNEXION
 {
-	public:	
-																						DIOCHECKCONNEXION											()
-																						{
-																							Clean();
-																																														
-																							if(diofactory) url = diofactory->CreateURL();		
-																									
-																						}
+  public:
+                                            DIOCHECKCONNEXION                     ()
+                                            {
+                                              Clean();
 
-		virtual																 ~DIOCHECKCONNEXION											()
-																						{																							
-																							if(url)  diofactory->DeleteURL(url);
-																							
-																							Clean();
-																						}
-		
-		XDWORD																	GetID	                                ()																{ return ID;																			}	
-		DIOURL*																	GetURL                                ()																{ return url;																			}
+                                              if(diofactory) url = diofactory->CreateURL();
 
-		bool																		IsConnected														()																{ return isconnected;                             }
-		void																		SetIsConnected												(bool isconnected)								{ this->isconnected = isconnected;                }
+                                            }
 
-		XDWORD																	GetNChecks														()																{ return nchecks;																	}
-		void																		SetNChecks														(XDWORD nchecks)									{ this->nchecks = nchecks;												}
-		XDWORD																	IncNChecks														()																{ return ++nchecks;																}
+    virtual                                ~DIOCHECKCONNEXION                     ()
+                                            {
+                                              if(url)  diofactory->DeleteURL(url);
 
-		bool																		Set																		(XCHAR* url)
-																						{
-																							if(!this->url)  return 0;
+                                              Clean();
+                                            }
 
-																							(*this->url) = url;
-																							
-																							this->url->Slash_Delete();
-																							
-																							ID = CreateID();
+    XDWORD                                  GetID                                 ()                                { return ID;                                      }
+    DIOURL*                                 GetURL                                ()                                { return url;                                     }
 
-																							return ID?true:false;
-																						}		
-	private:
+    bool                                    IsConnected                           ()                                { return isconnected;                             }
+    void                                    SetIsConnected                        (bool isconnected)                { this->isconnected = isconnected;                }
 
-		void																		Clean																	()
-																						{																																																	
-																							ID										= 0;
-																							url										= NULL;	
-																							isconnected						= false;
-																							nchecks								= 0;																							
-																						}
+    XDWORD                                  GetNChecks                            ()                                { return nchecks;                                 }
+    void                                    SetNChecks                            (XDWORD nchecks)                  { this->nchecks = nchecks;                        }
+    XDWORD                                  IncNChecks                            ()                                { return ++nchecks;                               }
 
-		XDWORD																	CreateID															()
-																						{
-																							HASHCRC32 hashcrc32;																							
-																							XDWORD    _ID = 0;
+    bool                                    Set                                   (XCHAR* url)
+                                            {
+                                              if(!this->url)  return 0;
 
-																							XSTRING_CREATEOEM((*url), charstr)	
-																							if(hashcrc32.Do((XBYTE*)charstr, url->GetSize())) _ID += hashcrc32.GetResultCRC32();																								
-																							XSTRING_DELETEOEM(charstr)
+                                              (*this->url) = url;
 
-																							return _ID;
-																						}	
+                                              this->url->Slash_Delete();
 
-		XDWORD																	ID;
-		DIOURL*																	url;
-		bool																		isconnected;
-		XDWORD																	nchecks;
+                                              ID = CreateID();
+
+                                              return ID?true:false;
+                                            }
+  private:
+
+    void                                    Clean                                 ()
+                                            {
+                                              ID                    = 0;
+                                              url                   = NULL;
+                                              isconnected           = false;
+                                              nchecks               = 0;
+                                            }
+
+    XDWORD                                  CreateID                              ()
+                                            {
+                                              HASHCRC32 hashcrc32;
+                                              XDWORD    _ID = 0;
+
+                                              XSTRING_CREATEOEM((*url), charstr)
+                                              if(hashcrc32.Do((XBYTE*)charstr, url->GetSize())) _ID += hashcrc32.GetResultCRC32();
+                                              XSTRING_DELETEOEM(charstr)
+
+                                              return _ID;
+                                            }
+
+    XDWORD                                  ID;
+    DIOURL*                                 url;
+    bool                                    isconnected;
+    XDWORD                                  nchecks;
 };
 
 
@@ -197,91 +197,91 @@ class DIOCHECKCONNEXION
 
 class DIOCHECKCONNEXIONS
 {
-	public:	
-																						DIOCHECKCONNEXIONS										();
-		virtual																 ~DIOCHECKCONNEXIONS										();
+  public:
+                                            DIOCHECKCONNEXIONS                    ();
+    virtual                                ~DIOCHECKCONNEXIONS                    ();
 
-		bool																		Ini                                   (int timerconnexionscheck = DIOCHECKCONNEXIONS_DEFAULTTIMECONNEXIONCHECKS, bool validsomeisconnected = false,  bool dispersionmode = false);
+    bool                                    Ini                                   (int timerconnexionscheck = DIOCHECKCONNEXIONS_DEFAULTTIMECONNEXIONCHECKS, bool validsomeisconnected = false,  bool dispersionmode = false);
 
-		bool																		Run                                   (bool activate = true)
-																						{
-																							if(!threadcheckconnexions) return false;
-																							return threadcheckconnexions->Run(activate);
-																						}	
-		
-		int																			GetTimeConnexionChecks								()																			{ return timeconnexionchecks;							}
+    bool                                    Run                                   (bool activate = true)
+                                            {
+                                              if(!threadcheckconnexions) return false;
+                                              return threadcheckconnexions->Run(activate);
+                                            }
 
-		bool																		IsCheckTimeConnexions									()																			{ return ischecktimeconnexions;						}	
-		void																		SetIsCheckTimeConnexions							(bool ischecktimeconnexions)
-																						{ 
-																							this->ischecktimeconnexions = ischecktimeconnexions;						
-																						}	
+    int                                     GetTimeConnexionChecks                ()                                      { return timeconnexionchecks;             }
 
-		
-		void																		Setup																	(int timeconnexionchecks = DIOCHECKCONNEXIONS_DEFAULTTIMECONNEXIONCHECKS, bool validsomeisconnected = false, bool dispersionmode = false)					
-																						{ 
-																							this->timeconnexionchecks		= timeconnexionchecks; 	
-																							this->validsomeisconnected	= validsomeisconnected;
-																							this->dispersionmode				= dispersionmode;
-																						}
-							
-		bool																		Connexion_Add													(XCHAR* url, XDWORD& ID);
-		bool																		Connexion_Add													(XSTRING& url, XDWORD& ID)				
-																						{ 
-																							return Connexion_Add(url.Get(), ID);							
-																						}
+    bool                                    IsCheckTimeConnexions                 ()                                      { return ischecktimeconnexions;           }
+    void                                    SetIsCheckTimeConnexions              (bool ischecktimeconnexions)
+                                            {
+                                              this->ischecktimeconnexions = ischecktimeconnexions;
+                                            }
 
-		bool																		Connexion_Add													(DIOURL& url, XDWORD& ID)					
-																						{ 
-																							return Connexion_Add(url.Get(), ID);							
-																						}		
 
-		DIOCHECKCONNEXION*											Connexion_GetByID						          (XDWORD ID); 
-		bool																		Connexion_IsActive										(XDWORD ID, bool& isactive);		
-		bool																		Connexion_DeleteByID									(XDWORD ID);
-		
-		bool																		Connexions_IsAllChecked								();
-		bool																		Connexions_IsSomeChecked							();
-		bool																		Connexions_WaitToAllChecked						(int timeout);
-		bool																		Connexions_WaitToSomeIsChecked				(int timeout);
-		bool																		Connexions_SomeIsConnected						();
+    void                                    Setup                                 (int timeconnexionchecks = DIOCHECKCONNEXIONS_DEFAULTTIMECONNEXIONCHECKS, bool validsomeisconnected = false, bool dispersionmode = false)
+                                            {
+                                              this->timeconnexionchecks   = timeconnexionchecks;
+                                              this->validsomeisconnected  = validsomeisconnected;
+                                              this->dispersionmode        = dispersionmode;
+                                            }
 
-		bool																		Connexions_DeleteAll									();
+    bool                                    Connexion_Add                         (XCHAR* url, XDWORD& ID);
+    bool                                    Connexion_Add                         (XSTRING& url, XDWORD& ID)
+                                            {
+                                              return Connexion_Add(url.Get(), ID);
+                                            }
 
-		bool																		End	                                  ();
-							
-		
-	private:
+    bool                                    Connexion_Add                         (DIOURL& url, XDWORD& ID)
+                                            {
+                                              return Connexion_Add(url.Get(), ID);
+                                            }
 
-		void																		Clean																	()
-																						{																									
-																							timeconnexionchecks									= DIOCHECKCONNEXIONS_DEFAULTTIMECONNEXIONCHECKS;																							
-																							validsomeisconnected								= false;
-																							dispersionmode											= false;
+    DIOCHECKCONNEXION*                      Connexion_GetByID                     (XDWORD ID);
+    bool                                    Connexion_IsActive                    (XDWORD ID, bool& isactive);
+    bool                                    Connexion_DeleteByID                  (XDWORD ID);
 
-																							xtimerfortimeconnexionchecks				= NULL;
-																							ischecktimeconnexions								= false;
-																							ping																= NULL;
-																							xmutexconnexions										= NULL;
-																							threadcheckconnexions								= NULL;
-																						}
+    bool                                    Connexions_IsAllChecked               ();
+    bool                                    Connexions_IsSomeChecked              ();
+    bool                                    Connexions_WaitToAllChecked           (int timeout);
+    bool                                    Connexions_WaitToSomeIsChecked        (int timeout);
+    bool                                    Connexions_SomeIsConnected            ();
 
-		static void															ThreadCheckConnexions									(void* param);
+    bool                                    Connexions_DeleteAll                  ();
 
-		int																			timeconnexionchecks;	
-		bool																		validsomeisconnected;
-		bool																		dispersionmode;
+    bool                                    End                                   ();
 
-		XTIMER*																	xtimerfortimeconnexionchecks;
-		bool																		ischecktimeconnexions;
-		DIOPING*																ping;
-		XMUTEX*																	xmutexconnexions;
-		XVECTOR<DIOCHECKCONNEXION*>							connexions;	
-		XTHREADCOLLECTED*												threadcheckconnexions;	
+
+  private:
+
+    void                                    Clean                                 ()
+                                            {
+                                              timeconnexionchecks                 = DIOCHECKCONNEXIONS_DEFAULTTIMECONNEXIONCHECKS;
+                                              validsomeisconnected                = false;
+                                              dispersionmode                      = false;
+
+                                              xtimerfortimeconnexionchecks        = NULL;
+                                              ischecktimeconnexions               = false;
+                                              ping                                = NULL;
+                                              xmutexconnexions                    = NULL;
+                                              threadcheckconnexions               = NULL;
+                                            }
+
+    static void                             ThreadCheckConnexions                 (void* param);
+
+    int                                     timeconnexionchecks;
+    bool                                    validsomeisconnected;
+    bool                                    dispersionmode;
+
+    XTIMER*                                 xtimerfortimeconnexionchecks;
+    bool                                    ischecktimeconnexions;
+    DIOPING*                                ping;
+    XMUTEX*                                 xmutexconnexions;
+    XVECTOR<DIOCHECKCONNEXION*>             connexions;
+    XTHREADCOLLECTED*                       threadcheckconnexions;
 };
 
-	
+
 /*---- INLINE FUNCTIONS ------------------------------------------------------------------*/
-	
+
 #endif
 

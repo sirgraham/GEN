@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------------------
-//	DIOANDROIDSTREAMWIFIREMOTEENUMDEVICES.H
+//  DIOANDROIDSTREAMWIFIREMOTEENUMDEVICES.H
 //
 /**
 // \class
 //
 //  ANDROID Data IO Stream Wifi Remote Enum Devices class
 //
-//	@author	 Abraham J. Velez
-//	@version 02/01/2002
+//  @author  Abraham J. Velez
+//  @version 02/01/2002
 */
-//	GEN  Copyright (C).  All right reserved.
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
 
 #ifndef _DIOANDROIDSTREAMWIFIREMOTEENUMDEVICES_H_
@@ -28,21 +28,21 @@
 
 enum DIOANDROIDWIFIENUMFSMFSMEVENTS
 {
-	DIOANDROIDWIFIENUMFSMEVENT_NONE							= 0 ,
-	DIOANDROIDWIFIENUMFSMEVENT_SEARCH								,	
-	DIOANDROIDWIFIENUMFSMEVENT_SEARCHEND						,
-		
-	DIOANDROIDWIFIENUM_LASTEVENT
+  DIOANDROIDWIFIENUMFSMEVENT_NONE             = 0 ,
+  DIOANDROIDWIFIENUMFSMEVENT_SEARCH               ,
+  DIOANDROIDWIFIENUMFSMEVENT_SEARCHEND            ,
+
+  DIOANDROIDWIFIENUM_LASTEVENT
 };
 
 
 enum DIOANDROIDWIFIENUMFSMSTATES
 {
-	DIOANDROIDWIFIENUMFSMSTATE_NONE							= 0 ,	
-	DIOANDROIDWIFIENUMFSMSTATE_SEARCH   						,
-	DIOANDROIDWIFIENUMFSMSTATE_SEARCHEND						,
+  DIOANDROIDWIFIENUMFSMSTATE_NONE             = 0 ,
+  DIOANDROIDWIFIENUMFSMSTATE_SEARCH               ,
+  DIOANDROIDWIFIENUMFSMSTATE_SEARCHEND            ,
 
-	DIOANDROIDWIFIENUM_LASTSTATE
+  DIOANDROIDWIFIENUM_LASTSTATE
 };
 
 
@@ -57,21 +57,21 @@ class DIOSTREAMDEVICEWIFI;
 
 class DIOANDROIDSTREAMWIFIREMOTEENUMDEVICES :  public DIOSTREAMWIFIREMOTEENUMDEVICES, public XFSMACHINE
 {
-	public:
-															DIOANDROIDSTREAMWIFIREMOTEENUMDEVICES							( );
-		virtual									 ~DIOANDROIDSTREAMWIFIREMOTEENUMDEVICES							();
+  public:
+                              DIOANDROIDSTREAMWIFIREMOTEENUMDEVICES             ( );
+    virtual                  ~DIOANDROIDSTREAMWIFIREMOTEENUMDEVICES             ();
 
-		bool											Search																					();	
-		bool											StopSearch																			(bool waitend);
-		bool											IsSearching																			();
+    bool                      Search                                          ();
+    bool                      StopSearch                                      (bool waitend);
+    bool                      IsSearching                                     ();
 
-	private:
+  private:
 
-		void											Clean																						();	
-				
-		static void								ThreadEnumDevices																(void* thread);	
+    void                      Clean                                           ();
 
-		XTHREAD*									threadenumdevices;	
+    static void               ThreadEnumDevices                               (void* thread);
+
+    XTHREAD*                  threadenumdevices;
 };
 
 

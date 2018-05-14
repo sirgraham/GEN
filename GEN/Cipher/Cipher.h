@@ -1,21 +1,21 @@
 //------------------------------------------------------------------------------------------
-//	CIPHER.H
-//	
-/**	
-// \class 
-//   
+//  CIPHER.H
+//
+/**
+// \class
+//
 //  Cipher Interface
-//   
-//	@author	 Abraham J. Velez
-//	@version 22/04/2002
-*/	
-//	GEN  Copyright (C).  All right reserved.		 			 
+//
+//  @author  Abraham J. Velez
+//  @version 22/04/2002
+*/
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
+
 #ifndef _CIPHERH_
 #define _CIPHERH_
-	
-	
+
+
 //---- INCLUDES ----------------------------------------------------------------------------
 
 #include <stdio.h>
@@ -24,75 +24,75 @@
 #include "XBase.h"
 #include "XBuffer.h"
 #include "XString.h"
-	
+
 //---- DEFINES & ENUMS  --------------------------------------------------------------------
-	
+
 #define CIPHERMAXKEYS 2
 
 enum CIPHERTYPE
 {
-	CIPHERTYPE_XOR			=	0	,
-	CIPHERTYPE_DES	        ,
-  CIPHERTYPE_3DES					,
-  CIPHERTYPE_BLOWFISH			,
-  CIPHERTYPE_AES					,  
+  CIPHERTYPE_XOR      = 0 ,
+  CIPHERTYPE_DES          ,
+  CIPHERTYPE_3DES         ,
+  CIPHERTYPE_BLOWFISH     ,
+  CIPHERTYPE_AES          ,
 };
 
 
 
 enum CIPHERKEYTYPE
 {
-	CIPHERKEYTYPE_UNKNOWN				  = 0  ,
-	CIPHERKEYTYPE_SYMMETRICAL					 ,
-	CIPHERKEYTYPE_PUBLIC							 , 
-	CIPHERKEYTYPE_PRIVATE					     ,
-	
+  CIPHERKEYTYPE_UNKNOWN         = 0  ,
+  CIPHERKEYTYPE_SYMMETRICAL          ,
+  CIPHERKEYTYPE_PUBLIC               ,
+  CIPHERKEYTYPE_PRIVATE              ,
+
 };
 
 
 enum CIPHERCHAININGMODE
 {
-	CIPHERCHAININGMODE_UNKNOWN		= 0 ,
-	CIPHERCHAININGMODE_ECB						,		
-	CIPHERCHAININGMODE_CBC						,		
-	CIPHERCHAININGMODE_CFB				    ,
-	CIPHERCHAININGMODE_CTR				    ,
+  CIPHERCHAININGMODE_UNKNOWN    = 0 ,
+  CIPHERCHAININGMODE_ECB            ,
+  CIPHERCHAININGMODE_CBC            ,
+  CIPHERCHAININGMODE_CFB            ,
+  CIPHERCHAININGMODE_CTR            ,
 };
 
-	
+
 //---- CLASS -------------------------------------------------------------------------------
 
 
 class CIPHERKEY
 {
-	public:						
-													CIPHERKEY									()																				{ Clean();																					}										
-		virtual							 ~CIPHERKEY									()																				{ Clean();																					}	
+  public:
+                          CIPHERKEY                 ()                                        { Clean();                                          }
+    virtual              ~CIPHERKEY                 ()                                        { Clean();                                          }
 
-		CIPHERKEYTYPE					GetType										()																				{ return type;																			}
-		void									SetType										()																				{ this->type = type;																}	
+    CIPHERKEYTYPE         GetType                   ()                                        { return type;                                      }
+    void                  SetType                   ()                                        { this->type = type;                                }
 
-		virtual int						GetSizeInBytes            ()																				{ return 0;																					}
-		int										GetSizeInBits	            ()																				{	return (GetSizeInBytes()*8);											}	
+    virtual int           GetSizeInBytes            ()                                        { return 0;                                         }
+    int                   GetSizeInBits             ()                                        { return (GetSizeInBytes()*8);                      }
 
-		bool									CopyFrom                  (CIPHERKEY* key)
-													{
-														if(!key) return false;
-														type = key->GetType();
+    bool                  CopyFrom                  (CIPHERKEY* key)
+                          {
+                            if(!key) return false;
+                            type = key->GetType();
 
-														return true;
-													}
-		
-	protected:
-				
-		CIPHERKEYTYPE				  type;	
-	
-private:	
+                            return true;
+                          }
 
-		void									Clean											()
-													{
-														type = CIPHERKEYTYPE_UNKNOWN;
-													}		
+  protected:
+
+    CIPHERKEYTYPE         type;
+
+private:
+
+    void                  Clean                     ()
+                          {
+                            type = CIPHERKEYTYPE_UNKNOWN;
+                          }
 };
 
 
@@ -100,38 +100,38 @@ private:
 
 class CIPHERKEYSYMMETRICAL : public CIPHERKEY
 {
-	public:						
-													CIPHERKEYSYMMETRICAL			();
-		virtual							 ~CIPHERKEYSYMMETRICAL			();
+  public:
+                          CIPHERKEYSYMMETRICAL      ();
+    virtual              ~CIPHERKEYSYMMETRICAL      ();
 
-		XBYTE*								Get												(int& size);
-		XBUFFER*							Get												();
+    XBYTE*                Get                       (int& size);
+    XBUFFER*              Get                       ();
 
-		bool									Set												(XBYTE* key, int size);
-		bool									Set												(XBUFFER& key);
+    bool                  Set                       (XBYTE* key, int size);
+    bool                  Set                       (XBUFFER& key);
 
-		int										GetSizeInBytes            ()																				{ return xbufferkey->GetSize();											}				
+    int                   GetSizeInBytes            ()                                        { return xbufferkey->GetSize();                     }
 
-		bool									CopyFrom                  (CIPHERKEYSYMMETRICAL* key)
-													{
-														if(!key) return false;
+    bool                  CopyFrom                  (CIPHERKEYSYMMETRICAL* key)
+                          {
+                            if(!key) return false;
 
-														if(!CIPHERKEY::CopyFrom((CIPHERKEY*)key)) return false;
+                            if(!CIPHERKEY::CopyFrom((CIPHERKEY*)key)) return false;
 
-														xbufferkey->Delete();
-														xbufferkey->Add(key->Get()->Get(), key->Get()->GetSize());
+                            xbufferkey->Delete();
+                            xbufferkey->Add(key->Get()->Get(), key->Get()->GetSize());
 
-														return true;
-													}
-		
-	private:	
+                            return true;
+                          }
 
-		void									Clean											()
-													{														
-														xbufferkey = NULL;
-													}
-			
-		XBUFFER*							xbufferkey;
+  private:
+
+    void                  Clean                     ()
+                          {
+                            xbufferkey = NULL;
+                          }
+
+    XBUFFER*              xbufferkey;
 };
 
 
@@ -140,60 +140,60 @@ class CIPHERKEYSYMMETRICAL : public CIPHERKEY
 
 class CIPHER
 {
-	public:						
-													CIPHER										();												
-		virtual							 ~CIPHER										();
+  public:
+                          CIPHER                    ();
+    virtual              ~CIPHER                    ();
 
-		CIPHERTYPE						GetType										()																				{ return type;																			}
-		void									SetType										()																				{ this->type = type;																}		
-		
-		CIPHERCHAININGMODE		GetChainingMode						()																				{ return chainingmode;															}
-		void									SetChainingMode						(CIPHERCHAININGMODE chainingmode)					{ this->chainingmode = chainingmode;								}
+    CIPHERTYPE            GetType                   ()                                        { return type;                                      }
+    void                  SetType                   ()                                        { this->type = type;                                }
 
-		XBUFFER_PADDINGTYPE		GetPaddingType						()																				{ return paddingtype;																}
-		void									SetPaddingType						(XBUFFER_PADDINGTYPE paddingtype)					{ this->paddingtype = paddingtype;									}
+    CIPHERCHAININGMODE    GetChainingMode           ()                                        { return chainingmode;                              }
+    void                  SetChainingMode           (CIPHERCHAININGMODE chainingmode)         { this->chainingmode = chainingmode;                }
 
-		int										GetPaddingAdjustSize			()																				{ return paddingadjustsize;													}
-		void									SetPaddingAdjustSize			(int paddingadjustsize)										{ this->paddingadjustsize = paddingadjustsize;			}
+    XBUFFER_PADDINGTYPE   GetPaddingType            ()                                        { return paddingtype;                               }
+    void                  SetPaddingType            (XBUFFER_PADDINGTYPE paddingtype)         { this->paddingtype = paddingtype;                  }
 
-		CIPHERKEY*						GetKey										(CIPHERKEYTYPE type = CIPHERKEYTYPE_SYMMETRICAL);
-		virtual bool					SetKey										(CIPHERKEY* key, bool integritycheck = false);
+    int                   GetPaddingAdjustSize      ()                                        { return paddingadjustsize;                         }
+    void                  SetPaddingAdjustSize      (int paddingadjustsize)                   { this->paddingadjustsize = paddingadjustsize;      }
 
-		XBYTE*								GetInitVector							();		
-		bool									SetInitVector							(XBYTE* inivector, int size);		
-		bool									SetInitVector							(XBUFFER& inivector);	
+    CIPHERKEY*            GetKey                    (CIPHERKEYTYPE type = CIPHERKEYTYPE_SYMMETRICAL);
+    virtual bool          SetKey                    (CIPHERKEY* key, bool integritycheck = false);
 
-		virtual bool					Cipher										(XBYTE* input, int size);		
-		bool									Cipher										(XBUFFER& input);	
+    XBYTE*                GetInitVector             ();
+    bool                  SetInitVector             (XBYTE* inivector, int size);
+    bool                  SetInitVector             (XBUFFER& inivector);
 
-		virtual bool					Uncipher									(XBYTE* input,int size);		
-		bool									Uncipher									(XBUFFER& input);	
-		
-		virtual XBYTE*				GetResult									(int& resultsize);
-		XBUFFER*							GetResult									();		
-		bool									GetResultString						(XSTRING& stringhex);
-		
-	protected:
-				 
-		CIPHERTYPE						type;
-		CIPHERCHAININGMODE		chainingmode;
-		XBUFFER_PADDINGTYPE		paddingtype;
-		int										paddingadjustsize;
-		
-		CIPHERKEY*						keys[CIPHERMAXKEYS];
-		XBUFFER*						  inivector;
-		XBUFFER*						  result;
+    virtual bool          Cipher                    (XBYTE* input, int size);
+    bool                  Cipher                    (XBUFFER& input);
 
-	private:
+    virtual bool          Uncipher                  (XBYTE* input,int size);
+    bool                  Uncipher                  (XBUFFER& input);
 
-		void									Clean											();
+    virtual XBYTE*        GetResult                 (int& resultsize);
+    XBUFFER*              GetResult                 ();
+    bool                  GetResultString           (XSTRING& stringhex);
 
-		CIPHERKEY*						GetKey										(int index);
-		bool									SetKey										(int index, CIPHERKEY* key);
+  protected:
+
+    CIPHERTYPE            type;
+    CIPHERCHAININGMODE    chainingmode;
+    XBUFFER_PADDINGTYPE   paddingtype;
+    int                   paddingadjustsize;
+
+    CIPHERKEY*            keys[CIPHERMAXKEYS];
+    XBUFFER*              inivector;
+    XBUFFER*              result;
+
+  private:
+
+    void                  Clean                     ();
+
+    CIPHERKEY*            GetKey                    (int index);
+    bool                  SetKey                    (int index, CIPHERKEY* key);
 };
 
 
-	
+
 //---- INLINE FUNCTIONS --------------------------------------------------------------------
 
 

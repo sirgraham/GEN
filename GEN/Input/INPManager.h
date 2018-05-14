@@ -1,17 +1,17 @@
 //------------------------------------------------------------------------------------------
-//	INPMANAGER.H
-//	
-/**	
-// \class 
-//   
+//  INPMANAGER.H
+//
+/**
+// \class
+//
 //  Input Manager
-//   
-//	@author	 Abraham J. Velez
-//	@version 10/02/2003
-*/	
-//	GEN  Copyright (C).  All right reserved.		 			 
+//
+//  @author  Abraham J. Velez
+//  @version 10/02/2003
+*/
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
+
 #ifndef _INPMANAGER_H_
 #define _INPMANAGER_H_
 
@@ -24,7 +24,7 @@
 #include "INPDevice.h"
 
 //---- DEFINES & ENUMS  --------------------------------------------------------------------
-	
+
 
 //---- CLASS -------------------------------------------------------------------------------
 
@@ -33,50 +33,50 @@ class XFACTORY;
 
 class INPMANAGER
 {
-	public:
-		
-		bool																AddDevice									(INPDEVICE* device);
-		bool																DelDevice									(INPDEVICE* device);
+  public:
 
-		bool																DeleteAllDevices					();
+    bool                                AddDevice                 (INPDEVICE* device);
+    bool                                DelDevice                 (INPDEVICE* device);
 
-		INPDEVICE_TYPE											GetDeviceIDByName					(XSTRING& name);
-		INPDEVICE_TYPE											GetDeviceIDByName					(XCHAR* name);
-		
-		int																	GetNDevices								();
-		INPDEVICE*													GetDevice									(int index);
-		INPDEVICE*													GetDevice									(INPDEVICE_TYPE type);
-		INPDEVICE*													GetDevice									(XSTRING& name);		
-		INPDEVICE*													GetDevice									(XCHAR* name);			
+    bool                                DeleteAllDevices          ();
 
-		virtual bool												Update										();
+    INPDEVICE_TYPE                      GetDeviceIDByName         (XSTRING& name);
+    INPDEVICE_TYPE                      GetDeviceIDByName         (XCHAR* name);
 
-		static INPMANAGER*									GetInstance								();
-		static void													DelInstance								();
+    int                                 GetNDevices               ();
+    INPDEVICE*                          GetDevice                 (int index);
+    INPDEVICE*                          GetDevice                 (INPDEVICE_TYPE type);
+    INPDEVICE*                          GetDevice                 (XSTRING& name);
+    INPDEVICE*                          GetDevice                 (XCHAR* name);
 
-	protected:
+    virtual bool                        Update                    ();
 
-		
-		
-																				INPMANAGER								(); 	
-																				INPMANAGER								(INPMANAGER const&);				// Don't implement  
-		virtual														 ~INPMANAGER								(); 		
+    static INPMANAGER*                  GetInstance               ();
+    static void                         DelInstance               ();
 
-		void																operator =								(INPMANAGER const&);				// Don't implement
-
-		static INPMANAGER*									Instance;
+  protected:
 
 
-	private:	
 
-		void																Clean											();
+                                        INPMANAGER                ();
+                                        INPMANAGER                (INPMANAGER const&);        // Don't implement
+    virtual                            ~INPMANAGER                ();
 
-		
-		XMAP<int, INPDEVICE*>								devicemap;			
+    void                                operator =                (INPMANAGER const&);        // Don't implement
+
+    static INPMANAGER*                  Instance;
+
+
+  private:
+
+    void                                Clean                     ();
+
+
+    XMAP<int, INPDEVICE*>               devicemap;
 };
 
-		
+
 //---- INLINE FUNCTIONS --------------------------------------------------------------------
-	
+
 #endif
 

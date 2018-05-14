@@ -1,21 +1,21 @@
 //------------------------------------------------------------------------------------------
-//	DIOSTREAMDEVICEIP.H
-//	
-/**	
-// \class 
-//   
+//  DIOSTREAMDEVICEIP.H
+//
+/**
+// \class
+//
 //  Data IO Stream Device IP class
-//   
-//	@author	 Abraham J. Velez
-//	@version 23/05/2002
-*/	
-//	GEN  Copyright (C).  All right reserved.		 			 
+//
+//  @author  Abraham J. Velez
+//  @version 23/05/2002
+*/
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
+
 #ifndef _DIOSTREAMDEVICEIP_H_
 #define _DIOSTREAMDEVICEIP_H_
-	
-	
+
+
 //---- INCLUDES ----------------------------------------------------------------------------
 
 #include "DIOIP.h"
@@ -28,11 +28,11 @@
 
 enum DIOSTREAMIPDEVICE_TYPE
 {
-	DIOSTREAMIPDEVICE_TYPE_UNKNOWN						= 0	,
-	DIOSTREAMIPDEVICE_TYPE_ETHERNET								,
-	DIOSTREAMIPDEVICE_TYPE_WIFI										,
-	DIOSTREAMIPDEVICE_TYPE_PPP										,
-	DIOSTREAMIPDEVICE_TYPE_LOOPBACK								,		
+  DIOSTREAMIPDEVICE_TYPE_UNKNOWN            = 0 ,
+  DIOSTREAMIPDEVICE_TYPE_ETHERNET               ,
+  DIOSTREAMIPDEVICE_TYPE_WIFI                   ,
+  DIOSTREAMIPDEVICE_TYPE_PPP                    ,
+  DIOSTREAMIPDEVICE_TYPE_LOOPBACK               ,
 };
 
 
@@ -41,28 +41,28 @@ enum DIOSTREAMIPDEVICE_TYPE
 
 class DIOSTREAMDEVICEIP : public DIOSTREAMDEVICE
 {
-	public:
+  public:
 
-																	DIOSTREAMDEVICEIP				();
-		virtual											 ~DIOSTREAMDEVICEIP				();
-		
-		DIOMAC*												GetMAC									();
-		DIOIP*												GetIP										();
+                                  DIOSTREAMDEVICEIP       ();
+    virtual                      ~DIOSTREAMDEVICEIP       ();
 
-		DIOSTREAMIPDEVICE_TYPE				GetIPType								();
-		bool													SetIPType								(DIOSTREAMIPDEVICE_TYPE iptype);
+    DIOMAC*                       GetMAC                  ();
+    DIOIP*                        GetIP                   ();
 
-		bool													DebugPrintInfo					(XCONSOLE* xconsole);
+    DIOSTREAMIPDEVICE_TYPE        GetIPType               ();
+    bool                          SetIPType               (DIOSTREAMIPDEVICE_TYPE iptype);
 
-	protected:
+    bool                          DebugPrintInfo          (XCONSOLE* xconsole);
 
-		DIOMAC												MAC;
-		DIOIP													IP;	
-		DIOSTREAMIPDEVICE_TYPE				iptype;
-	
-	private:
+  protected:
 
-		void													Clean										();			
+    DIOMAC                        MAC;
+    DIOIP                         IP;
+    DIOSTREAMIPDEVICE_TYPE        iptype;
+
+  private:
+
+    void                          Clean                   ();
 };
 
 

@@ -1,25 +1,25 @@
 /*------------------------------------------------------------------------------------------
-//	PHYSXMATERIAL.H
-*/	
-/**	
-// \class 
-//   
-//  Physics material abstract entity
-//   
-//	@author	 Diego Martinez Ruiz de Gaona
+//  PHYSXMATERIAL.H
+*/
+/**
+// \class
 //
-//	Date Of Creation	: 26/05/2016 19:29:49
-//	Last Modification	:	
-*/	
-/*	(C) Copyright GEN. All right reserved.
+//  Physics material abstract entity
+//
+//  @author  Diego Martinez Ruiz de Gaona
+//
+//  Date Of Creation  : 26/05/2016 19:29:49
+//  Last Modification :
+*/
+/*  (C) Copyright GEN. All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
+
 #ifdef PHY_ACTIVE
 
 #ifndef _PHYSXMATERIAL_H_
 #define _PHYSXMATERIAL_H_
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
 #include <PxPhysicsAPI.h>
@@ -30,14 +30,14 @@
 class PHYSXMATERIAL : public PHYMATERIAL
 {
 public:
-			PHYSXMATERIAL() { Clean(); }
-				
-		physx::PxMaterial* physxmaterial;
+      PHYSXMATERIAL() { Clean(); }
 
-		void Clean()
-		{
-				physxmaterial=NULL;
-		}
+    physx::PxMaterial* physxmaterial;
+
+    void Clean()
+    {
+        physxmaterial=NULL;
+    }
 };
 
 #endif

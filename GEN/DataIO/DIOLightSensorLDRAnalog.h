@@ -1,36 +1,36 @@
 /*------------------------------------------------------------------------------------------
-//	DIOLIGHTSENSORLDRANALOG.H
-*/	
-/**	
-// \class 
-//   
+//  DIOLIGHTSENSORLDRANALOG.H
+*/
+/**
+// \class
+//
 //  Data IO Sensor Light LDR (Light Dependent Resistor) Analog in port digital
-//  
+//
 //  Diagram:
-//	http://www.raspberrypi-spy.co.uk/2012/08/reading-analogue-sensors-with-one-gpio-pin/
+//  http://www.raspberrypi-spy.co.uk/2012/08/reading-analogue-sensors-with-one-gpio-pin/
 //
-//	@author	 Abraham J. Velez
+//  @author  Abraham J. Velez
 //
-//	Date Of Creation	: 22/03/2014 17:11:08
-//	Last Modification	:	
-*/	
-/*	(C) Copyright EndoraSoft S.L.. All right reserved.
+//  Date Of Creation  : 22/03/2014 17:11:08
+//  Last Modification :
+*/
+/*  (C) Copyright EndoraSoft S.L.. All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
+
 #ifndef _DIOLIGHTSENSORLDRANALOG_H_
 #define _DIOLIGHTSENSORLDRANALOG_H_
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
 #include "XBase.h"
 
 #include "DIODevice.h"
 #include "DIOGPIO.h"
-	
+
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
-	
-	
+
+
 /*---- CLASS -----------------------------------------------------------------------------*/
 
 class XFACTORY;
@@ -41,50 +41,50 @@ class DIOGPIO;
 
 class DIOLIGHTSENSORLDRANALOG :  public DIODEVICE
 {
-	public:
-													DIOLIGHTSENSORLDRANALOG				( DIOGPIO* diogpio, int pindata, bool activatecache);
-		virtual							 ~DIOLIGHTSENSORLDRANALOG				();
+  public:
+                          DIOLIGHTSENSORLDRANALOG       ( DIOGPIO* diogpio, int pindata, bool activatecache);
+    virtual              ~DIOLIGHTSENSORLDRANALOG       ();
 
-		bool									Ini                           ();
+    bool                  Ini                           ();
 
-		int										GetPinData										()																{ return pindata;										}
-		
-		bool									ReadFromCache									(XDWORD& level);
-		bool									ReadDirect										(XDWORD& level);
+    int                   GetPinData                    ()                                { return pindata;                   }
 
-		bool									End		                        ();
+    bool                  ReadFromCache                 (XDWORD& level);
+    bool                  ReadDirect                    (XDWORD& level);
 
-	private:
+    bool                  End                           ();
 
-		void									Clean													()
-													{
-														diogpio				= NULL;
-														pindata						= DIOGPIO_PINNOTUSE;
+  private:
 
-														xtimer						= NULL;
-														threadcache				= NULL;
-														xmutexread				= NULL;
+    void                  Clean                         ()
+                          {
+                            diogpio       = NULL;
+                            pindata           = DIOGPIO_PINNOTUSE;
 
-														nreads						= 0;
-														levelcache				= 0;
-														
-													}
+                            xtimer            = NULL;
+                            threadcache       = NULL;
+                            xmutexread        = NULL;
 
-		static void						ThreadRunFunction						(void* param);	
+                            nreads            = 0;
+                            levelcache        = 0;
 
-		DIOGPIO*							diogpio;
-		int										pindata;
+                          }
 
-		XTIMER*								xtimer;
-		XTHREADCOLLECTED*			threadcache;
-		XMUTEX*								xmutexread;
+    static void           ThreadRunFunction           (void* param);
 
-		XDWORD								nreads;	
-		XDWORD								levelcache;				
+    DIOGPIO*              diogpio;
+    int                   pindata;
+
+    XTIMER*               xtimer;
+    XTHREADCOLLECTED*     threadcache;
+    XMUTEX*               xmutexread;
+
+    XDWORD                nreads;
+    XDWORD                levelcache;
 };
-	
-	
+
+
 /*---- INLINE FUNCTIONS ------------------------------------------------------------------*/
-	
+
 #endif
 

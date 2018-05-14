@@ -1,25 +1,25 @@
 //------------------------------------------------------------------------------------------
-//	DIOWINDOWSSTREAMUSB.H
-//	
-/**	
-// \class 
-//   
+//  DIOWINDOWSSTREAMUSB.H
+//
+/**
+// \class
+//
 //  WINDOWS Data IO Stream USB class
-//   
-//	@author	 Abraham J. Velez
-//	@version 02/01/2002
-*/	
-//	GEN  Copyright (C).  All right reserved.		 			 
+//
+//  @author  Abraham J. Velez
+//  @version 02/01/2002
+*/
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
+
 #ifndef _DIOWINDOWSSTREAMUSB_H_
 #define _DIOWINDOWSSTREAMUSB_H_
-	
+
 #if defined(DIO_ACTIVE) && defined(DIOUSB_ACTIVE)
-	
+
 //---- INCLUDES ----------------------------------------------------------------------------
 
-#include <windows.h>	
+#include <windows.h>
 
 #include "XFSMachine.h"
 #include "DIOStreamUSB.h"
@@ -31,25 +31,25 @@
 
 enum DIOWINDOWSUSBFSMEVENTS
 {
-	DIOWINDOWSUSBFSMEVENT_NONE						    = 0 ,
-	DIOWINDOWSUSBFSMEVENT_CONNECTED							,
-	DIOWINDOWSUSBFSMEVENT_WAITINGTOREAD					,
-	DIOWINDOWSUSBFSMEVENT_SENDINGDATA						,
-	DIOWINDOWSUSBFSMEVENT_DISCONNECTING					,		
+  DIOWINDOWSUSBFSMEVENT_NONE                = 0 ,
+  DIOWINDOWSUSBFSMEVENT_CONNECTED             ,
+  DIOWINDOWSUSBFSMEVENT_WAITINGTOREAD         ,
+  DIOWINDOWSUSBFSMEVENT_SENDINGDATA           ,
+  DIOWINDOWSUSBFSMEVENT_DISCONNECTING         ,
 
-	DIOWINDOWSUSB_LASTEVENT
+  DIOWINDOWSUSB_LASTEVENT
 };
 
 
 enum DIOWINDOWSUSBFSMSTATES
 {
-	DIOWINDOWSUSBFSMSTATE_NONE								= 0 ,	
-	DIOWINDOWSUSBFSMSTATE_CONNECTED							,
-	DIOWINDOWSUSBFSMSTATE_WAITINGTOREAD					,
-	DIOWINDOWSUSBFSMSTATE_SENDINGDATA						,
-	DIOWINDOWSUSBFSMSTATE_DISCONNECTING					,		
+  DIOWINDOWSUSBFSMSTATE_NONE                = 0 ,
+  DIOWINDOWSUSBFSMSTATE_CONNECTED             ,
+  DIOWINDOWSUSBFSMSTATE_WAITINGTOREAD         ,
+  DIOWINDOWSUSBFSMSTATE_SENDINGDATA           ,
+  DIOWINDOWSUSBFSMSTATE_DISCONNECTING         ,
 
-	DIOWINDOWSUSB_LASTSTATE
+  DIOWINDOWSUSB_LASTSTATE
 };
 
 
@@ -61,39 +61,39 @@ class CIPHER;
 
 
 
-class DIOWINDOWSSTREAMUSB : public DIOSTREAMUSB , public XFSMACHINE 
+class DIOWINDOWSSTREAMUSB : public DIOSTREAMUSB , public XFSMACHINE
 {
-	public:	
-													DIOWINDOWSSTREAMUSB														();
-		virtual							 ~DIOWINDOWSSTREAMUSB														();
+  public:
+                          DIOWINDOWSSTREAMUSB                           ();
+    virtual              ~DIOWINDOWSSTREAMUSB                           ();
 
-		DIOSTREAMSTATUS 			GetConnectStatus															();		
-		
-		bool									Open																					();		
+    DIOSTREAMSTATUS       GetConnectStatus                              ();
 
-		bool									Disconnect																		()												{ return false; };
-		bool									Close																					();	
-			
-		bool									CleanBuffers																	(); 											
-				
-	protected:
+    bool                  Open                                          ();
 
-    void									Clean																					();
-		
-		static void 					ThreadConnexion																(void* data);
+    bool                  Disconnect                                    ()                        { return false; };
+    bool                  Close                                         ();
 
-		XDWORD								ReadBuffer																		(XBYTE* buffer,XDWORD size);
-		XDWORD								WriteBuffer																		(XBYTE* buffer,XDWORD size);
+    bool                  CleanBuffers                                  ();
 
-		XTHREADCOLLECTED*			threadconnexion;
+  protected:
 
-		HANDLE								handle;
-		XDWORD								mask;
-		HANDLE 								hevent;
-		OVERLAPPED						ovi;		
+    void                  Clean                                         ();
 
-		int										readtimeout;
-		int										writetimeout;
+    static void           ThreadConnexion                               (void* data);
+
+    XDWORD                ReadBuffer                                    (XBYTE* buffer,XDWORD size);
+    XDWORD                WriteBuffer                                   (XBYTE* buffer,XDWORD size);
+
+    XTHREADCOLLECTED*     threadconnexion;
+
+    HANDLE                handle;
+    XDWORD                mask;
+    HANDLE                hevent;
+    OVERLAPPED            ovi;
+
+    int                   readtimeout;
+    int                   writetimeout;
 };
 
 

@@ -1,16 +1,16 @@
 /*------------------------------------------------------------------------------------------
-//	CIPHERFILEKEYS.CPP
-//	
-//	Cipher File Keys (Own keys cipher file for GEN)
-//   
-//	Author						: Abraham J. Velez
-//	Date Of Creation	: 19/03/2014 13:13:28
-//	Last Modification	:	
-//	
-//	GEN  Copyright (C).  All right reserved.
+//  CIPHERFILEKEYS.CPP
+//
+//  Cipher File Keys (Own keys cipher file for GEN)
+//
+//  Author            : Abraham J. Velez
+//  Date Of Creation  : 19/03/2014 13:13:28
+//  Last Modification :
+//
+//  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
 #include "XFactory.h"
@@ -25,496 +25,496 @@
 #include "CipherFileKeys.h"
 
 #include "XMemory.h"
-	
+
 /*---- GENERAL VARIABLE ------------------------------------------------------------------*/
-	
-	
+
+
 /*---- CLASS MEMBERS ---------------------------------------------------------------------*/
 
 
 /*-------------------------------------------------------------------
-//	CIPHERFILEKEYS::CIPHERFILEKEYS
-*/	
-/**	
-//	
-//	Class Constructor CIPHERFILEKEYS
-//	
-//	@author				Abraham J. Velez
-//	@version			20/03/2014 9:27:46
-//	
- 
-//  @param				xpath : 
+//  CIPHERFILEKEYS::CIPHERFILEKEYS
+*/
+/**
+//
+//  Class Constructor CIPHERFILEKEYS
+//
+//  @author       Abraham J. Velez
+//  @version      20/03/2014 9:27:46
+//
+
+//  @param        xpath :
 */
 /*-----------------------------------------------------------------*/
 CIPHERFILEKEYS::CIPHERFILEKEYS(XPATH& xpath)
 {
-	Clean();
+  Clean();
 
-	this->xpath  = xpath;
+  this->xpath  = xpath;
 
-	xfilexml = new XFILEXML();
-	if(!xfilexml) return;
+  xfilexml = new XFILEXML();
+  if(!xfilexml) return;
 
-	ReadAllFile();
+  ReadAllFile();
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	CIPHERFILEKEYS::~CIPHERFILEKEYS
-*/	
-/**	
-//	
-//	 Class Destructor CIPHERFILEKEYS
-//	
-//	@author				Abraham J. Velez
-//	@version			20/03/2014 9:28:10
-//	
+//  CIPHERFILEKEYS::~CIPHERFILEKEYS
+*/
+/**
+//
+//   Class Destructor CIPHERFILEKEYS
+//
+//  @author       Abraham J. Velez
+//  @version      20/03/2014 9:28:10
+//
 */
 /*-----------------------------------------------------------------*/
 CIPHERFILEKEYS::~CIPHERFILEKEYS()
 {
-	DeleteAllKeys();
+  DeleteAllKeys();
 
-	if(xfilexml) delete xfilexml;
+  if(xfilexml) delete xfilexml;
 
-	Clean();
+  Clean();
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	CIPHERFILEKEYS::HaveKey
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			20/03/2014 13:39:33
-//	
-//	@return 			bool : 
+//  CIPHERFILEKEYS::HaveKey
+*/
+/**
 //
-//  @param				type : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      20/03/2014 13:39:33
+//
+//  @return       bool :
+//
+//  @param        type :
 */
 /*-----------------------------------------------------------------*/
 bool CIPHERFILEKEYS::HaveKey(CIPHERKEYTYPE type)
 {
-	for(int c=0; c<(int)keys.GetSize(); c++)
-		{
-			CIPHERKEY* key = keys.Get(c);
-			if(key)
-				{
-					if(key->GetType() == type)  return true;
-				}
-		}
+  for(int c=0; c<(int)keys.GetSize(); c++)
+    {
+      CIPHERKEY* key = keys.Get(c);
+      if(key)
+        {
+          if(key->GetType() == type)  return true;
+        }
+    }
 
-	return false;
+  return false;
 }
 
 
 
 /*-------------------------------------------------------------------
-//	CIPHERFILEKEYS::GetKey
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			20/03/2014 9:33:51
-//	
-//	@return 			CIPHERKEY* : 
+//  CIPHERFILEKEYS::GetKey
+*/
+/**
 //
-//  @param				type : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      20/03/2014 9:33:51
+//
+//  @return       CIPHERKEY* :
+//
+//  @param        type :
 */
 /*-----------------------------------------------------------------*/
 CIPHERKEY* CIPHERFILEKEYS::GetKey(CIPHERKEYTYPE type)
 {
-	for(int c=0; c<(int)keys.GetSize(); c++)
-		{
-			CIPHERKEY* key = keys.Get(c);
-			if(key)
-				{
-					if(key->GetType() == type)  return key;
-				}
-		}
+  for(int c=0; c<(int)keys.GetSize(); c++)
+    {
+      CIPHERKEY* key = keys.Get(c);
+      if(key)
+        {
+          if(key->GetType() == type)  return key;
+        }
+    }
 
-	return NULL;
+  return NULL;
 }
-	
+
 
 
 /*-------------------------------------------------------------------
-//	CIPHERFILEKEYS::AddKey
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			20/03/2014 9:30:08
-//	
-//	@return 			bool : 
+//  CIPHERFILEKEYS::AddKey
+*/
+/**
 //
-//  @param				key : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      20/03/2014 9:30:08
+//
+//  @return       bool :
+//
+//  @param        key :
 */
 /*-----------------------------------------------------------------*/
 bool CIPHERFILEKEYS::AddKey(CIPHERKEY& key)
 {
-	if(HaveKey(key.GetType())) return false;
+  if(HaveKey(key.GetType())) return false;
 
-	switch(key.GetType())
-		{
-			case CIPHERKEYTYPE_UNKNOWN				: break;
+  switch(key.GetType())
+    {
+      case CIPHERKEYTYPE_UNKNOWN        : break;
 
-			case CIPHERKEYTYPE_SYMMETRICAL	: { CIPHERKEYSYMMETRICAL* keysimetrical = new CIPHERKEYSYMMETRICAL();				
-																					
-																					keysimetrical->CopyFrom((CIPHERKEYSYMMETRICAL*)&key);
-																				 	
-																					keys.Add(keysimetrical);
-																				}											
-																				break;
+      case CIPHERKEYTYPE_SYMMETRICAL  : { CIPHERKEYSYMMETRICAL* keysimetrical = new CIPHERKEYSYMMETRICAL();
 
-			case CIPHERKEYTYPE_PUBLIC				: { CIPHERKEYRSAPUBLIC* keypublic = new CIPHERKEYRSAPUBLIC();																														
-			
-																					keypublic->CopyFrom((CIPHERKEYRSAPUBLIC*)&key);
-																					keys.Add(keypublic);
-																				}											
-																				break;
+                                          keysimetrical->CopyFrom((CIPHERKEYSYMMETRICAL*)&key);
 
-			case CIPHERKEYTYPE_PRIVATE			: { CIPHERKEYRSAPRIVATE* keyprivate = new CIPHERKEYRSAPRIVATE();																												
-																					
-																					keyprivate->CopyFrom((CIPHERKEYRSAPRIVATE*)&key);
-																					keys.Add(keyprivate);
-																				}											
-																				break;
-		}
+                                          keys.Add(keysimetrical);
+                                        }
+                                        break;
+
+      case CIPHERKEYTYPE_PUBLIC       : { CIPHERKEYRSAPUBLIC* keypublic = new CIPHERKEYRSAPUBLIC();
+
+                                          keypublic->CopyFrom((CIPHERKEYRSAPUBLIC*)&key);
+                                          keys.Add(keypublic);
+                                        }
+                                        break;
+
+      case CIPHERKEYTYPE_PRIVATE      : { CIPHERKEYRSAPRIVATE* keyprivate = new CIPHERKEYRSAPRIVATE();
+
+                                          keyprivate->CopyFrom((CIPHERKEYRSAPRIVATE*)&key);
+                                          keys.Add(keyprivate);
+                                        }
+                                        break;
+    }
 
 
-	return true;
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
-//	CIPHERFILEKEYS::DeleteKey
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			20/03/2014 9:30:13
-//	
-//	@return 			bool : 
+//  CIPHERFILEKEYS::DeleteKey
+*/
+/**
 //
-//  @param				type : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      20/03/2014 9:30:13
+//
+//  @return       bool :
+//
+//  @param        type :
 */
 /*-----------------------------------------------------------------*/
 bool CIPHERFILEKEYS::DeleteKey(CIPHERKEYTYPE type)
 {
-	for(int c=0; c<(int)keys.GetSize(); c++)
-		{
-			CIPHERKEY* key = keys.Get(c);
-			if(key)
-				{
-					if(key->GetType() == type)  
-						{
-							keys.Delete(key);
-							delete key;	
-						}
-				}
-		}
+  for(int c=0; c<(int)keys.GetSize(); c++)
+    {
+      CIPHERKEY* key = keys.Get(c);
+      if(key)
+        {
+          if(key->GetType() == type)
+            {
+              keys.Delete(key);
+              delete key;
+            }
+        }
+    }
 
-	return true;
+  return true;
 }
-	
+
 
 
 /*-------------------------------------------------------------------
-//	CIPHERFILEKEYS::DeleteAllKeys
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			20/03/2014 9:30:20
-//	
-//	@return 			bool : 
+//  CIPHERFILEKEYS::DeleteAllKeys
+*/
+/**
+//
+//
+//
+//  @author       Abraham J. Velez
+//  @version      20/03/2014 9:30:20
+//
+//  @return       bool :
 //
 */
 /*-----------------------------------------------------------------*/
 bool CIPHERFILEKEYS::DeleteAllKeys()
 {
-	if(keys.IsEmpty()) return false;
+  if(keys.IsEmpty()) return false;
 
-	keys.DeleteContents();
+  keys.DeleteContents();
 
-	keys.DeleteAll();
+  keys.DeleteAll();
 
-	return true;
+  return true;
 }
-		
-	
+
+
 
 /*-------------------------------------------------------------------
-//	CIPHERFILEKEYS::UpdateFile
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			20/03/2014 9:30:25
-//	
-//	@return 			bool : 
+//  CIPHERFILEKEYS::UpdateFile
+*/
+/**
+//
+//
+//
+//  @author       Abraham J. Velez
+//  @version      20/03/2014 9:30:25
+//
+//  @return       bool :
 //
 */
 /*-----------------------------------------------------------------*/
 bool CIPHERFILEKEYS::UpdateFile()
 {
-	if(!xfilexml) return false;
+  if(!xfilexml) return false;
 
-	if(!xfilexml->Create(xpath))	 return false;
-	
-	XFILEXMLELEMENT* noderoot = new XFILEXMLELEMENT(CIPHERFILEKEYS_NODENAME_ROOT);
-	if(!noderoot) return false;
+  if(!xfilexml->Create(xpath))   return false;
 
-	XFILEXMLELEMENT* node		= NULL;
-	XSTRING					 string;
-	int							 index	= 0;	
+  XFILEXMLELEMENT* noderoot = new XFILEXMLELEMENT(CIPHERFILEKEYS_NODENAME_ROOT);
+  if(!noderoot) return false;
 
-	node = noderoot->AddElement(CIPHERFILEKEYS_NODENAME_CREATOR);
-	if(node) 
-		{ 
-			XDATETIME* xdatetime = xfactory->CreateDateTime();
-			if(xdatetime)
-				{
-					xdatetime->Read();
+  XFILEXMLELEMENT* node   = NULL;
+  XSTRING          string;
+  int              index  = 0;
 
-					node->AddAtribute(CIPHERFILEKEYS_ATTRNAME_CREATOR_CREATENAME , creatorname.Get());		
-									
-					if(!creatordatetime.IsValidDate()) creatordatetime.CopyFrom(xdatetime);	
-					creatordatetime.GetDateTimeToString(XDATETIME_FORMAT_STANDARD, string);
-					node->AddAtribute(CIPHERFILEKEYS_ATTRNAME_CREATOR_CREATEDATE , string.Get());		
-	
-					creatorlastmodifieddatetime.CopyFrom(xdatetime);	
-					
-					creatorlastmodifieddatetime.GetDateTimeToString(XDATETIME_FORMAT_STANDARD, string);
-					node->AddAtribute(CIPHERFILEKEYS_ATTRNAME_CREATOR_LASTMODDATE , string.Get());		
+  node = noderoot->AddElement(CIPHERFILEKEYS_NODENAME_CREATOR);
+  if(node)
+    {
+      XDATETIME* xdatetime = xfactory->CreateDateTime();
+      if(xdatetime)
+        {
+          xdatetime->Read();
 
-					xfactory->DeleteDateTime(xdatetime);
-				}
-	
-			for(int c=0; c<(int)keys.GetSize(); c++)
-				{
-					CIPHERKEY* key = keys.Get(c);
-					if(key)
-						{
-							if(key->GetType()!=CIPHERKEYTYPE_UNKNOWN)
-								{
-									node = noderoot->AddElement(CIPHERFILEKEYS_NODENAME_CIPHERKEY);
-									if(node) 
-										{ 
-											string.Format(__L("%d"), key->GetType());
-											node->AddAtribute(CIPHERFILEKEYS_ATTRNAME_CIPHERKEY_TYPEKEY, string.Get());	
+          node->AddAtribute(CIPHERFILEKEYS_ATTRNAME_CREATOR_CREATENAME , creatorname.Get());
 
-											string.Format(__L("%d"), key->GetSizeInBits());
-											node->AddAtribute(CIPHERFILEKEYS_ATTRNAME_CIPHERKEY_SIZEBITS, string.Get());	
+          if(!creatordatetime.IsValidDate()) creatordatetime.CopyFrom(xdatetime);
+          creatordatetime.GetDateTimeToString(XDATETIME_FORMAT_STANDARD, string);
+          node->AddAtribute(CIPHERFILEKEYS_ATTRNAME_CREATOR_CREATEDATE , string.Get());
 
-											switch(key->GetType())
-												{
-													case CIPHERKEYTYPE_UNKNOWN				: break;
+          creatorlastmodifieddatetime.CopyFrom(xdatetime);
 
-													case CIPHERKEYTYPE_SYMMETRICAL	: { CIPHERKEYSYMMETRICAL* keysimetrical = (CIPHERKEYSYMMETRICAL*)key;
-																															XBUFFER* xbuffer = keysimetrical->Get();
-																															if(xbuffer) string.ConvertHexStringFromBuffer((*xbuffer));
-																													
-																															node->AddAtribute(CIPHERFILEKEYS_ATTRNAME_CIPHERKEY_KEY , string.Get());																																
-																														}											
-																														break;
+          creatorlastmodifieddatetime.GetDateTimeToString(XDATETIME_FORMAT_STANDARD, string);
+          node->AddAtribute(CIPHERFILEKEYS_ATTRNAME_CREATOR_LASTMODDATE , string.Get());
 
-													case CIPHERKEYTYPE_PUBLIC				: { CIPHERKEYRSAPUBLIC* keypublic = (CIPHERKEYRSAPUBLIC*)key;																														
-																															XMPINTEGER					modulus;							
-																															XMPINTEGER					exponent;
+          xfactory->DeleteDateTime(xdatetime);
+        }
 
-																															keypublic->Get(modulus, exponent);
+      for(int c=0; c<(int)keys.GetSize(); c++)
+        {
+          CIPHERKEY* key = keys.Get(c);
+          if(key)
+            {
+              if(key->GetType()!=CIPHERKEYTYPE_UNKNOWN)
+                {
+                  node = noderoot->AddElement(CIPHERFILEKEYS_NODENAME_CIPHERKEY);
+                  if(node)
+                    {
+                      string.Format(__L("%d"), key->GetType());
+                      node->AddAtribute(CIPHERFILEKEYS_ATTRNAME_CIPHERKEY_TYPEKEY, string.Get());
 
-																															modulus.GetToString(16, string);
-																															node->AddAtribute(CIPHERFILEKEYS_ATTRNAME_CIPHERKEY_MODULUS , string.Get());																																
+                      string.Format(__L("%d"), key->GetSizeInBits());
+                      node->AddAtribute(CIPHERFILEKEYS_ATTRNAME_CIPHERKEY_SIZEBITS, string.Get());
 
-																															exponent.GetToString(16, string);
-																															node->AddAtribute(CIPHERFILEKEYS_ATTRNAME_CIPHERKEY_EXPONENT , string.Get());																																
-																														}											
-																														break;
+                      switch(key->GetType())
+                        {
+                          case CIPHERKEYTYPE_UNKNOWN        : break;
 
-													case CIPHERKEYTYPE_PRIVATE			: { CIPHERKEYRSAPRIVATE*	keyprivate = (CIPHERKEYRSAPRIVATE*)key;																														
-																															XMPINTEGER						prime1factor;
-																															XMPINTEGER						prime2factor;
-																															XMPINTEGER						exponent;		
+                          case CIPHERKEYTYPE_SYMMETRICAL  : { CIPHERKEYSYMMETRICAL* keysimetrical = (CIPHERKEYSYMMETRICAL*)key;
+                                                              XBUFFER* xbuffer = keysimetrical->Get();
+                                                              if(xbuffer) string.ConvertHexStringFromBuffer((*xbuffer));
 
-																															keyprivate->Get(prime1factor, prime2factor, exponent);
+                                                              node->AddAtribute(CIPHERFILEKEYS_ATTRNAME_CIPHERKEY_KEY , string.Get());
+                                                            }
+                                                            break;
 
-																															prime1factor.GetToString(16, string);
-																															node->AddAtribute(CIPHERFILEKEYS_ATTRNAME_CIPHERKEY_FACTOR1 , string.Get());																																
+                          case CIPHERKEYTYPE_PUBLIC       : { CIPHERKEYRSAPUBLIC* keypublic = (CIPHERKEYRSAPUBLIC*)key;
+                                                              XMPINTEGER          modulus;
+                                                              XMPINTEGER          exponent;
 
-																															prime2factor.GetToString(16, string);
-																															node->AddAtribute(CIPHERFILEKEYS_ATTRNAME_CIPHERKEY_FACTOR2 , string.Get());																																
+                                                              keypublic->Get(modulus, exponent);
 
-																															exponent.GetToString(16, string);
-																															node->AddAtribute(CIPHERFILEKEYS_ATTRNAME_CIPHERKEY_EXPONENT , string.Get());																																
-																														}											
-																														break;
-												}
-										}
-								}
-						}
-				}
-		}
-	
-	bool status;
+                                                              modulus.GetToString(16, string);
+                                                              node->AddAtribute(CIPHERFILEKEYS_ATTRNAME_CIPHERKEY_MODULUS , string.Get());
 
-	xfilexml->SetRoot(noderoot);
+                                                              exponent.GetToString(16, string);
+                                                              node->AddAtribute(CIPHERFILEKEYS_ATTRNAME_CIPHERKEY_EXPONENT , string.Get());
+                                                            }
+                                                            break;
 
-	XVECTOR<XFILEXMLATTRIBUTE*>* CFGatributes = xfilexml->GetCFGAtributes();
-	if(CFGatributes)
-		{
-			XFILEXMLATTRIBUTE* attribute;
+                          case CIPHERKEYTYPE_PRIVATE      : { CIPHERKEYRSAPRIVATE*  keyprivate = (CIPHERKEYRSAPRIVATE*)key;
+                                                              XMPINTEGER            prime1factor;
+                                                              XMPINTEGER            prime2factor;
+                                                              XMPINTEGER            exponent;
 
-			attribute = new XFILEXMLATTRIBUTE(__L("version"),__L("1.0"));
-			if(attribute) CFGatributes->Add(attribute);
+                                                              keyprivate->Get(prime1factor, prime2factor, exponent);
 
-			//attribute = new XFILEXMLATTRIBUTE(__L("encoding"),__L("UTF-8"));
-			//if(attribute) CFGatributes->Add(attribute);
-		}
-	
-	status = xfilexml->EncodeAllLines();
-	if(status) status = xfilexml->WriteAllFile();
+                                                              prime1factor.GetToString(16, string);
+                                                              node->AddAtribute(CIPHERFILEKEYS_ATTRNAME_CIPHERKEY_FACTOR1 , string.Get());
 
-	xfilexml->DeleteAllElements();
+                                                              prime2factor.GetToString(16, string);
+                                                              node->AddAtribute(CIPHERFILEKEYS_ATTRNAME_CIPHERKEY_FACTOR2 , string.Get());
 
-	xfilexml->Close();
-	
-	return status;
+                                                              exponent.GetToString(16, string);
+                                                              node->AddAtribute(CIPHERFILEKEYS_ATTRNAME_CIPHERKEY_EXPONENT , string.Get());
+                                                            }
+                                                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+  bool status;
+
+  xfilexml->SetRoot(noderoot);
+
+  XVECTOR<XFILEXMLATTRIBUTE*>* CFGatributes = xfilexml->GetCFGAtributes();
+  if(CFGatributes)
+    {
+      XFILEXMLATTRIBUTE* attribute;
+
+      attribute = new XFILEXMLATTRIBUTE(__L("version"),__L("1.0"));
+      if(attribute) CFGatributes->Add(attribute);
+
+      //attribute = new XFILEXMLATTRIBUTE(__L("encoding"),__L("UTF-8"));
+      //if(attribute) CFGatributes->Add(attribute);
+    }
+
+  status = xfilexml->EncodeAllLines();
+  if(status) status = xfilexml->WriteAllFile();
+
+  xfilexml->DeleteAllElements();
+
+  xfilexml->Close();
+
+  return status;
 }
-				
+
 
 
 
 /*-------------------------------------------------------------------
-//	CIPHERFILEKEYS::ExportToPEMFile
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			08/04/2014 12:13:06
-//	
-//	@return 			bool : 
+//  CIPHERFILEKEYS::ExportToPEMFile
+*/
+/**
 //
-//  @param				key : 
-//  @param				publicPEM : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      08/04/2014 12:13:06
+//
+//  @return       bool :
+//
+//  @param        key :
+//  @param        publicPEM :
 */
 /*-----------------------------------------------------------------*/
 bool CIPHERFILEKEYS::ExportToPEMFile(CIPHERKEY* key, XSTRING& publicPEM)
 {
-	if(!key) return false;
+  if(!key) return false;
 
-	bool status = false;
+  bool status = false;
 
-	switch(key->GetType())
-		{
-			case CIPHERKEYTYPE_PUBLIC			:	{	XBER									beroui;
-																				XBER									bernull;
-																				XBER									berbitstring;
-																				XBER									bermodule;	
-																				XBER									berexponent;	
-																				XBER									berseq1;
-																				XBER									berseq2;
-																				XBER									berseq3;
-																				CIPHERKEYRSAPUBLIC*		publickey = (CIPHERKEYRSAPUBLIC*)key;
-																				XMPINTEGER						module;
-																				XMPINTEGER						exponent;	
-																				XBUFFER								xbuffermodule;
-																				XBUFFER								xbuffermodule2;
-																				XBUFFER								xbufferexponent;
-																				XBUFFER								xbufferpem;	 
-																				XSTRING								string;
-																				XSTRING								stringbase64;
-																				XSTRING								_publicPEM;
+  switch(key->GetType())
+    {
+      case CIPHERKEYTYPE_PUBLIC     : { XBER                  beroui;
+                                        XBER                  bernull;
+                                        XBER                  berbitstring;
+                                        XBER                  bermodule;
+                                        XBER                  berexponent;
+                                        XBER                  berseq1;
+                                        XBER                  berseq2;
+                                        XBER                  berseq3;
+                                        CIPHERKEYRSAPUBLIC*   publickey = (CIPHERKEYRSAPUBLIC*)key;
+                                        XMPINTEGER            module;
+                                        XMPINTEGER            exponent;
+                                        XBUFFER               xbuffermodule;
+                                        XBUFFER               xbuffermodule2;
+                                        XBUFFER               xbufferexponent;
+                                        XBUFFER               xbufferpem;
+                                        XSTRING               string;
+                                        XSTRING               stringbase64;
+                                        XSTRING               _publicPEM;
 
-																				publickey->Get(module, exponent);
+                                        publickey->Get(module, exponent);
 
-																				module.GetToXBuffer(xbuffermodule2		, module.GetSize()); 
-																				exponent.GetToXBuffer(xbufferexponent , exponent.GetSize()); 		
-																				
-																				
-																				xbuffermodule.Add((XBYTE)0);
-																				xbuffermodule.Add(xbuffermodule2);																				
-																				bermodule.SetINTEGER(xbuffermodule);
-																				berexponent.SetINTEGER(xbufferexponent);	
-																																							
-																				berseq2.Sequence_AddTo(bermodule);
-																				berseq2.Sequence_AddTo(berexponent);																				
-																				berseq2.SetType(berseq2.GetType()|(XBYTE)(XBERTYPE_ISCONSTRUCTED));
+                                        module.GetToXBuffer(xbuffermodule2    , module.GetSize());
+                                        exponent.GetToXBuffer(xbufferexponent , exponent.GetSize());
 
-																				xbufferpem.Add((XBYTE)0);
-																				berseq2.GetDump(xbufferpem);
-																				berbitstring.SetBITSTRING(xbufferpem);
-																																					
-																				beroui.SetOID(__L("1.2.840.113549.1.1.1"));																						
-																				bernull.SetNULL();
-																																								
-																				berseq1.Sequence_AddTo(beroui);
-																				berseq1.Sequence_AddTo(bernull);																					
-																				berseq1.SetType(berseq1.GetType()|(XBYTE)(XBERTYPE_ISCONSTRUCTED));					
-																																																																																																
-																				berseq3.Sequence_AddTo(berseq1);
-																				berseq3.Sequence_AddTo(berbitstring);																					
-																				berseq3.SetType(berseq3.GetType()|(XBYTE)(XBERTYPE_ISCONSTRUCTED));
 
-																				xbufferpem.Delete();
-																				berseq3.GetDump(xbufferpem);
+                                        xbuffermodule.Add((XBYTE)0);
+                                        xbuffermodule.Add(xbuffermodule2);
+                                        bermodule.SetINTEGER(xbuffermodule);
+                                        berexponent.SetINTEGER(xbufferexponent);
 
-																				string.Set(xbufferpem.Get(), xbufferpem.GetSize()); 
-																				string.ConvertToBase64(stringbase64);
+                                        berseq2.Sequence_AddTo(bermodule);
+                                        berseq2.Sequence_AddTo(berexponent);
+                                        berseq2.SetType(berseq2.GetType()|(XBYTE)(XBERTYPE_ISCONSTRUCTED));
 
-																				_publicPEM.Empty();
-																				_publicPEM += __L("-----BEGIN PUBLIC KEY-----\n"); 
-	
-																				int index				= 0;
-																				int lincounter	= 0;
+                                        xbufferpem.Add((XBYTE)0);
+                                        berseq2.GetDump(xbufferpem);
+                                        berbitstring.SetBITSTRING(xbufferpem);
 
-																				while(index<(int)stringbase64.GetSize())
-																					{
-																						_publicPEM.Add(stringbase64.Get()[index]);
-																						index++;
-																						lincounter++;
+                                        beroui.SetOID(__L("1.2.840.113549.1.1.1"));
+                                        bernull.SetNULL();
 
-																						if(lincounter>=64)
-																							{
-																								_publicPEM.Add(__C('\n'));
-																								lincounter = 0;
-																							}
-																					}
+                                        berseq1.Sequence_AddTo(beroui);
+                                        berseq1.Sequence_AddTo(bernull);
+                                        berseq1.SetType(berseq1.GetType()|(XBYTE)(XBERTYPE_ISCONSTRUCTED));
 
-																				_publicPEM.Add(__C('\n'));
-																				_publicPEM += __L("-----END PUBLIC KEY-----\n");
+                                        berseq3.Sequence_AddTo(berseq1);
+                                        berseq3.Sequence_AddTo(berbitstring);
+                                        berseq3.SetType(berseq3.GetType()|(XBYTE)(XBERTYPE_ISCONSTRUCTED));
 
-																				publicPEM = _publicPEM;
-																			}
-																			status = true;
-																			break;
-				
-			case CIPHERKEYTYPE_PRIVATE		: break;		
-		}
+                                        xbufferpem.Delete();
+                                        berseq3.GetDump(xbufferpem);
 
-	return status;
+                                        string.Set(xbufferpem.Get(), xbufferpem.GetSize());
+                                        string.ConvertToBase64(stringbase64);
+
+                                        _publicPEM.Empty();
+                                        _publicPEM += __L("-----BEGIN PUBLIC KEY-----\n");
+
+                                        int index       = 0;
+                                        int lincounter  = 0;
+
+                                        while(index<(int)stringbase64.GetSize())
+                                          {
+                                            _publicPEM.Add(stringbase64.Get()[index]);
+                                            index++;
+                                            lincounter++;
+
+                                            if(lincounter>=64)
+                                              {
+                                                _publicPEM.Add(__C('\n'));
+                                                lincounter = 0;
+                                              }
+                                          }
+
+                                        _publicPEM.Add(__C('\n'));
+                                        _publicPEM += __L("-----END PUBLIC KEY-----\n");
+
+                                        publicPEM = _publicPEM;
+                                      }
+                                      status = true;
+                                      break;
+
+      case CIPHERKEYTYPE_PRIVATE    : break;
+    }
+
+  return status;
 }
 
 
@@ -522,199 +522,199 @@ bool CIPHERFILEKEYS::ExportToPEMFile(CIPHERKEY* key, XSTRING& publicPEM)
 
 
 /*-------------------------------------------------------------------
-//	CIPHERFILEKEYS::ExportToPEMFile
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			08/04/2014 12:18:23
-//	
-//	@return 			bool : 
+//  CIPHERFILEKEYS::ExportToPEMFile
+*/
+/**
 //
-//  @param				key : 
-//  @param				xpath : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      08/04/2014 12:18:23
+//
+//  @return       bool :
+//
+//  @param        key :
+//  @param        xpath :
 */
 /*-----------------------------------------------------------------*/
 bool CIPHERFILEKEYS::ExportToPEMFile(CIPHERKEY* key, XPATH& xpath)
 {
-	if(!key) return false;
+  if(!key) return false;
 
-	XSTRING publicPEM;
+  XSTRING publicPEM;
 
-	if(!ExportToPEMFile(key, publicPEM)) return false;
-	
-	XFILE* xfile = xfactory->Create_File();	
-	if(xfile)
-		{			
-			if(xfile->Create(xpath))
-				{	
-					XSTRING_CREATEOEM(publicPEM, charstr)
-					xfile->Write((XBYTE*)charstr, publicPEM.GetSize());
-					XSTRING_DELETEOEM(charstr)
-					xfile->Close();
+  if(!ExportToPEMFile(key, publicPEM)) return false;
 
-					return true;
-				}
-		}
-																				
-	return false;
+  XFILE* xfile = xfactory->Create_File();
+  if(xfile)
+    {
+      if(xfile->Create(xpath))
+        {
+          XSTRING_CREATEOEM(publicPEM, charstr)
+          xfile->Write((XBYTE*)charstr, publicPEM.GetSize());
+          XSTRING_DELETEOEM(charstr)
+          xfile->Close();
+
+          return true;
+        }
+    }
+
+  return false;
 }
 
 
 
 
 /*-------------------------------------------------------------------
-//	CIPHERFILEKEYS::ReadAllFile
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			20/03/2014 9:30:30
-//	
-//	@return 			bool : 
+//  CIPHERFILEKEYS::ReadAllFile
+*/
+/**
+//
+//
+//
+//  @author       Abraham J. Velez
+//  @version      20/03/2014 9:30:30
+//
+//  @return       bool :
 //
 */
 /*-----------------------------------------------------------------*/
 bool CIPHERFILEKEYS::ReadAllFile()
-{	
-	if(!xfilexml) return false;
+{
+  if(!xfilexml) return false;
 
-	if(!xfilexml->Open(xpath))	return false;
-	
-	xfilexml->ReadAndDecodeAllLines();	
+  if(!xfilexml->Open(xpath))  return false;
 
-	XFILEXMLELEMENT* noderoot = xfilexml->GetRoot();
-	if(noderoot)
-		{
-			if(!noderoot->GetName().Compare(CIPHERFILEKEYS_NODENAME_ROOT))
-				{
-					XFILEXMLELEMENT* node		= NULL;
-					int							 index	= 0;	
+  xfilexml->ReadAndDecodeAllLines();
 
-					do{	node = noderoot->GetElement(index);
-							if(node)
-								{
-									if(!node->GetName().Compare(CIPHERFILEKEYS_NODENAME_CREATOR)) 
-										{
-											XSTRING string;
+  XFILEXMLELEMENT* noderoot = xfilexml->GetRoot();
+  if(noderoot)
+    {
+      if(!noderoot->GetName().Compare(CIPHERFILEKEYS_NODENAME_ROOT))
+        {
+          XFILEXMLELEMENT* node   = NULL;
+          int              index  = 0;
 
-											node->GetValueAttribute(CIPHERFILEKEYS_ATTRNAME_CREATOR_CREATENAME	, creatorname);
-											if(node->GetValueAttribute(CIPHERFILEKEYS_ATTRNAME_CREATOR_CREATEDATE	 , string))  creatordatetime.GetDateTimeFromString(string, XDATETIME_FORMAT_STANDARD);								
-											if(node->GetValueAttribute(CIPHERFILEKEYS_ATTRNAME_CREATOR_LASTMODDATE , string))  creatorlastmodifieddatetime.GetDateTimeFromString(string, XDATETIME_FORMAT_STANDARD);										
-										}
-									 else
-									  {
-											if(!node->GetName().Compare(CIPHERFILEKEYS_NODENAME_CIPHERKEY)) 
-												{
-													XSTRING						string;																									
-													int								index2 = 0;
+          do{ node = noderoot->GetElement(index);
+              if(node)
+                {
+                  if(!node->GetName().Compare(CIPHERFILEKEYS_NODENAME_CREATOR))
+                    {
+                      XSTRING string;
 
-													if(node->GetValueAttribute(CIPHERFILEKEYS_ATTRNAME_CIPHERKEY_TYPEKEY	, string))
-														{																		
-															int typekey = string.ConvertToInt();
-											
-															switch(typekey)
-																{
-																	case CIPHERKEYTYPE_UNKNOWN				: break;
+                      node->GetValueAttribute(CIPHERFILEKEYS_ATTRNAME_CREATOR_CREATENAME  , creatorname);
+                      if(node->GetValueAttribute(CIPHERFILEKEYS_ATTRNAME_CREATOR_CREATEDATE  , string))  creatordatetime.GetDateTimeFromString(string, XDATETIME_FORMAT_STANDARD);
+                      if(node->GetValueAttribute(CIPHERFILEKEYS_ATTRNAME_CREATOR_LASTMODDATE , string))  creatorlastmodifieddatetime.GetDateTimeFromString(string, XDATETIME_FORMAT_STANDARD);
+                    }
+                   else
+                    {
+                      if(!node->GetName().Compare(CIPHERFILEKEYS_NODENAME_CIPHERKEY))
+                        {
+                          XSTRING           string;
+                          int               index2 = 0;
 
-																	case CIPHERKEYTYPE_SYMMETRICAL	: { CIPHERKEYSYMMETRICAL* keysimetrical = new CIPHERKEYSYMMETRICAL();
-																																			if(keysimetrical)
-																																				{																																	
-																																					if(node->GetValueAttribute(CIPHERFILEKEYS_ATTRNAME_CIPHERKEY_KEY	, string))
-																																						{
-																																							XBUFFER xbuffer;
+                          if(node->GetValueAttribute(CIPHERFILEKEYS_ATTRNAME_CIPHERKEY_TYPEKEY  , string))
+                            {
+                              int typekey = string.ConvertToInt();
 
-																																							string.ConvertHexStringToBuffer(xbuffer);
-																																							keysimetrical->Set(xbuffer);	
+                              switch(typekey)
+                                {
+                                  case CIPHERKEYTYPE_UNKNOWN        : break;
 
-																																							keys.Add(keysimetrical);
-																																						}
-																																				}
-																																		}
-																																		break;
+                                  case CIPHERKEYTYPE_SYMMETRICAL  : { CIPHERKEYSYMMETRICAL* keysimetrical = new CIPHERKEYSYMMETRICAL();
+                                                                      if(keysimetrical)
+                                                                        {
+                                                                          if(node->GetValueAttribute(CIPHERFILEKEYS_ATTRNAME_CIPHERKEY_KEY  , string))
+                                                                            {
+                                                                              XBUFFER xbuffer;
 
-																	case CIPHERKEYTYPE_PUBLIC				: { CIPHERKEYRSAPUBLIC* keypublic = new CIPHERKEYRSAPUBLIC();
-																																			if(keypublic)
-																																				{	
-																																					XMPINTEGER modulus;							
-																																					XMPINTEGER exponent;																																	
+                                                                              string.ConvertHexStringToBuffer(xbuffer);
+                                                                              keysimetrical->Set(xbuffer);
 
-																																					modulus.Ini();
-																																					exponent.Ini();
+                                                                              keys.Add(keysimetrical);
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    break;
 
-																																					if(node->GetValueAttribute(CIPHERFILEKEYS_ATTRNAME_CIPHERKEY_MODULUS, string))
-																																						{																																			
-																																							modulus.SetFromString(16, string);
-																																							if(node->GetValueAttribute(CIPHERFILEKEYS_ATTRNAME_CIPHERKEY_EXPONENT, string))
-																																								{
-																																									exponent.SetFromString(16, string);
+                                  case CIPHERKEYTYPE_PUBLIC       : { CIPHERKEYRSAPUBLIC* keypublic = new CIPHERKEYRSAPUBLIC();
+                                                                      if(keypublic)
+                                                                        {
+                                                                          XMPINTEGER modulus;
+                                                                          XMPINTEGER exponent;
 
-																																									keypublic->Set(modulus,exponent);		
-																																									
-																																									keys.Add(keypublic);
-																																								}
-																																						}
+                                                                          modulus.Ini();
+                                                                          exponent.Ini();
 
-																																					modulus.End();
-																																					exponent.End();
-																																			 }
-																																		}
-																																		break;
-																																												
-																	case CIPHERKEYTYPE_PRIVATE			: { CIPHERKEYRSAPRIVATE* keyprivate = new CIPHERKEYRSAPRIVATE();
-																																			if(keyprivate)
-																																				{	
-																																					XMPINTEGER prime1factor;
-																																					XMPINTEGER prime2factor;
-																																					XMPINTEGER exponent;																																	
+                                                                          if(node->GetValueAttribute(CIPHERFILEKEYS_ATTRNAME_CIPHERKEY_MODULUS, string))
+                                                                            {
+                                                                              modulus.SetFromString(16, string);
+                                                                              if(node->GetValueAttribute(CIPHERFILEKEYS_ATTRNAME_CIPHERKEY_EXPONENT, string))
+                                                                                {
+                                                                                  exponent.SetFromString(16, string);
 
-																																					prime1factor.Ini();
-																																					prime2factor.Ini();
-																																					exponent.Ini();
+                                                                                  keypublic->Set(modulus,exponent);
 
-																																					if(node->GetValueAttribute(CIPHERFILEKEYS_ATTRNAME_CIPHERKEY_FACTOR1, string))
-																																						{																																			
-																																							prime1factor.SetFromString(16, string);
-																																							
-																																							if(node->GetValueAttribute(CIPHERFILEKEYS_ATTRNAME_CIPHERKEY_FACTOR2, string))
-																																								{																																			
-																																									prime2factor.SetFromString(16, string);
+                                                                                  keys.Add(keypublic);
+                                                                                }
+                                                                            }
 
-																																									if(node->GetValueAttribute(CIPHERFILEKEYS_ATTRNAME_CIPHERKEY_EXPONENT, string))
-																																										{
-																																											exponent.SetFromString(16, string);
+                                                                          modulus.End();
+                                                                          exponent.End();
+                                                                       }
+                                                                    }
+                                                                    break;
 
-																																											keyprivate->Set(prime1factor, prime2factor, exponent);		
+                                  case CIPHERKEYTYPE_PRIVATE      : { CIPHERKEYRSAPRIVATE* keyprivate = new CIPHERKEYRSAPRIVATE();
+                                                                      if(keyprivate)
+                                                                        {
+                                                                          XMPINTEGER prime1factor;
+                                                                          XMPINTEGER prime2factor;
+                                                                          XMPINTEGER exponent;
 
-																																											keys.Add(keyprivate);
-																																										}
-																																								}
-																																						}
+                                                                          prime1factor.Ini();
+                                                                          prime2factor.Ini();
+                                                                          exponent.Ini();
 
-																																					prime1factor.End();
-																																					prime2factor.End();
-																																					exponent.End();
-																																				}
-																																			}
-																																			break;
-																														
-																}																														
-														}												
-												}
-										}
+                                                                          if(node->GetValueAttribute(CIPHERFILEKEYS_ATTRNAME_CIPHERKEY_FACTOR1, string))
+                                                                            {
+                                                                              prime1factor.SetFromString(16, string);
 
-									index++;
-								}
+                                                                              if(node->GetValueAttribute(CIPHERFILEKEYS_ATTRNAME_CIPHERKEY_FACTOR2, string))
+                                                                                {
+                                                                                  prime2factor.SetFromString(16, string);
 
-						} while(node);
-				}
-		}
+                                                                                  if(node->GetValueAttribute(CIPHERFILEKEYS_ATTRNAME_CIPHERKEY_EXPONENT, string))
+                                                                                    {
+                                                                                      exponent.SetFromString(16, string);
 
-	xfilexml->Close();
-	
-	return true;
+                                                                                      keyprivate->Set(prime1factor, prime2factor, exponent);
+
+                                                                                      keys.Add(keyprivate);
+                                                                                    }
+                                                                                }
+                                                                            }
+
+                                                                          prime1factor.End();
+                                                                          prime2factor.End();
+                                                                          exponent.End();
+                                                                        }
+                                                                      }
+                                                                      break;
+
+                                }
+                            }
+                        }
+                    }
+
+                  index++;
+                }
+
+            } while(node);
+        }
+    }
+
+  xfilexml->Close();
+
+  return true;
 }

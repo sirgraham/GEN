@@ -1,31 +1,31 @@
 /*------------------------------------------------------------------------------------------
-//	SNDWINDOWSFACTORY.H
-*/	
-/**	
-// \file 
-//   
-//  sound system for windows
-//   
-//	@author	 Imanol Celaya Ruiz de Alegria
+//  SNDWINDOWSFACTORY.H
+*/
+/**
+// \file
 //
-//	Date Of Creation	: 11/11/2015 10:37:51
-//	Last Modification	:	
-*/	
-/*	GEN  Copyright (C).  All right reserved.
+//  sound system for windows
+//
+//  @author  Imanol Celaya Ruiz de Alegria
+//
+//  Date Of Creation  : 11/11/2015 10:37:51
+//  Last Modification :
+*/
+/*  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
+
 #ifndef _SNDWINDOWSFACTORY_H_
 #define _SNDWINDOWSFACTORY_H_
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
 #include "SNDFactory.h"
 #include "SNDOpenAL.h"
 
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
-	
-	
+
+
 /*---- CLASS -----------------------------------------------------------------------------*/
 
 class SNDOPENAL;
@@ -39,57 +39,57 @@ class XPUBLISHER;
 
 class SNDWINDOWSFACTORY : public SNDFACTORY
 {
-	public:
+  public:
 
-																							SNDWINDOWSFACTORY					();
-		virtual																	 ~SNDWINDOWSFACTORY					();
+                                              SNDWINDOWSFACTORY         ();
+    virtual                                  ~SNDWINDOWSFACTORY         ();
 
-		virtual SNDELEMENT*												AddFile										(XSTRING* file);
-		virtual SNDELEMENT*												AddFile										(XCHAR* file);
-		virtual	SNDELEMENT*												GetFile										(XSTRING* file);
-		virtual	SNDELEMENT*												GetFile										(XCHAR* file);
+    virtual SNDELEMENT*                       AddFile                   (XSTRING* file);
+    virtual SNDELEMENT*                       AddFile                   (XCHAR* file);
+    virtual SNDELEMENT*                       GetFile                   (XSTRING* file);
+    virtual SNDELEMENT*                       GetFile                   (XCHAR* file);
 
-		virtual SNDSTREAMELEMENT*									GetStreamer								();
+    virtual SNDSTREAMELEMENT*                 GetStreamer               ();
 
-		virtual SNDINSTANCE*											PlaySound									(SNDELEMENT* element);
-		virtual void															StopSound									(SNDELEMENT* element);
-		virtual SNDINSTANCE*											PauseSound								(SNDELEMENT* element);
+    virtual SNDINSTANCE*                      PlaySound                 (SNDELEMENT* element);
+    virtual void                              StopSound                 (SNDELEMENT* element);
+    virtual SNDINSTANCE*                      PauseSound                (SNDELEMENT* element);
 
-		
-		virtual bool															IsAnyPlaying							();
-	
-		virtual void															StopAll										();
 
-		virtual void															SetMasterVolume						(float mastervolume);
-		virtual float															GetMasterVolume						();
+    virtual bool                              IsAnyPlaying              ();
 
-		void																			IniEvents									()
-																							{
-																								sndopenal->IniEvents();
-																								isinit=true;
-																							}
+    virtual void                              StopAll                   ();
 
-		void																			EndEvents									()
-																							{
-																								sndopenal->EndEvents();
-																								isinit=false;
-																							}
+    virtual void                              SetMasterVolume           (float mastervolume);
+    virtual float                             GetMasterVolume           ();
 
-	protected:
-		virtual void															ImpUpdate									();
-	private:
+    void                                      IniEvents                 ()
+                                              {
+                                                sndopenal->IniEvents();
+                                                isinit=true;
+                                              }
 
-		void																			Clean											()
-																							{
-																								sndopenal = NULL;
-																							}
+    void                                      EndEvents                 ()
+                                              {
+                                                sndopenal->EndEvents();
+                                                isinit=false;
+                                              }
 
-		SNDOPENAL*																sndopenal;
+  protected:
+    virtual void                              ImpUpdate                 ();
+  private:
+
+    void                                      Clean                     ()
+                                              {
+                                                sndopenal = NULL;
+                                              }
+
+    SNDOPENAL*                                sndopenal;
 
 };
-	
-	
+
+
 /*---- INLINE FUNCTIONS ------------------------------------------------------------------*/
-	
+
 #endif
 

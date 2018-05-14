@@ -1,84 +1,84 @@
 //------------------------------------------------------------------------------------------
-//	DIOSTREAMUART.CPP
-//	
-//	Data IO Stream UART class
-//	
-// 
-//	@author	 Abraham J. Velez
-//	@version 12/3/2003  
-//	
-//	GEN  Copyright (C).  All right reserved.
+//  DIOSTREAMUART.CPP
+//
+//  Data IO Stream UART class
+//
+//
+//  @author  Abraham J. Velez
+//  @version 12/3/2003
+//
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
-	
+
+
 //---- INCLUDES ----------------------------------------------------------------------------
 
 #include "XFactory.h"
 #include "DIOStreamUART.h"
 
 #include "XMemory.h"
-	
+
 //---- GENERAL VARIABLE --------------------------------------------------------------------
-	
+
 
 
 
 /*-------------------------------------------------------------------
 //  DIOSTREAMUART::DIOSTREAMUART
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			18/02/2013 7:44:24
-//	
-//	@return 		
+//
+//
+//  @author       Abraham J. Velez
+//  @version      18/02/2013 7:44:24
+//
+//  @return
 
- 
- 
+
+
 */
 /*-----------------------------------------------------------------*/
 DIOSTREAMUART::DIOSTREAMUART() : DIOSTREAM()
 {
-	Clean();
+  Clean();
 
-	xtimer = xfactory->CreateTimer();	
+  xtimer = xfactory->CreateTimer();
 }
 
 
 //-------------------------------------------------------------------
 //  DIOSTREAMUART::~DIOSTREAMUART
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			20/11/2003 10:19:33
-//	
-//	@return 			
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      20/11/2003 10:19:33
+//
+//  @return
+//  */
 //-------------------------------------------------------------------
 DIOSTREAMUART::~DIOSTREAMUART()
-{ 
-	if(xtimer)	xfactory->DeleteTimer(xtimer);
+{
+  if(xtimer)  xfactory->DeleteTimer(xtimer);
 
-	Clean();
+  Clean();
 }
 
 
 //-------------------------------------------------------------------
 //  DIOSTREAMUART::GetConfig
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			14/09/2004 14:33:56
-//	
-//	@return				DIOSTREAMCONFIG* : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      14/09/2004 14:33:56
+//
+//  @return       DIOSTREAMCONFIG* :
+//  */
 //-------------------------------------------------------------------
 DIOSTREAMCONFIG* DIOSTREAMUART::GetConfig()
 {
-	return (DIOSTREAMCONFIG*)config;
+  return (DIOSTREAMCONFIG*)config;
 }
 
 
@@ -88,20 +88,20 @@ DIOSTREAMCONFIG* DIOSTREAMUART::GetConfig()
 /**
 //
 //
-//	@author				Abraham J. Velez
-//	@version			03/09/2001 16:58:17
+//  @author       Abraham J. Velez
+//  @version      03/09/2001 16:58:17
 //
-//	@return 			bool :
-//  @param				config :
+//  @return       bool :
+//  @param        config :
 */
 //-------------------------------------------------------------------
 bool DIOSTREAMUART::SetConfig(DIOSTREAMCONFIG* config)
 {
-	if(!config) return false;
+  if(!config) return false;
 
-	this->config = (DIOSTREAMUARTCONFIG*)config;
+  this->config = (DIOSTREAMUARTCONFIG*)config;
 
-	return true;
+  return true;
 }
 
 
@@ -109,17 +109,17 @@ bool DIOSTREAMUART::SetConfig(DIOSTREAMCONFIG* config)
 //-------------------------------------------------------------------
 //  DIOSTREAMUART::Clean
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			20/11/2003 10:19:50
-//	
-//	@return 			void : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      20/11/2003 10:19:50
+//
+//  @return       void :
+//  */
 //-------------------------------------------------------------------
 void DIOSTREAMUART::Clean()
-{	
-	config							= NULL;
-	xtimer							= NULL;	
+{
+  config              = NULL;
+  xtimer              = NULL;
 }
 

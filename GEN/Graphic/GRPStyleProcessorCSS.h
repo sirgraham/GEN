@@ -6,10 +6,10 @@
 //
 // Processes CSS
 //
-//	@author: Diego Martinez Ruiz de Gaona 
+//  @author: Diego Martinez Ruiz de Gaona
 //
-//	Date of Creation : 22/02/2018 14:06:46 
-//	Last Modification : 
+//  Date of Creation : 22/02/2018 14:06:46
+//  Last Modification :
 */
 /* GEN  Copyright (C).  All right reserved.
 /*------------------------------------------------------------------------------------------*/
@@ -32,27 +32,27 @@ class GRPWIDGETSTYLECLASS;
 class GRPSTYLEPROCESSORCSS
 {
 public:
-		GRPSTYLEPROCESSORCSS();
-		~GRPSTYLEPROCESSORCSS();
+    GRPSTYLEPROCESSORCSS();
+    ~GRPSTYLEPROCESSORCSS();
 
 
-		bool											ParseStyle		(GRPSTYLESHEET*,XCHAR*);
-		bool											CleanStyle		(XSTRING*);
-		GRPWIDGETSTYLECLASS*			CreateStyle		(XSTRING* name, XSTRING *data);
-		bool											Process				(GRPWIDGETSTYLECLASS* styleclass, XCHAR* stext);		
+    bool                      ParseStyle    (GRPSTYLESHEET*,XCHAR*);
+    bool                      CleanStyle    (XSTRING*);
+    GRPWIDGETSTYLECLASS*      CreateStyle   (XSTRING* name, XSTRING *data);
+    bool                      Process       (GRPWIDGETSTYLECLASS* styleclass, XCHAR* stext);
 
-		bool											Init					(GRPSTYLESHEET*);
-		bool											InitDictionary();
+    bool                      Init          (GRPSTYLESHEET*);
+    bool                      InitDictionary();
 
-		XMAP<GRPWIDGETSTYLETYPE, GRPWIDGETSTYLE*>* GetProperties() {	return &cssproperties;	}
+    XMAP<GRPWIDGETSTYLETYPE, GRPWIDGETSTYLE*>* GetProperties() {  return &cssproperties;  }
 
-		static GRPCOLORPALETTE*		GetPalette();
+    static GRPCOLORPALETTE*   GetPalette();
 
 protected:
 
-		static GRPCOLORPALETTE*											csscolorpalette;
-		XDICTIONARY<GRPWIDGETSTYLETYPE>							csstypes;
-		XMAP<GRPWIDGETSTYLETYPE, GRPWIDGETSTYLE*>		cssproperties;
+    static GRPCOLORPALETTE*                     csscolorpalette;
+    XDICTIONARY<GRPWIDGETSTYLETYPE>             csstypes;
+    XMAP<GRPWIDGETSTYLETYPE, GRPWIDGETSTYLE*>   cssproperties;
 
 
 

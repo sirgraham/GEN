@@ -1,26 +1,26 @@
 /*------------------------------------------------------------------------------------------
-//	DIOWEBSCRAPERGEOLOCATIONIP.CPP
-//	
-//	Geolocation IP (Web Service)
-//   
-//	Author						: Abraham J. Velez
-//	Date Of Creation	: 05/11/2007 16:26:37
-//	Last Mofificacion	:	
-//	
-//	GEN  Copyright (C).  All right reserved.			 
+//  DIOWEBSCRAPERGEOLOCATIONIP.CPP
+//
+//  Geolocation IP (Web Service)
+//
+//  Author            : Abraham J. Velez
+//  Date Of Creation  : 05/11/2007 16:26:37
+//  Last Mofificacion :
+//
+//  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
-	
+
 #include "XThread.h"
 #include "DIOWebScraperGeolocationIP.h"
 
 #include "XMemory.h"
-	
+
 /*---- GENERAL VARIABLE ------------------------------------------------------------------*/
 
-	
+
 /*---- CLASS MEMBERS ---------------------------------------------------------------------*/
 
 
@@ -28,226 +28,226 @@
 
 /*-------------------------------------------------------------------
 //  DIOGEOLOCATIONIP::DIOGEOLOCATIONIP
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			22/10/2008 10:38:16
-//	
-//	@return				 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      22/10/2008 10:38:16
+//
+//  @return
+//  */
 /*-----------------------------------------------------------------*/
 DIOGEOLOCATIONIP::DIOGEOLOCATIONIP() : DIOWEBSCRAPERCACHERESULT()
 {
-	Clean();
+  Clean();
 }
 
 
 /*-------------------------------------------------------------------
 //  DIOGEOLOCATIONIP::~DIOGEOLOCATIONIP
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			22/10/2008 10:38:19
-//	
-//	@return		
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      22/10/2008 10:38:19
+//
+//  @return
+//  */
 /*-----------------------------------------------------------------*/
 DIOGEOLOCATIONIP::~DIOGEOLOCATIONIP()
-{	
-	Clean();
+{
+  Clean();
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIOGEOLOCATIONIP::GetCountry
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			03/04/2011 15:50:12
-//	
-//	@return				XCHAR* : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      03/04/2011 15:50:12
+//
+//  @return       XCHAR* :
+//  */
 /*-----------------------------------------------------------------*/
 XCHAR* DIOGEOLOCATIONIP::GetCountry()
 {
-	return country.Get();
+  return country.Get();
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIOGEOLOCATIONIP::GetState
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			03/04/2011 15:50:47
-//	
-//	@return				XCHAR* : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      03/04/2011 15:50:47
+//
+//  @return       XCHAR* :
+//  */
 /*-----------------------------------------------------------------*/
 XCHAR* DIOGEOLOCATIONIP::GetState()
 {
-	return state.Get();
+  return state.Get();
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIOGEOLOCATIONIP::GetCity
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			03/04/2011 15:52:04
-//	
-//	@return				XCHAR* : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      03/04/2011 15:52:04
+//
+//  @return       XCHAR* :
+//  */
 /*-----------------------------------------------------------------*/
 XCHAR* DIOGEOLOCATIONIP::GetCity()
 {
-	return city.Get();
+  return city.Get();
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIOGEOLOCATIONIP::GetISP
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			03/04/2011 15:52:33
-//	
-//	@return				XCHAR* : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      03/04/2011 15:52:33
+//
+//  @return       XCHAR* :
+//  */
 /*-----------------------------------------------------------------*/
 XCHAR* DIOGEOLOCATIONIP::GetISP()
 {
-	return ISP.Get();
+  return ISP.Get();
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIOGEOLOCATIONIP::GetOrganization
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			20/04/2013 13:47:04
-//	
-//	@return 			XCHAR* : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      20/04/2013 13:47:04
+//
+//  @return       XCHAR* :
+//  */
 /*-----------------------------------------------------------------*/
 XCHAR* DIOGEOLOCATIONIP::GetOrganization()
 {
-	return organization.Get();
+  return organization.Get();
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIOGEOLOCATIONIP::GetLatitude
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			03/04/2011 15:53:17
-//	
-//	@return				float : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      03/04/2011 15:53:17
+//
+//  @return       float :
+//  */
 /*-----------------------------------------------------------------*/
 float DIOGEOLOCATIONIP::GetLatitude()
 {
-	return latitude;
+  return latitude;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIOGEOLOCATIONIP::GetLongitude
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			03/04/2011 15:53:33
-//	
-//	@return				float : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      03/04/2011 15:53:33
+//
+//  @return       float :
+//  */
 /*-----------------------------------------------------------------*/
 float DIOGEOLOCATIONIP::GetLongitude()
 {
-	return longitude;
+  return longitude;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIOGEOLOCATIONIP::IsEmpty
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			03/04/2011 22:11:46
-//	
-//	@return				bool : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      03/04/2011 22:11:46
+//
+//  @return       bool :
+//  */
 /*-----------------------------------------------------------------*/
 bool DIOGEOLOCATIONIP::IsEmpty()
 {
-	if(country.IsEmpty() || state.IsEmpty() || city.IsEmpty()) return true;
-	
-	return false;
+  if(country.IsEmpty() || state.IsEmpty() || city.IsEmpty()) return true;
+
+  return false;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIOGEOLOCATIONIP::Copy
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			23/10/2008 11:40:10
-//	
-//	@return				bool : 
-//	@param				geolocationIP : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      23/10/2008 11:40:10
+//
+//  @return       bool :
+//  @param        geolocationIP :
 */
 /*-----------------------------------------------------------------*/
 bool DIOGEOLOCATIONIP::CopyFrom(DIOWEBSCRAPERCACHERESULT* result)
 {
-	if(!result)		return false;
-	
-	DIOGEOLOCATIONIP* geolocationIP = (DIOGEOLOCATIONIP*)result;
+  if(!result)   return false;
 
-	if(geolocationIP->IsEmpty()) return false;
+  DIOGEOLOCATIONIP* geolocationIP = (DIOGEOLOCATIONIP*)result;
 
-	country				= geolocationIP->country;
-	state					= geolocationIP->state;
-	city					= geolocationIP->city;
-	ISP						= geolocationIP->ISP;
-	organization	= geolocationIP->organization;
+  if(geolocationIP->IsEmpty()) return false;
 
-	latitude			= geolocationIP->latitude;
-	longitude			= geolocationIP->longitude;	
+  country       = geolocationIP->country;
+  state         = geolocationIP->state;
+  city          = geolocationIP->city;
+  ISP           = geolocationIP->ISP;
+  organization  = geolocationIP->organization;
 
-	return true;
+  latitude      = geolocationIP->latitude;
+  longitude     = geolocationIP->longitude;
+
+  return true;
 }
 
 
@@ -256,58 +256,58 @@ bool DIOGEOLOCATIONIP::CopyFrom(DIOWEBSCRAPERCACHERESULT* result)
 
 /*-------------------------------------------------------------------
 //  DIOGEOLOCATIONIP::CopyTo
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			23/06/2013 17:16:33
-//	
-//	@return 			bool : 
-//	@param				result : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      23/06/2013 17:16:33
+//
+//  @return       bool :
+//  @param        result :
 */
 /*-----------------------------------------------------------------*/
 bool DIOGEOLOCATIONIP::CopyTo(DIOWEBSCRAPERCACHERESULT* result)
 {
-	if(!result)		return false;
-	if(IsEmpty()) return false;
+  if(!result)   return false;
+  if(IsEmpty()) return false;
 
-	DIOGEOLOCATIONIP* geolocationIP = (DIOGEOLOCATIONIP*)result;
+  DIOGEOLOCATIONIP* geolocationIP = (DIOGEOLOCATIONIP*)result;
 
-	geolocationIP->country			 = country;
-	geolocationIP->state				 = state;
-	geolocationIP->city					 = city;
-	geolocationIP->ISP					 = ISP;
-	geolocationIP->organization  = organization;
+  geolocationIP->country       = country;
+  geolocationIP->state         = state;
+  geolocationIP->city          = city;
+  geolocationIP->ISP           = ISP;
+  geolocationIP->organization  = organization;
 
-	geolocationIP->latitude			 = latitude;
-	geolocationIP->longitude		 = longitude;	
+  geolocationIP->latitude      = latitude;
+  geolocationIP->longitude     = longitude;
 
-	return true;
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIOGEOLOCATIONIP::Set
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			20/04/2013 15:36:39
-//	
-//	@return 			bool : 
-//	@param				country : 
-//  @param				state : 
-//  @param				city : 
-//  @param				ISP : 
-//  @param				organization : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      20/04/2013 15:36:39
+//
+//  @return       bool :
+//  @param        country :
+//  @param        state :
+//  @param        city :
+//  @param        ISP :
+//  @param        organization :
 */
 /*-----------------------------------------------------------------*/
 bool DIOGEOLOCATIONIP::Set(XSTRING& country, XSTRING& state, XSTRING& city, XSTRING& ISP, XSTRING& organization)
 {
-	return Set(country.Get(), state.Get(), city.Get(), ISP.Get(), organization.Get());
+  return Set(country.Get(), state.Get(), city.Get(), ISP.Get(), organization.Get());
 }
 
 
@@ -315,65 +315,65 @@ bool DIOGEOLOCATIONIP::Set(XSTRING& country, XSTRING& state, XSTRING& city, XSTR
 
 /*-------------------------------------------------------------------
 //  DIOGEOLOCATIONIP::Set
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			20/04/2013 15:36:48
-//	
-//	@return 			bool : 
-//	@param				country : 
-//  @param				state : 
-//  @param				city : 
-//  @param				ISP : 
-//  @param				organization : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      20/04/2013 15:36:48
+//
+//  @return       bool :
+//  @param        country :
+//  @param        state :
+//  @param        city :
+//  @param        ISP :
+//  @param        organization :
 */
 /*-----------------------------------------------------------------*/
 bool DIOGEOLOCATIONIP::Set(XCHAR* country, XCHAR* state, XCHAR* city, XCHAR* ISP, XCHAR* organization)
 {
-	if(country)				this->country				= country;
-	if(state)					this->state					= state;
-	if(city)					this->city					= city;
-	if(ISP)						this->ISP						= ISP;
-	if(organization)	this->organization	= organization;
+  if(country)       this->country       = country;
+  if(state)         this->state         = state;
+  if(city)          this->city          = city;
+  if(ISP)           this->ISP           = ISP;
+  if(organization)  this->organization  = organization;
 
-	XCHAR character[3] = { 0x09, 0x0A, 0x0D };
+  XCHAR character[3] = { 0x09, 0x0A, 0x0D };
 
-	for(int c=0;c<3;c++)
-		{
-			this->country.DeleteCharacter(character[c],XSTRINGCONTEXT_ALLSTRING);	
-			this->state.DeleteCharacter(character[c],XSTRINGCONTEXT_ALLSTRING);	
-			this->city.DeleteCharacter(character[c],XSTRINGCONTEXT_ALLSTRING);	
-			this->ISP.DeleteCharacter(character[c],XSTRINGCONTEXT_ALLSTRING);
-			this->organization.DeleteCharacter(character[c],XSTRINGCONTEXT_ALLSTRING);
-		}
-	
-	return true;
+  for(int c=0;c<3;c++)
+    {
+      this->country.DeleteCharacter(character[c],XSTRINGCONTEXT_ALLSTRING);
+      this->state.DeleteCharacter(character[c],XSTRINGCONTEXT_ALLSTRING);
+      this->city.DeleteCharacter(character[c],XSTRINGCONTEXT_ALLSTRING);
+      this->ISP.DeleteCharacter(character[c],XSTRINGCONTEXT_ALLSTRING);
+      this->organization.DeleteCharacter(character[c],XSTRINGCONTEXT_ALLSTRING);
+    }
+
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIOGEOLOCATIONIP::Set
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			03/04/2011 15:57:54
-//	
-//	@return				bool : 
-//	@param				latitude : 
-//  @param				longitude : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      03/04/2011 15:57:54
+//
+//  @return       bool :
+//  @param        latitude :
+//  @param        longitude :
 */
 /*-----------------------------------------------------------------*/
 bool DIOGEOLOCATIONIP::Set(float latitude,float longitude)
 {
-	this->latitude  = latitude;
-	this->longitude = longitude;
+  this->latitude  = latitude;
+  this->longitude = longitude;
 
-	return true;
+  return true;
 }
 
 
@@ -381,20 +381,20 @@ bool DIOGEOLOCATIONIP::Set(float latitude,float longitude)
 
 /*-------------------------------------------------------------------
 //  DIOGEOLOCATIONIP::Clean
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			27/03/2013 0:19:56
-//	
-//	@return 			void : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      27/03/2013 0:19:56
+//
+//  @return       void :
+//  */
 /*-----------------------------------------------------------------*/
 void DIOGEOLOCATIONIP::Clean()
 {
-	latitude  = 0;
-	longitude = 0;	
+  latitude  = 0;
+  longitude = 0;
 }
 
 
@@ -404,23 +404,23 @@ void DIOGEOLOCATIONIP::Clean()
 
 /*-------------------------------------------------------------------
 //  DIOWEBSCRAPERGEOLOCATIONIP::DIOWEBSCRAPERGEOLOCATIONIP
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			08/02/2014 17:24:03
-//	
-//	@return 			void : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      08/02/2014 17:24:03
+//
+//  @return       void :
 
- 
- 
-//  @param				xpublisher : 
+
+
+//  @param        xpublisher :
 */
 /*-----------------------------------------------------------------*/
 DIOWEBSCRAPERGEOLOCATIONIP::DIOWEBSCRAPERGEOLOCATIONIP(DIOWEBCLIENT* webclient) : DIOWEBSCRAPER()
 {
-	Clean();
+  Clean();
 }
 
 
@@ -428,48 +428,48 @@ DIOWEBSCRAPERGEOLOCATIONIP::DIOWEBSCRAPERGEOLOCATIONIP(DIOWEBCLIENT* webclient) 
 
 /*-------------------------------------------------------------------
 //  DIOWEBSCRAPERGEOLOCATIONIP::~DIOWEBSCRAPERGEOLOCATIONIP
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			05/11/2007 16:28:53
-//	
-//	@return
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      05/11/2007 16:28:53
+//
+//  @return
+//  */
 /*-----------------------------------------------------------------*/
 DIOWEBSCRAPERGEOLOCATIONIP::~DIOWEBSCRAPERGEOLOCATIONIP()
-{		
-	//DeleteAllCache();
+{
+  //DeleteAllCache();
 
-	Clean();
+  Clean();
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIOWEBSCRAPERGEOLOCATIONIP::ChangeURL
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			31/03/2013 18:36:20
-//	
-//	@return 			bool : 
-//	@param				maskurl : 
-//  @param				url : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      31/03/2013 18:36:20
+//
+//  @return       bool :
+//  @param        maskurl :
+//  @param        url :
 */
 /*-----------------------------------------------------------------*/
 bool DIOWEBSCRAPERGEOLOCATIONIP::ChangeURL(XCHAR* maskurl, DIOURL& url)
-{		
-	XSTRING IPstring;
+{
+  XSTRING IPstring;
 
-	IP.GetXString(IPstring);
+  IP.GetXString(IPstring);
 
-	url.Format(maskurl, IPstring.Get());
+  url.Format(maskurl, IPstring.Get());
 
-	return true;
+  return true;
 }
 
 
@@ -477,28 +477,28 @@ bool DIOWEBSCRAPERGEOLOCATIONIP::ChangeURL(XCHAR* maskurl, DIOURL& url)
 
 /*-------------------------------------------------------------------
 //  DIOWEBSCRAPERGEOLOCATIONIP::Get
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			14/02/2014 12:50:59
-//	
-//	@return 			bool : 
-//	@param				IP : 
-//  @param				geolocationIP : 
-//  @param				timeoutforurl : 
-//  @param				localIP : 
-//  @param				usecache : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      14/02/2014 12:50:59
+//
+//  @return       bool :
+//  @param        IP :
+//  @param        geolocationIP :
+//  @param        timeoutforurl :
+//  @param        localIP :
+//  @param        usecache :
 */
 /*-----------------------------------------------------------------*/
 bool DIOWEBSCRAPERGEOLOCATIONIP::Get(XCHAR* IP, DIOGEOLOCATIONIP& geolocationIP, int timeoutforurl, XSTRING* localIP, bool usecache)
 {
-	DIOIP _IP;
+  DIOIP _IP;
 
-	_IP.Set(IP);
+  _IP.Set(IP);
 
-	return Get(_IP, geolocationIP, timeoutforurl, localIP, usecache);
+  return Get(_IP, geolocationIP, timeoutforurl, localIP, usecache);
 }
 
 
@@ -506,24 +506,24 @@ bool DIOWEBSCRAPERGEOLOCATIONIP::Get(XCHAR* IP, DIOGEOLOCATIONIP& geolocationIP,
 
 /*-------------------------------------------------------------------
 //  DIOWEBSCRAPERGEOLOCATIONIP::Get
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			14/02/2014 12:51:21
-//	
-//	@return 			bool : 
-//	@param				IP : 
-//  @param				geolocationIP : 
-//  @param				timeoutforurl : 
-//  @param				localIP : 
-//  @param				usecache : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      14/02/2014 12:51:21
+//
+//  @return       bool :
+//  @param        IP :
+//  @param        geolocationIP :
+//  @param        timeoutforurl :
+//  @param        localIP :
+//  @param        usecache :
 */
 /*-----------------------------------------------------------------*/
 bool DIOWEBSCRAPERGEOLOCATIONIP::Get(XSTRING& IP, DIOGEOLOCATIONIP& geolocationIP, int timeoutforurl, XSTRING* localIP, bool usecache)
 {
-	return Get(IP.Get(), geolocationIP, timeoutforurl, localIP, usecache);
+  return Get(IP.Get(), geolocationIP, timeoutforurl, localIP, usecache);
 }
 
 
@@ -531,97 +531,97 @@ bool DIOWEBSCRAPERGEOLOCATIONIP::Get(XSTRING& IP, DIOGEOLOCATIONIP& geolocationI
 
 /*-------------------------------------------------------------------
 //  DIOWEBSCRAPERGEOLOCATIONIP::Get
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			05/02/2014 17:34:45
-//	
-//	@return 			bool : 
-//	@param				IP : 
-//  @param				geolocationIP : 
-//  @param				timeoutforurl : 
-//  @param				localIP : 
-//  @param				usecache : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      05/02/2014 17:34:45
+//
+//  @return       bool :
+//  @param        IP :
+//  @param        geolocationIP :
+//  @param        timeoutforurl :
+//  @param        localIP :
+//  @param        usecache :
 */
 /*-----------------------------------------------------------------*/
 bool DIOWEBSCRAPERGEOLOCATIONIP::Get(DIOIP& IP, DIOGEOLOCATIONIP& geolocationIP, int timeoutforurl, XSTRING* localIP, bool usecache)
 {
-	bool status = false;
+  bool status = false;
 
-	if(xmutexdo) xmutexdo->Lock(); 
+  if(xmutexdo) xmutexdo->Lock();
 
-	this->IP.Set(IP.Get());
+  this->IP.Set(IP.Get());
 
-	if(usecache)
-		{
-			XSTRING IPstring;
+  if(usecache)
+    {
+      XSTRING IPstring;
 
-			IP.GetXString(IPstring);
+      IP.GetXString(IPstring);
 
-			DIOGEOLOCATIONIP* geoIP = (DIOGEOLOCATIONIP*)cache->Get(IPstring);
-			if(geoIP)  
-				{
-					geolocationIP.CopyFrom(geoIP);
-						
-					if(xmutexdo) xmutexdo->UnLock(); 
-					return true;
-				}
-		}
+      DIOGEOLOCATIONIP* geoIP = (DIOGEOLOCATIONIP*)cache->Get(IPstring);
+      if(geoIP)
+        {
+          geolocationIP.CopyFrom(geoIP);
 
-	if(Load(DIOWEBSCRAPERGEOLOCATIONIP_NAMEFILE))
-		{	
- 			if(Do(DIOWEBSCRAPERGEOLOCATIONIP_NAMESERVICE, timeoutforurl, localIP))
-			 {	
-					XSTRING						country;
-					XSTRING						state;
-					XSTRING						city;
-					XSTRING						ISP;
-					XSTRING						organization;
-					double						latitude  = 0;
-					double						longitude = 0;
-					XSTRING						string;
+          if(xmutexdo) xmutexdo->UnLock();
+          return true;
+        }
+    }
 
-					country				= GetValue(__L("COUNTRY"));  
-					state					= GetValue(__L("STATE"));		 
-					city					= GetValue(__L("CITY"));     
-					ISP						= GetValue(__L("ISP"));
-					organization	= GetValue(__L("ORGANIZATION"));
+  if(Load(DIOWEBSCRAPERGEOLOCATIONIP_NAMEFILE))
+    {
+      if(Do(DIOWEBSCRAPERGEOLOCATIONIP_NAMESERVICE, timeoutforurl, localIP))
+       {
+          XSTRING           country;
+          XSTRING           state;
+          XSTRING           city;
+          XSTRING           ISP;
+          XSTRING           organization;
+          double            latitude  = 0;
+          double            longitude = 0;
+          XSTRING           string;
 
-					string			  = GetValue(__L("LATITUDE"));
-					if(!string.IsEmpty()) string.UnFormat(__L("%f"), &latitude);
+          country       = GetValue(__L("COUNTRY"));
+          state         = GetValue(__L("STATE"));
+          city          = GetValue(__L("CITY"));
+          ISP           = GetValue(__L("ISP"));
+          organization  = GetValue(__L("ORGANIZATION"));
 
-					string  = GetValue(__L("LONGITUDE"));
-					if(!string.IsEmpty()) string.UnFormat(__L("%f"), &longitude);
+          string        = GetValue(__L("LATITUDE"));
+          if(!string.IsEmpty()) string.UnFormat(__L("%f"), &latitude);
 
-					geolocationIP.Set(country, state, city, ISP, organization);
-					geolocationIP.Set((float)latitude, (float)longitude);	
+          string  = GetValue(__L("LONGITUDE"));
+          if(!string.IsEmpty()) string.UnFormat(__L("%f"), &longitude);
 
-					if(!geolocationIP.IsEmpty())
-						{						
-							if(usecache)
-								{
-									DIOGEOLOCATIONIP*	geoIP = new DIOGEOLOCATIONIP();
-									if(geoIP) 
-										{
-											XSTRING IPstring;
+          geolocationIP.Set(country, state, city, ISP, organization);
+          geolocationIP.Set((float)latitude, (float)longitude);
 
-											IP.GetXString(IPstring);
+          if(!geolocationIP.IsEmpty())
+            {
+              if(usecache)
+                {
+                  DIOGEOLOCATIONIP* geoIP = new DIOGEOLOCATIONIP();
+                  if(geoIP)
+                    {
+                      XSTRING IPstring;
 
-											geoIP->CopyFrom(&geolocationIP);
-											cache->Add(IPstring, geoIP);					
-										}
-								}
-							
-							status = true;
-						} 
-				}
-		}
-	 
-	if(xmutexdo) xmutexdo->UnLock(); 
+                      IP.GetXString(IPstring);
 
-	return status;
+                      geoIP->CopyFrom(&geolocationIP);
+                      cache->Add(IPstring, geoIP);
+                    }
+                }
+
+              status = true;
+            }
+        }
+    }
+
+  if(xmutexdo) xmutexdo->UnLock();
+
+  return status;
 }
 
 
@@ -630,13 +630,13 @@ bool DIOWEBSCRAPERGEOLOCATIONIP::Get(DIOIP& IP, DIOGEOLOCATIONIP& geolocationIP,
 //  DIOWEBSCRAPERGEOLOCATIONIP::Clean
 */
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			05/11/2007 16:28:12
-//	
-//	@return				void : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      05/11/2007 16:28:12
+//
+//  @return       void :
+//  */
 /*-----------------------------------------------------------------*/
 void DIOWEBSCRAPERGEOLOCATIONIP::Clean()
 {

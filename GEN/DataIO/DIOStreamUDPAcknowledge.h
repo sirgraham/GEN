@@ -1,29 +1,29 @@
 /*------------------------------------------------------------------------------------------
-//	DIOSTREAMUDPACKNOWLEDGE.H
-*/	
-/**	
-// \class 
-//   
-//  Data IO Stream UDP with Acknowledge
-//   
-//	@author	 Abraham J. Velez
+//  DIOSTREAMUDPACKNOWLEDGE.H
+*/
+/**
+// \class
 //
-//	Date Of Creation	: 24/11/2014 10:26:28
-//	Last Modification	:	
-*/	
-/*	GEN  Copyright (C).  All right reserved.	
+//  Data IO Stream UDP with Acknowledge
+//
+//  @author  Abraham J. Velez
+//
+//  Date Of Creation  : 24/11/2014 10:26:28
+//  Last Modification :
+*/
+/*  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
+
 #ifndef _DIOSTREAMUDPACKNOWLEDGE_H_
 #define _DIOSTREAMUDPACKNOWLEDGE_H_
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
 #include "DIOStreamUDP.h"
 
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
-	
+
 #define DIOSTREAMUDPACKNOWLEDGE_DEFAULTTIMEOUT 5
 
 /*---- CLASS -----------------------------------------------------------------------------*/
@@ -36,69 +36,69 @@ class DIOSTREAMUDP;
 
 class DIOSTREAMUDPACKNOWLEDGE : public DIOSTREAMUDP
 {
-	public:
+  public:
 
-																		DIOSTREAMUDPACKNOWLEDGE								(DIOSTREAMUDPCONFIG* config);
-		virtual												 ~DIOSTREAMUDPACKNOWLEDGE								();
-		
-		DIOSTREAMCONFIG*								GetConfig															()																															{ return (DIOSTREAMCONFIG*)config;		}
-		bool														SetConfig															(DIOSTREAMCONFIG* config)			
-																		{ 
-																			this->config = (DIOSTREAMUDPCONFIG*)config;
-																			return true;
-																		}
+                                    DIOSTREAMUDPACKNOWLEDGE               (DIOSTREAMUDPCONFIG* config);
+    virtual                        ~DIOSTREAMUDPACKNOWLEDGE               ();
 
-		DIOSTREAMSTATUS									GetConnectStatus											()
-																		{
-																			if(!diostream) return DIOSTREAMSTATUS_DISCONNECTED;
-																			return diostream->GetConnectStatus();
-																		}
+    DIOSTREAMCONFIG*                GetConfig                             ()                                                              { return (DIOSTREAMCONFIG*)config;    }
+    bool                            SetConfig                             (DIOSTREAMCONFIG* config)
+                                    {
+                                      this->config = (DIOSTREAMUDPCONFIG*)config;
+                                      return true;
+                                    }
 
-		int															GetTimeout                            ()																															{ return timeout;						         }
-		void														SetTimeout                            (int timeout  = DIOSTREAMUDPACKNOWLEDGE_DEFAULTTIMEOUT)					{ this->timeout = timeout;		       }
-		
-		bool														Open																	();
-			
-		XDWORD													Write																	(XBYTE* buffer, XDWORD size);
+    DIOSTREAMSTATUS                 GetConnectStatus                      ()
+                                    {
+                                      if(!diostream) return DIOSTREAMSTATUS_DISCONNECTED;
+                                      return diostream->GetConnectStatus();
+                                    }
 
-		bool														WriteDatagram													(XSTRING& address, XWORD port, XBYTE* buffer, int size);
-		bool														WriteDatagram													(XSTRING& address, XWORD port, XBUFFER& xbuffer);
+    int                             GetTimeout                            ()                                                              { return timeout;                    }
+    void                            SetTimeout                            (int timeout  = DIOSTREAMUDPACKNOWLEDGE_DEFAULTTIMEOUT)         { this->timeout = timeout;           }
 
-		bool														Disconnect														();																	
-		bool														Close																	();
-																	
-		DIOSTREAM*											GetDIOStreamBase											()																														{ return diostream;									}
+    bool                            Open                                  ();
 
-	private:
-		
-		void														Clean																	()
-																		{																			
-																			config						= NULL;		
-																			
-																			timeout           = 0;
+    XDWORD                          Write                                 (XBYTE* buffer, XDWORD size);
 
-																			URLremote         = NULL;
-																			portremote				= 0;
-																			diostream					= NULL;																																						
-																			xthreadconnexion  = NULL;
-																		}
+    bool                            WriteDatagram                         (XSTRING& address, XWORD port, XBYTE* buffer, int size);
+    bool                            WriteDatagram                         (XSTRING& address, XWORD port, XBUFFER& xbuffer);
 
-		static void											ThreadRunFunction											(void* param);	
+    bool                            Disconnect                            ();
+    bool                            Close                                 ();
 
-		
-		DIOSTREAMUDPCONFIG*							config;
-		
-		int                             timeout;
+    DIOSTREAM*                      GetDIOStreamBase                      ()                                                            { return diostream;                 }
 
-		DIOURL*													URLremote;
-		XSTRING                         addressremote;
-		XWORD			                      portremote;
-		DIOSTREAMUDP*										diostream;				
-		XTHREADCOLLECTED*								xthreadconnexion;
+  private:
+
+    void                            Clean                                 ()
+                                    {
+                                      config            = NULL;
+
+                                      timeout           = 0;
+
+                                      URLremote         = NULL;
+                                      portremote        = 0;
+                                      diostream         = NULL;
+                                      xthreadconnexion  = NULL;
+                                    }
+
+    static void                     ThreadRunFunction                     (void* param);
+
+
+    DIOSTREAMUDPCONFIG*             config;
+
+    int                             timeout;
+
+    DIOURL*                         URLremote;
+    XSTRING                         addressremote;
+    XWORD                           portremote;
+    DIOSTREAMUDP*                   diostream;
+    XTHREADCOLLECTED*               xthreadconnexion;
 };
-	
-	
+
+
 /*---- INLINE FUNCTIONS ------------------------------------------------------------------*/
-	
+
 #endif
 

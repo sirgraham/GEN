@@ -1,24 +1,24 @@
 /*------------------------------------------------------------------------------------------
-//	INPCURSOR.H
-*/	
-/**	
-// \class 
-//   
+//  INPCURSOR.H
+*/
+/**
+// \class
+//
 //  Input Cursor Class
-//   
-//	@author	 Abraham J. Velez
-//	@version 21/12/2011 12:03:09
-*/	
-/*	GEN  Copyright (C).  All right reserved.			 
+//
+//  @author  Abraham J. Velez
+//  @version 21/12/2011 12:03:09
+*/
+/*  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
-	
+
+
 #ifndef _INPCURSOR_H_
 #define _INPCURSOR_H_
-	
-	
+
+
 //---- INCLUDES ----------------------------------------------------------------------------
-	
+
 #include "XBase.h"
 #include "XVector.h"
 #include "XString.h"
@@ -30,33 +30,33 @@
 
 enum INPCURSOR_MOTIONDIR
 {
-	INPCURSOR_MOTIONDIR_UNKNOWN		= 0 ,
-	
-	INPCURSOR_MOTIONDIR_UP						,	
-	INPCURSOR_MOTIONDIR_DOWN					,
-	INPCURSOR_MOTIONDIR_RIGHT					,
-	INPCURSOR_MOTIONDIR_LEFT          ,
+  INPCURSOR_MOTIONDIR_UNKNOWN   = 0 ,
 
-	INPCURSOR_MOTIONDIR_RIGHTUP				,
-	INPCURSOR_MOTIONDIR_LEFTUP				,
-	INPCURSOR_MOTIONDIR_RIGHTDOWN			,
-	INPCURSOR_MOTIONDIR_LEFTDOWN			,
+  INPCURSOR_MOTIONDIR_UP            ,
+  INPCURSOR_MOTIONDIR_DOWN          ,
+  INPCURSOR_MOTIONDIR_RIGHT         ,
+  INPCURSOR_MOTIONDIR_LEFT          ,
+
+  INPCURSOR_MOTIONDIR_RIGHTUP       ,
+  INPCURSOR_MOTIONDIR_LEFTUP        ,
+  INPCURSOR_MOTIONDIR_RIGHTDOWN     ,
+  INPCURSOR_MOTIONDIR_LEFTDOWN      ,
 };
 
 
 enum INPCURSOR_ID
 {
-	INPCURSOR_ID_NONE							= 0 ,
+  INPCURSOR_ID_NONE             = 0 ,
 
-	INPCURSOR_ID_MOUSE								,
-	INPCURSOR_ID_TOUCHSCREEN1         ,      
-	INPCURSOR_ID_TOUCHSCREEN2         ,      
-	INPCURSOR_ID_TOUCHSCREEN3         ,      
-	INPCURSOR_ID_TOUCHSCREEN4         ,      
+  INPCURSOR_ID_MOUSE                ,
+  INPCURSOR_ID_TOUCHSCREEN1         ,
+  INPCURSOR_ID_TOUCHSCREEN2         ,
+  INPCURSOR_ID_TOUCHSCREEN3         ,
+  INPCURSOR_ID_TOUCHSCREEN4         ,
 };
 
 
-	
+
 //---- CLASS -------------------------------------------------------------------------------
 
 class XFACTORY;
@@ -67,28 +67,28 @@ class INPCURSOR;
 
 class INPCURSORMOTION : public INPPATH
 {
-	public:
-														INPCURSORMOTION						();
-		virtual								 ~INPCURSORMOTION						();
+  public:
+                            INPCURSORMOTION           ();
+    virtual                ~INPCURSORMOTION           ();
 
-		bool										IsInCurse									();
-		bool										SetIsInCurse							(bool isincurse);	
+    bool                    IsInCurse                 ();
+    bool                    SetIsInCurse              (bool isincurse);
 
-		bool										IsReadyToTest							();
-		
-		INPCURSOR_MOTIONDIR			GetDirection							(bool indetail);
-		
-		XQWORD									GetTimeElapsed						();
-		bool										SetTimeElapsed						(XQWORD timeelapsed);
-		
-		bool										Reset											();
-		
-	private:
+    bool                    IsReadyToTest             ();
 
-		void										Clean											();
+    INPCURSOR_MOTIONDIR     GetDirection              (bool indetail);
 
-		bool										isincurse;
-		XQWORD									timeelapsed;		
+    XQWORD                  GetTimeElapsed            ();
+    bool                    SetTimeElapsed            (XQWORD timeelapsed);
+
+    bool                    Reset                     ();
+
+  private:
+
+    void                    Clean                     ();
+
+    bool                    isincurse;
+    XQWORD                  timeelapsed;
 };
 
 
@@ -96,50 +96,50 @@ class INPCURSORMOTION : public INPPATH
 
 class INPCURSOR : public INPPATHPOINT
 {
-	public:
-														INPCURSOR									();
-		virtual								 ~INPCURSOR									();
-		
-		INPCURSOR_ID						GetID											();
-		void										SetID											(INPCURSOR_ID ID);
+  public:
+                            INPCURSOR                 ();
+    virtual                ~INPCURSOR                 ();
 
-		XTIMER*									GetTimer									();
-		
-		bool										HavePreSelect							();
-		bool										SetHavePreSelect					(bool havepreselect);
-		
-		bool										IsChanged									();
-		bool										SetIsChanged							(bool ischanged);
+    INPCURSOR_ID            GetID                     ();
+    void                    SetID                     (INPCURSOR_ID ID);
 
-		bool										IsPositionInRect					(int x = 0, int y = 0, int width = 0,int height = 0);
+    XTIMER*                 GetTimer                  ();
 
-		INPCURSORMOTION*				GetMotion									();
-		bool										AddPointToMotion					(bool ispressed);
-		
+    bool                    HavePreSelect             ();
+    bool                    SetHavePreSelect          (bool havepreselect);
 
-		void										Set												(float x = 0, float y = 0, float z = 0);
-		void										SetX											(float x = 0);
-		void										SetY											(float y = 0);
-		void										SetZ											(float z = 0);
+    bool                    IsChanged                 ();
+    bool                    SetIsChanged              (bool ischanged);
 
-	private:
+    bool                    IsPositionInRect          (int x = 0, int y = 0, int width = 0,int height = 0);
 
-		void										Clean											();
-		
-		XTIMER*									timer;
-		INPCURSOR_ID						ID;
-		bool										havepreselect;
-		bool										ischanged;
+    INPCURSORMOTION*        GetMotion                 ();
+    bool                    AddPointToMotion          (bool ispressed);
 
-		XRECT										source;
-		XRECT										destination;
 
-		INPCURSORMOTION					motion;
+    void                    Set                       (float x = 0, float y = 0, float z = 0);
+    void                    SetX                      (float x = 0);
+    void                    SetY                      (float y = 0);
+    void                    SetZ                      (float z = 0);
+
+  private:
+
+    void                    Clean                     ();
+
+    XTIMER*                 timer;
+    INPCURSOR_ID            ID;
+    bool                    havepreselect;
+    bool                    ischanged;
+
+    XRECT                   source;
+    XRECT                   destination;
+
+    INPCURSORMOTION         motion;
 };
 
-	
+
 //---- INLINE FUNCTIONS --------------------------------------------------------------------
-	
+
 
 #endif
 

@@ -1,93 +1,95 @@
 /*------------------------------------------------------------------------------------------
-//	SQLPOSTGRESQLDATABASE.H
-*/	
-/**	
-// \class 
-//   
-//  Postgres database concrete class
-//   
-//	@author	 Diego Martinez Ruiz de Gaona
+//  SQLPOSTGRESQLDATABASE.H
+*/
+/**
+// \class
 //
-//	Date Of Creation	: 10/08/2015 12:26:06
-//	Last Modification	:	
-*/	
-/*	GEN  Copyright (C).  All right reserved.
+//  Postgres database concrete class
+//
+//  @author  Diego Martinez Ruiz de Gaona
+//
+//  Date Of Creation  : 10/08/2015 12:26:06
+//  Last Modification :
+*/
+/*  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
+
 #if defined(DBSQL_ACTIVE) && defined(DBSQLPOSTGRESQL_ACTIVE)
 
 #ifndef _SQLPOSTGRESQLDATABASE_H_
 #define _SQLPOSTGRESQLDATABASE_H_
 
 #pragma comment (linker,"/NODEFAULTLIB:libcmtd.lib")
-	
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
-	
-	
+
+
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
-	
+
 /*---- CLASS -----------------------------------------------------------------------------*/
 
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
-#include "XDebug.h"	
+#include "XDebug.h"
 
 #include "DBSQLBase.h"
 #include "DBSQLDatabase.h"
 
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
-	
 
-	
+#include "SQLPostgreSQLQuery.h"
+#include "SQLPostgreSQLConnection.h"
+
+
 /*---- CLASS -----------------------------------------------------------------------------*/
 
-class SQLPOSTGRESQLQUERY;
-class SQLPOSTGRESQLCONNECTION;
+//class SQLPOSTGRESQLQUERY;
+//class SQLPOSTGRESQLCONNECTION;
 
 
 class SQLPOSTGRESQLDATABASE : public DBSQLDATABASE
 {
-	public:
+  public:
 
-		friend class										SQLPOSTGRESQLCONNECTION;
-		friend class										SQLPOSTGRESQLQUERY;
+    friend class                    SQLPOSTGRESQLCONNECTION;
+    friend class                    SQLPOSTGRESQLQUERY;
 
-	
-																		SQLPOSTGRESQLDATABASE				();
-		virtual													~SQLPOSTGRESQLDATABASE			()												{ Clean();																	}
-		virtual	XCHAR*									GetName											()												{ return __L("POSTGRESQL");									}
-		
-		virtual	bool										Transaction									();
-		virtual	bool										Commit											();
-		virtual	bool										Rollback										(XCHAR* savepointname=NULL);
-		virtual	bool										Savepoint										(XCHAR* savepoint);
-		virtual	bool										ReleaseSavepoint						(XCHAR* savepoint);
-		virtual	DBSQLQUERY*							CreateQuery									();
-		virtual DBSQLCONNECTION*				CreateConnection						();
-		virtual bool										GetTables										();
-		virtual	DBSQLDATABASE_ENCODING	GetDatabaseEncoding					();
-		virtual	bool										SetDatabaseEncoding					(DBSQLDATABASE_ENCODING encodingtouse);	
 
-		virtual		bool									OnConnection								();
-		virtual		bool									OnDisconnection							();
+                                    SQLPOSTGRESQLDATABASE       ();
+    virtual                         ~SQLPOSTGRESQLDATABASE      ()                        { Clean();                                  }
+    virtual XCHAR*                  GetName                     ()                        { return __L("POSTGRESQL");                 }
 
-		virtual		bool									IsThreadSafe								();
-	
+    virtual bool                    Transaction                 ();
+    virtual bool                    Commit                      ();
+    virtual bool                    Rollback                    (XCHAR* savepointname=NULL);
+    virtual bool                    Savepoint                   (XCHAR* savepoint);
+    virtual bool                    ReleaseSavepoint            (XCHAR* savepoint);
+    virtual DBSQLQUERY*             CreateQuery                 ();
+    virtual DBSQLCONNECTION*        CreateConnection            ();
+    virtual bool                    GetTables                   ();
+    virtual DBSQLDATABASE_ENCODING  GetDatabaseEncoding         ();
+    virtual bool                    SetDatabaseEncoding         (DBSQLDATABASE_ENCODING encodingtouse);
 
-	protected:
+    virtual   bool                  OnConnection                ();
+    virtual   bool                  OnDisconnection             ();
 
-	private:
+    virtual   bool                  IsThreadSafe                ();
 
-		void														Clean												()
-																		{
-																			type				= DBSQLDATABASE_FLAGS_NONE;
-																			connection	=	NULL;
-																		}
+
+  protected:
+
+  private:
+
+    void                            Clean                       ()
+                                    {
+                                      type        = DBSQLDATABASE_FLAGS_NONE;
+                                      connection  = NULL;
+                                    }
 };
-	
-	
+
+
 /*---- INLINE FUNCTIONS ------------------------------------------------------------------*/
-	
+
 #endif
 
 #endif

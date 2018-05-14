@@ -1,16 +1,16 @@
 /*------------------------------------------------------------------------------------------
-//	DIOWEBSCRAPERPUBLICIP.CPP
-//	
-//	Public IP (Web Service)
-//   
-//	Author						: Abraham J. Velez
-//	Date Of Creation	: 05/11/2007 16:26:37
-//	Last Mofificacion	:	
-//	
-//	GEN  Copyright (C).  All right reserved.			 
+//  DIOWEBSCRAPERPUBLICIP.CPP
+//
+//  Public IP (Web Service)
+//
+//  Author            : Abraham J. Velez
+//  Date Of Creation  : 05/11/2007 16:26:37
+//  Last Mofificacion :
+//
+//  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
 #include "XThread.h"
@@ -19,47 +19,47 @@
 #include "DIOWebScraperPublicIP.h"
 
 #include "XMemory.h"
-	
+
 /*---- GENERAL VARIABLE ------------------------------------------------------------------*/
 
-	
+
 /*---- CLASS MEMBERS ---------------------------------------------------------------------*/
 
 
 /*-------------------------------------------------------------------
 //  DIOPUBLICIP::DIOPUBLICIP
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			23/06/2013 19:00:57
-//	
-//	@return 			
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      23/06/2013 19:00:57
+//
+//  @return
+//  */
 /*-----------------------------------------------------------------*/
 DIOPUBLICIP::DIOPUBLICIP()
 {
-	Clean();
+  Clean();
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIOPUBLICIP::~DIOPUBLICIP
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			23/06/2013 19:01:15
-//	
-//	@return 			virtual : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      23/06/2013 19:01:15
+//
+//  @return       virtual :
+//  */
 /*-----------------------------------------------------------------*/
 DIOPUBLICIP::~DIOPUBLICIP()
 {
-	Clean();
+  Clean();
 }
 
 
@@ -67,19 +67,19 @@ DIOPUBLICIP::~DIOPUBLICIP()
 
 /*-------------------------------------------------------------------
 //  DIOPUBLICIP::Get
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			23/06/2013 18:59:18
-//	
-//	@return 			DIOIP* : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      23/06/2013 18:59:18
+//
+//  @return       DIOIP* :
+//  */
 /*-----------------------------------------------------------------*/
 DIOIP* DIOPUBLICIP::Get()
 {
-	return &IP;
+  return &IP;
 }
 
 
@@ -87,15 +87,15 @@ DIOIP* DIOPUBLICIP::Get()
 
 /*-------------------------------------------------------------------
 //  DIOPUBLICIP::Clean
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			23/06/2013 19:00:33
-//	
-//	@return 			void : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      23/06/2013 19:00:33
+//
+//  @return       void :
+//  */
 /*-----------------------------------------------------------------*/
 void DIOPUBLICIP::Clean()
 {
@@ -107,19 +107,19 @@ void DIOPUBLICIP::Clean()
 
 /*-------------------------------------------------------------------
 //  DIOWEBSCRAPERPUBLICIP::DIOWEBSCRAPERPUBLICIP
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			08/02/2014 17:22:24
-//	
-//	@return 			void : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      08/02/2014 17:22:24
+//
+//  @return       void :
 */
 /*-----------------------------------------------------------------*/
 DIOWEBSCRAPERPUBLICIP::DIOWEBSCRAPERPUBLICIP() : DIOWEBSCRAPER()
 {
-	Clean();
+  Clean();
 }
 
 
@@ -127,98 +127,98 @@ DIOWEBSCRAPERPUBLICIP::DIOWEBSCRAPERPUBLICIP() : DIOWEBSCRAPER()
 
 /*-------------------------------------------------------------------
 //  DIOWEBSCRAPERPUBLICIP::~DIOWEBSCRAPERPUBLICIP
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			05/11/2007 16:28:53
-//	
-//	@return
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      05/11/2007 16:28:53
+//
+//  @return
+//  */
 /*-----------------------------------------------------------------*/
 DIOWEBSCRAPERPUBLICIP::~DIOWEBSCRAPERPUBLICIP()
-{		
-	Clean();
+{
+  Clean();
 }
 
 
 /*-------------------------------------------------------------------
 //  DIOWEBSCRAPERPUBLICIP::Get
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			14/02/2014 12:48:01
-//	
-//	@return 			bool : 
-//	@param				IP : 
-//  @param				timeoutforurl : 
-//  @param				localIP : 
-//  @param				usecache : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      14/02/2014 12:48:01
+//
+//  @return       bool :
+//  @param        IP :
+//  @param        timeoutforurl :
+//  @param        localIP :
+//  @param        usecache :
 */
 /*-----------------------------------------------------------------*/
 bool DIOWEBSCRAPERPUBLICIP::Get(DIOIP& IP, int timeoutforurl,  XSTRING* localIP, bool usecache)
-{	
-	XSTRING publicIPID;
-	bool		status = false;
+{
+  XSTRING publicIPID;
+  bool    status = false;
 
-	if(xmutexdo) xmutexdo->Lock();
+  if(xmutexdo) xmutexdo->Lock();
 
-	publicIPID = __L("public IP ID");
+  publicIPID = __L("public IP ID");
 
-	if(usecache)
-		{
-			DIOPUBLICIP* publicIP = (DIOPUBLICIP*)cache->Get(publicIPID);
-			if(publicIP)  
-				{
-					XSTRING IPstring;
+  if(usecache)
+    {
+      DIOPUBLICIP* publicIP = (DIOPUBLICIP*)cache->Get(publicIPID);
+      if(publicIP)
+        {
+          XSTRING IPstring;
 
-					publicIP->Get()->GetXString(IPstring);
+          publicIP->Get()->GetXString(IPstring);
 
-					IP.Set(IPstring.Get());
+          IP.Set(IPstring.Get());
 
-					if(xmutexdo) xmutexdo->UnLock();
+          if(xmutexdo) xmutexdo->UnLock();
 
-					return true;
-				}			
-		}
+          return true;
+        }
+    }
 
-	if(Load(DIOWEBSCRAPERPUBLICIP_NAMEFILE)) 
-		{	
-			if(Do(DIOWEBSCRAPERPUBLICIP_NAMESERVICE, timeoutforurl,  localIP))	
-				{
-					XSTRING stringIP;
-	
-					stringIP = GetValue(__L("IP"));
+  if(Load(DIOWEBSCRAPERPUBLICIP_NAMEFILE))
+    {
+      if(Do(DIOWEBSCRAPERPUBLICIP_NAMESERVICE, timeoutforurl,  localIP))
+        {
+          XSTRING stringIP;
 
-					if(!stringIP.IsEmpty())
-						{
-							stringIP.DeleteCharacter(0x20);			
-							if(!stringIP.IsEmpty()) 
-								{
-									IP.Set(stringIP);
+          stringIP = GetValue(__L("IP"));
 
-									if(usecache)
-										{
-											DIOPUBLICIP* publicIP = new DIOPUBLICIP();
-											if(publicIP)
-												{
-													publicIP->Get()->Set(stringIP.Get());	
-													cache->Add(publicIPID, publicIP);
-												}	  
-										}
+          if(!stringIP.IsEmpty())
+            {
+              stringIP.DeleteCharacter(0x20);
+              if(!stringIP.IsEmpty())
+                {
+                  IP.Set(stringIP);
 
-									status = true;
-								}
-						} 
-				}
-		} 
+                  if(usecache)
+                    {
+                      DIOPUBLICIP* publicIP = new DIOPUBLICIP();
+                      if(publicIP)
+                        {
+                          publicIP->Get()->Set(stringIP.Get());
+                          cache->Add(publicIPID, publicIP);
+                        }
+                    }
 
-	if(xmutexdo) xmutexdo->UnLock();
+                  status = true;
+                }
+            }
+        }
+    }
 
-	return status;	
+  if(xmutexdo) xmutexdo->UnLock();
+
+  return status;
 }
 
 
@@ -228,13 +228,13 @@ bool DIOWEBSCRAPERPUBLICIP::Get(DIOIP& IP, int timeoutforurl,  XSTRING* localIP,
 //  DIOWEBSCRAPERPUBLICIP::Clean
 */
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			05/11/2007 16:28:12
-//	
-//	@return				void : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      05/11/2007 16:28:12
+//
+//  @return       void :
+//  */
 /*-----------------------------------------------------------------*/
 void DIOWEBSCRAPERPUBLICIP::Clean()
 {

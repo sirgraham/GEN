@@ -1,37 +1,37 @@
 /*------------------------------------------------------------------------------------------
-//	SNDOPENALELEMENT.H
-*/	
-/**	
-// \file 
-//   
-//  openal implementation of the element
-//   
-//	@author	 Imanol Celaya Ruiz de Alegria
+//  SNDOPENALELEMENT.H
+*/
+/**
+// \file
 //
-//	Date Of Creation	: 05/11/2015 10:31:09
-//	Last Modification	:	
-*/	
-/*	GEN  Copyright (C).  All right reserved.
+//  openal implementation of the element
+//
+//  @author  Imanol Celaya Ruiz de Alegria
+//
+//  Date Of Creation  : 05/11/2015 10:31:09
+//  Last Modification :
+*/
+/*  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
+
 #ifndef _SNDOPENALELEMENT_H_
 #define _SNDOPENALELEMENT_H_
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
 #include "XVector.h"
 
 #include "SNDElement.h"
-#include "SNDFileOGG.h"	
+#include "SNDFileOGG.h"
 #include "SNDOpenALBuffer.h"
 #include "SNDOpenALSource.h"
 
 #include "XMemory.h"
 
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
-	
-	
+
+
 /*---- CLASS -----------------------------------------------------------------------------*/
 
 class XPATH;
@@ -42,113 +42,113 @@ class XFACTORY;
 
 class SNDOPENALELEMENT : public SNDELEMENT
 {
-	friend class SNDOPENAL;
+  friend class SNDOPENAL;
 
-	public:
+  public:
 
-																	SNDOPENALELEMENT											(XPATH* xpath)
-																	{
-																		Clean();
-																		
+                                  SNDOPENALELEMENT                      (XPATH* xpath)
+                                  {
+                                    Clean();
 
-																		buffer	= new SNDOPENALBUFFER();
-																		buffer->Generate();
-																		volume	= 1.0f;
-																		pitch		= 1.0f;
-																		sources.SetIsMulti(false);
-																	}
 
-		virtual											 ~SNDOPENALELEMENT											()
-																	{
-																		if(buffer)
-																			{
-																				buffer->Destroy();
-																				delete buffer;
-																			}
-																		Clean();
-																	}
+                                    buffer  = new SNDOPENALBUFFER();
+                                    buffer->Generate();
+                                    volume  = 1.0f;
+                                    pitch   = 1.0f;
+                                    sources.SetIsMulti(false);
+                                  }
 
-		void													AddSource															(SNDOPENALSOURCE* source)
-																	{
-																		sources.Add(source);
-																	}
+    virtual                      ~SNDOPENALELEMENT                      ()
+                                  {
+                                    if(buffer)
+                                      {
+                                        buffer->Destroy();
+                                        delete buffer;
+                                      }
+                                    Clean();
+                                  }
 
-		void													SetSource															(SNDOPENALSOURCE* source)
-																	{
-																		if(source != NULL)
-																			{
-																				sources.Add(source);
-																				lastsource = source;
-																			}
-																		else
-																			{
-																				XDWORD size = sources.GetSize();
-																				for(XDWORD i = 0; i < size; i++)
-																					{
-																						if(sources.FastGet(i) == source)
-																							{
-																								sources.DeleteIndex(i);
-																								return;
-																							}
-																					}
-																			}
-																	}
+    void                          AddSource                             (SNDOPENALSOURCE* source)
+                                  {
+                                    sources.Add(source);
+                                  }
 
-		SNDOPENALSOURCE*							GetSource															()
-																	{
-																		SNDOPENALSOURCE* ret = NULL;
+    void                          SetSource                             (SNDOPENALSOURCE* source)
+                                  {
+                                    if(source != NULL)
+                                      {
+                                        sources.Add(source);
+                                        lastsource = source;
+                                      }
+                                    else
+                                      {
+                                        XDWORD size = sources.GetSize();
+                                        for(XDWORD i = 0; i < size; i++)
+                                          {
+                                            if(sources.FastGet(i) == source)
+                                              {
+                                                sources.DeleteIndex(i);
+                                                return;
+                                              }
+                                          }
+                                      }
+                                  }
 
-																		XDWORD size = sources.GetSize();
-																		for(XDWORD i = 0; i < size; i++)
-																			{
-																				if(sources.FastGet(i)->GetElement() == this)
-																					{
-																						return sources.FastGet(i);
-																					}
-																			}
+    SNDOPENALSOURCE*              GetSource                             ()
+                                  {
+                                    SNDOPENALSOURCE* ret = NULL;
 
-																		return ret;
-																	}
+                                    XDWORD size = sources.GetSize();
+                                    for(XDWORD i = 0; i < size; i++)
+                                      {
+                                        if(sources.FastGet(i)->GetElement() == this)
+                                          {
+                                            return sources.FastGet(i);
+                                          }
+                                      }
 
-		void													SetLoop																(bool loop);
-		bool													GetLoop																()															{ return this->loop;			}
-	
+                                    return ret;
+                                  }
 
-		SNDOPENALBUFFER*							GetBuffer															()															{ return this->buffer;		}
+    void                          SetLoop                               (bool loop);
+    bool                          GetLoop                               ()                              { return this->loop;      }
 
-		void													SetVolume															(float volume);
-		float													GetVolume															()															{ return volume;					}
 
-		void													SetPitch															(float pitch);
-		float													GetPitch															()															{ return pitch;						}
-		virtual void									SetFile																(SNDFILE* file);
+    SNDOPENALBUFFER*              GetBuffer                             ()                              { return this->buffer;    }
 
-	protected:
+    void                          SetVolume                             (float volume);
+    float                         GetVolume                             ()                              { return volume;          }
 
-		
-		SNDOPENALBUFFER*							buffer;
+    void                          SetPitch                              (float pitch);
+    float                         GetPitch                              ()                              { return pitch;           }
+    virtual void                  SetFile                               (SNDFILE* file);
 
-		XVECTOR<SNDOPENALSOURCE*>			sources;
-		SNDOPENALSOURCE*							lastsource;
+  protected:
 
-		XPATH*												xpath;
-		XSTRING												name;
-	
-	private:
 
-		void													Queue																	();
+    SNDOPENALBUFFER*              buffer;
 
-		void													Clean																	()
-																	{
-																		buffer		= NULL;
-																		loop			= false;
-																		volume		= 0.0f;
-																		pitch			= 0.0f;
-																	}
+    XVECTOR<SNDOPENALSOURCE*>     sources;
+    SNDOPENALSOURCE*              lastsource;
+
+    XPATH*                        xpath;
+    XSTRING                       name;
+
+  private:
+
+    void                          Queue                                 ();
+
+    void                          Clean                                 ()
+                                  {
+                                    buffer    = NULL;
+                                    loop      = false;
+                                    volume    = 0.0f;
+                                    pitch     = 0.0f;
+                                  }
 };
-	
-	
+
+
 /*---- INLINE FUNCTIONS ------------------------------------------------------------------*/
-	
+
 #endif
 

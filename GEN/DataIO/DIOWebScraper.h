@@ -1,23 +1,23 @@
 /*------------------------------------------------------------------------------------------
-//	DIOWEBSCRAPER.H
-*/	
-/**	
-// \class 
-//   
+//  DIOWEBSCRAPER.H
+*/
+/**
+// \class
+//
 //  Web Scraper Class
-//   
-//	@author	 Abraham J. Velez
-//	@version 05/11/2007 16:20:28
-*/	
-/*	GEN  Copyright (C).  All right reserved.			 
+//
+//  @author  Abraham J. Velez
+//  @version 05/11/2007 16:20:28
+*/
+/*  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
+
 #ifndef _DIOWEBSCRAPER_H_
 #define _DIOWEBSCRAPER_H_
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
-	
+
 #include "XVector.h"
 #include "XMap.h"
 
@@ -26,12 +26,12 @@
 
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
 
-#define DIOWEBSCRAPER_MAXTIMEOUTFORURL				 10
-#define DIOWEBSCRAPER_NAMEFILE								 __L("webscraper.xml")
-#define DIOWEBSCRAPER_DEFAULTUSERAGENT       	 DIOWEBCLIENT_DEFAULTUSERAGENT
+#define DIOWEBSCRAPER_MAXTIMEOUTFORURL         10
+#define DIOWEBSCRAPER_NAMEFILE                 __L("webscraper.xml")
+#define DIOWEBSCRAPER_DEFAULTUSERAGENT         DIOWEBCLIENT_DEFAULTUSERAGENT
 
 /*---- CLASS -----------------------------------------------------------------------------*/
-	
+
 class XFACTORY;
 class XPUBLISHER;
 class XDATETIME;
@@ -44,68 +44,68 @@ class DIOFACTORY;
 class DIOCHECKINTERNETCONNEXION;
 
 
-class DIOWEBSCRAPER 
+class DIOWEBSCRAPER
 {
-	public:	
-																		DIOWEBSCRAPER													();
-		virtual												 ~DIOWEBSCRAPER													();
-		
-		bool														Load																	(XCHAR* namefile);
-		bool														Load																	(XPATH& namefile);
+  public:
+                                    DIOWEBSCRAPER                         ();
+    virtual                        ~DIOWEBSCRAPER                         ();
 
-		DIOURL*                         GetURLDownload                        ()                                   { return URLdownload;                               }
+    bool                            Load                                  (XCHAR* namefile);
+    bool                            Load                                  (XPATH& namefile);
 
-		bool														Download															(DIOURL& URL, XPATH& xpath);
+    DIOURL*                         GetURLDownload                        ()                                   { return URLdownload;                               }
 
-		bool														Do																		(XCHAR* namewebservice  , int timeoutforurl = DIOWEBSCRAPER_MAXTIMEOUTFORURL, XSTRING* localIP = NULL);		
-		bool														Do																		(XSTRING& namewebservice, int timeoutforurl = DIOWEBSCRAPER_MAXTIMEOUTFORURL, XSTRING* localIP = NULL);
+    bool                            Download                              (DIOURL& URL, XPATH& xpath);
 
-		virtual bool										ChangeURL															(XCHAR* maskurl, DIOURL& url);			
+    bool                            Do                                    (XCHAR* namewebservice  , int timeoutforurl = DIOWEBSCRAPER_MAXTIMEOUTFORURL, XSTRING* localIP = NULL);
+    bool                            Do                                    (XSTRING& namewebservice, int timeoutforurl = DIOWEBSCRAPER_MAXTIMEOUTFORURL, XSTRING* localIP = NULL);
 
-		bool														AddValue															(XCHAR* name, XCHAR* value);
-		bool														AddValue															(XCHAR* name, XSTRING& value);
-		bool														AddValue															(XSTRING& name,XCHAR*  value);
-		bool														AddValue															(XSTRING& name, XSTRING& value);
-		XCHAR*													GetValue															(XCHAR* namevalue);
-		XCHAR*													GetValue															(XSTRING& namevalue);
-		bool														DeleteAllValues												();
-		
-		DIOWEBCLIENT*										GetWebClient													();
+    virtual bool                    ChangeURL                             (XCHAR* maskurl, DIOURL& url);
 
-		bool														ExtractString													(XCHAR* searchini, XCHAR* searchend, XBUFFER* xbuffer, bool usebufferpos, XSTRING& result);
-		bool														ExtractString													(XCHAR* searchini, XSTRING& searchend, XBUFFER* xbuffer, bool usebufferpos, XSTRING& result);
-		bool														ExtractString													(XSTRING& searchini,XCHAR* searchend, XBUFFER* xbuffer, bool usebufferpos, XSTRING& result);
-		bool														ExtractString													(XSTRING& searchini, XSTRING& searchend, XBUFFER* xbuffer, bool usebufferpos, XSTRING& result);
+    bool                            AddValue                              (XCHAR* name, XCHAR* value);
+    bool                            AddValue                              (XCHAR* name, XSTRING& value);
+    bool                            AddValue                              (XSTRING& name,XCHAR*  value);
+    bool                            AddValue                              (XSTRING& name, XSTRING& value);
+    XCHAR*                          GetValue                              (XCHAR* namevalue);
+    XCHAR*                          GetValue                              (XSTRING& namevalue);
+    bool                            DeleteAllValues                       ();
 
-	protected:
-							
-		XMUTEX*													xmutexdo;
-		DIOWEBCLIENT*										webclient;				
-		DIOWEBSCRAPERCACHE*							cache;
+    DIOWEBCLIENT*                   GetWebClient                          ();
 
-	private:
+    bool                            ExtractString                         (XCHAR* searchini, XCHAR* searchend, XBUFFER* xbuffer, bool usebufferpos, XSTRING& result);
+    bool                            ExtractString                         (XCHAR* searchini, XSTRING& searchend, XBUFFER* xbuffer, bool usebufferpos, XSTRING& result);
+    bool                            ExtractString                         (XSTRING& searchini,XCHAR* searchend, XBUFFER* xbuffer, bool usebufferpos, XSTRING& result);
+    bool                            ExtractString                         (XSTRING& searchini, XSTRING& searchend, XBUFFER* xbuffer, bool usebufferpos, XSTRING& result);
 
-		void														Clean																	()
-																		{
-																			xmutexdo								= NULL;
-																			webclient								= NULL;
-																			cache                   = NULL;
+  protected:
 
-																			URLdownload							= NULL;
-	
-																			xml											= NULL;
-																		}
+    XMUTEX*                         xmutexdo;
+    DIOWEBCLIENT*                   webclient;
+    DIOWEBSCRAPERCACHE*             cache;
 
-		void														HandleEvent														(XEVENT* xevent);	
-					
-		DIOURL*													URLdownload;
-		XFILEXML*												xml;
-		XMAP<XSTRING*,XSTRING*>					values;
+  private:
+
+    void                            Clean                                 ()
+                                    {
+                                      xmutexdo                = NULL;
+                                      webclient               = NULL;
+                                      cache                   = NULL;
+
+                                      URLdownload             = NULL;
+
+                                      xml                     = NULL;
+                                    }
+
+    void                            HandleEvent                           (XEVENT* xevent);
+
+    DIOURL*                         URLdownload;
+    XFILEXML*                       xml;
+    XMAP<XSTRING*,XSTRING*>         values;
 
 };
 
-	
+
 /*---- INLINE FUNCTIONS ------------------------------------------------------------------*/
-	
+
 #endif
 

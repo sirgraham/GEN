@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------------------
-//	DIOLINUXSTREAMUDP.H
+//  DIOLINUXSTREAMUDP.H
 //
 /**
 // \class
 //
 //  LINUX Data IO Stream UDP class
 //
-//	@author	 Abraham J. Velez
-//	@version 02/01/2002
+//  @author  Abraham J. Velez
+//  @version 02/01/2002
 */
-//	GEN  Copyright (C).  All right reserved.
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
 
 #ifndef _DIOLINUXSTREAMUDP_H_
@@ -29,30 +29,30 @@
 
 enum DIOLINUXUDPFSMEVENTS
 {
-	DIOLINUXUDPFSMEVENT_NONE							= 0 ,
+  DIOLINUXUDPFSMEVENT_NONE              = 0 ,
 
-	DIOLINUXUDPFSMEVENT_GETTINGCONNEXION			,
-	DIOLINUXUDPFSMEVENT_CONNECTED							,
-	DIOLINUXUDPFSMEVENT_WAITINGTOREAD					,
-	DIOLINUXUDPFSMEVENT_SENDINGDATA						,
-	DIOLINUXUDPFSMEVENT_DISCONNECTING					,		
+  DIOLINUXUDPFSMEVENT_GETTINGCONNEXION      ,
+  DIOLINUXUDPFSMEVENT_CONNECTED             ,
+  DIOLINUXUDPFSMEVENT_WAITINGTOREAD         ,
+  DIOLINUXUDPFSMEVENT_SENDINGDATA           ,
+  DIOLINUXUDPFSMEVENT_DISCONNECTING         ,
 
-	DIOLINUXUDP_LASTEVENT
+  DIOLINUXUDP_LASTEVENT
 
 };
 
 
 enum DIOLINUXUDPFSMSTATES
 {
-	DIOLINUXUDPFSMSTATE_NONE							= 0 ,	
+  DIOLINUXUDPFSMSTATE_NONE              = 0 ,
 
-	DIOLINUXUDPFSMSTATE_GETTINGCONNEXION			,
-	DIOLINUXUDPFSMSTATE_CONNECTED							,
-	DIOLINUXUDPFSMSTATE_WAITINGTOREAD					,
-	DIOLINUXUDPFSMSTATE_SENDINGDATA						,
-	DIOLINUXUDPFSMSTATE_DISCONNECTING					,		
+  DIOLINUXUDPFSMSTATE_GETTINGCONNEXION      ,
+  DIOLINUXUDPFSMSTATE_CONNECTED             ,
+  DIOLINUXUDPFSMSTATE_WAITINGTOREAD         ,
+  DIOLINUXUDPFSMSTATE_SENDINGDATA           ,
+  DIOLINUXUDPFSMSTATE_DISCONNECTING         ,
 
-	DIOLINUXUDP_LASTSTATE
+  DIOLINUXUDP_LASTSTATE
 };
 
 
@@ -62,26 +62,26 @@ class XTHREADCOLLECTED;
 
 class DIOLINUXSTREAMUDP : public DIOSTREAMUDP , public XFSMACHINE
 {
-	public:
-															DIOLINUXSTREAMUDP											();
-		virtual									 ~DIOLINUXSTREAMUDP											();
+  public:
+                              DIOLINUXSTREAMUDP                     ();
+    virtual                  ~DIOLINUXSTREAMUDP                     ();
 
-		bool											Open																	();
-		bool											Disconnect														();
-		bool											Close																	();
+    bool                      Open                                  ();
+    bool                      Disconnect                            ();
+    bool                      Close                                 ();
 
-	protected:
-		
-		int 											IsReadyConnect												(int sock);
-		    
-	private:
+  protected:
 
-		void											Clean																	();
-		static void								ThreadRunFunction											(void* thread);
-		
-		XTHREADCOLLECTED*					threadconnexion;
-		int 											handle; 		
-		XSTRING										remoteaddress;
+    int                       IsReadyConnect                        (int sock);
+
+  private:
+
+    void                      Clean                                 ();
+    static void               ThreadRunFunction                     (void* thread);
+
+    XTHREADCOLLECTED*         threadconnexion;
+    int                       handle;
+    XSTRING                   remoteaddress;
 };
 
 

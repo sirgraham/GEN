@@ -1,63 +1,63 @@
 /*------------------------------------------------------------------------------------------
-//	INPLINUXDEVICEID.H
-*/	
-/**	
-// \class 
-//   
-//  sdsa
-//   
-//	@author	 Abraham J. Velez
+//  INPLINUXDEVICEID.H
+*/
+/**
+// \class
 //
-//	Date Of Creation	: 10/04/2014 11:04:16
-//	Last Modification	:	
-*/	
-/*	GEN  Copyright (C).  All right reserved.
+//  sdsa
+//
+//  @author  Abraham J. Velez
+//
+//  Date Of Creation  : 10/04/2014 11:04:16
+//  Last Modification :
+*/
+/*  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
+
 #ifndef _INPLINUXDEVICEID_H_
 #define _INPLINUXDEVICEID_H_
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
 
-	
+
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
 
-#define	INPLINUXDEVICEID_HANDLEFILE		__L("/proc/bus/input/devices")
+#define INPLINUXDEVICEID_HANDLEFILE   __L("/proc/bus/input/devices")
 
-#define INPLINUXDEVICEID_INVALID			-1
-	
+#define INPLINUXDEVICEID_INVALID      -1
+
 /*---- CLASS -----------------------------------------------------------------------------*/
 
 
 class INPLINUXDEVICEID
 {
-	public:
+  public:
 
-										INPLINUXDEVICEID							()											{ Clean();																}
-		virtual			 	 ~INPLINUXDEVICEID							()											{ Clean();																}
+                    INPLINUXDEVICEID              ()                      { Clean();                                }
+    virtual        ~INPLINUXDEVICEID              ()                      { Clean();                                }
 
-		int							GetFileDescriptor							()											{ return filedescriptor;									}
-		void						SetFileDescriptor							(int filedescriptor)    { this->filedescriptor=filedescriptor;		}
-		
-		XSTRING*				GetName												()											{ return &name;														}
-	
+    int             GetFileDescriptor             ()                      { return filedescriptor;                  }
+    void            SetFileDescriptor             (int filedescriptor)    { this->filedescriptor=filedescriptor;    }
 
-	private:
+    XSTRING*        GetName                       ()                      { return &name;                           }
 
-		void						Clean													()
-										{
-											filedescriptor  = INPLINUXDEVICEID_INVALID;
-										}
-		
-		int							filedescriptor;
-		XSTRING					name;
+
+  private:
+
+    void            Clean                         ()
+                    {
+                      filedescriptor  = INPLINUXDEVICEID_INVALID;
+                    }
+
+    int             filedescriptor;
+    XSTRING         name;
 };
-	
-	
+
+
 /*---- INLINE FUNCTIONS ------------------------------------------------------------------*/
-	
+
 
 #endif
 

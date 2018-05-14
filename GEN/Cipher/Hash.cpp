@@ -1,16 +1,16 @@
 /*------------------------------------------------------------------------------------------
-//	HASH.CPP
-//	
-//	Hash Generic Class
-//   
-//	Author						: Abraham J. Velez
-//	Date Of Creation	: 02/03/2013 12:07:38
-//	Last Mofificacion	:	
-//	
-//	GEN  Copyright (C).  All right reserved.
+//  HASH.CPP
+//
+//  Hash Generic Class
+//
+//  Author            : Abraham J. Velez
+//  Date Of Creation  : 02/03/2013 12:07:38
+//  Last Mofificacion :
+//
+//  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
 #include "XFactory.h"
@@ -19,10 +19,10 @@
 #include "Hash.h"
 
 #include "XMemory.h"
-	
+
 /*---- GENERAL VARIABLE ------------------------------------------------------------------*/
-	
-	
+
+
 /*---- CLASS MEMBERS ---------------------------------------------------------------------*/
 
 
@@ -30,22 +30,22 @@
 
 /*-------------------------------------------------------------------
 //  HASH::HASH
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/03/2013 12:43:10
-//	
-//	@return 			
+//
+//
+//  @author       Abraham J. Velez
+//  @version      02/03/2013 12:43:10
+//
+//  @return
 
 */
 /*-----------------------------------------------------------------*/
 HASH::HASH()
 {
-	Clean();
-	
-	result = new XBUFFER();
+  Clean();
+
+  result = new XBUFFER();
 }
 
 
@@ -53,63 +53,63 @@ HASH::HASH()
 
 /*-------------------------------------------------------------------
 //  HASH::~HASH
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/03/2013 12:09:01
-//	
-//	@return 			
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      02/03/2013 12:09:01
+//
+//  @return
+//  */
 /*-----------------------------------------------------------------*/
 HASH::~HASH()
 {
-	delete result;
+  delete result;
 
-	Clean();
+  Clean();
 }
-		
-	
+
+
 
 
 /*-------------------------------------------------------------------
 //  HASH::Do
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			03/03/2013 16:23:56
-//	
-//	@return 			bool : 
-//	@param				input : 
-//  @param				size : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      03/03/2013 16:23:56
+//
+//  @return       bool :
+//  @param        input :
+//  @param        size :
 */
 /*-----------------------------------------------------------------*/
 bool HASH::Do(XBYTE* input, int size)
 {
-	return false;
+  return false;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  HASH::Do
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			03/03/2013 16:24:03
-//	
-//	@return 			bool : 
-//	@param				input : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      03/03/2013 16:24:03
+//
+//  @return       bool :
+//  @param        input :
 */
 /*-----------------------------------------------------------------*/
 bool HASH::Do(XBUFFER& input)
 {
-	return Do(input.Get(), (int)input.GetSize());
+  return Do(input.Get(), (int)input.GetSize());
 }
 
 
@@ -117,38 +117,38 @@ bool HASH::Do(XBUFFER& input)
 
 /*-------------------------------------------------------------------
 //  HASH::Do
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			03/03/2013 16:24:28
-//	
-//	@return 			bool : 
-//	@param				xpath : 
-//  @param				size : 
-//  @param				pos : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      03/03/2013 16:24:28
+//
+//  @return       bool :
+//  @param        xpath :
+//  @param        size :
+//  @param        pos :
 */
 /*-----------------------------------------------------------------*/
 bool HASH::Do(XPATH& xpath, int size, int pos)
 {
-	XFILE* file;
-	bool 	 status;
-	
+  XFILE* file;
+  bool   status;
+
   file = xfactory->Create_File();
-	if(!file) return false;
+  if(!file) return false;
 
-	ResetResult(); 
-			
-	if(file->Open(xpath,true))
-		{       
-		  status = Do(file,size,pos);
-			
-			file->Close();
+  ResetResult();
 
-		}  else status=false;			
-		 
-	if(file) xfactory->Delete_File(file);
+  if(file->Open(xpath,true))
+    {
+      status = Do(file,size,pos);
+
+      file->Close();
+
+    }  else status=false;
+
+  if(file) xfactory->Delete_File(file);
 
   return status;
 }
@@ -158,67 +158,67 @@ bool HASH::Do(XPATH& xpath, int size, int pos)
 
 /*-------------------------------------------------------------------
 //  HASH::Do
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			03/03/2013 16:24:46
-//	
-//	@return 			bool : 
-//	@param				xfile : 
-//  @param				size : 
-//  @param				pos : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      03/03/2013 16:24:46
+//
+//  @return       bool :
+//  @param        xfile :
+//  @param        size :
+//  @param        pos :
 */
 /*-----------------------------------------------------------------*/
 bool HASH::Do(XFILE* xfile, int size, int pos)
 {
-	if(!xfile)					 return false;
-	if(!xfile->IsOpen()) return false;
+  if(!xfile)           return false;
+  if(!xfile->IsOpen()) return false;
 
-	XBUFFER		xbuffer;
-	int				block		=	(((size==HASHALLFILESIZE)?xfile->GetSize():size) / HASHMAXFILESIZEBUFFER);
-	int				mod			=	(((size==HASHALLFILESIZE)?xfile->GetSize():size) % HASHMAXFILESIZEBUFFER);	
-	bool      status	= true;
+  XBUFFER   xbuffer;
+  int       block   = (((size==HASHALLFILESIZE)?xfile->GetSize():size) / HASHMAXFILESIZEBUFFER);
+  int       mod     = (((size==HASHALLFILESIZE)?xfile->GetSize():size) % HASHMAXFILESIZEBUFFER);
+  bool      status  = true;
 
-	if(!xfile->SetPosition(pos)) return false;
+  if(!xfile->SetPosition(pos)) return false;
 
-	xbuffer.Resize((XDWORD)HASHMAXFILESIZEBUFFER);
+  xbuffer.Resize((XDWORD)HASHMAXFILESIZEBUFFER);
 
-	for(int c=0;c<block;c++)
-		{
-			if(xfile->Read(xbuffer.Get(),HASHMAXFILESIZEBUFFER))
-				{
-					if(!Do(xbuffer)) 
-						{
-							status = false;
-							break;
-						}
-				} 
-			 else 
-			  {
-					status = false;
-					break;		
-				}
-		}
+  for(int c=0;c<block;c++)
+    {
+      if(xfile->Read(xbuffer.Get(),HASHMAXFILESIZEBUFFER))
+        {
+          if(!Do(xbuffer))
+            {
+              status = false;
+              break;
+            }
+        }
+       else
+        {
+          status = false;
+          break;
+        }
+    }
 
-	if(status)
-		{
-			xbuffer.Resize(mod);
-			if(xfile->Read(xbuffer.Get(),mod))
-				{					
-					if(!Do(xbuffer)) 
-						{
-							status = false;					
-						}
-				} 
-			 else 
-			  {
-					status = false;					
-				}
-		}
+  if(status)
+    {
+      xbuffer.Resize(mod);
+      if(xfile->Read(xbuffer.Get(),mod))
+        {
+          if(!Do(xbuffer))
+            {
+              status = false;
+            }
+        }
+       else
+        {
+          status = false;
+        }
+    }
 
-	return status;	
+  return status;
 }
 
 
@@ -226,61 +226,61 @@ bool HASH::Do(XFILE* xfile, int size, int pos)
 
 /*-------------------------------------------------------------------
 //  HASH::ResetResult
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/03/2013 12:35:35
-//	
-//	@return 			bool : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      02/03/2013 12:35:35
+//
+//  @return       bool :
+//  */
 /*-----------------------------------------------------------------*/
 bool HASH::ResetResult()
 {
-	if(!result) return false;
+  if(!result) return false;
 
-	result->Delete();
+  result->Delete();
 
-	return true;
+  return true;
 }
-		
+
 
 
 /*-------------------------------------------------------------------
 //  HASH::GetDefaultSize
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			21/04/2013 0:46:03
-//	
-//	@return 			int : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      21/04/2013 0:46:03
+//
+//  @return       int :
+//  */
 /*-----------------------------------------------------------------*/
 int HASH::GetDefaultSize()
 {
-	return 0;
+  return 0;
 }
-	
+
 
 
 /*-------------------------------------------------------------------
 //  HASH::GetResult
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/03/2013 12:35:39
-//	
-//	@return 			XBUFFER* : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      02/03/2013 12:35:39
+//
+//  @return       XBUFFER* :
+//  */
 /*-----------------------------------------------------------------*/
 XBUFFER* HASH::GetResult()
 {
-	return result;
+  return result;
 }
 
 
@@ -288,81 +288,80 @@ XBUFFER* HASH::GetResult()
 
 /*-------------------------------------------------------------------
 //  HASH::GetResult
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/03/2013 12:38:50
-//	
-//	@return 			XBYTE* : 
-//	@param				resultsize : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      02/03/2013 12:38:50
+//
+//  @return       XBYTE* :
+//  @param        resultsize :
 */
 /*-----------------------------------------------------------------*/
 XBYTE* HASH::GetResult(int& resultsize)
 {
-	resultsize = 0;
+  resultsize = 0;
 
-	if(!result) return NULL;
+  if(!result) return NULL;
 
-	resultsize	= result->GetSize();
+  resultsize  = result->GetSize();
 
-	return result->Get();
+  return result->Get();
 }
 
 
 
 /*-------------------------------------------------------------------
 //  HASH::GetResult
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/03/2013 21:08:16
-//	
-//	@return 			bool : 
-//	@param				stringhex : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      02/03/2013 21:08:16
+//
+//  @return       bool :
+//  @param        stringhex :
 */
 /*-----------------------------------------------------------------*/
 bool HASH::GetResultString(XSTRING& stringhex)
 {
-	stringhex.Empty();
+  stringhex.Empty();
 
-	XBUFFER* xbuffer = GetResult();
-	if(!xbuffer) return false;
+  XBUFFER* xbuffer = GetResult();
+  if(!xbuffer) return false;
 
-	if(!xbuffer->GetSize()) return false;
+  if(!xbuffer->GetSize()) return false;
 
-	for(int c=0;c<(int)xbuffer->GetSize();c++)
-		{
-			XSTRING strbyte;
+  for(int c=0;c<(int)xbuffer->GetSize();c++)
+    {
+      XSTRING strbyte;
 
-			strbyte.Format(__L("%02x"), xbuffer->GetByte(c));
+      strbyte.Format(__L("%02x"), xbuffer->GetByte(c));
 
-			stringhex += strbyte;
-		}
+      stringhex += strbyte;
+    }
 
-	return true;
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  HASH::Clean
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/03/2013 12:09:56
-//	
-//	@return 			void : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      02/03/2013 12:09:56
+//
+//  @return       void :
+//  */
 /*-----------------------------------------------------------------*/
 void HASH::Clean()
 {
-	type		 = HASHTYPE_NONE;
-	result	 = NULL;
+  type     = HASHTYPE_NONE;
+  result   = NULL;
 }
-	

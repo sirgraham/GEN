@@ -1,21 +1,21 @@
 //------------------------------------------------------------------------------------------
-//	XWINDOWSSLEEP.H
-//	
-/**	
-// \class 
-//   
+//  XWINDOWSSLEEP.H
+//
+/**
+// \class
+//
 //  WINDOWS sleep class
-//   
-//	@author	 Abraham J. Velez
-//	@version 04/04/2002
-*/	
-//	GEN  Copyright (C).  All right reserved.		 			 
+//
+//  @author  Abraham J. Velez
+//  @version 04/04/2002
+*/
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
+
 #ifndef _XWINDOWSSLEEP_H_
 #define _XWINDOWSSLEEP_H_
-	
-						
+
+
 //---- INCLUDES ----------------------------------------------------------------------------
 
 #include <windows.h>
@@ -32,31 +32,31 @@
 
 class XWINDOWSSLEEP : public XSLEEP
 {
-	public:
+  public:
 
-																XWINDOWSSLEEP											();
-		virtual										 ~XWINDOWSSLEEP											();
+                                XWINDOWSSLEEP                     ();
+    virtual                    ~XWINDOWSSLEEP                     ();
 
-		void												Seconds														(int seconds);
-		void												MilliSeconds											(int milliseconds);
-    void												MicroSeconds											(int microseconds);
-		
-		void												Clean															()
-																{																
-																	PCfrequencymilliseconds = 0.0;
-																	PCfrequencymicroseconds	= 0.0;
-																}
+    void                        Seconds                           (int seconds);
+    void                        MilliSeconds                      (int milliseconds);
+    void                        MicroSeconds                      (int microseconds);
 
-	private:
+    void                        Clean                             ()
+                                {
+                                  PCfrequencymilliseconds = 0.0;
+                                  PCfrequencymicroseconds = 0.0;
+                                }
 
-		LARGE_INTEGER								frequency;
-		double											PCfrequencymilliseconds;
-		double											PCfrequencymicroseconds;
+  private:
+
+    LARGE_INTEGER               frequency;
+    double                      PCfrequencymilliseconds;
+    double                      PCfrequencymicroseconds;
 };
 
 
 
 //---- INLINE FUNCTIONS --------------------------------------------------------------------
-										
+
 #endif
 

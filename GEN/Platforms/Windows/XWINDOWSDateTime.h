@@ -1,21 +1,21 @@
 //------------------------------------------------------------------------------------------
-//	XWINDOWSDATETIME.H
-//	
-/**	
-// \class 
-//   
+//  XWINDOWSDATETIME.H
+//
+/**
+// \class
+//
 //  WINDOWS date time class
-//   
-//	@author	 Abraham J. Velez
-//	@version 04/04/2002
-*/	
-//	GEN  Copyright (C).  All right reserved.		 			 
+//
+//  @author  Abraham J. Velez
+//  @version 04/04/2002
+*/
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
+
 #ifndef _XWINDOWSDATETIME_H_
 #define _XWINDOWSDATETIME_H_
-	
-						
+
+
 //---- INCLUDES ----------------------------------------------------------------------------
 
 #include <windows.h>
@@ -33,29 +33,29 @@
 
 class XWINDOWSDATETIME : public XDATETIME
 {
-	public:
-																XWINDOWSDATETIME									();
-		virtual										 ~XWINDOWSDATETIME									();
+  public:
+                                XWINDOWSDATETIME                  ();
+    virtual                    ~XWINDOWSDATETIME                  ();
 
-		bool												Read															();
-		bool												Write															();
+    bool                        Read                              ();
+    bool                        Write                             ();
 
-		bool												GetFileDateTime										(XPATH& xpath, void* tmzip, XDWORD* dt);
-		bool												GetFileDateTime										(XPATH& xpath);
+    bool                        GetFileDateTime                   (XPATH& xpath, void* tmzip, XDWORD* dt);
+    bool                        GetFileDateTime                   (XPATH& xpath);
 
-		int													GetDifferenceGMT									();
+    int                         GetDifferenceGMT                  ();
 
-		bool												IsDayLigthSavingTime							(int* bias = NULL);
-		
-	protected:
+    bool                        IsDayLigthSavingTime              (int* bias = NULL);
 
-		void												GetActualDateTime									(XWINDOWSDATETIME* time);
-		void												SetActualDateTime									(XWINDOWSDATETIME* time);
+  protected:
+
+    void                        GetActualDateTime                 (XWINDOWSDATETIME* time);
+    void                        SetActualDateTime                 (XWINDOWSDATETIME* time);
 };
 
 
 
 //---- INLINE FUNCTIONS --------------------------------------------------------------------
-										
+
 #endif
 

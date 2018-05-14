@@ -1,23 +1,23 @@
 //------------------------------------------------------------------------------------------
-//	DIOLINUXSTREAMUSB.H
-//	
-/**	
-// \class 
-//   
+//  DIOLINUXSTREAMUSB.H
+//
+/**
+// \class
+//
 //  LINUX Data IO Stream USB class
-//   
-//	@author	 Abraham J. Velez
-//	@version 02/01/2002
-*/	
-//	GEN  Copyright (C).  All right reserved.		 			 
+//
+//  @author  Abraham J. Velez
+//  @version 02/01/2002
+*/
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
+
 #ifndef _DIOLINUXSTREAMUSB_H_
 #define _DIOLINUXSTREAMUSB_H_
-	
+
 
 #if defined(DIO_ACTIVE) && defined(DIOUSB_ACTIVE)
-	
+
 //---- INCLUDES ----------------------------------------------------------------------------
 
 #include "XBuffer.h"
@@ -30,27 +30,27 @@
 
 enum DIOLINUXUSBFSMEVENTS
 {
-	DIOLINUXUSBFSMEVENT_NONE							 = 0  ,
-	DIOLINUXUSBFSMEVENT_CONNECTED							,
-	DIOLINUXUSBFSMEVENT_WAITINGTOREAD					,
-	DIOLINUXUSBFSMEVENT_SENDINGDATA						,
-	DIOLINUXUSBFSMEVENT_DISCONNECTING					,		
+  DIOLINUXUSBFSMEVENT_NONE               = 0  ,
+  DIOLINUXUSBFSMEVENT_CONNECTED             ,
+  DIOLINUXUSBFSMEVENT_WAITINGTOREAD         ,
+  DIOLINUXUSBFSMEVENT_SENDINGDATA           ,
+  DIOLINUXUSBFSMEVENT_DISCONNECTING         ,
 
-	DIOLINUXUSB_LASTEVENT
+  DIOLINUXUSB_LASTEVENT
 
 };
 
 
 enum DIOLINUXUSBFSMSTATES
 {
-	DIOLINUXUSBFSMSTATE_NONE							 = 0  ,	
+  DIOLINUXUSBFSMSTATE_NONE               = 0  ,
 
-	DIOLINUXUSBFSMSTATE_CONNECTED							,
-	DIOLINUXUSBFSMSTATE_WAITINGTOREAD					,
-	DIOLINUXUSBFSMSTATE_SENDINGDATA						,
-	DIOLINUXUSBFSMSTATE_DISCONNECTING					,		
+  DIOLINUXUSBFSMSTATE_CONNECTED             ,
+  DIOLINUXUSBFSMSTATE_WAITINGTOREAD         ,
+  DIOLINUXUSBFSMSTATE_SENDINGDATA           ,
+  DIOLINUXUSBFSMSTATE_DISCONNECTING         ,
 
-	DIOLINUXUSB_LASTSTATE
+  DIOLINUXUSB_LASTSTATE
 };
 
 
@@ -63,36 +63,36 @@ class DIOFACTORY;
 class DIOSTREAMCONFIG;
 
 
-class DIOLINUXSTREAMUSB : public DIOSTREAMUSB , public XFSMACHINE 
+class DIOLINUXSTREAMUSB : public DIOSTREAMUSB , public XFSMACHINE
 {
-	public:
-													DIOLINUXSTREAMUSB							();
-		virtual							 ~DIOLINUXSTREAMUSB							();
+  public:
+                          DIOLINUXSTREAMUSB             ();
+    virtual              ~DIOLINUXSTREAMUSB             ();
 
-		DIOSTREAMSTATUS				GetConnectStatus							();		
-		
-		bool									Open													();		
+    DIOSTREAMSTATUS       GetConnectStatus              ();
 
-		bool									Disconnect										()																{	return false; };
-		bool									Close													();	
+    bool                  Open                          ();
 
-		bool									CleanBuffers									(); 											
-				
-	protected:
+    bool                  Disconnect                    ()                                { return false; };
+    bool                  Close                         ();
 
-    void									Clean													();
+    bool                  CleanBuffers                  ();
 
-		static void 					ThreadConnexion								(void* data);
+  protected:
 
-		XDWORD								ReadBuffer										(XBYTE* buffer,XDWORD size);
-		XDWORD								WriteBuffer										(XBYTE* buffer,XDWORD size);
+    void                  Clean                         ();
 
-		XTHREADCOLLECTED*			threadconnexion;
-    
-    int 									fd;
+    static void           ThreadConnexion               (void* data);
 
-		int										readtimeout;
-		int										writetimeout;
+    XDWORD                ReadBuffer                    (XBYTE* buffer,XDWORD size);
+    XDWORD                WriteBuffer                   (XBYTE* buffer,XDWORD size);
+
+    XTHREADCOLLECTED*     threadconnexion;
+
+    int                   fd;
+
+    int                   readtimeout;
+    int                   writetimeout;
 };
 
 

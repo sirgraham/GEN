@@ -1,19 +1,19 @@
 
 /*------------------------------------------------------------------------------------------
-//	GRPOBJECTBUILDERALGORITHMLATHE.CPP
-//	
-//	Creates a revolution Surface from mesh spline
-//   
-//	Author						: Diego Martinez Ruiz de Gaona
-//	Date Of Creation	: 27/06/2014 15:53:13
-//	Last Modification	:	
-//	
-//	GEN  Copyright (C).  All right reserved.
+//  GRPOBJECTBUILDERALGORITHMLATHE.CPP
+//
+//  Creates a revolution Surface from mesh spline
+//
+//  Author            : Diego Martinez Ruiz de Gaona
+//  Date Of Creation  : 27/06/2014 15:53:13
+//  Last Modification :
+//
+//  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
-	
+
 #include "GRPElement.h"
 #include "GRPShape.h"
 #include "GRPFace.h"
@@ -21,270 +21,270 @@
 #include "GRPObjectBuilderAlgorithmLathe.h"
 
 #include "XMemory.h"
-	
+
 /*---- GENERAL VARIABLE ------------------------------------------------------------------*/
-	
-	
+
+
 /*---- CLASS MEMBERS ---------------------------------------------------------------------*/
 
 
 /*-------------------------------------------------------------------
-//	GRPOBJECTBUILDERALGORITHMLATHE::GRPOBJECTBUILDERALGORITHMLATHE
-*/	
-/**	
-//	
-//	Class Constructor GRPOBJECTBUILDERALGORITHMLATHE
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			27/06/2014 15:57:41
-//	
-//  @param				builder : 
+//  GRPOBJECTBUILDERALGORITHMLATHE::GRPOBJECTBUILDERALGORITHMLATHE
+*/
+/**
+//
+//  Class Constructor GRPOBJECTBUILDERALGORITHMLATHE
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      27/06/2014 15:57:41
+//
+//  @param        builder :
 */
 /*-----------------------------------------------------------------*/
 GRPOBJECTBUILDERALGORITHMLATHE::GRPOBJECTBUILDERALGORITHMLATHE(GRPOBJECTBUILDER* builder)
 {
-	Clean();
-	this->builder = builder;
+  Clean();
+  this->builder = builder;
 
 }
 
-		
+
 
 
 /*-------------------------------------------------------------------
-//	GRPOBJECTBUILDERALGORITHMLATHE::Execute
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			27/06/2014 16:07:21
-//	
-//	@return 			GRPELEMENT* : 
+//  GRPOBJECTBUILDERALGORITHMLATHE::Execute
+*/
+/**
 //
-//  @param				shape : 
+//
+//
+//  @author       Diego Martinez Ruiz de Gaona
+//  @version      27/06/2014 16:07:21
+//
+//  @return       GRPELEMENT* :
+//
+//  @param        shape :
 */
 /*-----------------------------------------------------------------*/
 GRPELEMENT* GRPOBJECTBUILDERALGORITHMLATHE::Execute(GRPSHAPE* shape)
 {
-	if(!builder) return NULL;
+  if(!builder) return NULL;
 
-	GRPSHAPE*						_shape = builder->MergeInnerSplines(shape);							
-	XVECTOR<GRPFACE*>		faces;							
-	
-
-	meridianangle=(maxangle-InitialAngle)/nmeridians;
-
-	GLFLOAT							anglepersegment	=	(GLFLOAT)meridianangle;
-	GLFLOAT							angle						=	InitialAngle;
-	GLFLOAT							radianangle			=	0.0f;
-
-	int n=0;
-
-	for(int nsegments=0;nsegments<nmeridians;nsegments++,angle+=anglepersegment)
-	{
-		
-		
-		XVECTOR<GRPPOINT*> MeridianO; 
-		XVECTOR<GRPPOINT*> MeridianF;
-
-		for(XDWORD e=0;e<_shape->contours.Get(0)->points.GetSize();e++)
-		{
-			GRPPOINT * o=new GRPPOINT();
-			GRPPOINT a = _shape->contours.Get(0)->points.Get(e)->value;
-
-			radianangle= (angle * PI / 180);
-
-					o->x	= (float)cos(radianangle) * a.x;
-					o->y	=	a.y;
-					o->z	= (float)sin(radianangle) * a.x;
-
-					o->index=n;
-
-					MeridianO.Add(o);
-
-			GRPPOINT * f=new GRPPOINT();
-			radianangle= ((angle+meridianangle) * PI / 180);
-
-					f->x	= (float)cos(radianangle) * a.x;
-					f->y	=	a.y;
-					f->z	= (float)sin(radianangle) * a.x;
-
-					f->index=n+_shape->contours.Get(0)->points.GetSize();
-
-					MeridianF.Add(f);
-					n++;					
-		}
-
-		for(XDWORD e=0;e<_shape->contours.Get(0)->points.GetSize()-1;e++)
-		{
-					GRPFACE* face = new GRPFACE();		
-					if(face)
-					{		
-						GRPPOINT *point=NULL;
-
-						GRPPOINT *ao=MeridianO.Get(e);
-						GRPPOINT *bo=MeridianO.Get(e+1);
-						GRPPOINT *bf=MeridianF.Get(e+1);	
-
-							float u=nsegments/nmeridians;
-							float v=float(e/_shape->contours.Get(0)->points.GetSize());
-
-							point = new GRPPOINT(ao->x,ao->y,ao->z,n);
-							if(point) face->Add(point);
-							face->a=ao->index;
-							
-							point = new GRPPOINT(bo->x,bo->y,bo->z,n);
-							if(point) face->Add(point);	
-							face->b=bo->index;
-							
-							point =new GRPPOINT(bf->x,bf->y,bf->z,n);
-							if(point) face->Add(point);
-							face->c=bf->index;
-							
-							face->CalculateNormal();
-							faces.Add(face);						
-					}
-					face = new GRPFACE();		
-					if(face)
-					{		
-						GRPPOINT *point=NULL;
-
-						GRPPOINT *ao=MeridianO.Get(e);
-						GRPPOINT *bf=MeridianF.Get(e+1);
-						GRPPOINT *af=MeridianF.Get(e);	
-
-							point = new GRPPOINT(ao->x,ao->y,ao->z,ao->index);
-							if(point) face->Add(point);						
-							face->a=ao->index;
-
-							point = new GRPPOINT(bf->x,bf->y,bf->z,bf->index);
-							if(point) face->Add(point);							
-							face->b=bf->index;
-
-							point = new GRPPOINT(af->x,af->y,af->z,n);
-							if(point) face->Add(point);
-							face->c=af->index;				
-
-							face->CalculateNormal();
-							faces.Add(face);					
-					}
-		}
-
-		MeridianF.DeleteContents();
-		MeridianF.DeleteAll();	
-		MeridianO.DeleteContents();
-		MeridianO.DeleteAll();	
-
-	}
+  GRPSHAPE*           _shape = builder->MergeInnerSplines(shape);
+  XVECTOR<GRPFACE*>   faces;
 
 
-	/*
- 	for(int nsegments=0;nsegments<nmeridians;nsegments++)
-		{
-			angle+=anglepersegment;
-			int lao,lbo,laf,lbf;
-			
-			for(XDWORD e=1;e<_shape->contours.Get(0)->points.GetSize();e++)
-				{
-					GRPPOINT a = _shape->contours.Get(0)->points.Get(e-1)->value;								
-					GRPPOINT b = _shape->contours.Get(0)->points.Get(e)->value;									
+  meridianangle=(maxangle-InitialAngle)/nmeridians;
 
-					radianangle= (angle * PI / 180);
+  GLFLOAT             anglepersegment = (GLFLOAT)meridianangle;
+  GLFLOAT             angle           = InitialAngle;
+  GLFLOAT             radianangle     = 0.0f;
 
-					GRPPOINT ao;
-					ao.x	=	cos(radianangle) * a.x;
-					ao.y	=	a.y;
-					ao.z	=	sin(radianangle) * a.x;					
-							
-					GRPPOINT bo;									
-					bo.x	=	cos(radianangle) * b.x;
-					bo.y	=	b.y;
-					bo.z	=	sin(radianangle) * b.x;
-																	
-					radianangle= ((angle+meridianangle) * PI / 180);
+  int n=0;
 
-					GRPPOINT af;
-					af.x=cos(radianangle)*a.x;
-					af.y=a.y;
-					af.z=sin(radianangle)*a.x;
+  for(int nsegments=0;nsegments<nmeridians;nsegments++,angle+=anglepersegment)
+  {
 
-					GRPPOINT bf;									
-					bf.x=cos(radianangle)*b.x;
-					bf.y=b.y;
-					bf.z=sin(radianangle)*b.x;
 
-					GRPFACE*	face;
-					GRPPOINT* point; 
-					GRPVECTOR va(a);
-					GRPVECTOR vb(b);
+    XVECTOR<GRPPOINT*> MeridianO;
+    XVECTOR<GRPPOINT*> MeridianF;
 
-					
+    for(XDWORD e=0;e<_shape->contours.Get(0)->points.GetSize();e++)
+    {
+      GRPPOINT * o=new GRPPOINT();
+      GRPPOINT a = _shape->contours.Get(0)->points.Get(e)->value;
 
-					face = new GRPFACE();		
-					if(face)
-						{		
-							float u=nsegments/nmeridians;
-							float v=float(e/_shape->contours.Get(0)->points.GetSize());
+      radianangle= (angle * PI / 180);
 
-							point = new GRPPOINT(ao.x,ao.y,ao.z,n);
-							if(point) face->Add(point);
-							face->a=n++;
-							lao=face->a;
+          o->x  = (float)cos(radianangle) * a.x;
+          o->y  = a.y;
+          o->z  = (float)sin(radianangle) * a.x;
 
-							point = new GRPPOINT(bo.x,bo.y,bo.z,n);
-							if(point) face->Add(point);	
-							face->b=n++;
-							lbo=face->b;
+          o->index=n;
 
-							point =new GRPPOINT(bf.x,bf.y,bf.z,n);
-							if(point) face->Add(point);
-							face->c=n++;
+          MeridianO.Add(o);
 
-							lbf=face->c;
-							
-							face->CalculateNormal();
-							faces.Add(face);
-						}
+      GRPPOINT * f=new GRPPOINT();
+      radianangle= ((angle+meridianangle) * PI / 180);
 
-					face = new GRPFACE();									
-					if(face)
-						{
-							point = new GRPPOINT(ao.x,ao.y,ao.z,ao.index);
-							if(point) face->Add(point);						
-							face->a=ao.index;
+          f->x  = (float)cos(radianangle) * a.x;
+          f->y  = a.y;
+          f->z  = (float)sin(radianangle) * a.x;
 
-							point = new GRPPOINT(bf.x,bf.y,bf.z,bf.index);
-							if(point) face->Add(point);							
-							face->b=bf.index;
+          f->index=n+_shape->contours.Get(0)->points.GetSize();
 
-							point = new GRPPOINT(af.x,af.y,af.z,n);
-							if(point) face->Add(point);
-							face->c=n++;				
+          MeridianF.Add(f);
+          n++;
+    }
 
-							face->CalculateNormal();
-							faces.Add(face);
-						}
-			  }
-		}
-		*/
-							
-	GRPELEMENT* element = new GRPELEMENT();					
-	if(element)
-		{
-			element->GetMesh()->LoadModel(&faces);
-			element->SetProgram(programID);			
-		}
-									
-	faces.DeleteContents();
-	faces.DeleteAll();
-	delete(_shape);
-	_shape=NULL;
-	return element;							
+    for(XDWORD e=0;e<_shape->contours.Get(0)->points.GetSize()-1;e++)
+    {
+          GRPFACE* face = new GRPFACE();
+          if(face)
+          {
+            GRPPOINT *point=NULL;
+
+            GRPPOINT *ao=MeridianO.Get(e);
+            GRPPOINT *bo=MeridianO.Get(e+1);
+            GRPPOINT *bf=MeridianF.Get(e+1);
+
+              float u=nsegments/nmeridians;
+              float v=float(e/_shape->contours.Get(0)->points.GetSize());
+
+              point = new GRPPOINT(ao->x,ao->y,ao->z,n);
+              if(point) face->Add(point);
+              face->a=ao->index;
+
+              point = new GRPPOINT(bo->x,bo->y,bo->z,n);
+              if(point) face->Add(point);
+              face->b=bo->index;
+
+              point =new GRPPOINT(bf->x,bf->y,bf->z,n);
+              if(point) face->Add(point);
+              face->c=bf->index;
+
+              face->CalculateNormal();
+              faces.Add(face);
+          }
+          face = new GRPFACE();
+          if(face)
+          {
+            GRPPOINT *point=NULL;
+
+            GRPPOINT *ao=MeridianO.Get(e);
+            GRPPOINT *bf=MeridianF.Get(e+1);
+            GRPPOINT *af=MeridianF.Get(e);
+
+              point = new GRPPOINT(ao->x,ao->y,ao->z,ao->index);
+              if(point) face->Add(point);
+              face->a=ao->index;
+
+              point = new GRPPOINT(bf->x,bf->y,bf->z,bf->index);
+              if(point) face->Add(point);
+              face->b=bf->index;
+
+              point = new GRPPOINT(af->x,af->y,af->z,n);
+              if(point) face->Add(point);
+              face->c=af->index;
+
+              face->CalculateNormal();
+              faces.Add(face);
+          }
+    }
+
+    MeridianF.DeleteContents();
+    MeridianF.DeleteAll();
+    MeridianO.DeleteContents();
+    MeridianO.DeleteAll();
+
+  }
+
+
+  /*
+  for(int nsegments=0;nsegments<nmeridians;nsegments++)
+    {
+      angle+=anglepersegment;
+      int lao,lbo,laf,lbf;
+
+      for(XDWORD e=1;e<_shape->contours.Get(0)->points.GetSize();e++)
+        {
+          GRPPOINT a = _shape->contours.Get(0)->points.Get(e-1)->value;
+          GRPPOINT b = _shape->contours.Get(0)->points.Get(e)->value;
+
+          radianangle= (angle * PI / 180);
+
+          GRPPOINT ao;
+          ao.x  = cos(radianangle) * a.x;
+          ao.y  = a.y;
+          ao.z  = sin(radianangle) * a.x;
+
+          GRPPOINT bo;
+          bo.x  = cos(radianangle) * b.x;
+          bo.y  = b.y;
+          bo.z  = sin(radianangle) * b.x;
+
+          radianangle= ((angle+meridianangle) * PI / 180);
+
+          GRPPOINT af;
+          af.x=cos(radianangle)*a.x;
+          af.y=a.y;
+          af.z=sin(radianangle)*a.x;
+
+          GRPPOINT bf;
+          bf.x=cos(radianangle)*b.x;
+          bf.y=b.y;
+          bf.z=sin(radianangle)*b.x;
+
+          GRPFACE*  face;
+          GRPPOINT* point;
+          GRPVECTOR va(a);
+          GRPVECTOR vb(b);
+
+
+
+          face = new GRPFACE();
+          if(face)
+            {
+              float u=nsegments/nmeridians;
+              float v=float(e/_shape->contours.Get(0)->points.GetSize());
+
+              point = new GRPPOINT(ao.x,ao.y,ao.z,n);
+              if(point) face->Add(point);
+              face->a=n++;
+              lao=face->a;
+
+              point = new GRPPOINT(bo.x,bo.y,bo.z,n);
+              if(point) face->Add(point);
+              face->b=n++;
+              lbo=face->b;
+
+              point =new GRPPOINT(bf.x,bf.y,bf.z,n);
+              if(point) face->Add(point);
+              face->c=n++;
+
+              lbf=face->c;
+
+              face->CalculateNormal();
+              faces.Add(face);
+            }
+
+          face = new GRPFACE();
+          if(face)
+            {
+              point = new GRPPOINT(ao.x,ao.y,ao.z,ao.index);
+              if(point) face->Add(point);
+              face->a=ao.index;
+
+              point = new GRPPOINT(bf.x,bf.y,bf.z,bf.index);
+              if(point) face->Add(point);
+              face->b=bf.index;
+
+              point = new GRPPOINT(af.x,af.y,af.z,n);
+              if(point) face->Add(point);
+              face->c=n++;
+
+              face->CalculateNormal();
+              faces.Add(face);
+            }
+        }
+    }
+    */
+
+  GRPELEMENT* element = new GRPELEMENT();
+  if(element)
+    {
+      element->GetMesh()->LoadModel(&faces);
+      element->SetProgram(programID);
+    }
+
+  faces.DeleteContents();
+  faces.DeleteAll();
+  delete(_shape);
+  _shape=NULL;
+  return element;
 }
 
-	
+
 /*
 Index[000] a 000 b 001 c 004 => a) -0.866025 0.100000 -0.500000 b) -0.779423 0.100000 -0.450000 c) -0.735826 0.100000 -0.518227
 Index[001] a 000 b 004 c 003 => a) -0.866025 0.100000 -0.500000 b) -0.735826 0.100000 -0.518227 c) -0.817585 0.100000 -0.575808

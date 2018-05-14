@@ -1,16 +1,16 @@
 /*------------------------------------------------------------------------------------------
-//	DIOMODBUS.CPP
-//	
-//	Data IO Mod Bus protocol class
-//   
-//	Author						: Abraham J. Velez
-//	Date Of Creation	: 04/06/2013 17:56:14
-//	Last Mofificacion	:	
-//	
-//	GEN  Copyright (C).  All right reserved.
+//  DIOMODBUS.CPP
+//
+//  Data IO Mod Bus protocol class
+//
+//  Author            : Abraham J. Velez
+//  Date Of Creation  : 04/06/2013 17:56:14
+//  Last Mofificacion :
+//
+//  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
 #include "XFactory.h"
@@ -21,36 +21,36 @@
 #include "DIOModBus.h"
 
 #include "XMemory.h"
-	
+
 /*---- GENERAL VARIABLE ------------------------------------------------------------------*/
-	
-	
+
+
 /*---- CLASS MEMBERS ---------------------------------------------------------------------*/
 
 
 
 /*-------------------------------------------------------------------
 //  DIOMODBUS::DIOMODBUS
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			04/06/2013 22:09:58
-//	
-//	@return 			
-//  @param				diostream : 
-//  @param				xpublisher : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      04/06/2013 22:09:58
+//
+//  @return
+//  @param        diostream :
+//  @param        xpublisher :
 */
 /*-----------------------------------------------------------------*/
 DIOMODBUS::DIOMODBUS(DIOSTREAM* diostream)
 {
-	Clean();
+  Clean();
 
-	this->diostream		= diostream;
-	; 
+  this->diostream   = diostream;
+  ;
 
-	xtimer = xfactory->CreateTimer();
+  xtimer = xfactory->CreateTimer();
 }
 
 
@@ -58,23 +58,23 @@ DIOMODBUS::DIOMODBUS(DIOSTREAM* diostream)
 
 /*-------------------------------------------------------------------
 //  DIOMODBUS::~DIOMODBUS
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			04/06/2013 18:26:57
-//	
-//	@return 			
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      04/06/2013 18:26:57
+//
+//  @return
+//  */
 /*-----------------------------------------------------------------*/
 DIOMODBUS::~DIOMODBUS()
 {
-	Disconnect();
+  Disconnect();
 
-	xfactory->DeleteTimer(xtimer);
+  xfactory->DeleteTimer(xtimer);
 
-	Clean();
+  Clean();
 }
 
 
@@ -82,19 +82,19 @@ DIOMODBUS::~DIOMODBUS()
 
 /*-------------------------------------------------------------------
 //  DIOMODBUS::GetDIOStream
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			04/06/2013 18:33:06
-//	
-//	@return 			DIOSTREAM* : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      04/06/2013 18:33:06
+//
+//  @return       DIOSTREAM* :
+//  */
 /*-----------------------------------------------------------------*/
 DIOSTREAM* DIOMODBUS::GetDIOStream()
 {
-	return diostream;
+  return diostream;
 }
 
 
@@ -102,19 +102,19 @@ DIOSTREAM* DIOMODBUS::GetDIOStream()
 
 /*-------------------------------------------------------------------
 //  DIOMODBUS::GetMode
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			04/06/2013 19:11:50
-//	
-//	@return 			DIOMODBUSMODE : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      04/06/2013 19:11:50
+//
+//  @return       DIOMODBUSMODE :
+//  */
 /*-----------------------------------------------------------------*/
 DIOMODBUSMODE DIOMODBUS::GetMode()
 {
-	return mode;
+  return mode;
 }
 
 
@@ -122,22 +122,22 @@ DIOMODBUSMODE DIOMODBUS::GetMode()
 
 /*-------------------------------------------------------------------
 //  DIOMODBUS::SetMode
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			04/06/2013 19:12:07
-//	
-//	@return 			bool : 
-//	@param				mode : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      04/06/2013 19:12:07
+//
+//  @return       bool :
+//  @param        mode :
 */
 /*-----------------------------------------------------------------*/
 bool DIOMODBUS::SetMode(DIOMODBUSMODE mode)
 {
-	this->mode = mode;
+  this->mode = mode;
 
-	return true;
+  return true;
 }
 
 
@@ -146,28 +146,28 @@ bool DIOMODBUS::SetMode(DIOMODBUSMODE mode)
 
 /*-------------------------------------------------------------------
 //  DIOMODBUS::Connect
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			05/06/2013 0:11:10
-//	
-//	@return 			bool : 
-//	@param				unit : 
-//  @param				timeout : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      05/06/2013 0:11:10
+//
+//  @return       bool :
+//  @param        unit :
+//  @param        timeout :
 */
 /*-----------------------------------------------------------------*/
 bool DIOMODBUS::Connect(XBYTE unit, int timeout)
 {
-	if(!diostream)																									return false;
-	if(diostream->GetConnectStatus()!=DIOSTREAMSTATUS_DISCONNECTED) return false;
+  if(!diostream)                                                  return false;
+  if(diostream->GetConnectStatus()!=DIOSTREAMSTATUS_DISCONNECTED) return false;
 
-	this->unit = unit;
+  this->unit = unit;
 
   if(!diostream->Open())  return false;
 
-	return diostream->WaitToConnected(timeout);
+  return diostream->WaitToConnected(timeout);
 }
 
 
@@ -176,142 +176,142 @@ bool DIOMODBUS::Connect(XBYTE unit, int timeout)
 
 /*-------------------------------------------------------------------
 //  DIOMODBUS::ReadHoldingRegisters
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			05/06/2013 19:37:07
-//	
-//	@return 			bool : 
-//	@param				address : 
-//  @param				nregisters : 
-//  @param				answer : 
-//  @param				timeout : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      05/06/2013 19:37:07
+//
+//  @return       bool :
+//  @param        address :
+//  @param        nregisters :
+//  @param        answer :
+//  @param        timeout :
 */
 /*-----------------------------------------------------------------*/
 /*
 bool DIOMODBUS::ReadHoldingRegisters(XWORD address, XWORD nregisters, XBUFFER& answer, int timeout)
 {
-	if(!diostream)																								 return false;
-	if(diostream->GetConnectStatus() != DIOSTREAMSTATUS_CONNECTED) return false;
+  if(!diostream)                                                 return false;
+  if(diostream->GetConnectStatus() != DIOSTREAMSTATUS_CONNECTED) return false;
 
-	answer.Delete();
+  answer.Delete();
 
-	switch(mode)
-		{
-			case DIOMODBUSMODE_UNKNOWN		: return false;
+  switch(mode)
+    {
+      case DIOMODBUSMODE_UNKNOWN    : return false;
 
-			case DIOMODBUSMODE_RTU			:
-			case DIOMODBUSMODE_ASCII		: return false; //Not Implemented yet!!!
+      case DIOMODBUSMODE_RTU      :
+      case DIOMODBUSMODE_ASCII    : return false; //Not Implemented yet!!!
 
-			case DIOMODBUSMODE_TCPIP		: {	XBUFFER datawrite();
+      case DIOMODBUSMODE_TCPIP    : { XBUFFER datawrite();
 
-																			datawrite.Add((XWORD) 0x0000);
-																			datawrite.Add((XWORD) 0x0000);
-																			datawrite.Add((XWORD) 0x0006);
-																			datawrite.Add((XBYTE) unit);
-																			datawrite.Add((XBYTE) DIOMODBUSFUNC_READ_HOLDING_REGISTERS);
-																			datawrite.Add((XWORD) address);
-																			datawrite.Add((XWORD) nregisters);
+                                      datawrite.Add((XWORD) 0x0000);
+                                      datawrite.Add((XWORD) 0x0000);
+                                      datawrite.Add((XWORD) 0x0006);
+                                      datawrite.Add((XBYTE) unit);
+                                      datawrite.Add((XBYTE) DIOMODBUSFUNC_READ_HOLDING_REGISTERS);
+                                      datawrite.Add((XWORD) address);
+                                      datawrite.Add((XWORD) nregisters);
 
-																			diostream->Write(datawrite);
-																			
-																			if(!diostream->WaitToFlushOutXBuffer(timeout)) return false;
-																
-																			xtimer->Reset();
+                                      diostream->Write(datawrite);
 
-																			int size = (nregisters*sizeof(XWORD)) + 9;
+                                      if(!diostream->WaitToFlushOutXBuffer(timeout)) return false;
 
-																			while(diostream->GetInXBuffer()->GetSize() != size)
-																				{
-																					if(xtimer->GetMeasureSec() >= (XDWORD)timeout) 
-																						{
-																							diostream->GetInXBuffer()->Delete();
-																							return false;	
-																						}
+                                      xtimer->Reset();
 
-																					xsleep->MilliSec(10);
-																				}	
-	
-																			answer.Resize(size);
-																			answer.FillBuffer(0x00);
+                                      int size = (nregisters*sizeof(XWORD)) + 9;
 
-																			if(!diostream->Read(answer.Get(), size)) return false;
+                                      while(diostream->GetInXBuffer()->GetSize() != size)
+                                        {
+                                          if(xtimer->GetMeasureSec() >= (XDWORD)timeout)
+                                            {
+                                              diostream->GetInXBuffer()->Delete();
+                                              return false;
+                                            }
 
-																			if(answer.GetSize() != size) return false;
+                                          xsleep->MilliSec(10);
+                                        }
 
-																			if(answer.Get()[7] & 0x80)   return false;
-																			
-																			XBYTE head[10];
-																			answer.Extract(head, 0 , 9);
-																		}
-																		break;
-		}
+                                      answer.Resize(size);
+                                      answer.FillBuffer(0x00);
 
-	return true;
+                                      if(!diostream->Read(answer.Get(), size)) return false;
+
+                                      if(answer.GetSize() != size) return false;
+
+                                      if(answer.Get()[7] & 0x80)   return false;
+
+                                      XBYTE head[10];
+                                      answer.Extract(head, 0 , 9);
+                                    }
+                                    break;
+    }
+
+  return true;
 }
 */
 
 bool DIOMODBUS::ReadHoldingRegisters(XWORD address, XWORD nregisters, XBUFFER& answer, int timeout)
 {
-	if(!diostream)																								 return false;
-	if(diostream->GetConnectStatus() != DIOSTREAMSTATUS_CONNECTED) return false;
+  if(!diostream)                                                 return false;
+  if(diostream->GetConnectStatus() != DIOSTREAMSTATUS_CONNECTED) return false;
 
-	answer.Delete();
+  answer.Delete();
 
-	switch(mode)
-		{
-			case DIOMODBUSMODE_UNKNOWN		: return false;
+  switch(mode)
+    {
+      case DIOMODBUSMODE_UNKNOWN    : return false;
 
-			case DIOMODBUSMODE_RTU			:
-			case DIOMODBUSMODE_ASCII		: return false; //Not Implemented yet!!!
+      case DIOMODBUSMODE_RTU      :
+      case DIOMODBUSMODE_ASCII    : return false; //Not Implemented yet!!!
 
-			case DIOMODBUSMODE_TCPIP		: {	XBUFFER datawrite;
+      case DIOMODBUSMODE_TCPIP    : { XBUFFER datawrite;
 
-																			datawrite.Add((XWORD) 0x0000);
-																			datawrite.Add((XWORD) 0x0000);
-																			datawrite.Add((XWORD) 0x0006);
-																			datawrite.Add((XBYTE) unit);
-																			datawrite.Add((XBYTE) DIOMODBUSFUNC_READ_HOLDING_REGISTERS);
-																			datawrite.Add((XWORD) address);
-																			datawrite.Add((XWORD) nregisters);
+                                      datawrite.Add((XWORD) 0x0000);
+                                      datawrite.Add((XWORD) 0x0000);
+                                      datawrite.Add((XWORD) 0x0006);
+                                      datawrite.Add((XBYTE) unit);
+                                      datawrite.Add((XBYTE) DIOMODBUSFUNC_READ_HOLDING_REGISTERS);
+                                      datawrite.Add((XWORD) address);
+                                      datawrite.Add((XWORD) nregisters);
 
-																			diostream->Write(datawrite);
-																			
-																			if(!diostream->WaitToFlushOutXBuffer(timeout)) return false;
-																
-																			xtimer->Reset();
+                                      diostream->Write(datawrite);
 
-																			int size = nregisters*sizeof(XWORD) + 9;
+                                      if(!diostream->WaitToFlushOutXBuffer(timeout)) return false;
 
-																			while(diostream->GetInXBuffer()->GetSize() != size)
-																				{
-																					if(xtimer->GetMeasureSeconds() >= (XDWORD)timeout) 
-																						{
-																							diostream->GetInXBuffer()->Delete();
-																							return false;	
-																						}
+                                      xtimer->Reset();
 
-																					xsleep->MilliSeconds(10);
-																				}	
-	
-																			answer.Resize(size);
-																			answer.FillBuffer(0x00);
-																			
-																			if(!diostream->Read(answer.Get(), size)) return false;
+                                      int size = nregisters*sizeof(XWORD) + 9;
 
-																			if(answer.GetSize() != size) return false;
+                                      while(diostream->GetInXBuffer()->GetSize() != size)
+                                        {
+                                          if(xtimer->GetMeasureSeconds() >= (XDWORD)timeout)
+                                            {
+                                              diostream->GetInXBuffer()->Delete();
+                                              return false;
+                                            }
 
-																			if(answer.Get()[7] & 0x80)   return false;
-																			
-																			XBYTE head[10];
-																			answer.Extract(head, 0 , 9);
-																		}
-																		break;
-		}
+                                          xsleep->MilliSeconds(10);
+                                        }
 
-	return true;
+                                      answer.Resize(size);
+                                      answer.FillBuffer(0x00);
+
+                                      if(!diostream->Read(answer.Get(), size)) return false;
+
+                                      if(answer.GetSize() != size) return false;
+
+                                      if(answer.Get()[7] & 0x80)   return false;
+
+                                      XBYTE head[10];
+                                      answer.Extract(head, 0 , 9);
+                                    }
+                                    break;
+    }
+
+  return true;
 }
 
 
@@ -322,65 +322,65 @@ bool DIOMODBUS::ReadHoldingRegisters(XWORD address, XWORD nregisters, XBUFFER& a
 
 /*-------------------------------------------------------------------
 //  DIOMODBUS::Disconnect
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			04/06/2013 19:49:34
-//	
-//	@return 			bool : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      04/06/2013 19:49:34
+//
+//  @return       bool :
+//  */
 /*-----------------------------------------------------------------*/
 bool DIOMODBUS::Disconnect()
-{	
-  if(diostream) 
-		{			
-			diostream->Disconnect();
-			diostream->Close();
+{
+  if(diostream)
+    {
+      diostream->Disconnect();
+      diostream->Close();
 
-			diostream = NULL;
-		}
+      diostream = NULL;
+    }
 
 
-	return true;
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIOMODBUS::CRC16
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			04/06/2013 22:41:49
-//	
-//	@return 			XWORD : 
-//	@param				data : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      04/06/2013 22:41:49
+//
+//  @return       XWORD :
+//  @param        data :
 */
 /*-----------------------------------------------------------------*/
 XWORD DIOMODBUS::CRC16(XBUFFER& data)
 {
-	XWORD poly16 = 0xA001;
-	XWORD	LSB;	
-	XWORD	crc		 = 0xFFFF;
+  XWORD poly16 = 0xA001;
+  XWORD LSB;
+  XWORD crc    = 0xFFFF;
 
-	for(int d=0; d<(int)data.GetSize(); d++)
-		{
-			crc = ((crc^data.Get()[d]) | 0xFF00) & (crc | 0x00FF);
+  for(int d=0; d<(int)data.GetSize(); d++)
+    {
+      crc = ((crc^data.Get()[d]) | 0xFF00) & (crc | 0x00FF);
 
-			for(int c=0; c<8; c++) 
-				{
-					LSB=(crc & 0x0001);
-					crc=crc/2;
+      for(int c=0; c<8; c++)
+        {
+          LSB=(crc & 0x0001);
+          crc=crc/2;
 
-					if(LSB) crc = crc ^ poly16;
-				}
-		}
+          if(LSB) crc = crc ^ poly16;
+        }
+    }
 
-	return crc;
+  return crc;
 }
 
 

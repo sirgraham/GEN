@@ -1,0 +1,2231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="NsightTegraProject">
+    <NsightTegraProjectRevisionNumber>11</NsightTegraProjectRevisionNumber>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Tegra-Android">
+      <Configuration>Debug</Configuration>
+      <Platform>Tegra-Android</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Tegra-Android">
+      <Configuration>Release</Configuration>
+      <Platform>Tegra-Android</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{FE907369-BD17-4290-B32C-035BFA053DAB}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <SccProjectName>
+    </SccProjectName>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccProvider>
+    </SccProvider>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v140_xp</PlatformToolset>
+    <NdkToolchainVersion>gcc-4.9</NdkToolchainVersion>
+    <AndroidNativeAPI>UseTarget</AndroidNativeAPI>
+    <AndroidMinAPI>android-21</AndroidMinAPI>
+    <AndroidTargetAPI>android-21</AndroidTargetAPI>
+    <AndroidBuildSystem>GradleBuild</AndroidBuildSystem>
+    <AndroidStripLibrary>true</AndroidStripLibrary>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Tegra-Android'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v140_xp</PlatformToolset>
+    <AndroidNativeAPI>UseTarget</AndroidNativeAPI>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Tegra-Android'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\Release\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Tegra-Android'">false</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\Debug\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkIncremental>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'" />
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Tegra-Android'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Tegra-Android'" />
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Tegra-Android'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">
+    <OutDir>$(ProjectDir)$(Platform)\$(Configuration)\</OutDir>
+    <FastDeploy>false</FastDeploy>
+    <TargetName>lib$(ProjectName)2</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>.\Release/GGFConverter.tlb</TypeLibraryName>
+      <HeaderFileName>
+      </HeaderFileName>
+    </Midl>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>..\..\Application;..\..\..\..\GEN\ArtificialIntelligence;..\..\..\..\GEN\Main;..\..\..\..\GEN\Interface;..\..\..\..\GEN\Input;..\..\..\..\GEN\Compress;..\..\..\..\GEN\Graphic;..\..\..\..\GEN\Bluetooth;..\..\..\..\GEN\Video;..\..\..\..\GEN\Media;..\..\..\..\GEN\Sound;..\..\..\..\GEN\Cipher;..\..\..\..\GEN\Script;..\..\..\..\GEN\DataIO;..\..\..\..\GEN\Utils;..\..\..\..\GEN\Platforms\Windows;..\..\..\..\GEN\Platforms\Common\SNDOpenAL;..\..\..\..\GEN\Platforms\Common\VIDEOCodecH264;..\..\..\..\ThirdPartyLibraries\zlib;..\..\..\..\ThirdPartyLibraries\zlib\contrib\minizip;..\..\..\..\ThirdPartyLibraries\jpeglib;..\..\..\..\ThirdPartyLibraries\libpng;..\..\..\..\ThirdPartyLibraries\openal-soft\include;..\..\..\..\ThirdPartyLibraries\glew\include;..\..\..\..\ThirdPartyLibraries\OpenGL-Registry;..\..\..\..\ThirdPartyLibraries\stb;..\..\..\..\ThirdPartyLibraries\ffmpeg;..\..\..\..\ThirdPartyLibraries\opengl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;__STDC_CONSTANT_MACROS;WIN32;WINDOWS;XVISUALC;HW_PC;UNICODE;GRP_ACTIVE;INP_ACTIVE;SND_ACTIVE;DIO_ACTIVE;DIOTCPIP_ACTIVE;DIOUDP_ACTIVE;DIOICMP_ACTIVE;DIOUSB_ACTIVE;VIDEO_ACTIVE;PHY_ACTIVE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <PrecompiledHeaderOutputFile>.\Release/GGFConverter.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\Release/</AssemblerListingLocation>
+      <ObjectFileName>.\Release/</ObjectFileName>
+      <ProgramDataBaseFileName>.\Release/</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>None</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0c0a</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>odbc32.lib;odbccp32.lib;winmm.lib;ws2_32.lib;irprops.lib;iphlpapi.lib;dbghelp.lib;setupapi.lib;opengl32.lib;glu32.lib;OpenAL32.lib;avcodec.lib;avformat.lib;avutil.lib;swresample.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>.\Release/GGFConverter.exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>../../../../ThirdPartyLibraries/ffmpeg/bin/ffmpeg-4.0-win32-dev/lib;../../../../ThirdPartyLibraries/openal-soft/build/windows/lib/Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ProgramDatabaseFile>.\Release/GGFConverter.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Tegra-Android'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TypeLibraryName>.\Release/GGFConverter.tlb</TypeLibraryName>
+      <HeaderFileName>
+      </HeaderFileName>
+    </Midl>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>..\..\..\GGFConverter\Application;..\..\..\..\GEN\Main;..\..\..\..\GEN\Interface;..\..\..\..\GEN\Input;..\..\..\..\GEN\Compress;..\..\..\..\ThirdPartyLibraries\zlib;..\..\..\..\GEN\Graphic\TypeFiles\JPG;..\..\..\..\ThirdPartyLibraries\libpng;..\..\..\..\GEN\Graphic;..\..\..\..\GEN\Bluetooth;..\..\..\..\GEN\Sound;..\..\..\..\GEN\Cipher;..\..\..\..\GEN\Script;..\..\..\..\GEN\DataIO;..\..\..\..\GEN\DataIO\SPI;..\..\..\..\GEN\Utils;..\..\..\..\GEN\Platforms\Windows;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;XVISUALC;HW_PC;HAVE_MEMMOVE;UNICODE;GRP_ACTIVE;INP_ACTIVE;SND_ACTIVE;DIO_ACTIVE;DIOSPI_ACTIVE;DIOPORTDATA_ACTIVE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <PrecompiledHeaderOutputFile>.\Release/GGFConverter.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\Release/</AssemblerListingLocation>
+      <ObjectFileName>.\Release/</ObjectFileName>
+      <ProgramDataBaseFileName>.\Release/</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0c0a</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>odbc32.lib;odbccp32.lib;winmm.lib;ws2_32.lib;irprops.lib;iphlpapi.lib;dbghelp.lib;setupapi.lib;opengl32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>.\Release/GGFConverter.exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ProgramDatabaseFile>.\Release/GGFConverter.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TypeLibraryName>.\Release/GGFConverter.tlb</TypeLibraryName>
+      <HeaderFileName>
+      </HeaderFileName>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>C:\Program Files\Microsoft SDKs\Windows\v7.0\Include;..\..\GGFConverter\Application;..\..\..\..\GEN\agg2\include;..\..\..\..\GEN\Platforms\Windows;..\..\..\..\GEN\Interface;..\..\..\..\GEN\Main;..\..\..\..\GEN\Input;..\..\..\..\GEN\Compress;..\..\..\..\ThirdPartyLibraries\zlib;..\..\..\..\GEN\Bluetooth;..\..\..\..\GEN\Graphics;..\..\..\..\GEN\Sounds;..\..\..\..\GEN\Cipher;..\..\..\..\GEN\Script;..\..\..\..\GEN\Graphic\TypeFiles\jpeg;..\..\..\..\GEN\DataIO;..\..\..\..\GEN\Utils;..\..\..\..\GEN\AWorld;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_WIN32_WINNT=0x0502;WIN32;_WINDOWS;UNICODE;XVISUALC;DIO_ACTIVE;DIOBLUETOOTH_ACTIVE;INP_ACTIVE;GRP_ACTIVE;SND_ACTIVE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <PrecompiledHeaderOutputFile>.\Release/GGFConverter.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\Release/</AssemblerListingLocation>
+      <ObjectFileName>.\Release/</ObjectFileName>
+      <ProgramDataBaseFileName>.\Release/</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0c0a</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>odbc32.lib;odbccp32.lib;winmm.lib;ws2_32.lib;irprops.lib;iphlpapi.lib;setupapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>.\Release/GGFConverter.exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ProgramDatabaseFile>.\Release/GGFConverter.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>.\Debug/GGFConverter.tlb</TypeLibraryName>
+      <HeaderFileName>
+      </HeaderFileName>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\Application;..\..\..\..\GEN\ArtificialIntelligence;..\..\..\..\GEN\Main;..\..\..\..\GEN\Interface;..\..\..\..\GEN\Input;..\..\..\..\GEN\Compress;..\..\..\..\GEN\Graphic;..\..\..\..\GEN\Bluetooth;..\..\..\..\GEN\Video;..\..\..\..\GEN\Media;..\..\..\..\GEN\Sound;..\..\..\..\GEN\Cipher;..\..\..\..\GEN\Script;..\..\..\..\GEN\DataIO;..\..\..\..\GEN\Utils;..\..\..\..\GEN\Platforms\Windows;..\..\..\..\GEN\Platforms\Common\SNDOpenAL;..\..\..\..\GEN\Platforms\Common\VIDEOCodecH264;..\..\..\..\ThirdPartyLibraries\zlib;..\..\..\..\ThirdPartyLibraries\zlib\contrib\minizip;..\..\..\..\ThirdPartyLibraries\jpeglib;..\..\..\..\ThirdPartyLibraries\libpng;..\..\..\..\ThirdPartyLibraries\openal-soft\include;..\..\..\..\ThirdPartyLibraries\glew\include;..\..\..\..\ThirdPartyLibraries\OpenGL-Registry;..\..\..\..\ThirdPartyLibraries\stb;..\..\..\..\ThirdPartyLibraries\ffmpeg;..\..\..\..\ThirdPartyLibraries\opengl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;__STDC_CONSTANT_MACROS;_DEBUG;WIN32;WINDOWS;XVISUALC;HW_PC;XDEBUG;XMEM;UNICODE;GRP_ACTIVE;INP_ACTIVE;SND_ACTIVE;DIO_ACTIVE;DIOTCPIP_ACTIVE;DIOUDP_ACTIVE;DIOICMP_ACTIVE;DIOUSB_ACTIVE;VIDEO_ACTIVE;PHY_ACTIVE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <PrecompiledHeaderOutputFile>.\Debug/GGFConverter.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\Debug/</AssemblerListingLocation>
+      <ObjectFileName>.\Debug/</ObjectFileName>
+      <ProgramDataBaseFileName>.\Debug/</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <BrowseInformation>false</BrowseInformation>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <DisableSpecificWarnings>4595</DisableSpecificWarnings>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0c0a</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>odbc32.lib;odbccp32.lib;winmm.lib;ws2_32.lib;irprops.lib;iphlpapi.lib;dbghelp.lib;setupapi.lib;opengl32.lib;glu32.lib;OpenAL32.lib;avcodec.lib;avformat.lib;avutil.lib;swresample.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ShowProgress>NotSet</ShowProgress>
+      <OutputFile>.\Debug/GGFConverter.exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>../../../../ThirdPartyLibraries/ffmpeg/bin/ffmpeg-4.0-win32-dev/lib;../../../../ThirdPartyLibraries/openal-soft/build/windows/lib/Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>.\Debug/GGFConverter.pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <SubSystem>Console</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+      <Profile>true</Profile>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+    </Link>
+    <Bscmake>
+      <PreserveSbr>true</PreserveSbr>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TypeLibraryName>.\Debug/GGFConverter.tlb</TypeLibraryName>
+      <HeaderFileName>
+      </HeaderFileName>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\..\GGFConverter\Application;..\..\..\GGFConverter\Platforms\Tegra-Android;..\..\..\..\GEN\Main;..\..\..\..\GEN\Interface;..\..\..\..\GEN\Input;..\..\..\..\GEN\Compress;..\..\..\..\ThirdPartyLibraries\zlib;..\..\..\..\GEN\Graphic\TypeFiles\JPG;..\..\..\..\ThirdPartyLibraries\libpng;..\..\..\..\GEN\Graphic;..\..\..\..\GEN\Bluetooth;..\..\..\..\GEN\Sound;..\..\..\..\GEN\Sound\TypeFiles\OGG;..\..\..\..\GEN\Cipher;..\..\..\..\GEN\Script;..\..\..\..\GEN\DataIO;..\..\..\..\GEN\DataIO\I2C;..\..\..\..\GEN\Utils;..\..\..\..\GEN\UserInterface;..\..\..\..\GEN\Platforms\Android;..\..\..\..\GEN\Platforms\Android\native_app_glue;..\..\..\..\GEN\Platforms\Common\SNDOpenAL;..\..\..\..\GEN\Platforms\Android\OpenAL\include;..\..\..\..\GEN\Platforms\Android\DIO;..\..\..\..\GEN\Video;..\..\..\..\GEN\Video\H264;..\..\..\..\GEN\ArtificialIntelligence;..\..\..\..\GEN\Platforms\Linux;..\..\..\..\GEN\Media;..\..\..\..\GEN\Physics;C:\NVPACK\PhysX\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>DISABLE_IMPORTGL;ANDROID;HAVE_MEMMOVE;UNICODE;XDEBUG;NDEBUG;_XMEM;GRP_ACTIVE;PHY_ACTIVE;INP_ACTIVE;_SND_ACTIVE;DIO_ACTIVE;DIOTCPIP_ACTIVE;DIOUDP_ACTIVE;DIOICMP_ACTIVE;_DIOUART_ACTIVE;_DIOUSB_ACTIVE;_DIOWIFI_ACTIVE;_DIOI2C_ACTIVE;_DIOSPI_ACTIVE;_DIOBLUETOOTH_ACTIVE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <PrecompiledHeaderOutputFile>.\Debug/GGFConverter.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\Debug/</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)%(FileName).o</ObjectFileName>
+      <ProgramDataBaseFileName>.\Debug/</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <BrowseInformation>false</BrowseInformation>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0c0a</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>GLESv2;mediandk;openal</AdditionalDependencies>
+      <ShowProgress>NotSet</ShowProgress>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>..\..\..\..\GEN\Platforms\Android\OpenAL\lib;C:\NVPACK\PhysX\Lib\android9;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>.\Debug/GGFConverter.pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <Profile>true</Profile>
+      <AndroidSystemLibs>c;m;log;gcc;android;EGL;GLESv1_CM</AndroidSystemLibs>
+      <AdditionalOptions>-Wl,--start-group -lPhysX3Common -lPvdRuntime -lSimulationController -lSceneQuery -lLowLevel -lLowLevelCloth -lPhysX3 -lPhysX3Vehicle -lPhysX3Cooking -lPhysX3Extensions -lPhysX3CharacterKinematic -lPhysXProfileSDK -lPxTask -lPhysXVisualDebuggerSDK -Wl,--end-group %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+    <Bscmake>
+      <PreserveSbr>true</PreserveSbr>
+    </Bscmake>
+    <AntBuild>
+      <AssetsDirectories>D:\GenFrameWork\GGFConverter\Platforms\Windows\assets;%(AssetsDirectories)</AssetsDirectories>
+      <AndroidManifestLocation>AndroidManifest.xml</AndroidManifestLocation>
+      <JavaSourceDir>..\..\..\..\GEN\Platforms\Android\java\</JavaSourceDir>
+      <NativeLibDirectories>D:\GenFrameWork\GEN\Platforms\Android\Mali</NativeLibDirectories>
+      <NativeLibDependencies>
+      </NativeLibDependencies>
+      <SkipAntStep>IfUpToDate</SkipAntStep>
+    </AntBuild>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TypeLibraryName>.\Debug/GGFConverter.tlb</TypeLibraryName>
+      <HeaderFileName>
+      </HeaderFileName>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>C:\Program Files\Microsoft SDKs\Windows\v7.0\Include;D:\Proyects\Gen\agg2\include;..\..\GGFConverter\Application;..\..\..\..\GEN\Input\Platforms\Windows;..\..\..\..\GEN\Main;..\..\..\..\GEN\Interface;..\..\..\..\GEN\Input;..\..\..\..\GEN\Compress;..\..\..\..\ThirdPartyLibraries\zlib;..\..\..\..\GEN\Graphics;..\..\..\..\GEN\Bluetooth;..\..\..\..\GEN\Sounds;..\..\..\..\GEN\Cipher;..\..\..\..\GEN\Script;..\..\..\..\GEN\DataIO;..\..\..\..\GEN\Utils;..\..\..\..\GEN\Graphic\TypeFiles\jpeg;..\..\..\..\GEN\AWorld;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_WIN32_WINNT=0x0502;WIN32;_DEBUG;_WINDOWS;UNICODE;XVISUALC;XDEBUG;XMEM;GRP_ACTIVE;DIO_ACTIVE;INP_ACTIVE;SND_ACTIVE;DIOBLUETOOTH_ACTIVE;_XSCREENSTATUS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <PrecompiledHeaderOutputFile>.\Debug/GGFConverter.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\Debug/</AssemblerListingLocation>
+      <ObjectFileName>.\Debug/</ObjectFileName>
+      <ProgramDataBaseFileName>.\Debug/</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0c0a</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>odbc32.lib;odbccp32.lib;winmm.lib;ws2_32.lib;irprops.lib;iphlpapi.lib;setupapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ShowProgress>NotSet</ShowProgress>
+      <OutputFile>.\Debug/GGFConverter.exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>.\Debug/GGFConverter.pdb</ProgramDatabaseFile>
+      <GenerateMapFile>true</GenerateMapFile>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <Profile>true</Profile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\GEN\ArtificialIntelligence\AIAnimation.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\ArtificialIntelligence\AIController.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\ArtificialIntelligence\AILogic.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\ArtificialIntelligence\AIState.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\ArtificialIntelligence\AITransition.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Cipher\Cipher.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Cipher\CipherAES.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Cipher\Hash.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Cipher\HashCOMP128v1.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Cipher\HashCRC32.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Cipher\HashMD5.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Cipher\HashSHA1.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Cipher\HashSHA2.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Cipher\HashWhirlpool.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Compress\CompressBase.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Compress\CompressGZ.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Compress\CompressLZRW1KH.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Compress\CompressLZW.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Compress\CompressManager.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Compress\CompressZIP.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOFactory.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOIP.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOMAC.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOPing.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIORemoteFileConfig.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStream.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamBluetooth.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamBluetoothConfig.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamBluetoothLocalEnumDevices.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamBluetoothRemoteEnumDevices.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamCipher.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamConfig.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamDevice.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamDeviceBluetooth.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamDeviceIP.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamDeviceUSB.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamDeviceWifi.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamEnumDevices.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamEnumServers.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamI2C.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamI2CConfig.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamICMP.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamICMPConfig.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamIPLocalEnumDevices.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamSPI.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamSPIConfig.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamTCPIP.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamTCPIPConfig.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamUART.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamUARTConfig.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamUARTLocalEnumDevices.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamUDP.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamUDPAcknowledge.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamUDPConfig.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamUDPLocalEnumServers.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamUSB.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamUSBConfig.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamUSBLocalEnumDevices.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamWifiRemoteEnumDevices.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOURL.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOWebClient.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOWebHeader.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOWebScraper.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOWebScraperCache.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\DIOWebScraperPublicIP.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\DataIO\I2C\DIOI2CPWMControlerPCA9685.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\FBX.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRP2DCollisionDetection.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPAnimation.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPApplication.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPArrayAlignTool.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPBackgroundPass.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPBezierSpline.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPBitmapSequence.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPBlendingPass.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPBufferOpenGLRender.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPCamera.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPColor.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPConsole.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPContext.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPCubeCoords.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPDeformer.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPDepthPass.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPElement.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPEnvMapPass.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPFactory.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPFile3D.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPFile3DFBX.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPFile3DGGF.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPFile3DOBJ.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPFile3DXML.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPFileBitmap.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPFileBitmapBMP.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPFileBitmapJPG.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPFileBitmapPNG.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPFileBitmapTGA.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPFileTTF.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPFont.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPFontManager.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPFrustum.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPHighDinamicRangePass.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPLight.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPLoader.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPLoaderInterface.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPMappingProjection.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPMappingProjectionCubic.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPMappingProjectionCylinder.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPMappingProjectionPlanar.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPMaterial.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPMaterialLibrary.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPMatrix.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPMesh.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPNode.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPNodeManager.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPObject.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPObjectBuilder.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPObjectBuilderAlgorithm.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPObjectBuilderAlgorithmExtrude.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPObjectBuilderAlgorithmLathe.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPObjectBuilderAlgorithmStroke.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPObjectBuilderAlgorithmTriangulationEar.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPObjectLibrary.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPObserver.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPOpenGL.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPOverlayPass.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPPass.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPPassManager.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPPath.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPPlane.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPProfiler.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPReflectionPass.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPRenderer.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRP2DRendererPrimitives.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPRenderTarget.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPRenderTargetPass.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPScene.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPScreen.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPSettings.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPShader.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPShaderDot.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPShaderLibrary.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPShadowPass.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPSkinning.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPSkyboxPass.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPSkyPlanePass.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPSlotNumber.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPSpline.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPStencilPass.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPStyleProcessorCSS.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPSubject.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPTextBox.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPTexture.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPTextureEXT.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPUserDataContainer.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPVector.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPViewport.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPViewportPass.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPVisualDebugger.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPWidget.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPWidgetPage.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPWidgetPass.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPWidgetStyle.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Media\MEDIAFile.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Media\MEDIAFrameReaderLibAV.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Media\MEDIAH264FrameReader.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Common\VIDEOCodecH264\VIDEOCodecH264ffmpeg.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Sound\SNDCodecFFMPEG.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Sound\SNDFileFFMPEG.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Video\VIDEOCodecH264.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Video\VIDEOFactory.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Video\VIDEOPlayer.cpp" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\glew\src\glew.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jaricom.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jcapimin.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jcapistd.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jcarith.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jccoefct.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jccolor.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jcdctmgr.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jchuff.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jcinit.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jcmainct.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jcmarker.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jcmaster.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jcomapi.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jcparam.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jcprepct.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jcsample.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jctrans.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jdapimin.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jdapistd.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jdarith.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jdatadst.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jdatasrc.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jdcoefct.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jdcolor.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jddctmgr.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jdhuff.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jdinput.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jdmainct.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jdmarker.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jdmaster.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jdmerge.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jdpostct.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jdsample.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jdtrans.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jerror.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jfdctflt.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jfdctfst.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jfdctint.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jidctflt.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jidctfst.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jidctint.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jmemmgr.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jmemnobs.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jquant1.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jquant2.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jutils.c" />
+    <ClCompile Include="..\..\..\..\GEN\Input\INPFactory.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Input\INPPath.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Android\ANDROIDJNI.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Android\ANDROIDJNIObject.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Android\ANDROIDMain.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Android\ANDROIDNativeActivity.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Android\DIOANDROIDFactory.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Android\DIOANDROIDPCap.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Android\DIOANDROIDStreamBluetooth.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Android\DIOANDROIDStreamBluetoothLocalEnumDevices.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Android\DIOANDROIDStreamBluetoothRemoteEnumDevices.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Android\DIOANDROIDStreamI2C.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Android\DIOANDROIDStreamICMP.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Android\DIOANDROIDStreamIPLocalEnumDevices.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Android\DIOANDROIDStreamSPI.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Android\DIOANDROIDStreamTCPIP.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Android\DIOANDROIDStreamUART.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Android\DIOANDROIDStreamUARTLocalEnumDevices.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Android\DIOANDROIDStreamUDP.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Android\DIOANDROIDStreamUSB.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Android\DIOANDROIDStreamUSBLocalEnumDevices.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Android\DIOANDROIDStreamWifiRemoteEnumDevices.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Android\DIOANDROIDURL.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Android\GRPANDROIDContext.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Android\GRPANDROIDFactory.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Android\GRPANDROIDScreen.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Android\INPANDROIDDeviceKeyboard.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Android\INPANDROIDFactory.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Android\native_app_glue\android_native_app_glue.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Android\SNDANDROIDFactory.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Android\XANDROIDConsole.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Android\XANDROIDDateTime.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Android\XANDROIDDebug.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Android\XANDROIDDir.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Android\XANDROIDFactory.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Android\XANDROIDFile.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Android\XANDROIDRand.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Android\XANDROIDSleep.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Android\XANDROIDSystem.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Android\XANDROIDThread.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Android\XANDROIDTimer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Common\SNDOpenAL\SNDOpenAL.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Common\SNDOpenAL\SNDOpenALBuffer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Common\SNDOpenAL\SNDOpenALElement.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Common\SNDOpenAL\SNDOpenALSource.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Common\SNDOpenAL\SNDOpenALStreamElement.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXFactory.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXPCap.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamBluetooth.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamBluetoothLocalEnumDevices.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamBluetoothRemoteEnumDevices.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamI2C.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamICMP.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamIPLocalEnumDevices.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamSPI.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamTCPIP.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamUART.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamUARTLocalEnumDevices.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamUDP.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamUSB.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamUSBLocalEnumDevices.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamWifiRemoteEnumDevices.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXURL.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\GRPLINUXDispmanContext.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\GRPLINUXFactory.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\GRPLINUXFrameBufferContext.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\GRPLINUXScreenDispman.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\GRPLINUXScreenFrameBuffer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\GRPLINUXScreenFrameBufferGLES.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\GRPLINUXScreenX11.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\GRPLINUXScreenX11GL.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\GRPLINUXScreenX11GLES.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\INPLINUXDeviceKeyboardDirect.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\INPLINUXDeviceKeyboardX11.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\INPLINUXDeviceMouseDirect.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\INPLINUXDeviceMouseX11.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\INPLINUXFactory.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\LINUXMain.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\SNDLinuxFactory.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\SNDLINUXResampler.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\VIDEOLINUXCodecH264ILClient.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\VIDEOLINUXFactory.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\XLINUXConsole.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\XLINUXDateTime.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\XLINUXDebug.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\XLINUXDir.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\XLINUXFactory.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\XLINUXFile.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\XLINUXRand.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\XLINUXSleep.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\XLINUXSystem.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\XLINUXThread.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\XLINUXTimer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSFactory.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamBluetooth.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamBluetoothLocalEnumDevices.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamBluetoothRemoteEnumDevices.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamI2C.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamICMP.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamIPLocalEnumDevices.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamSPI.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamTCPIP.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamUART.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamUARTLocalEnumDevices.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamUDP.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamUSB.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamUSBLocalEnumDevices.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamWifiRemoteEnumDevices.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSURL.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\GRP2DWINDOWSScreen.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\GRPWINDOWSContext.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\GRPWINDOWSFactory.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\GRPWINDOWSScreen.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\INPWINDOWSDeviceKeyboard.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\INPWINDOWSDeviceMouse.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\SNDWINDOWSFactory.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\SNDWINDOWSResampler.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\VIDEOWINDOWSFactory.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\WINDOWSMain.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\WINDOWSStackWalker.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSConsole.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSDateTime.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSDebug.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSDir.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSFactory.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSFile.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSRand.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSSleep.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSSystem.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSThread.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSTimer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Sound\SNDAnimationListener.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Sound\SNDDummyResampler.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Sound\SNDElement.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Sound\SNDEvent.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Sound\SNDFile.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Sound\SNDFileOGG.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\libpng\png.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\libpng\pngerror.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\libpng\pngget.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\libpng\pngmem.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\libpng\pngpread.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\libpng\pngread.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\libpng\pngrio.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\libpng\pngrtran.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\libpng\pngrutil.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\libpng\pngset.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\libpng\pngtrans.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\libpng\pngwio.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\libpng\pngwrite.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\libpng\pngwtran.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\libpng\pngwutil.c" />
+    <ClCompile Include="..\..\..\..\GEN\Sound\SNDFactory.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Sound\SNDManager.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Sound\SNDSource.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Sound\SNDStreamInstance.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XBufferBits.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Utils\XFactory.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Utils\XFileConfig.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Utils\XConsole.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Utils\XDateTime.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Utils\XFileJSON.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Utils\XFString.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Utils\XInterpolator.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Utils\XLoader.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Utils\XLog.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Utils\XPathsManager.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Utils\XScheduler.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Utils\XSleep.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Utils\XString.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Utils\XTimer.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Utils\XUUID.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Utils\XVariant.cpp" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\stb\stb_vorbis.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\zlib\contrib\minizip\ioapi.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\zlib\contrib\minizip\unzip.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\zlib\contrib\minizip\zip.c" />
+    <ClCompile Include="..\..\..\GGFConverter\Application\GGFConverter.cpp">
+      <DeploymentContent>true</DeploymentContent>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XApplication.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Utils\XBase.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Utils\XBuffer.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Utils\XDebug.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Utils\XDir.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Utils\XErrorMsg.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Utils\XFile.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Utils\XFileINI.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Utils\XFileTXT.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Utils\XFileXML.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Utils\XFileZIP.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Utils\XFSMachine.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Utils\XLanguage.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Utils\XMemory.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Utils\XPath.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Utils\XPhone.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Utils\XPublisher.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Utils\XSerialize.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Utils\XSystem.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Utils\XThread.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Input\INPButton.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Input\INPCursor.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Input\INPDevice.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Input\INPManager.cpp" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\zlib\adler32.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\zlib\compress.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\zlib\crc32.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\zlib\deflate.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\zlib\infback.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\zlib\inffast.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\zlib\inflate.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\zlib\inftrees.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\zlib\trees.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\zlib\uncompr.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\zlib\zutil.c" />
+    <ClCompile Include="..\..\..\..\GEN\Main\Main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\GEN\ArtificialIntelligence\AIAnimation.h" />
+    <ClInclude Include="..\..\..\..\GEN\ArtificialIntelligence\AIAnimationOverlay.h" />
+    <ClInclude Include="..\..\..\..\GEN\ArtificialIntelligence\AIController.h" />
+    <ClInclude Include="..\..\..\..\GEN\ArtificialIntelligence\AILogic.h" />
+    <ClInclude Include="..\..\..\..\GEN\ArtificialIntelligence\AIOrder.h" />
+    <ClInclude Include="..\..\..\..\GEN\ArtificialIntelligence\AIState.h" />
+    <ClInclude Include="..\..\..\..\GEN\ArtificialIntelligence\AITransition.h" />
+    <ClInclude Include="..\..\..\..\GEN\Cipher\Cipher.h" />
+    <ClInclude Include="..\..\..\..\GEN\Cipher\CipherAES.h" />
+    <ClInclude Include="..\..\..\..\GEN\Cipher\Hash.h" />
+    <ClInclude Include="..\..\..\..\GEN\Cipher\HashCOMP128v1.h" />
+    <ClInclude Include="..\..\..\..\GEN\Cipher\HashCRC32.h" />
+    <ClInclude Include="..\..\..\..\GEN\Cipher\HashMD5.h" />
+    <ClInclude Include="..\..\..\..\GEN\Cipher\HashSHA1.h" />
+    <ClInclude Include="..\..\..\..\GEN\Cipher\HashSHA2.h" />
+    <ClInclude Include="..\..\..\..\GEN\Cipher\HashWhirlpool.h" />
+    <ClInclude Include="..\..\..\..\GEN\Compress\CompressGZ.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOFactory.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOIP.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOMAC.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOPing.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIORemoteFileConfig.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStream.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamBluetooth.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamBluetoothConfig.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamBluetoothLocalEnumDevices.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamBluetoothRemoteEnumDevices.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamCipher.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamConfig.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamDevice.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamDeviceBluetooth.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamDeviceIP.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamDeviceUSB.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamDeviceWifi.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamEnumDevices.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamEnumServers.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamI2C.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamI2CConfig.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamICMP.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamICMPConfig.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamIPLocalEnumDevices.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamSPI.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamSPIConfig.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamTCPIP.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamTCPIPConfig.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamUART.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamUARTConfig.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamUARTLocalEnumDevices.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamUDP.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamUDPAcknowledge.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamUDPConfig.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamUDPLocalEnumServers.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamUSB.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamUSBConfig.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamUSBLocalEnumDevices.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamWifiRemoteEnumDevices.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOStreamXEvent.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOURL.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOWebClient.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOWebHeader.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOWebScraper.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOWebScraperCache.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\DIOWebScraperPublicIP.h" />
+    <ClInclude Include="..\..\..\..\GEN\DataIO\I2C\DIOI2CPWMControlerPCA9685.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\FBX.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRP2DCollisionDetection.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPAnimation.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPApplication.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPArrayAlignTool.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPBackgroundPass.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPBezierSpline.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPBlendingPass.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPBoundingBox.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPConsole.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPContext.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPDeformer.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRP2DEllipseBresenham.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPDepthPass.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPDrawable.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPEnvMapPass.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPFace.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPBitmap.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPBitmapSequence.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPBuffer.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPBufferColor.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPBufferColorGray.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPBufferColorRGB.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPBufferOpenGLRender.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPBufferPixelFormatGray.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPBufferPixelFormatRGB.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPBufferPixelFormatRGBA.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPBufferPixelFormatRGBPacked.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPBufferRendererBase.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPBufferRendererPrimitives.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPCamera.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPColor.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPCubeCoords.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPElement.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPFactory.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPFile3D.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPFile3DFBX.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPFile3DGGF.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPFile3DOBJ.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPFile3DXML.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPFileBitmap.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPFileBitmapBMP.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPFileBitmapJPG.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPFileBitmapPNG.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPFileBitmapTGA.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPFileTTF.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPFont.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPFontManager.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPFrustum.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPHighDinamicRangePass.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPInterfaceAnimable.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPLight.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPLightManager.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRP2DLineBresenham.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRP2DLineDDA.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPLoader.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPLoaderInterface.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPMappingProjection.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPMappingProjectionCubic.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPMappingProjectionCylinder.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPMappingProjectionPlanar.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPMaterial.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPMaterialLibrary.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPMatrix.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPMesh.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPNamed.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPNode.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPNodeManager.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPObject.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPObjectBuilder.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPObjectBuilderAlgorithm.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPObjectBuilderAlgorithmExtrude.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPObjectBuilderAlgorithmLathe.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPObjectBuilderAlgorithmStroke.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPObjectBuilderAlgorithmTriangulationEar.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPObjectLibrary.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPObserver.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPOpenGL.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPOverlayPass.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPPass.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPPassManager.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPPath.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPPlane.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPPoint.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPProfiler.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPProperties.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPQuaternion.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPRect.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPReflectionPass.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPRenderer.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRP2DRendererPrimitives.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPRenderTarget.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPRenderTargetPass.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPScene.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPScreen.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPSettings.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPShader.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPShaderLibrary.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPShadowPass.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPShape.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPSkinning.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPSkyboxPass.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPSkyPlanePass.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPSlotNumber.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPSpline.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPStencilPass.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPStyleProcessorCSS.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPSubject.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPTextBox.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPTexture.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPTextureEXT.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPUserDataContainer.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPVector.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPVertex.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPViewport.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPViewportPass.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPVisualDebugger.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPTextureFormats.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPXEvent.h" />
+    <ClInclude Include="..\..\..\..\GEN\Media\MEDIACodec.h" />
+    <ClInclude Include="..\..\..\..\GEN\Media\MEDIAFile.h" />
+    <ClInclude Include="..\..\..\..\GEN\Media\MEDIAFrameReader.h" />
+    <ClInclude Include="..\..\..\..\GEN\Media\MEDIAFrameReaderLibAV.h" />
+    <ClInclude Include="..\..\..\..\GEN\Media\MEDIAH264FrameReader.h" />
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Common\VIDEOCodecH264\VIDEOCodecH264ffmpeg.h" />
+    <ClInclude Include="..\..\..\..\GEN\Sound\SNDCodecFFMPEG.h" />
+    <ClInclude Include="..\..\..\..\GEN\Sound\SNDFileFFMPEG.h" />
+    <ClInclude Include="..\..\..\..\GEN\Video\VIDEOCodec.h" />
+    <ClInclude Include="..\..\..\..\GEN\Video\VIDEOCodecH264.h" />
+    <ClInclude Include="..\..\..\..\GEN\Video\VIDEOFactory.h" />
+    <ClInclude Include="..\..\..\..\GEN\Video\VIDEOPlayer.h" />
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\glew\include\GL\glew.h" />
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\glew\include\GL\glxew.h" />
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\glew\include\GL\wglew.h" />
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\jpeglib\cderror.h" />
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\jpeglib\cdjpeg.h" />
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jconfig.h" />
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jdct.h" />
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jerror.h" />
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jinclude.h" />
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jmemsys.h" />
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jmorecfg.h" />
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jpegint.h" />
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jpeglib.h" />
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jversion.h" />
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\jpeglib\transupp.h" />
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\libpng\png.h" />
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\libpng\pngconf.h" />
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\libpng\pngdebug.h" />
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\libpng\pnginfo.h" />
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\libpng\pnglibconf.h" />
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\libpng\pngpriv.h" />
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\libpng\pngstruct.h" />
+    <ClInclude Include="..\..\..\..\GEN\Input\INPFactory.h" />
+    <ClInclude Include="..\..\..\..\GEN\Input\INPManager.h" />
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Android\ANDROIDJNI.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Android\ANDROIDJNIObject.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Android\ANDROIDMain.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Android\ANDROIDNativeActivity.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Android\DIOANDROIDFactory.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Android\DIOANDROIDPCap.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Android\DIOANDROIDStreamBluetooth.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Android\DIOANDROIDStreamBluetoothLocalEnumDevices.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Android\DIOANDROIDStreamBluetoothRemoteEnumDevices.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Android\DIOANDROIDStreamI2C.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Android\DIOANDROIDStreamICMP.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Android\DIOANDROIDStreamIPLocalEnumDevices.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Android\DIOANDROIDStreamSPI.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Android\DIOANDROIDStreamTCPIP.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Android\DIOANDROIDStreamUART.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Android\DIOANDROIDStreamUARTLocalEnumDevices.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Android\DIOANDROIDStreamUDP.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Android\DIOANDROIDStreamUSB.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Android\DIOANDROIDStreamUSBLocalEnumDevices.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Android\DIOANDROIDStreamWifiRemoteEnumDevices.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Android\DIOANDROIDURL.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Android\GRPANDROIDContext.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Android\GRPANDROIDFactory.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Android\GRPANDROIDScreen.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Android\INPANDROIDDeviceKeyboard.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Android\INPANDROIDFactory.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Android\native_app_glue\android_native_app_glue.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Android\SNDANDROIDFactory.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Android\XANDROIDConsole.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Android\XANDROIDDateTime.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Android\XANDROIDDebug.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Android\XANDROIDDir.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Android\XANDROIDFactory.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Android\XANDROIDFile.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Android\XANDROIDRand.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Android\XANDROIDSleep.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Android\XANDROIDSystem.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Android\XANDROIDThread.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Android\XANDROIDTimer.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Common\SNDOpenAL\SNDOpenAL.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Common\SNDOpenAL\SNDOpenALBuffer.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Common\SNDOpenAL\SNDOpenALElement.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Common\SNDOpenAL\SNDOpenALSource.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Common\SNDOpenAL\SNDOpenALStreamElement.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXFactory.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXPCap.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamBluetooth.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamBluetoothLocalEnumDevices.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamBluetoothRemoteEnumDevices.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamI2C.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamICMP.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamIPLocalEnumDevices.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamSPI.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamTCPIP.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamUART.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamUARTLocalEnumDevices.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamUDP.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamUSB.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamUSBLocalEnumDevices.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXStreamWifiRemoteEnumDevices.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\DIOLINUXURL.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\GRPLINUXDispmanContext.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\GRPLINUXFactory.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\GRPLINUXFrameBufferContext.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\GRPLINUXScreenDispman.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\GRPLINUXScreenFrameBuffer.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\GRPLINUXScreenFrameBufferGLES.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\GRPLINUXScreenX11.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\GRPLINUXScreenX11GL.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\GRPLINUXScreenX11GLES.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\INPLINUXDeviceID.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\INPLINUXDeviceKeyboardDirect.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\INPLINUXDeviceKeyboardX11.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\INPLINUXDeviceMouseDirect.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\INPLINUXDeviceMouseX11.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\INPLINUXFactory.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\LINUXMain.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\SNDLinuxFactory.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\SNDLINUXResampler.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\VIDEOLINUXCodecH264ILClient.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\VIDEOLINUXFactory.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\XLINUXConsole.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\XLINUXDateTime.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\XLINUXDebug.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\XLINUXDir.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\XLINUXFactory.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\XLINUXFile.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\XLINUXRand.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\XLINUXSleep.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\XLINUXSystem.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\XLINUXThread.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\XLINUXTimer.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSFactory.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamBluetooth.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamBluetoothLocalEnumDevices.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamBluetoothRemoteEnumDevices.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamI2C.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamICMP.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamIPLocalEnumDevices.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamSPI.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamTCPIP.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamUART.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamUARTLocalEnumDevices.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamUDP.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamUSB.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamUSBLocalEnumDevices.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSStreamWifiRemoteEnumDevices.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSURL.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\GRP2DWINDOWSScreen.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\GRPWINDOWSContext.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\GRPWINDOWSFactory.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\GRPWINDOWSScreen.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\INPWINDOWSDeviceKeyboard.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\INPWINDOWSDeviceMouse.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\INPWINDOWSFactory.h" />
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\SNDWINDOWSFactory.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\SNDWINDOWSResampler.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\VIDEOWINDOWSFactory.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\WINDOWSMain.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSConsole.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSDateTime.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSDebug.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSDir.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSFactory.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSFile.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSPhone.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSRand.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSSleep.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSSystem.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSThread.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\opengl\glext.h" />
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\contrib\minizip\ioapi.h" />
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\contrib\minizip\unzip.h" />
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\contrib\minizip\zip.h" />
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\crc32.h" />
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\crypt.h" />
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\deflate.h" />
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\inffast.h" />
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\inffixed.h" />
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\inflate.h" />
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\inftrees.h" />
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\trees.h" />
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\zconf.h" />
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\zlib.h" />
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\zutil.h" />
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSTimer.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Sound\SNDAnimationListener.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Sound\SNDCodec.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Sound\SNDDummyResampler.h" />
+    <ClInclude Include="..\..\..\..\GEN\Sound\SNDEvent.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Sound\SNDInstance.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Sound\SNDManager.h" />
+    <ClInclude Include="..\..\..\..\GEN\Sound\SNDResampler.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Sound\SNDSource.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Sound\SNDStreamElement.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Sound\SNDFactory.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Sound\SNDStreamInstance.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Sound\SNDElement.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Sound\SNDFile.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Sound\SNDFileOGG.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XApplication.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XAVLTree.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XBinaryMap.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XBufferBits.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XFileConfig.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XBase.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XBER.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XBuffer.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XConsole.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XDateTime.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XDebug.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XDir.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XErrorMsg.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XFactory.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XFactoryMacros.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XFile.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XFileCSV.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XFileDBF.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XFileHash.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XFileHashID.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XFileHEX.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XFileID.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XFileINI.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XFileJSON.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XFileSentences.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XFileTXT.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XFileXDB.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XFileXML.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XFileZIP.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XFSMachine.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XFString.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XInterpolator.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XLanguage.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XList.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XLoader.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XLog.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XMap.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XMemory.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XPair.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XPath.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XPathsManager.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XPhone.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XPublisher.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XRand.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XScheduler.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XSerializable.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XSerialize.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XSleep.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XStack.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XString.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XSystem.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XThread.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XTimer.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XUUID.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XVariant.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XVector.h" />
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\stb\stb_vorbis.h" />
+    <ClInclude Include="..\..\..\GGFConverter\Application\GGFConverter.h" />
+    <ClInclude Include="..\..\Application\GRPMeshLOD.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\GEN\Platforms\Linux\makefile">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </None>
+    <None Include="..\Linux\makefile">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </None>
+    <AndroidBuild Include="AndroidManifest.xml">
+      <SubType>Designer</SubType>
+    </AndroidBuild>
+    <AndroidBuild Include="build.xml" />
+    <AndroidBuild Include="local.properties" />
+    <AndroidBuild Include="proguard.cfg" />
+    <AndroidBuild Include="proguard-project.txt" />
+    <AndroidBuild Include="project.properties" />
+    <None Include="res\drawable-hdpi\icon.png" />
+    <None Include="res\drawable-ldpi\icon.png" />
+    <None Include="res\drawable-mdpi\icon.png" />
+    <None Include="res\drawable-xhdpi\icon.png" />
+    <None Include="res\drawable-xxhdpi\icon.png" />
+    <None Include="res\drawable-xxxhdpi\icon.png" />
+    <None Include="res\values\strings.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <JCompile Include="..\..\..\..\GEN\Platforms\Android\java\gen\endorasoft\com\GENNativeActivity.java">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </JCompile>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

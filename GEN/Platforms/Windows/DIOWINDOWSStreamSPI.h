@@ -1,43 +1,43 @@
 /*------------------------------------------------------------------------------------------
 //  DIOWINDOWSSTREAMSPI.H
-*/  
-/** 
-// \class 
-//   
+*/
+/**
+// \class
+//
 //  Windows Data IO Stream SPI class
-//   
+//
 //  @author  Abraham J. Velez
 //  @version 20/09/2012 14:31:53
-*/  
-/*  GEN  Copyright (C).  All right reserved.		
+*/
+/*  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-  
+
 #ifndef _DIOWINDOWSSTREAMSPI_H_
 #define _DIOWINDOWSSTREAMSPI_H_
-    
-/*---- INCLUDES --------------------------------------------------------------------------*/ 
+
+/*---- INCLUDES --------------------------------------------------------------------------*/
 
 #include "DIOStreamSPI.h"
 
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
-  
+
 /*---- CLASS -----------------------------------------------------------------------------*/
-  
+
 class XFACTORY;
 class DIOFACTORY;
 class XPUBLISHER;
 
-class DIOWINDOWSSTREAMSPI : public DIOSTREAMSPI 
+class DIOWINDOWSSTREAMSPI : public DIOSTREAMSPI
 {
-	public:
-																	DIOWINDOWSSTREAMSPI									();
-		virtual											 ~DIOWINDOWSSTREAMSPI									();
+  public:
+                                  DIOWINDOWSSTREAMSPI                 ();
+    virtual                      ~DIOWINDOWSSTREAMSPI                 ();
 
-		virtual void									Sleep																(int count);
-				  
-	private:
-		
-		void													Clean																();	
+    virtual void                  Sleep                               (int count);
+
+  private:
+
+    void                          Clean                               ();
 };
 
 

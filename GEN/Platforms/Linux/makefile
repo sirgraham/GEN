@@ -18,7 +18,7 @@ ifeq "$(ARCHITECTURE)" "PC"
 	CCPP	  = g++
 	FLAGS	+= -DHW_PC
 	FLAGS	+= -D__STDC_CONSTANT_MACROS
- #FLAGS  += -m64
+  #FLAGS  += -m64
  
 	CPPDIR += /usr/include/postgresql  
 	
@@ -35,6 +35,8 @@ ifeq "$(ARCHITECTURE)" "PC_OLD"
 	FLAGS	+= -D__STDC_CONSTANT_MACROS
 	FLAGS += -w
 	FLAGS += -Wfatal-errors
+  
+  LIBS	 += -ldl
 	
  #FLAGS  += -m64
  
@@ -271,43 +273,42 @@ CPPDIR  += ../../../$(ADDDIRECTORYGEN)GEN/Compress
 CPPDIR  += ../../../$(ADDDIRECTORYGEN)GEN/DataIO
 CPPDIR  += ../../../$(ADDDIRECTORYGEN)GEN/DataIO/I2C
 CPPDIR  += ../../../$(ADDDIRECTORYGEN)GEN/DataIO/SPI
-CPPDIR  += ../../../$(ADDDIRECTORYGEN)GEN/DatabasesSQL
-CPPDIR  += ../../../$(ADDDIRECTORYGEN)GEN/DatabasesSQL/MySQL
-CPPDIR  += ../../../$(ADDDIRECTORYGEN)GEN/DatabasesSQL/PostgreSQL
-CPPDIR  += ../../../$(ADDDIRECTORYGEN)GEN/DatabasesSQL/SQLite
-
 CPPDIR  += ../../../$(ADDDIRECTORYGEN)GEN/Graphic
 CPPDIR  += ../../../$(ADDDIRECTORYGEN)GEN/Input
 CPPDIR  += ../../../$(ADDDIRECTORYGEN)GEN/Interface
 CPPDIR  += ../../../$(ADDDIRECTORYGEN)GEN/Main
 CPPDIR  += ../../../$(ADDDIRECTORYGEN)GEN/Utils
 CPPDIR  += ../../../$(ADDDIRECTORYGEN)GEN/Script
-CPPDIR  += ../../../$(ADDDIRECTORYGEN)GEN/Script/lua/src
 CPPDIR  += ../../../$(ADDDIRECTORYGEN)GEN/Sound
-CPPDIR  += ../../../$(ADDDIRECTORYGEN)GEN/Sound/TypeFiles/OGG
-CPPDIR  += ../../../$(ADDDIRECTORYGEN)GEN/Platforms/Linux
-CPPDIR  += ../../../$(ADDDIRECTORYGEN)GEN/Platforms/Windows/pcap/include
 CPPDIR  += ../../../$(ADDDIRECTORYGEN)GEN/UserInterface
-CPPDIR  += ../../../$(ADDDIRECTORYGEN)GEN/Platforms/Common/SNDOpenAL
-CPPDIR  += ../../../$(ADDDIRECTORYGEN)GEN/Platforms/Windows/
 CPPDIR  += ../../../$(ADDDIRECTORYGEN)GEN/Video
-CPPDIR  += ../../../$(ADDDIRECTORYGEN)GEN/Video/H264
-CPPDIR  += ../../../$(ADDDIRECTORYGEN)GEN/Platforms/Common/ffmpeg
 CPPDIR	+= ../../../$(ADDDIRECTORYGEN)GEN/Media
 CPPDIR  += ../../../$(ADDDIRECTORYGEN)GEN/ArtificialIntelligence
-
-CDIR	  += ../../../$(ADDDIRECTORYGEN)GEN/Compress/zlib
-CDIR	  += ../../../$(ADDDIRECTORYGEN)GEN/Graphic/TypeFiles/JPG
-CDIR	  += ../../../$(ADDDIRECTORYGEN)GEN/Graphic/TypeFiles/PNG
-CDIR	  += ../../../$(ADDDIRECTORYGEN)GEN/Platforms/Windows/MySQL/include     										# The same include(s) of windows 
-CDIR	  += ../../../$(ADDDIRECTORYGEN)GEN/Platforms/Windows/MySQL/bin/include
-CDIR	  += ../../../$(ADDDIRECTORYGEN)GEN/DatabasesSQL/SQLite/lib
-CDIR    += ../../../$(ADDDIRECTORYGEN)GEN/Sound/TypeFiles/OGG
-CDIR	  += ../../../$(ADDDIRECTORYGEN)GEN/Graphic
-
+CPPDIR  += ../../../$(ADDDIRECTORYGEN)GEN/DatabasesSQL
+CPPDIR  += ../../../$(ADDDIRECTORYGEN)GEN/DatabasesSQL/MySQL
+CPPDIR  += ../../../$(ADDDIRECTORYGEN)GEN/DatabasesSQL/PostgreSQL
+CPPDIR  += ../../../$(ADDDIRECTORYGEN)GEN/DatabasesSQL/SQLite
+CPPDIR  += ../../../$(ADDDIRECTORYGEN)GEN/Platforms/Common/SNDOpenAL
+CPPDIR  += ../../../$(ADDDIRECTORYGEN)GEN/Platforms/Common/VIDEOCodecH264
+CPPDIR  += ../../../$(ADDDIRECTORYGEN)GEN/Platforms/Linux
 CDIR	  += ../../../$(ADDDIRECTORYGEN)GEN/Physics
 
-															
+CPPDIR  += ../../../$(ADDDIRECTORYGEN)ThirdPartyLibraries/lua/src
+CPPDIR  += ../../../$(ADDDIRECTORYGEN)ThirdPartyLibraries/openal-soft/include
+CPPDIR  += ../../../$(ADDDIRECTORYGEN)ThirdPartyLibraries/libpcap
+
+CDIR	  += ../../../$(ADDDIRECTORYGEN)ThirdPartyLibraries/zlib
+CDIR	  += ../../../$(ADDDIRECTORYGEN)ThirdPartyLibraries/zlib/contrib/minizip
+CDIR	  += ../../../$(ADDDIRECTORYGEN)ThirdPartyLibraries/jpeglib
+CDIR	  += ../../../$(ADDDIRECTORYGEN)ThirdPartyLibraries/libpng
+CDIR    += ../../../$(ADDDIRECTORYGEN)ThirdPartyLibraries/stb
+CDIR	  += ../../../$(ADDDIRECTORYGEN)ThirdPartyLibraries/sqlite
+CDIR	  += ../../../$(ADDDIRECTORYGEN)ThirdPartyLibraries/mysql-connector-c/include
+CDIR	  += ../../../$(ADDDIRECTORYGEN)ThirdPartyLibraries/postgres/src/include
+CDIR    += ../../../$(ADDDIRECTORYGEN)ThirdPartyLibraries/glew/include
+CDIR    += ../../../$(ADDDIRECTORYGEN)ThirdPartyLibraries/glew/src
+CDIR    += ../../../$(ADDDIRECTORYGEN)ThirdPartyLibraries/ffmpeg
+								
 INCLUDES += $(addprefix -I, $(CPPDIR))					 					 			   
 INCLUDES += $(addprefix -I, $(CDIR))
            

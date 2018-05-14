@@ -1,23 +1,23 @@
 //------------------------------------------------------------------------------------------
-//	DIOWEBSERVER.H
-//	
-/**	
-// \class 
-//   
+//  DIOWEBSERVER.H
+//
+/**
+// \class
+//
 //  DIO WEB Server class
-//   
-//	@author	 Abraham J. Velez
-//	@version 20/01/2007 21:05:48
-*/	
-//	GEN  Copyright (C).  All right reserved.			 
+//
+//  @author  Abraham J. Velez
+//  @version 20/01/2007 21:05:48
+*/
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
+
 #ifndef _DIOWEBSERVER_H_
 #define _DIOWEBSERVER_H_
-	
-	
+
+
 //---- INCLUDES ----------------------------------------------------------------------------
-	
+
 #include "XBase.h"
 #include "XVector.h"
 #include "XBuffer.h"
@@ -32,74 +32,74 @@
 
 #include "DIOWebHeader.h"
 #include "DIOWebClient.h"
-	
+
 //---- DEFINES & ENUMS  --------------------------------------------------------------------
 
-	
-#define DIOWEBSERVER_DEFAULTCONNEXIONTIMEOUT			10		// Seconds
-#define DIOWEBSERVER_DEFAULTTIMEOUTSERVERPAGE			30    // Seconds
 
-#define DIOWEBSERVER_MAXPAGECONNEXIONS						30    
+#define DIOWEBSERVER_DEFAULTCONNEXIONTIMEOUT      10    // Seconds
+#define DIOWEBSERVER_DEFAULTTIMEOUTSERVERPAGE     30    // Seconds
 
-#define DIOWEBSERVER_IDSERVER											__L("GEN Web Server v1.5")
-#define DIOWEBSERVER_LOGSECTIONID									__L("WEB Server")
+#define DIOWEBSERVER_MAXPAGECONNEXIONS            30
 
-#define DIOWEBSERVER_TAGLABEL											__L("GEN")
+#define DIOWEBSERVER_IDSERVER                     __L("GEN Web Server v1.5")
+#define DIOWEBSERVER_LOGSECTIONID                 __L("WEB Server")
+
+#define DIOWEBSERVER_TAGLABEL                     __L("GEN")
 
 
-#define DIOWEBSERVER_DEFAULTPORT									80
-#define DIOWEBSERVER_MAXSENDFILE									DIOSTREAM_MAXBUFFER/2
-#define DIOWEBSERVER_MAXBUFFER										(16*1024)		
+#define DIOWEBSERVER_DEFAULTPORT                  80
+#define DIOWEBSERVER_MAXSENDFILE                  DIOSTREAM_MAXBUFFER/2
+#define DIOWEBSERVER_MAXBUFFER                    (16*1024)
 
 
 enum DIOWEBSERVER_PAGESTATUS
 {
-	DIOWEBSERVER_PAGESTATUS_NONE												= 0 ,	
-	DIOWEBSERVER_PAGESTATUS_WAIT														,
-	DIOWEBSERVER_PAGESTATUS_SENDING													,
-	DIOWEBSERVER_PAGESTATUS_SENT
+  DIOWEBSERVER_PAGESTATUS_NONE                        = 0 ,
+  DIOWEBSERVER_PAGESTATUS_WAIT                            ,
+  DIOWEBSERVER_PAGESTATUS_SENDING                         ,
+  DIOWEBSERVER_PAGESTATUS_SENT
 };
 
 
 enum DIOWEBSERVER_TYPE
 {
-	DIOWEBSERVER_TYPE_SYMPLE														= 0 ,
-	DIOWEBSERVER_TYPE_FULL		
+  DIOWEBSERVER_TYPE_SYMPLE                            = 0 ,
+  DIOWEBSERVER_TYPE_FULL
 };
 
 enum DIOWEBSERVER_METHOD
 {
-	DIOWEBSERVER_METHOD_UNKNOWN													= 0 ,
-	DIOWEBSERVER_METHOD_GET																	,
-	DIOWEBSERVER_METHOD_HEAD																,
-	DIOWEBSERVER_METHOD_POST																,
-	DIOWEBSERVER_METHOD_OPTIONS
+  DIOWEBSERVER_METHOD_UNKNOWN                         = 0 ,
+  DIOWEBSERVER_METHOD_GET                                 ,
+  DIOWEBSERVER_METHOD_HEAD                                ,
+  DIOWEBSERVER_METHOD_POST                                ,
+  DIOWEBSERVER_METHOD_OPTIONS
 };
 
 
 enum DIOWEBSERVER_ALIGN
 {
-	DIOWEBSERVER_ALIGN_NONE															= 0 ,
-	DIOWEBSERVER_ALIGN_LEFT																	,		
-	DIOWEBSERVER_ALIGN_RIGHT																,
-	DIOWEBSERVER_ALIGN_CENTER																,  
-};	
+  DIOWEBSERVER_ALIGN_NONE                             = 0 ,
+  DIOWEBSERVER_ALIGN_LEFT                                 ,
+  DIOWEBSERVER_ALIGN_RIGHT                                ,
+  DIOWEBSERVER_ALIGN_CENTER                               ,
+};
 
 
 enum DIOWEBSERVER_TAGSTATUS
 {
-  DIOWEBSERVER_TAGSTATUS_NOTFOUND										  = 0 ,  
-  DIOWEBSERVER_TAGSTATUS_TAGFOUNDNOTEND										,
-  DIOWEBSERVER_TAGSTATUS_TAGFOUNDEND               
+  DIOWEBSERVER_TAGSTATUS_NOTFOUND                     = 0 ,
+  DIOWEBSERVER_TAGSTATUS_TAGFOUNDNOTEND                   ,
+  DIOWEBSERVER_TAGSTATUS_TAGFOUNDEND
 };
 
 enum DIOWEBSERVER_ENCODINGFLAGS
 {
-	DIOWEBSERVER_ENCODINGFLAGS_NONE								=	0			,
-	DIOWEBSERVER_ENCODINGFLAGS_GZIP								=	1<<1	,
-	DIOWEBSERVER_ENCODINGFLAGS_DEFLATE						=	1<<2	,
-	DIOWEBSERVER_ENCODINGFLAGS_COMPRESS						=	1<<3	,
-	DIOWEBSERVER_ENCODINGFLAGS_SHAREDDICTIONARY		=	1<<4
+  DIOWEBSERVER_ENCODINGFLAGS_NONE               = 0     ,
+  DIOWEBSERVER_ENCODINGFLAGS_GZIP               = 1<<1  ,
+  DIOWEBSERVER_ENCODINGFLAGS_DEFLATE            = 1<<2  ,
+  DIOWEBSERVER_ENCODINGFLAGS_COMPRESS           = 1<<3  ,
+  DIOWEBSERVER_ENCODINGFLAGS_SHAREDDICTIONARY   = 1<<4
 };
 
 
@@ -125,22 +125,22 @@ class DIOWEBSERVER;
 
 class DIOWEBSERVER_HEADER : public DIOWEBHEADER
 {
-	public:	
-																DIOWEBSERVER_HEADER								();
-		virtual										 ~DIOWEBSERVER_HEADER								();		
+  public:
+                                DIOWEBSERVER_HEADER               ();
+    virtual                    ~DIOWEBSERVER_HEADER               ();
 
-		int													GetVersion												();
-		int													GetSubVersion											();
-		int													GetResult													();
-		bool												GetResultString										(XSTRING& coderesultstring);
+    int                         GetVersion                        ();
+    int                         GetSubVersion                     ();
+    int                         GetResult                         ();
+    bool                        GetResultString                   (XSTRING& coderesultstring);
 
-		bool												Create														(DIOWEBSERVER* webserver, DIOWEBSERVER_CONNEXION* connexion, DIOWEBSERVER_REQUEST* request, XSTRING* resource, int version, int subversion, DIOWEBHEADER_RESULT result, int size, XSTRING* entitytag = NULL, bool isplayed = true, bool password = false);
-				
-	private:
-		
-		void												Clean															();
+    bool                        Create                            (DIOWEBSERVER* webserver, DIOWEBSERVER_CONNEXION* connexion, DIOWEBSERVER_REQUEST* request, XSTRING* resource, int version, int subversion, DIOWEBHEADER_RESULT result, int size, XSTRING* entitytag = NULL, bool isplayed = true, bool password = false);
 
-		bool												GetDescriptionResult							(DIOWEBHEADER_RESULT result, XSTRING& description);
+  private:
+
+    void                        Clean                             ();
+
+    bool                        GetDescriptionResult              (DIOWEBHEADER_RESULT result, XSTRING& description);
 };
 
 
@@ -148,39 +148,39 @@ class DIOWEBSERVER_HEADER : public DIOWEBHEADER
 
 class DIOWEBSERVER_AUTHENTICATION
 {
-	public:
-																								DIOWEBSERVER_AUTHENTICATION							()																			{ Clean();																				}
-		virtual																		 ~DIOWEBSERVER_AUTHENTICATION							()																			{ Clean();																				}
+  public:
+                                                DIOWEBSERVER_AUTHENTICATION             ()                                      { Clean();                                        }
+    virtual                                    ~DIOWEBSERVER_AUTHENTICATION             ()                                      { Clean();                                        }
 
-		XSTRING*																		GetGuest  															()																			{ return &guest;																	}
-		XSTRING*																		GetLogin																()																			{ return &login;																  }
-		XSTRING*																		GetPassword															()																			{ return &password;																}
+    XSTRING*                                    GetGuest                                ()                                      { return &guest;                                  }
+    XSTRING*                                    GetLogin                                ()                                      { return &login;                                  }
+    XSTRING*                                    GetPassword                             ()                                      { return &password;                               }
 
-		bool																				Set																			(XSTRING& login, XSTRING& password)
-																								{
-																									this->login		 = login;
-																									this->password = password;
+    bool                                        Set                                     (XSTRING& login, XSTRING& password)
+                                                {
+                                                  this->login    = login;
+                                                  this->password = password;
 
-																									return true;
-																								}
+                                                  return true;
+                                                }
 
-		bool																				Set																			(XSTRING& guest, XSTRING& login, XSTRING& password)
-																								{
-																									this->guest		 = guest;
-																									this->login		 = login;
-																									this->password = password;
+    bool                                        Set                                     (XSTRING& guest, XSTRING& login, XSTRING& password)
+                                                {
+                                                  this->guest    = guest;
+                                                  this->login    = login;
+                                                  this->password = password;
 
-																									return true;
-																								}
+                                                  return true;
+                                                }
 
 
-	private:
+  private:
 
-		void																				Clean																		()																			{																									}
+    void                                        Clean                                   ()                                      {                                                 }
 
-		XSTRING																			guest;
-		XSTRING																			login;
-		XSTRING																			password;
+    XSTRING                                     guest;
+    XSTRING                                     login;
+    XSTRING                                     password;
 
 };
 
@@ -188,92 +188,92 @@ class DIOWEBSERVER_AUTHENTICATION
 
 class DIOWEBSERVER_REQUEST
 {
-	public:
-																								DIOWEBSERVER_REQUEST										()
-																								{
-																								  Clean();
-																									data = new XBUFFER();
-																								}
+  public:
+                                                DIOWEBSERVER_REQUEST                    ()
+                                                {
+                                                  Clean();
+                                                  data = new XBUFFER();
+                                                }
 
-		virtual																		 ~DIOWEBSERVER_REQUEST										()
-																								{
-																									delete data;
-																									Clean();
-																								}
+    virtual                                    ~DIOWEBSERVER_REQUEST                    ()
+                                                {
+                                                  delete data;
+                                                  Clean();
+                                                }
 
 
-		DIOWEBSERVER_TYPE														GetType																	()																			{ return type;																		}
-		DIOWEBSERVER_METHOD													GetMethod																()																			{ return method;																	}	
-		XSTRING*																		GetResource															()																			{ return &resource;																}
-		XSTRING*																		GetGuest	  														()																			{ return &guest;																	}
-		XSTRING*																		GetUserAgent														()																			{ return &useragent;															}
-		int																					GetSize																	()																			{ return size;																		}
-		XSTRING*																		GetIfNoneMatch													()																		  { return &ifnonematch;														}
-	
-		XBUFFER*																		GetData																	()																			{ return data;																		}
+    DIOWEBSERVER_TYPE                           GetType                                 ()                                      { return type;                                    }
+    DIOWEBSERVER_METHOD                         GetMethod                               ()                                      { return method;                                  }
+    XSTRING*                                    GetResource                             ()                                      { return &resource;                               }
+    XSTRING*                                    GetGuest                                ()                                      { return &guest;                                  }
+    XSTRING*                                    GetUserAgent                            ()                                      { return &useragent;                              }
+    int                                         GetSize                                 ()                                      { return size;                                    }
+    XSTRING*                                    GetIfNoneMatch                          ()                                      { return &ifnonematch;                            }
 
-		bool																				HaveLoginPassword												()																		  { return (loginpassword.IsEmpty()?false:true);		}
+    XBUFFER*                                    GetData                                 ()                                      { return data;                                    }
 
-		void																				SetType																	(DIOWEBSERVER_TYPE type)								{ this->type = type;                              }
-		void																				SetMethod																(DIOWEBSERVER_METHOD method)						{ this->method = method;                          }	
-		void																				SetResource															(XSTRING& resource)											{ this->resource = resource;                      }
-		void																				SetGuest																(XSTRING& guest)										    { this->guest = guest;                            }
+    bool                                        HaveLoginPassword                       ()                                      { return (loginpassword.IsEmpty()?false:true);    }
 
-		void																				SetUserAgent														(XSTRING& useragent)										{ this->useragent = useragent;                    }
-		void   																			SetSize																	(int size)															{ this->size = size;                              }
-		void 																				SetIfNoneMatch													(XSTRING& ifnonematch);
-																								
-		void																				SetLoginPassword												(XSTRING& loginpassword)								{ this->loginpassword = loginpassword;            }
-				
-		bool																				ConvertFromWeb													(XSTRING& string);
+    void                                        SetType                                 (DIOWEBSERVER_TYPE type)                { this->type = type;                              }
+    void                                        SetMethod                               (DIOWEBSERVER_METHOD method)            { this->method = method;                          }
+    void                                        SetResource                             (XSTRING& resource)                     { this->resource = resource;                      }
+    void                                        SetGuest                                (XSTRING& guest)                        { this->guest = guest;                            }
 
-		bool																				GetLoginPassword												(XSTRING& login, XSTRING& password);
-		
-		void																				ProcessAcceptedEncodingFlags						(XSTRING& string);		
-		void																				ProcessAcceptedLanguage									(XSTRING& string)												{ this->acceptedlanguage						= string;			}
-		void																				ProcessAcceptedCharset									(XSTRING& string)												{ this->acceptedcharset							= string;			} 
-		void																				ProcessAccessControlRequestMethod				(XSTRING& string)												{ this->acceptedcontrolrequest			= string;			}	
-		void																				ProcessAcceptedAllowHeaders							(XSTRING& string)												{ this->acceptedallowheaders				= string;			}	
-		void																				ProcessAccessControlAllowOrigin					(XSTRING& string)												{ this->accesscontrolalloworigin		= string;			} 
-		void																				ProcessAccessControlAllowMethods				(XSTRING& string)												{ this->accesscontrolallowmethods		= string;			}		
-		void																				ProcessAccessControlAllowHeaders				(XSTRING& string)												{ this->accesscontrolallowheaders		= string;			}	
-		void																				ProcessOrigin														(XSTRING& string)												{ this->origin											= string;			}
-		
+    void                                        SetUserAgent                            (XSTRING& useragent)                    { this->useragent = useragent;                    }
+    void                                        SetSize                                 (int size)                              { this->size = size;                              }
+    void                                        SetIfNoneMatch                          (XSTRING& ifnonematch);
 
-		bool																				IsAcceptedEncodingFlag									(DIOWEBSERVER_ENCODINGFLAGS flag)				{ return ((acceptedencodingflags&flag) != 0);			}
-		
-		bool																				Reset																		();			
+    void                                        SetLoginPassword                        (XSTRING& loginpassword)                { this->loginpassword = loginpassword;            }
 
-		XSTRING																			acceptedcharset;
-		XSTRING																			acceptedcontrolrequest;
-		XSTRING																			acceptedlanguage;
-		XSTRING																			acceptedallowheaders;
-		XSTRING																			accesscontrolalloworigin;
-		XSTRING																			accesscontrolallowmethods;
-		XSTRING																			accesscontrolallowheaders;
-		XSTRING																			origin;
+    bool                                        ConvertFromWeb                          (XSTRING& string);
 
-	private:
-		
-		void																				Clean																		()
-																								{
-																									type									= DIOWEBSERVER_TYPE_SYMPLE;
-																									method								= DIOWEBSERVER_METHOD_UNKNOWN;
-																									size									= -1;
-																									data									= NULL;
-																									acceptedencodingflags	=	DIOWEBSERVER_ENCODINGFLAGS_NONE;
-																								}	
-			
-		DIOWEBSERVER_TYPE														type;
-		DIOWEBSERVER_METHOD													method;				
-		XSTRING																			resource;
-		XSTRING																			guest;
-		XSTRING																			useragent;
-		XSTRING																			loginpassword;
-		XSTRING																			ifnonematch;	
-		int																					size;
-		XBUFFER*																		data;
-		XDWORD																			acceptedencodingflags;
+    bool                                        GetLoginPassword                        (XSTRING& login, XSTRING& password);
+
+    void                                        ProcessAcceptedEncodingFlags            (XSTRING& string);
+    void                                        ProcessAcceptedLanguage                 (XSTRING& string)                       { this->acceptedlanguage            = string;     }
+    void                                        ProcessAcceptedCharset                  (XSTRING& string)                       { this->acceptedcharset             = string;     }
+    void                                        ProcessAccessControlRequestMethod       (XSTRING& string)                       { this->acceptedcontrolrequest      = string;     }
+    void                                        ProcessAcceptedAllowHeaders             (XSTRING& string)                       { this->acceptedallowheaders        = string;     }
+    void                                        ProcessAccessControlAllowOrigin         (XSTRING& string)                       { this->accesscontrolalloworigin    = string;     }
+    void                                        ProcessAccessControlAllowMethods        (XSTRING& string)                       { this->accesscontrolallowmethods   = string;     }
+    void                                        ProcessAccessControlAllowHeaders        (XSTRING& string)                       { this->accesscontrolallowheaders   = string;     }
+    void                                        ProcessOrigin                           (XSTRING& string)                       { this->origin                      = string;     }
+
+
+    bool                                        IsAcceptedEncodingFlag                  (DIOWEBSERVER_ENCODINGFLAGS flag)       { return ((acceptedencodingflags&flag) != 0);     }
+
+    bool                                        Reset                                   ();
+
+    XSTRING                                     acceptedcharset;
+    XSTRING                                     acceptedcontrolrequest;
+    XSTRING                                     acceptedlanguage;
+    XSTRING                                     acceptedallowheaders;
+    XSTRING                                     accesscontrolalloworigin;
+    XSTRING                                     accesscontrolallowmethods;
+    XSTRING                                     accesscontrolallowheaders;
+    XSTRING                                     origin;
+
+  private:
+
+    void                                        Clean                                   ()
+                                                {
+                                                  type                  = DIOWEBSERVER_TYPE_SYMPLE;
+                                                  method                = DIOWEBSERVER_METHOD_UNKNOWN;
+                                                  size                  = -1;
+                                                  data                  = NULL;
+                                                  acceptedencodingflags = DIOWEBSERVER_ENCODINGFLAGS_NONE;
+                                                }
+
+    DIOWEBSERVER_TYPE                           type;
+    DIOWEBSERVER_METHOD                         method;
+    XSTRING                                     resource;
+    XSTRING                                     guest;
+    XSTRING                                     useragent;
+    XSTRING                                     loginpassword;
+    XSTRING                                     ifnonematch;
+    int                                         size;
+    XBUFFER*                                    data;
+    XDWORD                                      acceptedencodingflags;
 
 
 
@@ -284,181 +284,181 @@ class DIOWEBSERVER_REQUEST
 
 class DIOWEBSERVER_CONNEXION
 {
-	public:
-																								DIOWEBSERVER_CONNEXION									();
-		virtual																		 ~DIOWEBSERVER_CONNEXION									();
-	
-		bool																				Ini 																		(DIOWEBSERVER* webserver, DIOSTREAMTCPIPCONFIG*	diostreamcfg);		
-		
-		DIOSTREAMTCPIP*															GetDIOStream														()																			{ return diostream;                               }
+  public:
+                                                DIOWEBSERVER_CONNEXION                  ();
+    virtual                                    ~DIOWEBSERVER_CONNEXION                  ();
 
-		bool																				Activate																();
+    bool                                        Ini                                     (DIOWEBSERVER* webserver, DIOSTREAMTCPIPCONFIG* diostreamcfg);
 
-		bool																				IsActive																()																			{ return isactive;                                }
+    DIOSTREAMTCPIP*                             GetDIOStream                            ()                                      { return diostream;                               }
 
-		bool																				Receiver																(XBYTE* buffer,	int& size,int timeout = DIOWEBSERVER_DEFAULTCONNEXIONTIMEOUT);			
+    bool                                        Activate                                ();
 
-		bool																				Send																		(XBYTE* buffer, int& size, int timeout = DIOWEBSERVER_DEFAULTCONNEXIONTIMEOUT);
-    bool																				Send																		(XBUFFER& xbuffer, int timeout = DIOWEBSERVER_DEFAULTCONNEXIONTIMEOUT);				
-		bool																				Send																		(XSTRING& string, int timeout = DIOWEBSERVER_DEFAULTCONNEXIONTIMEOUT);
-		bool																				Send																		(XCHAR* string, int timeout = DIOWEBSERVER_DEFAULTCONNEXIONTIMEOUT);
-		bool																				SendResult															(XSTRING& string, int timeout = DIOWEBSERVER_DEFAULTCONNEXIONTIMEOUT);
-			
-		bool																				SendFile																(XPATH& xpath, int timeout = DIOWEBSERVER_DEFAULTCONNEXIONTIMEOUT);		
-		bool																				ParseFile																(XPATH& xpath, XSTRING& resultofparsing,	int timeout);		
-		bool																				ProcessFile															(XPATH& xpath, XSTRING& resultofparsing,	int timeout);		
+    bool                                        IsActive                                ()                                      { return isactive;                                }
 
-		DIOWEBSERVER_PAGESTATUS											GetPageStatus														()																			{ return pagestatus;								              }
-		XTIMER*																			GetXTimerSendingPage										()																			{ return xtimersendingpage;												}
+    bool                                        Receiver                                (XBYTE* buffer, int& size,int timeout = DIOWEBSERVER_DEFAULTCONNEXIONTIMEOUT);
 
-		DIOWEBCLIENT_HEADER*													GetHeader																()																			{ return &header;                                 }
+    bool                                        Send                                    (XBYTE* buffer, int& size, int timeout = DIOWEBSERVER_DEFAULTCONNEXIONTIMEOUT);
+    bool                                        Send                                    (XBUFFER& xbuffer, int timeout = DIOWEBSERVER_DEFAULTCONNEXIONTIMEOUT);
+    bool                                        Send                                    (XSTRING& string, int timeout = DIOWEBSERVER_DEFAULTCONNEXIONTIMEOUT);
+    bool                                        Send                                    (XCHAR* string, int timeout = DIOWEBSERVER_DEFAULTCONNEXIONTIMEOUT);
+    bool                                        SendResult                              (XSTRING& string, int timeout = DIOWEBSERVER_DEFAULTCONNEXIONTIMEOUT);
 
-    bool																				End																			();
-		
-		DIOWEBSERVER*																GetServer																()																			{ return this->webserver;													}
+    bool                                        SendFile                                (XPATH& xpath, int timeout = DIOWEBSERVER_DEFAULTCONNEXIONTIMEOUT);
+    bool                                        ParseFile                               (XPATH& xpath, XSTRING& resultofparsing,  int timeout);
+    bool                                        ProcessFile                             (XPATH& xpath, XSTRING& resultofparsing,  int timeout);
 
-		DIOWEBSERVER_ENCODINGFLAGS									GetActualEncodingFlag										()																			{ return actualencodingflag;											}
-		bool																				SetActualEncodingFlag										(DIOWEBSERVER_ENCODINGFLAGS actualencodingflag);										
-		XCHAR*																			GetAccessControlAllowHeaders						();
-		XCHAR*																			GetAccessControlAllowMethods						();
-		XCHAR*																			GetAcceptLenguage												();
-		XCHAR*																			GetOrigin																();
+    DIOWEBSERVER_PAGESTATUS                     GetPageStatus                           ()                                      { return pagestatus;                              }
+    XTIMER*                                     GetXTimerSendingPage                    ()                                      { return xtimersendingpage;                       }
 
-	protected:
-		
-		DIOWEBSERVER* 															webserver; 
-		DIOSTREAMTCPIPCONFIG *											diostreamcfg;
+    DIOWEBCLIENT_HEADER*                          GetHeader                               ()                                      { return &header;                                 }
 
-		DIOSTREAMTCPIP*															diostream;
-		XTIMER*																			xtimer;		
-		bool																				isactive;
-		DIOWEBCLIENT_HEADER													header;
-		DIOWEBSERVER_REQUEST*												request;
-		DIOWEBSERVER_PAGESTATUS											pagestatus;
-		XTIMER*																			xtimersendingpage;
-		XSTRING																			lastTAG;
-		XTHREADCOLLECTED*														threadconnexion;
-		DIOWEBSERVER_ENCODINGFLAGS									actualencodingflag;
+    bool                                        End                                     ();
 
-		XSTRING																			origin;
+    DIOWEBSERVER*                               GetServer                               ()                                      { return this->webserver;                         }
+
+    DIOWEBSERVER_ENCODINGFLAGS                  GetActualEncodingFlag                   ()                                      { return actualencodingflag;                      }
+    bool                                        SetActualEncodingFlag                   (DIOWEBSERVER_ENCODINGFLAGS actualencodingflag);
+    XCHAR*                                      GetAccessControlAllowHeaders            ();
+    XCHAR*                                      GetAccessControlAllowMethods            ();
+    XCHAR*                                      GetAcceptLenguage                       ();
+    XCHAR*                                      GetOrigin                               ();
+
+  protected:
+
+    DIOWEBSERVER*                               webserver;
+    DIOSTREAMTCPIPCONFIG *                      diostreamcfg;
+
+    DIOSTREAMTCPIP*                             diostream;
+    XTIMER*                                     xtimer;
+    bool                                        isactive;
+    DIOWEBCLIENT_HEADER                         header;
+    DIOWEBSERVER_REQUEST*                       request;
+    DIOWEBSERVER_PAGESTATUS                     pagestatus;
+    XTIMER*                                     xtimersendingpage;
+    XSTRING                                     lastTAG;
+    XTHREADCOLLECTED*                           threadconnexion;
+    DIOWEBSERVER_ENCODINGFLAGS                  actualencodingflag;
+
+    XSTRING                                     origin;
 
 
-	private:
+  private:
 
-		void																				Clean																		()
-																								{
-																									webserver						= NULL;
-																									diostream						= NULL;
-																									xtimer							= NULL;
-																									isactive						= false;
-																									request							= NULL;
-																									pagestatus					= DIOWEBSERVER_PAGESTATUS_NONE;	
-																									xtimersendingpage		= NULL;
-																									actualencodingflag	= DIOWEBSERVER_ENCODINGFLAGS_NONE;
-																								}
+    void                                        Clean                                   ()
+                                                {
+                                                  webserver           = NULL;
+                                                  diostream           = NULL;
+                                                  xtimer              = NULL;
+                                                  isactive            = false;
+                                                  request             = NULL;
+                                                  pagestatus          = DIOWEBSERVER_PAGESTATUS_NONE;
+                                                  xtimersendingpage   = NULL;
+                                                  actualencodingflag  = DIOWEBSERVER_ENCODINGFLAGS_NONE;
+                                                }
 
-		bool																				GetRequest															(DIOWEBSERVER_REQUEST& request, int timeout = DIOWEBSERVER_DEFAULTCONNEXIONTIMEOUT);		
-		
-		bool																				DoLogPage																(bool ini, DIOWEBSERVER_REQUEST& request);
-		
-		bool																				ReceiverLine														(XSTRING& string,int maxlen);		
-		bool																				ExistFile																(XPATH& xpath);
-		
-		bool																				SendingPage															();
-		
-		DIOWEBSERVER_TAGSTATUS											SearchTAG									              (XSTRING* originalline, bool& intag, XSTRING& inioutputline,XSTRING& endoutputline);
-		
-		static void																	ThreadRunFunction												(void* param);					
+    bool                                        GetRequest                              (DIOWEBSERVER_REQUEST& request, int timeout = DIOWEBSERVER_DEFAULTCONNEXIONTIMEOUT);
+
+    bool                                        DoLogPage                               (bool ini, DIOWEBSERVER_REQUEST& request);
+
+    bool                                        ReceiverLine                            (XSTRING& string,int maxlen);
+    bool                                        ExistFile                               (XPATH& xpath);
+
+    bool                                        SendingPage                             ();
+
+    DIOWEBSERVER_TAGSTATUS                      SearchTAG                               (XSTRING* originalline, bool& intag, XSTRING& inioutputline,XSTRING& endoutputline);
+
+    static void                                 ThreadRunFunction                       (void* param);
 };
 
 
-	
+
 class DIOWEBSERVER : public XSUBJECT, public XOBSERVER
 {
-	public:	
-																								DIOWEBSERVER														();
-		virtual																		 ~DIOWEBSERVER														();
+  public:
+                                                DIOWEBSERVER                            ();
+    virtual                                    ~DIOWEBSERVER                            ();
 
-		bool																				Ini 																		(int port = DIOWEBSERVER_DEFAULTPORT, int timeoutserverpage = DIOWEBSERVER_DEFAULTTIMEOUTSERVERPAGE, XSTRING* addrlocal = NULL);		
-		
-		int																					GetPort																	()																									{ return port;																											}			
-		int																					GetTimeoutServerPage										()																									{ return timeoutserverpage;																					}
-		
-		DIOSTREAMTCPIPCONFIG *											GetDIOStreamCFG													()																									{ return diostreamcfg;																							}
+    bool                                        Ini                                     (int port = DIOWEBSERVER_DEFAULTPORT, int timeoutserverpage = DIOWEBSERVER_DEFAULTTIMEOUTSERVERPAGE, XSTRING* addrlocal = NULL);
 
-		bool																				IsSendingAnyPage												();
-		bool																				UnSubscribeAllPages											();
+    int                                         GetPort                                 ()                                                  { return port;                                                      }
+    int                                         GetTimeoutServerPage                    ()                                                  { return timeoutserverpage;                                         }
 
-		bool																				AddAuthentication												(XSTRING& guest, XSTRING& login, XSTRING& password);
-		DIOWEBSERVER_AUTHENTICATION*								GetAuthentication												(XSTRING& guest);
-		bool																				DelAuthentication												(XSTRING& guest);
-		bool																				DelAllAuthentication										();
+    DIOSTREAMTCPIPCONFIG *                      GetDIOStreamCFG                         ()                                                  { return diostreamcfg;                                              }
 
-    bool																				IsPlayablePage													(XCHAR* extension);
-		bool																				IsPlayablePage													(XSTRING& extension);
+    bool                                        IsSendingAnyPage                        ();
+    bool                                        UnSubscribeAllPages                     ();
 
-    bool																				AddPlayablePageExtension								(XCHAR* extension);
-    bool																				AddPlayablePageExtension								(XSTRING& extension);
+    bool                                        AddAuthentication                       (XSTRING& guest, XSTRING& login, XSTRING& password);
+    DIOWEBSERVER_AUTHENTICATION*                GetAuthentication                       (XSTRING& guest);
+    bool                                        DelAuthentication                       (XSTRING& guest);
+    bool                                        DelAllAuthentication                    ();
 
-    bool																				DeleteAllPlayablePageExtensions					();	
+    bool                                        IsPlayablePage                          (XCHAR* extension);
+    bool                                        IsPlayablePage                          (XSTRING& extension);
 
-		void																				AddIncludedEncodingFlag									(DIOWEBSERVER_ENCODINGFLAGS flag)									  { includedencodingflags |= flag;																		}
-		bool																				IsIncludedEncodingFlag									(DIOWEBSERVER_ENCODINGFLAGS flag)										{ return ((includedencodingflags&flag) != 0);												}	
-				
-		bool																				End																			();
+    bool                                        AddPlayablePageExtension                (XCHAR* extension);
+    bool                                        AddPlayablePageExtension                (XSTRING& extension);
 
-	
-	protected:
-	
-		DIOSTREAMTCPIPCONFIG *											diostreamcfg;
-		int																					port;
-		int																					timeoutserverpage;
-		XSTRING																			addrlocal;
-		XVECTOR<DIOWEBSERVER_CONNEXION*>						connexions;
-		bool																				isactive;
-		bool																				doexit;
-		XVECTOR<DIOWEBSERVER_AUTHENTICATION*>				authentications;
-		XVECTOR<XSTRING*>														playablepageextensions;  
-		XTIMER*																			xtimercontrol;		
-		XTHREADCOLLECTED*														threadserver;			
-		XDWORD																			includedencodingflags;
-		
-		XMUTEX*																			xmutexconnexions;
-				
-	private:
+    bool                                        DeleteAllPlayablePageExtensions         ();
 
-		void																				Clean																		()
-																								{																					
-																									diostreamcfg					= NULL;
-																									port									= DIOWEBSERVER_DEFAULTPORT;
+    void                                        AddIncludedEncodingFlag                 (DIOWEBSERVER_ENCODINGFLAGS flag)                   { includedencodingflags |= flag;                                    }
+    bool                                        IsIncludedEncodingFlag                  (DIOWEBSERVER_ENCODINGFLAGS flag)                   { return ((includedencodingflags&flag) != 0);                       }
 
-																									timeoutserverpage			= 0;
-																									isactive							= false;
-																									doexit								= false;	
-																									xtimercontrol					=	NULL;		
-																									threadserver					= NULL;
+    bool                                        End                                     ();
 
-																									includedencodingflags	= DIOWEBSERVER_ENCODINGFLAGS_NONE;
 
-																									xmutexconnexions			=	NULL;
-																								}
+  protected:
 
-		bool																				WaitToSentAllPages											();
-		
-		XDWORD																			Connexions_GetNWaiting									();
-		
-		int																					Connexions_GetNConnexionsSendingPage		();
-		bool																				Connexions_CreateNew										();
-		bool																				Connexions_DeleteUsed										();
-		bool																				Connexions_DeleteWaiting								();		
-		bool																				Connexions_DeleteAll										();		
+    DIOSTREAMTCPIPCONFIG *                      diostreamcfg;
+    int                                         port;
+    int                                         timeoutserverpage;
+    XSTRING                                     addrlocal;
+    XVECTOR<DIOWEBSERVER_CONNEXION*>            connexions;
+    bool                                        isactive;
+    bool                                        doexit;
+    XVECTOR<DIOWEBSERVER_AUTHENTICATION*>       authentications;
+    XVECTOR<XSTRING*>                           playablepageextensions;
+    XTIMER*                                     xtimercontrol;
+    XTHREADCOLLECTED*                           threadserver;
+    XDWORD                                      includedencodingflags;
 
-		static void																	ThreadRunFunction												(void* param);	
-		void																				HandleEvent															(XEVENT* xevent);
+    XMUTEX*                                     xmutexconnexions;
+
+  private:
+
+    void                                        Clean                                   ()
+                                                {
+                                                  diostreamcfg          = NULL;
+                                                  port                  = DIOWEBSERVER_DEFAULTPORT;
+
+                                                  timeoutserverpage     = 0;
+                                                  isactive              = false;
+                                                  doexit                = false;
+                                                  xtimercontrol         = NULL;
+                                                  threadserver          = NULL;
+
+                                                  includedencodingflags = DIOWEBSERVER_ENCODINGFLAGS_NONE;
+
+                                                  xmutexconnexions      = NULL;
+                                                }
+
+    bool                                        WaitToSentAllPages                      ();
+
+    XDWORD                                      Connexions_GetNWaiting                  ();
+
+    int                                         Connexions_GetNConnexionsSendingPage    ();
+    bool                                        Connexions_CreateNew                    ();
+    bool                                        Connexions_DeleteUsed                   ();
+    bool                                        Connexions_DeleteWaiting                ();
+    bool                                        Connexions_DeleteAll                    ();
+
+    static void                                 ThreadRunFunction                       (void* param);
+    void                                        HandleEvent                             (XEVENT* xevent);
 };
 
-	
+
 //---- INLINE FUNCTIONS --------------------------------------------------------------------
-	
+
 #endif
 

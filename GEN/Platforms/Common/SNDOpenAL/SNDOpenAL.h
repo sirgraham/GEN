@@ -1,23 +1,23 @@
 /*------------------------------------------------------------------------------------------
-//	SNDOPENALSYSTEM.H
-*/	
-/**	
-// \file 
-//   
-//  OpenAL backend device
-//   
-//	@author	 Imanol Celaya Ruiz de Alegria
+//  SNDOPENALSYSTEM.H
+*/
+/**
+// \file
 //
-//	Date Of Creation	: 03/11/2015 14:08:04
-//	Last Modification	:	
-*/	
-/*	GEN  Copyright (C).  All right reserved.
+//  OpenAL backend device
+//
+//  @author  Imanol Celaya Ruiz de Alegria
+//
+//  Date Of Creation  : 03/11/2015 14:08:04
+//  Last Modification :
+*/
+/*  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
+
 #ifndef _SNDOPENALSYSTEM_H_
 #define _SNDOPENALSYSTEM_H_
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
 #include "AL/al.h"
@@ -33,8 +33,8 @@
 
 
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
-	
-	
+
+
 /*---- CLASS -----------------------------------------------------------------------------*/
 
 class SNDELEMENT;
@@ -50,90 +50,90 @@ class XPATHS;
 
 class SNDOPENAL : public XSUBJECT
 {
-	public:
+  public:
 
-																							SNDOPENAL									(SNDFACTORY* sndystem);
-		virtual																	 ~SNDOPENAL									();
+                                              SNDOPENAL                 (SNDFACTORY* sndystem);
+    virtual                                  ~SNDOPENAL                 ();
 
-		virtual SNDELEMENT*												AddFile										(XPATH& xpath, XSTRING* namefile, bool stream);
-		virtual SNDELEMENT*												AddFile										(XPATH& xpath, XCHAR* namefile, bool stream);
-		virtual	SNDELEMENT*												GetFile										(XSTRING* namefile, bool stream);
-		virtual	SNDELEMENT*												GetFile										(XCHAR* namefile, bool stream);
+    virtual SNDELEMENT*                       AddFile                   (XPATH& xpath, XSTRING* namefile, bool stream);
+    virtual SNDELEMENT*                       AddFile                   (XPATH& xpath, XCHAR* namefile, bool stream);
+    virtual SNDELEMENT*                       GetFile                   (XSTRING* namefile, bool stream);
+    virtual SNDELEMENT*                       GetFile                   (XCHAR* namefile, bool stream);
 
-		virtual bool															RemoveFile								(SNDELEMENT* element);
+    virtual bool                              RemoveFile                (SNDELEMENT* element);
 
-		virtual SNDSTREAMELEMENT*									GetStreamer								();
+    virtual SNDSTREAMELEMENT*                 GetStreamer               ();
 
-		virtual SNDINSTANCE*											PlaySound									(SNDELEMENT* element);
-		virtual void															StopSound									(SNDELEMENT* element);
-		virtual SNDINSTANCE*											PauseSound								(SNDELEMENT* element);
+    virtual SNDINSTANCE*                      PlaySound                 (SNDELEMENT* element);
+    virtual void                              StopSound                 (SNDELEMENT* element);
+    virtual SNDINSTANCE*                      PauseSound                (SNDELEMENT* element);
 
-		void																			Update										();
-		bool																			IsAnyPlaying							();
+    void                                      Update                    ();
+    bool                                      IsAnyPlaying              ();
 
-		void																			StopAll										();
+    void                                      StopAll                   ();
 
-		void																			SetMasterVolume						(float mastervolume);
-		float																			GetMasterVolume						()																											{ return mastervolume;								}
+    void                                      SetMasterVolume           (float mastervolume);
+    float                                     GetMasterVolume           ()                                                      { return mastervolume;                }
 
-		void																			IniEvents									()
-																							{
-																								this->RegisterEvent(XEVENTTYPE_SOUND);
-																								sndsystem->SetXSUBJECT(this);		
-																								
-																								isinit = true;
-																							}
+    void                                      IniEvents                 ()
+                                              {
+                                                this->RegisterEvent(XEVENTTYPE_SOUND);
+                                                sndsystem->SetXSUBJECT(this);
 
-		void																			EndEvents									()
-																							{				
-																								StopAll();
-																								DeRegisterEvent(XEVENTTYPE_SOUND);
-																								sndsystem->SetXSUBJECT(NULL);
+                                                isinit = true;
+                                              }
 
-																							}
+    void                                      EndEvents                 ()
+                                              {
+                                                StopAll();
+                                                DeRegisterEvent(XEVENTTYPE_SOUND);
+                                                sndsystem->SetXSUBJECT(NULL);
 
-		static void																StreamingThread						(void* param);
+                                              }
 
-	protected:
+    static void                               StreamingThread           (void* param);
 
-		ALCdevice*																device;
-		ALCcontext*																context;
-		float																			mastervolume;
+  protected:
 
-	private:
+    ALCdevice*                                device;
+    ALCcontext*                               context;
+    float                                     mastervolume;
 
-		bool																			isinit;
+  private:
 
-		SNDFACTORY*																sndsystem;
+    bool                                      isinit;
 
-		XVECTOR<SNDOPENALSOURCE*>									sources;
-		XVECTOR<SNDOPENALELEMENT*>								playqueue;
+    SNDFACTORY*                               sndsystem;
 
-		XVECTOR<SNDOPENALELEMENT*>								loadedfiles;		
-		XVECTOR<SNDOPENALSTREAMELEMENT*>					streamelements;
+    XVECTOR<SNDOPENALSOURCE*>                 sources;
+    XVECTOR<SNDOPENALELEMENT*>                playqueue;
 
-		XVECTOR<SNDELEMENT*>											deletequeue;
+    XVECTOR<SNDOPENALELEMENT*>                loadedfiles;
+    XVECTOR<SNDOPENALSTREAMELEMENT*>          streamelements;
 
-		XDWORD																		maxchannels;
+    XVECTOR<SNDELEMENT*>                      deletequeue;
 
-		XTHREAD*																	streamthread;
-		XMUTEX*																		streammutex;
+    XDWORD                                    maxchannels;
 
-		void																			Clean											()
-																							{
-																								sndsystem			= NULL;
-																								device				= NULL;
-																								context				= NULL;																								
-																								maxchannels		= 0;
-																								mastervolume	= 0.0f;
-																								streamthread	= NULL;
-																								streammutex		= NULL;
-																								isinit				= false;
-																							}
+    XTHREAD*                                  streamthread;
+    XMUTEX*                                   streammutex;
+
+    void                                      Clean                     ()
+                                              {
+                                                sndsystem     = NULL;
+                                                device        = NULL;
+                                                context       = NULL;
+                                                maxchannels   = 0;
+                                                mastervolume  = 0.0f;
+                                                streamthread  = NULL;
+                                                streammutex   = NULL;
+                                                isinit        = false;
+                                              }
 };
-	
-	
+
+
 /*---- INLINE FUNCTIONS ------------------------------------------------------------------*/
-	
+
 #endif
 

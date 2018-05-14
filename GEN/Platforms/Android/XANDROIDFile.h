@@ -1,21 +1,21 @@
 //------------------------------------------------------------------------------------------
-//	XANDROIDFILE.H
-//	
-/**	
-// \class 
-//   
+//  XANDROIDFILE.H
+//
+/**
+// \class
+//
 //  ANDROID file class
-//   
-//	@author	 Abraham J. Velez
-//	@version 13/03/2002
-*/	
-//	GEN  Copyright (C).  All right reserved.		 			 
+//
+//  @author  Abraham J. Velez
+//  @version 13/03/2002
+*/
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
+
 #ifndef _XANDROIDFILE_H_
 #define _XANDROIDFILE_H_
-	
-	
+
+
 //---- INCLUDES ----------------------------------------------------------------------------
 
 #include <stdio.h>
@@ -26,7 +26,7 @@
 
 //---- DEFINES & ENUMS  --------------------------------------------------------------------
 
-	
+
 //---- CLASS -------------------------------------------------------------------------------
 
 class CIPHER;
@@ -34,52 +34,52 @@ class XANDROIDFACTORY;
 
 class XANDROIDFILE : public XFILE
 {
-	public:
-												XANDROIDFILE					();											
-		virtual						 ~XANDROIDFILE					();		
+  public:
+                        XANDROIDFILE          ();
+    virtual            ~XANDROIDFILE          ();
 
-		bool								Exist								  (XCHAR* xpath);
+    bool                Exist                 (XCHAR* xpath);
 
-		bool								Open								  (XCHAR* xpath, bool readonly = true);
-		bool								Create							  (XCHAR* xpath);
-		
-		bool								SetSize								(int size);
+    bool                Open                  (XCHAR* xpath, bool readonly = true);
+    bool                Create                (XCHAR* xpath);
 
-		bool								GetPosition						(int& position);
-		bool								SetPosition						(int position);
-		
-		bool								Read								  (XBYTE* buffer, int size , CIPHER* cipher = NULL);
-		bool								Read									(XBYTE* buffer, int* size, CIPHER* cipher = NULL);
+    bool                SetSize               (int size);
 
-		bool								Write				 					(XBYTE* buffer, int size , CIPHER* cipher = NULL);
-		
-		bool								Flush									();
+    bool                GetPosition           (int& position);
+    bool                SetPosition           (int position);
 
-		bool								Close									();
+    bool                Read                  (XBYTE* buffer, int size , CIPHER* cipher = NULL);
+    bool                Read                  (XBYTE* buffer, int* size, CIPHER* cipher = NULL);
 
-		bool								Erase									(XCHAR* xpath, bool overwrite = false);
-		bool								Rename								(XCHAR* xpathold, XCHAR* xpathnew);
+    bool                Write                 (XBYTE* buffer, int size , CIPHER* cipher = NULL);
 
-		FILE*								GetFileStructHandle		()																	{ return filehandle;    };
+    bool                Flush                 ();
+
+    bool                Close                 ();
+
+    bool                Erase                 (XCHAR* xpath, bool overwrite = false);
+    bool                Rename                (XCHAR* xpathold, XCHAR* xpathnew);
+
+    FILE*               GetFileStructHandle   ()                                  { return filehandle;    };
 
 
-	protected:
+  protected:
 
-		bool								ActualizeSize					();
-						
-	private:
+    bool                ActualizeSize         ();
 
-		void								Clean									()
-												{
-													filehandle  = NULL;
-												}
+  private:
 
-		bool								ExtendedOpen					(XCHAR* xpath, XCHAR* mode);
-		
-		XANDROIDFACTORY*		xfactory;
-		FILE*								filehandle;
-};	
-	
+    void                Clean                 ()
+                        {
+                          filehandle  = NULL;
+                        }
+
+    bool                ExtendedOpen          (XCHAR* xpath, XCHAR* mode);
+
+    XANDROIDFACTORY*    xfactory;
+    FILE*               filehandle;
+};
+
 
 //---- INLINE FUNCTIONS --------------------------------------------------------------------
 

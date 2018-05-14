@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------------------
-//	DIOLINUXSTREAMBLUETOOTH.H
+//  DIOLINUXSTREAMBLUETOOTH.H
 //
 /**
 // \class
 //
 //  LINUX Data IO Stream Bluetooth class
 //
-//	@author	 Abraham J. Velez
-//	@version 02/01/2002
+//  @author  Abraham J. Velez
+//  @version 02/01/2002
 */
-//	GEN  Copyright (C).  All right reserved.
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
 
 #ifndef _DIOLINUXSTREAMBLUETOOTH_H_
@@ -52,41 +52,41 @@
 
 enum DIOLINUXBTFSMEVENTS
 {
-	DIOLINUXBTFSMEVENT_NONE							= 0 ,
-	DIOLINUXBTFSMEVENT_SEARCHMAC    				,
-	DIOLINUXBTFSMEVENT_SEARCHSERVICES				,
-	DIOLINUXBTFSMEVENT_SEARCHEND						,
-	
-	DIOLINUXBTFSMEVENT_GETTINGCONNEXION		  ,
-	DIOLINUXBTFSMEVENT_CONNECTED						,
-	DIOLINUXBTFSMEVENT_WAITINGTOREAD				,
-	DIOLINUXBTFSMEVENT_SENDINGDATA					,
-	DIOLINUXBTFSMEVENT_DISCONNECTING				,	
+  DIOLINUXBTFSMEVENT_NONE             = 0 ,
+  DIOLINUXBTFSMEVENT_SEARCHMAC            ,
+  DIOLINUXBTFSMEVENT_SEARCHSERVICES       ,
+  DIOLINUXBTFSMEVENT_SEARCHEND            ,
 
-	DIOLINUXBT_LASTEVENT
+  DIOLINUXBTFSMEVENT_GETTINGCONNEXION     ,
+  DIOLINUXBTFSMEVENT_CONNECTED            ,
+  DIOLINUXBTFSMEVENT_WAITINGTOREAD        ,
+  DIOLINUXBTFSMEVENT_SENDINGDATA          ,
+  DIOLINUXBTFSMEVENT_DISCONNECTING        ,
+
+  DIOLINUXBT_LASTEVENT
 };
 
 
 enum DIOLINUXBTFSMSTATES
 {
-	DIOLINUXBTFSMSTATE_NONE							= 0 ,	
-	DIOLINUXBTFSMSTATE_SEARCHMAC						,
-	DIOLINUXBTFSMSTATE_SEARCHSERVICES				,	
-	DIOLINUXBTFSMSTATE_SEARCHEND						,
+  DIOLINUXBTFSMSTATE_NONE             = 0 ,
+  DIOLINUXBTFSMSTATE_SEARCHMAC            ,
+  DIOLINUXBTFSMSTATE_SEARCHSERVICES       ,
+  DIOLINUXBTFSMSTATE_SEARCHEND            ,
 
-	DIOLINUXBTFSMSTATE_GETTINGCONNEXION		  ,
-	DIOLINUXBTFSMSTATE_CONNECTED						,
-	DIOLINUXBTFSMSTATE_WAITINGTOREAD				,
-	DIOLINUXBTFSMSTATE_SENDINGDATA					,
-	DIOLINUXBTFSMSTATE_DISCONNECTING				,	
+  DIOLINUXBTFSMSTATE_GETTINGCONNEXION     ,
+  DIOLINUXBTFSMSTATE_CONNECTED            ,
+  DIOLINUXBTFSMSTATE_WAITINGTOREAD        ,
+  DIOLINUXBTFSMSTATE_SENDINGDATA          ,
+  DIOLINUXBTFSMSTATE_DISCONNECTING        ,
 
-	DIOLINUXBT_LASTSTATE
+  DIOLINUXBT_LASTSTATE
 };
 
 
 #define DIOLINUXSTREAMBLUETOOTH_SCANBLOCKING
 
-#define DIOLINUXSTREAMBLUETOOTH_DBUSAGENTPATH			"/org/bluez"
+#define DIOLINUXSTREAMBLUETOOTH_DBUSAGENTPATH     "/org/bluez"
 
 
 //---- CLASS -------------------------------------------------------------------------------
@@ -95,33 +95,33 @@ class XTHREADCOLLECTED;
 
 class DIOLINUXSTREAMBLUETOOTH : public DIOSTREAMBLUETOOTH , public XFSMACHINE
 {
-	public:
-															DIOLINUXSTREAMBLUETOOTH							();
-		virtual									 ~DIOLINUXSTREAMBLUETOOTH							();
+  public:
+                              DIOLINUXSTREAMBLUETOOTH             ();
+    virtual                  ~DIOLINUXSTREAMBLUETOOTH             ();
 
-		bool											Open																();
-		bool											Disconnect													();
-		bool											Close																();
+    bool                      Open                                ();
+    bool                      Disconnect                          ();
+    bool                      Close                               ();
 
-		int												IsReadyConnect											(int socket);
+    int                       IsReadyConnect                      (int socket);
 
-	protected:
+  protected:
 
-		sdp_session_t*						SDP_RegisterService									(char* service_name,char* service_dsc,char* service_prov,int rfcomm_channel);
+    sdp_session_t*            SDP_RegisterService                 (char* service_name,char* service_dsc,char* service_prov,int rfcomm_channel);
 
-	private:
-		
-		void											Clean																();
+  private:
 
-		bool											ManagementOfPIN											(bool active, XSTRING &locMACstring, XSTRING &remMACstring, XSTRING& PIN);
+    void                      Clean                               ();
 
-		static void 							ThreadRunFunction										(void* param);
+    bool                      ManagementOfPIN                     (bool active, XSTRING &locMACstring, XSTRING &remMACstring, XSTRING& PIN);
 
-		XTHREADCOLLECTED*					threadconnexion;
-		
-		int 											handlesocket;
-		void* 										sdpserversession;  
-		int 											handleserver;  		
+    static void               ThreadRunFunction                   (void* param);
+
+    XTHREADCOLLECTED*         threadconnexion;
+
+    int                       handlesocket;
+    void*                     sdpserversession;
+    int                       handleserver;
 };
 
 

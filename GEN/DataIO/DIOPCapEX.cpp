@@ -1,19 +1,19 @@
 /*------------------------------------------------------------------------------------------
 //  DIOCAPEX.CPP
-//  
-//  Interface PCap Extended Library class 
-//   
+//
+//  Interface PCap Extended Library class
+//
 //  Author            : Abraham J. Velez
 //  Date Of Creation  : 22/10/2012 13:30:11
-//  Last Mofificacion : 
-//  
-//  GEN  Copyright (C).  All right reserved. 
+//  Last Mofificacion :
+//
+//  GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-  
+
 #ifdef DIOPCAP_ACTIVE
-  
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
-  
+
 #include <stdio.h>
 #include <string.h>
 
@@ -23,24 +23,24 @@
 #include "DIOPCapEX.h"
 
 #include "XMemory.h"
-  
+
 /*---- GENERAL VARIABLE ------------------------------------------------------------------*/
-  
-  
+
+
 /*---- CLASS MEMBERS ---------------------------------------------------------------------*/
 
 
 /*-------------------------------------------------------------------
 //  DIOPCAPFRAMEEX::DIOPCAPFRAMEEX
-*/ 
+*/
 /**
-//  
-//  
+//
+//
 //  @author       Abraham J. Velez
 //  @version      26/10/2012 13:06:09
-//  
-//  @return       void : 
-//  @param        xfactory : 
+//
+//  @return       void :
+//  @param        xfactory :
 */
 /*-----------------------------------------------------------------*/
 DIOPCAPFRAMEEX::DIOPCAPFRAMEEX() : DIOPCAPFRAME()
@@ -52,19 +52,19 @@ DIOPCAPFRAMEEX::DIOPCAPFRAMEEX() : DIOPCAPFRAME()
 
 /*-------------------------------------------------------------------
 //  DIOPCAPFRAMEEX::~DIOPCAPFRAMEEX
-*/ 
+*/
 /**
-//  
-//  
+//
+//
 //  @author       Abraham J. Velez
 //  @version      23/10/2012 16:57:45
-//  
-//  @return       virtual : 
+//
+//  @return       virtual :
 //  */
 /*-----------------------------------------------------------------*/
 DIOPCAPFRAMEEX::~DIOPCAPFRAMEEX()
 {
-  Clean(); 
+  Clean();
 }
 
 
@@ -72,16 +72,16 @@ DIOPCAPFRAMEEX::~DIOPCAPFRAMEEX()
 
 /*-------------------------------------------------------------------
 //  DIOPCAPFRAMEEX::GetDNSAsk
-*/ 
+*/
 /**
-//  
-//  
+//
+//
 //  @author       Abraham J. Velez
 //  @version      29/10/2012 10:33:11
-//  
-//  @return       bool : 
-//  @param        header : 
-//  @param        url : 
+//
+//  @return       bool :
+//  @param        header :
+//  @param        url :
 */
 /*-----------------------------------------------------------------*/
 bool DIOPCAPFRAMEEX::GetDNSAsk(DIOPCAPEXDNSHEADER& header,DIOPCAPEXDNSASK& ask)
@@ -92,27 +92,27 @@ bool DIOPCAPFRAMEEX::GetDNSAsk(DIOPCAPEXDNSHEADER& header,DIOPCAPEXDNSASK& ask)
   memcpy((XBYTE*)&header,(XBYTE*)(_header),sizeof(DIOPCAPEXDNSHEADER));
 
   if(xfactory->HardwareUseLittleEndian())
-    {          
-      SWAPWORD(header.ID);   
-      SWAPWORD(header.QDcount);    
-      SWAPWORD(header.ANcount);    
-      SWAPWORD(header.NScount);    
-      SWAPWORD(header.ARcount);    
+    {
+      SWAPWORD(header.ID);
+      SWAPWORD(header.QDcount);
+      SWAPWORD(header.ANcount);
+      SWAPWORD(header.NScount);
+      SWAPWORD(header.ARcount);
     }
- 
+
   XBYTE* _url = (XBYTE*)_header;
   _url+=sizeof(DIOPCAPEXDNSHEADER);
-  
+
   int size = DNSnameFormatToString(_url,ask.url);
 
-  XBYTE* data = (XBYTE*)(UserData_Get());   
+  XBYTE* data = (XBYTE*)(UserData_Get());
   data+=(sizeof(DIOPCAPEXDNSHEADER)+size);
 
   XWORD* data2 = (XWORD*)data;
-  ask.qclass = (*data2);   SWAPWORD(ask.qclass);   
-  data2++;  
+  ask.qclass = (*data2);   SWAPWORD(ask.qclass);
+  data2++;
   ask.qtype  = (*data2);   SWAPWORD(ask.qtype);
-  
+
   return true;
 }
 
@@ -120,16 +120,16 @@ bool DIOPCAPFRAMEEX::GetDNSAsk(DIOPCAPEXDNSHEADER& header,DIOPCAPEXDNSASK& ask)
 
 /*-------------------------------------------------------------------
 //  DIOPCAPFRAMEEX::GetDNSRequest
-*/ 
+*/
 /**
 //  ONLY INTERPRETS ONE ANSWER.
-//  
+//
 //  @author       Abraham J. Velez
 //  @version      29/10/2012 14:52:00
-//  
-//  @return       bool : 
-//  @param        header : 
-//  @param        request : 
+//
+//  @return       bool :
+//  @param        header :
+//  @param        request :
 */
 /*-----------------------------------------------------------------*/
 bool DIOPCAPFRAMEEX::GetDNSRequest(DIOPCAPEXDNSHEADER& header,DIOPCAPEXDNSREQUEST& request)
@@ -140,38 +140,38 @@ bool DIOPCAPFRAMEEX::GetDNSRequest(DIOPCAPEXDNSHEADER& header,DIOPCAPEXDNSREQUES
   memcpy((XBYTE*)&header,(XBYTE*)(_header),sizeof(DIOPCAPEXDNSHEADER));
 
   if(xfactory->HardwareUseLittleEndian())
-    {          
-      SWAPWORD(header.ID);   
-      SWAPWORD(header.QDcount);    
-      SWAPWORD(header.ANcount);    
-      SWAPWORD(header.NScount);    
-      SWAPWORD(header.ARcount);    
+    {
+      SWAPWORD(header.ID);
+      SWAPWORD(header.QDcount);
+      SWAPWORD(header.ANcount);
+      SWAPWORD(header.NScount);
+      SWAPWORD(header.ARcount);
     }
-  
+
   XBYTE* _url = (XBYTE*)_header;
   _url+=sizeof(DIOPCAPEXDNSHEADER);
 
   for(int c=0;c<header.ANcount;c++)
-    {               
+    {
       int size = DNSnameFormatToString(_url,request.url);
 
-      XBYTE*  data = (XBYTE*)(UserData_Get());   
+      XBYTE*  data = (XBYTE*)(UserData_Get());
       data+=(sizeof(DIOPCAPEXDNSHEADER)+size);
 
       XWORD*  data2 = (XWORD*)data;
-      
-      request.qclass      = (*data2);  SWAPWORD(request.qclass);      data2++;  
-      request.qtype       = (*data2);  SWAPWORD(request.qtype);       data2++; 
-      request.ttl         = (*data2);  SWAPWORD(request.ttl);         data2++;  
-      request.rlenght     = (*data2);  SWAPWORD(request.rlenght);     data2++;  
-      request.preference  = (*data2);  SWAPWORD(request.preference);  data2++;  
-      request.exchange    = (*data2);  SWAPWORD(request.exchange);    data2++;   
-      
+
+      request.qclass      = (*data2);  SWAPWORD(request.qclass);      data2++;
+      request.qtype       = (*data2);  SWAPWORD(request.qtype);       data2++;
+      request.ttl         = (*data2);  SWAPWORD(request.ttl);         data2++;
+      request.rlenght     = (*data2);  SWAPWORD(request.rlenght);     data2++;
+      request.preference  = (*data2);  SWAPWORD(request.preference);  data2++;
+      request.exchange    = (*data2);  SWAPWORD(request.exchange);    data2++;
+
       data = (XBYTE*)data2;
-      request.address.byte1 = (*data); data++;     
-      request.address.byte2 = (*data); data++;     
-      request.address.byte3 = (*data); data++;     
-      request.address.byte4 = (*data); data++;     
+      request.address.byte1 = (*data); data++;
+      request.address.byte2 = (*data); data++;
+      request.address.byte3 = (*data); data++;
+      request.address.byte4 = (*data); data++;
     }
 
   return true;
@@ -182,16 +182,16 @@ bool DIOPCAPFRAMEEX::GetDNSRequest(DIOPCAPEXDNSHEADER& header,DIOPCAPEXDNSREQUES
 
 /*-------------------------------------------------------------------
 //  DIOPCAPFRAMEEX::DNSnameFormatToString
-*/ 
+*/
 /**
-//  
-//  
+//
+//
 //  @author       Abraham J. Velez
 //  @version      29/10/2012 11:47:34
-//  
-//  @return       int : 
-//  @param        urlDNS : 
-//  @param        url : 
+//
+//  @return       int :
+//  @param        urlDNS :
+//  @param        url :
 */
 /*-----------------------------------------------------------------*/
 int DIOPCAPFRAMEEX::DNSnameFormatToString(XBYTE* urlDNS,DIOURL& url)
@@ -200,8 +200,8 @@ int DIOPCAPFRAMEEX::DNSnameFormatToString(XBYTE* urlDNS,DIOURL& url)
 
   while(urlDNS[c])
    {
-     int counter = urlDNS[c];     
-     
+     int counter = urlDNS[c];
+
      c++;
 
      for(int d=0;d<counter;d++)
@@ -220,16 +220,16 @@ int DIOPCAPFRAMEEX::DNSnameFormatToString(XBYTE* urlDNS,DIOURL& url)
 
 /*-------------------------------------------------------------------
 //  DIOPCAPFRAMEEX::StringToDNSNameFormat
-*/ 
+*/
 /**
-//  
-//  
+//
+//
 //  @author       Abraham J. Velez
 //  @version      29/10/2012 12:47:56
-//  
-//  @return       bool : 
-//  @param        name : 
-//  @param        nameDNS : 
+//
+//  @return       bool :
+//  @param        name :
+//  @param        nameDNS :
 */
 /*-----------------------------------------------------------------*/
 bool DIOPCAPFRAMEEX::StringToDNSNameFormat(XSTRING& name,XBUFFER& nameDNS)
@@ -237,7 +237,7 @@ bool DIOPCAPFRAMEEX::StringToDNSNameFormat(XSTRING& name,XBUFFER& nameDNS)
   /*
   XCHAR* _name = name.Get();
 
-  nameDNS[0] = 
+  nameDNS[0] =
   */
 
 
@@ -248,19 +248,19 @@ bool DIOPCAPFRAMEEX::StringToDNSNameFormat(XSTRING& name,XBUFFER& nameDNS)
 
 /*-------------------------------------------------------------------
 //  DIOPCAPFRAMEEX::Clean
-*/ 
+*/
 /**
-//  
-//  
+//
+//
 //  @author       Abraham J. Velez
 //  @version      23/10/2012 16:58:49
-//  
-//  @return       void : 
+//
+//  @return       void :
 //  */
 /*-----------------------------------------------------------------*/
 void DIOPCAPFRAMEEX::Clean()
 {
- 
+
 }
 
 

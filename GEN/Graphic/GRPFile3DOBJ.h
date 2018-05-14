@@ -1,27 +1,27 @@
 /*------------------------------------------------------------------------------------------
-//	GRPFILE3DOBJ.H
-*/	
-/**	
-// \class 
-//   
-//  Loads Wavefront Mesh File
-//   
-//	@author	 Diego Martinez Ruiz de Gaona
+//  GRPFILE3DOBJ.H
+*/
+/**
+// \class
 //
-//	Date Of Creation	: 12/01/2015 16:44:44
-//	Last Modification	:	
-*/	
-//*	GEN  Copyright (C).  All right reserved.
+//  Loads Wavefront Mesh File
+//
+//  @author  Diego Martinez Ruiz de Gaona
+//
+//  Date Of Creation  : 12/01/2015 16:44:44
+//  Last Modification :
+*/
+//* GEN  Copyright (C).  All right reserved.
 //----------------------------------------------------------------------------------------*/
-	
+
 #ifndef _GRPFILE3DOBJ_H_
 #define _GRPFILE3DOBJ_H_
-	
-	
+
+
 /*---- INCLUDES --------------------------------------------------------------------------*/
-	
+
 #include "GRPFile3D.h"
-	
+
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
 enum GRPFILE3DWAVEFRONTFILESECTION
 {
@@ -38,27 +38,27 @@ GRPFILE3DWAVEFRONTFILESECTION_ELEMENT_MATERIAL,
 GRPFILE3DWAVEFRONTFILESECTION_ELEMENT_MATERIAL_LIBRARY,
 GRPFILE3DWAVEFRONTFILESECTION_SMOOTH_SHADING
 };
-	
+
 /*---- CLASS -----------------------------------------------------------------------------*/
 class GRPFILE3DOBJ : public GRPFILE3D
 {
 public:
-					GRPFILE3DOBJ	() : GRPFILE3D() 
-					{
-					};
-	virtual ~GRPFILE3DOBJ	() {}
+          GRPFILE3DOBJ  () : GRPFILE3D()
+          {
+          };
+  virtual ~GRPFILE3DOBJ () {}
 
 protected:
-	
-	virtual GRPOBJECT*	Load			(XCHAR* file);
-					bool				LoadMtl		(XCHAR* file,XPATH*);
+
+  virtual GRPOBJECT*  Load      (XCHAR* file);
+          bool        LoadMtl   (XCHAR* file,XPATH*);
 
 private:
 
 };
-	
-	
+
+
 /*---- INLINE FUNCTIONS ------------------------------------------------------------------*/
-	
+
 #endif
 

@@ -1,21 +1,21 @@
 //------------------------------------------------------------------------------------------
-//	DIOSTREAMUDP.H
-//	
-/**	
-// \class 
-//   
+//  DIOSTREAMUDP.H
+//
+/**
+// \class
+//
 //  Data IO Stream UDP class
-//   
-//	@author	 Abraham J. Velez
-//	@version 23/05/2002
-*/	
-//	GEN  Copyright (C).  All right reserved.		 			 
+//
+//  @author  Abraham J. Velez
+//  @version 23/05/2002
+*/
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
+
 #ifndef _DIOSTREAMUDP_H_
 #define _DIOSTREAMUDP_H_
-	
-	
+
+
 //---- INCLUDES ----------------------------------------------------------------------------
 
 #include "XVector.h"
@@ -25,7 +25,7 @@
 
 //---- DEFINES & ENUMS  --------------------------------------------------------------------
 
-#define DIOSTREAMUDP_NOTFOUND							-1
+#define DIOSTREAMUDP_NOTFOUND             -1
 
 //---- CLASS -------------------------------------------------------------------------------
 
@@ -39,62 +39,62 @@ class DIOSTREAMUDPCONFIG;
 
 class DIOSTREAMUDPDATAGRAM
 {
-	public:
-																			DIOSTREAMUDPDATAGRAM											()
-																			{
-																				Clean();
-																				data = new XBUFFER();																				
-																			}
+  public:
+                                      DIOSTREAMUDPDATAGRAM                      ()
+                                      {
+                                        Clean();
+                                        data = new XBUFFER();
+                                      }
 
-		virtual													 ~DIOSTREAMUDPDATAGRAM											()
-																			{
-																				if(data) delete data;
+    virtual                          ~DIOSTREAMUDPDATAGRAM                      ()
+                                      {
+                                        if(data) delete data;
 
-																				Clean();
-																			}
+                                        Clean();
+                                      }
 
 
-		bool															IsToSend																	()																{ return istosend;                      }
-		void															SetIsToSend																(bool istosend)										{ this->istosend = istosend;            }
-		
-		XSTRING*													GetAddress																()																{	return &address;											}					
-		bool															SetAddress																(XCHAR* address)
-																			{
-																				if(!address) return false;
-																				this->address = address;
-																				return true;
-																			}	
-		bool															SetAddress																(XSTRING& address)								{	return SetAddress(address.Get());			}
+    bool                              IsToSend                                  ()                                { return istosend;                      }
+    void                              SetIsToSend                               (bool istosend)                   { this->istosend = istosend;            }
 
-		XWORD															GetPort																		()																{	return port;													}					
-		void															SetPorts																	(XWORD port)											{ this->port = port;										}
-		
-		XBUFFER*													GetData																		()																{ return data;													}
-		bool															SetData																		(XBYTE* data,int size)
-																			{
-																				if(!this->data) return false;
-																				this->data->Delete();
-																				this->data->Add(data,size);
+    XSTRING*                          GetAddress                                ()                                { return &address;                      }
+    bool                              SetAddress                                (XCHAR* address)
+                                      {
+                                        if(!address) return false;
+                                        this->address = address;
+                                        return true;
+                                      }
+    bool                              SetAddress                                (XSTRING& address)                { return SetAddress(address.Get());     }
 
-																				return true;
-																			}
+    XWORD                             GetPort                                   ()                                { return port;                          }
+    void                              SetPorts                                  (XWORD port)                      { this->port = port;                    }
 
-		void  														SetData																		(XBUFFER& data)										{ SetData(data.Get(), data.GetSize());  }
-		
-	private:
+    XBUFFER*                          GetData                                   ()                                { return data;                          }
+    bool                              SetData                                   (XBYTE* data,int size)
+                                      {
+                                        if(!this->data) return false;
+                                        this->data->Delete();
+                                        this->data->Add(data,size);
 
-		void															Clean																			()
-																			{
-																				istosend = false;
-																				address.Empty();
-																				port     = 0;
-																				data		 = NULL;
-																			}
-		
-		bool															istosend;
-		XSTRING														address;
-		XWORD															port;
-		XBUFFER*													data;
+                                        return true;
+                                      }
+
+    void                              SetData                                   (XBUFFER& data)                   { SetData(data.Get(), data.GetSize());  }
+
+  private:
+
+    void                              Clean                                     ()
+                                      {
+                                        istosend = false;
+                                        address.Empty();
+                                        port     = 0;
+                                        data     = NULL;
+                                      }
+
+    bool                              istosend;
+    XSTRING                           address;
+    XWORD                             port;
+    XBUFFER*                          data;
 };
 
 
@@ -102,54 +102,54 @@ class DIOSTREAMUDPDATAGRAM
 
 class DIOSTREAMUDP : public DIOSTREAM
 {
-	public:
-																			DIOSTREAMUDP															();
-		virtual													 ~DIOSTREAMUDP															();		
+  public:
+                                      DIOSTREAMUDP                              ();
+    virtual                          ~DIOSTREAMUDP                              ();
 
-		DIOSTREAMCONFIG*									GetConfig																	();
-		bool															SetConfig																	(DIOSTREAMCONFIG* config);
-		
-		virtual bool											Open																			() 																= 0;
+    DIOSTREAMCONFIG*                  GetConfig                                 ();
+    bool                              SetConfig                                 (DIOSTREAMCONFIG* config);
 
-		bool															ReadDatagram															(XSTRING& address, XWORD& port, XBUFFER& xbuffer);
+    virtual bool                      Open                                      ()                                = 0;
 
-		bool															WriteDatagram															(XSTRING& address, XWORD port, XBYTE* buffer, int size);
-		bool															WriteDatagram															(XSTRING& address, XWORD port, XBUFFER& xbuffer);
+    bool                              ReadDatagram                              (XSTRING& address, XWORD& port, XBUFFER& xbuffer);
 
-		virtual bool											Disconnect																()																= 0;
-		virtual bool											Close																			() 																= 0;	
+    bool                              WriteDatagram                             (XSTRING& address, XWORD port, XBYTE* buffer, int size);
+    bool                              WriteDatagram                             (XSTRING& address, XWORD port, XBUFFER& xbuffer);
 
-		bool															ResetXBuffers															();
-		bool															ResetInXBuffer														();
-		bool															ResetOutXBuffer														();
+    virtual bool                      Disconnect                                ()                                = 0;
+    virtual bool                      Close                                     ()                                = 0;
 
-		DIOURL*														GetHost																		();
-		
-		bool															WaitToWriteDatagramsEmpty									(int timeout);
-		int																WaitToGetFirstDatagram										(bool tosend, int timeout);
+    bool                              ResetXBuffers                             ();
+    bool                              ResetInXBuffer                            ();
+    bool                              ResetOutXBuffer                           ();
 
-    XVECTOR<DIOSTREAMUDPDATAGRAM*>*		GetDatagramsVector                        ()								 { return &datagrams;                      };
-		
-		bool															DeleteDatagram														(int index);
-		bool															DeleteAllDatagrams												();
+    DIOURL*                           GetHost                                   ();
 
-	protected:
-	
-		bool															AddDatagram																(bool istosend, XCHAR* address, XWORD port, XBYTE* data, int size);
-		bool															AddDatagram																(bool istosend, XSTRING& address, XWORD port, XBYTE* data, int size);
-		
-		DIOSTREAMUDPDATAGRAM*							GetDatagram																(int index);
-		int																GetFirstDatagram(bool issend);
+    bool                              WaitToWriteDatagramsEmpty                 (int timeout);
+    int                               WaitToGetFirstDatagram                    (bool tosend, int timeout);
 
-		DIOSTREAMUDPCONFIG*								config;
-		DIOURL*														host;	
+    XVECTOR<DIOSTREAMUDPDATAGRAM*>*   GetDatagramsVector                        ()                 { return &datagrams;                      };
 
-	private:
-		
-		void															Clean																			();
+    bool                              DeleteDatagram                            (int index);
+    bool                              DeleteAllDatagrams                        ();
 
-		XMUTEX*														datagramsmutex;
-		XVECTOR<DIOSTREAMUDPDATAGRAM*>		datagrams;
+  protected:
+
+    bool                              AddDatagram                               (bool istosend, XCHAR* address, XWORD port, XBYTE* data, int size);
+    bool                              AddDatagram                               (bool istosend, XSTRING& address, XWORD port, XBYTE* data, int size);
+
+    DIOSTREAMUDPDATAGRAM*             GetDatagram                               (int index);
+    int                               GetFirstDatagram(bool issend);
+
+    DIOSTREAMUDPCONFIG*               config;
+    DIOURL*                           host;
+
+  private:
+
+    void                              Clean                                     ();
+
+    XMUTEX*                           datagramsmutex;
+    XVECTOR<DIOSTREAMUDPDATAGRAM*>    datagrams;
 };
 
 

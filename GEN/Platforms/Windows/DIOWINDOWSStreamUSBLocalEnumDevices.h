@@ -1,23 +1,23 @@
 //------------------------------------------------------------------------------------------
-//	DIOWINDOWSSTREAMUSBLOCALENUMDEVICES.H
-//	
-/**	
-// \class 
-//   
+//  DIOWINDOWSSTREAMUSBLOCALENUMDEVICES.H
+//
+/**
+// \class
+//
 //  WINDOWS Data IO Stream USB Local Enum Devices class
-//   
-//	@author	 Abraham J. Velez
-//	@version 02/01/2002
-*/	
-//	GEN  Copyright (C).  All right reserved.		 			 
+//
+//  @author  Abraham J. Velez
+//  @version 02/01/2002
+*/
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
+
 #ifndef _DIOWINDOWSSTREAMUSBLOCALENUMDEVICES_H_
 #define _DIOWINDOWSSTREAMUSBLOCALENUMDEVICES_H_
-	
+
 
 #if defined(DIO_ACTIVE) && defined(DIOUSB_ACTIVE)
-	
+
 //---- INCLUDES ----------------------------------------------------------------------------
 
 #include "XString.h"
@@ -34,25 +34,25 @@
 
 class DIOWINDOWSSTREAMUSBLOCALENUMDEVICES :  public DIOSTREAMUSBLOCALENUMDEVICES
 {
-	public:
-																										DIOWINDOWSSTREAMUSBLOCALENUMDEVICES					();
-		virtual																				 ~DIOWINDOWSSTREAMUSBLOCALENUMDEVICES					();
+  public:
+                                                    DIOWINDOWSSTREAMUSBLOCALENUMDEVICES         ();
+    virtual                                        ~DIOWINDOWSSTREAMUSBLOCALENUMDEVICES         ();
 
-		bool																						Search																			();	
-		
-	private:
+    bool                                            Search                                      ();
 
-		void																						Clean																				()
-																										{
+  private:
 
-																										}
+    void                                            Clean                                       ()
+                                                    {
+
+                                                    }
 
 
-		bool																						SearchGUID																	(const GUID* interfaceclassguid);
+    bool                                            SearchGUID                                  (const GUID* interfaceclassguid);
 
-		bool																						GetInfoFromRegistry													(DIOSTREAMDEVICEUSB* device);
+    bool                                            GetInfoFromRegistry                         (DIOSTREAMDEVICEUSB* device);
 
-		bool																						SearchAndDeleteEqualDevices									();
+    bool                                            SearchAndDeleteEqualDevices                 ();
 };
 
 

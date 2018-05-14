@@ -1,16 +1,16 @@
 //------------------------------------------------------------------------------------------
-//	DIOSTREAMDEVICE.CPP
-//	
-//	Data IO Stream Device class
-//	
+//  DIOSTREAMDEVICE.CPP
 //
-//	@author	 Abraham J. Velez
-//	@version 12/3/2003
-//	
-//	GEN  Copyright (C).  All right reserved.
+//  Data IO Stream Device class
+//
+//
+//  @author  Abraham J. Velez
+//  @version 12/3/2003
+//
+//  GEN  Copyright (C).  All right reserved.
 //------------------------------------------------------------------------------------------
-	
-	
+
+
 //---- INCLUDES ----------------------------------------------------------------------------
 
 #include "XDebug.h"
@@ -18,7 +18,7 @@
 #include "DIOStreamDevice.h"
 
 #include "XMemory.h"
-	
+
 
 //---- GENERAL VARIABLE --------------------------------------------------------------------
 
@@ -29,121 +29,121 @@
 
 /*-------------------------------------------------------------------
 //  DIOSTREAMDEVICE:: DIOSTREAMDEVICE
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/04/2013 17:17:12
-//	
-//	@return 			
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/04/2013 17:17:12
+//
+//  @return
+//  */
 /*-----------------------------------------------------------------*/
 DIOSTREAMDEVICE:: DIOSTREAMDEVICE()
 {
-	Clean();
+  Clean();
 }
-	
+
 
 
 /*-------------------------------------------------------------------
 //  DIOSTREAMDEVICE::~DIOSTREAMDEVICE
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/04/2013 17:17:23
-//	
-//	@return 			
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/04/2013 17:17:23
+//
+//  @return
+//  */
 /*-----------------------------------------------------------------*/
 DIOSTREAMDEVICE::~DIOSTREAMDEVICE()
 {
-	Clean();
+  Clean();
 }
- 
- 
+
+
 
 
 /*-------------------------------------------------------------------
 //  DIOSTREAMDEVICE::GetIndex
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/04/2013 17:17:39
-//	
-//	@return 			int : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/04/2013 17:17:39
+//
+//  @return       int :
+//  */
 /*-----------------------------------------------------------------*/
 int DIOSTREAMDEVICE::GetIndex()
 {
-	return index;	
+  return index;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIOSTREAMDEVICE::SetIndex
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/04/2013 17:17:45
-//	
-//	@return 			bool : 
-//	@param				index : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/04/2013 17:17:45
+//
+//  @return       bool :
+//  @param        index :
 */
 /*-----------------------------------------------------------------*/
 bool DIOSTREAMDEVICE::SetIndex(int index)
 {
-	this->index = index;
+  this->index = index;
 
-	return true;
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIOSTREAMDEVICE::GetType
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			26/05/2013 23:00:03
-//	
-//	@return 			DIOSTREAMDEVICE_TYPE : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      26/05/2013 23:00:03
+//
+//  @return       DIOSTREAMDEVICE_TYPE :
+//  */
 /*-----------------------------------------------------------------*/
 DIOSTREAMDEVICE_TYPE DIOSTREAMDEVICE::GetType()
 {
-	return type;
+  return type;
 }
-		
+
 
 
 /*-------------------------------------------------------------------
 //  DIOSTREAMDEVICE::SetType
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			26/05/2013 22:59:58
-//	
-//	@return 			bool : 
-//	@param				type : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      26/05/2013 22:59:58
+//
+//  @return       bool :
+//  @param        type :
 */
 /*-----------------------------------------------------------------*/
 bool DIOSTREAMDEVICE::SetType(DIOSTREAMDEVICE_TYPE type)
 {
-	this->type = type;
+  this->type = type;
 
-	return true;
+  return true;
 }
 
 
@@ -151,135 +151,135 @@ bool DIOSTREAMDEVICE::SetType(DIOSTREAMDEVICE_TYPE type)
 
 /*-------------------------------------------------------------------
 //  DIOSTREAMDEVICE::GetName
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			05/05/2013 2:36:12
-//	
-//	@return 			XSTRING* : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      05/05/2013 2:36:12
+//
+//  @return       XSTRING* :
+//  */
 /*-----------------------------------------------------------------*/
 XSTRING* DIOSTREAMDEVICE::GetName()
 {
-	return &name;
+  return &name;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIOSTREAMDEVICE::GetDescription
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			05/05/2013 2:36:30
-//	
-//	@return 			XSTRING* : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      05/05/2013 2:36:30
+//
+//  @return       XSTRING* :
+//  */
 /*-----------------------------------------------------------------*/
 XSTRING* DIOSTREAMDEVICE::GetDescription()
 {
-	return &description;
+  return &description;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIOSTREAMDEVICE::GetResource
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			05/05/2013 2:37:44
-//	
-//	@return 			XSTRING* : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      05/05/2013 2:37:44
+//
+//  @return       XSTRING* :
+//  */
 /*-----------------------------------------------------------------*/
 XSTRING* DIOSTREAMDEVICE::GetResource()
 {
-	return &resource;
+  return &resource;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIOSTREAMDEVICE::CopyFrom
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/04/2013 17:21:35
-//	
-//	@return 			bool : 
-//	@param				device : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/04/2013 17:21:35
+//
+//  @return       bool :
+//  @param        device :
 */
 /*-----------------------------------------------------------------*/
 bool DIOSTREAMDEVICE::CopyFrom(DIOSTREAMDEVICE& device)
 {
-	index				= device.GetIndex();
-	name				= (*device.GetName());
-	description = (*device.GetDescription());
-	resource		= (*device.GetResource());
+  index       = device.GetIndex();
+  name        = (*device.GetName());
+  description = (*device.GetDescription());
+  resource    = (*device.GetResource());
 
-	return true;
+  return true;
 }
 
 
 
 /*-------------------------------------------------------------------
 //  DIOSTREAMDEVICE::CopyTo
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/04/2013 17:21:39
-//	
-//	@return 			bool : 
-//	@param				device : 
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/04/2013 17:21:39
+//
+//  @return       bool :
+//  @param        device :
 */
 /*-----------------------------------------------------------------*/
 bool DIOSTREAMDEVICE::CopyTo(DIOSTREAMDEVICE& device)
 {
-	device.SetIndex(index);
-	device.GetName()->Set(name);
-	device.GetDescription()->Set(description);
-	device.GetResource()->Set(resource);
+  device.SetIndex(index);
+  device.GetName()->Set(name);
+  device.GetDescription()->Set(description);
+  device.GetResource()->Set(resource);
 
-	return true;
+  return true;
 }
 
 
 /*-------------------------------------------------------------------
 //  DIOSTREAMDEVICE::DebugPrintInfo
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			19/05/2013 11:17:06
-//	
-//	@return 			bool : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      19/05/2013 11:17:06
+//
+//  @return       bool :
+//  */
 /*-----------------------------------------------------------------*/
 bool DIOSTREAMDEVICE::DebugPrintInfo(XCONSOLE* xconsole)
 {
 
   #ifdef XDEBUG
-	XSTRING line;
+  XSTRING line;
 
-	line = __L(" ");																								DIOSTREAMDEBUGPRINTINFO(xconsole, line.Get());
-	line.Format(__L("Index         : %02d"), index);								DIOSTREAMDEBUGPRINTINFO(xconsole, line.Get());
-	line.Format(__L("Name          : %s")  , name.Get());						DIOSTREAMDEBUGPRINTINFO(xconsole, line.Get());
-	line.Format(__L("Description   : %s")  , description.Get());		DIOSTREAMDEBUGPRINTINFO(xconsole, line.Get());
-	line.Format(__L("Resource      : %s")  , resource.Get());				DIOSTREAMDEBUGPRINTINFO(xconsole, line.Get());
+  line = __L(" ");                                                DIOSTREAMDEBUGPRINTINFO(xconsole, line.Get());
+  line.Format(__L("Index         : %02d"), index);                DIOSTREAMDEBUGPRINTINFO(xconsole, line.Get());
+  line.Format(__L("Name          : %s")  , name.Get());           DIOSTREAMDEBUGPRINTINFO(xconsole, line.Get());
+  line.Format(__L("Description   : %s")  , description.Get());    DIOSTREAMDEBUGPRINTINFO(xconsole, line.Get());
+  line.Format(__L("Resource      : %s")  , resource.Get());       DIOSTREAMDEBUGPRINTINFO(xconsole, line.Get());
 
-	return true;
+  return true;
   #else
   return false;
   #endif
@@ -288,19 +288,19 @@ bool DIOSTREAMDEVICE::DebugPrintInfo(XCONSOLE* xconsole)
 
 /*-------------------------------------------------------------------
 //  DIOSTREAMDEVICE::Clean
-*/ 
+*/
 /**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			28/04/2013 17:18:09
-//	
-//	@return 			void : 
-//	*/
+//
+//
+//  @author       Abraham J. Velez
+//  @version      28/04/2013 17:18:09
+//
+//  @return       void :
+//  */
 /*-----------------------------------------------------------------*/
 void DIOSTREAMDEVICE::Clean()
 {
-	index = 0;
-	type  = DIOSTREAMDEVICE_TYPE_UNKNOWN;
+  index = 0;
+  type  = DIOSTREAMDEVICE_TYPE_UNKNOWN;
 }
 
