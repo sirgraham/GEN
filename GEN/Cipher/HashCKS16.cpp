@@ -103,7 +103,7 @@ HASHCKS16::~HASHCKS16()
 //  @param        size :
 */
 /*-----------------------------------------------------------------*/
-bool HASHCKS16::Do(XBYTE* input, int size)
+bool HASHCKS16::Do(XBYTE* input, XDWORD size)
 {
   if(!size) return false;
 
@@ -111,7 +111,7 @@ bool HASHCKS16::Do(XBYTE* input, int size)
 
   resulttmp->Extract(value);
 
-  for(int c=0;c<size;c++)
+  for(XDWORD c=0; c<size; c++)
     {
       value = Update(value, (*(XWORD*)input));
       input = input + sizeof(XWORD); // need to offset the input by 16 bits, as we are adding 16 by 16

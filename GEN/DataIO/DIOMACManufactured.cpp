@@ -351,8 +351,8 @@ bool DIOMACMANUFACTURED::File_Convert(XBUFFER& xbuffer, XPATH& xpath)
 
   XDWORD    nrecords =  idmap.GetSize();
   HASHMD5   hashmd5;
-  int       initablepos = 0;
-  int       filepos     = 0;
+  XDWORD    initablepos = 0;
+  XDWORD    filepos     = 0;
 
   XFILEXDB* xfilexdb = new XFILEXDB( &hashmd5, xpath);
   if(xfilexdb)

@@ -72,8 +72,8 @@ class XFILETXT : public XFILECONTAINER
 
     XFILETXTFORMATCHAR    GetFormatChar           ();
     bool                  SetFormatChar           (XFILETXTFORMATCHAR formatchar);
-    XFILETXTFORMATCHAR    GetFormatCharFromFile   (int* sizeBOM = NULL);
-    bool                  CreateBOMFormatChar     (XFILETXTFORMATCHAR formatchar,XBYTE* BOM,int& sizeBOM);
+    XFILETXTFORMATCHAR    GetFormatCharFromFile   (XDWORD* sizeBOM = NULL);
+    bool                  CreateBOMFormatChar     (XFILETXTFORMATCHAR formatchar, XBYTE* BOM, XDWORD& sizeBOM);
     int                   SizeOfCharacter         (XFILETXTFORMATCHAR formatchar)
                           {
                             switch(formatchar)
@@ -92,7 +92,7 @@ class XFILETXT : public XFILECONTAINER
 
     XFILETXTTYPELF        GetTypeLF               ();
     bool                  SetTypeLF               (XFILETXTTYPELF typeLF);
-    bool                  CreateTypeLF            (XFILETXTFORMATCHAR formatchar,XFILETXTTYPELF typeLF,XBYTE* LF,int& sizeLF);
+    bool                  CreateTypeLF            (XFILETXTFORMATCHAR formatchar, XFILETXTTYPELF typeLF, XBYTE* LF, XDWORD& sizeLF);
     bool                  GetLF                   (XBUFFER& lfdata);
     XSTRING*              GetLF                   ();
 
@@ -100,8 +100,8 @@ class XFILETXT : public XFILECONTAINER
     XSTRING*              GetLine                 (int index);
     XCHAR*                GetLineText             (int index);
 
-    bool                  GetAllInOneLine         (XSTRING& alllines , int start = 0, int end = XFILETXT_TOLASTLINE);
-    bool                  GetAllInBuffer          (XBUFFER& xbuffer, int start = 0, int end = XFILETXT_TOLASTLINE);
+    bool                  GetAllInOneLine         (XSTRING& alllines , XDWORD start = 0, XDWORD end = XFILETXT_TOLASTLINE);
+    bool                  GetAllInBuffer          (XBUFFER& xbuffer, XDWORD start = 0, XDWORD end = XFILETXT_TOLASTLINE);
 
     bool                  ReadAllFile             ();
     bool                  WriteAllFile            ();
@@ -111,11 +111,11 @@ class XFILETXT : public XFILECONTAINER
     bool                  AddLine                 (XCHAR* line);
     bool                  AddLine                 (XSTRING& line);
 
-    bool                  GenerateLineFromBuffer  (XFILETXTFORMATCHAR formatchar, XBYTE* line, int sizeline, XSTRING& string);
-    bool                  AddLine                 (XFILETXTFORMATCHAR type, XBYTE* line, int sizeline);
+    bool                  GenerateLineFromBuffer  (XFILETXTFORMATCHAR formatchar, XBYTE* line, XDWORD sizeline, XSTRING& string);
+    bool                  AddLine                 (XFILETXTFORMATCHAR type, XBYTE* line, XDWORD sizeline);
 
-    bool                  AddLineAlready          (XCHAR* line, int* sizeline = NULL, int* sizeLF = NULL);
-    bool                  AddLineAlready          (XSTRING& line, int* sizeline = NULL, int* sizeLF = NULL);
+    bool                  AddLineAlready          (XCHAR* line, XDWORD* sizeline = NULL, XDWORD* sizeLF = NULL);
+    bool                  AddLineAlready          (XSTRING& line, XDWORD* sizeline = NULL, XDWORD* sizeLF = NULL);
 
     bool                  InsertLine              (int index, XCHAR* line);
     bool                  InsertLine              (int index, XSTRING& line);
@@ -125,7 +125,7 @@ class XFILETXT : public XFILECONTAINER
 
     bool                  AddBufferLines          (XFILETXTFORMATCHAR formatchar, XBUFFER& xbuffer);
 
-    bool                  GetSizeOfLine           (XFILETXTFORMATCHAR formatchar, XBYTE* buffer, XFILETXTTYPELF& typeLF, int& sizeLF, int& size, int maxsize);
+    bool                  GetSizeOfLine           (XFILETXTFORMATCHAR formatchar, XBYTE* buffer, XFILETXTTYPELF& typeLF, XDWORD& sizeLF, XDWORD& size, XDWORD maxsize);
 
     XVECTOR<XSTRING*>*    GetLines                ()                                { return &lines;                                }
 

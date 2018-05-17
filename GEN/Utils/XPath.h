@@ -33,10 +33,10 @@ class XPATH : public XSTRING
 {
   public:
                               XPATH                         ();
-                              XPATH                         (int size);
+                              XPATH                         (XDWORD size);
                               XPATH                         (const char* path);
                               XPATH                         (const XCHAR* path);
-                              XPATH                         (const XCHAR* path, int size);
+                              XPATH                         (const XCHAR* path, XDWORD size);
                               XPATH                         (XPATH& path);
                               XPATH                         (XSTRING& path);
                               XPATH                         (XWORD* path);

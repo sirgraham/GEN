@@ -2456,11 +2456,11 @@ bool XMPINTEGER::SetFromXBuffer(XBUFFER& xbuffer)
 //  @param        size :
 */
 /*-----------------------------------------------------------------*/
-bool XMPINTEGER::GetToXBuffer(XBUFFER& xbuffer, int size)
+bool XMPINTEGER::GetToXBuffer(XBUFFER& xbuffer, XDWORD size)
 {
-  int i;
-  int j;
-  int n;
+  int     i;
+  int     j;
+  XDWORD  n;
 
   n = GetSize();
 

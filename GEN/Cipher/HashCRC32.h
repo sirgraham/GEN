@@ -33,14 +33,14 @@ class HASHCRC32 : public HASH
     virtual            ~HASHCRC32               ();
 
     using               HASH::Do;
-    bool                Do                      (XBYTE* input, int size);
+    bool                Do                      (XBYTE* input, XDWORD size);
 
     bool                ResetResult             ();
 
     int                 GetDefaultSize          ();
 
     XBUFFER*            GetResult               ();
-    XBYTE*              GetResult               (int& resultsize);
+    XBYTE*              GetResult               (XDWORD& resultsize);
 
     XDWORD              GetResultCRC32          ();
 

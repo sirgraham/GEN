@@ -55,19 +55,19 @@ class XCONSOLE
     virtual bool                Print                         (XCHAR* string);
     bool                        Printf                        (XCHAR* mask,...);
 
-    bool                        PrintDataBlock                (XBYTE* data, int _size, int marginsize = 1, int sizeline = 16, bool showoffset = true, bool showtext = true);
-    bool                        PrintDataBlock                (XBUFFER& data, int marginsize = 1, int sizeline = 16, bool showoffset = true, bool showtext = true);
+    bool                        PrintDataBlock                (XBYTE* data, XDWORD _size, XDWORD marginsize = 1, XDWORD sizeline = 16, bool showoffset = true, bool showtext = true);
+    bool                        PrintDataBlock                (XBUFFER& data, XDWORD marginsize = 1, XDWORD sizeline = 16, bool showoffset = true, bool showtext = true);
 
     virtual bool                Clear                         ()                              { return false;         }
 
     virtual bool                KBHit                         ()                              { return false;         }
     virtual int                 GetChar                       ()                              { return 0;             }
 
-    bool                        FormatMessage                 (XCHAR* message, int margin, bool prelude, bool returnline, XSTRING& string);
-    bool                        PrintMessage                  (XCHAR* message, int margin, bool prelude, bool returnline);
-    bool                        TipicalHeader_Create          (int yearorigin, XCHAR* nameapp,int version,int subversion,int subversionerr,XCHAR* enterprise,XSTRING& header);
-    bool                        TipicalHeader_Show            (int yearorigin, XCHAR* nameapp,int version,int subversion,int subversionerr, XCHAR* enterprise);
-    bool                        WaitKey                       (XCHAR* text, int margin,bool prelude, int timeout);
+    bool                        FormatMessage                 (XCHAR* message, XDWORD margin, bool prelude, bool returnline, XSTRING& string);
+    bool                        PrintMessage                  (XCHAR* message, XDWORD margin, bool prelude, bool returnline);
+    bool                        TipicalHeader_Create          (int yearorigin, XCHAR* nameapp, int version, int subversion, int subversionerr, XCHAR* enterprise, XSTRING& header);
+    bool                        TipicalHeader_Show            (int yearorigin, XCHAR* nameapp, int version, int subversion, int subversionerr, XCHAR* enterprise);
+    bool                        WaitKey                       (XCHAR* text, XDWORD margin, bool prelude, XDWORD timeout);
 
   protected:
 

@@ -2322,7 +2322,7 @@ bool  XFILEXML2::ReadAllFile()
 
   DeleteAllLines();
 
-  int                sizeBOM              = 0;
+  XDWORD             sizeBOM              = 0;
   XFILETXTFORMATCHAR formatchar           = GetFormatCharFromFile(&sizeBOM);
   int                sizebytescharacter   = SizeOfCharacter(formatchar);
 
@@ -2333,47 +2333,44 @@ bool  XFILEXML2::ReadAllFile()
 
   XDWORD filesize=file->GetSize();
 
-  int     br;
-  XBUFFER dataline(false);
+  XDWORD    br;
+  XBUFFER   dataline(false);
 
-
-
-  XBYTE*  readbuffer = new XBYTE[filesize];
+  XBYTE*    readbuffer = new XBYTE[filesize];
   if(!readbuffer) return false;
 
   memset(readbuffer, 0, filesize);
 
-  int bufferpos = 0;
+  XDWORD bufferpos = 0;
 
-      br            = filesize;
-      file->Read(readbuffer, &br);
-      if(!br) return false;
+  br = filesize;
+  file->Read(readbuffer, &br);
+  if(!br) return false;
 
-      do{ XFILETXTTYPELF  _typeLF   = XFILETXTTYPELF_UNKNOWN;
-          //int             sizeLF    = 0;
-          //int             sizeline  = 0;
-          //bool            endline   = GetSizeOfLine(formatchar, &readbuffer[bufferpos], _typeLF, sizeLF, sizeline, (br-bufferpos));
-
-          if(typeLF == XFILETXTTYPELF_UNKNOWN && _typeLF != XFILETXTTYPELF_UNKNOWN) typeLF = _typeLF;
+  do{ XFILETXTTYPELF  _typeLF   = XFILETXTTYPELF_UNKNOWN;
+  
+      if(typeLF == XFILETXTTYPELF_UNKNOWN && _typeLF != XFILETXTTYPELF_UNKNOWN) typeLF = _typeLF;
 
 
-              int lack = (br-bufferpos);
-              dataline.Add(&readbuffer[bufferpos], lack);
-              bufferpos += lack;
+      XDWORD lack = (br-bufferpos);
+      dataline.Add(&readbuffer[bufferpos], lack);
+      bufferpos += lack;
 
-              if(bufferpos == br)
-                {
-                  AddLine(formatchar, dataline.Get(), (int)(lack/sizebytescharacter));
-                  dataline.Delete();
-                }
+      if(bufferpos == br)
+        {
+          AddLine(formatchar, dataline.Get(), (int)(lack/sizebytescharacter));
+          dataline.Delete();
+        }
 
-        } while(bufferpos < br);
-
+    } while(bufferpos < br);
 
   delete [] readbuffer;
 
   return true;
 }
+
+
+
 
 /*-------------------------------------------------------------------
 //  XFILEXML2::ReadAndDecodeAllLines

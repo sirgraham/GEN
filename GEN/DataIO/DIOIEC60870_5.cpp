@@ -1906,9 +1906,9 @@ bool DIOIEC60870_5::SendMsgFix(XBYTE functioncode)
 //  @param        timeout :
 */
 /*-----------------------------------------------------------------*/
-bool DIOIEC60870_5::WaitToReadMsg(int size,int timeout)
+bool DIOIEC60870_5::WaitToReadMsg(XDWORD size,int timeout)
 {
-  int actualsize = 0;
+  XDWORD actualsize = 0;
 
   if(!xtimer) return false;
   xtimer->Reset();
@@ -1924,7 +1924,7 @@ bool DIOIEC60870_5::WaitToReadMsg(int size,int timeout)
 
       xsleep->MilliSeconds(10);
 
-      if(actualsize>=size) return true;
+      if(actualsize >= size) return true;
 
     } while(!actualsize);
 
@@ -2066,7 +2066,7 @@ bool DIOIEC60870_5::ReadMsg(XBYTE& retfunctioncode,bool& retisfixmsg,XBUFFER* re
 //  @param        sizebuffer :
 */
 /*-----------------------------------------------------------------*/
-XBYTE DIOIEC60870_5::CalculateCheckSum(XBYTE* buffer,int sizebuffer)
+XBYTE DIOIEC60870_5::CalculateCheckSum(XBYTE* buffer,XDWORD sizebuffer)
 {
   if(!buffer)       return 0;
 
@@ -2143,11 +2143,11 @@ XBYTE DIOIEC60870_5::CalculateCheckSum(XBUFFER& xbuffer)
 //  @param        size :
 */
 /*-----------------------------------------------------------------*/
-int DIOIEC60870_5::GetIntFromBuffer(XBYTE* buffer,int size)
+int DIOIEC60870_5::GetIntFromBuffer(XBYTE* buffer,XDWORD size)
 {
   XDWORD value = 0;
 
-  for(int d=0;d<size;d++)
+  for(XDWORD d=0; d<size; d++)
     {
       value |= (XDWORD)buffer[((size-1)-d)];
       if(d<(size-1)) value<<=8;

@@ -189,7 +189,7 @@ bool HASHCOMP128V1::SetInput(XBYTE* rand, XBYTE* ki,XBUFFER& xbuffer)
 //  @param        size :
 */
 /*-----------------------------------------------------------------*/
-bool HASHCOMP128V1::Do(XBYTE* input, int size)
+bool HASHCOMP128V1::Do(XBYTE* input, XDWORD size)
 {
   if(size!= (HASHCOMP128V1_RAND_SIZE + HASHCOMP128V1_KI_SIZE)) return false;
 

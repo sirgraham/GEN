@@ -156,15 +156,15 @@ bool XCONSOLE::Printf(XCHAR* mask,...)
 //  @param        showtext :
 */
 /*-----------------------------------------------------------------*/
-bool XCONSOLE::PrintDataBlock(XBYTE* data, int size, int marginsize, int sizeline, bool showoffset, bool showtext)
+bool XCONSOLE::PrintDataBlock(XBYTE* data, XDWORD size, XDWORD marginsize, XDWORD sizeline, bool showoffset, bool showtext)
 {
   XSTRING    margin;
   XSTRING    strdata;
-  int        _size     = 0;
-  int        _sizeline = sizeline;
+  XDWORD     _size     = 0;
+  XDWORD     _sizeline = sizeline;
   int        index     = 0;
 
-  for(int c=0;c<marginsize;c++)
+  for(XDWORD c=0;c<marginsize;c++)
     {
       margin += __L(" ");
     }
@@ -183,7 +183,7 @@ bool XCONSOLE::PrintDataBlock(XBYTE* data, int size, int marginsize, int sizelin
           string += __L("   ");
         }
 
-      for(int c=0;c<_sizeline;c++)
+      for(XDWORD c=0; c<_sizeline; c++)
         {
           strdata.Format(__L("%02X "),data[index]);
           string += strdata;
@@ -193,7 +193,7 @@ bool XCONSOLE::PrintDataBlock(XBYTE* data, int size, int marginsize, int sizelin
 
       if(_sizeline != sizeline)
         {
-          for(int c=0;c<(sizeline-_sizeline);c++)
+          for(XDWORD c=0; c<(sizeline-_sizeline); c++)
             {
               strdata.Format(__L("   "));
               string += strdata;
@@ -205,7 +205,7 @@ bool XCONSOLE::PrintDataBlock(XBYTE* data, int size, int marginsize, int sizelin
           index -= _sizeline;
           string += __L(" ");
 
-          for(int c=0;c<_sizeline;c++)
+          for(XDWORD c=0; c<_sizeline; c++)
             {
               XCHAR character = (XCHAR)data[index];
 
@@ -248,7 +248,7 @@ bool XCONSOLE::PrintDataBlock(XBYTE* data, int size, int marginsize, int sizelin
 //  @param        showtext :
 */
 /*-----------------------------------------------------------------*/
-bool XCONSOLE::PrintDataBlock(XBUFFER& data, int marginsize, int sizeline, bool showoffset, bool showtext)
+bool XCONSOLE::PrintDataBlock(XBUFFER& data, XDWORD marginsize, XDWORD sizeline, bool showoffset, bool showtext)
 {
   return PrintDataBlock(data.Get(), data.GetSize(), marginsize, sizeline, showoffset, showtext);
 }
@@ -275,11 +275,11 @@ bool XCONSOLE::PrintDataBlock(XBUFFER& data, int marginsize, int sizeline, bool 
 //  @param        string :
 */
 /*-----------------------------------------------------------------*/
-bool XCONSOLE::FormatMessage(XCHAR* message, int margin, bool prelude, bool returnline, XSTRING& string)
+bool XCONSOLE::FormatMessage(XCHAR* message, XDWORD margin, bool prelude, bool returnline, XSTRING& string)
 {
   string.Empty();
 
-  for(int c=0;c<margin;c++)
+  for(XDWORD c=0; c<margin; c++)
     {
       string += __L(" ");
     }
@@ -314,7 +314,7 @@ bool XCONSOLE::FormatMessage(XCHAR* message, int margin, bool prelude, bool retu
 //  @param        returnline :
 */
 /*-----------------------------------------------------------------*/
-bool XCONSOLE::PrintMessage(XCHAR* message, int margin, bool prelude, bool returnline)
+bool XCONSOLE::PrintMessage(XCHAR* message, XDWORD margin, bool prelude, bool returnline)
 {
   XSTRING string;
 
@@ -443,7 +443,7 @@ bool XCONSOLE::TipicalHeader_Show(int yearorigin, XCHAR* nameapp,int version,int
 //  @param        timeout :
 */
 /*-----------------------------------------------------------------*/
-bool XCONSOLE::WaitKey(XCHAR* text, int margin,bool prelude, int timeout)
+bool XCONSOLE::WaitKey(XCHAR* text, XDWORD margin, bool prelude, XDWORD timeout)
 {
   XTIMER* xtimer = xfactory->CreateTimer();
   if(!xtimer) return false;

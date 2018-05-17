@@ -68,7 +68,7 @@ class DIOSTREAMICMPDATAGRAM
     bool                              SetAddress                                (XSTRING& address)                { return SetAddress(address.Get());     }
 
     XBUFFER*                          GetData                                   ()                                { return data;                          }
-    bool                              SetData                                   (XBYTE* data,int size)
+    bool                              SetData                                   (XBYTE* data,XDWORD size)
                                       {
                                         if(!this->data) return false;
                                         this->data->Delete();
@@ -112,7 +112,7 @@ class DIOSTREAMICMP : public DIOSTREAM
 
     bool                              ReadDatagram                              (XSTRING& address, XBUFFER& xbuffer);
 
-    bool                              WriteDatagram                             (XSTRING& address, XBYTE* buffer, int size);
+    bool                              WriteDatagram                             (XSTRING& address, XBYTE* buffer, XDWORD size);
     bool                              WriteDatagram                             (XSTRING& address, XBUFFER& xbuffer);
 
     virtual bool                      Disconnect                                ()                                = 0;
@@ -129,8 +129,8 @@ class DIOSTREAMICMP : public DIOSTREAM
 
   protected:
 
-    bool                              AddDatagram                               (bool istosend, XCHAR* address, XBYTE* data, int size);
-    bool                              AddDatagram                               (bool istosend, XSTRING& address, XBYTE* data, int size);
+    bool                              AddDatagram                               (bool istosend, XCHAR* address, XBYTE* data, XDWORD size);
+    bool                              AddDatagram                               (bool istosend, XSTRING& address, XBYTE* data, XDWORD size);
 
     DIOSTREAMICMPDATAGRAM*            GetDatagram                               (int index);
     int                               GetFirstDatagram                          (bool issend);

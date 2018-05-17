@@ -166,7 +166,7 @@ bool XANDROIDFILE::Create(XCHAR* xpath)
 //  @param        size :
 */
 /*-----------------------------------------------------------------*/
-bool XANDROIDFILE::SetSize(int size)
+bool XANDROIDFILE::SetSize(XDWORD size)
 {
   if(!isopen)       return false;
   if(!filehandle)   return false;
@@ -196,7 +196,7 @@ bool XANDROIDFILE::SetSize(int size)
 //  @param        position :
 */
 /*-----------------------------------------------------------------*/
-bool XANDROIDFILE::GetPosition(int& position)
+bool XANDROIDFILE::GetPosition(XDWORD& position)
 {
   if(!isopen)     return false;
   if(!filehandle) return false;
@@ -226,7 +226,7 @@ bool XANDROIDFILE::GetPosition(int& position)
 //  @param        position :
 */
 /*-----------------------------------------------------------------*/
-bool XANDROIDFILE::SetPosition(int position)
+bool XANDROIDFILE::SetPosition(XDWORD position)
 {
   if(!isopen)     return false;
   if(!filehandle) return false;
@@ -259,7 +259,7 @@ bool XANDROIDFILE::SetPosition(int position)
 //  @param        cipher :
 */
 //-------------------------------------------------------------------
-bool XANDROIDFILE::Read(XBYTE* buffer, int size, CIPHER* cipher)
+bool XANDROIDFILE::Read(XBYTE* buffer, XDWORD size, CIPHER* cipher)
 {
   if(!isopen)       return false;
   if(!filehandle)   return false;
@@ -292,7 +292,7 @@ bool XANDROIDFILE::Read(XBYTE* buffer, int size, CIPHER* cipher)
 //  @param        cipher :
 */
 //-------------------------------------------------------------------
-bool XANDROIDFILE::Read(XBYTE* buffer, int* size, CIPHER* cipher)
+bool XANDROIDFILE::Read(XBYTE* buffer, XDWORD* size, CIPHER* cipher)
 {
   if(!isopen)       return false;
   if(!filehandle)   return false;
@@ -336,7 +336,7 @@ bool XANDROIDFILE::Read(XBYTE* buffer, int* size, CIPHER* cipher)
 //  @param        cipher :
 */
 //-------------------------------------------------------------------
-bool XANDROIDFILE::Write(XBYTE* buffer, int size, CIPHER* cipher)
+bool XANDROIDFILE::Write(XBYTE* buffer, XDWORD size, CIPHER* cipher)
 {
   if(!isopen)       return false;
   if(!filehandle)   return false;

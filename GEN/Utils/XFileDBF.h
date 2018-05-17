@@ -92,7 +92,7 @@ class XFILEDBF_RECORD
     bool                            SetDataString               (int indexfield, XSTRING& string);
 
     bool                            SetCharacterType            (int indexfield,XCHAR* data);
-    bool                            SetData                     (XBYTE* data,int size);
+    bool                            SetData                     (XBYTE* data,XDWORD size);
     int                             GetSize                     ();
     int                             GetSizeField                (int indexfield);
 

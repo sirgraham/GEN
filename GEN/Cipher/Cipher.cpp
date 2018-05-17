@@ -132,7 +132,7 @@ XBUFFER* CIPHERKEYSYMMETRICAL::Get()
 //  @param        size :
 */
 /*-----------------------------------------------------------------*/
-bool CIPHERKEYSYMMETRICAL::Set(XBYTE* key, int size)
+bool CIPHERKEYSYMMETRICAL::Set(XBYTE* key, XDWORD size)
 {
   if(!key) return false;
 
@@ -331,7 +331,7 @@ XBYTE* CIPHER::GetInitVector()
 //  @param        size :
 */
 /*-----------------------------------------------------------------*/
-bool CIPHER::SetInitVector(XBYTE* vector, int size)
+bool CIPHER::SetInitVector(XBYTE* vector, XDWORD size)
 {
   if(!vector)    return false;
   if(!inivector) return false;
@@ -381,7 +381,7 @@ bool CIPHER::SetInitVector(XBUFFER& vector)
 //  @param        size :
 */
 //-------------------------------------------------------------------
-bool CIPHER::Cipher(XBYTE* input,int size)
+bool CIPHER::Cipher(XBYTE* input,XDWORD size)
 {
   result->Delete();
   result->Add(input, size);
@@ -392,7 +392,7 @@ bool CIPHER::Cipher(XBYTE* input,int size)
 
   int indexkey = 0;
 
-  for(int c=0;c<size;c++)
+  for(XDWORD c=0; c<size; c++)
     {
       result->Get()[c] ^= key->Get()->GetByte(indexkey);
 
@@ -439,7 +439,7 @@ bool CIPHER::Cipher(XBUFFER& input)
 //  @param        size :
 */
 //-------------------------------------------------------------------
-bool CIPHER::Uncipher(XBYTE* input,int size)
+bool CIPHER::Uncipher(XBYTE* input,XDWORD size)
 {
   return Cipher(input,size);
 }

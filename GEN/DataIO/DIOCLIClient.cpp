@@ -701,7 +701,7 @@ bool DIOCLICLIENT::ReadAnswerLF(XSTRING& answer,int timeout)
 //  @param        timeout :
 */
 /*-----------------------------------------------------------------*/
-bool DIOCLICLIENT::ReadAnswer(XSTRING& answer,int size,int timeout)
+bool DIOCLICLIENT::ReadAnswer(XSTRING& answer,XDWORD size,int timeout)
 {
   char str[4];
   int  br;

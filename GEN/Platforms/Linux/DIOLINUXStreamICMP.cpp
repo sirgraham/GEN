@@ -383,7 +383,7 @@ void DIOLINUXSTREAMICMP::ThreadRunFunction(void* thread)
 
                                                                   memset(&origin_addr, 0, size_addr);
 
-                                                                  int size = recvfrom(diostream->handle, buffer, DIOSTREAM_MAXBUFFER, 0,(struct sockaddr*)&origin_addr, &size_addr);
+                                                                  XDWORD size = recvfrom(diostream->handle, buffer, DIOSTREAM_MAXBUFFER, 0,(struct sockaddr*)&origin_addr, &size_addr);
                                                                   if(size < 0)
                                                                     {
                                                                       diostream->SetEvent(DIOLINUXICMPFSMEVENT_DISCONNECTING);

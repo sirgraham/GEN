@@ -250,7 +250,7 @@ bool XFILEDBF_RECORD::SetData(int indexfield, XBYTE* data, int limitsize)
 
   XFILEDBF_FIELD* field = (XFILEDBF_FIELD*)fields->Get(indexfield);
   if(!field)     return false;
-  int size = field->size;
+  XDWORD size = field->size;
 
   memset((XBYTE*)(&datarec[offset]), ' '  , field->size);
   memcpy((XBYTE*)(&datarec[offset]), data , (limitsize==-1)?size:limitsize);
@@ -332,7 +332,7 @@ bool XFILEDBF_RECORD::SetDataString(int indexfield, XSTRING& string)
   if(!field->size)                                return false;
   if(field->type != XFILEDBF_FIELDTYPE_CHARACTER) return false;
 
-  int sizestring = string.GetSize();
+  XDWORD sizestring = string.GetSize();
   if(sizestring > field->size) sizestring = field->size;
 
   XSTRING_CREATEOEM(string, charstr);
@@ -340,7 +340,7 @@ bool XFILEDBF_RECORD::SetDataString(int indexfield, XSTRING& string)
   memset((XBYTE*)(&datarec[offset]), ' '     , field->size);
 //memcpy((XBYTE*)(&datarec[offset]), charstr , size);
 
-  for(int c=0; c<sizestring; c++)
+  for(XDWORD c=0; c<sizestring; c++)
     {
       datarec[offset+c] = charstr[c];
     }
@@ -401,7 +401,7 @@ bool XFILEDBF_RECORD::SetCharacterType(int indexfield,XCHAR* data)
 //  @param        size :
 */
 //-------------------------------------------------------------------
-bool XFILEDBF_RECORD::SetData(XBYTE* data,int size)
+bool XFILEDBF_RECORD::SetData(XBYTE* data,XDWORD size)
 {
   memcpy(datarec,data,size);
 
@@ -703,7 +703,7 @@ bool XFILEDBF_HEADER::Create(XFILE* fileb)
 
           XSTRING_CREATEOEM(field->name, charstr)
 
-          int size = (int)strlen(charstr);
+          XDWORD size = (int)strlen(charstr);
           if(size>XFILEDBF_FIELDSIZE) size = XFILEDBF_FIELDSIZE;
 
           memcpy((char*)(&headerdata[index]), charstr, size);
@@ -966,7 +966,7 @@ bool XFILEDBF_HEADER::SetNRecords(XDWORD nrecords)
 //-------------------------------------------------------------------
 int XFILEDBF_HEADER::GetSizeRecord()
 {
-  int size=0;
+  XDWORD size=0;
 
   if(fields.IsEmpty()) return size;
 
@@ -1423,7 +1423,7 @@ XFILEDBF_RECORD* XFILEDBF::ReadRecord(XDWORD nrecord)
   XFILEDBF_RECORD* record;
   if(nrecord>=header->GetNRecords()) return NULL;
 
-  int sizerecord = header->GetSizeRecord();
+  XDWORD sizerecord = header->GetSizeRecord();
 
   if(!sizerecord) return NULL;
 
@@ -1553,10 +1553,10 @@ bool XFILEDBF::AddRecord(XFILEDBF_RECORD* record)
   if(!IsOpen()) return false;
   if(!header)   return false;
 
-  int size = header->GetSizeRecord()-1;
+  XDWORD size = header->GetSizeRecord()-1;
 
-  XBYTE specialend;
-  int   position;
+  XBYTE   specialend;
+  XDWORD  position;
 
   file->SetPosition(XFILE_SEEKEND);
   file->GetPosition(position);

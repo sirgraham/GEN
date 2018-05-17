@@ -183,7 +183,7 @@ bool DIOSTREAMUDP::ReadDatagram(XSTRING& address, XWORD& port, XBUFFER& xbuffer)
 //  @param        size :
 */
 /*-----------------------------------------------------------------*/
-bool DIOSTREAMUDP::WriteDatagram(XSTRING& address, XWORD port, XBYTE* buffer, int size)
+bool DIOSTREAMUDP::WriteDatagram(XSTRING& address, XWORD port, XBYTE* buffer, XDWORD size)
 {
   if(address.IsEmpty())                                 return false;
   if(!AddDatagram(true, address , port, buffer, size))  return false;
@@ -501,7 +501,7 @@ bool DIOSTREAMUDP::DeleteAllDatagrams()
 //  @param        size :
 */
 /*-----------------------------------------------------------------*/
-bool DIOSTREAMUDP::AddDatagram(bool istosend, XCHAR* address, XWORD port, XBYTE* data, int size)
+bool DIOSTREAMUDP::AddDatagram(bool istosend, XCHAR* address, XWORD port, XBYTE* data, XDWORD size)
 {
   if(!address) return false;
   if(!data)    return false;
@@ -545,7 +545,7 @@ bool DIOSTREAMUDP::AddDatagram(bool istosend, XCHAR* address, XWORD port, XBYTE*
 //  @param        size :
 */
 /*-----------------------------------------------------------------*/
-bool DIOSTREAMUDP::AddDatagram(bool istosend, XSTRING& address, XWORD port, XBYTE* data,int size)
+bool DIOSTREAMUDP::AddDatagram(bool istosend, XSTRING& address, XWORD port, XBYTE* data,XDWORD size)
 {
   return AddDatagram(istosend, address.Get(), port, data, size);
 }

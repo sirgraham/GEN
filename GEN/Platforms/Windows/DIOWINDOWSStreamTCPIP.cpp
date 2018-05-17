@@ -486,7 +486,7 @@ bool DIOWINDOWSSTREAMTCPIP::GetHandleServer()
         }
     }
 
-  int sizeaddr   = sizeof(SOCKADDR_IN);
+  XDWORD sizeaddr   = sizeof(SOCKADDR_IN);
   handlesocket = Accept(handleserver, (SOCKADDR*)&rem_addr, &sizeaddr, 100/*50*1000*/);
   if(handlesocket != INVALID_SOCKET)
     {
@@ -734,7 +734,7 @@ void DIOWINDOWSSTREAMTCPIP::ThreadConnexion(void* data)
 
                                                                   memset(buffer, 0, DIOSTREAM_MAXBUFFER);
 
-                                                                  int size = recv(diostream->handlesocket,(char*)buffer, DIOSTREAM_MAXBUFFER, 0);
+                                                                  XDWORD size = recv(diostream->handlesocket,(char*)buffer, DIOSTREAM_MAXBUFFER, 0);
                                                                   if(size==SOCKET_ERROR)
                                                                     {
                                                                       diostream->SetEvent(DIOWINDOWSTCPIPFSMEVENT_DISCONNECTING);
@@ -762,7 +762,7 @@ void DIOWINDOWSSTREAMTCPIP::ThreadConnexion(void* data)
                                                                   if(esize)
                                                                     {
                                                                       diostream->outbuffer->SetBlocked(true);
-                                                                      int size = send(diostream->handlesocket,(char*)diostream->outbuffer->Get(), esize,0);
+                                                                      XDWORD size = send(diostream->handlesocket,(char*)diostream->outbuffer->Get(), esize,0);
                                                                       diostream->outbuffer->SetBlocked(false);
                                                                       if(size==SOCKET_ERROR)
                                                                         {

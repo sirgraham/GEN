@@ -74,7 +74,7 @@ bool DIOPROTOCOL_FILE::ReadBlock(XBYTE* buffer)
     {
       xfile->SetPosition(position);
 
-      xfile->Read(buffer,&sizeblock);
+      xfile->Read(buffer, &sizeblock);
       if(sizeblock)
         {
           xfile->GetPosition(position);

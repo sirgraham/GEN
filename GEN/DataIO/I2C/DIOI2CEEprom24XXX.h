@@ -64,10 +64,10 @@ class DIOI2CEEPROM24XXX : public DIODEVICEI2C
 
     XDWORD                    GetSize                     ()                              { return maxsize;                                }
 
-    bool                      Read                        (XDWORD address, XBYTE* buffer, int size);
-    bool                      Read                        (XDWORD address, int size, XBUFFER& xbuffer);
+    bool                      Read                        (XDWORD address, XBYTE* buffer, XDWORD size);
+    bool                      Read                        (XDWORD address, XDWORD size, XBUFFER& xbuffer);
 
-    bool                      Write                       (XDWORD address, XBYTE* buffer, int size);
+    bool                      Write                       (XDWORD address, XBYTE* buffer, XDWORD size);
     bool                      Write                       (XDWORD address, XBUFFER& xbuffer);
 
     bool                      End                         ();

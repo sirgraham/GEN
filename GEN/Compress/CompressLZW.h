@@ -43,8 +43,8 @@ class COMPRESS_LZW : public COMPRESSBASE
                            COMPRESS_LZW                       ();
     virtual               ~COMPRESS_LZW                       ();
 
-    bool                   Compress                           (XBYTE* source,int size,XBUFFER* buffer);
-    bool                   Decompress                         (XBYTE* source,int size,XBUFFER* buffer);
+    bool                   Compress                           (XBYTE* source,XDWORD size,XBUFFER* buffer);
+    bool                   Decompress                         (XBYTE* source,XDWORD size,XBUFFER* buffer);
 
     XDWORD                 LZW_Encode                         (XBYTE* InBuffer, XDWORD dwLength, XBYTE* OutBuffer);
     void                   LZW_Decode                         (XBYTE* InBuffer, XBYTE* OutBuffer);

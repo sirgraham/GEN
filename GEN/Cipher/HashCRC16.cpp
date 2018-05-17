@@ -102,7 +102,7 @@ HASHCRC16::~HASHCRC16()
 //  @param        size :
 */
 /*-----------------------------------------------------------------*/
-bool HASHCRC16::Do(XBYTE* input, int size)
+bool HASHCRC16::Do(XBYTE* input, XDWORD size)
 {
   if(!size) return false;
 
@@ -110,7 +110,7 @@ bool HASHCRC16::Do(XBYTE* input, int size)
 
   resulttmp->Extract(value);
 
-  for(int c=0;c<size;c++)
+  for(XDWORD c=0; c<size; c++)
     {
       value = Update(value, (*input));
       input++;

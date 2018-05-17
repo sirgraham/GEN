@@ -95,7 +95,7 @@ bool XFILEHASH::Open(XPATH& pathname, bool readonly, bool checkhash, bool checkv
 
   if(file->Exist(pathname)!=true) return false;
 
-  bool status=file->Open(pathname,readonly);
+  bool status = file->Open(pathname,readonly);
 
   XSTRING IDini(16);
   XWORD   _ID      = 0;
@@ -147,7 +147,7 @@ bool XFILEHASH::Open(XPATH& pathname, bool readonly, bool checkhash, bool checkv
 
   file->GetPosition(dataposition);
 
-  int size =  file->GetSize() - GetDataPosition();
+  XDWORD size =  file->GetSize() - GetDataPosition();
 
   hash->ResetResult();
 
@@ -514,7 +514,7 @@ bool XFILEHASH::UpdateHash()
 
   hash->ResetResult();
 
-  int size =  file->GetSize() - GetDataPosition();
+  XDWORD size =  file->GetSize() - GetDataPosition();
 
   if(!hash->Do(file, size, GetDataPosition())) return false;
 

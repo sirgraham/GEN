@@ -60,7 +60,7 @@ XPATH::XPATH() : XSTRING()
 //  @return
 //  */
 /*-----------------------------------------------------------------*/
-XPATH::XPATH(int size) : XSTRING(size)
+XPATH::XPATH(XDWORD size) : XSTRING(size)
 {
 
 }
@@ -115,7 +115,7 @@ XPATH::XPATH(const XCHAR* path) : XSTRING(path)
 //  @return
 //  */
 /*-----------------------------------------------------------------*/
-XPATH::XPATH(const XCHAR* path,int size) : XSTRING(path,size)
+XPATH::XPATH(const XCHAR* path,XDWORD size) : XSTRING(path,size)
 {
 
 }

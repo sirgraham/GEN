@@ -122,7 +122,7 @@ class DIOCLICLIENT  : public XFSMACHINE
 
     bool                            GetAnswer                     (int type,int indexanswer,XSTRING& answerstring);
     bool                            ReadAnswerLF                  (XSTRING& answer,int timeout);
-    bool                            ReadAnswer                    (XSTRING& answer,int size,int timeout);
+    bool                            ReadAnswer                    (XSTRING& answer,XDWORD size,int timeout);
 
     bool                            SendCommand                   (int type, int nparams = 0, ...);
     bool                            IsSendCommand                 (DIOCLICLIENT_ERROR& error);

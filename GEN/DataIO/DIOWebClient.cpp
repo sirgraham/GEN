@@ -1384,7 +1384,7 @@ bool DIOWEBCLIENT::MakeOperationFile(DIOURL& url, XBUFFER& webpage, XBUFFER* bou
 
   // need a loop to send the file in chunks
   XBYTE* localbuffer = new XBYTE[1024*1024];
-  int totalread = 0;
+  XDWORD totalread = 0;
   if(file)
     {
 
@@ -1393,9 +1393,12 @@ bool DIOWEBCLIENT::MakeOperationFile(DIOURL& url, XBUFFER& webpage, XBUFFER* bou
       // now send the file
       while(totalread < file->GetSize())
         {
-          int size = 1024*1024;
+          XDWORD size = 1024*1024;
+
           file->Read(localbuffer, &size);
+
           totalread += size;
+
           diostream->Write(localbuffer, size);
           diostream->WaitToFlushOutXBuffer(timeout); // maybe
         }

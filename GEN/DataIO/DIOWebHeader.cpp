@@ -265,7 +265,7 @@ XCHAR* DIOWEBHEADER::GetFieldValue(XCHAR* field)
            int index = line->Find(field, true);
            if(index!= XSTRING_NOTFOUND)
              {
-               int size = (int)XSTRING::GetSize(field);
+               XDWORD size = (int)XSTRING::GetSize(field);
 
                return line->Get() + index + size + 1;
              }

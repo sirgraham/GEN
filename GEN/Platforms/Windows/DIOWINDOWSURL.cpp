@@ -59,7 +59,7 @@ DIOWINDOWSURL::DIOWINDOWSURL() : DIOURL()
 //  @return
 //  */
 /*-----------------------------------------------------------------*/
-DIOWINDOWSURL::DIOWINDOWSURL(int size) : DIOURL(size)
+DIOWINDOWSURL::DIOWINDOWSURL(XDWORD size) : DIOURL(size)
 {
   Clean();
 }
@@ -114,7 +114,7 @@ DIOWINDOWSURL::DIOWINDOWSURL(const XCHAR* url) : DIOURL(url)
 //  @return
 //  */
 /*-----------------------------------------------------------------*/
-DIOWINDOWSURL::DIOWINDOWSURL(const XCHAR* url,int size) : DIOURL(url,size)
+DIOWINDOWSURL::DIOWINDOWSURL(const XCHAR* url,XDWORD size) : DIOURL(url,size)
 {
   Clean();
 }

@@ -81,8 +81,8 @@ class XFILEHASH : public XFILECONTAINER
 
     bool              hashisupdate;
 
-    int               hashposition;
-    int               dataposition;
+    XDWORD            hashposition;
+    XDWORD            dataposition;
 };
 
 

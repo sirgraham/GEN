@@ -1115,7 +1115,7 @@ bool DIOAPPLICATIONUPDATE::CopyFile(XPATH& origin, XPATH& target)
               #define COPYFILEBLOCKSIZE  500*1024
 
               XBUFFER xbuffer;
-              int     br = COPYFILEBLOCKSIZE;
+              XDWORD  br = COPYFILEBLOCKSIZE;
 
               xbuffer.Resize(COPYFILEBLOCKSIZE);
 

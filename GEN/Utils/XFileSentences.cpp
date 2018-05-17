@@ -130,7 +130,7 @@ bool XFILESENTENCES::ConvertFileFromDBF(XPATH& xpath)
       return false;
     }
 
-  int initablepos;
+  XDWORD initablepos;
 
   Create(this->xpath);
 
@@ -148,7 +148,7 @@ bool XFILESENTENCES::ConvertFileFromDBF(XPATH& xpath)
     }
 
   XDWORD  index;
-  int     fpos  = 0;
+  XDWORD  fpos  = 0;
 
   for(c=0;c<nrecords;c++)
     {

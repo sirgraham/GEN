@@ -103,7 +103,7 @@ bool DIOPCAPFRAMEEX::GetDNSAsk(DIOPCAPEXDNSHEADER& header,DIOPCAPEXDNSASK& ask)
   XBYTE* _url = (XBYTE*)_header;
   _url+=sizeof(DIOPCAPEXDNSHEADER);
 
-  int size = DNSnameFormatToString(_url,ask.url);
+  XDWORD size = DNSnameFormatToString(_url,ask.url);
 
   XBYTE* data = (XBYTE*)(UserData_Get());
   data+=(sizeof(DIOPCAPEXDNSHEADER)+size);
@@ -153,7 +153,7 @@ bool DIOPCAPFRAMEEX::GetDNSRequest(DIOPCAPEXDNSHEADER& header,DIOPCAPEXDNSREQUES
 
   for(int c=0;c<header.ANcount;c++)
     {
-      int size = DNSnameFormatToString(_url,request.url);
+      XDWORD size = DNSnameFormatToString(_url,request.url);
 
       XBYTE*  data = (XBYTE*)(UserData_Get());
       data+=(sizeof(DIOPCAPEXDNSHEADER)+size);

@@ -64,7 +64,7 @@ class SQLSQLITEQUERY : public DBSQLQUERY
     virtual DBSQLRESULT*    ConstructResult           ();
     virtual bool            BindParametersToQuery     ();
 
-    int                     Exec                      (const char* zsql,int size);
+    int                     Exec                      (const char* zsql,XDWORD size);
 
     sqlite3_stmt*           ppstmt;
 

@@ -226,12 +226,12 @@ bool XFILETXT::SetFormatChar(XFILETXTFORMATCHAR formatchar)
 //  @param        sizeBOM :
 */
 /*-----------------------------------------------------------------*/
-XFILETXTFORMATCHAR XFILETXT::GetFormatCharFromFile(int* sizeBOM)
+XFILETXTFORMATCHAR XFILETXT::GetFormatCharFromFile(XDWORD* sizeBOM)
 {
   XFILETXTFORMATCHAR formatchar;
 
-  XBYTE BOM[3];
-  int  position = 0;
+  XBYTE   BOM[3];
+  XDWORD  position = 0;
 
   file->GetPosition(position);
   file->SetPosition(0);
@@ -287,7 +287,7 @@ XFILETXTFORMATCHAR XFILETXT::GetFormatCharFromFile(int* sizeBOM)
 //  @param        sizeBOM :
 */
 /*-----------------------------------------------------------------*/
-bool XFILETXT::CreateBOMFormatChar(XFILETXTFORMATCHAR formatchar,XBYTE* BOM,int& sizeBOM)
+bool XFILETXT::CreateBOMFormatChar(XFILETXTFORMATCHAR formatchar, XBYTE* BOM, XDWORD& sizeBOM)
 {
   if(!BOM) return false;
 
@@ -374,7 +374,7 @@ bool XFILETXT::SetTypeLF(XFILETXTTYPELF typeLF)
 //  @param        sizeLF :
 */
 /*-----------------------------------------------------------------*/
-bool XFILETXT::CreateTypeLF(XFILETXTFORMATCHAR formatchar,XFILETXTTYPELF typeLF,XBYTE* LF,int& sizeLF)
+bool XFILETXT::CreateTypeLF(XFILETXTFORMATCHAR formatchar,XFILETXTTYPELF typeLF, XBYTE* LF, XDWORD& sizeLF)
 {
   if(!LF) return false;
 
@@ -632,7 +632,7 @@ XCHAR* XFILETXT::GetLineText(int index)
 //  @param        end :
 */
 /*-----------------------------------------------------------------*/
-bool XFILETXT::GetAllInOneLine(XSTRING& alllines, int start, int end)
+bool XFILETXT::GetAllInOneLine(XSTRING& alllines, XDWORD start, XDWORD end)
 {
   alllines.Empty();
 
@@ -670,7 +670,7 @@ bool XFILETXT::GetAllInOneLine(XSTRING& alllines, int start, int end)
 //  @param        end :
 */
 /*-----------------------------------------------------------------*/
-bool XFILETXT::GetAllInBuffer(XBUFFER& xbuffer,  int start, int end)
+bool XFILETXT::GetAllInBuffer(XBUFFER& xbuffer, XDWORD start, XDWORD end)
 {
   xbuffer.Delete();
 
@@ -815,16 +815,16 @@ bool XFILETXT::ReadAllFile()
 
   DeleteAllLines();
 
-  int                sizeBOM              = 0;
+  XDWORD             sizeBOM              = 0;
   XFILETXTFORMATCHAR formatchar           = GetFormatCharFromFile(&sizeBOM);
-  int                sizebytescharacter   = SizeOfCharacter(formatchar);
+  XDWORD             sizebytescharacter   = SizeOfCharacter(formatchar);
 
   if(this->formatchar==XFILETXTFORMATCHAR_UNKNOWN) this->formatchar = formatchar;
 
   file->SetPosition(sizeBOM);
 
   bool    endfile;
-  int     br;
+  XDWORD  br;
   XBUFFER dataline(false);
 
   XBYTE*  readbuffer = new XBYTE[XFILETXT_MAXBUFFER];
@@ -832,15 +832,15 @@ bool XFILETXT::ReadAllFile()
 
   memset(readbuffer, 0, XFILETXT_MAXBUFFER);
 
-  do{ int bufferpos = 0;
+  do{ XDWORD bufferpos = 0;
 
       br            = XFILETXT_MAXBUFFER;
       endfile = !file->Read(readbuffer, &br);
       if(!br) break;
 
       do{ XFILETXTTYPELF  _typeLF   = XFILETXTTYPELF_UNKNOWN;
-          int             sizeLF    = 0;
-          int             sizeline  = 0;
+          XDWORD          sizeLF    = 0;
+          XDWORD          sizeline  = 0;
           bool            endline   = GetSizeOfLine(formatchar, &readbuffer[bufferpos], _typeLF, sizeLF, sizeline, (br-bufferpos));
 
           if(typeLF == XFILETXTTYPELF_UNKNOWN && _typeLF != XFILETXTTYPELF_UNKNOWN) typeLF = _typeLF;
@@ -900,15 +900,15 @@ bool XFILETXT::WriteAllFile()
 
   if(lines.IsEmpty()) return false;
 
-  XBYTE BOM[3]  = { 0,0,0 };
-  int  sizeBOM = 0;
+  XBYTE   BOM[3]  = { 0,0,0 };
+  XDWORD  sizeBOM = 0;
 
-  XBYTE LF[4]   = { 0,0,0,0 };
-  int  sizeLF  = 0;
+  XBYTE   LF[4]   = { 0,0,0,0 };
+  XDWORD  sizeLF  = 0;
 
-  CreateBOMFormatChar(formatchar,BOM,sizeBOM);
+  CreateBOMFormatChar(formatchar, BOM, sizeBOM);
 
-  CreateTypeLF(formatchar,typeLF,LF,sizeLF);
+  CreateTypeLF(formatchar, typeLF, LF, sizeLF);
 
   file->SetPosition(0);
   if(sizeBOM)
@@ -985,7 +985,7 @@ bool XFILETXT::WriteAllFile()
 
   if(status)
     {
-      int position = 0;
+      XDWORD position = 0;
       file->GetPosition(position);
       status = file->SetSize(position);
     }
@@ -1083,53 +1083,53 @@ bool XFILETXT::AddLine(XSTRING& line)
 //  @param        string :
 */
 /*-----------------------------------------------------------------*/
-bool XFILETXT::GenerateLineFromBuffer(XFILETXTFORMATCHAR formatchar, XBYTE* line, int sizeline, XSTRING& string)
+bool XFILETXT::GenerateLineFromBuffer(XFILETXTFORMATCHAR formatchar, XBYTE* line, XDWORD sizeline, XSTRING& string)
 {
   if(!line)     return true;
   if(!sizeline) return true;
 
   switch(formatchar)
     {
-      case XFILETXTFORMATCHAR_UNKNOWN   : break;
+      case XFILETXTFORMATCHAR_UNKNOWN     : break;
 
-      case XFILETXTFORMATCHAR_ASCII     :
-      case XFILETXTFORMATCHAR_UTF8      :
-                                          string.ConvertFromUTF8((XBYTE*)line,sizeline);
-                                          break;
+      case XFILETXTFORMATCHAR_ASCII       :
+      case XFILETXTFORMATCHAR_UTF8        :
+                                            string.ConvertFromUTF8((XBYTE*)line, sizeline);
+                                            break;
 
-      case XFILETXTFORMATCHAR_UTF16_BE  : { XCHAR* unibuffer = new XCHAR[sizeline];
-                                            XWORD*          wline     = (XWORD*)line;
+      case XFILETXTFORMATCHAR_UTF16_BE    : { XCHAR* unibuffer = new XCHAR[sizeline];
+                                              XWORD* wline     = (XWORD*)line;
 
-                                            if(unibuffer)
-                                              {
-                                                for(int c=0;c<sizeline;c++)
-                                                  {
-                                                    wline[c]     = (wline[c]<<8) | (wline[c]>>8);
-                                                    unibuffer[c] = wline[c];
-                                                  }
+                                              if(unibuffer)
+                                                {
+                                                  for(XDWORD c=0; c<sizeline; c++)
+                                                    {
+                                                      wline[c]     = (wline[c]<<8) | (wline[c]>>8);
+                                                      unibuffer[c] = wline[c];
+                                                    }
 
-                                                string.Set(unibuffer,sizeline);
+                                                  string.Set(unibuffer,sizeline);
 
-                                                delete [] unibuffer;
-                                              }
-                                         }
-                                         break;
+                                                  delete [] unibuffer;
+                                                }
+                                             }
+                                             break;
 
-      case XFILETXTFORMATCHAR_UTF16_LE  :{  XCHAR* unibuffer = new XCHAR[sizeline];
-                                            XWORD*          wline     = (XWORD*)line;
-                                            if(unibuffer)
-                                              {
-                                                for(int c=0;c<sizeline;c++)
-                                                  {
-                                                    unibuffer[c] = wline[c];
-                                                  }
+      case XFILETXTFORMATCHAR_UTF16_LE   :  {  XCHAR* unibuffer = new XCHAR[sizeline];
+                                               XWORD*          wline     = (XWORD*)line;
+                                               if(unibuffer)
+                                                 {
+                                                   for(XDWORD c=0; c<sizeline; c++)
+                                                     {
+                                                       unibuffer[c] = wline[c];
+                                                     }
 
-                                                string.Set(unibuffer,sizeline);
+                                                   string.Set(unibuffer,sizeline);
 
-                                                delete [] unibuffer;
-                                              }
-                                         }
-                                         break;
+                                                   delete [] unibuffer;
+                                                 }
+                                            }
+                                            break;
     }
 
   return true;
@@ -1153,7 +1153,7 @@ bool XFILETXT::GenerateLineFromBuffer(XFILETXTFORMATCHAR formatchar, XBYTE* line
 //  @param        sizeline :
 */
 /*-----------------------------------------------------------------*/
-bool XFILETXT::AddLine(XFILETXTFORMATCHAR formatchar, XBYTE* line, int sizeline)
+bool XFILETXT::AddLine(XFILETXTFORMATCHAR formatchar, XBYTE* line, XDWORD sizeline)
 {
   XSTRING* string = new XSTRING();
   if(!string) return false;
@@ -1190,7 +1190,7 @@ bool XFILETXT::AddLine(XFILETXTFORMATCHAR formatchar, XBYTE* line, int sizeline)
 //  @param        resultsizeLF :
 */
 /*-----------------------------------------------------------------*/
-bool XFILETXT::AddLineAlready(XCHAR* line, int* resultsizeline, int* resultsizeLF)
+bool XFILETXT::AddLineAlready(XCHAR* line, XDWORD* resultsizeline, XDWORD* resultsizeLF)
 {
   if(!line) return false;
 
@@ -1218,15 +1218,15 @@ bool XFILETXT::AddLineAlready(XCHAR* line, int* resultsizeline, int* resultsizeL
 //  @param        resultsizeLF :
 */
 /*-----------------------------------------------------------------*/
-bool XFILETXT::AddLineAlready(XSTRING& line, int* resultsizeline, int* resultsizeLF)
+bool XFILETXT::AddLineAlready(XSTRING& line, XDWORD* resultsizeline, XDWORD* resultsizeLF)
 {
   if(!file)           return false;
   if(!file->IsOpen()) return false;
 
-  XBYTE LF[4]   = { 0,0,0,0 };
-  int  sizeLF  = 0;
+  XBYTE   LF[4]   = { 0,0,0,0 };
+  XDWORD  sizeLF  = 0;
 
-  CreateTypeLF(formatchar,typeLF,LF,sizeLF);
+  CreateTypeLF(formatchar, typeLF, LF, sizeLF);
 
   file->SetPosition(XFILE_SEEKEND);
 
@@ -1257,7 +1257,7 @@ bool XFILETXT::AddLineAlready(XSTRING& line, int* resultsizeline, int* resultsiz
 
                                                 bw = (line.GetSize()*2);
 
-                                                for(int d=0;d<(int)line.GetSize();d++)
+                                                for(XDWORD d=0; d<(int)line.GetSize(); d++)
                                                   {
                                                     bufferw[d] = (XWORD)line.Get()[d];
                                                     bufferw[d] = (bufferw[d]<<8) | (bufferw[d]>>8);
@@ -1269,7 +1269,7 @@ bool XFILETXT::AddLineAlready(XSTRING& line, int* resultsizeline, int* resultsiz
 
                                                 bw = (line.GetSize()*2);
 
-                                                for(int d=0;d<(int)line.GetSize();d++)
+                                                for(XDWORD d=0; d<(int)line.GetSize(); d++)
                                                   {
                                                     bufferw[d] = (XWORD)line.Get()[d];
                                                   }
@@ -1430,10 +1430,10 @@ bool XFILETXT::AddBufferLines(XFILETXTFORMATCHAR formatchar, XBUFFER& xbuffer)
   this->formatchar = formatchar;
 
   do{ XFILETXTTYPELF typeLF;
-      int            sizeLF   = 0;
-      int            sizeline = 0;
+      XDWORD         sizeLF   = 0;
+      XDWORD         sizeline = 0;
 
-      bool endline = GetSizeOfLine(formatchar,&buffer[nchar],typeLF,sizeLF,sizeline,(br-nchar));
+      bool endline = GetSizeOfLine(formatchar, &buffer[nchar], typeLF, sizeLF, sizeline, (br-nchar));
 
       if(!endline) sizeline = (br-nchar);
 
@@ -1502,10 +1502,10 @@ bool XFILETXT::AddBufferLines(XFILETXTFORMATCHAR formatchar, XBUFFER& xbuffer)
 //  @param        maxsize :
 */
 /*-----------------------------------------------------------------*/
-bool XFILETXT::GetSizeOfLine(XFILETXTFORMATCHAR formatchar, XBYTE* buffer, XFILETXTTYPELF& typeLF, int& sizeLF, int& size, int maxsize)
+bool XFILETXT::GetSizeOfLine(XFILETXTFORMATCHAR formatchar, XBYTE* buffer, XFILETXTTYPELF& typeLF, XDWORD& sizeLF, XDWORD& size, XDWORD maxsize)
 {
-  bool status = false;
-  int  c      = 0;
+  bool    status = false;
+  XDWORD  c      = 0;
 
   sizeLF = 0;
 

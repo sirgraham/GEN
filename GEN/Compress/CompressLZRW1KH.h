@@ -38,11 +38,11 @@ class COMPRESS_LZRW1KH : public COMPRESSBASE
                             COMPRESS_LZRW1KH      ();
     virtual                ~COMPRESS_LZRW1KH      ();
 
-    bool                    Compress              (XBYTE* origin,int size,XBUFFER* buffer);
-    bool                    Decompress            (XBYTE* origin,int size,XBUFFER* buffer);
+    bool                    Compress              (XBYTE* origin,XDWORD size,XBUFFER* buffer);
+    bool                    Decompress            (XBYTE* origin,XDWORD size,XBUFFER* buffer);
 
-    bool                    Compress              (XBYTE* origin,int size,void* param1=NULL);
-    bool                    Decompress            (XBYTE* origin,int size,void* param1=NULL);
+    bool                    Compress              (XBYTE* origin,XDWORD size,void* param1=NULL);
+    bool                    Decompress            (XBYTE* origin,XDWORD size,void* param1=NULL);
 
   private:
 

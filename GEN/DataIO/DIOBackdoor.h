@@ -40,7 +40,7 @@
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
 
 #define DIOBACKDOOR_CFGREMOTENAMEFILE       __L("backdoor.ini")
-#define DIOBACKDOOR_DEFAULTPORTSSH          1240
+#define DIOBACKDOOR_DEFAULTPORT             3540
 
 
 /*---- CLASS -----------------------------------------------------------------------------*/
@@ -204,9 +204,16 @@ class DIOBACKDOOR
                                     if(!diostream) return false;
 
                                     if(!diostream->Open())             return false;
-                                    if(!diostream->WaitToConnected(2)) return false;
+
+                                    if((mode == DIOSTREAMMODE_CLIENT) ||  (mode == DIOSTREAMMODE_SLAVE))
+                                      {
+                                        if(!diostream->WaitToConnected(10)) return false;
+                                      }
 
                                     xthreadconnexion = CREATEXTHREAD(XTHREADGROUPID_UNGROUP,__L("DIOBACKDOOR::DIOBACKDOOR"), ThreadRunFunction, (void*)this);
+                                    if(xthreadconnexion) xthreadconnexion->Ini();
+
+                                    return true;
                                   }
 
 
@@ -222,7 +229,13 @@ class DIOBACKDOOR
                                         diostream = NULL;
                                       }
 
-                                    DELETEXTHREAD(XTHREADGROUPID_UNGROUP, xthreadconnexion);
+                                    if(xthreadconnexion)
+                                      {
+                                        xthreadconnexion->End();
+                                        DELETEXTHREAD(XTHREADGROUPID_UNGROUP, xthreadconnexion);
+
+                                        xthreadconnexion = NULL;
+                                      }
 
                                     return status;
                                   }
@@ -256,10 +269,10 @@ class DIOBACKDOOR
 
     void                          Clean                 ()
                                   {
-                                    diostream        = NULL;
+                                    diostream        = NULL;                                    
 
                                     URLtarget.Empty();
-                                    port             = 0;
+                                    port             = DIOBACKDOOR_DEFAULTPORT;
 
                                     xthreadconnexion = NULL;
                                     commandreceived.Empty();
@@ -304,7 +317,7 @@ class DIOBACKDOOR
                                         if((character >= 0x20) && (character < 0x80)) commandreceived.Add(character);
                                       }
 
-                                    return true;
+                                    return false;
                                   }
 
   static void                     ThreadRunFunction     (void* param)
@@ -339,8 +352,12 @@ class DIOBACKDOOR
                                                           {
                                                             for(int c=0; c<xfiletxt->GetNLines(); c++)
                                                               {
-                                                                XSTRING_CREATEOEM((*xfiletxt->GetLine(c)), line)
-                                                                backdoor->diostream->Write((XBYTE*)line, xfiletxt->GetLine(c)->GetSize());
+                                                                XSTRING string = xfiletxt->GetLine(c)->Get();
+
+                                                                string.Add(__L("\n\r"));
+
+                                                                XSTRING_CREATEOEM(string, line)
+                                                                backdoor->diostream->Write((XBYTE*)line, string.GetSize());
                                                                 XSTRING_DELETEOEM(line)
                                                               }
                                                           }

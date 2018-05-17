@@ -1315,8 +1315,8 @@ bool SCRIPTG::HaveError(SCRIPTERRORMSG errorcode)
       SCRIPTXEVENT xevent(this,(errorcode==SCRIPTERRORMSG_USERBREAK)?SCRIPTXEVENTTYPE_BREAK:SCRIPTXEVENTTYPE_ERROR);
 
 
-      int sizecharnow = (int)(ipprg - script.Get());
-      int sizechar    = 0;
+      XDWORD sizecharnow = (int)(ipprg - script.Get());
+      XDWORD sizechar    = 0;
       int nline       = 0;
 
       for(int c=0;c<xfiletxt->GetNLines();c++)

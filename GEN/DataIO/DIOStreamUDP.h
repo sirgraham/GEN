@@ -70,7 +70,7 @@ class DIOSTREAMUDPDATAGRAM
     void                              SetPorts                                  (XWORD port)                      { this->port = port;                    }
 
     XBUFFER*                          GetData                                   ()                                { return data;                          }
-    bool                              SetData                                   (XBYTE* data,int size)
+    bool                              SetData                                   (XBYTE* data,XDWORD size)
                                       {
                                         if(!this->data) return false;
                                         this->data->Delete();
@@ -113,7 +113,7 @@ class DIOSTREAMUDP : public DIOSTREAM
 
     bool                              ReadDatagram                              (XSTRING& address, XWORD& port, XBUFFER& xbuffer);
 
-    bool                              WriteDatagram                             (XSTRING& address, XWORD port, XBYTE* buffer, int size);
+    bool                              WriteDatagram                             (XSTRING& address, XWORD port, XBYTE* buffer, XDWORD size);
     bool                              WriteDatagram                             (XSTRING& address, XWORD port, XBUFFER& xbuffer);
 
     virtual bool                      Disconnect                                ()                                = 0;
@@ -135,8 +135,8 @@ class DIOSTREAMUDP : public DIOSTREAM
 
   protected:
 
-    bool                              AddDatagram                               (bool istosend, XCHAR* address, XWORD port, XBYTE* data, int size);
-    bool                              AddDatagram                               (bool istosend, XSTRING& address, XWORD port, XBYTE* data, int size);
+    bool                              AddDatagram                               (bool istosend, XCHAR* address, XWORD port, XBYTE* data, XDWORD size);
+    bool                              AddDatagram                               (bool istosend, XSTRING& address, XWORD port, XBYTE* data, XDWORD size);
 
     DIOSTREAMUDPDATAGRAM*             GetDatagram                               (int index);
     int                               GetFirstDatagram(bool issend);

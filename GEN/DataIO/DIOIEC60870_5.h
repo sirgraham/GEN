@@ -245,13 +245,13 @@ class DIOIEC60870_5  : public XSUBJECT
     bool                      SendMsgVar                          (XBYTE functioncode, XBUFFER* dataASDU);
     bool                      SendMsgFix                          (XBYTE functioncode);
 
-    bool                      WaitToReadMsg                       (int size,int timeout =  DIOIEC60870_5_READTIMEOUT);
+    bool                      WaitToReadMsg                       (XDWORD size,int timeout =  DIOIEC60870_5_READTIMEOUT);
     bool                      ReadMsg                             (XBYTE& retfunctioncode, bool& retisfixmsg, XBUFFER* retASDU, int timeout =  DIOIEC60870_5_READTIMEOUT);
 
-    XBYTE                     CalculateCheckSum                   (XBYTE* buffer, int sizebuffer);
+    XBYTE                     CalculateCheckSum                   (XBYTE* buffer, XDWORD sizebuffer);
     XBYTE                     CalculateCheckSum                   (XBUFFER& xbuffer);
 
-    int                       GetIntFromBuffer                    (XBYTE* buffer, int size);
+    int                       GetIntFromBuffer                    (XBYTE* buffer, XDWORD size);
 
     DIOSTREAM*                diostream;
     XTIMER*                   xtimer;

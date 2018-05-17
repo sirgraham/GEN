@@ -95,7 +95,7 @@ DIOI2CEEPROM24XXX::~DIOI2CEEPROM24XXX()
 //  @param        size :
 */
 /*-----------------------------------------------------------------*/
-bool DIOI2CEEPROM24XXX::Read(XDWORD address, XBYTE* buffer, int size)
+bool DIOI2CEEPROM24XXX::Read(XDWORD address, XBYTE* buffer, XDWORD size)
 {
   if(!diostream)        return false;
   if(!IsInitialized())  return false;
@@ -106,7 +106,7 @@ bool DIOI2CEEPROM24XXX::Read(XDWORD address, XBYTE* buffer, int size)
 
   bool status = true;
 
-  for(int c=0; c<size; c++)
+  for(XDWORD c=0; c<size; c++)
     {
       xtimerout->Reset();
 
@@ -144,7 +144,7 @@ bool DIOI2CEEPROM24XXX::Read(XDWORD address, XBYTE* buffer, int size)
 //  @param        xbuffer :
 */
 /*-----------------------------------------------------------------*/
-bool DIOI2CEEPROM24XXX::Read(XDWORD address, int size, XBUFFER& xbuffer)
+bool DIOI2CEEPROM24XXX::Read(XDWORD address, XDWORD size, XBUFFER& xbuffer)
 {
   xbuffer.Delete();
   xbuffer.Resize(size);
@@ -172,7 +172,7 @@ bool DIOI2CEEPROM24XXX::Read(XDWORD address, int size, XBUFFER& xbuffer)
 //  @param        size :
 */
 /*-----------------------------------------------------------------*/
-bool DIOI2CEEPROM24XXX::Write(XDWORD address, XBYTE* buffer, int size)
+bool DIOI2CEEPROM24XXX::Write(XDWORD address, XBYTE* buffer, XDWORD size)
 {
   if(!diostream)        return false;
   if(!IsInitialized())  return false;
@@ -183,7 +183,7 @@ bool DIOI2CEEPROM24XXX::Write(XDWORD address, XBYTE* buffer, int size)
 
   bool status = true;
 
-  for(int c=0; c<size; c++)
+  for(XDWORD c=0; c<size; c++)
     {
       status = WriteBYTE(address+c, buffer[c]);
       if(!status) break;

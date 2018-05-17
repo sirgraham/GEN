@@ -82,13 +82,13 @@ XFILE::~XFILE()
 //  @param        size :
 */
 //-------------------------------------------------------------------
-bool XFILE::EraseBlock(int size)
+bool XFILE::EraseBlock(XDWORD size)
 {
   XBYTE* tbuffer;
-  int    position;
-  int    sizetomove;
-  int    nblocks;
-  int    rest;
+  XDWORD position;
+  XDWORD sizetomove;
+  XDWORD nblocks;
+  XDWORD rest;
   bool   status = true;
 
   if(!isopen) return false;
@@ -103,7 +103,7 @@ bool XFILE::EraseBlock(int size)
   nblocks = (sizetomove / XFILE_MAXBUFFER);
   rest    = (sizetomove % XFILE_MAXBUFFER);
 
-  for(int c=0; c<nblocks; c++)
+  for(XDWORD c=0; c<nblocks; c++)
     {
       SetPosition(position + size + (c*XFILE_MAXBUFFER));
       if(Read(tbuffer, XFILE_MAXBUFFER))
@@ -142,11 +142,11 @@ bool XFILE::EraseBlock(int size)
 //  @param        size :
 */
 //-------------------------------------------------------------------
-bool XFILE::InsertBlock(XBYTE* buffer,int size)
+bool XFILE::InsertBlock(XBYTE* buffer, XDWORD size)
 {
   XBYTE*  movebuffer;
-  int     origin;
-  int     position;
+  XDWORD  origin;
+  XDWORD  position;
 
   bool    status = true;
 
@@ -161,17 +161,17 @@ bool XFILE::InsertBlock(XBYTE* buffer,int size)
 
   ActualizeSize();
 
-  int sizefile      = GetSize();
-  int sizetomove    = sizefile-position;
-  int nblockstomove = (sizetomove / XFILE_MAXBUFFER);
-  int resttomove    = (sizetomove % XFILE_MAXBUFFER);
-  int c;
+  XDWORD sizefile      = GetSize();
+  XDWORD sizetomove    = sizefile-position;
+  XDWORD nblockstomove = (sizetomove / XFILE_MAXBUFFER);
+  XDWORD resttomove    = (sizetomove % XFILE_MAXBUFFER);
+  XDWORD c;
 
   position = GetSize() - XFILE_MAXBUFFER;
 
   for(c=0; c<nblockstomove+1; c++)
     {
-      int rb;
+      XDWORD rb;
 
       if(c>=nblockstomove)
         {

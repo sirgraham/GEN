@@ -206,7 +206,7 @@ bool DIOWEBSERVER_HEADER::GetResultString(XSTRING& resultstring)
 //  @param				password : 
 */
 /*-----------------------------------------------------------------*/
-bool DIOWEBSERVER_HEADER::Create(DIOWEBSERVER* webserver, DIOWEBSERVER_CONNEXION* connexion, DIOWEBSERVER_REQUEST* request, XSTRING* resource, int version, int subversion, DIOWEBHEADER_RESULT result, int size, XSTRING* entitytag, bool isplayable, bool password)
+bool DIOWEBSERVER_HEADER::Create(DIOWEBSERVER* webserver, DIOWEBSERVER_CONNEXION* connexion, DIOWEBSERVER_REQUEST* request, XSTRING* resource, int version, int subversion, DIOWEBHEADER_RESULT result, XDWORD size, XSTRING* entitytag, bool isplayable, bool password)
 {
 		/*
 				Accept - Ranges:bytes
@@ -264,11 +264,13 @@ bool DIOWEBSERVER_HEADER::Create(DIOWEBSERVER* webserver, DIOWEBSERVER_CONNEXION
 		else if (resource->Find(__L(".avi"),		true) != XSTRING_NOTFOUND)  line += __L("video/x-msvideof");
 		else if (resource->Find(__L(".css"),		true) != XSTRING_NOTFOUND)  line += __L("text/css");
 		else if (resource->Find(__L(".json"),		true) != XSTRING_NOTFOUND)  line += __L("application/json");
+    else if (resource->Find(__L(".zip"),		true) != XSTRING_NOTFOUND)  line += __L("application/zip");
 		else if (resource->Find(__L("."),				true) == XSTRING_NOTFOUND)  line += __L("text/html");
 		else line += __L("text/html");
 		AddLine(line.Get());
 
 		//AddLine(__L("Date : Mon, 06 Nov 2017 14:21:24 GMT"));
+
 		XDATETIME* datetime = xfactory->CreateDateTime();
 		XSTRING date, day, month, hour;
 		datetime->Read();
@@ -882,22 +884,22 @@ bool DIOWEBSERVER_CONNEXION::Activate()
 //  @param				timeout : 
 */
 /*-----------------------------------------------------------------*/
-bool DIOWEBSERVER_CONNEXION::Receiver(XBYTE* buffer,int& size,int timeout)
+bool DIOWEBSERVER_CONNEXION::Receiver(XBYTE* buffer, XDWORD& size, int timeout)
 {
 	if(!xtimer)		 return false;
 	if(!diostream) return false;
 	if(!size)			 return false;
 
-	int br;
+	XDWORD br;
 
 	xtimer->Reset();
 
 	while(1)
 		{
-			br = diostream->Read(buffer,size);
+			br = diostream->Read(buffer, size);
 			if(br) break;
 
-			if(xtimer->GetMeasureSeconds()>=(XDWORD)timeout) break;
+			if(xtimer->GetMeasureSeconds()>= (XDWORD)timeout) break;
 		}
 			
 	if(!br) return false;
@@ -925,7 +927,7 @@ bool DIOWEBSERVER_CONNEXION::Receiver(XBYTE* buffer,int& size,int timeout)
 //  @param				timeout : 
 */
 /*-----------------------------------------------------------------*/
-bool DIOWEBSERVER_CONNEXION::Send(XBYTE* buffer, int& size, int timeout)
+bool DIOWEBSERVER_CONNEXION::Send(XBYTE* buffer, XDWORD& size, int timeout)
 {
 	if(!diostream) return false;
 	if(!size)			 return false;
@@ -964,7 +966,7 @@ bool DIOWEBSERVER_CONNEXION::Send(XBYTE* buffer, int& size, int timeout)
 /*-----------------------------------------------------------------*/
 bool DIOWEBSERVER_CONNEXION::Send(XBUFFER& xbuffer, int timeout)
 {
-  int size = xbuffer.GetSize();
+  XDWORD size = xbuffer.GetSize();
 
   return Send(xbuffer.Get(), size, timeout);
 }
@@ -991,8 +993,8 @@ bool DIOWEBSERVER_CONNEXION::Send(XBUFFER& xbuffer, int timeout)
 /*-----------------------------------------------------------------*/
 bool DIOWEBSERVER_CONNEXION::Send(XSTRING& string, int timeout)
 {
-	int _size		 = string.GetSize();
-	bool status	 = false;
+	XDWORD _size		 = string.GetSize();
+	bool   status	 = false;
 
 	switch(actualencodingflag)
 		{
@@ -1315,33 +1317,48 @@ bool DIOWEBSERVER_CONNEXION::ProcessFile(XPATH& xpath, XSTRING& resultofparsing,
 {	
 	bool status = true;	  	
 
-  XFILE* file = xfactory->Create_File();
-  if(!file) return false;		    
+  XFILE* xfile = xfactory->Create_File();
+  if(!xfile) return false;		    
 
-	if(file->Open(xpath))
+	if(xfile->Open(xpath))
 		{
-			XDWORD size = file->GetSize();
+			XDWORD size = xfile->GetSize();
 
-			XBUFFER* buffer = new XBUFFER(size,true);	
-			if(buffer) 
-				{
-					int sizeread = size;
+      if(size > DIOWEBSERVER__MAXBUFFERFILE)  size = DIOWEBSERVER__MAXBUFFERFILE;
 
-					file->Read(buffer->Get(), &sizeread);	
+      if(size) 
+        {
+			    XBUFFER* xbuffer = new XBUFFER(size, true);	
+			    if(xbuffer) 
+				    {
+              XDWORD sizeread; 
 
-			    file->Close();	
+              do{ sizeread = size;
 
-					if(Send(*buffer))						
-						{
-							if(diostream->WaitToFlushOutXBuffer(5)) status = true;
-						}
-						
-					delete(buffer);
+					        xfile->Read(xbuffer->Get(), &sizeread);
+                  
+                  if(sizeread)
+                    {
+					            if(!Send(xbuffer->Get(), sizeread))						
+						             {
+							             status = false;
+                           break;
+						             }
+                    }
+                  
+                } while(sizeread == size);
+						  
+                if(diostream->WaitToFlushOutXBuffer(5)) status = true;
+
+					    delete(xbuffer);
+            }  
+              
+         xfile->Close();	
 
 		   } else status = false;
 		}
 
-	xfactory->Delete_File(file);
+	xfactory->Delete_File(xfile);
 
 	return status;
 }
@@ -1588,7 +1605,7 @@ bool DIOWEBSERVER_CONNEXION::GetRequest(DIOWEBSERVER_REQUEST& request, int timeo
 			XBUFFER* data = request.GetData();
 			if(!data) return false;
 	
-			int size;
+			XDWORD size;
 
 			data->Delete();
 
@@ -1678,7 +1695,7 @@ bool DIOWEBSERVER_CONNEXION::ReceiverLine(XSTRING& string,int maxlen)
 
   for(int c=1;c<maxlen-1;c++) 
 		{	
-			int size = 1;
+			XDWORD size = 1;
 
 			if(Receiver((XBYTE*)&data,size))
 				{		

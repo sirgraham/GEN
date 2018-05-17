@@ -136,7 +136,7 @@ bool SQLSQLITEQUERY::Execute()
 //  @param        zsql :
 */
 /*-----------------------------------------------------------------*/
-int SQLSQLITEQUERY::Exec(const char* sql,int size)
+int SQLSQLITEQUERY::Exec(const char* sql,XDWORD size)
 {
   sqlite3* db = static_cast<SQLSQLITEDATABASE*>(database)->sqlite3database;
 

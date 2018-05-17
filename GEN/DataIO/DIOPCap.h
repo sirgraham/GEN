@@ -149,7 +149,7 @@ class DIOPCAPFRAME
     int                               UserData_GetSize              ();
 
     XBUFFER*                          GetData                       ();
-    bool                              SetData                       (XBYTE* data, int size);
+    bool                              SetData                       (XBYTE* data, XDWORD size);
 
   private:
 
@@ -186,7 +186,7 @@ class DIOPCAP
 
   protected:
 
-    bool                              Frames_Add                    (XBYTE* data,int size);
+    bool                              Frames_Add                    (XBYTE* data,XDWORD size);
 
     virtual bool                      CreateListNetInterfaces       () = 0;
     bool                              DeleteListNetInterfaces       ();

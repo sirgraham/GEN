@@ -127,7 +127,7 @@ class DIOAPPLICATIONUPDATEVERSIONDATA
 class DIOAPPLICATIONUPDATEFILE
 {
   public:
-                                          DIOAPPLICATIONUPDATEFILE          (XPATH& xpathfile, XDWORD CRC32, int size)
+                                          DIOAPPLICATIONUPDATEFILE          (XPATH& xpathfile, XDWORD CRC32, XDWORD size)
                                           {
                                             Clean();
 

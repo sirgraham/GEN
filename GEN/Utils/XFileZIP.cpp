@@ -390,7 +390,7 @@ bool XFILECMPZIP::GetSeek(int *position)
 //  @param        size :
 */
 /*-----------------------------------------------------------------*/
-bool XFILECMPZIP::Read(XBYTE* buffer,int size)
+bool XFILECMPZIP::Read(XBYTE* buffer,XDWORD size)
 {
   if(!on)     return false;
   if(zipoper) return false;
@@ -447,7 +447,7 @@ bool XFILECMPZIP::Read(XBYTE* buffer,int* size)
 //  @param        size :
 */
 /*-----------------------------------------------------------------*/
-bool XFILECMPZIP::Write(XBYTE* buffer,int size)
+bool XFILECMPZIP::Write(XBYTE* buffer,XDWORD size)
 {
   if(!on)      return false;
   if(!zipoper) return false;
@@ -703,13 +703,13 @@ XDWORD XFILEZIP::GetFileCRC(XFILE*  xfile)
   if(!xfile->IsOpen()) return 0;
 
   int     blocksize = 1024;
-  XBYTE*    buffer    = new XBYTE[blocksize];
-  int     size;
-  XDWORD    crcfile       = 0;
+  XBYTE*  buffer    = new XBYTE[blocksize];
+  XDWORD  size;
+  XDWORD  crcfile       = 0;
 
   if(!buffer) return 0;
 
-  int position = 0;
+  XDWORD position = 0;
 
   xfile->GetPosition(position);
 
@@ -769,7 +769,7 @@ bool XFILEZIP::AddFile(XPATH& xpath,XPATH& xpathnew,XCHAR* password)
           if(filecmp->Create(crcfile,&zfinfo,password))
             {
               XBYTE* buffer = new XBYTE[blocksize];
-              int   size;
+              XDWORD size;
 
               if(buffer)
                 {

@@ -81,7 +81,7 @@ COMPRESS_GZ::~COMPRESS_GZ()
 //  @param        xbuffer :
 */
 //-------------------------------------------------------------------
-bool COMPRESS_GZ::Compress(XBYTE* source,int size,XBUFFER* xbuffer)
+bool COMPRESS_GZ::Compress(XBYTE* source,XDWORD size,XBUFFER* xbuffer)
 {
 
   if(!source)  return false;
@@ -115,7 +115,7 @@ bool COMPRESS_GZ::Compress(XBYTE* source,int size,XBUFFER* xbuffer)
 //  @param        xbuffer :
 */
 //-------------------------------------------------------------------
-bool COMPRESS_GZ::Decompress(XBYTE* source,int size,XBUFFER* xbuffer)
+bool COMPRESS_GZ::Decompress(XBYTE* source,XDWORD size,XBUFFER* xbuffer)
 {
 
   if(!source)  return false;

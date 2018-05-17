@@ -1,6 +1,36 @@
 # GEN Third Party Libraries
 
-This is the list of third-party libraries used by the GEN framework.
+**GEN FrameWork** uses several third-party libraries for part of its functionality that it offers. These libraries should only be present if some features of **GEN FrameWork** are used.
+
+It is convenient that these libraries are organized in a directory and have the appropriate versions of them, although this location can be organized where necessary by changing the project files.
+
+The suggested default organization and directory is:
+
+**ThirdPartyLibraries struct (Default)** 
+```
+GENFramework/ThirdPartyLibraries/zlib
+                                 libpng
+                                 jpeglib
+                                 lua
+                                 ...
+                                 (rest of directories)
+````
+
+The project files of the included applications of TEST (GENFrameWork/Tests) and GEN UTILS (GENFrameWork/Utils) refer to that default directory.
+
+These libraries can be downloaded from the Internet because their use is public and free.
+
+Next, you have a list of the libraries used with:
+- Installation directory (suggested by default).
+- Version used by GEN.
+- URL of the creator.
+- Download URL (if applicable)
+- Additional comments for your configuration.
+
+Additionally, to facilitate the use of FrameWork GEN you have available this download URL in which in a single compressed file is all the contents of this directory:
+
+[Third Party Libraries URL **http://genframework.dyndns.org/thirdpartylibraries.zip**](http://genframework.dyndns.org/thirdpartylibraries.zip)
+
 
 ## List of third party libraries
 

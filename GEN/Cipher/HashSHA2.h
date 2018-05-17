@@ -77,7 +77,7 @@ class HASHSHA2 : public HASH
     virtual          ~HASHSHA2              ();
 
     using             HASH::Do;
-    bool              Do                    (XBYTE* input, int size);
+    bool              Do                    (XBYTE* input, XDWORD size);
 
     int               GetDefaultSize        ();
 

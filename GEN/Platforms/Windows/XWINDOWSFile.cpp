@@ -169,7 +169,7 @@ bool XWINDOWSFILE::Create(XCHAR* xpath)
 //  @param        size :
 */
 /*-----------------------------------------------------------------*/
-bool XWINDOWSFILE::SetSize(int size)
+bool XWINDOWSFILE::SetSize(XDWORD size)
 {
   if(!isopen)                   return false;
   if(!filehandle)               return false;
@@ -199,7 +199,7 @@ bool XWINDOWSFILE::SetSize(int size)
 //  @param        position :
 */
 /*-----------------------------------------------------------------*/
-bool XWINDOWSFILE::GetPosition(int& position)
+bool XWINDOWSFILE::GetPosition(XDWORD& position)
 {
   if(!isopen)     return false;
   if(!filehandle) return false;
@@ -228,12 +228,12 @@ bool XWINDOWSFILE::GetPosition(int& position)
 //  @param        position :
 */
 /*-----------------------------------------------------------------*/
-bool XWINDOWSFILE::SetPosition(int position)
+bool XWINDOWSFILE::SetPosition(XDWORD position)
 {
   if(!isopen)     return false;
   if(!filehandle) return false;
 
-  int  _position    = position;
+  XDWORD  _position    = position;
 
   if(_position == XFILE_SEEKEND) _position = cachesize;
   if(_position > cachesize) return false;
@@ -260,7 +260,7 @@ bool XWINDOWSFILE::SetPosition(int position)
 //  @param        cipher :
 */
 //-------------------------------------------------------------------
-bool XWINDOWSFILE::Read(XBYTE* buffer, int size, CIPHER* cipher)
+bool XWINDOWSFILE::Read(XBYTE* buffer, XDWORD size, CIPHER* cipher)
 {
   if(!isopen)       return false;
   if(!filehandle)   return false;
@@ -293,7 +293,7 @@ bool XWINDOWSFILE::Read(XBYTE* buffer, int size, CIPHER* cipher)
 //  @param        cipher :
 */
 //-------------------------------------------------------------------
-bool XWINDOWSFILE::Read(XBYTE* buffer, int* size, CIPHER* cipher)
+bool XWINDOWSFILE::Read(XBYTE* buffer, XDWORD* size, CIPHER* cipher)
 {
   if(!isopen)       return false;
   if(!filehandle)   return false;
@@ -341,7 +341,7 @@ bool XWINDOWSFILE::Read(XBYTE* buffer, int* size, CIPHER* cipher)
 //  @param        cipher :
 */
 //-------------------------------------------------------------------
-bool XWINDOWSFILE::Write(XBYTE* buffer, int size, CIPHER* cipher)
+bool XWINDOWSFILE::Write(XBYTE* buffer, XDWORD size, CIPHER* cipher)
 {
   if(!isopen)       return false;
   if(!filehandle)   return false;

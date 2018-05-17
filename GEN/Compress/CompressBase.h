@@ -44,11 +44,11 @@ class COMPRESSBASE
     COMPRESSBASE_TYPE     GetType               ();
     COMPRESSBASE_TYPE     SetType               (COMPRESSBASE_TYPE type = COMPRESSBASE_TYPE_NONE);
 
-    virtual bool          Compress              (XBYTE* origin,int size,XBUFFER* buffer);
-    virtual bool          Decompress            (XBYTE* origin,int size,XBUFFER* buffer);
+    virtual bool          Compress              (XBYTE* origin,XDWORD size,XBUFFER* buffer);
+    virtual bool          Decompress            (XBYTE* origin,XDWORD size,XBUFFER* buffer);
 
-    virtual bool          Compress              (XBYTE* origin,int size,void* param1 = NULL);
-    virtual bool          Decompress            (XBYTE* origin,int size,void* param1 = NULL);
+    virtual bool          Compress              (XBYTE* origin,XDWORD size,void* param1 = NULL);
+    virtual bool          Decompress            (XBYTE* origin,XDWORD size,void* param1 = NULL);
 
     virtual bool          CompressResult        (bool compress,XBYTE data,void* param1 = NULL);
 

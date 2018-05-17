@@ -71,11 +71,11 @@ XSTRING::XSTRING()
 //  @param        initsize :
 */
 /*-----------------------------------------------------------------*/
-XSTRING::XSTRING(int initsize)
+XSTRING::XSTRING(XDWORD size)
 {
   Clean();
 
-  ReAllocBuffer(initsize);
+  ReAllocBuffer(size);
 }
 
 
@@ -137,7 +137,7 @@ XSTRING::XSTRING(const XCHAR* string)
 //  @param        size :
 */
 /*-----------------------------------------------------------------*/
-XSTRING::XSTRING(const XCHAR* string,int size)
+XSTRING::XSTRING(const XCHAR* string,XDWORD size)
 {
   Clean();
 
@@ -267,7 +267,7 @@ XDWORD XSTRING::GetSize() const
 /*-----------------------------------------------------------------*/
 XDWORD XSTRING::GetSize(const XCHAR* string)
 {
-  int size = 0;
+  XDWORD size = 0;
 
   while(string[size])
     {
@@ -294,7 +294,7 @@ XDWORD XSTRING::GetSize(const XCHAR* string)
 /*-----------------------------------------------------------------*/
 XDWORD XSTRING::GetSize(XWORD* string)
 {
-  int size = 0;
+  XDWORD size = 0;
 
   while(string[size])
     {
@@ -345,7 +345,7 @@ bool XSTRING::IsOEM()
 /*-----------------------------------------------------------------*/
 bool XSTRING::CreateOEM(char*& _textOEM) const
 {
-  int sizeOEM = GetSize();
+  XDWORD sizeOEM = GetSize();
 
   _textOEM = new char[sizeOEM+1];
   if(!_textOEM) return false;
@@ -378,7 +378,7 @@ bool XSTRING::CreateOEM(char*& _textOEM) const
 /*-----------------------------------------------------------------*/
 bool XSTRING::CreateNormalize(XWORD*& _textnormalize, bool inverse)
 {
-  int sizenormalize = GetSize()+1;
+  XDWORD sizenormalize = GetSize()+1;
 
   _textnormalize = new XWORD[sizenormalize];
   if(!_textnormalize) return false;
@@ -387,7 +387,7 @@ bool XSTRING::CreateNormalize(XWORD*& _textnormalize, bool inverse)
 
   if(sizenormalize>1)
     {
-      for(int c=0; c<sizenormalize; c++)
+      for(XDWORD c=0; c<sizenormalize; c++)
         {
           if(inverse)
             {
@@ -421,7 +421,7 @@ bool XSTRING::CreateNormalize(XWORD*& _textnormalize, bool inverse)
 //  @param        size :
 */
 /*-----------------------------------------------------------------*/
-bool XSTRING::Set(int size)
+bool XSTRING::Set(XDWORD size)
 {
   //if(!size) Empty();
 
@@ -550,7 +550,7 @@ bool XSTRING::Set(const XCHAR* string)
 //  @param        size :
 */
 /*-----------------------------------------------------------------*/
-bool XSTRING::Set(const XCHAR* string, int size)
+bool XSTRING::Set(const XCHAR* string, XDWORD size)
 {
   Empty();
   if(!string) return false;
@@ -727,7 +727,7 @@ bool XSTRING::Set(XCHAR* str1,const XCHAR* str2)
 //  @param        size :
 */
 /*-----------------------------------------------------------------*/
-bool XSTRING::Set(const XBYTE* buffer, int size)
+bool XSTRING::Set(const XBYTE* buffer, XDWORD size)
 {
   Empty();
   if(!buffer) return false;
@@ -765,7 +765,7 @@ bool XSTRING::Set(const XBYTE* buffer, int size)
 //  @param    int :
 //
 *//*-----------------------------------------------------------------*/
-bool XSTRING::Set(const XDWORD* buffer, int size)
+bool XSTRING::Set(const XDWORD* buffer, XDWORD size)
 {
     Empty();
     if (!buffer) return false;
@@ -993,7 +993,7 @@ bool XSTRING::Add(XCHAR* str1,const XCHAR* str2)
   if(!str1) return false;
   if(!str2) return false;
 
-  int sizestr1 = XSTRING::GetSize(str1);
+  XDWORD sizestr1 = XSTRING::GetSize(str1);
   int c        = 0;
 
   while(str2[c])
@@ -1025,14 +1025,14 @@ bool XSTRING::Add(XCHAR* str1,const XCHAR* str2)
 //  @param        size :
 */
 /*-----------------------------------------------------------------*/
-bool XSTRING::Add(const XBYTE* buffer, int size)
+bool XSTRING::Add(const XBYTE* buffer, XDWORD size)
 {
   int ini   = this->size;
   int tsize = this->size + size;
 
   AdjustSize(tsize);
 
-  for(int c=0;c<size;c++)
+  for(XDWORD c=0; c<size; c++)
     {
       text[ini+c] = (XCHAR)buffer[c];
     }
@@ -2454,7 +2454,7 @@ int XSTRING::Copy(const XCHAR* startmark, const XCHAR* endmark, bool ignorecase,
 {
   int startindex  = 0;
   int endindex    = GetSize();
-  int sizeendmark = 0;
+  XDWORD sizeendmark = 0;
 
   string.Empty();
 
@@ -2517,7 +2517,7 @@ int XSTRING::Copy(const XCHAR* startmark, const XCHAR* endmark, bool ignorecase,
 int XSTRING::Copy(int startindex, const XCHAR* endmark, bool ignorecase, XSTRING& string)
 {
   int endindex    = GetSize();
-  int sizeendmark = 0;
+  XDWORD sizeendmark = 0;
 
   string.Empty();
 
@@ -2572,7 +2572,7 @@ int XSTRING::Copy(int startindex, const XCHAR* endmark, bool ignorecase, XSTRING
 int XSTRING::Copy(const XCHAR* startmark, int endindex, bool ignorecase, int addstartindex, XSTRING& string)
 {
   int startindex    = 0;
-  int sizeendmark = 0;
+  XDWORD sizeendmark = 0;
 
   string.Empty();
 
@@ -3566,14 +3566,14 @@ bool XSTRING::ConvertToBoolean()
 //  @param        maxsize :
 */
 /*-----------------------------------------------------------------*/
-bool XSTRING::ConvertFromUTF8(XBYTE* data,int size)
+bool XSTRING::ConvertFromUTF8(XBYTE* data,XDWORD size)
 {
   //Empty();
 
-  int     sizeutf8  = 0;
-  int     index     = 0;
+  XDWORD  sizeutf8  = 0;
+  XDWORD  index     = 0;
   XBYTE*  ptr;
-  int     c;
+  XDWORD  c;
 
   c   = 0;
   ptr = data;
@@ -3593,7 +3593,7 @@ bool XSTRING::ConvertFromUTF8(XBYTE* data,int size)
 
   c   = 0;
   ptr = data;
-  while(c<size)
+  while(c < size)
     {
       XBYTE b=*ptr;
       //Byte represents an ASCII character. Direct copy will do.
@@ -3688,7 +3688,7 @@ bool XSTRING::ConvertFromUTF8(XBUFFER& xbuffer)
 /*-----------------------------------------------------------------*/
 int XSTRING::GetSizeConvertToUTF8()
 {
-  int size = 0;
+  XDWORD size = 0;
 
   if(IsEmpty()) return size;
 
@@ -3841,7 +3841,7 @@ bool XSTRING::ConvertToUTF8(XBUFFER& xbuffer)
 {
   if(IsEmpty()) return false;
 
-  int sizeUTF8 = GetSizeConvertToUTF8()+1;
+  XDWORD sizeUTF8 = GetSizeConvertToUTF8()+1;
 
   xbuffer.Delete();
   xbuffer.Resize(sizeUTF8);
@@ -3870,7 +3870,7 @@ bool XSTRING::ConvertToUTF8(XBUFFER& xbuffer)
 /*-----------------------------------------------------------------*/
 bool XSTRING::ConvertToBase64(XSTRING& string)
 {
-  int sizebase64  = 4 * ((GetSize() + 2) / 3);
+  XDWORD sizebase64  = 4 * ((GetSize() + 2) / 3);
   int mod_table[] = { 0, 2, 1 };
 
   string.Empty();
@@ -4354,9 +4354,9 @@ bool XSTRING::FormatArg(const XCHAR* mask, va_list* arg, bool isspecialweb)
                                                                   if(!sizestr.IsEmpty())
                                                                     {
                                                                       int sizeadjust = sizestr.ConvertToInt();
-                                                                      if(abs(sizeadjust)>(int)str.GetSize())
+                                                                      if(abs((int)sizeadjust) > (int)str.GetSize())
                                                                         {
-                                                                          str.AdjustSize(abs(sizeadjust),(sizeadjust>0)?true:false, isspecialweb?__L("&nbsp"):__L(" "), isspecialweb);
+                                                                          str.AdjustSize(abs((int)sizeadjust),(sizeadjust>0)?true:false, isspecialweb?__L("&nbsp"):__L(" "), isspecialweb);
                                                                         }
                                                                     }
                                                                 }

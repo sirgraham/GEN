@@ -305,7 +305,7 @@ XDWORD DIOSTREAMUDPACKNOWLEDGE::Write(XBYTE* buffer, XDWORD size)
 //  @param        size :
 */
 /*-----------------------------------------------------------------*/
-bool DIOSTREAMUDPACKNOWLEDGE::WriteDatagram(XSTRING& address, XWORD port, XBYTE* buffer, int size)
+bool DIOSTREAMUDPACKNOWLEDGE::WriteDatagram(XSTRING& address, XWORD port, XBYTE* buffer, XDWORD size)
 {
   XSTRING old_address;
   int     old_port;

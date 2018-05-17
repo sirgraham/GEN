@@ -83,7 +83,7 @@ CIPHER3DES::~CIPHER3DES()
 //  @param        size :
 */
 //-------------------------------------------------------------------
-bool CIPHER3DES::Cipher(XBYTE* input, int size)
+bool CIPHER3DES::Cipher(XBYTE* input, XDWORD size)
 {
   if(!size) return false;
 
@@ -136,7 +136,7 @@ bool CIPHER3DES::Cipher(XBYTE* input, int size)
 //  @param        size :
 */
 /*-----------------------------------------------------------------*/
-bool CIPHER3DES::Uncipher(XBYTE* input, int size)
+bool CIPHER3DES::Uncipher(XBYTE* input, XDWORD size)
 {
   if(!size) return false;
 

@@ -317,9 +317,17 @@ bool MEDIAH264FRAMEREADER::ReadStream(XVECTOR<XBYTE> & xvector, XDWORD size)
 
 
 
+/**-------------------------------------------------------------------------------------------------------------------
+* @fn         MEDIAH264FRAMEREADER::IsEndOfStream
+* @brief      
+* @ingroup    MEDIA
+* @date       15/05/2018 19:59:14
+* @param[]     : 
+* @return     bool : 
+*---------------------------------------------------------------------------------------------------------------------*/
 bool MEDIAH264FRAMEREADER::IsEndOfStream()
 {
-  int pos = 0;
+  XDWORD pos = 0;
 
   if(xfile)
     {
@@ -485,8 +493,10 @@ XDWORD MEDIAH264FRAMEREADER::GetReadBufferSize()
 /*-----------------------------------------------------------------*/
 void MEDIAH264FRAMEREADER::FillReadBuffer()
 {
-  int size = (int)readbuffersize;
+  XDWORD size = (int)readbuffersize;
+
   xfile->Read(readbuffer.GetPointer(0), &size);
+
   lefttoread = size;
 }
 

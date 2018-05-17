@@ -221,7 +221,7 @@ bool DIOMODBUS::ReadHoldingRegisters(XWORD address, XWORD nregisters, XBUFFER& a
 
                                       xtimer->Reset();
 
-                                      int size = (nregisters*sizeof(XWORD)) + 9;
+                                      XDWORD size = (nregisters*sizeof(XWORD)) + 9;
 
                                       while(diostream->GetInXBuffer()->GetSize() != size)
                                         {
@@ -283,7 +283,7 @@ bool DIOMODBUS::ReadHoldingRegisters(XWORD address, XWORD nregisters, XBUFFER& a
 
                                       xtimer->Reset();
 
-                                      int size = nregisters*sizeof(XWORD) + 9;
+                                      XDWORD size = nregisters*sizeof(XWORD) + 9;
 
                                       while(diostream->GetInXBuffer()->GetSize() != size)
                                         {

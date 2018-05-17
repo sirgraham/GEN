@@ -243,7 +243,7 @@ bool XDIR::Copy(XPATH& xpathsource,XPATH& xpathtarget)
               XBYTE* buffer = new XBYTE[COPYFILE_MAXBUFFER];
               if(buffer)
                 {
-                  int rsize  = 0;
+                  XDWORD rsize  = 0;
 
                   do { rsize = COPYFILE_MAXBUFFER;
 
@@ -253,7 +253,7 @@ bool XDIR::Copy(XPATH& xpathsource,XPATH& xpathtarget)
 
                        if(rsize) ftarget->Write(buffer,rsize);
 
-                     } while(rsize==COPYFILE_MAXBUFFER);
+                     } while(rsize == COPYFILE_MAXBUFFER);
 
                   delete[] buffer;
                 }

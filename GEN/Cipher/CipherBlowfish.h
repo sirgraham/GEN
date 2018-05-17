@@ -48,8 +48,8 @@ class CIPHERBLOWFISH : public CIPHER
     using                 CIPHER::Cipher;
     using                 CIPHER::Uncipher;
 
-    bool                  Cipher                  (XBYTE* input, int size);
-    bool                  Uncipher                (XBYTE* input, int size);
+    bool                  Cipher                  (XBYTE* input, XDWORD size);
+    bool                  Uncipher                (XBYTE* input, XDWORD size);
 
   private:
 
@@ -66,9 +66,9 @@ class CIPHERBLOWFISH : public CIPHER
     bool                  BlowfishSetKey          (CIPHERBLOWFISH_CONTEXT* ctx, XBYTE* key, XDWORD keysize);
 
     bool                  BlowfishCipher_ECB      (CIPHERBLOWFISH_CONTEXT* ctx, int mode, XBYTE input[CIPHERBLOWFISH_BLOCKSIZE], XBYTE output[CIPHERBLOWFISH_BLOCKSIZE]);
-    bool                  BlowfishCipher_CBC      (CIPHERBLOWFISH_CONTEXT* ctx, int mode, int size, XBYTE iv[CIPHERBLOWFISH_BLOCKSIZE], XBYTE* input, XBYTE* output);
-    bool                  BlowfishCipher_CFB64    (CIPHERBLOWFISH_CONTEXT* ctx, int mode, int size, int* iv_off, XBYTE iv[CIPHERBLOWFISH_BLOCKSIZE], XBYTE* input, XBYTE* output);
-    bool                  BlowfishCipher_CTR      (CIPHERBLOWFISH_CONTEXT* ctx, int size, int* nc_off, XBYTE nonce_counter[CIPHERBLOWFISH_BLOCKSIZE], XBYTE stream_block[CIPHERBLOWFISH_BLOCKSIZE], XBYTE* input, XBYTE* output);
+    bool                  BlowfishCipher_CBC      (CIPHERBLOWFISH_CONTEXT* ctx, int mode, XDWORD size, XBYTE iv[CIPHERBLOWFISH_BLOCKSIZE], XBYTE* input, XBYTE* output);
+    bool                  BlowfishCipher_CFB64    (CIPHERBLOWFISH_CONTEXT* ctx, int mode, XDWORD size, int* iv_off, XBYTE iv[CIPHERBLOWFISH_BLOCKSIZE], XBYTE* input, XBYTE* output);
+    bool                  BlowfishCipher_CTR      (CIPHERBLOWFISH_CONTEXT* ctx, XDWORD size, int* nc_off, XBYTE nonce_counter[CIPHERBLOWFISH_BLOCKSIZE], XBYTE stream_block[CIPHERBLOWFISH_BLOCKSIZE], XBYTE* input, XBYTE* output);
 };
 
 //---- INLINE FUNCTIONS --------------------------------------------------------------------

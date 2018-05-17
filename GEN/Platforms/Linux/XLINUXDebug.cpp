@@ -224,7 +224,7 @@ void XLINUXDEBUGCTRL::PrintFile(XDEBUGCTRLTARGET* target, XBYTE level, XCHAR* st
 
   // --- Check File size --------------
 
-  int sizefile = 0;
+  XDWORD sizefile = 0;
 
   fflush(file);
 

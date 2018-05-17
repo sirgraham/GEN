@@ -299,7 +299,7 @@ bool XLOG::IsActive()
 //  @param        size :
 */
 /*-----------------------------------------------------------------*/
-bool XLOG::GetLevelString(XLOGLEVEL level, XSTRING& strlevel, int size)
+bool XLOG::GetLevelString(XLOGLEVEL level, XSTRING& strlevel, XDWORD size)
 {
   strlevel.Empty();
 
@@ -478,14 +478,14 @@ bool XLOG::AddEntry(XLOGLEVEL level, XCHAR* sectionID, bool inmemory, XCHAR* mas
     }
    else
     {
-      int resultsizeline = 0;
-      int resultsizeLF   = 0;
+      XDWORD resultsizeline = 0;
+      XDWORD resultsizeLF   = 0;
 
       if(filelog->GetNLines()) FlushMemoryEntrys();
 
       if(outstring.Get()[0] != 0x20)
         {
-          int position;
+          XDWORD position;
 
           filelog->GetPrimaryFile()->GetPosition(position);
 
@@ -537,7 +537,7 @@ bool XLOG::AddEntry(XLOGLEVEL level, XCHAR* sectionID, bool inmemory, XCHAR* mas
 //  @param        showtext :
 */
 /*-----------------------------------------------------------------*/
-bool XLOG::AddEntry(XLOGLEVEL level, XCHAR* sectionID, bool inmemory, XBYTE* data, int size, int sizeline, bool showoffset, bool showtext)
+bool XLOG::AddEntry(XLOGLEVEL level, XCHAR* sectionID, bool inmemory, XBYTE* data, XDWORD size, XDWORD sizeline, bool showoffset, bool showtext)
 {
   if(!IsActive()) return false;
   if(!mutex)      return false;
@@ -551,10 +551,10 @@ bool XLOG::AddEntry(XLOGLEVEL level, XCHAR* sectionID, bool inmemory, XBYTE* dat
     }
 
   XSTRING    strdata;
-  int        _size     = 0;
-  int        _sizeline = sizeline;
+  XDWORD      _size     = 0;
+  XDWORD      _sizeline = sizeline;
   int        index     = 0;
-  int        lines     = 0;
+  XDWORD     lines     = 0;
 
   while(_size<size)
     {
@@ -569,7 +569,7 @@ bool XLOG::AddEntry(XLOGLEVEL level, XCHAR* sectionID, bool inmemory, XBYTE* dat
           string += __L("   ");
         }
 
-      for(int c=0;c<_sizeline;c++)
+      for(XDWORD c=0; c<_sizeline; c++)
         {
           strdata.Format(__L("%02X "),data[index]);
           string += strdata;
@@ -579,7 +579,7 @@ bool XLOG::AddEntry(XLOGLEVEL level, XCHAR* sectionID, bool inmemory, XBYTE* dat
 
       if(_sizeline != sizeline)
         {
-          for(int c=0;c<(sizeline-_sizeline);c++)
+          for(XDWORD c=0; c<(sizeline-_sizeline); c++)
             {
               strdata.Format(__L("   "));
               string += strdata;
@@ -591,7 +591,7 @@ bool XLOG::AddEntry(XLOGLEVEL level, XCHAR* sectionID, bool inmemory, XBYTE* dat
           index -= _sizeline;
           string += __L(" ");
 
-          for(int c=0;c<_sizeline;c++)
+          for(XDWORD c=0; c<_sizeline; c++)
             {
               XCHAR character = (XCHAR)data[index];
 
@@ -638,7 +638,7 @@ bool XLOG::AddEntry(XLOGLEVEL level, XCHAR* sectionID, bool inmemory, XBYTE* dat
 //  @param        showtext :
 */
 /*-----------------------------------------------------------------*/
-bool XLOG::AddEntry(XLOGLEVEL level, XCHAR* sectionID, bool inmemory, XBUFFER& data, int sizeline, bool showoffset, bool showtext)
+bool XLOG::AddEntry(XLOGLEVEL level, XCHAR* sectionID, bool inmemory, XBUFFER& data, XDWORD sizeline, bool showoffset, bool showtext)
 {
   return XLOG::AddEntry(level, sectionID, inmemory, data.Get(), data.GetSize(), sizeline, showoffset, showtext);
 }
@@ -738,29 +738,29 @@ bool XLOG::CalculateInitialStatus()
   entrys.DeleteContents();
   entrys.DeleteAll();
 
-  int                sizeBOM              = 0;
+  XDWORD             sizeBOM              = 0;
   XFILETXTFORMATCHAR formatchar           = filelog->GetFormatCharFromFile(&sizeBOM);
   int                sizebytescharacter   = filelog->SizeOfCharacter(formatchar);
 
   xfile->SetPosition(sizeBOM);
 
   bool    endfile;
-  int     br;
+  XDWORD  br;
   XBUFFER dataline;
   XBYTE*  readbuffer = new XBYTE[XFILETXT_MAXBUFFER];
   if(!readbuffer) return false;
 
   memset(readbuffer, 0, XFILETXT_MAXBUFFER);
 
-  do{ int bufferpos = 0;
+  do{ XDWORD  bufferpos = 0;
 
-      br            = XFILETXT_MAXBUFFER;
+      br      = XFILETXT_MAXBUFFER;
       endfile = !xfile->Read(readbuffer, &br);
       if(!br) break;
 
       do{ XFILETXTTYPELF typeLF;
-          int            sizeLF   = 0;
-          int            sizeline = 0;
+          XDWORD         sizeLF   = 0;
+          XDWORD         sizeline = 0;
           bool           endline = filelog->GetSizeOfLine(formatchar, &readbuffer[bufferpos], typeLF, sizeLF, sizeline, (br-bufferpos));
 
           if(endline)
@@ -840,12 +840,12 @@ bool XLOG::FlushMemoryEntrys()
       XSTRING* line = filelog->GetLine(c);
       if(line)
         {
-          int resultsizeline = 0;
-          int resultsizeLF   = 0;
+          XDWORD resultsizeline = 0;
+          XDWORD resultsizeLF   = 0;
 
           if(line->Get()[0] != 0x20)
             {
-              int position;
+              XDWORD position;
 
               filelog->GetPrimaryFile()->GetPosition(position);
 

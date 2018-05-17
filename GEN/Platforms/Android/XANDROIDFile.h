@@ -43,15 +43,15 @@ class XANDROIDFILE : public XFILE
     bool                Open                  (XCHAR* xpath, bool readonly = true);
     bool                Create                (XCHAR* xpath);
 
-    bool                SetSize               (int size);
+    bool                SetSize               (XDWORD size);
 
-    bool                GetPosition           (int& position);
-    bool                SetPosition           (int position);
+    bool                GetPosition           (XDWORD& position);
+    bool                SetPosition           (XDWORD position);
 
-    bool                Read                  (XBYTE* buffer, int size , CIPHER* cipher = NULL);
-    bool                Read                  (XBYTE* buffer, int* size, CIPHER* cipher = NULL);
+    bool                Read                  (XBYTE* buffer, XDWORD size , CIPHER* cipher = NULL);
+    bool                Read                  (XBYTE* buffer, XDWORD* size, CIPHER* cipher = NULL);
 
-    bool                Write                 (XBYTE* buffer, int size , CIPHER* cipher = NULL);
+    bool                Write                 (XBYTE* buffer, XDWORD size , CIPHER* cipher = NULL);
 
     bool                Flush                 ();
 

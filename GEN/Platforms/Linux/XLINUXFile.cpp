@@ -167,7 +167,7 @@ bool XLINUXFILE::Create(XCHAR* xpath)
 //  @param        size :
 */
 /*-----------------------------------------------------------------*/
-bool XLINUXFILE::SetSize(int size)
+bool XLINUXFILE::SetSize(XDWORD size)
 {
   if(!isopen)       return false;
   if(!filehandle)   return false;
@@ -197,7 +197,7 @@ bool XLINUXFILE::SetSize(int size)
 //  @param        position :
 */
 /*-----------------------------------------------------------------*/
-bool XLINUXFILE::GetPosition(int& position)
+bool XLINUXFILE::GetPosition(XDWORD& position)
 {
   if(!isopen)     return false;
   if(!filehandle) return false;
@@ -226,13 +226,13 @@ bool XLINUXFILE::GetPosition(int& position)
 //  @param        position :
 */
 /*-----------------------------------------------------------------*/
-bool XLINUXFILE::SetPosition(int position)
+bool XLINUXFILE::SetPosition(XDWORD position)
 {
   if(!isopen)     return false;
   if(!filehandle) return false;
 
-  int  _position    = position;
-  bool status;
+  XDWORD _position = position;
+  bool   status;
 
   if(_position == XFILE_SEEKEND) _position = cachesize;
   if(_position > cachesize) return false;
@@ -259,7 +259,7 @@ bool XLINUXFILE::SetPosition(int position)
 //  @param        cipher :
 */
 //-------------------------------------------------------------------
-bool XLINUXFILE::Read(XBYTE* buffer, int size, CIPHER* cipher)
+bool XLINUXFILE::Read(XBYTE* buffer, XDWORD size, CIPHER* cipher)
 {
   if(!isopen)       return false;
   if(!filehandle)   return false;
@@ -292,7 +292,7 @@ bool XLINUXFILE::Read(XBYTE* buffer, int size, CIPHER* cipher)
 //  @param        cipher :
 */
 //-------------------------------------------------------------------
-bool XLINUXFILE::Read(XBYTE* buffer, int* size, CIPHER* cipher)
+bool XLINUXFILE::Read(XBYTE* buffer, XDWORD* size, CIPHER* cipher)
 {
   if(!isopen)       return false;
   if(!filehandle)   return false;
@@ -336,7 +336,7 @@ bool XLINUXFILE::Read(XBYTE* buffer, int* size, CIPHER* cipher)
 //  @param        cipher :
 */
 //-------------------------------------------------------------------
-bool XLINUXFILE::Write(XBYTE* buffer, int size, CIPHER* cipher)
+bool XLINUXFILE::Write(XBYTE* buffer, XDWORD size, CIPHER* cipher)
 {
   if(!isopen)       return false;
   if(!filehandle)   return false;

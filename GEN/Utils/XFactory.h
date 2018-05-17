@@ -40,8 +40,6 @@ class XPHONE;
 class XMUTEX;
 class XTHREAD;
 
-//DIEGO: estaría bien eliminar todos los delete* de este objeto. así como hacer un dummy para el XPHONE y sacarlo de aqui
-//       si xfactory no tiene constructor ni destructor es mejor quitarlos, por que al ser virtual, no se optimizan.
 
 class XFACTORY
 {

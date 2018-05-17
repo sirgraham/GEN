@@ -94,7 +94,7 @@ bool XSERIALIZE::SerializeData(XSERIALIZEPTR* ptr, int nptr,XBUFFER* buffer,bool
     }
    else
     {
-      int size = 0;
+      XDWORD size = 0;
 
       for(c=0;c<nptr;c++)
         {

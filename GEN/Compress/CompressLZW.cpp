@@ -85,7 +85,7 @@ COMPRESS_LZW::~COMPRESS_LZW()
 //  @param        xbuffer :
 */
 //-------------------------------------------------------------------
-bool COMPRESS_LZW::Compress(XBYTE* source,int size,XBUFFER* xbuffer)
+bool COMPRESS_LZW::Compress(XBYTE* source,XDWORD size,XBUFFER* xbuffer)
 {
   if(!source)  return false;
   if(!size)    return false;
@@ -116,7 +116,7 @@ bool COMPRESS_LZW::Compress(XBYTE* source,int size,XBUFFER* xbuffer)
 //  @param        xbuffer :
 */
 //-------------------------------------------------------------------
-bool COMPRESS_LZW::Decompress(XBYTE* source,int size,XBUFFER* xbuffer)
+bool COMPRESS_LZW::Decompress(XBYTE* source,XDWORD size,XBUFFER* xbuffer)
 {
   if(!source)  return false;
   if(!xbuffer) return false;

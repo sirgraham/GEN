@@ -204,7 +204,7 @@ bool XBER::SetINTEGER(XDWORD integer)
 
   data->Delete();
 
-  int size = 0;
+  XDWORD size = 0;
 
   if(integer&0xFF800000)
     {
@@ -304,7 +304,7 @@ bool XBER::SetBITSTRING(XBUFFER& xbuffer)
 * @param[in]  size : size buffer
 * @return     bool : true if is succesful
 *---------------------------------------------------------------------------------------------------------------------*/
-bool XBER::SetBITSTRING(XBYTE* buffer, int size)
+bool XBER::SetBITSTRING(XBYTE* buffer, XDWORD size)
 {
   if(!buffer) return false;
   if(!size)   return false;
@@ -388,7 +388,7 @@ bool XBER::SetOCTETSTRING(XBUFFER& xbuffer)
 * @param[in]  size : size of buffer
 * @return     bool : true if is succesful
 *---------------------------------------------------------------------------------------------------------------------*/
-bool XBER::SetOCTETSTRING(XBYTE* buffer, int size)
+bool XBER::SetOCTETSTRING(XBYTE* buffer, XDWORD size)
 {
   if(!buffer) return false;
   if(!size)   return false;

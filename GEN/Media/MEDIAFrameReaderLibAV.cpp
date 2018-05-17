@@ -79,12 +79,11 @@ static int interrupt_cb(void *unused)
 /*-----------------------------------------------------------------*/
 static int file_read(void *h, XBYTE* buf, int size)
 {
-  if(interrupt_cb(NULL))
-    return -1;
+  if(interrupt_cb(NULL))  return -1;
 
   XFILE* file = (XFILE*)h;
 
-  int s = size;
+  XDWORD s = (XDWORD)size;
   file->Read(buf, &s);
 
   return s;

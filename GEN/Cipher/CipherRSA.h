@@ -217,13 +217,13 @@ class CIPHERRSA : public CIPHER
 
     bool                            SetKey                            (CIPHERKEY* key, bool integritycheck = false);
 
-    bool                            Cipher                            (XBYTE* input, int size, CIPHERKEYTYPE keytouse, CIPHERRSAPKCS1VERSION pkcs1version = CIPHERRSAPKCS1VERSIONV15);
+    bool                            Cipher                            (XBYTE* input, XDWORD size, CIPHERKEYTYPE keytouse, CIPHERRSAPKCS1VERSION pkcs1version = CIPHERRSAPKCS1VERSIONV15);
     bool                            Cipher                            (XBUFFER& input, CIPHERKEYTYPE keytouse, CIPHERRSAPKCS1VERSION pkcs1version = CIPHERRSAPKCS1VERSIONV15);
 
-    bool                            Uncipher                          (XBYTE* input, int size, CIPHERKEYTYPE keytouse, CIPHERRSAPKCS1VERSION pkcs1version = CIPHERRSAPKCS1VERSIONV15);
+    bool                            Uncipher                          (XBYTE* input, XDWORD size, CIPHERKEYTYPE keytouse, CIPHERRSAPKCS1VERSION pkcs1version = CIPHERRSAPKCS1VERSIONV15);
     bool                            Uncipher                          (XBUFFER& input, CIPHERKEYTYPE keytouse, CIPHERRSAPKCS1VERSION pkcs1version = CIPHERRSAPKCS1VERSIONV15);
 
-    bool                            Sign                              (XBYTE* input, int size, CIPHERKEYTYPE keytouse, HASH* hash, CIPHERRSAPKCS1VERSION pkcs1version = CIPHERRSAPKCS1VERSIONV15);
+    bool                            Sign                              (XBYTE* input, XDWORD size, CIPHERKEYTYPE keytouse, HASH* hash, CIPHERRSAPKCS1VERSION pkcs1version = CIPHERRSAPKCS1VERSIONV15);
     bool                            Sign                              (XBUFFER& input, CIPHERKEYTYPE keytouse, HASH* hash, CIPHERRSAPKCS1VERSION pkcs1version = CIPHERRSAPKCS1VERSIONV15);
 
 
@@ -244,9 +244,9 @@ class CIPHERRSA : public CIPHER
     bool                            CheckContextPublicKey             ();
     bool                            CheckContextPrivateKey            ();
 
-    bool                            Cipher_PKCS1                      (XBYTE* buffer, int size, CIPHERKEYTYPE keytouse, CIPHERRSAPKCS1VERSION pkcs1version,  XMPINTEGER_FUNCRANDOM funcrandom, void* paramrandom);
-    bool                            Cipher_PKCS1_V15                  (XBYTE* buffer, int size, XBUFFER& output, CIPHERKEYTYPE keytypetouse, CIPHERRSAPKCS1VERSION pkcs1version,  XMPINTEGER_FUNCRANDOM funcrandom, void* paramrandom);
-    bool                            Uncipher_PKCS1_V15                (XBYTE* buffer, int size, XBUFFER& output, CIPHERKEYTYPE keytypetouse, CIPHERRSAPKCS1VERSION pkcs1version,  XMPINTEGER_FUNCRANDOM funcrandom, void* paramrandom);
+    bool                            Cipher_PKCS1                      (XBYTE* buffer, XDWORD size, CIPHERKEYTYPE keytouse, CIPHERRSAPKCS1VERSION pkcs1version,  XMPINTEGER_FUNCRANDOM funcrandom, void* paramrandom);
+    bool                            Cipher_PKCS1_V15                  (XBYTE* buffer, XDWORD size, XBUFFER& output, CIPHERKEYTYPE keytypetouse, CIPHERRSAPKCS1VERSION pkcs1version,  XMPINTEGER_FUNCRANDOM funcrandom, void* paramrandom);
+    bool                            Uncipher_PKCS1_V15                (XBYTE* buffer, XDWORD size, XBUFFER& output, CIPHERKEYTYPE keytypetouse, CIPHERRSAPKCS1VERSION pkcs1version,  XMPINTEGER_FUNCRANDOM funcrandom, void* paramrandom);
 
     bool                            DoRSAPublicOperation              (XBUFFER& input, XBUFFER& output);
     bool                            DoRSAPrivateOperation             (XBUFFER& input, XBUFFER& output, XMPINTEGER_FUNCRANDOM funcrandom, void* paramrandom);

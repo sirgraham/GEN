@@ -91,7 +91,7 @@ XMEMORY XMemory;
 /*-----------------------------------------------------------------*/
 bool XMEMORY_ASSIGN::SetNameModule(char* _namemodule)
 {
-  int sizenamemodule = strlen(_namemodule)+1;
+  XDWORD sizenamemodule = strlen(_namemodule)+1;
 
   this->namemodule = (char*)malloc(sizenamemodule);
   if(!this->namemodule) return false;

@@ -87,7 +87,7 @@ HASH::~HASH()
 //  @param        size :
 */
 /*-----------------------------------------------------------------*/
-bool HASH::Do(XBYTE* input, int size)
+bool HASH::Do(XBYTE* input, XDWORD size)
 {
   return false;
 }
@@ -109,46 +109,45 @@ bool HASH::Do(XBYTE* input, int size)
 /*-----------------------------------------------------------------*/
 bool HASH::Do(XBUFFER& input)
 {
-  return Do(input.Get(), (int)input.GetSize());
+  return Do(input.Get(), input.GetSize());
 }
 
 
 
 
-/*-------------------------------------------------------------------
-//  HASH::Do
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      03/03/2013 16:24:28
-//
-//  @return       bool :
-//  @param        xpath :
-//  @param        size :
-//  @param        pos :
-*/
-/*-----------------------------------------------------------------*/
-bool HASH::Do(XPATH& xpath, int size, int pos)
-{
-  XFILE* file;
-  bool   status;
 
-  file = xfactory->Create_File();
-  if(!file) return false;
+/**-------------------------------------------------------------------------------------------------------------------
+* @fn         HASH::Do
+* @brief      Hash do from file
+* @ingroup    CIPHER
+* @date       15/05/2018 19:31:43
+* @param[in]  xpath : xpath from the file to hash
+* @param[in]  size : size of the part of file 
+* @param[in]  pos : position from file
+* @return     bool : true if is succesfull
+*---------------------------------------------------------------------------------------------------------------------*/
+bool HASH::Do(XPATH& xpath, XDWORD size, XDWORD pos)
+{
+  XFILE* xfile;
+  bool   status = false;
+
+  xfile = xfactory->Create_File();
+  if(!xfile) return false;
 
   ResetResult();
 
-  if(file->Open(xpath,true))
+  if(xfile->Open(xpath, true))
     {
-      status = Do(file,size,pos);
+      XDWORD _size;
 
-      file->Close();
+      if(size == -1) _size = xfile->GetSize(); else _size = size;
 
-    }  else status=false;
+      status = Do(xfile, _size, pos);
 
-  if(file) xfactory->Delete_File(file);
+      xfile->Close();
+    }  
+
+  if(xfile) xfactory->Delete_File(xfile);
 
   return status;
 }
@@ -171,23 +170,23 @@ bool HASH::Do(XPATH& xpath, int size, int pos)
 //  @param        pos :
 */
 /*-----------------------------------------------------------------*/
-bool HASH::Do(XFILE* xfile, int size, int pos)
+bool HASH::Do(XFILE* xfile, XDWORD size, XDWORD pos)
 {
   if(!xfile)           return false;
   if(!xfile->IsOpen()) return false;
 
   XBUFFER   xbuffer;
-  int       block   = (((size==HASHALLFILESIZE)?xfile->GetSize():size) / HASHMAXFILESIZEBUFFER);
-  int       mod     = (((size==HASHALLFILESIZE)?xfile->GetSize():size) % HASHMAXFILESIZEBUFFER);
+  XDWORD    block   = (((size==HASHALLFILESIZE)?xfile->GetSize():size) / HASHMAXFILESIZEBUFFER);
+  XDWORD    mod     = (((size==HASHALLFILESIZE)?xfile->GetSize():size) % HASHMAXFILESIZEBUFFER);
   bool      status  = true;
 
   if(!xfile->SetPosition(pos)) return false;
 
   xbuffer.Resize((XDWORD)HASHMAXFILESIZEBUFFER);
 
-  for(int c=0;c<block;c++)
+  for(XDWORD c=0;c<block;c++)
     {
-      if(xfile->Read(xbuffer.Get(),HASHMAXFILESIZEBUFFER))
+      if(xfile->Read(xbuffer.Get(), HASHMAXFILESIZEBUFFER))
         {
           if(!Do(xbuffer))
             {
@@ -299,7 +298,7 @@ XBUFFER* HASH::GetResult()
 //  @param        resultsize :
 */
 /*-----------------------------------------------------------------*/
-XBYTE* HASH::GetResult(int& resultsize)
+XBYTE* HASH::GetResult(XDWORD& resultsize)
 {
   resultsize = 0;
 

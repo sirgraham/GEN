@@ -257,7 +257,7 @@ bool DIOSTREAMICMP::ReadDatagram(XSTRING& address, XBUFFER& xbuffer)
 //  @param        size :
 */
 /*-----------------------------------------------------------------*/
-bool DIOSTREAMICMP::WriteDatagram(XSTRING& address, XBYTE* buffer, int size)
+bool DIOSTREAMICMP::WriteDatagram(XSTRING& address, XBYTE* buffer, XDWORD size)
 {
   if(address.IsEmpty()) return false;
   if(!AddDatagram(true, address, buffer, size)) return false;
@@ -443,7 +443,7 @@ bool DIOSTREAMICMP::DeleteAllDatagrams()
 //  @param        size :
 */
 /*-----------------------------------------------------------------*/
-bool DIOSTREAMICMP::AddDatagram(bool istosend, XCHAR* address, XBYTE* data, int size)
+bool DIOSTREAMICMP::AddDatagram(bool istosend, XCHAR* address, XBYTE* data, XDWORD size)
 {
   if(!address) return false;
   if(!data)    return false;
@@ -486,7 +486,7 @@ bool DIOSTREAMICMP::AddDatagram(bool istosend, XCHAR* address, XBYTE* data, int 
 //  @param        size :
 */
 /*-----------------------------------------------------------------*/
-bool DIOSTREAMICMP::AddDatagram(bool istosend, XSTRING& address, XBYTE* data,int size)
+bool DIOSTREAMICMP::AddDatagram(bool istosend, XSTRING& address, XBYTE* data,XDWORD size)
 {
   return AddDatagram(istosend, address.Get(), data, size);
 }

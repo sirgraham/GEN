@@ -70,15 +70,15 @@ class XFILE
     virtual bool            Open                  (XCHAR* xpath, bool isreadonly = true)                      = 0;
     virtual bool            Create                (XCHAR* xpath)                                              = 0;
 
-    int                     GetSize               ()                                      { return cachesize;                                   }
-    virtual bool            SetSize               (int size)                                                  = 0;
-    virtual bool            GetPosition           (int& position)                                             = 0;
-    virtual bool            SetPosition           (int position)                                              = 0;
+    XDWORD                  GetSize               ()                                      { return cachesize;                                   }
+    virtual bool            SetSize               (XDWORD size)                                               = 0;
+    virtual bool            GetPosition           (XDWORD& position)                                          = 0;
+    virtual bool            SetPosition           (XDWORD position)                                           = 0;
 
-    virtual bool            Read                  (XBYTE* buffer, int size , CIPHER* cipher = NULL)           = 0;
-    virtual bool            Read                  (XBYTE* buffer, int* size, CIPHER* cipher = NULL)           = 0;
+    virtual bool            Read                  (XBYTE* buffer, XDWORD  size , CIPHER* cipher = NULL)       = 0;
+    virtual bool            Read                  (XBYTE* buffer, XDWORD* size , CIPHER* cipher = NULL)       = 0;
 
-    virtual bool            Write                 (XBYTE* buffer, int size , CIPHER* cipher = NULL)           = 0;
+    virtual bool            Write                 (XBYTE* buffer, XDWORD  size , CIPHER* cipher = NULL)       = 0;
             bool            Write                 (XBUFFER &xbuffer)                      { return Write(xbuffer.Get(), xbuffer.GetSize());    }
 
     virtual bool            Flush                 ()                                                          = 0;
@@ -104,8 +104,8 @@ class XFILE
     bool                    IsReadOnly            ()                                      { return isreadonly;                                  }
     XCHAR*                  GetPathNameFile       ()                                      { return xpathnamefile.Get();                         }
 
-    bool                    EraseBlock            (int size);
-    bool                    InsertBlock           (unsigned char* buffer,int size);
+    bool                    EraseBlock            (XDWORD size);
+    bool                    InsertBlock           (XBYTE* buffer, XDWORD size);
 
     virtual void            ChangeAttributes      (XCHAR* attributes)                     {                                                     }
 
@@ -117,7 +117,7 @@ class XFILE
     bool                    isopen;
     bool                    isreadonly;
     XPATH                   xpathnamefile;
-    int                     cachesize;
+    XDWORD                  cachesize;
 
   private:
 

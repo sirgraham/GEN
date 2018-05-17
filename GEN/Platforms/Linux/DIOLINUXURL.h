@@ -31,10 +31,10 @@ class DIOLINUXURL : public DIOURL
                               DIOLINUXURL                     ();
     virtual                  ~DIOLINUXURL                     ();
 
-                              DIOLINUXURL                     (int size);
+                              DIOLINUXURL                     (XDWORD size);
                               DIOLINUXURL                     (const char* url);
                               DIOLINUXURL                     (const XCHAR* url);
-                              DIOLINUXURL                     (const XCHAR* url,int size);
+                              DIOLINUXURL                     (const XCHAR* url,XDWORD size);
                               DIOLINUXURL                     (DIOURL& url);
                               DIOLINUXURL                     (XSTRING& url);
                               DIOLINUXURL                     (XWORD* url);

@@ -61,7 +61,7 @@ class DIOSTREAMUDPACKNOWLEDGE : public DIOSTREAMUDP
 
     XDWORD                          Write                                 (XBYTE* buffer, XDWORD size);
 
-    bool                            WriteDatagram                         (XSTRING& address, XWORD port, XBYTE* buffer, int size);
+    bool                            WriteDatagram                         (XSTRING& address, XWORD port, XBYTE* buffer, XDWORD size);
     bool                            WriteDatagram                         (XSTRING& address, XWORD port, XBUFFER& xbuffer);
 
     bool                            Disconnect                            ();

@@ -287,15 +287,15 @@ bool XDEBUGCTRL::Print(XBYTE level, XCHAR* mask,...)
 //  @param        showtext :
 */
 /*-----------------------------------------------------------------*/
-bool XDEBUGCTRL::PrintDataBlock(XBYTE level, XBYTE* data, int size, int marginsize, int sizeline, bool showoffset, bool showtext)
+bool XDEBUGCTRL::PrintDataBlock(XBYTE level, XBYTE* data, XDWORD size, XDWORD marginsize, XDWORD sizeline, bool showoffset, bool showtext)
 {
   XSTRING    margin;
   XSTRING    strdata;
-  int        _size     = 0;
-  int        _sizeline = sizeline;
+  XDWORD     _size     = 0;
+  XDWORD     _sizeline = sizeline;
   int        index     = 0;
 
-  for(int c=0;c<marginsize;c++)
+  for(XDWORD c=0; c<marginsize; c++)
     {
       margin += __L(" ");
     }
@@ -315,7 +315,7 @@ bool XDEBUGCTRL::PrintDataBlock(XBYTE level, XBYTE* data, int size, int marginsi
           string += __L("   ");
         }
 
-      for(int c=0;c<_sizeline;c++)
+      for(XDWORD c=0; c<_sizeline; c++)
         {
           strdata.Format(__L("%02X "),data[index]);
           string += strdata;
@@ -325,7 +325,7 @@ bool XDEBUGCTRL::PrintDataBlock(XBYTE level, XBYTE* data, int size, int marginsi
 
       //if(_sizeline != sizeline)
         {
-          for(int c=_sizeline;c<sizeline;c++)
+          for(XDWORD c=_sizeline; c<sizeline; c++)
             {
               string += __L("   ");
             }
@@ -337,7 +337,7 @@ bool XDEBUGCTRL::PrintDataBlock(XBYTE level, XBYTE* data, int size, int marginsi
           index -= _sizeline;
           string += __L(" ");
 
-          for(int c=0;c<_sizeline;c++)
+          for(XDWORD c=0; c<_sizeline; c++)
             {
               XCHAR character = (XCHAR)data[index];
 
@@ -377,7 +377,7 @@ bool XDEBUGCTRL::PrintDataBlock(XBYTE level, XBYTE* data, int size, int marginsi
 //  @param        showtext :
 */
 /*-----------------------------------------------------------------*/
-bool XDEBUGCTRL::PrintDataBlock(XBYTE level, XBUFFER& data, int marginsize, int sizeline, bool showoffset, bool showtext)
+bool XDEBUGCTRL::PrintDataBlock(XBYTE level, XBUFFER& data, XDWORD marginsize, XDWORD sizeline, bool showoffset, bool showtext)
 {
   return PrintDataBlock(level,data.Get(), data.GetSize(), marginsize, sizeline, showoffset, showtext);
 }
@@ -459,8 +459,8 @@ XDWORD XDEBUGCTRL::GetDebugFromXBuffer(XBUFFER& xbufferpacket, XDWORD& publicIP,
 
   //xbuffer.Resize(sizepacketread);
 
-  int sizeassing    = sizepacketread;
-  int sizeassingmin = 5*1024;
+  XDWORD sizeassing    = sizepacketread;
+  XDWORD sizeassingmin = 5*1024;
 
   if(sizeassing < sizeassingmin) sizeassing = sizeassingmin;
   xbuffer.Resize(sizeassing);
@@ -497,10 +497,10 @@ XDWORD XDEBUGCTRL::GetDebugFromXBuffer(XBUFFER& xbufferpacket, XDWORD& publicIP,
   xbuffer.Get(dword); xtime->SetSeconds(dword);
   xbuffer.Get(dword); xtime->SetMilliSeconds(dword);
 
-  int sizestr = sizepacketread - sizeheader;        // CRC16
+  XDWORD sizestr = sizepacketread - sizeheader;        // CRC16
   sizestr /= sizeof(XWORD);
 
-  for(int c=0; c<(sizestr-1); c++)
+  for(XDWORD c=0; c<(sizestr-1); c++)
     {
       XWORD  word;
       if(!xbuffer.Get(word)) break;

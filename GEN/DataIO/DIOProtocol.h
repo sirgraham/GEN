@@ -298,7 +298,7 @@ class DIOPROTOCOL_FILE
     void                                      SetCRC32                        (XDWORD crc32)                            { this->crc32 = crc32;                                        }
 
     int                                       GetSizeBlock                    ()                                        { return sizeblock;                                           }
-    void                                      SetSizeBlock                    (int sizeblock)                           { this->sizeblock = sizeblock;                                }
+    void                                      SetSizeBlock                    (XDWORD sizeblock)                           { this->sizeblock = sizeblock;                                }
 
     int                                       GetPosition                     ()                                        { return position;                                            }
     void                                      SetPosition                     (int position)                            { this->position = position;                                  }
@@ -334,8 +334,8 @@ class DIOPROTOCOL_FILE
 
     XDWORD                                    size;
     XDWORD                                    crc32;
-    int                                       sizeblock;
-    int                                       position;
+    XDWORD                                    sizeblock;
+    XDWORD                                    position;
     XBYTE                                     percent;
 
   private:

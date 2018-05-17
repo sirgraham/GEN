@@ -647,7 +647,7 @@ HASHWHIRLPOOL::~HASHWHIRLPOOL()
 //  @param        size :
 */
 /*-----------------------------------------------------------------*/
-bool HASHWHIRLPOOL::Do(XBYTE* input, int size)
+bool HASHWHIRLPOOL::Do(XBYTE* input, XDWORD size)
 {
   WHIRLPOOL w;
   XBYTE  digest[HASHWHIRLPOOL_DIGESTBYTES];

@@ -72,7 +72,7 @@ COMPRESS_LZRW1KH::~COMPRESS_LZRW1KH()
 //  @param        buffer :
 */
 //-------------------------------------------------------------------
-bool COMPRESS_LZRW1KH::Compress(XBYTE* origin,int size,XBUFFER* buffer)
+bool COMPRESS_LZRW1KH::Compress(XBYTE* origin,XDWORD size,XBUFFER* buffer)
 {
   param1  =  NULL;
 
@@ -96,7 +96,7 @@ bool COMPRESS_LZRW1KH::Compress(XBYTE* origin,int size,XBUFFER* buffer)
 //  @param        buffer :
 */
 //-------------------------------------------------------------------
-bool COMPRESS_LZRW1KH::Decompress(XBYTE* origin,int size,XBUFFER* buffer)
+bool COMPRESS_LZRW1KH::Decompress(XBYTE* origin,XDWORD size,XBUFFER* buffer)
 {
   param1  =  NULL;
 
@@ -120,7 +120,7 @@ bool COMPRESS_LZRW1KH::Decompress(XBYTE* origin,int size,XBUFFER* buffer)
 //  @param        param1 :
 */
 //-------------------------------------------------------------------
-bool COMPRESS_LZRW1KH::Compress(XBYTE* origin,int size,void* param1)
+bool COMPRESS_LZRW1KH::Compress(XBYTE* origin,XDWORD size,void* param1)
 {
   this->param1  =  param1;
 
@@ -144,7 +144,7 @@ bool COMPRESS_LZRW1KH::Compress(XBYTE* origin,int size,void* param1)
 //  @param        param1 :
 */
 //-------------------------------------------------------------------
-bool COMPRESS_LZRW1KH::Decompress(XBYTE* origin,int size,void* param1)
+bool COMPRESS_LZRW1KH::Decompress(XBYTE* origin,XDWORD size,void* param1)
 {
   this->param1  =  param1;
 

@@ -61,7 +61,7 @@ DIOLINUXURL::DIOLINUXURL() : DIOURL()
 //  @return
 //  */
 /*-----------------------------------------------------------------*/
-DIOLINUXURL::DIOLINUXURL(int size) : DIOURL(size)
+DIOLINUXURL::DIOLINUXURL(XDWORD size) : DIOURL(size)
 {
   Clean();
 }
@@ -116,7 +116,7 @@ DIOLINUXURL::DIOLINUXURL(const XCHAR* url) : DIOURL(url)
 //  @return
 //  */
 /*-----------------------------------------------------------------*/
-DIOLINUXURL::DIOLINUXURL(const XCHAR* url,int size) : DIOURL(url,size)
+DIOLINUXURL::DIOLINUXURL(const XCHAR* url,XDWORD size) : DIOURL(url,size)
 {
   Clean();
 }

@@ -419,7 +419,7 @@ void DIOWINDOWSSTREAMUDP::ThreadConnexion(void* data)
 
                                                                 memset(&origin_addr, 0, size_addr);
 
-                                                                int size = recvfrom(diostream->handle, (char*)buffer, DIOSTREAM_MAXBUFFER, 0,(sockaddr*)&origin_addr, &size_addr);
+                                                                XDWORD size = recvfrom(diostream->handle, (char*)buffer, DIOSTREAM_MAXBUFFER, 0,(sockaddr*)&origin_addr, &size_addr);
 
                                                                 if(size == SOCKET_ERROR)
                                                                   {

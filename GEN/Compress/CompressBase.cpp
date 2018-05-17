@@ -134,7 +134,7 @@ COMPRESSBASE_TYPE COMPRESSBASE::SetType(COMPRESSBASE_TYPE type)
 //  @param        buffer :
 */
 //-------------------------------------------------------------------
-bool COMPRESSBASE::Compress(XBYTE* origin,int size,XBUFFER* buffer)
+bool COMPRESSBASE::Compress(XBYTE* origin,XDWORD size,XBUFFER* buffer)
 {
   if(!origin)   return false;
   if(!size)     return false;
@@ -162,7 +162,7 @@ bool COMPRESSBASE::Compress(XBYTE* origin,int size,XBUFFER* buffer)
 //  @param        buffer :
 */
 //-------------------------------------------------------------------
-bool COMPRESSBASE::Decompress(XBYTE* origin,int size,XBUFFER* buffer)
+bool COMPRESSBASE::Decompress(XBYTE* origin,XDWORD size,XBUFFER* buffer)
 {
   if(!origin)   return false;
   if(!size)     return false;
@@ -189,12 +189,12 @@ bool COMPRESSBASE::Decompress(XBYTE* origin,int size,XBUFFER* buffer)
 //  @param        param1 :
 */
 //-------------------------------------------------------------------
-bool COMPRESSBASE::Compress(XBYTE* origin,int size,void* param1)
+bool COMPRESSBASE::Compress(XBYTE* origin,XDWORD size,void* param1)
 {
   if(!origin) return false;
   if(!size)   return false;
 
-  for(int c=0;c<size;c++)
+  for(XDWORD c=0; c<size; c++)
     {
       CompressResult(true,origin[c],param1);
     }
@@ -218,12 +218,12 @@ bool COMPRESSBASE::Compress(XBYTE* origin,int size,void* param1)
 //  @param        param1 :
 */
 //-------------------------------------------------------------------
-bool COMPRESSBASE::Decompress(XBYTE* origin,int size,void* param1)
+bool COMPRESSBASE::Decompress(XBYTE* origin,XDWORD size,void* param1)
 {
   if(!origin) return false;
   if(!size)   return false;
 
-  for(int c=0;c<size;c++)
+  for(XDWORD c=0; c<size; c++)
     {
       CompressResult(false,origin[c],param1);
     }

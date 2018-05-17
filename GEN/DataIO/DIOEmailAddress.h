@@ -37,10 +37,10 @@ class DIOEMAILADDRESS: public XSTRING
                       DIOEMAILADDRESS                           (): XSTRING()                                       { Clean();                      }
     virtual          ~DIOEMAILADDRESS                           ()                                                  { Clean();                      }
 
-                      DIOEMAILADDRESS                           (int size) : XSTRING(size)                          { Clean();                      }
+                      DIOEMAILADDRESS                           (XDWORD size) : XSTRING(size)                          { Clean();                      }
                       DIOEMAILADDRESS                           (const char* url) : XSTRING(url)                    { Clean();                      }
                       DIOEMAILADDRESS                           (const XCHAR* url) : XSTRING(url)                   { Clean();                      }
-                      DIOEMAILADDRESS                           (const XCHAR* url,int size) : XSTRING(url, size)    { Clean();                      }
+                      DIOEMAILADDRESS                           (const XCHAR* url,XDWORD size) : XSTRING(url, size)    { Clean();                      }
                       DIOEMAILADDRESS                           (DIOEMAILADDRESS& url) : XSTRING(url)               { Clean();                      }
                       DIOEMAILADDRESS                           (XSTRING& url) : XSTRING(url)                       { Clean();                      }
                       DIOEMAILADDRESS                           (XWORD* url) : XSTRING(url)                         { Clean();                      }

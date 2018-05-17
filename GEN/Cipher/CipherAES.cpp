@@ -163,7 +163,7 @@ CIPHERAES::~CIPHERAES()
 //  @param        size :
 */
 //-------------------------------------------------------------------
-bool CIPHERAES::Cipher(XBYTE* input,int size)
+bool CIPHERAES::Cipher(XBYTE* input,XDWORD size)
 {
   if(!size) return false;
 
@@ -234,7 +234,7 @@ bool CIPHERAES::Cipher(XBYTE* input,int size)
 //  @param        size :
 */
 /*-----------------------------------------------------------------*/
-bool CIPHERAES::Uncipher(XBYTE* input, int size)
+bool CIPHERAES::Uncipher(XBYTE* input, XDWORD size)
 {
   if(!size) return false;
 
@@ -704,7 +704,7 @@ bool CIPHERAES::AESCipher_ECB_Block(CIPHERAES_CONTEXT* ctx, int mode, XBYTE inpu
 //  @param        output :
 */
 /*-----------------------------------------------------------------*/
-bool CIPHERAES::AESCipher_ECB(CIPHERAES_CONTEXT* ctx, int mode, int size, XBYTE* input, XBYTE* output)
+bool CIPHERAES::AESCipher_ECB(CIPHERAES_CONTEXT* ctx, int mode, XDWORD size, XBYTE* input, XBYTE* output)
 {
   if(size % 16) return false;
 
@@ -743,7 +743,7 @@ bool CIPHERAES::AESCipher_ECB(CIPHERAES_CONTEXT* ctx, int mode, int size, XBYTE*
 //  @param        output :
 */
 /*-----------------------------------------------------------------*/
-bool CIPHERAES::AESCipher_CBC(CIPHERAES_CONTEXT* ctx, int mode, int size, XBYTE iv[16], XBYTE* input, XBYTE* output)
+bool CIPHERAES::AESCipher_CBC(CIPHERAES_CONTEXT* ctx, int mode, XDWORD size, XBYTE iv[16], XBYTE* input, XBYTE* output)
 {
   XBYTE temp[16];
   int   i;
@@ -812,7 +812,7 @@ bool CIPHERAES::AESCipher_CBC(CIPHERAES_CONTEXT* ctx, int mode, int size, XBYTE 
 //  @param        output :
 */
 /*-----------------------------------------------------------------*/
-bool CIPHERAES::AESCipher_CFB128(CIPHERAES_CONTEXT* ctx, int mode, int size, int* iv_off, XBYTE iv[16], XBYTE* input, XBYTE* output)
+bool CIPHERAES::AESCipher_CFB128(CIPHERAES_CONTEXT* ctx, int mode, XDWORD size, int* iv_off, XBYTE iv[16], XBYTE* input, XBYTE* output)
 {
   int c;
   size_t n = *iv_off;
@@ -875,7 +875,7 @@ bool CIPHERAES::AESCipher_CFB128(CIPHERAES_CONTEXT* ctx, int mode, int size, int
 //  @param        output :
 */
 /*-----------------------------------------------------------------*/
-bool CIPHERAES::AESCipher_CTR(CIPHERAES_CONTEXT* ctx, int size, int* nc_off, XBYTE nonce_counter[16], XBYTE stream_block[16], XBYTE* input, XBYTE* output)
+bool CIPHERAES::AESCipher_CTR(CIPHERAES_CONTEXT* ctx, XDWORD size, int* nc_off, XBYTE nonce_counter[16], XBYTE stream_block[16], XBYTE* input, XBYTE* output)
 {
   int c;
   int i;

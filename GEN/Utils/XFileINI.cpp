@@ -1368,7 +1368,7 @@ bool XFILEINI::Serialization(bool read)
         {
           WriteAllFile();
 
-          int pos = 0;
+          XDWORD pos = 0;
           file->GetPosition(pos);
 
           if(pos) file->SetSize(pos);

@@ -447,7 +447,7 @@ void DIOWINDOWSSTREAMBLUETOOTH::ThreadConnexion(void* param)
                                                               XBYTE buffer[DIOSTREAM_MAXBUFFER];
 
 
-                                                              int size = recv(diostream->handlesocket, (char*)buffer, DIOSTREAM_MAXBUFFER, 0);
+                                                              XDWORD size = recv(diostream->handlesocket, (char*)buffer, DIOSTREAM_MAXBUFFER, 0);
                                                               if(size<=0)
                                                                 {
                                                                   diostream->SetEvent(DIOWINDOWSBTFSMEVENT_DISCONNECTING);
@@ -466,7 +466,7 @@ void DIOWINDOWSSTREAMBLUETOOTH::ThreadConnexion(void* param)
                                                               if(esize)
                                                                 {
                                                                   diostream->outbuffer->SetBlocked(true);
-                                                                  int size = send(diostream->handlesocket, (char*)diostream->outbuffer->Get(), esize, 0);
+                                                                  XDWORD size = send(diostream->handlesocket, (char*)diostream->outbuffer->Get(), esize, 0);
                                                                   diostream->outbuffer->SetBlocked(false);
 
                                                                   if(size<=0)

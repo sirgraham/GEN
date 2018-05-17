@@ -33,10 +33,10 @@ class DIOWINDOWSURL : public DIOURL
                               DIOWINDOWSURL                     ();
     virtual                  ~DIOWINDOWSURL                     ();
 
-                              DIOWINDOWSURL                     (int size);
+                              DIOWINDOWSURL                     (XDWORD size);
                               DIOWINDOWSURL                     (const char* url);
                               DIOWINDOWSURL                     (const XCHAR* url);
-                              DIOWINDOWSURL                     (const XCHAR* url,int size);
+                              DIOWINDOWSURL                     (const XCHAR* url,XDWORD size);
                               DIOWINDOWSURL                     (DIOURL& url);
                               DIOWINDOWSURL                     (XSTRING& url);
                               DIOWINDOWSURL                     (XWORD* url);

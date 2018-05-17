@@ -1184,7 +1184,7 @@ bool TEST::Test_WEBServerSendFile(DIOWEBSERVER_CONNEXION* connexion, DIOWEBSERVE
 
 			if(request->GetIfNoneMatch()->Compare(entitytag))
 				{			
-					int sizefile;
+					XDWORD sizefile;
 					XFILE_GETFILESIZE(xpathfile, sizefile)
 					
 					XSTRING extension;
@@ -1465,7 +1465,7 @@ bool TEST::Test_DIOStreamUART(bool modeserver)
 													//xconsole->Printf(__L("Send data...\n"));
 												}
 
-											int size = diostream->GetInXBuffer()->GetSize();
+											XDWORD size = diostream->GetInXBuffer()->GetSize();
 											if(size)
 												{
 													xbuffer.Resize(size);
@@ -6581,7 +6581,7 @@ bool TEST::Test_DIOStreamUSB()
 													///xconsole->Printf(__L("%c"),  character);																																			
 												}
 
-											int size = diostream->GetInXBuffer()->GetSize();
+											XDWORD size = diostream->GetInXBuffer()->GetSize();
 											if(size)
 												{
 													xbuffer.Resize(size);
@@ -10529,7 +10529,7 @@ bool TEST::Test_Zip()
 
 	if(xfiletxt->Open(xpath))
 		{
-			int size = xfiletxt->GetSize();
+			XDWORD size = xfiletxt->GetSize();
 
 			XBUFFER* dec = new XBUFFER(size,false);
 			if(!dec) return false;

@@ -122,10 +122,10 @@ class XSTRING
 {
   public:
                           XSTRING                         ();
-                          XSTRING                         (int size);
+                          XSTRING                         (XDWORD size);
                           XSTRING                         (const char* string);
                           XSTRING                         (const XCHAR* string);
-                          XSTRING                         (const XCHAR* string,int size);
+                          XSTRING                         (const XCHAR* string,XDWORD size);
                           XSTRING                         (const XSTRING& string);
                           XSTRING                         (XWORD* string);
 
@@ -141,24 +141,24 @@ class XSTRING
     bool                  CreateOEM                       (char*& text) const;
     bool                  CreateNormalize                 (XWORD*& text, bool inverse = false);
 
-    bool                  Set                             (int size);
+    bool                  Set                             (XDWORD size);
     bool                  Set                             (const char* string);
     bool                  Set                             (const XCHAR* string);
-    bool                  Set                             (const XCHAR* string, int size);
+    bool                  Set                             (const XCHAR* string, XDWORD size);
     bool                  Set                             (const XSTRING& string);
     bool                  Set                             (XWORD* string);
     bool                  Set                             (const XCHAR character);
     static bool           Set                             (XCHAR* str1, const XCHAR* str2);
-    bool                  Set                             (const XBYTE* buffer, int size);
+    bool                  Set                             (const XBYTE* buffer, XDWORD size);
     bool                  Set                             (XBUFFER& buffer);
-    bool                  Set                             (const XDWORD* buffer, int size);
+    bool                  Set                             (const XDWORD* buffer, XDWORD size);
 
     bool                  Add                             (const char* string);
     bool                  Add                             (const XCHAR* string);
     bool                  Add                             (XSTRING& string);
     bool                  Add                             (XCHAR character);
     static bool           Add                             (XCHAR* str1, const XCHAR* str2);
-    bool                  Add                             (const XBYTE* buffer, int size);
+    bool                  Add                             (const XBYTE* buffer, XDWORD size);
     bool                  Add                             (XBUFFER& buffer);
 
 
@@ -322,7 +322,7 @@ class XSTRING
 
     bool                  ConvertToBoolean                ();
 
-    bool                  ConvertFromUTF8                 (XBYTE* data, int size);
+    bool                  ConvertFromUTF8                 (XBYTE* data, XDWORD size);
     bool                  ConvertFromUTF8                 (XBUFFER& xbuffer);
     int                   GetSizeConvertToUTF8            ();
     bool                  ConvertToUTF8                   (XBYTE* data, int& size);

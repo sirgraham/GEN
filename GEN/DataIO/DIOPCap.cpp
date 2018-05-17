@@ -538,7 +538,7 @@ XBUFFER* DIOPCAPFRAME::GetData()
 //  @param        size :
 */
 /*-----------------------------------------------------------------*/
-bool DIOPCAPFRAME::SetData(XBYTE* data, int size)
+bool DIOPCAPFRAME::SetData(XBYTE* data, XDWORD size)
 {
   if(!this->data) return false;
   if(!data)       return false;
@@ -864,7 +864,7 @@ bool DIOPCAP::End()
 //  @param        size :
 */
 /*-----------------------------------------------------------------*/
-bool DIOPCAP::Frames_Add(XBYTE* data,int size)
+bool DIOPCAP::Frames_Add(XBYTE* data,XDWORD size)
 {
   if(!data) return false;
   if(!size) return false;

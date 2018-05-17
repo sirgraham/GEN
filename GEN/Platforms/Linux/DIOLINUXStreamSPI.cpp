@@ -169,7 +169,7 @@ bool DIOLINUXSTREAMSPI::TransferBuffer(XBYTE* bufferread, XBYTE* bufferwrite, XD
 {
   struct spi_ioc_transfer transf;
 
-  int sizeint = size;
+  XDWORD sizeint = size;
 
   memset((XBYTE*)&transf, 0, sizeof(struct spi_ioc_transfer));
 

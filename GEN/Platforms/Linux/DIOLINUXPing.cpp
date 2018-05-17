@@ -178,7 +178,7 @@ bool DIOLINUXPING::Do(XDWORD nretries, XDWORD timebetweenchecks, bool exitfirstg
       echorequest.time              = (XDWORD)xtimer->GetMicroSecondsTickCounter();                           // Save tick count when sent
       echorequest.icmphdr.checksum  = CalculeCheckSum((XWORD *)&echorequest, sizeof(DIOPING_ECHOREQUEST));    // Put data in packet and compute checksum
 
-      int size = sendto(handle,(char*)&echorequest, sizeof(DIOPING_ECHOREQUEST), 0, (sockaddr*)&targetaddr, sizeof(struct sockaddr_in));
+      XDWORD size = sendto(handle,(char*)&echorequest, sizeof(DIOPING_ECHOREQUEST), 0, (sockaddr*)&targetaddr, sizeof(struct sockaddr_in));
       if(size != sizeof(DIOPING_ECHOREQUEST))
         {
           XDEBUG_PRINTCOLOR(4, __L("Ping: not write packet! %s"), targetIP.Get());

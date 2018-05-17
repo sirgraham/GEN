@@ -51,6 +51,8 @@
 #define DIOWEBSERVER_MAXSENDFILE                  DIOSTREAM_MAXBUFFER/2
 #define DIOWEBSERVER_MAXBUFFER                    (16*1024)
 
+#define DIOWEBSERVER__MAXBUFFERFILE               (1024*1024)
+
 
 enum DIOWEBSERVER_PAGESTATUS
 {
@@ -134,7 +136,7 @@ class DIOWEBSERVER_HEADER : public DIOWEBHEADER
     int                         GetResult                         ();
     bool                        GetResultString                   (XSTRING& coderesultstring);
 
-    bool                        Create                            (DIOWEBSERVER* webserver, DIOWEBSERVER_CONNEXION* connexion, DIOWEBSERVER_REQUEST* request, XSTRING* resource, int version, int subversion, DIOWEBHEADER_RESULT result, int size, XSTRING* entitytag = NULL, bool isplayed = true, bool password = false);
+    bool                        Create                            (DIOWEBSERVER* webserver, DIOWEBSERVER_CONNEXION* connexion, DIOWEBSERVER_REQUEST* request, XSTRING* resource, int version, int subversion, DIOWEBHEADER_RESULT result, XDWORD size, XSTRING* entitytag = NULL, bool isplayed = true, bool password = false);
 
   private:
 
@@ -220,7 +222,7 @@ class DIOWEBSERVER_REQUEST
     void                                        SetGuest                                (XSTRING& guest)                        { this->guest = guest;                            }
 
     void                                        SetUserAgent                            (XSTRING& useragent)                    { this->useragent = useragent;                    }
-    void                                        SetSize                                 (int size)                              { this->size = size;                              }
+    void                                        SetSize                                 (XDWORD size)                              { this->size = size;                              }
     void                                        SetIfNoneMatch                          (XSTRING& ifnonematch);
 
     void                                        SetLoginPassword                        (XSTRING& loginpassword)                { this->loginpassword = loginpassword;            }
@@ -296,9 +298,9 @@ class DIOWEBSERVER_CONNEXION
 
     bool                                        IsActive                                ()                                      { return isactive;                                }
 
-    bool                                        Receiver                                (XBYTE* buffer, int& size,int timeout = DIOWEBSERVER_DEFAULTCONNEXIONTIMEOUT);
+    bool                                        Receiver                                (XBYTE* buffer, XDWORD& size,int timeout = DIOWEBSERVER_DEFAULTCONNEXIONTIMEOUT);
 
-    bool                                        Send                                    (XBYTE* buffer, int& size, int timeout = DIOWEBSERVER_DEFAULTCONNEXIONTIMEOUT);
+    bool                                        Send                                    (XBYTE* buffer, XDWORD& size, int timeout = DIOWEBSERVER_DEFAULTCONNEXIONTIMEOUT);
     bool                                        Send                                    (XBUFFER& xbuffer, int timeout = DIOWEBSERVER_DEFAULTCONNEXIONTIMEOUT);
     bool                                        Send                                    (XSTRING& string, int timeout = DIOWEBSERVER_DEFAULTCONNEXIONTIMEOUT);
     bool                                        Send                                    (XCHAR* string, int timeout = DIOWEBSERVER_DEFAULTCONNEXIONTIMEOUT);

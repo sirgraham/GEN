@@ -81,7 +81,7 @@ COMPRESS_ZIP::~COMPRESS_ZIP()
 //  @param        xbuffer :
 */
 //-------------------------------------------------------------------
-bool COMPRESS_ZIP::Compress(XBYTE* source,int size,XBUFFER* xbuffer)
+bool COMPRESS_ZIP::Compress(XBYTE* source,XDWORD size,XBUFFER* xbuffer)
 {
   if(!source)  return false;
   if(!size)    return false;
@@ -114,7 +114,7 @@ bool COMPRESS_ZIP::Compress(XBYTE* source,int size,XBUFFER* xbuffer)
 //  @param        xbuffer :
 */
 //-------------------------------------------------------------------
-bool COMPRESS_ZIP::Decompress(XBYTE* source,int size,XBUFFER* xbuffer)
+bool COMPRESS_ZIP::Decompress(XBYTE* source,XDWORD size,XBUFFER* xbuffer)
 {
   if(!source)  return false;
   if(!size)    return false;

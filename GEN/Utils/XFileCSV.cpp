@@ -795,7 +795,7 @@ bool XFILECSV::Serialization(bool read,bool haveheader)
 
           WriteAllFile();
 
-          int pos;
+          XDWORD pos;
           file->GetPosition(pos);
 
           if(pos) file->SetSize(pos);

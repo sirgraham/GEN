@@ -135,13 +135,13 @@ class XLOG
     XDWORD                  GetNEntrys                        ()                                                                    { return nentrys;                         }
     XDWORD                  GetNLines                         ()                                                                    { return nlines;                          }
     XDWORD                  GetSize                           ()                                                                    { return size;                            }
-    bool                    GetLevelString                    (XLOGLEVEL level, XSTRING& strlevel, int size);
+    bool                    GetLevelString                    (XLOGLEVEL level, XSTRING& strlevel, XDWORD size);
     XSTRING*                GetSectionsIDFilter               ();
     bool                    PassFilters                       (XLOGLEVEL level, XCHAR* sectionID);
 
     bool                    AddEntry                          (XLOGLEVEL level, XCHAR* sectionID, bool inmemory, XCHAR*   mask, ...);
-    bool                    AddEntry                          (XLOGLEVEL level, XCHAR* sectionID, bool inmemory, XBYTE*   data, int size,           int sizeline = 16,       bool showoffset  = true, bool showtext = true);
-    bool                    AddEntry                          (XLOGLEVEL level, XCHAR* sectionID, bool inmemory, XBUFFER& data, int sizeline = 16,  bool showoffset = true,  bool showtext    = true);
+    bool                    AddEntry                          (XLOGLEVEL level, XCHAR* sectionID, bool inmemory, XBYTE*   data, XDWORD size,           XDWORD sizeline = 16,       bool showoffset  = true, bool showtext = true);
+    bool                    AddEntry                          (XLOGLEVEL level, XCHAR* sectionID, bool inmemory, XBUFFER& data, XDWORD sizeline = 16,  bool showoffset = true,  bool showtext    = true);
 
     bool                    Flush                             ();
 

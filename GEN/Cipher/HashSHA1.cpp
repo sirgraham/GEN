@@ -89,7 +89,7 @@ HASHSHA1::~HASHSHA1()
 //  @param        size :
 */
 /*-----------------------------------------------------------------*/
-bool HASHSHA1::Do(XBYTE* input, int size)
+bool HASHSHA1::Do(XBYTE* input, XDWORD size)
 {
   XDWORD msgdigest[5];
 

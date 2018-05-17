@@ -32,8 +32,8 @@ class COMPRESS_ZIP : public COMPRESSBASE
                             COMPRESS_ZIP          ();
     virtual                ~COMPRESS_ZIP          ();
 
-    bool                    Compress              (XBYTE* source,int size,XBUFFER* buffer);
-    bool                    Decompress            (XBYTE* source,int size,XBUFFER* buffer);
+    bool                    Compress              (XBYTE* source,XDWORD size,XBUFFER* buffer);
+    bool                    Decompress            (XBYTE* source,XDWORD size,XBUFFER* buffer);
 
   private:
 

@@ -104,7 +104,7 @@ HASHCRC32::~HASHCRC32()
 //  @param        size :
 */
 /*-----------------------------------------------------------------*/
-bool HASHCRC32::Do(XBYTE* input, int size)
+bool HASHCRC32::Do(XBYTE* input, XDWORD size)
 {
   if(!size) return false;
 
@@ -112,7 +112,7 @@ bool HASHCRC32::Do(XBYTE* input, int size)
 
   resulttmp->Extract(value);
 
-  for(int c=0;c<size;c++)
+  for(XDWORD c=0;c<size;c++)
     {
       value = Update(value, (*input));
       input++;
@@ -205,7 +205,7 @@ XBUFFER* HASHCRC32::GetResult()
 //  @param        resultsize :
 */
 /*-----------------------------------------------------------------*/
-XBYTE* HASHCRC32::GetResult(int& resultsize)
+XBYTE* HASHCRC32::GetResult(XDWORD& resultsize)
 {
   GetResultCRC32();
 

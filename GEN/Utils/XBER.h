@@ -82,11 +82,11 @@ class XBER
     bool                      SetINTEGER                (XBUFFER& xbufferdata);
 
     bool                      SetBITSTRING              (XBUFFER& databuffer);
-    bool                      SetBITSTRING              (XBYTE* buffer, int size);
+    bool                      SetBITSTRING              (XBYTE* buffer, XDWORD size);
 
     bool                      SetOCTETSTRING            (XCHAR* string);
     bool                      SetOCTETSTRING            (XBUFFER& databuffer);
-    bool                      SetOCTETSTRING            (XBYTE* buffer, int size);
+    bool                      SetOCTETSTRING            (XBYTE* buffer, XDWORD size);
 
     bool                      SetOID                    (XCHAR* OIDstring);
 

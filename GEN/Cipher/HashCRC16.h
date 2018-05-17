@@ -33,7 +33,7 @@ public:
   virtual            ~HASHCRC16               ();
 
   using               HASH::Do;
-  bool                Do                      (XBYTE* input, int size);
+  bool                Do                      (XBYTE* input, XDWORD size);
 
   bool                ResetResult             ();
 

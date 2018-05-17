@@ -60,18 +60,18 @@ class HASH
     HASHTYPE                      GetType                       ()                    { return type;                  }
     XSTRING*                      GetOUINoSign                  ()                    { return &OUInosignstring;      };
 
-    virtual bool                  Do                            (XBYTE* input, int size);
+    virtual bool                  Do                            (XBYTE* input, XDWORD size);
     bool                          Do                            (XBUFFER& input);
 
-    bool                          Do                            (XPATH& xpath, int size = HASHALLFILESIZE, int pos = 0);
-    bool                          Do                            (XFILE* xfile, int size = HASHALLFILESIZE, int pos = 0);
+    bool                          Do                            (XPATH& xpath, XDWORD size = HASHALLFILESIZE, XDWORD pos = 0);
+    bool                          Do                            (XFILE* xfile, XDWORD size = HASHALLFILESIZE, XDWORD pos = 0);
 
     virtual bool                  ResetResult                   ();
 
     virtual int                   GetDefaultSize                ();
 
     virtual XBUFFER*              GetResult                     ();
-    virtual XBYTE*                GetResult                     (int& resultsize);
+    virtual XBYTE*                GetResult                     (XDWORD& resultsize);
 
     bool                          GetResultString               (XSTRING& stringhex);
 

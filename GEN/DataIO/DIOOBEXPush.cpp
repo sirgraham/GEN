@@ -1062,7 +1062,7 @@ bool DIOOBEXPUSH::CheckSending()
 
                                                           { XBUFFER datafile((XDWORD)readfilesizeblock, true);
 
-                                                            xfile->Read(datafile.Get(),(int*)&readfilesizeblock);
+                                                            xfile->Read(datafile.Get(),(XDWORD*)&readfilesizeblock);
                                                             if(!readfilesizeblock)
                                                               {
                                                                 haveerror = true;

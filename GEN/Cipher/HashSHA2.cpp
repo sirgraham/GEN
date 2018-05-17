@@ -260,7 +260,7 @@ HASHSHA2::~HASHSHA2()
 //  @param        size :
 */
 /*-----------------------------------------------------------------*/
-bool HASHSHA2::Do(XBYTE* input, int size)
+bool HASHSHA2::Do(XBYTE* input, XDWORD size)
 {
   XBYTE digest[128];
 

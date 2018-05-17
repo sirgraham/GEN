@@ -46,8 +46,8 @@ class CIPHERAES : public CIPHER
     using                 CIPHER::Cipher;
     using                 CIPHER::Uncipher;
 
-    bool                  Cipher                  (XBYTE* input,  int size);
-    bool                  Uncipher                (XBYTE* input,  int size);
+    bool                  Cipher                  (XBYTE* input,  XDWORD size);
+    bool                  Uncipher                (XBYTE* input,  XDWORD size);
 
   private:
 
@@ -60,10 +60,10 @@ class CIPHERAES : public CIPHER
 
     bool                  AESCipher_ECB_Block     (CIPHERAES_CONTEXT* ctx, int mode, XBYTE input[16], XBYTE output[16]);
 
-    bool                  AESCipher_ECB           (CIPHERAES_CONTEXT* ctx, int mode, int size, XBYTE* input, XBYTE* output);
-    bool                  AESCipher_CBC           (CIPHERAES_CONTEXT* ctx, int mode, int size, XBYTE iv[16], XBYTE* input, XBYTE* output);
-    bool                  AESCipher_CFB128        (CIPHERAES_CONTEXT* ctx, int mode, int size, int* iv_off, XBYTE iv[16], XBYTE* input, XBYTE* output);
-    bool                  AESCipher_CTR           (CIPHERAES_CONTEXT* ctx, int size, int*  nc_off, XBYTE nonce_counter[16], XBYTE stream_block[16], XBYTE* input, XBYTE* output);
+    bool                  AESCipher_ECB           (CIPHERAES_CONTEXT* ctx, int mode, XDWORD size, XBYTE* input, XBYTE* output);
+    bool                  AESCipher_CBC           (CIPHERAES_CONTEXT* ctx, int mode, XDWORD size, XBYTE iv[16], XBYTE* input, XBYTE* output);
+    bool                  AESCipher_CFB128        (CIPHERAES_CONTEXT* ctx, int mode, XDWORD size, int* iv_off, XBYTE iv[16], XBYTE* input, XBYTE* output);
+    bool                  AESCipher_CTR           (CIPHERAES_CONTEXT* ctx, XDWORD size, int*  nc_off, XBYTE nonce_counter[16], XBYTE stream_block[16], XBYTE* input, XBYTE* output);
 
     static XBYTE          FSb[256];
     static XDWORD         FT0[256];

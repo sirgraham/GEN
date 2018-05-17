@@ -105,7 +105,7 @@ HASHMD5::~HASHMD5()
 //  @param        size :
 */
 /*-----------------------------------------------------------------*/
-bool HASHMD5::Do(XBYTE* input, int size)
+bool HASHMD5::Do(XBYTE* input, XDWORD size)
 {
   if(!result) return false;
 

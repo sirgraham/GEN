@@ -136,7 +136,7 @@ class XDEBUGCTRLTARGET
 
     void                    SetAim                        (XCHAR* aim)
                             {
-                              int size = XSTRING::GetSize(aim);
+                              XDWORD size = XSTRING::GetSize(aim);
                               memset(this->aim, 0, (_MAXSTR * sizeof(XCHAR)));
                               memcpy(this->aim, aim, size * sizeof(XCHAR));
                             }
@@ -202,14 +202,14 @@ class XDEBUGCTRL
     XCHAR*                  GetApplicationName            ()                                                                  { return applicationname;                   }
     void                    SetApplicationName            (XCHAR* applicationname)
                             {
-                              int size = 0;
+                              XDWORD size = 0;
                               if(applicationname) size=XSTRING::GetSize(applicationname);
 
                               memset(this->applicationname, 0, _MAXSTR * sizeof(XCHAR));
                               if(applicationname) memcpy(this->applicationname, applicationname, (size + 1) * sizeof(XCHAR));
                             }
 
-    void                    SetApplicationName            (XCHAR* applicationname, int size)
+    void                    SetApplicationName            (XCHAR* applicationname, XDWORD size)
                             {
                               memset(this->applicationname, 0, _MAXSTR*sizeof(XCHAR));
                               if(applicationname) memcpy(this->applicationname, applicationname, (size+1)*sizeof(XCHAR));
@@ -236,7 +236,7 @@ class XDEBUGCTRL
 
     XCHAR*                  GetApplicationID              ()                                                                  { return applicationID;                     }
 
-    void                    SetApplicationID              (XCHAR* applicationID, int size)
+    void                    SetApplicationID              (XCHAR* applicationID, XDWORD size)
                             {
                               memset(this->applicationID, 0, _MAXSTR*sizeof(XCHAR)),
                               memcpy(this->applicationID, applicationID, (size+1)*sizeof(XCHAR));
@@ -283,7 +283,7 @@ class XDEBUGCTRL
     XCHAR*                  GetWebScraperScriptURLDownload    ()                                                                  { return webscraperscripturldownload;       }
     void                    SetWebScraperScriptURLDownload    (XCHAR* webscraperscripturldownload)
                             {
-                              int size = 0;
+                              XDWORD size = 0;
                               if(webscraperscripturldownload) size=XSTRING::GetSize(webscraperscripturldownload);
 
                               memset(this->webscraperscripturldownload, 0, _MAXSTR * sizeof(XCHAR));
@@ -293,8 +293,8 @@ class XDEBUGCTRL
 
     void                    PrintHeader                       (XCHAR* header);
     bool                    Print                             (XBYTE level, XCHAR* mask,...);
-    bool                    PrintDataBlock                    (XBYTE level, XBYTE* data, int _size, int marginsize = 1, int sizeline = 32, bool showoffset = true, bool showtext = true);
-    bool                    PrintDataBlock                    (XBYTE level, XBUFFER& data, int marginsize = 1, int sizeline = 32, bool showoffset = true, bool showtext = true);
+    bool                    PrintDataBlock                    (XBYTE level, XBYTE* data, XDWORD _size, XDWORD marginsize = 1, XDWORD sizeline = 32, bool showoffset = true, bool showtext = true);
+    bool                    PrintDataBlock                    (XBYTE level, XBUFFER& data, XDWORD marginsize = 1, XDWORD sizeline = 32, bool showoffset = true, bool showtext = true);
 
     virtual void            PrintSpecial                      (XDEBUGCTRLTARGET* target, XBYTE level, XCHAR* string)              {                                           }
     virtual void            PrintFile                         (XDEBUGCTRLTARGET* target, XBYTE level, XCHAR* string)              {                                           }

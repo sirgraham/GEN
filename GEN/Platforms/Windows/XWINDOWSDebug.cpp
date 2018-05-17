@@ -230,7 +230,7 @@ void XWINDOWSDEBUGCTRL::PrintFile(XDEBUGCTRLTARGET* target, XBYTE level, XCHAR* 
 
   // --- Check File size --------------
 
-  int sizefile;
+  XDWORD sizefile;
 
   fflush(file);
 

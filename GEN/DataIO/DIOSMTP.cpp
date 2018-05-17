@@ -344,7 +344,7 @@ bool DIOSMTP::DelAllRecipients()
 //  @param        sizelimit :
 */
 /*-----------------------------------------------------------------*/
-bool DIOSMTP::AddAttachment(XCHAR* path, bool check, int sizelimit)
+bool DIOSMTP::AddAttachment(XCHAR* path, bool check, XDWORD sizelimit)
 {
   if(!path) return false;
 
@@ -392,7 +392,7 @@ bool DIOSMTP::AddAttachment(XCHAR* path, bool check, int sizelimit)
 //  @param        sizelimit :
 */
 /*-----------------------------------------------------------------*/
-bool DIOSMTP::AddAttachment(XPATH& xpath, bool check, int sizelimit)
+bool DIOSMTP::AddAttachment(XPATH& xpath, bool check, XDWORD sizelimit)
 {
   return AddAttachment(xpath.Get(), check, sizelimit);
 }
@@ -694,7 +694,7 @@ bool DIOSMTP::Send()
             {
               XBUFFER datafile;
               XSTRING datafileenconded64;
-              int     filesize;
+              XDWORD  filesize;
 
               if(attachment->FileExists(&filesize))
                 {
@@ -720,7 +720,7 @@ bool DIOSMTP::Send()
                   XFILE* xfile = xfactory->Create_File();
                   if(xfile)
                     {
-                      int br = filesize;
+                      XDWORD br = filesize;
 
                       if(xfile->Open((*attachment->GetXPath())))
                         {

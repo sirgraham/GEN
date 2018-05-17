@@ -108,7 +108,7 @@ class DIOSMTPATTACHMENT
 
     XPATH*                        GetXPath                        ()                                        { return &xpath;                    }
 
-    bool                          FileExists                      (int* size = NULL)
+    bool                          FileExists                      (XDWORD* size = NULL)
                                   {
                                     XFILE* xfile = xfactory->Create_File();
                                     bool   status = false;
@@ -126,14 +126,14 @@ class DIOSMTPATTACHMENT
                                     return status;
                                   }
 
-    int                           GetSize                         ()
+    XDWORD                        GetSize                         ()
                                   {
                                     FileExists();
                                     return size;
                                   }
 
     int                           GetSizeLimit                    ()                                        { return sizelimit;                 }
-    void                          SetSizeLimit                    (int sizelimit = DIOSMTP_ANYSIZELIMITATTACHMENT)
+    void                          SetSizeLimit                    (XDWORD sizelimit = DIOSMTP_ANYSIZELIMITATTACHMENT)
                                   {
                                     this->sizelimit = sizelimit;
                                   }
@@ -148,8 +148,8 @@ class DIOSMTPATTACHMENT
 
 
     XPATH                         xpath;
-    int                           size;
-    int                           sizelimit;
+    XDWORD                        size;
+    XDWORD                        sizelimit;
 };
 
 
@@ -203,8 +203,8 @@ class DIOSMTP
     DIOSMTPXPRIORITY              GetXPriority                    ()                                        { return xpriority;                           }
     void                          SetXPriority                    (DIOSMTPXPRIORITY xpriority)              { this->xpriority = xpriority;                }
 
-    bool                          AddAttachment                   (XCHAR* path, bool check = true, int sizelimit = DIOSMTP_DEFAULSIZELIMITATTACHMENT);
-    bool                          AddAttachment                   (XPATH& xpath, bool check = true, int sizelimit = DIOSMTP_DEFAULSIZELIMITATTACHMENT);
+    bool                          AddAttachment                   (XCHAR* path, bool check = true, XDWORD sizelimit = DIOSMTP_DEFAULSIZELIMITATTACHMENT);
+    bool                          AddAttachment                   (XPATH& xpath, bool check = true, XDWORD sizelimit = DIOSMTP_DEFAULSIZELIMITATTACHMENT);
     bool                          DelAttachment                   (XCHAR* path);
     bool                          DelAttachment                   (XPATH& xpath);
     bool                          DelAllAttachments               ();

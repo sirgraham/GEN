@@ -54,7 +54,7 @@ class HASHWHIRLPOOL : public HASH
     virtual            ~HASHWHIRLPOOL         ();
 
     using               HASH::Do;
-    bool                Do                    (XBYTE* input, int size);
+    bool                Do                    (XBYTE* input, XDWORD size);
 
     int                 GetDefaultSize        ();
 

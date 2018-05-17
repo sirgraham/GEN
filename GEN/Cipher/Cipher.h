@@ -107,7 +107,7 @@ class CIPHERKEYSYMMETRICAL : public CIPHERKEY
     XBYTE*                Get                       (int& size);
     XBUFFER*              Get                       ();
 
-    bool                  Set                       (XBYTE* key, int size);
+    bool                  Set                       (XBYTE* key, XDWORD size);
     bool                  Set                       (XBUFFER& key);
 
     int                   GetSizeInBytes            ()                                        { return xbufferkey->GetSize();                     }
@@ -160,13 +160,13 @@ class CIPHER
     virtual bool          SetKey                    (CIPHERKEY* key, bool integritycheck = false);
 
     XBYTE*                GetInitVector             ();
-    bool                  SetInitVector             (XBYTE* inivector, int size);
+    bool                  SetInitVector             (XBYTE* inivector, XDWORD size);
     bool                  SetInitVector             (XBUFFER& inivector);
 
-    virtual bool          Cipher                    (XBYTE* input, int size);
+    virtual bool          Cipher                    (XBYTE* input, XDWORD size);
     bool                  Cipher                    (XBUFFER& input);
 
-    virtual bool          Uncipher                  (XBYTE* input,int size);
+    virtual bool          Uncipher                  (XBYTE* input,XDWORD size);
     bool                  Uncipher                  (XBUFFER& input);
 
     virtual XBYTE*        GetResult                 (int& resultsize);

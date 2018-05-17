@@ -35,10 +35,10 @@ class DIOURL : public XSTRING
                               DIOURL                            (): XSTRING()                                       { Clean();                      }
     virtual                  ~DIOURL                            ()                                                  { Clean();                      }
 
-                              DIOURL                            (int size) : XSTRING(size)                          { Clean();                      }
+                              DIOURL                            (XDWORD size) : XSTRING(size)                          { Clean();                      }
                               DIOURL                            (const char* url) : XSTRING(url)                    { Clean();                      }
                               DIOURL                            (const XCHAR* url) : XSTRING(url)                   { Clean();                      }
-                              DIOURL                            (const XCHAR* url,int size) : XSTRING(url, size)    { Clean();                      }
+                              DIOURL                            (const XCHAR* url,XDWORD size) : XSTRING(url, size)    { Clean();                      }
                               DIOURL                            (DIOURL& url) : XSTRING(url)                        { Clean();                      }
                               DIOURL                            (XSTRING& url) : XSTRING(url)                       { Clean();                      }
                               DIOURL                            (XWORD* url) : XSTRING(url)                         { Clean();                      }

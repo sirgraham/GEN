@@ -58,9 +58,9 @@ class XFILECMPZIP
 
     bool                      GetSeek                   (int *position);
 
-    bool                      Read                      (XBYTE* buffer,int size);
+    bool                      Read                      (XBYTE* buffer,XDWORD size);
     bool                      Read                      (XBYTE* buffer,int* size);
-    bool                      Write                     (XBYTE* buffer,int size);
+    bool                      Write                     (XBYTE* buffer,XDWORD size);
 
     bool                      IsEOF                     ();
 

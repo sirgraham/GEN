@@ -43,8 +43,8 @@ class CIPHER3DES : public CIPHERDES
     using                 CIPHER::Cipher;
     using                 CIPHER::Uncipher;
 
-    bool                  Cipher                  (XBYTE* input, int size);
-    bool                  Uncipher                (XBYTE* input, int size);
+    bool                  Cipher                  (XBYTE* input, XDWORD size);
+    bool                  Uncipher                (XBYTE* input, XDWORD size);
 
   private:
 

@@ -368,7 +368,7 @@ CIPHERBLOWFISH::~CIPHERBLOWFISH()
 //  @param        size :
 */
 //-------------------------------------------------------------------
-bool CIPHERBLOWFISH::Cipher(XBYTE* input,int size)
+bool CIPHERBLOWFISH::Cipher(XBYTE* input,XDWORD size)
 {
   if(!size) return false;
 
@@ -440,7 +440,7 @@ bool CIPHERBLOWFISH::Cipher(XBYTE* input,int size)
 //  @param        size :
 */
 /*-----------------------------------------------------------------*/
-bool CIPHERBLOWFISH::Uncipher(XBYTE* input,int size)
+bool CIPHERBLOWFISH::Uncipher(XBYTE* input,XDWORD size)
 {
   if(!size) return false;
 
@@ -782,7 +782,7 @@ bool CIPHERBLOWFISH::BlowfishCipher_ECB(CIPHERBLOWFISH_CONTEXT* ctx, int mode, X
 //  @param        output :
 */
 /*-----------------------------------------------------------------*/
-bool CIPHERBLOWFISH::BlowfishCipher_CBC(CIPHERBLOWFISH_CONTEXT* ctx, int mode, int size, XBYTE iv[CIPHERBLOWFISH_BLOCKSIZE], XBYTE* input, XBYTE* output)
+bool CIPHERBLOWFISH::BlowfishCipher_CBC(CIPHERBLOWFISH_CONTEXT* ctx, int mode, XDWORD size, XBYTE iv[CIPHERBLOWFISH_BLOCKSIZE], XBYTE* input, XBYTE* output)
 {
   XBYTE temp[CIPHERBLOWFISH_BLOCKSIZE];
   int   i;
@@ -852,7 +852,7 @@ bool CIPHERBLOWFISH::BlowfishCipher_CBC(CIPHERBLOWFISH_CONTEXT* ctx, int mode, i
 //  @param        output :
 */
 /*-----------------------------------------------------------------*/
-bool CIPHERBLOWFISH::BlowfishCipher_CFB64(CIPHERBLOWFISH_CONTEXT* ctx, int mode, int size, int* iv_off, XBYTE iv[CIPHERBLOWFISH_BLOCKSIZE], XBYTE* input, XBYTE* output)
+bool CIPHERBLOWFISH::BlowfishCipher_CFB64(CIPHERBLOWFISH_CONTEXT* ctx, int mode, XDWORD size, int* iv_off, XBYTE iv[CIPHERBLOWFISH_BLOCKSIZE], XBYTE* input, XBYTE* output)
 {
   int n = *iv_off;
   int c;
@@ -909,7 +909,7 @@ bool CIPHERBLOWFISH::BlowfishCipher_CFB64(CIPHERBLOWFISH_CONTEXT* ctx, int mode,
 //  @param        output :
 */
 /*-----------------------------------------------------------------*/
-bool CIPHERBLOWFISH::BlowfishCipher_CTR(CIPHERBLOWFISH_CONTEXT* ctx, int size, int* nc_off, XBYTE nonce_counter[CIPHERBLOWFISH_BLOCKSIZE], XBYTE stream_block[CIPHERBLOWFISH_BLOCKSIZE], XBYTE* input, XBYTE* output)
+bool CIPHERBLOWFISH::BlowfishCipher_CTR(CIPHERBLOWFISH_CONTEXT* ctx, XDWORD size, int* nc_off, XBYTE nonce_counter[CIPHERBLOWFISH_BLOCKSIZE], XBYTE stream_block[CIPHERBLOWFISH_BLOCKSIZE], XBYTE* input, XBYTE* output)
 {
   int n = *nc_off;
   int c;

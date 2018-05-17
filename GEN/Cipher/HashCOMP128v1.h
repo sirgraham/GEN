@@ -41,7 +41,7 @@ class HASHCOMP128V1 : public HASH
     bool                  SetInput                  (XBYTE* rand, XBYTE* ki, XBUFFER& xbuffer);
 
     using                 HASH::Do;
-    bool                  Do                        (XBYTE* input, int size);
+    bool                  Do                        (XBYTE* input, XDWORD size);
 
     int                   GetDefaultSize            ();
 

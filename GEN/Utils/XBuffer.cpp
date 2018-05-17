@@ -1262,7 +1262,7 @@ XDWORD XBUFFER::Extract(XBYTE* pbuffer, XDWORD ppos, XDWORD psize)
 /*-----------------------------------------------------------------*/
 bool XBUFFER::Extract(XBYTE& data, XDWORD ppos)
 {
-  int size = Extract((XBYTE*)&data, ppos, sizeof(XBYTE));
+  XDWORD size = Extract((XBYTE*)&data, ppos, sizeof(XBYTE));
   if(size!=sizeof(XBYTE)) return false;
 
   return true;
@@ -1290,7 +1290,7 @@ bool XBUFFER::Extract(bool& data, XDWORD ppos)
 {
   XBYTE _data = 0;
 
-  int size = Extract((XBYTE*)&_data, ppos, sizeof(XBYTE));
+  XDWORD size = Extract((XBYTE*)&_data, ppos, sizeof(XBYTE));
   if(size!=sizeof(XBYTE)) return false;
 
   data = _data?true:false;
@@ -1316,7 +1316,7 @@ bool XBUFFER::Extract(bool& data, XDWORD ppos)
 /*-----------------------------------------------------------------*/
 bool XBUFFER::Extract(XWORD& data, XDWORD ppos)
 {
-  int size = Extract((XBYTE*)&data, ppos, sizeof(XWORD));
+  XDWORD size = Extract((XBYTE*)&data, ppos, sizeof(XWORD));
   if(size!=sizeof(XWORD)) return false;
 
   if(hardwareuselittleendian) SWAPWORD(data);
@@ -1343,7 +1343,7 @@ bool XBUFFER::Extract(XWORD& data, XDWORD ppos)
 /*-----------------------------------------------------------------*/
 bool XBUFFER::Extract(XDWORD& data, XDWORD ppos)
 {
-  int size = Extract((XBYTE*)&data, ppos, sizeof(XDWORD));
+  XDWORD size = Extract((XBYTE*)&data, ppos, sizeof(XDWORD));
   if(size!=sizeof(XDWORD)) return false;
 
   if(hardwareuselittleendian) SWAPDWORD(data);
@@ -1371,7 +1371,7 @@ bool XBUFFER::Extract(XDWORD& data, XDWORD ppos)
 /*-----------------------------------------------------------------*/
 bool XBUFFER::Extract(XQWORD& data, XDWORD ppos)
 {
-  int size = Extract((XBYTE*)&data, ppos, sizeof(XQWORD));
+  XDWORD size = Extract((XBYTE*)&data, ppos, sizeof(XQWORD));
   if(size!=sizeof(XQWORD)) return false;
 
   if(hardwareuselittleendian) SWAPQWORD(data);
@@ -1399,7 +1399,7 @@ bool XBUFFER::Extract(XQWORD& data, XDWORD ppos)
 /*-----------------------------------------------------------------*/
 bool XBUFFER::Extract(float& data,XDWORD ppos)
 {
-  int size = Extract((XBYTE*)&data, ppos, sizeof(XDWORD));
+  XDWORD size = Extract((XBYTE*)&data, ppos, sizeof(XDWORD));
   if(size!=sizeof(XDWORD)) return false;
 
   return true;
@@ -1425,7 +1425,7 @@ bool XBUFFER::Extract(float& data,XDWORD ppos)
 /*-----------------------------------------------------------------*/
 bool XBUFFER::Extract(double& data, XDWORD ppos)
 {
-  int size = Extract((XBYTE*)&data, ppos, sizeof(XQWORD));
+  XDWORD size = Extract((XBYTE*)&data, ppos, sizeof(XQWORD));
   if(size!=sizeof(XQWORD)) return false;
 
   return true;
@@ -2826,7 +2826,7 @@ bool XBUFFER::AddXBufferWithMask(XBUFFER& xbuffer, XSTRING* mask, va_list& arg)
                     break;
 
           case 'S': { XSTRING* svar = va_arg(arg, XSTRING*);
-                      int size = (svar->GetSize()+1)*sizeof(XWORD);
+                      XDWORD size = (svar->GetSize()+1)*sizeof(XWORD);
 
                       XSTRING_CREATENORMALIZE((*svar), buffnormalize, false)
                       xbuffer.Add((XBYTE*)buffnormalize, size);
@@ -2925,7 +2925,7 @@ bool XBUFFER::ExtractXBufferWithMask(XBUFFER& xbuffer, XSTRING* mask, va_list& a
 
           case 'A': { XBYTE* avar = va_arg(arg, XBYTE*);
 
-                      int size = 0;
+                      XDWORD size = 0;
                       c++;
 
                       if(mask->Get()[c]==__C('X'))
@@ -2954,7 +2954,7 @@ bool XBUFFER::ExtractXBufferWithMask(XBUFFER& xbuffer, XSTRING* mask, va_list& a
           case 'S': { XSTRING* svar = va_arg(arg, XSTRING*);
 
                       svar->Set((XWORD*)(xbuffer.Get()));
-                      int size = (svar->GetSize()+1)*sizeof(XWORD);
+                      XDWORD size = (svar->GetSize()+1)*sizeof(XWORD);
 
                       xbuffer.Extract(NULL, 0, size);
                     }

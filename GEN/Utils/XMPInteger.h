@@ -162,7 +162,7 @@ class XMPINTEGER
     bool                        GetToString                   (int radix, XSTRING& string);
 
     bool                        SetFromXBuffer                (XBUFFER& xbuffer);
-    bool                        GetToXBuffer                  (XBUFFER& xbuffer, int size);
+    bool                        GetToXBuffer                  (XBUFFER& xbuffer, XDWORD size);
 
     bool                        End                           ();
 

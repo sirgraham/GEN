@@ -279,7 +279,7 @@ CIPHERDES::~CIPHERDES()
 //  @param        size :
 */
 //-------------------------------------------------------------------
-bool CIPHERDES::Cipher(XBYTE* input,int size)
+bool CIPHERDES::Cipher(XBYTE* input,XDWORD size)
 {
   if(!size) return false;
 
@@ -329,7 +329,7 @@ bool CIPHERDES::Cipher(XBYTE* input,int size)
 //  @param        size :
 */
 /*-----------------------------------------------------------------*/
-bool CIPHERDES::Uncipher(XBYTE* input,int size)
+bool CIPHERDES::Uncipher(XBYTE* input,XDWORD size)
 {
   if(!size) return false;
 

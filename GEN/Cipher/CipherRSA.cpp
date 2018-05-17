@@ -472,7 +472,7 @@ bool CIPHERRSA::SetKey(CIPHERKEY* key, bool integritycheck)
 //  @param        pkcs1version :
 */
 /*-----------------------------------------------------------------*/
-bool CIPHERRSA::Cipher(XBYTE* input, int size, CIPHERKEYTYPE keytouse, CIPHERRSAPKCS1VERSION pkcs1version)
+bool CIPHERRSA::Cipher(XBYTE* input, XDWORD size, CIPHERKEYTYPE keytouse, CIPHERRSAPKCS1VERSION pkcs1version)
 {
   if(!size) return false;
 
@@ -561,7 +561,7 @@ bool CIPHERRSA::Cipher(XBUFFER& input, CIPHERKEYTYPE keytouse, CIPHERRSAPKCS1VER
 //  @param        pkcs1version :
 */
 /*-----------------------------------------------------------------*/
-bool CIPHERRSA::Uncipher(XBYTE* input,int size, CIPHERKEYTYPE keytouse, CIPHERRSAPKCS1VERSION pkcs1version)
+bool CIPHERRSA::Uncipher(XBYTE* input,XDWORD size, CIPHERKEYTYPE keytouse, CIPHERRSAPKCS1VERSION pkcs1version)
 {
   if(!size) return false;
 
@@ -652,7 +652,7 @@ bool CIPHERRSA::Uncipher(XBUFFER& input, CIPHERKEYTYPE keytouse, CIPHERRSAPKCS1V
 //  @param        pkcs1version :
 */
 /*-----------------------------------------------------------------*/
-bool CIPHERRSA::Sign(XBYTE* input, int size, CIPHERKEYTYPE keytouse, HASH* hash, CIPHERRSAPKCS1VERSION pkcs1version)
+bool CIPHERRSA::Sign(XBYTE* input, XDWORD size, CIPHERKEYTYPE keytouse, HASH* hash, CIPHERRSAPKCS1VERSION pkcs1version)
 {
   if(!hash) return false;
 
@@ -948,7 +948,7 @@ bool CIPHERRSA::CheckContextPrivateKey()
 //  @param        paramrandom :
 */
 /*-----------------------------------------------------------------*/
-bool CIPHERRSA::Cipher_PKCS1_V15(XBYTE* buffer, int size, XBUFFER& output, CIPHERKEYTYPE keytypetouse, CIPHERRSAPKCS1VERSION pkcs1version,  XMPINTEGER_FUNCRANDOM funcrandom, void* paramrandom)
+bool CIPHERRSA::Cipher_PKCS1_V15(XBYTE* buffer, XDWORD size, XBUFFER& output, CIPHERKEYTYPE keytypetouse, CIPHERRSAPKCS1VERSION pkcs1version,  XMPINTEGER_FUNCRANDOM funcrandom, void* paramrandom)
 {
   XBUFFER input;
   int     nb_pad;
@@ -1029,7 +1029,7 @@ bool CIPHERRSA::Cipher_PKCS1_V15(XBYTE* buffer, int size, XBUFFER& output, CIPHE
 //  @param        paramrandom :
 */
 /*-----------------------------------------------------------------*/
-bool CIPHERRSA::Uncipher_PKCS1_V15(XBYTE* buffer, int size, XBUFFER& output, CIPHERKEYTYPE keytypetouse, CIPHERRSAPKCS1VERSION pkcs1version,  XMPINTEGER_FUNCRANDOM funcrandom, void* paramrandom)
+bool CIPHERRSA::Uncipher_PKCS1_V15(XBYTE* buffer, XDWORD size, XBUFFER& output, CIPHERKEYTYPE keytypetouse, CIPHERRSAPKCS1VERSION pkcs1version,  XMPINTEGER_FUNCRANDOM funcrandom, void* paramrandom)
 {
   XBUFFER   input;
   XBUFFER   _output;
@@ -1064,7 +1064,7 @@ bool CIPHERRSA::Uncipher_PKCS1_V15(XBYTE* buffer, int size, XBUFFER& output, CIP
 
   pad_chk |= (_output.GetByte(index++)) ^  ((keytypetouse == CIPHERKEYTYPE_PRIVATE)? CIPHERRSA_CIPHERDATA : CIPHERRSA_SINGDATA);
 
-  for(int i=0; i<size-3; i++)
+  for(XDWORD i=0; i<size-3; i++)
     {
       pad_done  |= (_output.GetByte(index+i) == 0);
       pad_count += (pad_done == 0);

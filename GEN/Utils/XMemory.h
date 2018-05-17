@@ -60,7 +60,7 @@ class XMEMORY_ASSIGN
     int                   GetLineModule               ()                                      { return linemodule;                }
 
     bool                  SetPtr                      (void* ptr)                             { this->ptr        = ptr; return true;  }
-    bool                  SetSize                     (int size)                              { this->size       = size; return true; }
+    bool                  SetSize                     (XDWORD size)                              { this->size       = size; return true; }
     bool                  SetNameModule               (char* namemodule);
     bool                  SetLineModule               (int linemodule)                        { this->linemodule = linemodule; return true;   }
 
