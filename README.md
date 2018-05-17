@@ -1,4 +1,4 @@
-![GEN FrameWork](\Resources\Logos\Icons\Icon_144.png "GEN FrameWork")
+![GEN FrameWork](/Resources/Logos/Icons/Icon_144.png "GEN FrameWork")
 
 # GEN FrameWork
 
