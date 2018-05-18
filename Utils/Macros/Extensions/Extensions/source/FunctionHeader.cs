@@ -277,20 +277,55 @@ namespace Extensions
                 string result;
 
                 result  = "/**-------------------------------------------------------------------------------------------------------------------\n";
+                result += "*\n";
                 result += "*\t@fn \t\t\t\t"    + funcname.TrimStart() + "\n";
                 result += "*\t@brief\t\t\t"    + description + "\n";                
-                result += "*\t@ingroup\t\t"    + group       + "\n";               
+                result += "*\t@ingroup\t\t"    + group       + "\n";  
+                result += "*\n";
+                result += "*\t@author \t\t"    + author      + "\n";       
                 result += "*\t@date\t\t\t\t"   + date        + "\n";
+              
                 
-                if (parameters != null)
-                {
+                if(parameters != null)
+                  {
+                    if(parameters.Length != 0)
+                      {
+                        result += "*\n";
+                      }
+                    
                     for (i = 0; i < parameters.Length; i++)
-                    {
-                        result += "*\t@param[]\t\t" + parameters[i] + " : \n";
-                    }
-                }
-                                
-                result += "*\t@return\t\t\t" + returntype + " : \n";                                
+                      {
+                        if(parameters[i].Length != 0)
+                               result += "*\t@param[]\t\t" + parameters[i] + " : \n";
+                          else result += "*\t@param\n";
+                      }
+                  }
+                  
+                if(returntype.Length == 0)
+                  {
+                     result += "*\t@return\n";       
+                  }           
+                 else
+                  {
+                    result += "*\n";
+                    if(returntype == "void")
+                      {
+                        result += "*\t@return\t\t\t" + returntype + " : does not return anything. \n";    
+                      }
+                     else
+                      { 
+                        if(returntype == "bool")
+                          {
+                            result += "*\t@return\t\t\t" + returntype + " : true if is succesful. \n";    
+                          }
+                         else
+                          {
+                            result += "*\t@return\t\t\t" + returntype + " : \n";
+                          }
+                      }
+                  }
+
+                result += "*\n";
                 result += "*---------------------------------------------------------------------------------------------------------------------*/\n";
                 result += selection.Text;
 

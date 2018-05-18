@@ -1,15 +1,17 @@
 /**-------------------------------------------------------------------------------------------------------------------
-* @file     XBase.h
 *
-* @class    XBASE
-* @brief    Basic functions and defines 
-* @ingroup  UTILS
+* @file        XBase.h
 *
-* @author   Abraham J. Velez 
-* @date     13/05/2018 13:15:44
+* @class       XBASE
+* @brief       Basic functions and defines
+* @ingroup     UTILS
 *
-* Copyright(c) 2005 - 2018 GEN Group.
+* @author      Abraham J. Velez 
+* @date        17/05/2018 20:59:15
 *
+* @copyright   Copyright(c) 2005 - 2018 GEN Group.
+*
+* @cond
 * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 * documentation files(the "Software"), to deal in the Software without restriction, including without limitation
 * the rights to use, copy, modify, merge, publish, distribute, sublicense, and/ or sell copies of the Software,
@@ -23,6 +25,8 @@
 * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
+* @endcond
+*
 *---------------------------------------------------------------------------------------------------------------------*/
 
 #ifndef _XBASE_H_
@@ -122,6 +126,21 @@ typedef bool (*PROGRESS_FUNCTION)(void);
 
 /*---- CLASS ---------------------------------------------------------------------------------------------------------*/
 
+class XBASE
+{
+  public:
+                     XBASE   ()    { Clean();                            }
+    virtual         ~XBASE   ()    { Clean();                            }
+
+  protected:
+
+  private:
+
+    void             Clean   ()
+                     {
+
+                     }
+};
 
 
 /*---- INLINE FUNCTIONS ----------------------------------------------------------------------------------------------*/

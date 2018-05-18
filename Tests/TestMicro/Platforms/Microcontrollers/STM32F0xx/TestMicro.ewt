@@ -2110,437 +2110,440 @@
       <group>
         <name>I2C</name>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\GEN\DataIO\I2C\DIOI2C6AxisTrackingLSM303DLHC.cpp</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\GEN\DataIO\I2C\DIOI2C6AxisTrackingLSM303DLHC.cpp</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\GEN\DataIO\I2C\DIOI2C6AxisTrackingLSM303DLHC.h</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\GEN\DataIO\I2C\DIOI2C6AxisTrackingLSM303DLHC.h</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\GEN\DataIO\I2C\DIOI2CLightSensorTSL2561.cpp</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\GEN\DataIO\I2C\DIOI2CLightSensorTSL2561.cpp</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\GEN\DataIO\I2C\DIOI2CLightSensorTSL2561.h</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\GEN\DataIO\I2C\DIOI2CLightSensorTSL2561.h</name>
         </file>
       </group>
       <group>
         <name>SPI</name>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\GEN\DataIO\SPI\DIOSPILCDScreenPCF8833.cpp</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\GEN\DataIO\SPI\DIOSPILCDScreenPCF8833.cpp</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\GEN\DataIO\SPI\DIOSPILCDScreenPCF8833.h</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\GEN\DataIO\SPI\DIOSPILCDScreenPCF8833.h</name>
         </file>
       </group>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\DataIO\DIODevice.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\DataIO\DIODevice.h</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\DataIO\DIODeviceI2C.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\DataIO\DIODeviceI2C.h</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\DataIO\DIOFactory.cpp</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\DataIO\DIOFactory.cpp</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\DataIO\DIOFactory.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\DataIO\DIOFactory.h</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\DataIO\DIOGPIO.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\DataIO\DIOGPIO.h</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\DataIO\DIOStream.cpp</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\DataIO\DIOStream.cpp</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\DataIO\DIOStream.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\DataIO\DIOStream.h</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\DataIO\DIOStreamConfig.cpp</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\DataIO\DIOStreamConfig.cpp</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\DataIO\DIOStreamConfig.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\DataIO\DIOStreamConfig.h</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\DataIO\DIOStreamDevice.cpp</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\DataIO\DIOStreamDevice.cpp</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\DataIO\DIOStreamDevice.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\DataIO\DIOStreamDevice.h</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\DataIO\DIOStreamDeviceIP.cpp</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\DataIO\DIOStreamDeviceIP.cpp</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\DataIO\DIOStreamDeviceIP.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\DataIO\DIOStreamDeviceIP.h</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\DataIO\DIOStreamI2C.cpp</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\DataIO\DIOStreamI2C.cpp</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\DataIO\DIOStreamI2C.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\DataIO\DIOStreamI2C.h</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\DataIO\DIOStreamI2CConfig.cpp</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\DataIO\DIOStreamI2CConfig.cpp</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\DataIO\DIOStreamI2CConfig.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\DataIO\DIOStreamI2CConfig.h</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\DataIO\DIOStreamSPI.cpp</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\DataIO\DIOStreamSPI.cpp</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\DataIO\DIOStreamSPI.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\DataIO\DIOStreamSPI.h</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\DataIO\DIOStreamSPIConfig.cpp</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\DataIO\DIOStreamSPIConfig.cpp</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\DataIO\DIOStreamSPIConfig.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\DataIO\DIOStreamSPIConfig.h</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\DataIO\DIOStreamUART.cpp</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\DataIO\DIOStreamUART.cpp</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\DataIO\DIOStreamUART.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\DataIO\DIOStreamUART.h</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\DataIO\DIOStreamUARTConfig.cpp</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\DataIO\DIOStreamUARTConfig.cpp</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\DataIO\DIOStreamUARTConfig.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\DataIO\DIOStreamUARTConfig.h</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\DataIO\DIOStreamUSB.cpp</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\DataIO\DIOStreamUSB.cpp</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\DataIO\DIOStreamUSB.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\DataIO\DIOStreamUSB.h</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\DataIO\DIOStreamUSBConfig.cpp</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\DataIO\DIOStreamUSBConfig.cpp</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\DataIO\DIOStreamUSBConfig.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\DataIO\DIOStreamUSBConfig.h</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\DataIO\DIOStreamUSBLocalEnumDevices.cpp</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\DataIO\DIOStreamUSBLocalEnumDevices.cpp</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\DataIO\DIOStreamUSBLocalEnumDevices.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\DataIO\DIOStreamUSBLocalEnumDevices.h</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\DataIO\DIOURL.cpp</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\DataIO\DIOURL.cpp</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\DataIO\DIOURL.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\DataIO\DIOURL.h</name>
       </file>
     </group>
     <group>
       <name>Main</name>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\Main\Main.cpp</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\Main\Main.cpp</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\Main\Main.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\Main\Main.h</name>
       </file>
     </group>
     <group>
       <name>Platforms</name>
       <group>
         <name>STM32Fxxx</name>
-        <group>
-          <name>STM32F0xxLibrary</name>
-          <group>
-            <name>CMSIS</name>
-            <file>
-              <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\STM32F0xxLibrary\Drivers\CMSIS\Device\ST\STM32F0xx\Source\Templates\iar\startup_stm32f072xb.s</name>
-            </file>
-            <file>
-              <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\STM32F0xxLibrary\Drivers\CMSIS\Device\ST\STM32F0xx\Source\Templates\system_stm32f0xx.c</name>
-            </file>
-          </group>
-          <group>
-            <name>Middlewares</name>
-            <group>
-              <name>USB_Device_Library</name>
-              <file>
-                <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\STM32F0xxLibrary\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Src\usbd_cdc.c</name>
-              </file>
-              <file>
-                <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\STM32F0xxLibrary\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_core.c</name>
-              </file>
-              <file>
-                <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\STM32F0xxLibrary\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ctlreq.c</name>
-              </file>
-              <file>
-                <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\STM32F0xxLibrary\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ioreq.c</name>
-              </file>
-            </group>
-          </group>
-          <group>
-            <name>STM32F0xx_HAL_Driver</name>
-            <file>
-              <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\STM32F0xxLibrary\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal.c</name>
-            </file>
-            <file>
-              <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\STM32F0xxLibrary\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_cortex.c</name>
-            </file>
-            <file>
-              <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\STM32F0xxLibrary\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_dma.c</name>
-            </file>
-            <file>
-              <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\STM32F0xxLibrary\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_flash.c</name>
-            </file>
-            <file>
-              <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\STM32F0xxLibrary\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_flash_ex.c</name>
-            </file>
-            <file>
-              <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\STM32F0xxLibrary\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_gpio.c</name>
-            </file>
-            <file>
-              <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\STM32F0xxLibrary\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_i2c.c</name>
-            </file>
-            <file>
-              <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\STM32F0xxLibrary\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_i2c_ex.c</name>
-            </file>
-            <file>
-              <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\STM32F0xxLibrary\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_pcd.c</name>
-            </file>
-            <file>
-              <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\STM32F0xxLibrary\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_pcd_ex.c</name>
-            </file>
-            <file>
-              <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\STM32F0xxLibrary\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_pwr.c</name>
-            </file>
-            <file>
-              <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\STM32F0xxLibrary\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_pwr_ex.c</name>
-            </file>
-            <file>
-              <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\STM32F0xxLibrary\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_rcc.c</name>
-            </file>
-            <file>
-              <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\STM32F0xxLibrary\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_rcc_ex.c</name>
-            </file>
-            <file>
-              <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\STM32F0xxLibrary\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_spi.c</name>
-            </file>
-            <file>
-              <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\STM32F0xxLibrary\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_spi_ex.c</name>
-            </file>
-            <file>
-              <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\STM32F0xxLibrary\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_tim.c</name>
-            </file>
-            <file>
-              <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\STM32F0xxLibrary\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_tim_ex.c</name>
-            </file>
-            <file>
-              <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\STM32F0xxLibrary\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_uart.c</name>
-            </file>
-            <file>
-              <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\STM32F0xxLibrary\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_uart_ex.c</name>
-            </file>
-          </group>
-          <file>
-            <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\STM32F0xxLibrary\Src\gen_usbd_desc.c</name>
-          </file>
-          <file>
-            <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\STM32F0xxLibrary\Src\stm32f0xx_hal_msp.c</name>
-          </file>
-          <file>
-            <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\STM32F0xxLibrary\Src\stm32f0xx_it.c</name>
-          </file>
-          <file>
-            <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\STM32F0xxLibrary\Src\STM32FxxxIni.cpp</name>
-          </file>
-          <file>
-            <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\STM32F0xxLibrary\Src\usb_device.c</name>
-          </file>
-          <file>
-            <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\STM32F0xxLibrary\Src\usbd_cdc_if.c</name>
-          </file>
-          <file>
-            <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\STM32F0xxLibrary\Src\usbd_conf.c</name>
-          </file>
-        </group>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\DIOSTM32FxxxFactory.cpp</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\DIOSTM32FxxxFactory.cpp</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\DIOSTM32FxxxFactory.h</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\DIOSTM32FxxxFactory.h</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\DIOSTM32FxxxGPIO.cpp</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\DIOSTM32FxxxGPIO.cpp</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\DIOSTM32FxxxGPIO.h</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\DIOSTM32FxxxGPIO.h</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\DIOSTM32FxxxStreamI2C.cpp</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\DIOSTM32FxxxStreamI2C.cpp</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\DIOSTM32FxxxStreamI2C.h</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\DIOSTM32FxxxStreamI2C.h</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\DIOSTM32FxxxStreamSPI.cpp</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\DIOSTM32FxxxStreamSPI.cpp</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\DIOSTM32FxxxStreamSPI.h</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\DIOSTM32FxxxStreamSPI.h</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\DIOSTM32FxxxStreamUART.cpp</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\DIOSTM32FxxxStreamUART.cpp</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\DIOSTM32FxxxStreamUART.h</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\DIOSTM32FxxxStreamUART.h</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\DIOSTM32FxxxStreamUSB.cpp</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\DIOSTM32FxxxStreamUSB.cpp</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\DIOSTM32FxxxStreamUSB.h</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\DIOSTM32FxxxStreamUSB.h</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\STM32FxxxMain.cpp</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\STM32FxxxMain.cpp</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\STM32FxxxMain.h</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\STM32FxxxMain.h</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32Fxxx_HAL.h</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32Fxxx_HAL.h</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxDateTime.cpp</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxDateTime.cpp</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxDateTime.h</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxDateTime.h</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxDebug.cpp</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxDebug.cpp</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxDebug.h</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxDebug.h</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxFactory.cpp</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxFactory.cpp</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxFactory.h</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxFactory.h</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxRand.cpp</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxRand.cpp</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxRand.h</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxRand.h</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxSleep.cpp</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxSleep.cpp</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxSleep.h</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxSleep.h</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxSystem.cpp</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxSystem.cpp</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxSystem.h</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxSystem.h</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxThread.cpp</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxThread.cpp</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxThread.h</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxThread.h</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxTimer.cpp</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxTimer.cpp</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxTimer.h</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\GEN\Platforms\Microcontrollers\STM32Fxxx\XSTM32FxxxTimer.h</name>
         </file>
       </group>
     </group>
     <group>
       <name>Utils</name>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\Utils\XApplication.cpp</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\Utils\XApplication.cpp</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\Utils\XApplication.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\Utils\XApplication.h</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\Utils\XBase.cpp</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\Utils\XBase.cpp</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\Utils\XBase.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\Utils\XBase.h</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\Utils\XBuffer.cpp</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\Utils\XBuffer.cpp</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\Utils\XBuffer.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\Utils\XBuffer.h</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\Utils\XDebug.cpp</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\Utils\XDebug.cpp</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\Utils\XDebug.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\Utils\XDebug.h</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\Utils\XFactory.cpp</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\Utils\XFactory.cpp</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\Utils\XFactory.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\Utils\XFactory.h</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\Utils\XFSMachine.cpp</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\Utils\XFSMachine.cpp</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\Utils\XFSMachine.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\Utils\XFSMachine.h</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\Utils\XPublisher.cpp</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\Utils\XPublisher.cpp</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\Utils\XPublisher.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\Utils\XPublisher.h</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\Utils\XSleep.cpp</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\Utils\XSleep.cpp</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\Utils\XSleep.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\Utils\XSleep.h</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\Utils\XString.cpp</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\Utils\XString.cpp</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\Utils\XString.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\Utils\XString.h</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\Utils\XSystem.cpp</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\Utils\XSystem.cpp</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\Utils\XSystem.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\Utils\XSystem.h</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\Utils\XThread.cpp</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\Utils\XThread.cpp</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\Utils\XThread.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\Utils\XThread.h</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\Utils\XThreadListNonPreemptive.cpp</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\Utils\XThreadListNonPreemptive.cpp</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\Utils\XThreadListNonPreemptive.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\Utils\XThreadListNonPreemptive.h</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\Utils\XTimer.cpp</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\Utils\XTimer.cpp</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\Utils\XTimer.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\Utils\XTimer.h</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\Utils\XVariant.cpp</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\Utils\XVariant.cpp</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\Utils\XVariant.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\Utils\XVariant.h</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\GEN\Utils\XVector.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\..\GEN\Utils\XVector.h</name>
+      </file>
+    </group>
+  </group>
+  <group>
+    <name>ThirdPartyLibraries</name>
+    <group>
+      <name>STM32F0xxLibrary</name>
+      <group>
+        <name>CMSIS</name>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\..\ThirdPartyLibraries\STM32Fxxx\STM32F0xxLibrary\Drivers\CMSIS\Device\ST\STM32F0xx\Source\Templates\iar\startup_stm32f072xb.s</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\..\ThirdPartyLibraries\STM32Fxxx\STM32F0xxLibrary\Drivers\CMSIS\Device\ST\STM32F0xx\Source\Templates\system_stm32f0xx.c</name>
+        </file>
+      </group>
+      <group>
+        <name>Middlewares</name>
+        <group>
+          <name>USB_Device_Library</name>
+          <file>
+            <name>$PROJ_DIR$\..\..\..\..\..\ThirdPartyLibraries\STM32Fxxx\STM32F0xxLibrary\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Src\usbd_cdc.c</name>
+          </file>
+          <file>
+            <name>$PROJ_DIR$\..\..\..\..\..\ThirdPartyLibraries\STM32Fxxx\STM32F0xxLibrary\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_core.c</name>
+          </file>
+          <file>
+            <name>$PROJ_DIR$\..\..\..\..\..\ThirdPartyLibraries\STM32Fxxx\STM32F0xxLibrary\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ctlreq.c</name>
+          </file>
+          <file>
+            <name>$PROJ_DIR$\..\..\..\..\..\ThirdPartyLibraries\STM32Fxxx\STM32F0xxLibrary\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ioreq.c</name>
+          </file>
+        </group>
+      </group>
+      <group>
+        <name>STM32F0xx_HAL_Driver</name>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\..\ThirdPartyLibraries\STM32Fxxx\STM32F0xxLibrary\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\..\ThirdPartyLibraries\STM32Fxxx\STM32F0xxLibrary\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_cortex.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\..\ThirdPartyLibraries\STM32Fxxx\STM32F0xxLibrary\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_dma.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\..\ThirdPartyLibraries\STM32Fxxx\STM32F0xxLibrary\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_flash.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\..\ThirdPartyLibraries\STM32Fxxx\STM32F0xxLibrary\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_flash_ex.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\..\ThirdPartyLibraries\STM32Fxxx\STM32F0xxLibrary\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_gpio.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\..\ThirdPartyLibraries\STM32Fxxx\STM32F0xxLibrary\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_i2c.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\..\ThirdPartyLibraries\STM32Fxxx\STM32F0xxLibrary\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_i2c_ex.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\..\ThirdPartyLibraries\STM32Fxxx\STM32F0xxLibrary\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_pcd.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\..\ThirdPartyLibraries\STM32Fxxx\STM32F0xxLibrary\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_pcd_ex.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\..\ThirdPartyLibraries\STM32Fxxx\STM32F0xxLibrary\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_pwr.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\..\ThirdPartyLibraries\STM32Fxxx\STM32F0xxLibrary\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_pwr_ex.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\..\ThirdPartyLibraries\STM32Fxxx\STM32F0xxLibrary\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_rcc.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\..\ThirdPartyLibraries\STM32Fxxx\STM32F0xxLibrary\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_rcc_ex.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\..\ThirdPartyLibraries\STM32Fxxx\STM32F0xxLibrary\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_spi.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\..\ThirdPartyLibraries\STM32Fxxx\STM32F0xxLibrary\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_spi_ex.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\..\ThirdPartyLibraries\STM32Fxxx\STM32F0xxLibrary\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_tim.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\..\ThirdPartyLibraries\STM32Fxxx\STM32F0xxLibrary\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_tim_ex.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\..\ThirdPartyLibraries\STM32Fxxx\STM32F0xxLibrary\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_uart.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\..\ThirdPartyLibraries\STM32Fxxx\STM32F0xxLibrary\Drivers\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_uart_ex.c</name>
+        </file>
+      </group>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\ThirdPartyLibraries\STM32Fxxx\STM32F0xxLibrary\Src\gen_usbd_desc.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\ThirdPartyLibraries\STM32Fxxx\STM32F0xxLibrary\Src\stm32f0xx_hal_msp.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\ThirdPartyLibraries\STM32Fxxx\STM32F0xxLibrary\Src\stm32f0xx_it.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\ThirdPartyLibraries\STM32Fxxx\STM32F0xxLibrary\Src\STM32FxxxIni.cpp</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\ThirdPartyLibraries\STM32Fxxx\STM32F0xxLibrary\Src\usb_device.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\ThirdPartyLibraries\STM32Fxxx\STM32F0xxLibrary\Src\usbd_cdc_if.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\ThirdPartyLibraries\STM32Fxxx\STM32F0xxLibrary\Src\usbd_conf.c</name>
       </file>
     </group>
   </group>

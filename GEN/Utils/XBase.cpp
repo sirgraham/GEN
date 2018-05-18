@@ -1,15 +1,17 @@
 /**-------------------------------------------------------------------------------------------------------------------
-* @file     XBase.cpp
 *
-* @class    XBASE
-* @brief    Basic functions and defines 
-* @ingroup  UTILS
+* @file        XBase.cpp
 *
-* @author   Abraham J. Velez 
-* @date     13/05/2018 13:17:54
+* @class       XBASE
+* @brief       Basic functions and defines
+* @ingroup     UTILS
 *
-* Copyright(c) 2005 - 2018 GEN Group.
+* @author      Abraham J. Velez 
+* @date        17/05/2018 20:57:47
 *
+* @copyright   Copyright(c) 2005 - 2018 GEN Group.
+*
+* @cond
 * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 * documentation files(the "Software"), to deal in the Software without restriction, including without limitation
 * the rights to use, copy, modify, merge, publish, distribute, sublicense, and/ or sell copies of the Software,
@@ -23,7 +25,10 @@
 * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
+* @endcond
+*
 *---------------------------------------------------------------------------------------------------------------------*/
+
 
 /*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 
@@ -40,12 +45,18 @@
 
 
 /**-------------------------------------------------------------------------------------------------------------------
+*
 * @fn         Truncate
 * @brief      Trucate double
 * @ingroup    UTILS
-* @date       13/05/2018 13:53:01
+*
+* @author     Abraham J. Velez 
+* @date       17/05/2018 21:03:09
+*
 * @param[in]  value : double to truncate
+*
 * @return     double : double truncate
+*
 *---------------------------------------------------------------------------------------------------------------------*/
 double Truncate(double value)
 {
@@ -59,12 +70,18 @@ double Truncate(double value)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
+*
 * @fn         Fraction
 * @brief      Return the fractional part of double
 * @ingroup    UTILS
-* @date       13/05/2018 13:54:13
+*
+* @author     Abraham J. Velez 
+* @date       17/05/2018 21:03:35
+*
 * @param[in]  value : double value to obtain fractional part
+*
 * @return     double : fractional part of value
+*
 *---------------------------------------------------------------------------------------------------------------------*/
 double Fraction(double value)
 {
@@ -76,12 +93,18 @@ double Fraction(double value)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
+*
 * @fn         SwapWORD
 * @brief      Return the swap of word (2 bytes) hi-lo  > lo-hi
 * @ingroup    UTILS
-* @date       13/05/2018 13:54:58
+*
+* @author     Abraham J. Velez 
+* @date       17/05/2018 21:04:20
+*
 * @param[in]  data : word to swap
+*
 * @return     XWORD : word swaped
+*
 *---------------------------------------------------------------------------------------------------------------------*/
 XWORD SwapWORD(XWORD data)
 {
@@ -94,12 +117,18 @@ XWORD SwapWORD(XWORD data)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
+*
 * @fn         SwapDWORD
 * @brief      Swap double word (4 bytes) hi1 lo1 h2 lo2 >  lo2 hi2 lo1 hi1
 * @ingroup    UTILS
-* @date       13/05/2018 13:55:38
-* @param[in]  data : 
+*
+* @author     Abraham J. Velez 
+* @date       17/05/2018 21:04:59
+*
+* @param[in]  data :  dword to swap
+*
 * @return     XDWORD : double word swaped
+*
 *---------------------------------------------------------------------------------------------------------------------*/
 XDWORD SwapDWORD(XDWORD data)
 {
@@ -114,12 +143,18 @@ XDWORD SwapDWORD(XDWORD data)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
+*
 * @fn         SwapQWORD
 * @brief      Swap quad word (8 bytes) hi1 lo1 h2 lo2 hi3 lo3 h4 lo4  > lo3 hi3 lo4 hi4 lo2 hi2 lo1 hi1
 * @ingroup    UTILS
-* @date       13/05/2018 13:56:10
+*
+* @author     Abraham J. Velez 
+* @date       17/05/2018 21:06:45
+*
 * @param[in]  data : quad word to swap
+*
 * @return     XQWORD : quad word swaped
+*
 *---------------------------------------------------------------------------------------------------------------------*/
 XQWORD SwapQWORD(XQWORD data)
 {
@@ -139,12 +174,18 @@ XQWORD SwapQWORD(XQWORD data)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
+*
 * @fn         RoundFloat
 * @brief      Round float
 * @ingroup    UTILS
-* @date       13/05/2018 13:56:45
-* @param[]    x : float to round
+*
+* @author     Abraham J. Velez 
+* @date       17/05/2018 21:07:22
+*
+* @param[in]  x : float to round
+*
 * @return     float : rounded float
+*
 *---------------------------------------------------------------------------------------------------------------------*/
 float RoundFloat(float x)
 {
@@ -154,12 +195,18 @@ float RoundFloat(float x)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
+*
 * @fn         DWORDToBCD
 * @brief      Convert double word to BCD
 * @ingroup    UTILS
-* @date       13/05/2018 13:57:23
-* @param[in]    dword : double word to convert
+*
+* @author     Abraham J. Velez 
+* @date       17/05/2018 21:08:01
+*
+* @param[in]  dword : double word to convert
+*
 * @return     XQWORD : Quad word converted BCD
+*
 *---------------------------------------------------------------------------------------------------------------------*/
 XQWORD DWORDToBCD(XDWORD dword)
 {
@@ -178,12 +225,18 @@ XQWORD DWORDToBCD(XDWORD dword)
 
 
 /**-------------------------------------------------------------------------------------------------------------------
+*
 * @fn         BCDToDWORD
 * @brief      Convert BCD to double word
 * @ingroup    UTILS
-* @date       13/05/2018 13:57:56
+*
+* @author     Abraham J. Velez 
+* @date       17/05/2018 21:08:06
+*
 * @param[in]  bcd : BCD to convert
+*
 * @return     XDWORD : doble word converted
+*
 *---------------------------------------------------------------------------------------------------------------------*/
 XDWORD BCDToDWORD(XQWORD bcd)
 {

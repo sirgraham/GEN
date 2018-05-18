@@ -7,7 +7,7 @@ DEBUGMODE    	= YES
 TOOLCHAIN			= LINARO
 SYSROOT				= JESSIE
 
-ADDDIRECTORYGEN = ../GENFrameWork/
+ADDDIRECTORYGEN = ../../GENFrameWork/
 
 FLAGS  			+= -D LINUX
 FLAGS  			+= -D UNICODE
@@ -16,7 +16,7 @@ FLAGS				+= -D DIOUART_ACTIVE
 FLAGS				+= -D DIOUSB_ACTIVE
 FLAGS				+= -D DIOI2C_ACTIVE
 FLAGS				+= -D DIOSPI_ACTIVE
-FLAGS				+= -D DIOPORTDATA_ACTIVE
+FLAGS			  += -D DIOGPIO_ACTIVE
 
 FLAGSC  		+= 
 FLAGSCPP		+= 
@@ -46,12 +46,17 @@ SOURCESCPP  += HashMD5.cpp
 SOURCESCPP  += HashSHA1.cpp
 
 SOURCESCPP  += DIOFactory.cpp
+SOURCESCPP	+= DIOURL.cpp
+SOURCESCPP	+= DIOMAC.cpp
+SOURCESCPP	+= DIOIP.cpp
+SOURCESCPP	+= DIOStreamDeviceIP.cpp
 SOURCESCPP	+= DIOStream.cpp
 SOURCESCPP	+= DIOStreamConfig.cpp
 SOURCESCPP	+= DIOStreamDevice.cpp
 SOURCESCPP	+= DIOStreamDeviceUSB.cpp
 SOURCESCPP	+= DIOStreamEnumDevices.cpp
 SOURCESCPP	+= DIOStreamEnumServers.cpp
+SOURCESCPP	+= DIOStreamTCPIPConfig.cpp
 SOURCESCPP	+= DIOStreamI2C.cpp
 SOURCESCPP	+= DIOStreamI2CConfig.cpp
 SOURCESCPP	+= DIOStreamSPI.cpp
@@ -62,36 +67,18 @@ SOURCESCPP	+= DIOStreamUARTLocalEnumDevices.cpp
 SOURCESCPP	+= DIOStreamUSB.cpp
 SOURCESCPP	+= DIOStreamUSBConfig.cpp
 SOURCESCPP	+= DIOStreamUSBLocalEnumDevices.cpp
-SOURCESCPP	+= DIOI2CSensorLightTSL2561.cpp
-SOURCESCPP	+= DIOI2C3DCompassAccelerometerLSM303DLHC.cpp
-SOURCESCPP	+= DIOURL.cpp
-SOURCESCPP	+= DIOIP.cpp
+SOURCESCPP	+= DIOStreamIPLocalEnumDevices.cpp
+SOURCESCPP	+= DIOI2CLightSensorTSL2561.cpp
+SOURCESCPP	+= DIOI2C6AxisTrackingLSM303DLHC.cpp
+SOURCESCPP	+= DIOSPILCDScreenPCF8833.cpp
+SOURCESCPP	+= DIOWebHeader.cpp
+SOURCESCPP	+= DIOWebClient.cpp
+SOURCESCPP	+= DIOWebScraper.cpp
+SOURCESCPP	+= DIOWebScraperCache.cpp
+SOURCESCPP	+= DIOWebScraperPublicIP.cpp
 
 SOURCESCPP  += Main.cpp
 
-SOURCESCPP  += DIOLINUXFactory.cpp
-SOURCESCPP  += DIOLINUXStreamI2C.cpp
-SOURCESCPP  += DIOLINUXStreamSPI.cpp
-SOURCESCPP  += DIOLINUXPortData.cpp
-SOURCESCPP  += DIOLINUXStreamUART.cpp
-SOURCESCPP  += DIOLINUXStreamUARTLocalEnumDevices.cpp
-SOURCESCPP  += DIOLINUXStreamUSB.cpp
-SOURCESCPP  += DIOLINUXStreamUSBLocalEnumDevices.cpp
-SOURCESCPP  += DIOLINUXURL.cpp
-
-
-SOURCESCPP  += LINUXMain.cpp
-SOURCESCPP  += XLINUXSleep.cpp
-SOURCESCPP  += XLINUXDebug.cpp
-SOURCESCPP  += XLINUXFactory.cpp
-SOURCESCPP  += XLINUXRand.cpp
-SOURCESCPP  += XLINUXSystem.cpp
-SOURCESCPP  += XLINUXThread.cpp
-SOURCESCPP  += XLINUXTimer.cpp
-SOURCESCPP  += XLINUXDateTime.cpp
-SOURCESCPP  += XLINUXFile.cpp
-SOURCESCPP  += XLINUXDir.cpp
-SOURCESCPP  += XLINUXConsole.cpp
 
 SOURCESCPP  += XFactory.cpp
 SOURCESCPP  += XSleep.cpp
@@ -117,7 +104,31 @@ SOURCESCPP  += XFile.cpp
 SOURCESCPP  += XFileTXT.cpp
 SOURCESCPP  += XFileXML.cpp
 SOURCESCPP  += XFileZIP.cpp
+SOURCESCPP  += XFileJSON.cpp
 
+SOURCESCPP  += DIOLINUXFactory.cpp
+SOURCESCPP  += DIOLINUXStreamI2C.cpp
+SOURCESCPP  += DIOLINUXStreamSPI.cpp
+SOURCESCPP  += DIOLINUXGPIOPC.cpp
+SOURCESCPP  += DIOLINUXStreamUART.cpp
+SOURCESCPP  += DIOLINUXStreamUARTLocalEnumDevices.cpp
+SOURCESCPP  += DIOLINUXStreamUSB.cpp
+SOURCESCPP  += DIOLINUXStreamUSBLocalEnumDevices.cpp
+SOURCESCPP  += DIOLINUXURL.cpp
+
+
+SOURCESCPP  += LINUXMain.cpp
+SOURCESCPP  += XLINUXSleep.cpp
+SOURCESCPP  += XLINUXDebug.cpp
+SOURCESCPP  += XLINUXFactory.cpp
+SOURCESCPP  += XLINUXRand.cpp
+SOURCESCPP  += XLINUXSystem.cpp
+SOURCESCPP  += XLINUXThread.cpp
+SOURCESCPP  += XLINUXTimer.cpp
+SOURCESCPP  += XLINUXDateTime.cpp
+SOURCESCPP  += XLINUXFile.cpp
+SOURCESCPP  += XLINUXDir.cpp
+SOURCESCPP  += XLINUXConsole.cpp
 
 
 #---- SOURCES C --------------------------------------------------------------------------------------------------
@@ -126,7 +137,6 @@ SOURCESC 		+= adler32.c
 SOURCESC		+= compress.c
 SOURCESC 		+= crc32.c
 SOURCESC 		+= deflate.c
-SOURCESC 		+= gzio.c
 SOURCESC 		+= infback.c
 SOURCESC 		+= inffast.c
 SOURCESC 		+= inflate.c
@@ -138,10 +148,7 @@ SOURCESC 		+= unzip.c
 SOURCESC 		+= zip.c
 SOURCESC 		+= zutil.c
        
-       
-       
-       
-       
+      
 include ../../../$(ADDDIRECTORYGEN)GEN/Platforms/Linux/makefile        
      
    

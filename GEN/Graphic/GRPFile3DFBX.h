@@ -205,7 +205,7 @@ public:
 
       DeleteAllLines();
 
-      int                sizeBOM              = 0;
+      XDWORD             sizeBOM              = 0;
       XFILETXTFORMATCHAR formatchar           = GetFormatCharFromFile(&sizeBOM);
       int                sizebytescharacter   = SizeOfCharacter(formatchar);
 
@@ -216,7 +216,7 @@ public:
       unsigned long totalsize=file->GetSize();
 
       bool    endfile;
-      int     br;
+      XDWORD  br;
       XBUFFER dataline(false);
 
       XBYTE*  readbuffer = new XBYTE[totalsize];

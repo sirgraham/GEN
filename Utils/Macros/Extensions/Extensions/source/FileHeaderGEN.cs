@@ -180,24 +180,25 @@ namespace Extensions
             string date           = DateTime.Now.ToString();
             var    namewithoutext = Path.GetFileNameWithoutExtension(name);
 
-            info  = "*\t@file     " + name + "\n";
+            info  = "*\n";
+            info += "*\t@file        " + name + "\n";
             info += "*\n";
-            info += "*\t@class    " + (namewithoutext.ToUpper()) + "\n";
-            info += "*\t@brief    " + description + "\n";
-            info += "*\t@ingroup  " + group + "\n";
+            info += "*\t@class       " + (namewithoutext.ToUpper()) + "\n";
+            info += "*\t@brief       " + description + "\n";
+            info += "*\t@ingroup     " + group + "\n";
             info += "*\n";
-            info += "*\t@author   " + author + "\n";
-            info += "*\t@date     " + date + "\n";
+            info += "*\t@author      " + author + "\n";
+            info += "*\t@date        " + date + "\n";        
             info += "*\n";
         }
 
         private void CreateCopyright(bool isGEN,  ref string copyright)
         {           
-            if (isGEN)
-            {         
-                copyright  = "*\tCopyright(c) 2005 - " + DateTime.Now.Year + " GEN Group.\n";
+            if(isGEN)
+              {         
+                copyright  = "*\t@copyright   Copyright(c) 2005 - " + DateTime.Now.Year + " GEN Group.\n";
                 copyright += "*\n";
-
+                copyright += "*\t@cond\n";    
                 copyright += "*\tPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated\n";
                 copyright += "*\tdocumentation files(the \"Software\"), to deal in the Software without restriction, including without limitation\n";
                 copyright += "*\tthe rights to use, copy, modify, merge, publish, distribute, sublicense, and/ or sell copies of the Software,\n";
@@ -211,11 +212,14 @@ namespace Extensions
                 copyright += "*\tAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\n";
                 copyright += "*\tTORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n";
                 copyright += "*\tSOFTWARE.\n";                
-            }
+                copyright += "*\t@endcond\n";   
+                copyright += "*\n";                
+             }
             else
-            {
-                copyright = "*\tCopyright(c) " + DateTime.Now.Year + " " + enterprise + " All rights reserved.\n";
-            }           
+             {
+                copyright = "*\t@copyright   Copyright(c) " + DateTime.Now.Year + " " + enterprise + " All rights reserved.\n";
+                copyright += "*\n";   
+             }           
         }
 
         private void ProcessCPPHeader(DTE dte, bool isGEN, string name, string group)

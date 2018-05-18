@@ -2,7 +2,7 @@
 
 "C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.3\arm\bin\armstlink2.dll" 
 
-"D:\GENFrameWork\TestMicro\Platforms\Microcontrollers\STM32F3xx\Debug\Exe\TestMicro.out" 
+"D:\GENFrameWork\Tests\TestMicro\Platforms\Microcontrollers\STM32F3xx\Debug\Exe\TestMicro.out" 
 
 --plugin "C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.3\arm\bin\armbat.dll" 
 

@@ -1677,9 +1677,6 @@
     <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\crc32.h">
       <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\crypt.h">
-      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\deflate.h">
       <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
     </ClInclude>
@@ -1698,16 +1695,7 @@
     <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\trees.h">
       <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\unzip.h">
-      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\zconf.h">
-      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\zconf.in.h">
-      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\zip.h">
       <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\zlib.h">
@@ -2122,6 +2110,12 @@
       <Filter>Source Files\ThirdPartyLibraries\stb</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\contrib\minizip\ioapi.h">
+      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\contrib\minizip\unzip.h">
+      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\contrib\minizip\zip.h">
       <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
     </ClInclude>
   </ItemGroup>
