@@ -23,7 +23,7 @@
 #include <arpa/inet.h>
 
 
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "DIOStreamDeviceIP.h"
 
 #include "DIOLINUXStreamIPLocalEnumDevices.h"

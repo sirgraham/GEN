@@ -16,7 +16,7 @@
 
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "SQLSQLITEResult.h"
 
@@ -262,7 +262,7 @@ bool SQLSQLITERESULT::ProcessRow()
                                   break;
 
           case SQLITE_BLOB      : { //unsupported
-                                    XDEBUG_PRINTCOLOR(0,__L("Unsupported BLOB type"));
+                                   XDEBUGTRACE_PRINTCOLOR(0,__L("Unsupported BLOB type"));
                                   }
                                   break;
 

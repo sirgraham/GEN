@@ -1,93 +1,116 @@
-//------------------------------------------------------------------------------------------
-//  XWINDOWSSYSTEM.CPP
-//
-//  WINDOWS system class
-//
-//  Author            : Abraham J. Velez
-//  Date Of Creation  : 03/03/2004 12:28:40
-//  Last Mofificacion :
-//
-//  GEN  Copyright (C).  All right reserved.
-//------------------------------------------------------------------------------------------
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @file        XWINDOWSSystem.cpp
+*
+* @class       XWINDOWSSYSTEM
+* @brief       Windows System class
+* @ingroup     PLATFORM_WINDOWS
+*
+* @author      Abraham J. Velez 
+* @date        03/06/2018 13:03:21
+*
+* @copyright   Copyright(c) 2005 - 2018 GEN Group.
+*
+* @cond
+* Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+* documentation files(the "Software"), to deal in the Software without restriction, including without limitation
+* the rights to use, copy, modify, merge, publish, distribute, sublicense, and/ or sell copies of the Software,
+* and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of
+* the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+* THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+* @endcond
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 
-
-//---- INCLUDES ----------------------------------------------------------------------------
+/*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 
 #include <cstdio>
 #include <windows.h>
+
 #ifndef BUILDER
 #include <versionhelpers.h>
 #endif
+
 #include <tlhelp32.h>
 #include <process.h>
 #include <errno.h>
 
 #include "XFactory.h"
 #include "XFile.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "XWINDOWSSystem.h"
 
 #include "XMemory.h"
 
+/*---- GENERAL VARIABLE ----------------------------------------------------------------------------------------------*/
+
+/*---- CLASS MEMBERS -------------------------------------------------------------------------------------------------*/
 
 
-//---- GENERAL VARIABLE --------------------------------------------------------------------
-
-
-//---- CLASS MEMBERS -----------------------------------------------------------------------
-
-
-//-------------------------------------------------------------------
-//  XWINDOWSSYSTEM::XWINDOWSSYSTEM
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      03/03/2004 12:28:59
-//
-//  @return
-//  */
-//-------------------------------------------------------------------
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XWINDOWSSYSTEM::XWINDOWSSYSTEM() : XSYSTEM()
+* @brief      Constructor
+* @ingroup    PLATFORM_WINDOWS
+*
+* @author     Abraham J. Velez 
+* @date       03/06/2018 13:05:25
+*
+* @param[in]  ) : 
+*
+* @return     Does not return anything. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XWINDOWSSYSTEM::XWINDOWSSYSTEM() : XSYSTEM()
-{
 
+{
+  Clean();
 }
 
 
 
-//-------------------------------------------------------------------
-//  XWINDOWSSYSTEM::~XWINDOWSSYSTEM
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      03/03/2004 12:29:20
-//
-//  @return
-//  */
-//-------------------------------------------------------------------
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XWINDOWSSYSTEM::~XWINDOWSSYSTEM()
+* @brief      Destructor
+* @note       VIRTUAL
+* @ingroup    PLATFORM_WINDOWS
+*
+* @author     Abraham J. Velez 
+* @date       03/06/2018 13:05:38
+*
+* @return     Does not return anything. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XWINDOWSSYSTEM::~XWINDOWSSYSTEM()
 {
-
+  Clean();
 }
 
 
-/*-------------------------------------------------------------------
-//  XWINDOWSSYSTEM::GetTypeHardware
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      21/04/2014 20:33:03
-//
-//  @return       XSYSTEM_HARDWARE :
-//
-//  @param        revision :
-*/
-/*-----------------------------------------------------------------*/
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XSYSTEM_HARDWARETYPE XWINDOWSSYSTEM::GetTypeHardware(int* revision)
+* @brief      Get Type Hardware
+* @ingroup    PLATFORM_WINDOWS
+*
+* @author     Abraham J. Velez 
+* @date       03/06/2018 13:05:54
+*
+* @param[in]  revision : Type hardware
+*
+* @return     XSYSTEM_HARDWARETYPE : 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XSYSTEM_HARDWARETYPE XWINDOWSSYSTEM::GetTypeHardware(int* revision)
 {
   if(revision) (*revision) = -1;
@@ -97,20 +120,22 @@ XSYSTEM_HARDWARETYPE XWINDOWSSYSTEM::GetTypeHardware(int* revision)
 
 
 
-//-------------------------------------------------------------------
-//  XWINDOWSSYSTEM::GetSO
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      03/03/2004 12:29:40
-//
-//  @return       XWINDOWSSYSTEM_SO :
-//  */
-//-------------------------------------------------------------------
-XSYSTEM_SO XWINDOWSSYSTEM::GetSO()
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XSYSTEM_SO XWINDOWSSYSTEM::GetTypeSO()
+* @brief      Get Type SO
+* @ingroup    PLATFORM_WINDOWS
+*
+* @author     Abraham J. Velez 
+* @date       03/06/2018 13:06:17
+*
+* @return     XSYSTEM_SO : type of SO (enum XSYSTEM_SO)
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+XSYSTEM_SO XWINDOWSSYSTEM::GetTypeSO()
 {
-  /*
+  #ifdef BUILDER
+
   OSVERSIONINFO osvi;
 
   osvi.dwOSVersionInfoSize =sizeof(OSVERSIONINFO);
@@ -123,9 +148,9 @@ XSYSTEM_SO XWINDOWSSYSTEM::GetSO()
       case VER_PLATFORM_WIN32_WINDOWS : return XSYSTEM_SO_WINDOWS98;
       case VER_PLATFORM_WIN32_NT      : return XSYSTEM_SO_WINDOWSNT;
     }
-  */
-
-  #ifndef BUILDER
+  
+  #else
+  
   OSVERSIONINFOEXW osvi;
   DWORDLONG        const dwlConditionMask = VerSetConditionMask(0, VER_PLATFORMID, VER_GREATER_EQUAL);
 
@@ -147,6 +172,7 @@ XSYSTEM_SO XWINDOWSSYSTEM::GetSO()
       case _WIN32_WINNT_WINBLUE       : return XSYSTEM_SO_WINDOWS81;
       case _WIN32_WINNT_WIN10         : return XSYSTEM_SO_WINDOWS10;
     }
+
   #endif
 
   return XSYSTEM_SO_WINDOWS;
@@ -154,19 +180,18 @@ XSYSTEM_SO XWINDOWSSYSTEM::GetSO()
 
 
 
-
-
-//-------------------------------------------------------------------
-//  XWINDOWSSYSTEM::GetLanguage
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      03/03/2004 12:29:55
-//
-//  @return       XLANGUAGE_CODE :
-//  */
-//-------------------------------------------------------------------
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XLANGUAGE_CODE XWINDOWSSYSTEM::GetLanguage()
+* @brief      Get Language Code
+* @ingroup    PLATFORM_WINDOWS
+*
+* @author     Abraham J. Velez 
+* @date       03/06/2018 13:07:31
+*
+* @return     XLANGUAGE_CODE : language code (enum XLANGUAGE_CODE)
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XLANGUAGE_CODE XWINDOWSSYSTEM::GetLanguage()
 {
   switch(PRIMARYLANGID(GetUserDefaultLangID()))
@@ -194,20 +219,21 @@ XLANGUAGE_CODE XWINDOWSSYSTEM::GetLanguage()
 
 
 
-/*-------------------------------------------------------------------
-//  XWINDOWSSYSTEM::GetMemoryInfo
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      18/09/2012 8:58:22
-//
-//  @return       bool :
-//  @param        total : (in Kb)
-//  @param        free :  (in Kb)
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XWINDOWSSYSTEM::GetMemoryInfo(XDWORD& total,XDWORD& free)
+* @brief      Get Memory Info
+* @ingroup    PLATFORM_WINDOWS
+*
+* @author     Abraham J. Velez 
+* @date       03/06/2018 13:08:10
+*
+* @param[out]  total : total memory in bytes.
+* @param[out]  free : free memory in bytes.
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XWINDOWSSYSTEM::GetMemoryInfo(XDWORD& total,XDWORD& free)
 {
   MEMORYSTATUS mem;
@@ -222,23 +248,22 @@ bool XWINDOWSSYSTEM::GetMemoryInfo(XDWORD& total,XDWORD& free)
 
 
 
-/*-------------------------------------------------------------------
-//  XWINDOWSSYSTEM::MakeCommand
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      12/11/2014 20:32:22
-//
-//  @return       bool :
-//
-//  @param        command :
-//  @param        waitexit :
-//  @param        NULL :
-*/
-/*-----------------------------------------------------------------*/
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XWINDOWSSYSTEM::MakeCommand(XCHAR* command, int* returncode)
+* @brief      Make Command
+* @ingroup    PLATFORM_WINDOWS
+*
+* @author     Abraham J. Velez 
+* @date       03/06/2018 13:09:08
+*
+* @param[in]  command : command to make
+* @param[out] returncode : return code of command
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XWINDOWSSYSTEM::MakeCommand(XCHAR* command, int* returncode)
 {
   int status;
@@ -263,30 +288,29 @@ bool XWINDOWSSYSTEM::MakeCommand(XCHAR* command, int* returncode)
 
 
 
-/*-------------------------------------------------------------------
-//  XWINDOWSSYSTEM::ExecuteApplication
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      06/08/2015 15:58:02
-//
-//  @return       bool :
-//
-//  @param        command :
-//  @param        params :
-*/
-/*-----------------------------------------------------------------*/
-bool XWINDOWSSYSTEM::ExecuteApplication(XCHAR* command, XCHAR* params, bool screen)
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XWINDOWSSYSTEM::ExecuteApplication(XCHAR* applicationname, XCHAR* params)
+* @brief      Execute Application
+* @ingroup    PLATFORM_WINDOWS
+*
+* @author     Abraham J. Velez 
+* @date       03/06/2018 13:10:10
+*
+* @param[in]  applicationpath :  path + name to application to exec
+* @param[in]  params : params to exec application
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+bool XWINDOWSSYSTEM::ExecuteApplication(XCHAR* applicationpath, XCHAR* params)
 {
   bool exist = false;
 
   XFILE* xfile = xfactory->Create_File();
   if(xfile)
     {
-      exist = xfile->Open(command);
+      exist = xfile->Open(applicationpath);
       xfile->Close();
     }
 
@@ -295,30 +319,29 @@ bool XWINDOWSSYSTEM::ExecuteApplication(XCHAR* command, XCHAR* params, bool scre
   if(!exist)
     return false;
 
-   _wspawnl(_P_NOWAIT , command, command, params, NULL);
+   _wspawnl(_P_NOWAIT, applicationpath, applicationpath, params, NULL);
 
   return true;
 }
 
 
 
-
-/*-------------------------------------------------------------------
-//   XWINDOWSSYSTEM::IsApplicationRunning
-*/
-/**
-//
-//
-//
-//  @author   Abraham J. Velez
-//  @version
-//
-//  @return   bool :
-//
-//  @param    XCHAR* :
-//
-*//*-----------------------------------------------------------------*/
-bool XWINDOWSSYSTEM::IsApplicationRunning(XCHAR* command, XDWORD* ID)
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XWINDOWSSYSTEM::IsApplicationRunning(XCHAR* applicationname, XDWORD* ID)
+* @brief      Is Application Running
+* @ingroup    PLATFORM_WINDOWS
+*
+* @author     Abraham J. Velez 
+* @date       03/06/2018 13:12:24
+*
+* @param[in]  applicationname : application name
+* @param[out] ID : ID of the application by SO
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+bool XWINDOWSSYSTEM::IsApplicationRunning(XCHAR* applicationname, XDWORD* ID)
 {
   PROCESSENTRY32 entry;
   HANDLE         snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, NULL);
@@ -331,9 +354,9 @@ bool XWINDOWSSYSTEM::IsApplicationRunning(XCHAR* command, XDWORD* ID)
       while(Process32Next(snapshot, &entry))
         {
           XSTRING nameapp  = entry.szExeFile;
-          XSTRING _command = command;
+          XSTRING _applicationname = applicationname;
 
-          if(_command.Find(nameapp, true) != XSTRING_NOTFOUND)
+          if(_applicationname.Find(nameapp, true) != XSTRING_NOTFOUND)
             {
               if(ID) (*ID) = entry.th32ProcessID;
               exists = true;
@@ -349,19 +372,21 @@ bool XWINDOWSSYSTEM::IsApplicationRunning(XCHAR* command, XDWORD* ID)
 
 
 
-/*-------------------------------------------------------------------
-//  XWINDOWSSYSTEM::ShutDown
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      08/12/2013 13:47:24
-//
-//  @return       bool :
-//  @param        type :
-*/
-/*-----------------------------------------------------------------*/
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XWINDOWSSYSTEM::ShutDown(XSYSTEM_SHUTDOWNTYPE type)
+* @brief      ShutDown of the SO
+* @ingroup    PLATFORM_WINDOWS
+*
+* @author     Abraham J. Velez 
+* @date       03/06/2018 13:13:15
+*
+* @param[in]  type : type of shutdown
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XWINDOWSSYSTEM::ShutDown(XSYSTEM_SHUTDOWNTYPE type)
 {
   if(type == XSYSTEM_SHUTDOWNTYPE_UNKNOWN) return false;
@@ -398,3 +423,22 @@ bool XWINDOWSSYSTEM::ShutDown(XSYSTEM_SHUTDOWNTYPE type)
 
 }
 
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         void XWINDOWSSYSTEM::Clean()
+* @brief      Clean the attributes of the class: Default initialice
+* @note       INTERNAL
+* @ingroup    PLATFORM_WINDOWS
+*
+* @author     Abraham J. Velez 
+* @date       03/06/2018 13:14:33
+*
+* @return     void : does not return anything. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+void XWINDOWSSYSTEM::Clean()
+{
+
+}

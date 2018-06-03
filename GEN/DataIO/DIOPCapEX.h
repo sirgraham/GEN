@@ -80,7 +80,7 @@ typedef struct
 class DIOPCAPFRAMEEX : public DIOPCAPFRAME
 {
   public:
-                                  DIOPCAPFRAMEEX                ();
+                                  DIOPCAPFRAMEEX                (bool hardwareuselittleendian);
     virtual                      ~DIOPCAPFRAMEEX                ();
 
     bool                          GetDNSAsk                     (DIOPCAPEXDNSHEADER& header,DIOPCAPEXDNSASK& ask);

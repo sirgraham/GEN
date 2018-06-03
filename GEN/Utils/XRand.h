@@ -21,7 +21,7 @@
 
 //---- DEFINES & ENUMS  --------------------------------------------------------------------
 
-#define GetRandom(min,max)  ((rand()%(int)(((max)+1)-(min)))+(min))
+#define GETRANDOM(min,max)  ((rand()%(int)(((max)+1)-(min)))+(min))
 
 //---- CLASS -------------------------------------------------------------------------------
 
@@ -31,10 +31,11 @@ class XRAND
                     XRAND       ()                        {                                 }
     virtual        ~XRAND       ()                        {                                 }
 
-    virtual bool    Ini         () = 0;
-    virtual int     MaxElements (int    max)              {   return GetRandom(0,max-1);    }
-    virtual int     Max         (int    max)              {   return GetRandom(0,max);      }
-    virtual int     Between     (int    min,  int   max)  {   return GetRandom(min,max);    }
+    virtual bool    Ini         ()                  = 0;
+    virtual int     MaxElements (int max)           = 0;
+    virtual int     Max         (int max)           = 0;
+    virtual int     Between     (int min, int max)  = 0;
+
     float           Between     (float  min,  float max)
                     {
                       int   randomvalue = rand();

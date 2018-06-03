@@ -19,7 +19,7 @@
 #include "XFactory.h"
 #include "XDir.h"
 #include "XString.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "XPath.h"
 

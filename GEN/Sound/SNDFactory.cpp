@@ -14,7 +14,7 @@
 
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "SNDInstance.h"
 
 #include "SNDFactory.h"
@@ -57,6 +57,6 @@ void SNDFACTORY::Update()
 
   if(instances.GetSize() > 100)
     {
-      XDEBUG_PRINTCOLOR(4, __L("WARNING: too many SNDINSTANCES"));
+     XDEBUGTRACE_PRINTCOLOR(4, __L("WARNING: too many SNDINSTANCES"));
     }
 }

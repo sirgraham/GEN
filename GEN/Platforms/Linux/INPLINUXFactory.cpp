@@ -24,7 +24,7 @@
 #include "INPLINUXDeviceMouseX11.h"
 #endif
 
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
 
@@ -49,7 +49,7 @@
 /*-----------------------------------------------------------------*/
 INPDEVICE* INPLINUXFACTORY::CreateDevice(XCHAR* device,void* screenpointer)
 {
-  XDEBUG_PRINTCOLOR(0,__L("CreateDevice %s"),device);
+  XDEBUGTRACE_PRINTCOLOR(0,__L("CreateDevice %s"),device);
 
 #if (defined(GRP_ACTIVE)) && (!defined(HW_RASPBERRYPI))
 

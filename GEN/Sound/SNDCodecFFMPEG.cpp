@@ -19,7 +19,7 @@
 #include "MEDIAFrameReaderLibAV.h"
 
 #include "SNDResampler.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "XBuffer.h"
 #include "XVector.h"
@@ -107,7 +107,7 @@ bool SNDCODECFFMPEG::SetFile(XCHAR* filename)
 
   if(!framereader->OpenFile(filename))
     {
-      XDEBUG_PRINTCOLOR(4, __L("Can't Open File %s"), filename);
+     XDEBUGTRACE_PRINTCOLOR(4, __L("Can't Open File %s"), filename);
       delete framereader;
       framereader = NULL;
       return false;
@@ -140,7 +140,7 @@ bool SNDCODECFFMPEG::Ini()
 
   if(avcodec_open2(avframereader->GetAudioCodecContext(), avframereader->GetAudioCodec(), NULL) < 0)
     {
-      XDEBUG_PRINTCOLOR(4, __L("Error Opening Audio Codec"));
+     XDEBUGTRACE_PRINTCOLOR(4, __L("Error Opening Audio Codec"));
     }
 
   AVCodecContext* audiocontext = avframereader->GetAudioCodecContext();
@@ -168,7 +168,7 @@ bool SNDCODECFFMPEG::Ini()
         }
       else
         {
-          XDEBUG_PRINTCOLOR(4, __L("AUDIO DECODE ERROR: no channel information"));
+         XDEBUGTRACE_PRINTCOLOR(4, __L("AUDIO DECODE ERROR: no channel information"));
           return false;
         }
     }

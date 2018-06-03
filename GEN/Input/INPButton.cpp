@@ -20,7 +20,7 @@
 
 #include "INPButton.h"
 
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "XMemory.h"
 
 //---- GENERAL VARIABLE --------------------------------------------------------------------
@@ -278,9 +278,9 @@ void INPBUTTON::SetPressed(bool on)
   {
     switch(state)
     {
-    case INPBUTTON_STATE_UNKNOWN:         state=INPBUTTON_STATE_PRESSED;          XDEBUG_PRINTCOLOR(0,__L("INPBUTTON_STATE_PRESSED %d"),this->GetKeyCode());break;
-    case INPBUTTON_STATE_RELEASED:        state=INPBUTTON_STATE_PRESSED;          XDEBUG_PRINTCOLOR(0,__L("INPBUTTON_STATE_PRESSED %d"),this->GetKeyCode());break;
-    case INPBUTTON_STATE_UP:              state=INPBUTTON_STATE_PRESSED;          XDEBUG_PRINTCOLOR(0,__L("INPBUTTON_STATE_PRESSED %d"),this->GetKeyCode()); break;
+    case INPBUTTON_STATE_UNKNOWN:         state=INPBUTTON_STATE_PRESSED;          XDEBUGTRACE_PRINTCOLOR(0,__L("INPBUTTON_STATE_PRESSED %d"),this->GetKeyCode());break;
+    case INPBUTTON_STATE_RELEASED:        state=INPBUTTON_STATE_PRESSED;          XDEBUGTRACE_PRINTCOLOR(0,__L("INPBUTTON_STATE_PRESSED %d"),this->GetKeyCode());break;
+    case INPBUTTON_STATE_UP:              state=INPBUTTON_STATE_PRESSED;          XDEBUGTRACE_PRINTCOLOR(0,__L("INPBUTTON_STATE_PRESSED %d"),this->GetKeyCode()); break;
     case INPBUTTON_STATE_PRESSED:         state=INPBUTTON_STATE_HOLD;             break;
     case INPBUTTON_STATE_HOLD:            state=INPBUTTON_STATE_HOLD;             break;
     }
@@ -289,11 +289,11 @@ void INPBUTTON::SetPressed(bool on)
   {
     switch(state)
     {
-    case INPBUTTON_STATE_UNKNOWN:         state=INPBUTTON_STATE_RELEASED;         XDEBUG_PRINTCOLOR(0,__L("INPBUTTON_STATE_RELEASED %d"),this->GetKeyCode());;break;
+    case INPBUTTON_STATE_UNKNOWN:         state=INPBUTTON_STATE_RELEASED;         XDEBUGTRACE_PRINTCOLOR(0,__L("INPBUTTON_STATE_RELEASED %d"),this->GetKeyCode());;break;
     case INPBUTTON_STATE_RELEASED:        state=INPBUTTON_STATE_UP;               break;
     case INPBUTTON_STATE_UP:              state=INPBUTTON_STATE_UP;               break;
-    case INPBUTTON_STATE_PRESSED:         state=INPBUTTON_STATE_RELEASED;         XDEBUG_PRINTCOLOR(0,__L("INPBUTTON_STATE_RELEASED %d"),this->GetKeyCode());;break;
-    case INPBUTTON_STATE_HOLD:            state=INPBUTTON_STATE_RELEASED;         XDEBUG_PRINTCOLOR(0,__L("INPBUTTON_STATE_RELEASED %d"),this->GetKeyCode());;break;
+    case INPBUTTON_STATE_PRESSED:         state=INPBUTTON_STATE_RELEASED;         XDEBUGTRACE_PRINTCOLOR(0,__L("INPBUTTON_STATE_RELEASED %d"),this->GetKeyCode());;break;
+    case INPBUTTON_STATE_HOLD:            state=INPBUTTON_STATE_RELEASED;         XDEBUGTRACE_PRINTCOLOR(0,__L("INPBUTTON_STATE_RELEASED %d"),this->GetKeyCode());;break;
     }
   }
 */

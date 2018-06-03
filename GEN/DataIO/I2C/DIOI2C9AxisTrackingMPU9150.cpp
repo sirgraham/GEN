@@ -18,7 +18,7 @@
 
 #include "XFactory.h"
 #include "XBuffer.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "XSleep.h"
 
 #include "DIOFactory.h"
@@ -3414,10 +3414,10 @@ void DIOI2C9AXISTRACKINGMPU9150::GetMotion9(XWORDSIG* ax, XWORDSIG* ay, XWORDSIG
 
   //read mag
   WriteByte(deviceaddr, DIOI2CMPU9150_RA_INT_PIN_CFG, 0x02); //set i2c bypass enable pin to true to access magnetometer
-  xsleep->MilliSeconds(10);
+  XSLEEP::GetInstance().MilliSeconds(10);
 
   WriteByte(DIOI2CMPU9150_RA_MAG_ADDRESS, 0x0A, 0x01); //enable the magnetometer
-  xsleep->MilliSeconds(10);
+  XSLEEP::GetInstance().MilliSeconds(10);
 
   ReadBytes(DIOI2CMPU9150_RA_MAG_ADDRESS, DIOI2CMPU9150_RA_MAG_XOUT_L, 6, buffer);
   *mx = (((XWORDSIG)buffer[1]) << 8) | buffer[0];
@@ -3446,10 +3446,10 @@ void DIOI2C9AXISTRACKINGMPU9150::GetMag(XWORDSIG* mx, XWORDSIG* my, XWORDSIG* mz
 {
   //read mag
   WriteByte(deviceaddr, DIOI2CMPU9150_RA_INT_PIN_CFG, 0x02); //set i2c bypass enable pin to true to access magnetometer
-  xsleep->MilliSeconds(10);
+  XSLEEP::GetInstance().MilliSeconds(10);
 
   WriteByte(DIOI2CMPU9150_RA_MAG_ADDRESS, 0x0A, 0x01); //enable the magnetometer
-  xsleep->MilliSeconds(10);
+  XSLEEP::GetInstance().MilliSeconds(10);
 
   ReadBytes(DIOI2CMPU9150_RA_MAG_ADDRESS, DIOI2CMPU9150_RA_MAG_XOUT_L, 6, buffer);
   *mx = (((XWORDSIG)buffer[1]) << 8) | buffer[0];

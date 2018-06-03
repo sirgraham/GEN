@@ -15,7 +15,7 @@
 
 #include "XFactory.h"
 #include "XBuffer.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "DIOFactory.h"
 #include "DIOStreamI2CConfig.h"

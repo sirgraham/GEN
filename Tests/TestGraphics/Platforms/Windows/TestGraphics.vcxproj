@@ -56,8 +56,8 @@
     <PlatformToolset>v140_xp</PlatformToolset>
     <NdkToolchainVersion>gcc-4.9</NdkToolchainVersion>
     <AndroidNativeAPI>UseTarget</AndroidNativeAPI>
-    <AndroidMinAPI>android-21</AndroidMinAPI>
-    <AndroidTargetAPI>android-21</AndroidTargetAPI>
+    <AndroidMinAPI>android-22</AndroidMinAPI>
+    <AndroidTargetAPI>android-22</AndroidTargetAPI>
     <AndroidBuildSystem>GradleBuild</AndroidBuildSystem>
     <AndroidStripLibrary>true</AndroidStripLibrary>
   </PropertyGroup>
@@ -296,7 +296,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>..\..\Application;..\..\..\..\GEN\ArtificialIntelligence;..\..\..\..\GEN\Main;..\..\..\..\GEN\Interface;..\..\..\..\GEN\Input;..\..\..\..\GEN\Compress;..\..\..\..\GEN\Graphic;..\..\..\..\GEN\Physics;..\..\..\..\GEN\UserInterface;..\..\..\..\GEN\Bluetooth;..\..\..\..\GEN\Video;..\..\..\..\GEN\Media;..\..\..\..\GEN\Sound;..\..\..\..\GEN\Cipher;..\..\..\..\GEN\Script;..\..\..\..\GEN\DataIO;..\..\..\..\GEN\DataIO\I2C;..\..\..\..\GEN\Utils;..\..\..\..\GEN\Platforms\Windows;..\..\..\..\GEN\Platforms\Common\SNDOpenAL;..\..\..\..\GEN\Platforms\Common\VIDEOCodecH264;..\..\..\..\ThirdPartyLibraries\zlib;..\..\..\..\ThirdPartyLibraries\zlib\contrib\minizip;..\..\..\..\ThirdPartyLibraries\jpeglib;..\..\..\..\ThirdPartyLibraries\libpng;..\..\..\..\ThirdPartyLibraries\openal-soft\include;..\..\..\..\ThirdPartyLibraries\glew\include;..\..\..\..\ThirdPartyLibraries\OpenGL-Registry;..\..\..\..\ThirdPartyLibraries\stb;..\..\..\..\ThirdPartyLibraries\ffmpeg;..\..\..\..\ThirdPartyLibraries\opengl;..\..\..\..\ThirdPartyLibraries\physx\PxShared\include;..\..\..\..\ThirdPartyLibraries\physx\PhysX_3.4\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>__STDC_CONSTANT_MACROS;__STDC_LIMIT_MACROS;WINDOWS;WIN32;_DEBUG;_WINDOWS;XVISUALC;HW_PC;UNICODE;XDEBUG;XMEM;GRP_ACTIVE;GRPDEFORMER_ACTIVE;INP_ACTIVE;SND_ACTIVE;UI_ACTIVE;DIO_ACTIVE;DIOTCPIP_ACTIVE;DIOUDP_ACTIVE;DIOICMP_ACTIVE;DIOUSB_ACTIVE;PHY_ACTIVE;VIDEO_ACTIVE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__STDC_CONSTANT_MACROS;__STDC_LIMIT_MACROS;WINDOWS;WIN32;_DEBUG;_WINDOWS;XVISUALC;HW_PC;UNICODE;XDEBUG;XMEM;GRP_ACTIVE;GRPDEFORMER_ACTIVE;INP_ACTIVE;SND_ACTIVE;UI_ACTIVE;DIO_ACTIVE;DIOTCPIP_ACTIVE;DIOUDP_ACTIVE;DIOICMP_ACTIVE;DIOUSB_ACTIVE;_PHY_ACTIVE;VIDEO_ACTIVE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <StructMemberAlignment>Default</StructMemberAlignment>
@@ -349,8 +349,8 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\TestGraphics\Application;..\..\..\TestGraphics\Platforms\Tegra-Android;..\..\..\..\GEN\Main;..\..\..\..\GEN\Interface;..\..\..\..\GEN\Input;..\..\..\..\GEN\Compress;..\..\..\..\ThirdPartyLibraries\zlib;..\..\..\..\ThirdPartyLibraries\jpeglib;..\..\..\..\ThirdPartyLibraries\libpng;..\..\..\..\GEN\Graphic;..\..\..\..\GEN\Bluetooth;..\..\..\..\GEN\Sound;..\..\..\..\GEN\Sound\TypeFiles\OGG;..\..\..\..\GEN\Cipher;..\..\..\..\GEN\Script;..\..\..\..\GEN\DataIO;..\..\..\..\GEN\DataIO\I2C;..\..\..\..\GEN\Utils;..\..\..\..\GEN\UserInterface;..\..\..\..\GEN\Platforms\Android;..\..\..\..\GEN\Platforms\Android\native_app_glue;..\..\..\..\GEN\Platforms\Common\SNDOpenAL;..\..\..\..\GEN\Platforms\Android\OpenAL\include;..\..\..\..\GEN\Platforms\Android\DIO;..\..\..\..\GEN\Video;..\..\..\..\GEN\Video\H264;..\..\..\..\GEN\ArtificialIntelligence;..\..\..\..\GEN\Platforms\Linux;..\..\..\..\GEN\Media;..\..\..\..\GEN\Physics;C:\NVPACK\PhysX\Include;C:\NVPACK\PxShared\include;d:\NVPACK\PhysX\Include;d:\NVPACK\PxShared\include;D:\GENFrameWork\GEN\Video\H264;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>DISABLE_IMPORTGL;ANDROID;HAVE_MEMMOVE;UNICODE;XDEBUG;NDEBUG;_XMEM;GRP_ACTIVE;PHY_ACTIVE;INP_ACTIVE;SND_ACTIVE;VIDEO_ACTIVE;DIO_ACTIVE;DIOTCPIP_ACTIVE;DIOUDP_ACTIVE;DIOICMP_ACTIVE;_DIOUART_ACTIVE;_DIOUSB_ACTIVE;_DIOWIFI_ACTIVE;_DIOI2C_ACTIVE;_DIOSPI_ACTIVE;_DIOBLUETOOTH_ACTIVE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\Application;..\..\..\..\GEN\ArtificialIntelligence;..\..\..\..\GEN\Main;..\..\..\..\GEN\Interface;..\..\..\..\GEN\Input;..\..\..\..\GEN\Compress;..\..\..\..\GEN\Graphic;..\..\..\..\GEN\Physics;..\..\..\..\GEN\UserInterface;..\..\..\..\GEN\Bluetooth;..\..\..\..\GEN\Video;..\..\..\..\GEN\Media;..\..\..\..\GEN\Sound;..\..\..\..\GEN\Cipher;..\..\..\..\GEN\Script;..\..\..\..\GEN\DataIO;..\..\..\..\GEN\DataIO\I2C;..\..\..\..\GEN\Utils;..\..\..\..\GEN\Platforms\Android;..\..\..\..\GEN\Platforms\Common\SNDOpenAL;..\..\..\..\GEN\Platforms\Common\VIDEOCodecH264;..\..\..\..\ThirdPartyLibraries\android-ndk\sources\android\native_app_glue;..\..\..\..\ThirdPartyLibraries\zlib;..\..\..\..\ThirdPartyLibraries\zlib\contrib\minizip;..\..\..\..\ThirdPartyLibraries\jpeglib;..\..\..\..\ThirdPartyLibraries\libpng;..\..\..\..\ThirdPartyLibraries\openal-soft\include;..\..\..\..\ThirdPartyLibraries\glew\include;..\..\..\..\ThirdPartyLibraries\OpenGL-Registry;..\..\..\..\ThirdPartyLibraries\stb;..\..\..\..\ThirdPartyLibraries\ffmpeg;..\..\..\..\ThirdPartyLibraries\opengl;..\..\..\..\ThirdPartyLibraries\physx\PxShared\include;..\..\..\..\ThirdPartyLibraries\physx\PhysX_3.4\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IOAPI_NO_64;GLEW_NO_GLU;DISABLE_IMPORTGL;ANDROID;HAVE_MEMMOVE;UNICODE;XDEBUG;NDEBUG;_XMEM;GRP_ACTIVE;_PHY_ACTIVE;INP_ACTIVE;__SND_ACTIVE;__VIDEO_ACTIVE;DIO_ACTIVE;DIOTCPIP_ACTIVE;DIOUDP_ACTIVE;_DIOICMP_ACTIVE;_DIOUART_ACTIVE;_DIOUSB_ACTIVE;_DIOWIFI_ACTIVE;_DIOI2C_ACTIVE;_DIOSPI_ACTIVE;_DIOBLUETOOTH_ACTIVE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <StructMemberAlignment>Default</StructMemberAlignment>
@@ -376,7 +376,7 @@
       <ShowProgress>NotSet</ShowProgress>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>..\..\..\..\GEN\Platforms\Android\OpenAL\lib;C:\NVPACK\PhysX\Lib\android9;C:\NVPACK\physx\Lib\vc14win64;d:\NVPACK\PhysX\Lib\android9;d:\NVPACK\physx\Lib\vc14win64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../../../ThirdPartyLibraries/openal-soft/build/android/lib;../../../../ThirdPartyLibraries/ffmpeg/bin/videokit-ffmpeg-android/videokit/src/main/jniLibs/armeabi-v7a;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>.\Debug/TestGraphics.pdb</ProgramDatabaseFile>
       <GenerateMapFile>true</GenerateMapFile>
@@ -385,8 +385,8 @@
       <DataExecutionPrevention>
       </DataExecutionPrevention>
       <Profile>true</Profile>
-      <AndroidSystemLibs>c;m;log;gcc;android;EGL;GLESv1_CM</AndroidSystemLibs>
-      <AdditionalOptions>-Wl,--start-group -lPhysX3Common -lPvdRuntime -lSimulationController -lSceneQuery -lLowLevel -lLowLevelCloth -lPhysX3 -lPhysX3Vehicle -lPhysX3Cooking -lPhysX3Extensions -lPhysX3CharacterKinematic -lPhysXProfileSDK -lPxTask -lPhysXVisualDebuggerSDK -Wl,--end-group %(AdditionalOptions)</AdditionalOptions>
+      <AndroidSystemLibs>c;m;log;gcc;android;EGL;GLESv1_CM;</AndroidSystemLibs>
+      <AdditionalOptions>-Wl,--start-group  -Wl,--end-group %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <Bscmake>
       <PreserveSbr>true</PreserveSbr>
@@ -618,9 +618,21 @@
     <ClCompile Include="..\..\..\..\GEN\Graphic\GRPWidgetPage.cpp" />
     <ClCompile Include="..\..\..\..\GEN\Graphic\GRPWidgetPass.cpp" />
     <ClCompile Include="..\..\..\..\GEN\Graphic\GRPWidgetStyle.cpp" />
-    <ClCompile Include="..\..\..\..\GEN\Media\MEDIAH264FrameReader.cpp" />
-    <ClCompile Include="..\..\..\..\GEN\Platforms\Common\VIDEOCodecH264\VIDEOCodecH264ffmpeg.cpp" />
-    <ClCompile Include="..\..\..\..\GEN\Video\VIDEOCodecH264.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Media\MEDIAH264FrameReader.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Common\VIDEOCodecH264\VIDEOCodecH264ffmpeg.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSSharedMemory.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Video\VIDEOCodecH264.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\android-ndk\sources\android\native_app_glue\android_native_app_glue.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\..\..\ThirdPartyLibraries\glew\src\glew.c" />
     <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jaricom.c" />
     <ClCompile Include="..\..\..\..\ThirdPartyLibraries\jpeglib\jcapimin.c" />
@@ -674,7 +686,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\..\..\GEN\Media\MEDIAFrameReaderLibAV.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\..\..\GEN\Physics\PHYEngine.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -815,10 +827,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\..\..\GEN\Platforms\Android\INPANDROIDFactory.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\GEN\Platforms\Android\native_app_glue\android_native_app_glue.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -1251,7 +1259,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\..\..\GEN\Sound\SNDCodecFFMPEG.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\..\..\GEN\Sound\SNDDummyResampler.cpp" />
     <ClCompile Include="..\..\..\..\GEN\Sound\SNDElement.cpp">
@@ -1264,11 +1272,13 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\..\..\GEN\Sound\SNDFileFFMPEG.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\..\..\GEN\Sound\SNDFileOGG.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\libpng\arm\arm_init.c" />
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\libpng\arm\filter_neon_intrinsics.c" />
     <ClCompile Include="..\..\..\..\ThirdPartyLibraries\libpng\png.c" />
     <ClCompile Include="..\..\..\..\ThirdPartyLibraries\libpng\pngerror.c" />
     <ClCompile Include="..\..\..\..\ThirdPartyLibraries\libpng\pngget.c" />
@@ -1767,9 +1777,22 @@
     <ClInclude Include="..\..\..\..\GEN\Graphic\GRPWidgetStyle.h" />
     <ClInclude Include="..\..\..\..\GEN\Graphic\GRPXEvent.h" />
     <ClInclude Include="..\..\..\..\GEN\Graphic\stb_truetype.h" />
-    <ClInclude Include="..\..\..\..\GEN\Media\MEDIAH264FrameReader.h" />
-    <ClInclude Include="..\..\..\..\GEN\Platforms\Common\VIDEOCodecH264\VIDEOCodecH264ffmpeg.h" />
-    <ClInclude Include="..\..\..\..\GEN\Video\VIDEOCodecH264.h" />
+    <ClInclude Include="..\..\..\..\GEN\Media\MEDIAH264FrameReader.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Common\VIDEOCodecH264\VIDEOCodecH264ffmpeg.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSSharedMemory.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XSharedMemory.h" />
+    <ClInclude Include="..\..\..\..\GEN\Video\VIDEOCodecH264.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\android-ndk\sources\android\native_app_glue\android_native_app_glue.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="..\..\..\..\ThirdPartyLibraries\glew\include\GL\glew.h" />
     <ClInclude Include="..\..\..\..\ThirdPartyLibraries\glew\include\GL\glxew.h" />
     <ClInclude Include="..\..\..\..\ThirdPartyLibraries\glew\include\GL\wglew.h" />
@@ -1804,7 +1827,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="..\..\..\..\GEN\Media\MEDIAFrameReaderLibAV.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="..\..\..\..\GEN\Physics\PHYCharacter.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -1958,10 +1981,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="..\..\..\..\GEN\Platforms\Android\INPANDROIDFactory.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\GEN\Platforms\Android\native_app_glue\android_native_app_glue.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
@@ -2397,7 +2416,6 @@
     <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\contrib\minizip\unzip.h" />
     <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\contrib\minizip\zip.h" />
     <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\crc32.h" />
-    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\crypt.h" />
     <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\deflate.h" />
     <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\inffast.h" />
     <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\inffixed.h" />
@@ -2417,14 +2435,14 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="..\..\..\..\GEN\Sound\SNDCodecFFMPEG.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="..\..\..\..\GEN\Sound\SNDDummyResampler.h" />
     <ClInclude Include="..\..\..\..\GEN\Sound\SNDEvent.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="..\..\..\..\GEN\Sound\SNDFileFFMPEG.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="..\..\..\..\GEN\Sound\SNDInstance.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Tegra-Android'">false</ExcludedFromBuild>
@@ -2755,6 +2773,18 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </None>
+    <None Include="..\..\..\..\ThirdPartyLibraries\ffmpeg\bin\ffmpeg-git-android-gcc-lite\lib\armeabi-v7a\libavcodec.a" />
+    <None Include="..\..\..\..\ThirdPartyLibraries\ffmpeg\bin\ffmpeg-git-android-gcc-lite\lib\armeabi-v7a\libavcodec.so" />
+    <None Include="..\..\..\..\ThirdPartyLibraries\ffmpeg\bin\ffmpeg-git-android-gcc-lite\lib\armeabi-v7a\libavfilter.a" />
+    <None Include="..\..\..\..\ThirdPartyLibraries\ffmpeg\bin\ffmpeg-git-android-gcc-lite\lib\armeabi-v7a\libavfilter.so" />
+    <None Include="..\..\..\..\ThirdPartyLibraries\ffmpeg\bin\ffmpeg-git-android-gcc-lite\lib\armeabi-v7a\libavformat.a" />
+    <None Include="..\..\..\..\ThirdPartyLibraries\ffmpeg\bin\ffmpeg-git-android-gcc-lite\lib\armeabi-v7a\libavformat.so" />
+    <None Include="..\..\..\..\ThirdPartyLibraries\ffmpeg\bin\ffmpeg-git-android-gcc-lite\lib\armeabi-v7a\libavutil.a" />
+    <None Include="..\..\..\..\ThirdPartyLibraries\ffmpeg\bin\ffmpeg-git-android-gcc-lite\lib\armeabi-v7a\libavutil.so" />
+    <None Include="..\..\..\..\ThirdPartyLibraries\ffmpeg\bin\ffmpeg-git-android-gcc-lite\lib\armeabi-v7a\libswresample.a" />
+    <None Include="..\..\..\..\ThirdPartyLibraries\ffmpeg\bin\ffmpeg-git-android-gcc-lite\lib\armeabi-v7a\libswresample.so" />
+    <None Include="..\..\..\..\ThirdPartyLibraries\ffmpeg\bin\ffmpeg-git-android-gcc-lite\lib\armeabi-v7a\libswscale.a" />
+    <None Include="..\..\..\..\ThirdPartyLibraries\ffmpeg\bin\ffmpeg-git-android-gcc-lite\lib\armeabi-v7a\libswscale.so" />
     <None Include="..\..\resources\divs\graphics\test_divs.html" />
     <None Include="..\..\resources\divs\graphics\virtualRouletteInterface.html" />
     <None Include="..\..\resources\divs\graphics\virtualRouletteInterface_v2.html" />

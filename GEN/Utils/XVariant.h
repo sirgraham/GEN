@@ -20,10 +20,11 @@
 
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
-#include "XDebug.h"
+
 #include "XBase.h"
 #include "XString.h"
 #include "XDateTime.h"
+#include "XDebugTrace.h"
 
 #ifdef _MSC_VER
 #pragma warning(push)
@@ -103,17 +104,17 @@ class XVARIANT
 
     bool                            IsNull                  ()                                              { return (this->data==NULL);        }
 
-    #ifdef XDEBUG
+    #ifdef XDEBUG_TRACE
     void                            PrintDebug              ()
                                     {
                                       switch(this->type)
                                         {
-                                          case XVARIANT_TYPE_NULL         :  XDEBUG_PRINTCOLOR(XDEBUG_COLORINFO,__L("NULL"));                     break;
-                                          case XVARIANT_TYPE_SERIALIZABLE :  XDEBUG_PRINTCOLOR(XDEBUG_COLORINFO,__L("SERIALIZABLE"));             break;
-                                          case XVARIANT_TYPE_INTEGER      :  XDEBUG_PRINTCOLOR(XDEBUG_COLORINFO,__L("INTEGER %d"),(int)*this);    break;
-                                          case XVARIANT_TYPE_XCHAR        :  XDEBUG_PRINTCOLOR(XDEBUG_COLORINFO,__L("XCHAR %c"),(XCHAR)*this);    break;
-                                          case XVARIANT_TYPE_FLOAT        :  XDEBUG_PRINTCOLOR(XDEBUG_COLORINFO,__L("FLOAT %f"),(float)*this);    break;
-                                          case XVARIANT_TYPE_STRING       :  XDEBUG_PRINTCOLOR(XDEBUG_COLORINFO,__L("STRING %s"),(XCHAR*)*this);  break;
+                                          case XVARIANT_TYPE_NULL         : XDEBUGTRACE_PRINTCOLOR(XDEBUGTRACE_COLOR_INFO, __L("NULL"));                     break;
+                                          case XVARIANT_TYPE_SERIALIZABLE : XDEBUGTRACE_PRINTCOLOR(XDEBUGTRACE_COLOR_INFO, __L("SERIALIZABLE"));             break;
+                                          case XVARIANT_TYPE_INTEGER      : XDEBUGTRACE_PRINTCOLOR(XDEBUGTRACE_COLOR_INFO, __L("INTEGER %d"),(int)*this);    break;
+                                          case XVARIANT_TYPE_XCHAR        : XDEBUGTRACE_PRINTCOLOR(XDEBUGTRACE_COLOR_INFO, __L("XCHAR %c"),(XCHAR)*this);    break;
+                                          case XVARIANT_TYPE_FLOAT        : XDEBUGTRACE_PRINTCOLOR(XDEBUGTRACE_COLOR_INFO, __L("FLOAT %f"),(float)*this);    break;
+                                          case XVARIANT_TYPE_STRING       : XDEBUGTRACE_PRINTCOLOR(XDEBUGTRACE_COLOR_INFO, __L("STRING %s"),(XCHAR*)*this);  break;
                                         }
                                     }
     #endif

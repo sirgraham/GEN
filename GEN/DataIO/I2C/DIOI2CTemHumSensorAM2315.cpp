@@ -16,7 +16,7 @@
 #include "XFactory.h"
 #include "XSleep.h"
 #include "XBuffer.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "DIOFactory.h"
 #include "DIOStreamI2CConfig.h"
@@ -118,13 +118,13 @@ bool DIOI2CTEMHUMSENSORAM2315::Read(float& temperature, float& humidity)
 
         } else break;
 
-      xsleep->MilliSeconds(50);
+      XSLEEP::GetInstance().MilliSeconds(50);
     }
   */
 
   if(status)
     {
-      //XDEBUG_PRINTCOLOR(2, __L("%02X %02X %02X %02X %02X %02X %02X %02X"), answer[0], answer[1], answer[2], answer[3], answer[4], answer[5], answer[6], answer[7]);
+      //XDEBUGTRACE_PRINTCOLOR(2, __L("%02X %02X %02X %02X %02X %02X %02X %02X"), answer[0], answer[1], answer[2], answer[3], answer[4], answer[5], answer[6], answer[7]);
 
       XWORD  CRC       = (answer[7]<<8) + answer[6];
       XWORD  CRCbuffer = 0;
@@ -218,7 +218,7 @@ bool DIOI2CTEMHUMSENSORAM2315::IniDevice()
               float humidity;
 
               Read(temperature, humidity);
-              xsleep->MilliSeconds(300);
+              XSLEEP::GetInstance().MilliSeconds(300);
             }
 
           return DIODEVICE::Ini();

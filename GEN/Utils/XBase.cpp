@@ -43,10 +43,68 @@
 /*---- CLASS MEMBERS -------------------------------------------------------------------------------------------------*/
 
 
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XBASE::XBASE()
+* @brief      Constructor
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       29/05/2018 12:54:52
+*
+* @return     Does not return anything. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+XBASE::XBASE()  
+{ 
+  Clean();                            
+}
+
+
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         Truncate
+* @fn         XBASE::~XBASE()
+* @brief      Destructor
+* @note       VIRTUAL
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       29/05/2018 12:54:40
+*
+* @return     Does not return anything. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+XBASE::~XBASE()
+{ 
+  Clean();                            
+}
+
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         void XBASE::Clean()
+* @brief      Clean the attributes of the class: Default initialice
+* @note       INTERNAL
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       29/05/2018 13:09:13
+*
+* @return     void : does not return anything. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+void XBASE::Clean() 
+{
+
+}
+
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         double Truncate(double value)
 * @brief      Trucate double
 * @ingroup    UTILS
 *
@@ -71,7 +129,7 @@ double Truncate(double value)
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         Fraction
+* @fn         double Fraction(double value)
 * @brief      Return the fractional part of double
 * @ingroup    UTILS
 *
@@ -94,7 +152,7 @@ double Fraction(double value)
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         SwapWORD
+* @fn         XWORD SwapWORD(XWORD data)
 * @brief      Return the swap of word (2 bytes) hi-lo  > lo-hi
 * @ingroup    UTILS
 *
@@ -118,7 +176,7 @@ XWORD SwapWORD(XWORD data)
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         SwapDWORD
+* @fn         XDWORD SwapDWORD(XDWORD data)
 * @brief      Swap double word (4 bytes) hi1 lo1 h2 lo2 >  lo2 hi2 lo1 hi1
 * @ingroup    UTILS
 *
@@ -144,7 +202,7 @@ XDWORD SwapDWORD(XDWORD data)
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         SwapQWORD
+* @fn         XQWORD SwapQWORD(XQWORD data)
 * @brief      Swap quad word (8 bytes) hi1 lo1 h2 lo2 hi3 lo3 h4 lo4  > lo3 hi3 lo4 hi4 lo2 hi2 lo1 hi1
 * @ingroup    UTILS
 *
@@ -175,7 +233,7 @@ XQWORD SwapQWORD(XQWORD data)
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         RoundFloat
+* @fn         float RoundFloat(float x)
 * @brief      Round float
 * @ingroup    UTILS
 *
@@ -196,7 +254,7 @@ float RoundFloat(float x)
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         DWORDToBCD
+* @fn         XQWORD DWORDToBCD(XDWORD dword)
 * @brief      Convert double word to BCD
 * @ingroup    UTILS
 *
@@ -226,7 +284,7 @@ XQWORD DWORDToBCD(XDWORD dword)
 
 /**-------------------------------------------------------------------------------------------------------------------
 *
-* @fn         BCDToDWORD
+* @fn         XDWORD BCDToDWORD(XQWORD bcd)
 * @brief      Convert BCD to double word
 * @ingroup    UTILS
 *

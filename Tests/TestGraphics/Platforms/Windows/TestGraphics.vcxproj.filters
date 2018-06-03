@@ -342,6 +342,15 @@
     <Filter Include="Source Files\GEN\Platforms\Common\VIDEOCodecH264">
       <UniqueIdentifier>{edc54daa-3455-483c-8b39-79c07bc53408}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\ThirdPartyLibraries\android-ndk">
+      <UniqueIdentifier>{2ca73877-8690-43a0-8388-f17f39ed3e02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ThirdPartyLibraries\libpng\arm">
+      <UniqueIdentifier>{c3ab13a4-74cb-4088-a4a1-ba6dcffcd85c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ThirdPartyLibraries\ffmpeg">
+      <UniqueIdentifier>{b2599ba3-9982-4be9-b656-6299ea59517c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\GEN\Utils\XApplication.cpp">
@@ -861,9 +870,6 @@
       <Filter>Source Files\GEN\Platforms\Android</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\GEN\Platforms\Android\DIOANDROIDURL.cpp">
-      <Filter>Source Files\GEN\Platforms\Android</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\GEN\Platforms\Android\native_app_glue\android_native_app_glue.c">
       <Filter>Source Files\GEN\Platforms\Android</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\GEN\DataIO\DIOStreamBluetooth.cpp">
@@ -1808,9 +1814,6 @@
     <ClCompile Include="..\..\..\..\GEN\Graphic\GRPOverlayPass.cpp">
       <Filter>Source Files\GEN\Graphic\Passes</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\GEN\UserInterface\UIMotion.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\GEN\DataIO\DIORemoteFileConfig.cpp">
       <Filter>Source Files\GEN\DataIO</Filter>
     </ClCompile>
@@ -1901,15 +1904,6 @@
     <ClCompile Include="..\..\..\..\ThirdPartyLibraries\zlib\zutil.c">
       <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\zlib\contrib\minizip\ioapi.c">
-      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\zlib\contrib\minizip\unzip.c">
-      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\zlib\contrib\minizip\zip.c">
-      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\ThirdPartyLibraries\glew\src\glew.c">
       <Filter>Source Files\ThirdPartyLibraries\glew</Filter>
     </ClCompile>
@@ -1933,6 +1927,30 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\GEN\Video\VIDEOCodecH264.cpp">
       <Filter>Source Files\GEN\Video</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\zlib\contrib\minizip\ioapi.c">
+      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\zlib\contrib\minizip\unzip.c">
+      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\zlib\contrib\minizip\zip.c">
+      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\android-ndk\sources\android\native_app_glue\android_native_app_glue.c">
+      <Filter>Source Files\ThirdPartyLibraries\android-ndk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSSharedMemory.cpp">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\UserInterface\UIMotion.cpp">
+      <Filter>Source Files\GEN\UserInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\libpng\arm\arm_init.c">
+      <Filter>Source Files\ThirdPartyLibraries\libpng\arm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ThirdPartyLibraries\libpng\arm\filter_neon_intrinsics.c">
+      <Filter>Source Files\ThirdPartyLibraries\libpng\arm</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2459,9 +2477,6 @@
       <Filter>Source Files\GEN\Platforms\Android</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\GEN\Platforms\Android\DIOANDROIDURL.h">
-      <Filter>Source Files\GEN\Platforms\Android</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\GEN\Platforms\Android\native_app_glue\android_native_app_glue.h">
       <Filter>Source Files\GEN\Platforms\Android</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\GEN\DataIO\DIOFactory.h">
@@ -3503,9 +3518,6 @@
     <ClInclude Include="..\..\..\..\GEN\Utils\XFString.h">
       <Filter>Source Files\GEN\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPSmartVector.h">
-      <Filter>Source Files\GEN\Utils</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\GEN\Platforms\Android\VIDEOANDROIDJNICodecH264MediaCodec.h">
       <Filter>Source Files\GEN\Platforms\Android</Filter>
     </ClInclude>
@@ -3522,9 +3534,6 @@
       <Filter>Source Files\GEN\UserInterface</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\crc32.h">
-      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\crypt.h">
       <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\deflate.h">
@@ -3552,15 +3561,6 @@
       <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\zutil.h">
-      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\contrib\minizip\ioapi.h">
-      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\contrib\minizip\unzip.h">
-      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\contrib\minizip\zip.h">
       <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\ThirdPartyLibraries\glew\include\GL\glew.h">
@@ -3596,6 +3596,27 @@
     <ClInclude Include="..\..\..\..\GEN\Video\VIDEOCodecH264.h">
       <Filter>Source Files\GEN\Video</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\android-ndk\sources\android\native_app_glue\android_native_app_glue.h">
+      <Filter>Source Files\ThirdPartyLibraries\android-ndk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\contrib\minizip\ioapi.h">
+      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\contrib\minizip\unzip.h">
+      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\contrib\minizip\zip.h">
+      <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPSmartVector.h">
+      <Filter>Source Files\GEN\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XSharedMemory.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSSharedMemory.h">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Linux\makefile">
@@ -3622,7 +3643,6 @@
     <None Include="res\drawable-xxxhdpi\icon.png">
       <Filter>Source Files\res\drawable-xxxhdpi</Filter>
     </None>
-    <None Include="res\values\strings.xml" />
     <None Include="..\..\resources\divs\graphics\test_divs.html">
       <Filter>Source Files\Application\GRAPHIC\Divs</Filter>
     </None>
@@ -3631,6 +3651,45 @@
     </None>
     <None Include="..\..\resources\divs\graphics\virtualRouletteInterface_v2.html">
       <Filter>Source Files\Application\GRAPHIC\Divs</Filter>
+    </None>
+    <None Include="res\values\strings.xml">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="..\..\..\..\ThirdPartyLibraries\ffmpeg\bin\ffmpeg-git-android-gcc-lite\lib\armeabi-v7a\libavcodec.so">
+      <Filter>Source Files\ThirdPartyLibraries\ffmpeg</Filter>
+    </None>
+    <None Include="..\..\..\..\ThirdPartyLibraries\ffmpeg\bin\ffmpeg-git-android-gcc-lite\lib\armeabi-v7a\libavfilter.so">
+      <Filter>Source Files\ThirdPartyLibraries\ffmpeg</Filter>
+    </None>
+    <None Include="..\..\..\..\ThirdPartyLibraries\ffmpeg\bin\ffmpeg-git-android-gcc-lite\lib\armeabi-v7a\libavformat.so">
+      <Filter>Source Files\ThirdPartyLibraries\ffmpeg</Filter>
+    </None>
+    <None Include="..\..\..\..\ThirdPartyLibraries\ffmpeg\bin\ffmpeg-git-android-gcc-lite\lib\armeabi-v7a\libavutil.so">
+      <Filter>Source Files\ThirdPartyLibraries\ffmpeg</Filter>
+    </None>
+    <None Include="..\..\..\..\ThirdPartyLibraries\ffmpeg\bin\ffmpeg-git-android-gcc-lite\lib\armeabi-v7a\libswresample.so">
+      <Filter>Source Files\ThirdPartyLibraries\ffmpeg</Filter>
+    </None>
+    <None Include="..\..\..\..\ThirdPartyLibraries\ffmpeg\bin\ffmpeg-git-android-gcc-lite\lib\armeabi-v7a\libswscale.so">
+      <Filter>Source Files\ThirdPartyLibraries\ffmpeg</Filter>
+    </None>
+    <None Include="..\..\..\..\ThirdPartyLibraries\ffmpeg\bin\ffmpeg-git-android-gcc-lite\lib\armeabi-v7a\libavcodec.a">
+      <Filter>Source Files\ThirdPartyLibraries\ffmpeg</Filter>
+    </None>
+    <None Include="..\..\..\..\ThirdPartyLibraries\ffmpeg\bin\ffmpeg-git-android-gcc-lite\lib\armeabi-v7a\libavfilter.a">
+      <Filter>Source Files\ThirdPartyLibraries\ffmpeg</Filter>
+    </None>
+    <None Include="..\..\..\..\ThirdPartyLibraries\ffmpeg\bin\ffmpeg-git-android-gcc-lite\lib\armeabi-v7a\libavformat.a">
+      <Filter>Source Files\ThirdPartyLibraries\ffmpeg</Filter>
+    </None>
+    <None Include="..\..\..\..\ThirdPartyLibraries\ffmpeg\bin\ffmpeg-git-android-gcc-lite\lib\armeabi-v7a\libavutil.a">
+      <Filter>Source Files\ThirdPartyLibraries\ffmpeg</Filter>
+    </None>
+    <None Include="..\..\..\..\ThirdPartyLibraries\ffmpeg\bin\ffmpeg-git-android-gcc-lite\lib\armeabi-v7a\libswresample.a">
+      <Filter>Source Files\ThirdPartyLibraries\ffmpeg</Filter>
+    </None>
+    <None Include="..\..\..\..\ThirdPartyLibraries\ffmpeg\bin\ffmpeg-git-android-gcc-lite\lib\armeabi-v7a\libswscale.a">
+      <Filter>Source Files\ThirdPartyLibraries\ffmpeg</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

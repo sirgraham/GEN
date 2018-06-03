@@ -141,7 +141,7 @@ bool DIOWINDOWSSTREAMBLUETOOTHREMOTEENUMDEVICES::Search()
       xtimerout->Reset();
       while(GetCurrentState() == DIOWINDOWSBTENUMFSMSTATE_NONE)
         {
-          xsleep->MilliSeconds(10);
+          XSLEEP::GetInstance().MilliSeconds(10);
 
           if(xtimerout->GetMeasureSeconds() >= 5)
             {
@@ -178,7 +178,7 @@ bool DIOWINDOWSSTREAMBLUETOOTHREMOTEENUMDEVICES::StopSearch(bool waitend)
     {
       while(GetCurrentState()!=DIOWINDOWSBTENUMFSMEVENT_SEARCHEND)
         {
-          xsleep->MilliSeconds(10);
+          XSLEEP::GetInstance().MilliSeconds(10);
         }
     }
 
@@ -415,7 +415,7 @@ void DIOWINDOWSSTREAMBLUETOOTHREMOTEENUMDEVICES::SearchServices()
         {
           int error = WSAGetLastError();
 
-          //XDEBUG_PRINT(__L("Search SDP Services Error %d"), error);
+          //XDEBUGTRACE_PRINT(__L("Search SDP Services Error %d"), error);
 
           delete [] qs;
 
@@ -553,8 +553,8 @@ BOOL __stdcall SDP_ServiceCallback(ULONG attribID, LPBYTE valuestream, ULONG cbs
                                                                                             for(ULONG c=0; c<data.data.sequence.length; c++)
                                                                                               xbuffer.Add((XBYTE)data.data.sequence.value[c]);
 
-                                                                                            XDEBUG_PRINTCOLOR(1, __L("Sequence: "));
-                                                                                            XDEBUG_PRINTDATABLOCK(1, xbuffer);
+                                                                                           XDEBUGTRACE_PRINTCOLOR(1, __L("Sequence: "));
+                                                                                            XDEBUGTRACE_PRINTDATABLOCK(1, xbuffer);
                                                                                             */
                                                                                             //---------------------------------------------------
 

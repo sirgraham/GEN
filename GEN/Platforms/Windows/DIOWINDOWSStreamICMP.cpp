@@ -22,7 +22,7 @@
 
 #include "XFactory.h"
 #include "XBuffer.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "XThreadCollected.h"
 
 #include "DIOIP.h"
@@ -471,7 +471,7 @@ void DIOWINDOWSSTREAMICMP::ThreadConnexion(void* data)
 
                                                                             if(size == SOCKET_ERROR)
                                                                               {
-                                                                                //XDEBUG_PRINTCOLOR(4, __L("Write ICMP to [%s] (%d) ERROR!"), tmpremoteaddress.Get(), size);
+                                                                                //XDEBUGTRACE_PRINTCOLOR(4, __L("Write ICMP to [%s] (%d) ERROR!"), tmpremoteaddress.Get(), size);
 
                                                                                 diostream->SetEvent(DIOWINDOWSICMPFSMEVENT_DISCONNECTING);
                                                                                 break;
@@ -479,7 +479,7 @@ void DIOWINDOWSSTREAMICMP::ThreadConnexion(void* data)
 
                                                                             if(size)
                                                                               {
-                                                                                //XDEBUG_PRINTCOLOR(1, __L("Write ICMP to [%s] (%d)"), tmpremoteaddress.Get(), size);
+                                                                                //XDEBUGTRACE_PRINTCOLOR(1, __L("Write ICMP to [%s] (%d)"), tmpremoteaddress.Get(), size);
 
                                                                                 diostream->outbuffer->Extract(NULL, 0 , datagram->GetData()->GetSize());
                                                                                 diostream->DeleteDatagram(indexdatagram);

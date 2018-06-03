@@ -92,7 +92,7 @@ bool XWINDOWSRAND::Ini()
 //-------------------------------------------------------------------
 int XWINDOWSRAND::MaxElements(int max)
 {
-  return GetRandom(0,max-1);
+  return GETRANDOM(0,max-1);
 }
 
 
@@ -110,7 +110,7 @@ int XWINDOWSRAND::MaxElements(int max)
 //-------------------------------------------------------------------
 int XWINDOWSRAND::Max(int max)
 {
-  return GetRandom(0,max);
+  return GETRANDOM(0,max);
 }
 
 
@@ -129,7 +129,7 @@ int XWINDOWSRAND::Max(int max)
 //-------------------------------------------------------------------
 int XWINDOWSRAND::Between(int min,int max)
 {
-  return GetRandom(min,max);
+  return GETRANDOM(min,max);
 }
 
 

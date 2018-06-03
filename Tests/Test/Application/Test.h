@@ -1,21 +1,38 @@
-//------------------------------------------------------------------------------------------
-//	TEST.H
-//
-/**
-// \class
-//
-//  Test
-//
-//	@author	 Abraham J. Velez
-//	@version 06/10/2005 20:06:20
-*/
-//	GEN (C) Copyright  (All right reserved).
-//------------------------------------------------------------------------------------------
-	
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @file        Test.h
+*
+* @class       TEST
+* @brief       Unit Test for console
+* @ingroup     TEST
+*
+* @author      Abraham J. Velez 
+* @date        23/05/2018 13:57:21
+*
+* @copyright   Copyright(c) 2005 - 2018 GEN Group.
+*
+* @cond
+* Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+* documentation files(the "Software"), to deal in the Software without restriction, including without limitation
+* the rights to use, copy, modify, merge, publish, distribute, sublicense, and/ or sell copies of the Software,
+* and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of
+* the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+* THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+* @endcond
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+
 #ifndef _TEST_H_
 #define _TEST_H_
 
-//---- INCLUDES ----------------------------------------------------------------------------
+/*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 
 #include "XDateTime.h"
 #include "XTimer.h"
@@ -29,7 +46,7 @@
 
 #include "Hash.h"
 
-//---- DEFINES & ENUMS  --------------------------------------------------------------------
+/*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
 
 enum TESTXFSMEVENTS
 {
@@ -102,23 +119,7 @@ enum TESTXFSMSTATES
 
 
 
-
-enum RASPBERRYPI_MODEL
-{
-	RASPBERRYPI_MODEL_UNKNOWN						=   0 ,	
-	RASPBERRYPI_MODEL_A												,
-	RASPBERRYPI_MODEL_B												,
-	RASPBERRYPI_MODEL_A_PLUS									,
-	RASPBERRYPI_MODEL_B_PLUS									,
-	RASPBERRYPI_MODEL_COMPUTERMODULE					,
-	RASPBERRYPI_MODEL_B_2											,
-	RASPBERRYPI_MODEL_ZERO										,
-};
-
-
-
-
-//---- CLASS -------------------------------------------------------------------------------
+/*---- CLASS ---------------------------------------------------------------------------------------------------------*/
 
 class XTIME;
 class XTIMER;
@@ -188,7 +189,6 @@ class TEST : public XAPPLICATION , public XFSMACHINE, public XSUBJECT
 		bool														Test_Log																();
 		bool														Test_Scheduler													();
 		bool														Test_Script															();
-		bool														Test_OrganicCipherDB										();
 		bool														Test_AOSONGSensor												();
 		bool														Test_Rele220V														();
 		bool														Test_TimeString													();
@@ -230,10 +230,10 @@ class TEST : public XAPPLICATION , public XFSMACHINE, public XSUBJECT
 		bool														Test_DatabaseSQL												(XDWORD type);
 		bool														Test_XFile															();
 		bool														Test_DIOPCap														();
-		bool														Test_RPI_RevisionBoard									(RASPBERRYPI_MODEL& model, int& megabytes, float& revision);
+		bool														Test_RPI_RevisionBoard									();
 		bool														Test_DIOGPIO														();
 		bool														Test_Lists															();
-		bool														Test_Audio															();
+		bool														Test_Sound															();
 		bool														Test_AVLTree														();
 		bool														Test_BinaryMap													();	
 		bool														Test_Variants														();
@@ -245,7 +245,7 @@ class TEST : public XAPPLICATION , public XFSMACHINE, public XSUBJECT
 		bool														Test_StringProtocol											(bool modeserver);	
 		bool														Test_XDebug                             ();
 		bool														Test_String															();
-		bool														Test_Dictionary													();
+		bool														Test_SharedMemory        								(bool modeserver);
 
 			
 		void														HandleEvent															(XEVENT* event);	
@@ -265,10 +265,11 @@ class TEST : public XAPPLICATION , public XFSMACHINE, public XSUBJECT
 		int															threadwebactual;
 };
 
-	
-//---- INLINE FUNCTIONS --------------------------------------------------------------------
+
+/*---- INLINE FUNCTIONS ----------------------------------------------------------------------------------------------*/
 
 extern TEST* test;
 
 #endif
+
 

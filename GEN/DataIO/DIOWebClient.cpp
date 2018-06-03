@@ -17,7 +17,7 @@
 #include "XTimer.h"
 #include "XPath.h"
 #include "XFile.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "DIOFactory.h"
 #include "DIOURL.h"
@@ -796,7 +796,7 @@ bool DIOWEBCLIENT::MakeOperationBuffer(DIOURL& url, XBUFFER& webpage, XBUFFER* p
 
   //--- Connexion WEB server -------------------
 
-  //XDEBUG_PRINTCOLOR(XDEBUG_COLORGREEN, __L("WEB client access %s:%d resource [%s]"), diostreamcfg->GetRemoteURL()->Get(), diostreamcfg->GetRemotePort(), resource.Get());
+  //XDEBUGTRACE_PRINTCOLOR(XDEBUG_COLORGREEN, __L("WEB client access %s:%d resource [%s]"), diostreamcfg->GetRemoteURL()->Get(), diostreamcfg->GetRemotePort(), resource.Get());
 
   if(!diostream->Open())
     {
@@ -856,7 +856,7 @@ bool DIOWEBCLIENT::MakeOperationBuffer(DIOURL& url, XBUFFER& webpage, XBUFFER* p
 
   sendheader += __L("\r\n");
 
-  //XDEBUG_PRINTCOLOR(2, __L("WEB Client Header %s"), sendheader.Get());
+  //XDEBUGTRACE_PRINTCOLOR(2, __L("WEB Client Header %s"), sendheader.Get());
 
   diostream->WriteStr(sendheader);
 
@@ -879,7 +879,7 @@ bool DIOWEBCLIENT::MakeOperationBuffer(DIOURL& url, XBUFFER& webpage, XBUFFER* p
 
   if(!header.Read(diostream, timerout, timeout))
     {
-      //XDEBUG_PRINTCOLOR(2, __L("WEB_CLIENT: Error! leer header! "));
+      //XDEBUGTRACE_PRINTCOLOR(2, __L("WEB_CLIENT: Error! leer header! "));
 
       diostream->Close();
       return false;
@@ -889,7 +889,7 @@ bool DIOWEBCLIENT::MakeOperationBuffer(DIOURL& url, XBUFFER& webpage, XBUFFER* p
 
   if((header.GetResultServer()>=400)||(!header.GetResultServer()))
     {
-      //XDEBUG_PRINTCOLOR(2, __L("WEB_CLIENT: Error! leer header2! "));
+      //XDEBUGTRACE_PRINTCOLOR(2, __L("WEB_CLIENT: Error! leer header2! "));
 
       xevent.SetEventType(DIOWEBCLIENTXEVENTTYPE_HEADERERROR);
       PostEvent(&xevent);
@@ -921,7 +921,7 @@ bool DIOWEBCLIENT::MakeOperationBuffer(DIOURL& url, XBUFFER& webpage, XBUFFER* p
 
               webpage.Add(buffer, br);
 
-              //XDEBUG_PRINTCOLOR(2, __L("WEB_CLIENT: Block read %d [size: %d]"), br, webpage.GetSize());
+              //XDEBUGTRACE_PRINTCOLOR(2, __L("WEB_CLIENT: Block read %d [size: %d]"), br, webpage.GetSize());
 
               xevent.SetEventType(DIOWEBCLIENTXEVENTTYPE_READBODYBLOCK);
               xevent.SetDownloadSize(br);
@@ -931,7 +931,7 @@ bool DIOWEBCLIENT::MakeOperationBuffer(DIOURL& url, XBUFFER& webpage, XBUFFER* p
             {
               if(timerout->GetMeasureSeconds()>(XDWORD)timeout)
                 {
-                  //XDEBUG_PRINTCOLOR(2, __L("WEB_CLIENT: Error! time out! "));
+                  //XDEBUGTRACE_PRINTCOLOR(2, __L("WEB_CLIENT: Error! time out! "));
                   status = false;
                   break;
                 }
@@ -940,7 +940,7 @@ bool DIOWEBCLIENT::MakeOperationBuffer(DIOURL& url, XBUFFER& webpage, XBUFFER* p
                 {
                   if(!diostream->GetInXBuffer()->GetSize())
                     {
-                      //XDEBUG_PRINTCOLOR(2, __L("WEB_CLIENT: Connexion close! "));
+                      //XDEBUGTRACE_PRINTCOLOR(2, __L("WEB_CLIENT: Connexion close! "));
                       break;
                     }
                 }
@@ -1013,7 +1013,7 @@ bool DIOWEBCLIENT::MakeOperationFile(DIOURL& url, XFILE& webpage, XBUFFER* postd
   url.GetHTTPServer(server, login, password);
   url.GetHTTPResource(resource);
 
-  //XDEBUG_PRINTCOLOR(1, __L("WEB Download %s %s [%d]"), server.Get(), resource.Get(), port);
+  //XDEBUGTRACE_PRINTCOLOR(1, __L("WEB Download %s %s [%d]"), server.Get(), resource.Get(), port);
 
   loginpassword.Format(__L("%s:%s"), login.Get(), password.Get());
   loginpassword.ConvertToBase64(loginpasswordbase64);
@@ -1098,7 +1098,7 @@ bool DIOWEBCLIENT::MakeOperationFile(DIOURL& url, XFILE& webpage, XBUFFER* postd
 
   sendheader += __L("\r\n");
 
-  //XDEBUG_PRINTCOLOR(2, __L("WEB Client Header %s"), sendheader.Get());
+  //XDEBUGTRACE_PRINTCOLOR(2, __L("WEB Client Header %s"), sendheader.Get());
 
   diostream->WriteStr(sendheader);
 
@@ -1121,7 +1121,7 @@ bool DIOWEBCLIENT::MakeOperationFile(DIOURL& url, XFILE& webpage, XBUFFER* postd
 
   if(!header.Read(diostream, timerout, timeout))
     {
-      //XDEBUG_PRINTCOLOR(2, __L("WEB_CLIENT: Error! leer header! "));
+      //XDEBUGTRACE_PRINTCOLOR(2, __L("WEB_CLIENT: Error! leer header! "));
 
       diostream->Close();
       return false;
@@ -1131,7 +1131,7 @@ bool DIOWEBCLIENT::MakeOperationFile(DIOURL& url, XFILE& webpage, XBUFFER* postd
 
   if((header.GetResultServer()>=400)||(!header.GetResultServer()))
     {
-      //XDEBUG_PRINTCOLOR(2, __L("WEB_CLIENT: Error! leer header2! "));
+      //XDEBUGTRACE_PRINTCOLOR(2, __L("WEB_CLIENT: Error! leer header2! "));
 
       xevent.SetEventType(DIOWEBCLIENTXEVENTTYPE_HEADERERROR);
       PostEvent(&xevent);
@@ -1164,7 +1164,7 @@ bool DIOWEBCLIENT::MakeOperationFile(DIOURL& url, XFILE& webpage, XBUFFER* postd
               //webpage.Add(buffer, br);
               webpage.Write(buffer, br);
 
-              //XDEBUG_PRINTCOLOR(2, __L("WEB_CLIENT: Block read %d [size: %d]"), br, webpage.GetSize());
+              //XDEBUGTRACE_PRINTCOLOR(2, __L("WEB_CLIENT: Block read %d [size: %d]"), br, webpage.GetSize());
 
               xevent.SetEventType(DIOWEBCLIENTXEVENTTYPE_READBODYBLOCK);
               xevent.SetDownloadSize(br);
@@ -1174,7 +1174,7 @@ bool DIOWEBCLIENT::MakeOperationFile(DIOURL& url, XFILE& webpage, XBUFFER* postd
             {
               if(timerout->GetMeasureSeconds()>(XDWORD)timeout)
                 {
-                  //XDEBUG_PRINTCOLOR(2, __L("WEB_CLIENT: Error! time out! "));
+                  //XDEBUGTRACE_PRINTCOLOR(2, __L("WEB_CLIENT: Error! time out! "));
                   status = false;
                   break;
                 }
@@ -1183,7 +1183,7 @@ bool DIOWEBCLIENT::MakeOperationFile(DIOURL& url, XFILE& webpage, XBUFFER* postd
                 {
                   if(!diostream->GetInXBuffer()->GetSize())
                     {
-                      //XDEBUG_PRINTCOLOR(2, __L("WEB_CLIENT: Connexion close! "));
+                      //XDEBUGTRACE_PRINTCOLOR(2, __L("WEB_CLIENT: Connexion close! "));
                       break;
                     }
                 }
@@ -1373,7 +1373,7 @@ bool DIOWEBCLIENT::MakeOperationFile(DIOURL& url, XBUFFER& webpage, XBUFFER* bou
 
   sendheader += __L("\r\n");
 
-  //XDEBUG_PRINTCOLOR(2, __L("WEB Client Header %s"), sendheader.Get());
+  //XDEBUGTRACE_PRINTCOLOR(2, __L("WEB Client Header %s"), sendheader.Get());
 
   diostream->WriteStr(sendheader);
 
@@ -1417,7 +1417,7 @@ bool DIOWEBCLIENT::MakeOperationFile(DIOURL& url, XBUFFER& webpage, XBUFFER* bou
 
   if(!header.Read(diostream, timerout, timeout))
     {
-      //XDEBUG_PRINTCOLOR(2, __L("WEB_CLIENT: Error! leer header! "));
+      //XDEBUGTRACE_PRINTCOLOR(2, __L("WEB_CLIENT: Error! leer header! "));
 
       diostream->Close();
       return false;
@@ -1427,7 +1427,7 @@ bool DIOWEBCLIENT::MakeOperationFile(DIOURL& url, XBUFFER& webpage, XBUFFER* bou
 
   if((header.GetResultServer()>=400)||(!header.GetResultServer()))
     {
-      //XDEBUG_PRINTCOLOR(2, __L("WEB_CLIENT: Error! leer header2! "));
+      //XDEBUGTRACE_PRINTCOLOR(2, __L("WEB_CLIENT: Error! leer header2! "));
 
       xevent.SetEventType(DIOWEBCLIENTXEVENTTYPE_HEADERERROR);
       PostEvent(&xevent);
@@ -1459,7 +1459,7 @@ bool DIOWEBCLIENT::MakeOperationFile(DIOURL& url, XBUFFER& webpage, XBUFFER* bou
 
               webpage.Add(buffer, br);
 
-              //XDEBUG_PRINTCOLOR(2, __L("WEB_CLIENT: Block read %d [size: %d]"), br, webpage.GetSize());
+              //XDEBUGTRACE_PRINTCOLOR(2, __L("WEB_CLIENT: Block read %d [size: %d]"), br, webpage.GetSize());
 
               xevent.SetEventType(DIOWEBCLIENTXEVENTTYPE_READBODYBLOCK);
               xevent.SetDownloadSize(br);
@@ -1469,7 +1469,7 @@ bool DIOWEBCLIENT::MakeOperationFile(DIOURL& url, XBUFFER& webpage, XBUFFER* bou
             {
               if(timerout->GetMeasureSeconds()>(XDWORD)timeout)
                 {
-                  //XDEBUG_PRINTCOLOR(2, __L("WEB_CLIENT: Error! time out! "));
+                  //XDEBUGTRACE_PRINTCOLOR(2, __L("WEB_CLIENT: Error! time out! "));
                   status = false;
                   break;
                 }
@@ -1478,7 +1478,7 @@ bool DIOWEBCLIENT::MakeOperationFile(DIOURL& url, XBUFFER& webpage, XBUFFER* bou
                 {
                   if(!diostream->GetInXBuffer()->GetSize())
                     {
-                      //XDEBUG_PRINTCOLOR(2, __L("WEB_CLIENT: Connexion close! "));
+                      //XDEBUGTRACE_PRINTCOLOR(2, __L("WEB_CLIENT: Connexion close! "));
                       break;
                     }
                 }

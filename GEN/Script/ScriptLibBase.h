@@ -72,7 +72,7 @@ void    Call_Printf               (SCRIPTLIB* library, SCRIPT* script, XVECTOR<X
 void    Call_GetPathExec          (SCRIPTLIB* library, SCRIPT* script, XVECTOR<XVARIANT*>* params, XVARIANT* returnvalue);
 void    Call_GetPathScript        (SCRIPTLIB* library, SCRIPT* script, XVECTOR<XVARIANT*>* params, XVARIANT* returnvalue);
 
-void    Call_XDEBUG_PRINTCOLOR    (SCRIPTLIB* library, SCRIPT* script, XVECTOR<XVARIANT*>* params, XVARIANT* returnvalue);
+void    Call_XDEBUGTRACE_PRINTCOLOR    (SCRIPTLIB* library, SCRIPT* script, XVECTOR<XVARIANT*>* params, XVARIANT* returnvalue);
 
 #endif
 

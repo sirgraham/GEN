@@ -20,7 +20,7 @@
 
 #include "XFactory.h"
 #include "XBuffer.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "XThreadCollected.h"
 
@@ -292,7 +292,7 @@ int DIOWINDOWSSTREAMUDP::IsReadyConnect(SOCKET socket)
   int status2 = FD_ISSET(socket, &fdw) ? 1 : 0;
   int status3 = FD_ISSET(socket, &fds) ? 1 : 0;
 
-  //XDEBUG_PRINTCOLOR(1, __L("UDP stream: r: %d, w: %d, s: %d"), status1, status2, status3);
+  //XDEBUGTRACE_PRINTCOLOR(1, __L("UDP stream: r: %d, w: %d, s: %d"), status1, status2, status3);
 
   if(config->IsServer())
     {
@@ -437,7 +437,7 @@ void DIOWINDOWSSTREAMUDP::ThreadConnexion(void* data)
                                                                                                       , origin_addr.sin_addr.S_un.S_un_b.s_b3
                                                                                                       , origin_addr.sin_addr.S_un.S_un_b.s_b4);
 
-                                                                    //XDEBUG_PRINTCOLOR(1, __L("Read UDP from [%s] (%d)"), address.Get(), size);
+                                                                    //XDEBUGTRACE_PRINTCOLOR(1, __L("Read UDP from [%s] (%d)"), address.Get(), size);
 
                                                                     port =  ntohs(origin_addr.sin_port);
 
@@ -498,7 +498,7 @@ void DIOWINDOWSSTREAMUDP::ThreadConnexion(void* data)
 
                                                                             size = sendto(diostream->handle,(char*)datagram->GetData()->Get(), datagram->GetData()->GetSize(), 0, (sockaddr*)&target_addr, size_addr);
 
-                                                                            //XDEBUG_PRINTCOLOR(1, __L("Write UDP to [%s] (%d)"), tmpremoteaddress.Get(), size);
+                                                                            //XDEBUGTRACE_PRINTCOLOR(1, __L("Write UDP to [%s] (%d)"), tmpremoteaddress.Get(), size);
 
                                                                             if(size == SOCKET_ERROR)
                                                                               {

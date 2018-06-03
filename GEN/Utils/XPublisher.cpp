@@ -17,7 +17,7 @@
 
 #include "XFactory.h"
 #include "XObserver.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "XPublisher.h"
 

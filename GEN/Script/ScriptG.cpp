@@ -20,7 +20,7 @@
 #include "XFactory.h"
 #include "XFileTXT.h"
 #include "XThread.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "XThreadCollected.h"
 #include "XVariant.h"
 
@@ -1335,7 +1335,7 @@ bool SCRIPTG::HaveError(SCRIPTERRORMSG errorcode)
       xevent.GetCurrentToken()->Set(currenttoken);
       xevent.SetNLine(nline);
 
-      XDEBUG_PRINTCOLOR(4, __L("Script [%s] ERROR %d: %s, line %d \"%s\"") , namescript.Get(), errorcode, errorstr[errorcode], nline, currenttoken);
+     XDEBUGTRACE_PRINTCOLOR(4, __L("Script [%s] ERROR %d: %s, line %d \"%s\"") , namescript.Get(), errorcode, errorstr[errorcode], nline, currenttoken);
 
       PostEvent(&xevent);
       errorscript  = errorcode;

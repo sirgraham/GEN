@@ -95,7 +95,7 @@ bool TESTBASEVIDEO::IniResources()
 {
 	PathManagement(__L("Video"));
 
-#ifdef VIDEO_ACTIVE
+  #ifdef VIDEO_ACTIVE
 
 	GRPSCENE*		 secondaryscene = new GRPSCENE(xapplication->GetMainScreen());
 	//GRPVIEWPORT* viewport				= new GRPVIEWPORT();
@@ -119,13 +119,13 @@ bool TESTBASEVIDEO::IniResources()
 	videoplayer = new VIDEOPLAYER();
 
 	SNDFACTORY* sndptr = NULL;
-#ifdef SND_ACTIVE
-	sndptr  = SNDFACTORY::Get();
-#endif
+  #ifdef SND_ACTIVE
+	  sndptr  = SNDFACTORY::Get();
+  #endif
 
 	videoplayer->Ini(xapplication->GetMainScreen(), xapplication->GetMainRenderer(), sndptr);
 	videoplayer->SetTarget(VIDEOPLAYER_TARGET_FULLSCREEN);
-#endif
+  #endif
 
 	return true;
 }

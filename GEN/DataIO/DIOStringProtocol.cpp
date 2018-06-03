@@ -21,7 +21,7 @@
 #include "XSleep.h"
 #include "XBuffer.h"
 #include "XFSMachine.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "DIOStream.h"
 
@@ -262,7 +262,7 @@ bool DIOSTRINGPROTOCOL::SendCommand(XCHAR* command, XSTRING* answer, int timeout
               break;
             }
 
-          //xsleep->MilliSeconds(10);
+          //XSLEEP::GetInstance().MilliSeconds(10);
         }
     }
 
@@ -350,7 +350,7 @@ void DIOSTRINGPROTOCOL::ReceivedCommandManager()
 
                           result.Format(__L("[%s%s]:%s\n\r"), DIOSTRINGPROTOCOL_ANSWER, command.Get(), answer.Get());
 
-                          //XDEBUG_PRINTCOLOR(3, __L("DIOStringProtocol Send Answer: %s"), result.Get());
+                          //XDEBUGTRACE_PRINTCOLOR(3, __L("DIOStringProtocol Send Answer: %s"), result.Get());
 
                           XSTRING_CREATEOEM(result, charstr);
                           diostream->Write((XBYTE*)charstr, result.GetSize());
@@ -377,7 +377,7 @@ void DIOSTRINGPROTOCOL::ReceivedCommandManager()
 
                              laststringreceived.DeleteCharacters(0, startanswer+2);
 
-                             //XDEBUG_PRINTCOLOR(3, __L("DIOStringProtocol Received Answer: %s %s"), command.Get(), laststringreceived.Get());
+                             //XDEBUGTRACE_PRINTCOLOR(3, __L("DIOStringProtocol Received Answer: %s %s"), command.Get(), laststringreceived.Get());
 
                              if(AddAnswer(command.Get(), laststringreceived))
                                {

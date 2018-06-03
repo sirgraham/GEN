@@ -16,7 +16,7 @@
 #include <string.h>
 
 #include "XFactory.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "Cipher.h"
 
@@ -26,7 +26,7 @@
 
 //---- GENERAL VARIABLE --------------------------------------------------------------------
 
-#ifdef XDEBUG
+#ifdef XDEBUG_TRACE
 XFILEOPENLIST XFileOpenList;
 #endif
 
@@ -335,7 +335,7 @@ bool XFILECONTAINER::DeletePrimaryFile()
 
 
 
-#ifdef XDEBUG
+#ifdef XDEBUG_TRACE
 
 
 /*-------------------------------------------------------------------
@@ -446,24 +446,24 @@ bool XFILEOPENLIST::DisplayAll()
 
   if(!nfilesopen)
     {
-      XDEBUG_PRINTHEADER(__L("ALL FILES HAVE BEEN CLOSED"));
+      XDEBUGTRACE_PRINTHEADER(__L("ALL FILES HAVE BEEN CLOSED"));
     }
    else
     {
-      XDEBUG_PRINTHEADER(__L("NOT ALL FILES ARE CLOSED"));
+      XDEBUGTRACE_PRINTHEADER(__L("NOT ALL FILES ARE CLOSED"));
 
-      XDEBUG_PRINT(__L("Number files not closed: %d"), nfilesopen);
+      XDEBUGTRACE_PRINT(__L("Number files not closed: %d"), nfilesopen);
 
-      XDEBUG_PRINT(__L("Path + File Name"));
+      XDEBUGTRACE_PRINT(__L("Path + File Name"));
 
       for(XDWORD c=0; c<nfilesopen; c++)
         {
           XFILE* xfile = (XFILE*)filelist.Get(c);
 
-          if(xfile) XDEBUG_PRINT(__L("%s")  , xfile->GetPathNameFile());
+          if(xfile) XDEBUGTRACE_PRINT(__L("%s")  , xfile->GetPathNameFile());
         }
 
-      XDEBUG_PRINTHEADER(NULL);
+      XDEBUGTRACE_PRINTHEADER(NULL);
     }
 
   CloseAll();

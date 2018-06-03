@@ -17,7 +17,7 @@
 
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "SQLMYSQLConnection.h"
 

@@ -22,7 +22,7 @@
 #include "XBuffer.h"
 #include "XTimer.h"
 #include "XThreadCollected.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "HashCRC32.h"
 
@@ -1016,7 +1016,7 @@ bool DIOOBEXPUSH::CheckSending()
 
                                                             if(!ReadAnswer(answer)) break;
 
-                                                            //XDEBUG_PRINTDATABLOCK(4|XDEBUGCTRLLEVEL_WITHCOLOR, answer);
+                                                            //XDEBUGTRACE_PRINTDATABLOCK(4|XDEBUGTRACELEVEL_WITHCOLOR, answer);
 
                                                             if(answer.Get()[0]==0xA0)
                                                               {
@@ -1078,7 +1078,7 @@ bool DIOOBEXPUSH::CheckSending()
                                                             else  wsize = (XWORD)sendbuffer->GetSize();
                                                           sendbuffer->Set((XBYTE*)&wsize,2,1);
 
-                                                          //XDEBUG_PRINTDATABLOCK(2|XDEBUGCTRLLEVEL_WITHCOLOR, (*sendbuffer));
+                                                          //XDEBUGTRACE_PRINTDATABLOCK(2|XDEBUGTRACELEVEL_WITHCOLOR, (*sendbuffer));
 
                                                           sio->Write(sendbuffer->Get(),sendbuffer->GetSize());
                                                           sio->WaitToFlushOutXBuffer(5);
@@ -1093,7 +1093,7 @@ bool DIOOBEXPUSH::CheckSending()
 
                                                             if(!ReadAnswer(answer)) break;
 
-                                                            //XDEBUG_PRINTDATABLOCK(4|XDEBUGCTRLLEVEL_WITHCOLOR, answer);
+                                                            //XDEBUGTRACE_PRINTDATABLOCK(4|XDEBUGTRACELEVEL_WITHCOLOR, answer);
 
                                                             switch(answer.Get()[0])
                                                               {
@@ -1146,7 +1146,7 @@ bool DIOOBEXPUSH::CheckSending()
                                                           wsize = DIOOBEXPUSH_MAXBUFFER;
                                                           sendbuffer->Add((XWORD)wsize);
 
-                                                          //XDEBUG_PRINTDATABLOCK(2|XDEBUGCTRLLEVEL_WITHCOLOR, (*sendbuffer));
+                                                          //XDEBUGTRACE_PRINTDATABLOCK(2|XDEBUGTRACELEVEL_WITHCOLOR, (*sendbuffer));
 
                                                           sio->Write(sendbuffer->Get(),sendbuffer->GetSize());
                                                           sio->WaitToFlushOutXBuffer(5);
@@ -1201,7 +1201,7 @@ bool DIOOBEXPUSH::CheckSending()
                                                             else  wsize = (XWORD)sendbuffer->GetSize();
                                                           sendbuffer->Set((XBYTE*)&wsize,2,1);
 
-                                                          //XDEBUG_PRINTDATABLOCK(2|XDEBUGCTRLLEVEL_WITHCOLOR, (*sendbuffer));
+                                                          //XDEBUGTRACE_PRINTDATABLOCK(2|XDEBUGTRACELEVEL_WITHCOLOR, (*sendbuffer));
 
                                                           sio->Write(sendbuffer->Get(),sendbuffer->GetSize());
                                                           sio->WaitToFlushOutXBuffer(5);

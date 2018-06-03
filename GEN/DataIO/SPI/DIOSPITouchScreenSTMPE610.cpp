@@ -17,7 +17,7 @@
 #include "XFactory.h"
 #include "XSleep.h"
 #include "XBuffer.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "DIOFactory.h"
 #include "DIOStreamSPIConfig.h"
@@ -401,7 +401,7 @@ bool DIOSPITOUCHSCREENSTMPE610::TouchScreen_Ini()
 {
   if(!WriteRegister(DIOSPITOUCHSCREENSTMPE610_REG_SYS_CTRL1, DIOSPITOUCHSCREENSTMPE610_SYS_CTRL1_RESET)) return false;
 
-  xsleep->MilliSeconds(250);
+  XSLEEP::GetInstance().MilliSeconds(250);
 
   for(XBYTE c=0; c<65; c++)
     {

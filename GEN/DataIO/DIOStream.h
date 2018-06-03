@@ -138,7 +138,7 @@ class DIOSTREAM : public XSUBJECT
     DIOSTREAMERROR              GetLastDIOError                 ()                                { DIOSTREAMERROR ret = error; this->error = DIOSTREAMERROR_NONE; return ret;  }
     void                        SetLastDIOError                 (DIOSTREAMERROR error)            { this->error = error;                                                        }
 
-    void                        Wait                            (int milliseconds)                { xsleep->MilliSeconds(milliseconds);                                         }
+    void                        Wait                            (int milliseconds)                { XSLEEP::GetInstance().MilliSeconds(milliseconds);                           }
 
     XBUFFER*                    inbuffer;
     XBUFFER*                    outbuffer;

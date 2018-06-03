@@ -13,7 +13,7 @@
 
 //---- INCLUDES ----------------------------------------------------------------------------
 
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "XConsole.h"
 #include "DIOStreamDevice.h"
 
@@ -270,7 +270,7 @@ bool DIOSTREAMDEVICE::CopyTo(DIOSTREAMDEVICE& device)
 bool DIOSTREAMDEVICE::DebugPrintInfo(XCONSOLE* xconsole)
 {
 
-  #ifdef XDEBUG
+  #ifdef XDEBUG_TRACE
   XSTRING line;
 
   line = __L(" ");                                                DIOSTREAMDEBUGPRINTINFO(xconsole, line.Get());

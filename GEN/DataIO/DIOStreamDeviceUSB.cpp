@@ -16,7 +16,7 @@
 #include <string.h>
 
 #include "XString.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "XConsole.h"
 
 #include "DIOStreamDeviceUSB.h"

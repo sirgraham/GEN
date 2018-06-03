@@ -66,6 +66,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\GENExtensions.ico" />
+    <Content Include="Resources\gen_logo.jpg" />
     <VSCTCompile Include="manifests\GENExtensions.vsct">
       <ResourceName>Menus.ctmenu</ResourceName>
       <SubType>Designer</SubType>
@@ -75,7 +77,6 @@
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="manifests\index.html" />
-    <Content Include="Resources\GENExtensions.ico" />
     <Content Include="manifests\stylesheet.css" />
   </ItemGroup>
   <ItemGroup>

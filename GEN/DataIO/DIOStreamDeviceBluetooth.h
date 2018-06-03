@@ -19,7 +19,7 @@
 //---- INCLUDES ----------------------------------------------------------------------------
 
 #include "XVector.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "DIOMAC.h"
 

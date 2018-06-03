@@ -15,7 +15,7 @@
 
 #include "XFactory.h"
 #include "XBuffer.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "DIOFactory.h"
 #include "DIOStreamSPIConfig.h"
@@ -44,15 +44,13 @@
 
 
 //  @param        xpublisher :
-//  @param        xsystem :
 //  @param        diostreamspi :
 */
 /*-----------------------------------------------------------------*/
-DIOSPILCDSCREENPCF8833::DIOSPILCDSCREENPCF8833(XSYSTEM* xsystem) : DIODEVICESPI()
+DIOSPILCDSCREENPCF8833::DIOSPILCDSCREENPCF8833() : DIODEVICESPI()
 {
   Clean();
 
-  this->xsystem = xsystem;
   databuffer = new XBUFFER();
 }
 
@@ -384,10 +382,10 @@ bool DIOSPILCDSCREENPCF8833::LCD_Reset()
   if(!diogpio)                      return false;
 
   diogpio->Set(resetpin, false, resetpinsgroup);
-  xsleep->MilliSeconds(200);
+  XSLEEP::GetInstance().MilliSeconds(200);
 
   diogpio->Set(resetpin, true, resetpinsgroup);
-  xsleep->MilliSeconds(200);
+  XSLEEP::GetInstance().MilliSeconds(200);
 
   return true;
 }
@@ -426,7 +424,7 @@ bool DIOSPILCDSCREENPCF8833::LCD_Init()
 
   if(!Buffer_Send()) return false;
 
-  xsleep->MilliSeconds(50);
+  XSLEEP::GetInstance().MilliSeconds(50);
 
   Buffer_Delete();
 

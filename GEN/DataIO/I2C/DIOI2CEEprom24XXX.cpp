@@ -15,7 +15,7 @@
 
 #include "XFactory.h"
 #include "XBuffer.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "DIOFactory.h"
 #include "DIOStreamI2CConfig.h"
@@ -353,7 +353,7 @@ bool DIOI2CEEPROM24XXX::ReadBYTE(XDWORD address, XBYTE& data)
 
                                               xbuffer.Add((XBYTE)offset);
 
-                                              //XDEBUG_PRINTCOLOR(1, __L("%d, %d"), page, offset);
+                                              //XDEBUGTRACE_PRINTCOLOR(1, __L("%d, %d"), page, offset);
                                             }
                                             break;
 
@@ -369,7 +369,7 @@ bool DIOI2CEEPROM24XXX::ReadBYTE(XDWORD address, XBYTE& data)
   status = diostream->WaitToFilledReadingBuffer(1, timeout);
   if(status) status = diostream->Read(&data, 1)?true:false;
 
-  //XDEBUG_PRINTCOLOR(1, __L("%02X, %02X"), xbuffer.GetByte(0), data);
+  //XDEBUGTRACE_PRINTCOLOR(1, __L("%02X, %02X"), xbuffer.GetByte(0), data);
 
   diostreamcfg->SetRemoteAddress(remotebasebackup);
 

@@ -56,7 +56,7 @@ SQLPOSTGRESQLDATABASE::SQLPOSTGRESQLDATABASE() : DBSQLDATABASE()
   Clean();
 
   int version = PQlibVersion();
-  //XDEBUG_PRINTCOLOR(0,__L("SQL DATABASE: PostGres Version %d.%d"),version/10000,(version%1000)/100);
+  //XDEBUGTRACE_PRINTCOLOR(0,__L("SQL DATABASE: PostGres Version %d.%d"),version/10000,(version%1000)/100);
   type  = DBSQLDATABASE_FLAGS_SQL | DBSQLDATABASE_FLAGS_TRANSACTIONAL;
 }
 

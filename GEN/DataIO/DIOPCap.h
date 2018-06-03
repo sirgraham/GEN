@@ -33,6 +33,7 @@
 class XFACTORY;
 class XTHREADCOLLECTED;
 class XMUTEX;
+class XSYSTEM;
 
 
 #define DIOPCAPETHERNETMACSIZE        6
@@ -137,7 +138,7 @@ class DIOPCAPNETINTERFACE
 class DIOPCAPFRAME
 {
   public:
-                                      DIOPCAPFRAME                  ();
+                                      DIOPCAPFRAME                  (bool hardwareuselittleendian);
     virtual                          ~DIOPCAPFRAME                  ();
 
     bool                              GetHeaderEthernet             (DIOPCAPETHERNETHEADER& ethernetheader);
@@ -150,12 +151,17 @@ class DIOPCAPFRAME
 
     XBUFFER*                          GetData                       ();
     bool                              SetData                       (XBYTE* data, XDWORD size);
+  
+  protected:
+
+    bool                              hardwareuselittleendian;
 
   private:
 
     void                              Clean                         ();
 
     XBUFFER*                          data;
+    
 };
 
 
@@ -194,6 +200,8 @@ class DIOPCAP
     XVECTOR<DIOPCAPNETINTERFACE*>     netinterfaces;
     XMUTEX*                           xmutexframes;
     XVECTOR<DIOPCAPFRAME*>            frames;
+
+    XSYSTEM*                          xsystem;
 
   private:
 

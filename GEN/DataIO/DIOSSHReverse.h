@@ -31,7 +31,7 @@
 #include "XSleep.h"
 #include "XThread.h"
 #include "XLog.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 
 

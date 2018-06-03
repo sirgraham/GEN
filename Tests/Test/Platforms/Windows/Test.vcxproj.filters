@@ -86,6 +86,12 @@
     <Filter Include="Source Files\ThirdPartyLibraries\stb">
       <UniqueIdentifier>{86ddfcfd-bdb6-484b-a785-5b91d24ecea9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GEN\Input">
+      <UniqueIdentifier>{75d821cf-da18-4ef7-843a-dbdf27e9efcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GEN\Graphics">
+      <UniqueIdentifier>{d988c56a-814e-4353-ab81-88826102b594}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\GEN\Cipher\Cipher.cpp">
@@ -143,9 +149,6 @@
       <Filter>Source Files\GEN\Utils</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\GEN\Utils\XConsole.cpp">
-      <Filter>Source Files\GEN\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\GEN\Utils\XDebug.cpp">
       <Filter>Source Files\GEN\Utils</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\GEN\Utils\XDir.cpp">
@@ -508,9 +511,6 @@
     <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSConsole.cpp">
       <Filter>Source Files\GEN\Platforms\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSDebug.cpp">
-      <Filter>Source Files\GEN\Platforms\Windows</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSDir.cpp">
       <Filter>Source Files\GEN\Platforms\Windows</Filter>
     </ClCompile>
@@ -635,9 +635,6 @@
       <Filter>Source Files\GEN\Platforms\Linux</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\XLINUXDateTime.cpp">
-      <Filter>Source Files\GEN\Platforms\Linux</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\XLINUXDebug.cpp">
       <Filter>Source Files\GEN\Platforms\Linux</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\XLINUXDir.cpp">
@@ -1054,9 +1051,6 @@
     <ClCompile Include="..\..\..\..\GEN\DataIO\DIOSSHReverse.cpp">
       <Filter>Source Files\GEN\DataIO</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\GEN\Utils\XDictionary.cpp">
-      <Filter>Source Files\GEN\Utils</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\GEN\Utils\XFString.cpp">
       <Filter>Source Files\GEN\Utils</Filter>
     </ClCompile>
@@ -1068,6 +1062,66 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\ThirdPartyLibraries\zlib\contrib\minizip\ioapi.c">
       <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSSharedMemory.cpp">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\XLINUXSharedMemory.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\INPLINUXDeviceKeyboardDirect.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\INPLINUXDeviceMouseDirect.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Utils\XDebugTrace.cpp">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSDebugTrace.cpp">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\XLINUXDebugTrace.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Input\INPButton.cpp">
+      <Filter>Source Files\GEN\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Input\INPCursor.cpp">
+      <Filter>Source Files\GEN\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Input\INPDevice.cpp">
+      <Filter>Source Files\GEN\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Input\INPFactory.cpp">
+      <Filter>Source Files\GEN\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Input\INPManager.cpp">
+      <Filter>Source Files\GEN\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Input\INPPath.cpp">
+      <Filter>Source Files\GEN\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\INPLINUXDeviceKeyboardX11.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\INPLINUXDeviceMouseX11.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\INPLINUXFactory.cpp">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\INPWINDOWSDeviceKeyboard.cpp">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\INPWINDOWSDeviceMouse.cpp">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPScreen.cpp">
+      <Filter>Source Files\GEN\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\GRPWINDOWSScreen.cpp">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1117,9 +1171,6 @@
       <Filter>Source Files\GEN\Platforms\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSConsole.h">
-      <Filter>Source Files\GEN\Platforms\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSDebug.h">
       <Filter>Source Files\GEN\Platforms\Windows</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSDir.h">
@@ -1407,9 +1458,6 @@
     <ClInclude Include="..\..\..\..\GEN\Utils\XConsole.h">
       <Filter>Source Files\GEN\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\GEN\Utils\XDebug.h">
-      <Filter>Source Files\GEN\Utils</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\GEN\Utils\XDir.h">
       <Filter>Source Files\GEN\Utils</Filter>
     </ClInclude>
@@ -1612,9 +1660,6 @@
       <Filter>Source Files\GEN\Platforms\Linux</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\XLINUXDateTime.h">
-      <Filter>Source Files\GEN\Platforms\Linux</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\XLINUXDebug.h">
       <Filter>Source Files\GEN\Platforms\Linux</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\XLINUXDir.h">
@@ -1841,9 +1886,6 @@
     </ClInclude>
     <ClInclude Include="..\..\Application\TestProtocolApplicationData.h">
       <Filter>Source Files\Application</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\GEN\Utils\XVectorMutex.h">
-      <Filter>Source Files\GEN\Utils</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\DIOWINDOWSPing.h">
       <Filter>Source Files\GEN\Platforms\Windows</Filter>
@@ -2117,6 +2159,75 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\contrib\minizip\zip.h">
       <Filter>Source Files\ThirdPartyLibraries\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XSharedMemory.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSSharedMemory.h">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\XLINUXSharedMemory.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\INPLINUXDeviceKeyboardDirect.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\INPLINUXDeviceMouseDirect.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Utils\XDebugTrace.h">
+      <Filter>Source Files\GEN\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSDebugTrace.h">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\XLINUXDebugTrace.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Input\INPButton.h">
+      <Filter>Source Files\GEN\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Input\INPCursor.h">
+      <Filter>Source Files\GEN\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Input\INPDevice.h">
+      <Filter>Source Files\GEN\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Input\INPFactory.h">
+      <Filter>Source Files\GEN\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Input\INPManager.h">
+      <Filter>Source Files\GEN\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Input\INPPath.h">
+      <Filter>Source Files\GEN\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\INPLINUXDeviceID.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\INPLINUXDeviceKeyboardX11.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\INPLINUXDeviceMouseX11.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\INPLINUXFactory.h">
+      <Filter>Source Files\GEN\Platforms\Linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\INPWINDOWSDeviceKeyboard.h">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\INPWINDOWSDeviceMouse.h">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\INPWINDOWSFactory.h">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPScreen.h">
+      <Filter>Source Files\GEN\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\GRPWINDOWSScreen.h">
+      <Filter>Source Files\GEN\Platforms\Windows</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

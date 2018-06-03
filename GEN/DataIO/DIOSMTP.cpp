@@ -16,7 +16,7 @@
 
 #include "XBuffer.h"
 #include "XFileTXT.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "DIOStreamTCPIPConfig.h"
 #include "DIOStreamTCPIP.h"

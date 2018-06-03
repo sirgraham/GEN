@@ -18,7 +18,7 @@
 
 #include "XFactory.h"
 #include "XTimer.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "XRand.h"
 
 #include "DIOStreamICMPConfig.h"
@@ -264,7 +264,7 @@ bool DIOPING::Do(XDWORD nretries, XDWORD timebetweenchecks, bool exitfirstgoodre
 
       if(!status)
         {
-          //XDEBUG_PRINTCOLOR(4, __L("Ping: not write packet! %s"), targetIP.Get());
+          //XDEBUGTRACE_PRINTCOLOR(4, __L("Ping: not write packet! %s"), targetIP.Get());
           break;
         }
 
@@ -273,7 +273,7 @@ bool DIOPING::Do(XDWORD nretries, XDWORD timebetweenchecks, bool exitfirstgoodre
           status = diostreamICMP->WaitToFilledReadingBuffer(sizeof(DIOPING_ECHOREPLY), 1);
           if(!status)
             {
-              //XDEBUG_PRINTCOLOR(4, __L("Ping: not ready packet! %s"), targetIP.Get());
+              //XDEBUGTRACE_PRINTCOLOR(4, __L("Ping: not ready packet! %s"), targetIP.Get());
               if(exitfirstgoodreply)  nloop = 0;  else nloop--;
               break;
             }
@@ -281,14 +281,14 @@ bool DIOPING::Do(XDWORD nretries, XDWORD timebetweenchecks, bool exitfirstgoodre
           status = diostreamICMP->ReadDatagram(address, xbuffer);
           if(!status)
             {
-              //XDEBUG_PRINTCOLOR(4, __L("Ping: not read packet! %s"), targetIP.Get());
+              //XDEBUGTRACE_PRINTCOLOR(4, __L("Ping: not read packet! %s"), targetIP.Get());
               if(exitfirstgoodreply)  nloop = 0;  else nloop--;
               break;
             }
 
           if(xbuffer.GetSize() < sizeof(DIOPING_ECHOREPLY))
             {
-              //XDEBUG_PRINTCOLOR(4, __L("Ping: invalid size packet! %s, "), targetIP.Get());
+              //XDEBUGTRACE_PRINTCOLOR(4, __L("Ping: invalid size packet! %s, "), targetIP.Get());
               continue;
             }
 
@@ -330,7 +330,7 @@ bool DIOPING::Do(XDWORD nretries, XDWORD timebetweenchecks, bool exitfirstgoodre
                               xevent.SetPingReply((DIOPINGREPLY*)replys.Get(replys.GetSize()-1));
                               PostEvent(&xevent);
 
-                              //XDEBUG_PRINTCOLOR(1, __L("Ping: received! %s %s"), fromIP.Get(), targetIP.Get());
+                              //XDEBUGTRACE_PRINTCOLOR(1, __L("Ping: received! %s %s"), fromIP.Get(), targetIP.Get());
 
                               if(exitfirstgoodreply)
                                 {
@@ -338,35 +338,35 @@ bool DIOPING::Do(XDWORD nretries, XDWORD timebetweenchecks, bool exitfirstgoodre
                                   break;
                                 }
 
-                              xsleep->MilliSeconds(timebetweenchecks);
+                              XSLEEP::GetInstance().MilliSeconds(timebetweenchecks);
 
                               nloop--;
                               break;
                             }
                            else
                             {
-                              //XDEBUG_PRINTCOLOR(4, __L("Ping: application ID not equal! %s %s"), fromIP.Get(), targetIP.Get());
+                              //XDEBUGTRACE_PRINTCOLOR(4, __L("Ping: application ID not equal! %s %s"), fromIP.Get(), targetIP.Get());
                             }
                         }
                        else
                         {
-                          //XDEBUG_PRINTCOLOR(4, __L("Ping: not IP equal! %s %s"), fromIP.Get(), targetIP.Get());
+                          //XDEBUGTRACE_PRINTCOLOR(4, __L("Ping: not IP equal! %s %s"), fromIP.Get(), targetIP.Get());
                         }
 
                     }
                    else
                     {
-                      //XDEBUG_PRINTCOLOR(4, __L("Ping: error Checksum! %s "), targetIP.Get());
+                      //XDEBUGTRACE_PRINTCOLOR(4, __L("Ping: error Checksum! %s "), targetIP.Get());
                     }
                 }
                else
                 {
-                  //XDEBUG_PRINTCOLOR(4, __L("Ping: error CRC! %s "), targetIP.Get());
+                  //XDEBUGTRACE_PRINTCOLOR(4, __L("Ping: error CRC! %s "), targetIP.Get());
                 }
             }
            else
             {
-              //XDEBUG_PRINTCOLOR(4, __L("Ping: Is not reply packet! %s "), targetIP.Get());
+              //XDEBUGTRACE_PRINTCOLOR(4, __L("Ping: Is not reply packet! %s "), targetIP.Get());
             }
         }
    }
@@ -379,7 +379,7 @@ bool DIOPING::Do(XDWORD nretries, XDWORD timebetweenchecks, bool exitfirstgoodre
   /*
   if(!status)
     {
-      XDEBUG_PRINTCOLOR((status?1:4), __L("Ping to [%s]: %s"), targetIP.Get(), (status?__L("Ok."): __L("Error!")));
+     XDEBUGTRACE_PRINTCOLOR((status?1:4), __L("Ping to [%s]: %s"), targetIP.Get(), (status?__L("Ok."): __L("Error!")));
     }
   */
 

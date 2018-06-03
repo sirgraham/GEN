@@ -16,7 +16,7 @@
 #include <math.h>
 
 #include "XString.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "XPath.h"
 
 #include "XWINDOWSDateTime.h"

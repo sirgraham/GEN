@@ -21,7 +21,7 @@
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
 #include "XLog.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "DIOFactory.h"
 #include "DIOStreamI2C.h"
@@ -313,7 +313,7 @@ class DIOAIOBIMAINBOARD
 
                                     if(SetStatusHeaderPin(DIOAIOBIMAINBOARD_HEADER_SLOT, 9,  pinstatus))
                                       {
-                                        xsleep->MilliSeconds(10);
+                                        XSLEEP::GetInstance().MilliSeconds(10);
 
                                         pinstatus = !pinstatus;
 

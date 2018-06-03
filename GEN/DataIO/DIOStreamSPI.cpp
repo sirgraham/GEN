@@ -16,7 +16,7 @@
 #include "XFactory.h"
 #include "XBuffer.h"
 #include "XThreadCollected.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "DIOFactory.h"
 #include "DIOGPIO.h"

@@ -29,7 +29,7 @@
 #include "XFactory.h"
 #include "XBase.h"
 #include "XString.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "XThreadCollected.h"
 
 #include "DIOStreamXEvent.h"
@@ -278,7 +278,7 @@ void DIOLINUXSTREAMUSB::ThreadConnexion(void* data)
                                                                     XDWORD br = diostream->ReadBuffer(buffer, DIOSTREAM_MAXBUFFER);
                                                                     if(br)
                                                                       {
-                                                                        //XDEBUG_PRINTDATABLOCK(XDEBUGLEVELCOLOR(2), (XBYTE*)diostream->buffer, (int)br);
+                                                                        //XDEBUGTRACE_PRINTDATABLOCK(XDEBUGLEVELCOLOR(2), (XBYTE*)diostream->buffer, (int)br);
                                                                         diostream->inbuffer->Add(buffer, br);
                                                                       }
                                                                   }
@@ -296,12 +296,12 @@ void DIOLINUXSTREAMUSB::ThreadConnexion(void* data)
 
                                                                         if(bw)
                                                                           {
-                                                                            //XDEBUG_PRINTDATABLOCK(XDEBUGLEVELCOLOR(4), (XBYTE*)diostream->buffer, (int)bw);
+                                                                            //XDEBUGTRACE_PRINTDATABLOCK(XDEBUGLEVELCOLOR(4), (XBYTE*)diostream->buffer, (int)bw);
                                                                             diostream->outbuffer->Extract(NULL , 0, bw);
                                                                           }
                                                                          else
                                                                           {
-                                                                            //XDEBUG_PRINTDATABLOCK(XDEBUGLEVELCOLOR(3), (XBYTE*)diostream->buffer, (int)bw);
+                                                                            //XDEBUGTRACE_PRINTDATABLOCK(XDEBUGLEVELCOLOR(3), (XBYTE*)diostream->buffer, (int)bw);
                                                                           }
                                                                       }
                                                                   }

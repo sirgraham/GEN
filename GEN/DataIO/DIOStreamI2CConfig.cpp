@@ -80,13 +80,10 @@ DIOSTREAMI2CCONFIG::~DIOSTREAMI2CCONFIG()
 */
 /*-----------------------------------------------------------------*/
 bool DIOSTREAMI2CCONFIG::SetLocalDeviceNameByPort()
-{
-  XSYSTEM* xsystem = xfactory->CreateSystem();
-  if(!xsystem) return false;
-
+{  
   int revision = 0;
 
-  switch(xsystem->GetTypeHardware(&revision))
+  switch(XSYSTEM::GetInstance().GetTypeHardware(&revision))
     {
       case XSYSTEM_HARDWARETYPE_PC          : localdevicename.Format(__L("/dev/i2c-%d"), port);
                                               break;
@@ -98,8 +95,6 @@ bool DIOSTREAMI2CCONFIG::SetLocalDeviceNameByPort()
 
                                    default  : break;
     }
-
-  xfactory->DeleteSystem(xsystem);
 
   return true;
 }

@@ -27,7 +27,7 @@
 #include "Cipher.h"
 
 #include "XWINDOWSFile.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "XMemory.h"
 
@@ -414,7 +414,7 @@ bool XWINDOWSFILE::Close()
     {
         CloseHandle(filehandle);
 
-      #ifdef XDEBUG
+      #ifdef XDEBUG_TRACE
       XFileOpenList.Del(this);
       #endif
 
@@ -600,7 +600,7 @@ bool XWINDOWSFILE::ExtendedOpen(XCHAR* xpath, XWINDOWSFILEMODE mode)
 
   ActualizeSize();
 
-  #ifdef XDEBUG
+  #ifdef XDEBUG_TRACE
   XFileOpenList.Add(this);
   #endif
   return true;

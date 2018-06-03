@@ -20,7 +20,7 @@
 #include "SNDFile.h"
 #include "SNDCodec.h"
 
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "XMemory.h"
 

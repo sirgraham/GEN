@@ -29,7 +29,7 @@
 #include "XVector.h"
 #include "XTimer.h"
 #include "XThread.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 //---- DEFINES & ENUMS  --------------------------------------------------------------------
 
@@ -96,7 +96,7 @@ class XTHREADCOLLECTED
                                                   return;
                                                 }
 
-                                              xsleep->MilliSeconds(milliseconds);
+                                              XSLEEP::GetInstance().MilliSeconds(milliseconds);
                                             }
 
     bool                                    End                             ()
@@ -357,10 +357,10 @@ class XTHREADSCOLLECTED
                                                     }
 
                                                   /*
-                                                  #ifdef XDEBUG
+                                                  #ifdef XDEBUG_TRACE
                                                   XSTRING groupID;
                                                   GetGroupThreadIDString(groupID);
-                                                  XDEBUG_PRINTCOLOR(XDEBUG_COLORINFO, __L("Create THREAD COLLECTED (%02d) grupo %s: %s"), xthreadsvector.GetSize(), groupID.Get(), ID);
+                                                 XDEBUGTRACE_PRINTCOLOR(XDEBUG_COLORINFO, __L("Create THREAD COLLECTED (%02d) grupo %s: %s"), xthreadsvector.GetSize(), groupID.Get(), ID);
                                                   #endif
                                                   */
 
@@ -394,10 +394,10 @@ class XTHREADSCOLLECTED
                                                       if(xthreadcollected == _xthreadcollected)
                                                         {
                                                           /*
-                                                          #ifdef XDEBUG
+                                                          #ifdef XDEBUG_TRACE
                                                           XSTRING groupID;
                                                           GetGroupThreadIDString(groupID);
-                                                          XDEBUG_PRINTCOLOR(XDEBUG_COLORINFO, __L("Delete THREAD COLLECTED (%02d) grupo %s: %s"), xthreadsvector.GetSize(), groupID.Get(), xthreadcollected->GetID()->Get());
+                                                         XDEBUGTRACE_PRINTCOLOR(XDEBUG_COLORINFO, __L("Delete THREAD COLLECTED (%02d) grupo %s: %s"), xthreadsvector.GetSize(), groupID.Get(), xthreadcollected->GetID()->Get());
                                                           #endif
                                                           */
 

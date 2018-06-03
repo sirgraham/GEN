@@ -22,7 +22,7 @@
 #include "XFactory.h"
 #include "XFSMachine.h"
 #include "XBuffer.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "DIOStream.h"
 

@@ -29,7 +29,7 @@
 #include "XVector.h"
 #include "XString.h"
 #include "XThreadCollected.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "DIOStream.h"
 #include "DIOStreamDeviceWifi.h"

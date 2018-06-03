@@ -16,7 +16,7 @@
 
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "SQLSQLITEConnection.h"
 #include "SQLSQLITEQuery.h"
@@ -81,12 +81,12 @@ bool SQLSQLITEDATABASE::Commit()
       int rc=sqlite3_exec(sqlite3database, "COMMIT", 0, 0, 0);
       transactionstarted = false;
 
-      //XDEBUG_PRINTCOLOR(0,__L("Commiting %d"),rc);
+      //XDEBUGTRACE_PRINTCOLOR(0,__L("Commiting %d"),rc);
 
       if(rc == SQLITE_OK)   return true;
       if(rc == SQLITE_BUSY) return true;
     }
-   //else XDEBUG_PRINTCOLOR(4,__L("transaction not started"));
+   //elseXDEBUGTRACE_PRINTCOLOR(4,__L("transaction not started"));
 
   return false;
 }
@@ -216,7 +216,7 @@ DBSQLQUERY* SQLSQLITEDATABASE::CreateQuery()
   DBSQLQUERY* query = new SQLSQLITEQUERY(this);
   if(!query)
     {
-      XDEBUG_PRINTCOLOR(4,__L("SQLSQLITEDATABASE::CreateQuery  unable to create SQLSQLITEQUERY"));
+     XDEBUGTRACE_PRINTCOLOR(4,__L("SQLSQLITEDATABASE::CreateQuery  unable to create SQLSQLITEQUERY"));
       return NULL;
     }
 

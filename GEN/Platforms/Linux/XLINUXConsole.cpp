@@ -19,7 +19,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "XLINUXConsole.h"
 

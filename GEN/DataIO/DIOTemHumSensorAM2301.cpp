@@ -21,7 +21,7 @@
 #include "XFactory.h"
 #include "XSleep.h"
 #include "XTimer.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "XThreadCollected.h"
 
 #include "DIOGPIO.h"
@@ -195,17 +195,17 @@ bool DIOTEMHUMSENSORAM2301::ReadDirect(float& temperature, float& humidity)
   // Leave it high for a while
   diogpio->SetMode(pindata,  DIOTEMHUMSENSORAM2301_OUTPUT);
   diogpio->Set(pindata, DIOTEMHUMSENSORAM2301_HIGH);
-  xsleep->MilliSeconds(1);
+  XSLEEP::GetInstance().MilliSeconds(1);
 
   // Set it low to give the start signal
   diogpio->Set(pindata, DIOTEMHUMSENSORAM2301_LOW);
-  xsleep->MilliSeconds(1);
+  XSLEEP::GetInstance().MilliSeconds(1);
   diogpio->Set(pindata, DIOTEMHUMSENSORAM2301_HIGH);
 
   // Now set the pin high to let the sensor start communicating
   diogpio->SetMode(pindata,  DIOTEMHUMSENSORAM2301_INPUT);
 
-  xsleep->NanoSeconds(30);
+  XSLEEP::GetInstance().NanoSeconds(30);
 
   // Read ACK
   WaitTo(false, 50);
@@ -236,10 +236,10 @@ bool DIOTEMHUMSENSORAM2301::ReadDirect(float& temperature, float& humidity)
   diogpio->SetMode(pindata, DIOTEMHUMSENSORAM2301_OUTPUT);
   diogpio->Set(pindata    , DIOTEMHUMSENSORAM2301_HIGH);
 
-  xsleep->MilliSeconds(1);
+  XSLEEP::GetInstance().MilliSeconds(1);
 
   /*
-  XDEBUG_PRINTCOLOR(2, __L(" %X %X %X %X "), value[0], value[1], value[2],  value[3]);
+ XDEBUGTRACE_PRINTCOLOR(2, __L(" %X %X %X %X "), value[0], value[1], value[2],  value[3]);
   */
 
   // Verify checksum
@@ -381,7 +381,7 @@ void DIOTEMHUMSENSORAM2301::ThreadRunFunction(void* param)
       if(sensor->xmutexread) sensor->xmutexread->UnLock();
     }
 
-  if(sensor->xtimer) xsleep->MilliSeconds(500);
+  if(sensor->xtimer) XSLEEP::GetInstance().MilliSeconds(500);
 
 }
 

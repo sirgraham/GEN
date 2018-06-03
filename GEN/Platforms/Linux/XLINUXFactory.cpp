@@ -22,6 +22,7 @@
 #include "XLINUXSystem.h"
 #include "XLINUXConsole.h"
 #include "XLINUXThread.h"
+#include "XLINUXSharedMemory.h"
 
 #include "XFactoryMacros.h"
 
@@ -91,4 +92,7 @@ bool XLINUXFACTORY::DeleteThread(XTHREADGROUPID groupID, XTHREAD* xthread)
   return true;
 };
 
+
+CREATEFUNC(XLINUXFACTORY, XSHAREDMEMORY   , XLINUXSHAREDMEMORY     , Create_SharedMemory)
+DELETEFUNC(XLINUXFACTORY, XSHAREDMEMORY   , XLINUXSHAREDMEMORY     , Delete_SharedMemory)
 

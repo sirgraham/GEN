@@ -62,7 +62,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;__STDC_CONSTANT_MACROS;WINDOWS;WIN32;_DEBUG;_CONSOLE;XVISUALC;XDEBUG;XMEM;HW_PC;UNICODE;XTHREADCOLLECTION_ACTIVE;DIO_ACTIVE;DIOUART_ACTIVE;DIOUSB_ACTIVE;DIOICMP_ACTIVE;DIOUDP_ACTIVE;DIOTCPIP_ACTIVE;DIOBLUETOOTH_ACTIVE;DIOWIFI_ACTIVE;DIOSPI_ACTIVE;DIOI2C_ACTIVE;DIOPING_ACTIVE;DIOGPIO_ACTIVE;DIOALERTS_ACTIVE;DBSQL_ACTIVE;_DBSQLMYSQL_ACTIVE;_DBSQLPOSTGRESQL_ACTIVE;DBSQLSQLITE_ACTIVE;SND_ACTIVE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;__STDC_CONSTANT_MACROS;WINDOWS;WIN32;_DEBUG;_CONSOLE;XVISUALC;XDEBUG_TRACE;XMEM;HW_PC;UNICODE;XTHREADCOLLECTION_ACTIVE;DIO_ACTIVE;DIOUART_ACTIVE;DIOUSB_ACTIVE;DIOICMP_ACTIVE;DIOUDP_ACTIVE;DIOTCPIP_ACTIVE;DIOBLUETOOTH_ACTIVE;DIOWIFI_ACTIVE;DIOSPI_ACTIVE;DIOI2C_ACTIVE;DIOPING_ACTIVE;DIOGPIO_ACTIVE;DIOALERTS_ACTIVE;DBSQL_ACTIVE;_DBSQLMYSQL_ACTIVE;_DBSQLPOSTGRESQL_ACTIVE;DBSQLSQLITE_ACTIVE;SND_ACTIVE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\..\..\Test\Application;..\..\..\..\GEN\Main;..\..\..\..\GEN\DatabasesSQL;..\..\..\..\GEN\DatabasesSQL\MySQL;..\..\..\..\GEN\DatabasesSQL\PostgreSQL;..\..\..\..\GEN\DatabasesSQL\SQLite;..\..\..\..\GEN\DataIO;..\..\..\..\GEN\DataIO\I2C;..\..\..\..\GEN\DataIO\SPI;..\..\..\..\GEN\Compress;..\..\..\..\GEN\Cipher;..\..\..\..\GEN\Graphic;..\..\..\..\GEN\Sound;..\..\..\..\GEN\Input;..\..\..\..\GEN\Interface;..\..\..\..\GEN\Script;..\..\..\..\GEN\Media;..\..\..\..\GEN\Utils;..\..\..\..\GEN\Platforms\Common\SNDOpenAL;..\..\..\..\GEN\Platforms\Windows;..\..\..\..\ThirdPartyLibraries\zlib;..\..\..\..\ThirdPartyLibraries\zlib\contrib\minizip;..\..\..\..\ThirdPartyLibraries\lua\src;..\..\..\..\ThirdPartyLibraries\stb-master;..\..\..\..\ThirdPartyLibraries\openal-soft\include;..\..\..\..\ThirdPartyLibraries\ffmpeg;..\..\..\..\ThirdPartyLibraries\sqlite;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -135,6 +135,42 @@
     <ClInclude Include="..\..\..\..\GEN\Compress\CompressLZW.h" />
     <ClInclude Include="..\..\..\..\GEN\Compress\CompressManager.h" />
     <ClInclude Include="..\..\..\..\GEN\Compress\CompressZIP.h" />
+    <ClInclude Include="..\..\..\..\GEN\Graphic\GRPScreen.h" />
+    <ClInclude Include="..\..\..\..\GEN\Input\INPButton.h" />
+    <ClInclude Include="..\..\..\..\GEN\Input\INPCursor.h" />
+    <ClInclude Include="..\..\..\..\GEN\Input\INPDevice.h" />
+    <ClInclude Include="..\..\..\..\GEN\Input\INPFactory.h" />
+    <ClInclude Include="..\..\..\..\GEN\Input\INPManager.h" />
+    <ClInclude Include="..\..\..\..\GEN\Input\INPPath.h" />
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\INPLINUXDeviceID.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\INPLINUXDeviceKeyboardDirect.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\INPLINUXDeviceKeyboardX11.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\INPLINUXDeviceMouseDirect.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\INPLINUXDeviceMouseX11.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\INPLINUXFactory.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\XLINUXSharedMemory.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\GRPWINDOWSScreen.h" />
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\INPWINDOWSDeviceKeyboard.h" />
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\INPWINDOWSDeviceMouse.h" />
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\INPWINDOWSFactory.h" />
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSDebugTrace.h" />
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSSharedMemory.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XDebugTrace.h" />
+    <ClInclude Include="..\..\..\..\GEN\Utils\XSharedMemory.h" />
     <ClInclude Include="..\..\..\..\ThirdPartyLibraries\sqlite\sqlite3.h" />
     <ClInclude Include="..\..\..\..\ThirdPartyLibraries\stb\stb_vorbis.h" />
     <ClInclude Include="..\..\..\..\ThirdPartyLibraries\zlib\contrib\minizip\ioapi.h" />
@@ -403,7 +439,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\XLINUXDebug.h">
+    <ClInclude Include="..\..\..\..\GEN\Platforms\Linux\XLINUXDebugTrace.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
@@ -463,7 +499,6 @@
     <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\WINDOWSMain.h" />
     <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSConsole.h" />
     <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSDateTime.h" />
-    <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSDebug.h" />
     <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSDir.h" />
     <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSFactory.h" />
     <ClInclude Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSFile.h" />
@@ -531,7 +566,6 @@
     <ClInclude Include="..\..\..\..\GEN\Utils\XBuffer.h" />
     <ClInclude Include="..\..\..\..\GEN\Utils\XConsole.h" />
     <ClInclude Include="..\..\..\..\GEN\Utils\XDateTime.h" />
-    <ClInclude Include="..\..\..\..\GEN\Utils\XDebug.h" />
     <ClInclude Include="..\..\..\..\GEN\Utils\XDir.h" />
     <ClInclude Include="..\..\..\..\GEN\Utils\XErrorMsg.h" />
     <ClInclude Include="..\..\..\..\GEN\Utils\XEvent.h" />
@@ -577,7 +611,6 @@
     <ClInclude Include="..\..\..\..\GEN\Utils\XUUID.h" />
     <ClInclude Include="..\..\..\..\GEN\Utils\XVariant.h" />
     <ClInclude Include="..\..\..\..\GEN\Utils\XVector.h" />
-    <ClInclude Include="..\..\..\..\GEN\Utils\XVectorMutex.h" />
     <ClInclude Include="..\..\Application\Test.h" />
     <ClInclude Include="..\..\Application\TestProtocol.h" />
     <ClInclude Include="..\..\Application\TestProtocolApplicationData.h" />
@@ -606,6 +639,36 @@
     <ClCompile Include="..\..\..\..\GEN\Compress\CompressLZW.cpp" />
     <ClCompile Include="..\..\..\..\GEN\Compress\CompressManager.cpp" />
     <ClCompile Include="..\..\..\..\GEN\Compress\CompressZIP.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Graphic\GRPScreen.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Input\INPButton.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Input\INPCursor.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Input\INPDevice.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Input\INPFactory.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Input\INPManager.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Input\INPPath.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\INPLINUXDeviceKeyboardDirect.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\INPLINUXDeviceKeyboardX11.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\INPLINUXDeviceMouseDirect.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\INPLINUXDeviceMouseX11.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\INPLINUXFactory.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\XLINUXSharedMemory.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\GRPWINDOWSScreen.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\INPWINDOWSDeviceKeyboard.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\INPWINDOWSDeviceMouse.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSSharedMemory.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Utils\XDebugTrace.cpp" />
     <ClCompile Include="..\..\..\..\ThirdPartyLibraries\sqlite\sqlite3.c" />
     <ClCompile Include="..\..\..\..\ThirdPartyLibraries\stb\stb_vorbis.c" />
     <ClCompile Include="..\..\..\..\ThirdPartyLibraries\zlib\adler32.c" />
@@ -862,7 +925,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\XLINUXDebug.cpp">
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Linux\XLINUXDebugTrace.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -922,7 +985,7 @@
     <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\WINDOWSMain.cpp" />
     <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSConsole.cpp" />
     <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSDateTime.cpp" />
-    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSDebug.cpp" />
+    <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSDebugTrace.cpp" />
     <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSDir.cpp" />
     <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSFactory.cpp" />
     <ClCompile Include="..\..\..\..\GEN\Platforms\Windows\XWINDOWSFile.cpp" />
@@ -983,7 +1046,6 @@
     <ClCompile Include="..\..\..\..\GEN\Sound\SNDStreamInstance.cpp" />
     <ClCompile Include="..\..\..\..\GEN\Utils\XApplication.cpp" />
     <ClCompile Include="..\..\..\..\GEN\Utils\XBufferBits.cpp" />
-    <ClCompile Include="..\..\..\..\GEN\Utils\XDictionary.cpp" />
     <ClCompile Include="..\..\..\..\GEN\Utils\XFactory.cpp" />
     <ClCompile Include="..\..\..\..\GEN\Utils\XFileConfig.cpp" />
     <ClCompile Include="..\..\..\..\GEN\Utils\XBase.cpp" />
@@ -991,7 +1053,6 @@
     <ClCompile Include="..\..\..\..\GEN\Utils\XBuffer.cpp" />
     <ClCompile Include="..\..\..\..\GEN\Utils\XConsole.cpp" />
     <ClCompile Include="..\..\..\..\GEN\Utils\XDateTime.cpp" />
-    <ClCompile Include="..\..\..\..\GEN\Utils\XDebug.cpp" />
     <ClCompile Include="..\..\..\..\GEN\Utils\XDir.cpp" />
     <ClCompile Include="..\..\..\..\GEN\Utils\XErrorMsg.cpp" />
     <ClCompile Include="..\..\..\..\GEN\Utils\XFile.cpp" />

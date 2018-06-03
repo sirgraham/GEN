@@ -19,7 +19,7 @@
 #include "SNDLINUXResampler.h"
 #include "SNDFileFFMPEG.h"
 
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 /*---- GENERAL VARIABLE ------------------------------------------------------------------*/
 
@@ -234,7 +234,7 @@ SNDSTREAMELEMENT* SNDLINUXFACTORY::GetStreamer()
 /*-----------------------------------------------------------------*/
 SNDINSTANCE* SNDLINUXFACTORY::PlaySound(SNDELEMENT* element)
 {
-  //XDEBUG_PRINTCOLOR(4, __L("Play audio file"));
+  //XDEBUGTRACE_PRINTCOLOR(4, __L("Play audio file"));
   return sndopenal->PlaySound(element);
 }
 

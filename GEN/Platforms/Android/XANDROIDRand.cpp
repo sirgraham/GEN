@@ -26,7 +26,6 @@
 
 
 
-
 /*-------------------------------------------------------------------
 //  XANDROIDRAND::Ini
 */
@@ -45,3 +44,62 @@ bool XANDROIDRAND::Ini()
 
   return true;
 }
+
+
+//-------------------------------------------------------------------
+//  XANDROIDRAND::MaxElements
+/**
+//
+//
+//  @author       Abraham J. Velez
+//  @version      04/04/2002 14:54:45
+//
+//  @return       int :
+//  @param        max :
+//  */
+//-------------------------------------------------------------------
+int XANDROIDRAND::MaxElements(int max)
+{
+  return GETRANDOM(0, max-1);;
+}
+
+
+
+//-------------------------------------------------------------------
+//  XANDROIDRAND::Max
+/**
+//
+//
+//  @author       Abraham J. Velez
+//  @version      04/04/2002 14:54:45
+//
+//  @return       int :
+//  @param        max :
+//  */
+//-------------------------------------------------------------------
+int XANDROIDRAND::Max(int max)
+{
+  return GETRANDOM(0, max);
+}
+
+
+//-------------------------------------------------------------------
+//  XANDROIDRAND::Between
+/**
+//
+//
+//  @author       Abraham J. Velez
+//  @version      04/04/2002 14:54:45
+//
+//  @return       int :
+//  @param        min :
+//  @param        max :
+//  */
+//-------------------------------------------------------------------
+int XANDROIDRAND::Between(int min,int max)
+{
+  return GETRANDOM(min, max);
+}
+
+
+

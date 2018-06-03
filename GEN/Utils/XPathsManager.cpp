@@ -14,7 +14,7 @@
 
 #include "XFactory.h"
 #include "XDir.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "XPathsManager.h"
 
@@ -340,11 +340,11 @@ bool XPATHSMANAGER::CreateAllPathSectionOnDisk()
                       status = false;
                     }
 
-                  //XDEBUG_PRINTCOLOR((status?2:4), __L("Dir Create: %s "), xpath->Get());
+                  //XDEBUGTRACE_PRINTCOLOR((status?2:4), __L("Dir Create: %s "), xpath->Get());
                 }
                else
                 {
-                  //XDEBUG_PRINTCOLOR(2, __L("Dir Exist: %s "), xpath->Get());
+                  //XDEBUGTRACE_PRINTCOLOR(2, __L("Dir Exist: %s "), xpath->Get());
                 }
             }
         }

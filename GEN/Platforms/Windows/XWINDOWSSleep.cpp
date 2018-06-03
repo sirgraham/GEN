@@ -1,17 +1,35 @@
-//------------------------------------------------------------------------------------------
-//  XWINDOWSSLEEP.CPP
-//
-//  WINDOWS sleep class
-//
-//  Author            : Abraham J. Velez
-//  Date Of Creation  : 04/04/2002
-//  Last Mofificacion :
-//
-//  GEN  Copyright (C).  All right reserved.
-//------------------------------------------------------------------------------------------
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @file        XWINDOWSSleep.cpp
+*
+* @class       XWINDOWSSLEEP
+* @brief       Windows sleep class
+* @ingroup     PLATFORM_WINDOWS
+*
+* @author      Abraham J. Velez 
+* @date        03/06/2018 18:43:47
+*
+* @copyright   Copyright(c) 2005 - 2018 GEN Group.
+*
+* @cond
+* Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+* documentation files(the "Software"), to deal in the Software without restriction, including without limitation
+* the rights to use, copy, modify, merge, publish, distribute, sublicense, and/ or sell copies of the Software,
+* and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of
+* the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+* THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+* @endcond
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 
-
-//---- INCLUDES ----------------------------------------------------------------------------
+/*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 
 #include <math.h>
 
@@ -19,23 +37,24 @@
 
 #include "XMemory.h"
 
-//---- GENERAL VARIABLE --------------------------------------------------------------------
+/*---- GENERAL VARIABLE ----------------------------------------------------------------------------------------------*/
+
+/*---- CLASS MEMBERS -------------------------------------------------------------------------------------------------*/
 
 
-//---- CLASS MEMBERS -----------------------------------------------------------------------
 
-
-//-------------------------------------------------------------------
-//  XWINDOWSSLEEP::XWINDOWSSLEEP
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      04/04/2002 14:54:45
-//
-//  @return
-//  */
-//-------------------------------------------------------------------
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XWINDOWSSLEEP::XWINDOWSSLEEP()
+* @brief      Constructor
+* @ingroup    PLATFORM_WINDOWS
+*
+* @author     Abraham J. Velez 
+* @date       03/06/2018 18:44:09
+*
+* @return     Does not return anything. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XWINDOWSSLEEP::XWINDOWSSLEEP()
 {
   Clean();
@@ -47,17 +66,20 @@ XWINDOWSSLEEP::XWINDOWSSLEEP()
 }
 
 
-//-------------------------------------------------------------------
-//  XWINDOWSSLEEP::~WINDOWSXWINDOWSSLEEP
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      10/01/2001 17:01:21
-//
-//  @return       void :
-*/
-//-------------------------------------------------------------------
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XWINDOWSSLEEP::~XWINDOWSSLEEP()
+* @brief      Destructor
+* @note       VIRTUAL
+* @ingroup    PLATFORM_WINDOWS
+*
+* @author     Abraham J. Velez 
+* @date       03/06/2018 18:44:31
+*
+* @return     Does not return anything. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XWINDOWSSLEEP::~XWINDOWSSLEEP()
 {
   Clean();
@@ -65,19 +87,20 @@ XWINDOWSSLEEP::~XWINDOWSSLEEP()
 
 
 
-/*-------------------------------------------------------------------
-//  XWINDOWSSLEEP::Seconds
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      28/11/2013 13:29:17
-//
-//  @return       void :
-//  @param        seconds :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         void XWINDOWSSLEEP::Seconds(int seconds)
+* @brief      Sleep n Seconds
+* @ingroup    PLATFORM_WINDOWS
+*
+* @author     Abraham J. Velez 
+* @date       03/06/2018 18:45:44
+*
+* @param[in]  seconds : seconds to sleep
+*
+* @return     void : does not return anything. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void XWINDOWSSLEEP::Seconds(int seconds)
 {
   Sleep(seconds*1000);
@@ -85,19 +108,20 @@ void XWINDOWSSLEEP::Seconds(int seconds)
 
 
 
-/*-------------------------------------------------------------------
-//  XWINDOWSSLEEP::MilliSeconds
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      28/11/2013 14:10:57
-//
-//  @return       void :
-//  @param        milliseconds :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         void XWINDOWSSLEEP::MilliSeconds(int milliseconds)
+* @brief      Sleep n MilliSeconds
+* @ingroup    PLATFORM_WINDOWS
+*
+* @author     Abraham J. Velez 
+* @date       03/06/2018 18:46:55
+*
+* @param[in]  milliseconds : milliseconds to sleep
+*
+* @return     void : does not return anything. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void XWINDOWSSLEEP::MilliSeconds(int milliseconds)
 {
   Sleep(milliseconds);
@@ -105,19 +129,20 @@ void XWINDOWSSLEEP::MilliSeconds(int milliseconds)
 
 
 
-/*-------------------------------------------------------------------
-//  XWINDOWSSLEEP::MicroSeconds
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      28/11/2013 13:37:00
-//
-//  @return       void :
-//  @param        microseconds :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         void XWINDOWSSLEEP::MicroSeconds(int microseconds)
+* @brief      Sleep n MicroSeconds
+* @ingroup    PLATFORM_WINDOWS
+*
+* @author     Abraham J. Velez 
+* @date       03/06/2018 18:47:36
+*
+* @param[in]  microseconds : microseconds to sleep
+*
+* @return     void : does not return anything. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void XWINDOWSSLEEP::MicroSeconds(int microseconds)
 {
   __int64 timeellapsed;

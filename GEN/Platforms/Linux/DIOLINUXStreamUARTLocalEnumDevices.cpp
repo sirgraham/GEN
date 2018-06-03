@@ -26,7 +26,7 @@
 #include <sys/ioctl.h>
 #include <linux/serial.h>
 
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "XPath.h"
 #include "DIOStreamDevice.h"
 
@@ -149,7 +149,7 @@ bool DIOLINUXSTREAMUARTLOCALENUMDEVICES::Search()
                       devicepath  = __L("/dev/");
                       devicepath += devicefile;
 
-                      // XDEBUG_PRINTCOLOR(4,__L(" %s %s %s"),devicedir.Get(), devicepath.Get(), tty.Get());
+                      //XDEBUGTRACE_PRINTCOLOR(4,__L(" %s %s %s"),devicedir.Get(), devicepath.Get(), tty.Get());
 
                       bool isvalid = false;
 

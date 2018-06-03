@@ -1,19 +1,35 @@
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @file        XBufferBits.cpp
+*
+* @class       XBUFFERBITS
+* @brief       Reads bits from an xbuffer
+* @ingroup     UTILS
+*
+* @author      Imanol Celaya Ruiz de Alegria 
+* @date        28/05/2018 20:12:24
+*
+* @copyright   Copyright(c) 2005 - 2018 GEN Group.
+*
+* @cond
+* Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+* documentation files(the "Software"), to deal in the Software without restriction, including without limitation
+* the rights to use, copy, modify, merge, publish, distribute, sublicense, and/ or sell copies of the Software,
+* and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of
+* the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+* THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+* @endcond
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 
-/*------------------------------------------------------------------------------------------
-//  XBUFFERBITS.CPP
-//
-//  reads bits from an xbuffer
-//
-//  Author            : Imanol Celaya Ruiz de Alegria
-//  Date Of Creation  : 01/04/2016 14:27:11
-//  Last Modification :
-//
-//  GEN  Copyright (C).  All right reserved.
-//----------------------------------------------------------------------------------------*/
-
-
-/*---- INCLUDES --------------------------------------------------------------------------*/
-
+/*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 
 #include "XBuffer.h"
 
@@ -21,27 +37,26 @@
 
 #include "XMemory.h"
 
-/*---- GENERAL VARIABLE ------------------------------------------------------------------*/
+/*---- GENERAL VARIABLE ----------------------------------------------------------------------------------------------*/
 
-
-/*---- CLASS MEMBERS ---------------------------------------------------------------------*/
-
+/*---- CLASS MEMBERS -------------------------------------------------------------------------------------------------*/
 
 
 
-/*-------------------------------------------------------------------
-//  XBUFFERBITS::XBUFFERBITS
-*/
-/**
-//
-//  Class Constructor XBUFFERBITS
-//
-//  @author       Imanol Celaya Ruiz de Alegria
-//  @version      01/04/2016 16:10:10
-//
-//  @param        xbuffer :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XBUFFERBITS::XBUFFERBITS(XBUFFER* xbuffer)
+* @brief      Constructor
+* @ingroup    UTILS
+*
+* @author     Imanol Celaya Ruiz de Alegria 
+* @date       28/05/2018 20:13:01
+*
+* @param[in]  XBUFFER* : buffer of origin
+*
+* @return     Does not return anything. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XBUFFERBITS::XBUFFERBITS(XBUFFER* xbuffer)
 {
   Clean();
@@ -54,19 +69,19 @@ XBUFFERBITS::XBUFFERBITS(XBUFFER* xbuffer)
 
 
 
-
-/*-------------------------------------------------------------------
-//  XBUFFERBITS::~XBUFFERBITS
-*/
-/**
-//
-//   Class Destructor XBUFFERBITS
-//
-//  @author       Imanol Celaya Ruiz de Alegria
-//  @version      01/04/2016 16:10:16
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XBUFFERBITS::~XBUFFERBITS()
+* @brief      Destructor
+* @note       VIRTUAL
+* @ingroup    UTILS
+*
+* @author     Imanol Celaya Ruiz de Alegria 
+* @date       29/05/2018 13:14:44
+*
+* @return     Does not return anything. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XBUFFERBITS::~XBUFFERBITS()
 {
   Clean();
@@ -74,46 +89,37 @@ XBUFFERBITS::~XBUFFERBITS()
 
 
 
-
-
-/*-------------------------------------------------------------------
-//  XBUFFERBITS::IsByteAligned
-*/
-/**
-//
-//
-//
-//  @author       Imanol Celaya Ruiz de Alegria
-//  @version      01/04/2016 16:10:23
-//
-//  @return       bool :
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFERBITS::IsByteAligned()
+* @brief      Is buffer byte aligned
+* @ingroup    UTILS
+*
+* @author     Imanol Celaya Ruiz de Alegria 
+* @date       28/05/2018 20:14:13
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFERBITS::IsByteAligned()
 {
-  return bits_left == 8;
+  return (bits_left == 8);
 }
 
 
 
-
-
-
-/*-------------------------------------------------------------------
-//  XBUFFERBITS::IsEOF
-*/
-/**
-//
-//
-//
-//  @author       Imanol Celaya Ruiz de Alegria
-//  @version      01/04/2016 16:10:31
-//
-//  @return       bool :
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFERBITS::IsEOF()
+* @brief      Is EOF of buffer stream
+* @ingroup    UTILS
+*
+* @author     Imanol Celaya Ruiz de Alegria 
+* @date       28/05/2018 20:14:49
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFERBITS::IsEOF()
 {
   return p >= (xbuffer->Get()+xbuffer->GetSize());
@@ -121,22 +127,18 @@ bool XBUFFERBITS::IsEOF()
 
 
 
-
-
-/*-------------------------------------------------------------------
-//  XBUFFERBITS::IsOverrun
-*/
-/**
-//
-//
-//
-//  @author       Imanol Celaya Ruiz de Alegria
-//  @version      01/04/2016 16:10:38
-//
-//  @return       bool :
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFERBITS::IsOverrun()
+* @brief      Check Is buffer overrun
+* @ingroup    UTILS
+*
+* @author     Imanol Celaya Ruiz de Alegria 
+* @date       28/05/2018 20:15:28
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFERBITS::IsOverrun()
 {
   return (p >= (xbuffer->Get()+xbuffer->GetSize())) && (bits_left < 8);
@@ -144,22 +146,18 @@ bool XBUFFERBITS::IsOverrun()
 
 
 
-
-
-/*-------------------------------------------------------------------
-//  XBUFFERBITS::GetBytePosition
-*/
-/**
-//
-//
-//
-//  @author       Imanol Celaya Ruiz de Alegria
-//  @version      01/04/2016 16:10:45
-//
-//  @return       XDWORD :
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XDWORD XBUFFERBITS::GetBytePosition()
+* @brief      Get Byte position into buffer
+* @ingroup    UTILS
+*
+* @author     Imanol Celaya Ruiz de Alegria 
+* @date       28/05/2018 20:15:52
+*
+* @return     XDWORD : position byte into buffer
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XDWORD XBUFFERBITS::GetBytePosition()
 {
   return (XDWORD)(xbuffer->Get() - p);
@@ -167,22 +165,18 @@ XDWORD XBUFFERBITS::GetBytePosition()
 
 
 
-
-
-/*-------------------------------------------------------------------
-//  XBUFFERBITS::GetBitPosition
-*/
-/**
-//
-//
-//
-//  @author       Imanol Celaya Ruiz de Alegria
-//  @version      01/04/2016 16:10:52
-//
-//  @return       XDWORD :
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XDWORD XBUFFERBITS::GetBitPosition()
+* @brief      Get bit position into buffer
+* @ingroup    UTILS
+*
+* @author     Imanol Celaya Ruiz de Alegria 
+* @date       28/05/2018 20:16:41
+*
+* @return     XDWORD : position bit into buffer
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XDWORD XBUFFERBITS::GetBitPosition()
 {
   return 8 - bits_left;
@@ -190,21 +184,21 @@ XDWORD XBUFFERBITS::GetBitPosition()
 
 
 
-
-/*-------------------------------------------------------------------
-//  XBUFFERBITS::SetPosition
-*/
-/**
-//
-//
-//
-//  @author       Imanol Celaya Ruiz de Alegria
-//  @version      01/04/2016 16:10:59
-//
-//  @param        index :
-//  @param        bitindex :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         void XBUFFERBITS::SetPosition(XDWORD index, XDWORD bitindex)
+* @brief      Set Position into buffer
+* @ingroup    UTILS
+*
+* @author     Imanol Celaya Ruiz de Alegria 
+* @date       28/05/2018 20:16:58
+*
+* @param[in]  index : index into buffer
+* @param[in]  bitindex : bit index into buffer
+*
+* @return     void : does not return anything. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void XBUFFERBITS::SetPosition(XDWORD index, XDWORD bitindex)
 {
   p = xbuffer->Get() + index;
@@ -213,20 +207,18 @@ void XBUFFERBITS::SetPosition(XDWORD index, XDWORD bitindex)
 
 
 
-
-
-/*-------------------------------------------------------------------
-//  XBUFFERBITS::SkipU1
-*/
-/**
-//
-//
-//
-//  @author       Imanol Celaya Ruiz de Alegria
-//  @version      01/04/2016 16:11:07
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         void XBUFFERBITS::SkipU1()
+* @brief      Skip one bit
+* @ingroup    UTILS
+*
+* @author     Imanol Celaya Ruiz de Alegria 
+* @date       28/05/2018 20:19:05
+*
+* @return     void : does not return anything. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void XBUFFERBITS::SkipU1()
 {
   bits_left--;
@@ -240,22 +232,18 @@ void XBUFFERBITS::SkipU1()
 
 
 
-
-
-/*-------------------------------------------------------------------
-//  XBUFFERBITS::PeekU1
-*/
-/**
-//
-//
-//
-//  @author       Imanol Celaya Ruiz de Alegria
-//  @version      01/04/2016 16:11:13
-//
-//  @return       XDWORD :
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XDWORD XBUFFERBITS::PeekU1()
+* @brief      Peek one bit
+* @ingroup    UTILS
+*
+* @author     Imanol Celaya Ruiz de Alegria 
+* @date       28/05/2018 20:19:37
+*
+* @return     XDWORD : bit peek.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XDWORD XBUFFERBITS::PeekU1()
 {
   XDWORD r = 0;
@@ -271,21 +259,18 @@ XDWORD XBUFFERBITS::PeekU1()
 
 
 
-
-/*-------------------------------------------------------------------
-//  XBUFFERBITS::ReadU1
-*/
-/**
-//
-//
-//
-//  @author       Imanol Celaya Ruiz de Alegria
-//  @version      01/04/2016 16:11:20
-//
-//  @return       XDWORD :
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XDWORD XBUFFERBITS::ReadU1()
+* @brief      Read one bit
+* @ingroup    UTILS
+*
+* @author     Imanol Celaya Ruiz de Alegria 
+* @date       28/05/2018 20:20:02
+*
+* @return     XDWORD : Read U1
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XDWORD XBUFFERBITS::ReadU1()
 {
   XDWORD r = 0;
@@ -308,21 +293,20 @@ XDWORD XBUFFERBITS::ReadU1()
 
 
 
-
-
-/*-------------------------------------------------------------------
-//  XBUFFERBITS::SkipU
-*/
-/**
-//
-//
-//
-//  @author       Imanol Celaya Ruiz de Alegria
-//  @version      01/04/2016 16:11:28
-//
-//  @param        n :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         void XBUFFERBITS::SkipU(XDWORD n)
+* @brief      Skip n bits
+* @ingroup    UTILS
+*
+* @author     Imanol Celaya Ruiz de Alegria 
+* @date       28/05/2018 20:20:47
+*
+* @param[in]  n : n bits
+*
+* @return     void : does not return anything. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void XBUFFERBITS::SkipU(XDWORD n)
 {
   XDWORD i;
@@ -334,23 +318,20 @@ void XBUFFERBITS::SkipU(XDWORD n)
 
 
 
-
-
-/*-------------------------------------------------------------------
-//  XBUFFERBITS::PeekU
-*/
-/**
-//
-//
-//
-//  @author       Imanol Celaya Ruiz de Alegria
-//  @version      01/04/2016 16:11:36
-//
-//  @return       XDWORD :
-//
-//  @param        n :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XDWORD XBUFFERBITS::PeekU(XDWORD n)
+* @brief      Peek n bits (max 32 bits)
+* @ingroup    UTILS
+*
+* @author     Imanol Celaya Ruiz de Alegria 
+* @date       28/05/2018 20:22:06
+*
+* @param[in]  n : n bits
+*
+* @return     XDWORD : n bits Peek (max 32 bits)
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XDWORD XBUFFERBITS::PeekU(XDWORD n)
 {
   XBYTE* orig_byte = p;
@@ -368,23 +349,20 @@ XDWORD XBUFFERBITS::PeekU(XDWORD n)
 
 
 
-
-
-/*-------------------------------------------------------------------
-//  XBUFFERBITS::ReadU
-*/
-/**
-//
-//
-//
-//  @author       Imanol Celaya Ruiz de Alegria
-//  @version      01/04/2016 16:11:44
-//
-//  @return       XDWORD :
-//
-//  @param        n :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XDWORD XBUFFERBITS::ReadU(XDWORD n)
+* @brief      Read n bits (max 32 bits)
+* @ingroup    UTILS
+*
+* @author     Imanol Celaya Ruiz de Alegria 
+* @date       28/05/2018 20:22:21
+*
+* @param[in]  n : n bits
+*
+* @return     XDWORD : n bits read (max 32 bits)
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XDWORD XBUFFERBITS::ReadU(XDWORD n)
 {
   XDWORD r = 0;
@@ -399,22 +377,18 @@ XDWORD XBUFFERBITS::ReadU(XDWORD n)
 
 
 
-
-
-/*-------------------------------------------------------------------
-//  XBUFFERBITS::ReadUE
-*/
-/**
-//
-//
-//
-//  @author       Imanol Celaya Ruiz de Alegria
-//  @version      01/04/2016 16:11:51
-//
-//  @return       XDWORD :
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XDWORD XBUFFERBITS::ReadUE()
+* @brief      
+* @ingroup    UTILS
+*
+* @author     Imanol Celaya Ruiz de Alegria 
+* @date       28/05/2018 20:23:15
+*
+* @return     XDWORD : 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XDWORD XBUFFERBITS::ReadUE()
 {
   XDWORD r = 0;
@@ -433,22 +407,18 @@ XDWORD XBUFFERBITS::ReadUE()
 
 
 
-
-
-/*-------------------------------------------------------------------
-//  XBUFFERBITS::ReadSE
-*/
-/**
-//
-//
-//
-//  @author       Imanol Celaya Ruiz de Alegria
-//  @version      01/04/2016 16:11:59
-//
-//  @return       int :
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         int XBUFFERBITS::ReadSE()
+* @brief      Read SE
+* @ingroup    UTILS
+*
+* @author     Imanol Celaya Ruiz de Alegria 
+* @date       28/05/2018 20:23:44
+*
+* @return     int : 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 int XBUFFERBITS::ReadSE()
 {
   int r = ReadUE();
@@ -466,19 +436,20 @@ int XBUFFERBITS::ReadSE()
 
 
 
-/*-------------------------------------------------------------------
-//  XBUFFERBITS::WriteU1
-*/
-/**
-//
-//
-//
-//  @author       Imanol Celaya Ruiz de Alegria
-//  @version      01/04/2016 16:27:27
-//
-//  @param        v :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         void XBUFFERBITS::WriteU1(XDWORD v)
+* @brief      Write one bit
+* @ingroup    UTILS
+*
+* @author     Imanol Celaya Ruiz de Alegria 
+* @date       28/05/2018 20:24:07
+*
+* @param[in]  v : bit to write
+*
+* @return     void : does not return anything. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void XBUFFERBITS::WriteU1(XDWORD v)
 {
   bits_left--;
@@ -502,21 +473,21 @@ void XBUFFERBITS::WriteU1(XDWORD v)
 
 
 
-
-/*-------------------------------------------------------------------
-//  XBUFFERBITS::WriteU
-*/
-/**
-//
-//
-//
-//  @author       Imanol Celaya Ruiz de Alegria
-//  @version      01/04/2016 16:27:35
-//
-//  @param        n :
-//  @param        v :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         void XBUFFERBITS::WriteU(XDWORD n, XDWORD v)
+* @brief      Write n bits
+* @ingroup    UTILS
+*
+* @author     Imanol Celaya Ruiz de Alegria 
+* @date       28/05/2018 20:24:28
+*
+* @param[in]  n : n bits
+* @param[in]  v : bits to write
+*
+* @return     void : does not return anything. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void XBUFFERBITS::WriteU(XDWORD n, XDWORD v)
 {
   XDWORD i;
@@ -528,21 +499,20 @@ void XBUFFERBITS::WriteU(XDWORD n, XDWORD v)
 
 
 
-
-
-/*-------------------------------------------------------------------
-//  XBUFFERBITS::WriteUE
-*/
-/**
-//
-//
-//
-//  @author       Imanol Celaya Ruiz de Alegria
-//  @version      01/04/2016 16:27:42
-//
-//  @param        v :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         void XBUFFERBITS::WriteUE(XDWORD v)
+* @brief      
+* @ingroup    UTILS
+*
+* @author     Imanol Celaya Ruiz de Alegria 
+* @date       28/05/2018 20:24:49
+*
+* @param[in]  v : 
+*
+* @return     void : does not return anything. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void XBUFFERBITS::WriteUE(XDWORD v)
 {
   static const int len_table[256] =
@@ -603,19 +573,20 @@ void XBUFFERBITS::WriteUE(XDWORD v)
 
 
 
-/*-------------------------------------------------------------------
-//  XBUFFERBITS::WriteSE
-*/
-/**
-//
-//
-//
-//  @author       Imanol Celaya Ruiz de Alegria
-//  @version      01/04/2016 16:27:49
-//
-//  @param        v :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         void XBUFFERBITS::WriteSE(int v)
+* @brief      
+* @ingroup    UTILS
+*
+* @author     Imanol Celaya Ruiz de Alegria 
+* @date       28/05/2018 20:25:17
+*
+* @param[in]  v : 
+*
+* @return     void : does not return anything. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void XBUFFERBITS::WriteSE(int v)
 {
   if (v <= 0)
@@ -628,3 +599,24 @@ void XBUFFERBITS::WriteSE(int v)
     }
 }
 
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         void XBUFFERBITS::Clean()
+* @brief      Clean the attributes of the class: Default initialice
+* @note       INTERNAL
+* @ingroup    UTILS
+*
+* @author     Imanol Celaya Ruiz de Alegria 
+* @date       29/05/2018 13:13:44
+*
+* @return     void : does not return anything. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+void XBUFFERBITS::Clean()
+{
+  xbuffer     = NULL;
+  p           = NULL;
+  bits_left   = 0;
+}

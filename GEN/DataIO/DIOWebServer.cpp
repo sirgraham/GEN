@@ -20,7 +20,7 @@
 #include "XPath.h"
 #include "XLog.h"
 #include "XFileTXT.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "CompressManager.h"
 
@@ -247,7 +247,7 @@ bool DIOWEBSERVER_HEADER::Create(DIOWEBSERVER* webserver, DIOWEBSERVER_CONNEXION
 //				line.Format(__L("Content-Length:%d"), size);	AddLine(line.Get());
 
 
-		//XDEBUG_PRINTCOLOR(4, line.Get());
+		//XDEBUGTRACE_PRINTCOLOR(4, line.Get());
 		
 		line.Set(__L("Content-Type:"));
 				 if (resource->Find(__L(".htm"),		true) != XSTRING_NOTFOUND)  line += __L("text/html");
@@ -860,7 +860,7 @@ bool DIOWEBSERVER_CONNEXION::Activate()
 
 	threadconnexion->Ini();
 
-//XDEBUG_PRINTCOLOR(1, __L("WEB Server: Active connexion... [%08X]"), this);
+//XDEBUGTRACE_PRINTCOLOR(1, __L("WEB Server: Active connexion... [%08X]"), this);
 	
 	return true;
 }
@@ -1575,7 +1575,7 @@ bool DIOWEBSERVER_CONNEXION::GetRequest(DIOWEBSERVER_REQUEST& request, int timeo
 
 	header.GetMethod(string);
 
-  //XDEBUG_PRINTCOLOR(1, __L("method: %s"), string.Get());
+  //XDEBUGTRACE_PRINTCOLOR(1, __L("method: %s"), string.Get());
 
 	if(!string.Compare(__L("GET"),true)) request.SetMethod(DIOWEBSERVER_METHOD_GET);
 	  else if(!string.Compare(__L("POST"),true)) request.SetMethod(DIOWEBSERVER_METHOD_POST);
@@ -1800,7 +1800,7 @@ bool DIOWEBSERVER_CONNEXION::SendingPage()
 				}	
 			 else
 				{
-					//XDEBUG_PRINTCOLOR(4, __L("DIOWEBSERVER_CONNEXION::SendingPage : Unknown method"));
+					//XDEBUGTRACE_PRINTCOLOR(4, __L("DIOWEBSERVER_CONNEXION::SendingPage : Unknown method"));
 				}
 		}
 
@@ -1920,7 +1920,7 @@ void DIOWEBSERVER_CONNEXION::ThreadRunFunction(void* param)
 	DIOWEBSERVER_CONNEXION* webserverconnexion = (DIOWEBSERVER_CONNEXION*)param;
 	if(!webserverconnexion) return;
 	
-	//XDEBUG_PRINTCOLOR(1, __L("WEB Server: Open connexion... [%08X]"), webserverconnexion);	
+	//XDEBUGTRACE_PRINTCOLOR(1, __L("WEB Server: Open connexion... [%08X]"), webserverconnexion);	
 	
 	webserverconnexion->xtimersendingpage->Reset();
 
@@ -1936,8 +1936,8 @@ void DIOWEBSERVER_CONNEXION::ThreadRunFunction(void* param)
 	
 	webserverconnexion->pagestatus = DIOWEBSERVER_PAGESTATUS_SENT;
 		
-	//XDEBUG_PRINTCOLOR(1, __L("WEB Server: Time server page %lu milliseconds"), webserverconnexion->xtimersendingpage->GetMeasureMilliSeconds());
-	//XDEBUG_PRINTCOLOR(1, __L("WEB Server: Close connexion... [%08X]"), webserverconnexion);
+	//XDEBUGTRACE_PRINTCOLOR(1, __L("WEB Server: Time server page %lu milliseconds"), webserverconnexion->xtimersendingpage->GetMeasureMilliSeconds());
+	//XDEBUGTRACE_PRINTCOLOR(1, __L("WEB Server: Close connexion... [%08X]"), webserverconnexion);
 
 	return;
 }
@@ -2518,7 +2518,7 @@ bool DIOWEBSERVER::WaitToSentAllPages()
 		{
 			if(xtimercontrol) 
 				{					
-					do{  xsleep->MilliSeconds(10);
+					do{  XSLEEP::GetInstance().MilliSeconds(10);
 			 
 						} while(IsSendingAnyPage());					
 				}

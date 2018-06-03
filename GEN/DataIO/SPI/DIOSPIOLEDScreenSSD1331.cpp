@@ -15,7 +15,7 @@
 
 #include "XFactory.h"
 #include "XBuffer.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "DIOFactory.h"
 #include "DIOStreamSPIConfig.h"
@@ -283,13 +283,13 @@ bool DIOSPIOLEDSCREENSSD1331::LCD_Reset()
   if(!diogpio)                      return false;
 
   diogpio->Set(DCpin, false, DCpinsgroup);
-  xsleep->MilliSeconds(10);
+  XSLEEP::GetInstance().MilliSeconds(10);
 
   diogpio->Set(resetpin, false, resetpinsgroup);
-  xsleep->MilliSeconds(10);
+  XSLEEP::GetInstance().MilliSeconds(10);
 
   diogpio->Set(resetpin, true, resetpinsgroup);
-  xsleep->MilliSeconds(10);
+  XSLEEP::GetInstance().MilliSeconds(10);
 
   return true;
 }

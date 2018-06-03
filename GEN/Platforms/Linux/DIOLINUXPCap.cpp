@@ -15,7 +15,7 @@
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
 #include "XFactory.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "XThreadCollected.h"
 
 #include "DIOLINUXPCap.h"

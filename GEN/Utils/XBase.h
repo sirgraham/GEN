@@ -129,17 +129,14 @@ typedef bool (*PROGRESS_FUNCTION)(void);
 class XBASE
 {
   public:
-                     XBASE   ()    { Clean();                            }
-    virtual         ~XBASE   ()    { Clean();                            }
+                     XBASE   ();
+    virtual         ~XBASE   ();
 
   protected:
 
   private:
 
-    void             Clean   ()
-                     {
-
-                     }
+    void             Clean   ();
 };
 
 

@@ -23,7 +23,7 @@
 #include <sys/types.h>
 #include <libusb-1.0/libusb.h>
 
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "XPath.h"
 #include "DIOStreamDeviceUSB.h"
 
@@ -160,7 +160,7 @@ bool DIOLINUXSTREAMUSBLOCALENUMDEVICES::Search()
                   string[0].AdjustSize();
                   string[1].AdjustSize();
 
-                  //XDEBUG_PRINTCOLOR(2, __L("%s - [port %d] class[%s]"), devicepath.Get(), port, classstr.Get());
+                  //XDEBUGTRACE_PRINTCOLOR(2, __L("%s - [port %d] class[%s]"), devicepath.Get(), port, classstr.Get());
 
                   DIOSTREAMDEVICEUSB* device = new DIOSTREAMDEVICEUSB();
                   if(device)

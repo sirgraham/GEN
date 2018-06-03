@@ -325,7 +325,7 @@ bool GRPWINDOWSSCREEN::CreateWIN32Window(void * handle)
 /*-----------------------------------------------------------------*/
 void GRPWINDOWSSCREEN::ChooseValidPixelFormat()
 {
-  int                    pixelformat;
+  int pixelformat;
 
   // Define pixel format for our window
   ZeroMemory(&pixelformatdescriptor, sizeof(PIXELFORMATDESCRIPTOR));
@@ -345,7 +345,9 @@ void GRPWINDOWSSCREEN::ChooseValidPixelFormat()
       ::SetPixelFormat(hdc, pixelformat, &pixelformatdescriptor);
     }
   else
-    XDEBUG_PRINTCOLOR(4,__L("Unable to find a suitable pixel format!!"));
+    {
+      XDEBUGTRACE_PRINTCOLOR(4, __L("Unable to find a suitable pixel format!!"));
+    }
 }
 
 

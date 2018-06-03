@@ -17,7 +17,7 @@
 #include <process.h>
 
 #include "XTimer.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #ifndef BUILDER
 #include "WINDOWSMain.h"

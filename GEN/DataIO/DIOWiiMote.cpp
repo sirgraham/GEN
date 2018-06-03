@@ -127,7 +127,7 @@ bool DIOWIIMOTE::Ini(int timeout)
 
   while(enumremotedevices->IsSearching())
     {
-      xsleep->MilliSeconds(10);
+      XSLEEP::GetInstance().MilliSeconds(10);
     }
 
 

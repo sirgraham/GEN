@@ -18,7 +18,7 @@
 #include "XTimer.h"
 #include "XString.h"
 #include "XBuffer.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "XThreadCollected.h"
 
 #include "DIOStreamXEvent.h"
@@ -788,7 +788,7 @@ void DIOWINDOWSSTREAMUART::ThreadConnexion(void* data)
                                                                     XDWORD br = diostream->ReadDirect(buffer, DIOSTREAM_MAXBUFFER);
                                                                     if(br)
                                                                       {
-                                                                        //XDEBUG_PRINTDATABLOCK(XDEBUGLEVELCOLOR(2), (XBYTE*)diostream->buffer, (int)br);
+                                                                        //XDEBUGTRACE_PRINTDATABLOCK(XDEBUGLEVELCOLOR(2), (XBYTE*)diostream->buffer, (int)br);
                                                                         diostream->inbuffer->Add(buffer, br);
                                                                       }
                                                                   }

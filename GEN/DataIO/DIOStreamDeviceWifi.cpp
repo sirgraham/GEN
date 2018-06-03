@@ -14,7 +14,7 @@
 //---- INCLUDES ----------------------------------------------------------------------------
 
 #include "XConsole.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "DIOStreamDeviceWifi.h"
 

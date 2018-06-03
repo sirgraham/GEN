@@ -17,7 +17,7 @@
 #include <stdlib.h>     /* strtoll */
 #include <time.h>
 
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "XSystem.h"
 
 #include "SQLPostgreSQLResult.h"

@@ -20,9 +20,9 @@
 #include "XFactory.h"
 #include "XBuffer.h"
 #include "XThread.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "XString.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "DIOIP.h"
 #include "DIOURL.h"
@@ -222,7 +222,7 @@ bool DIOWINDOWSSTREAMTCPIP::Close()
                   config->SetHandleMultiServer((int)INVALID_SOCKET);
                   config->GetXMutexMultiServer()->UnLock();
 
-                  //XDEBUG_PRINTCOLOR(1, __L("TCPIP: Delete Handle BASE %d Port %d"), handleserver, config->GetRemotePort());
+                  //XDEBUGTRACE_PRINTCOLOR(1, __L("TCPIP: Delete Handle BASE %d Port %d"), handleserver, config->GetRemotePort());
                 }
             }
         }
@@ -469,7 +469,7 @@ bool DIOWINDOWSSTREAMTCPIP::GetHandleServer()
 
       config->SetHandleMultiServer((int)handleserver);
 
-      //XDEBUG_PRINTCOLOR(1, __L("TCPIP: Create Handle BASE %d Port %d"), handleserver, config->GetRemotePort());
+      //XDEBUGTRACE_PRINTCOLOR(1, __L("TCPIP: Create Handle BASE %d Port %d"), handleserver, config->GetRemotePort());
     }
 
   config->GetXMutexMultiServer()->UnLock();

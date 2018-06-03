@@ -30,7 +30,7 @@
 
 #include "DBSQLFactory.h"
 
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "XMemory.h"
 
 /*---- GENERAL VARIABLE ------------------------------------------------------------------*/
@@ -86,7 +86,7 @@ DBSQLDATABASE* DBSQLFACTORY::Create( DBSQLDATABASE_TYPE databasetype)
                               default           : break;
     }
 
-  XDEBUG_PRINTCOLOR(4, __L("Unrecognized database type"));
+ XDEBUGTRACE_PRINTCOLOR(4, __L("Unrecognized database type"));
   return NULL;
 }
 

@@ -14,8 +14,11 @@
 
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
+#include "XDebugTrace.h"
+
 #include "xinterpolator.h"
-#include "XDebug.h"
+
+#include "XMemory.h"
 
 /*---- GENERAL VARIABLE ------------------------------------------------------------------*/
 
@@ -627,7 +630,7 @@ void XINTERPOLATOR::SetTarget(XDWORD target)
     if (this->limits & XINTERPOLATOR_LIMITS_MAXIMUN)
     if (target>this->max)
     {
-      XDEBUG_PRINTCOLOR(4,__L("Assigned over maximun: %d/%d"),target,max);
+      XDEBUGTRACE_PRINTCOLOR(4,__L("Assigned over maximun: %d/%d"),target,max);
       this->target=this->max;
       return;
     }
@@ -635,7 +638,7 @@ void XINTERPOLATOR::SetTarget(XDWORD target)
     if (this->limits & XINTERPOLATOR_LIMITS_MINIMUN)
     if (target<this->min)
     {
-      XDEBUG_PRINTCOLOR(4,__L("Assigned under minimun: %d/%d"),target,max);
+      XDEBUGTRACE_PRINTCOLOR(4,__L("Assigned under minimun: %d/%d"),target,max);
       this->target=this->min;
       return;
     }

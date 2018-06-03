@@ -20,7 +20,7 @@
 
 #include "XFileTXT.h"
 #include "XFileXDB.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "DIOWebScraperMACManufacturer.h"
 
@@ -223,7 +223,7 @@ bool DIOMACMANUFACTURED::File_GetManufacturedMACs(XPATH& xpath, XSTRING& manufac
 
                       MACs.Add(ID);
 
-                      //XDEBUG_PRINTCOLOR(2,__L("[%08X] [%s]"), ID, _manufactured.Get());
+                      //XDEBUGTRACE_PRINTCOLOR(2,__L("[%08X] [%s]"), ID, _manufactured.Get());
                     }
 
                   delete xbuffer;
@@ -268,7 +268,7 @@ bool DIOMACMANUFACTURED::File_Download(XBUFFER& xbuffer, int timeout)
   DIOWEBCLIENT* webclient = new DIOWEBCLIENT;
   if(!webclient) return false;
 
-  //XDEBUG_PRINTCOLOR(2,__L("Get File %s "), url.Get());
+  //XDEBUGTRACE_PRINTCOLOR(2,__L("Get File %s "), url.Get());
   status = webclient->Get(url, xbuffer, DIOWEBCLIENT_DEFAULTUSERAGENT, timeout);
 
   delete webclient;
@@ -326,7 +326,7 @@ bool DIOMACMANUFACTURED::File_Convert(XBUFFER& xbuffer, XPATH& xpath)
                 {
                   XDWORD  ID = 0;
 
-                  //XDEBUG_PRINTCOLOR(2,__L("Line %d / %d"), c, nlines);
+                  //XDEBUGTRACE_PRINTCOLOR(2,__L("Line %d / %d"), c, nlines);
 
                   start+=11;
                   line->UnFormat(__L("%X    (base 16)\t\t"),&ID);
@@ -339,7 +339,7 @@ bool DIOMACMANUFACTURED::File_Convert(XBUFFER& xbuffer, XPATH& xpath)
                           line->Copy(start,(*name));
                           idmap.Add(ID,name);
 
-                          //XDEBUG_PRINTCOLOR(2,__L("[%08X] [%s]"), ID, name->Get());
+                          //XDEBUGTRACE_PRINTCOLOR(2,__L("[%08X] [%s]"), ID, name->Get());
                         }
                     }
                 }

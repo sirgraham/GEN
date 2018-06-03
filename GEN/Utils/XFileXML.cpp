@@ -17,7 +17,7 @@
 #include <string.h>
 
 #include "XFileXML.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "XFactory.h"
 #include "XTimer.h"
 
@@ -1347,7 +1347,7 @@ bool XFILEXML::EncodeAllLines(bool istabulatedline)
   EncodeConfig(line);
   AddLine(line);
 
-  //XDEBUG_PRINTCOLOR(1,line.Get());
+  //XDEBUGTRACE_PRINTCOLOR(1,line.Get());
 
   encodelevel  = -1;
 
@@ -2218,7 +2218,7 @@ bool XFILEXML::EncodeElements(bool istabulatedline, XFILEXMLELEMENT* element)
                                             string += value;
                                             string += __L("-->");
                                             AddLine(string);
-                                            //XDEBUG_PRINTCOLOR(1,string.Get());
+                                            //XDEBUGTRACE_PRINTCOLOR(1,string.Get());
                                           }
                                           break;
 
@@ -2226,7 +2226,7 @@ bool XFILEXML::EncodeElements(bool istabulatedline, XFILEXMLELEMENT* element)
                                             string += value;
                                             string += __L("]]>");
                                             AddLine(string);
-                                            //XDEBUG_PRINTCOLOR(1,string.Get());
+                                            //XDEBUGTRACE_PRINTCOLOR(1,string.Get());
                                           }
                                           break;
 
@@ -2257,7 +2257,7 @@ bool XFILEXML::EncodeElements(bool istabulatedline, XFILEXMLELEMENT* element)
                                              else string +=__L(">");
 
                                             AddLine(string);
-                                            //XDEBUG_PRINTCOLOR(1,string.Get());
+                                            //XDEBUGTRACE_PRINTCOLOR(1,string.Get());
 
                                             if(!value.IsEmpty())
                                               {
@@ -2266,7 +2266,7 @@ bool XFILEXML::EncodeElements(bool istabulatedline, XFILEXMLELEMENT* element)
                                                 string+=value;
 
                                                 AddLine(string);
-                                                //XDEBUG_PRINTCOLOR(1,string.Get());
+                                                //XDEBUGTRACE_PRINTCOLOR(1,string.Get());
                                               }
 
                                             for(c=0;c<(int)element->GetNElements();c++)
@@ -2286,7 +2286,7 @@ bool XFILEXML::EncodeElements(bool istabulatedline, XFILEXMLELEMENT* element)
                                                 string += __L(">");
 
                                                 AddLine(string);
-                                                //XDEBUG_PRINTCOLOR(1,string.Get());
+                                                //XDEBUGTRACE_PRINTCOLOR(1,string.Get());
                                               }
                                           }
                                           break;
@@ -2461,7 +2461,7 @@ bool  XFILEXML2::ReadAndDecodeAllLines()
     DeleteAllLines();
     delete(stringml);
 
-    XDEBUG_PRINTCOLOR(0,__L("XML Decoded in %d"),timer->GetMeasureMilliSeconds());
+   XDEBUGTRACE_PRINTCOLOR(0,__L("XML Decoded in %d"),timer->GetMeasureMilliSeconds());
     delete(timer);
     return true;
 }

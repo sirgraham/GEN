@@ -18,7 +18,7 @@
 #include "XThread.h"
 #include "XDateTime.h"
 #include "XTimer.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "XScheduler.h"
 
@@ -638,7 +638,7 @@ void XSCHEDULER::ThreadScheduler(void* data)
   if(!xscheduler->xmutexscheduler)     return;
   if(!xscheduler->xdatetimeactual)     return;
 
-  xsleep->MilliSeconds(10);
+  XSLEEP::GetInstance().MilliSeconds(10);
 
   if(!xscheduler->isactive)  return;
 

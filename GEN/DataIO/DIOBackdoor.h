@@ -28,7 +28,7 @@
 #include "XFileINI.h"
 #include "XSleep.h"
 #include "XThreadCollected.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "DIOFactory.h"
 #include "DIOURL.h"
@@ -327,53 +327,51 @@ class DIOBACKDOOR
 
                                     if(backdoor->ReceivedCommand())
                                       {
-                                        XSYSTEM* xsystem = xfactory->CreateSystem();
-                                        if(xsystem)
+                                       
+                                        XPATH xpath;
+
+                                        XPATHSMANAGER::GetInstance().GetPathOfSection(XPATHSMANAGERSECTIONTYPE_ROOT, xpath);
+                                        xpath.Slash_Add();
+                                        xpath.Add(__L("backscreen"));
+
+                                        XSTRING command;
+                                        int     returncode = 0;
+
+                                        command.Format(__L("%s > %s"), backdoor->commandreceived.Get(), xpath.Get());
+
+                                        if(XSYSTEM::GetInstance().MakeCommand(command.Get(), &returncode))
                                           {
-                                            XPATH xpath;
-
-                                            XPATHSMANAGER::GetInstance().GetPathOfSection(XPATHSMANAGERSECTIONTYPE_ROOT, xpath);
-                                            xpath.Slash_Add();
-                                            xpath.Add(__L("backscreen"));
-
-                                            XSTRING command;
-                                            int     returncode = 0;
-
-                                            command.Format(__L("%s > %s"), backdoor->commandreceived.Get(), xpath.Get());
-
-                                            if(xsystem->MakeCommand(command.Get(), &returncode))
+                                            XFILETXT* xfiletxt = new XFILETXT();
+                                            if(xfiletxt)
                                               {
-                                                XFILETXT* xfiletxt = new XFILETXT();
-                                                if(xfiletxt)
+                                                if(xfiletxt->Open(xpath, true))
                                                   {
-                                                    if(xfiletxt->Open(xpath, true))
+                                                    if(xfiletxt->ReadAllFile())
                                                       {
-                                                        if(xfiletxt->ReadAllFile())
+                                                        for(int c=0; c<xfiletxt->GetNLines(); c++)
                                                           {
-                                                            for(int c=0; c<xfiletxt->GetNLines(); c++)
-                                                              {
-                                                                XSTRING string = xfiletxt->GetLine(c)->Get();
+                                                            XSTRING string = xfiletxt->GetLine(c)->Get();
 
-                                                                string.Add(__L("\n\r"));
+                                                            string.Add(__L("\n\r"));
 
-                                                                XSTRING_CREATEOEM(string, line)
-                                                                backdoor->diostream->Write((XBYTE*)line, string.GetSize());
-                                                                XSTRING_DELETEOEM(line)
-                                                              }
+                                                            XSTRING_CREATEOEM(string, line)
+                                                            backdoor->diostream->Write((XBYTE*)line, string.GetSize());
+                                                            XSTRING_DELETEOEM(line)
                                                           }
-
-                                                        xfiletxt->Close();
                                                       }
 
-                                                    xfiletxt->GetPrimaryFile()->Erase(xpath);
+                                                    xfiletxt->Close();
                                                   }
 
-                                                delete xfiletxt;
-                                             }
+                                                xfiletxt->GetPrimaryFile()->Erase(xpath);
+                                              }
 
-                                            backdoor->commandreceived.Empty();
+                                            delete xfiletxt;
                                           }
+
+                                        backdoor->commandreceived.Empty();
                                       }
+                                       
                                   }
 
     DIOSTREAMTCPIPCONFIG          diostreamcfg;

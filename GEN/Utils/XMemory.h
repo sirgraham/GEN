@@ -40,6 +40,7 @@
 #endif
 
 #define XMEMORY_SHOWDATABLOCKSIZE       16
+#define XMEMORY_MAXIMUNLEAKSTODISPLAY   100
 
 #define XMEMORY_DISPLAYMEMORYLEAKS      XMemory.DisplayAll(true);
 #define XMEMORY_GETMEMORYUSED           XMemory.GetMemoryUsed()

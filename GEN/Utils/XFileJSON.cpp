@@ -16,7 +16,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "XFileJSON.h"
 
@@ -1417,7 +1417,7 @@ bool XFILEJSON::DecodeObject(int& position, bool isobject, XFILEJSONOBJECT* obje
         }
     }
 
-  //XDEBUG_PRINTCOLOR(2, __L("%d"), position);
+  //XDEBUGTRACE_PRINTCOLOR(2, __L("%d"), position);
 
   return true;
 }
@@ -1832,7 +1832,7 @@ bool XFILEJSON::EncodeObject(bool isobject, XFILEJSONOBJECT* object,bool istabul
   AddControlCharacter(isobject?XFILEJSONCONTROLCHAR_OPENBRACE:XFILEJSONCONTROLCHAR_OPENBRACKET, line);
   AddLine(line);
 
-  //XDEBUG_PRINTCOLOR(0,line.Get());
+  //XDEBUGTRACE_PRINTCOLOR(0,line.Get());
 
   for(int c=0;c<(int)object->GetValues()->GetSize();c++)
     {
@@ -1895,7 +1895,7 @@ bool XFILEJSON::EncodeObject(bool isobject, XFILEJSONOBJECT* object,bool istabul
                                                             if((!line.IsEmpty()) && line.HaveCharacters())
                                                               {
                                                                 AddLine(line);
-                                                                //XDEBUG_PRINTCOLOR(0,line.Get());
+                                                                //XDEBUGTRACE_PRINTCOLOR(0,line.Get());
                                                               }
 
                                                             if(!EncodeObject(true,newobject,istabulatedline)) return false;
@@ -1910,7 +1910,7 @@ bool XFILEJSON::EncodeObject(bool isobject, XFILEJSONOBJECT* object,bool istabul
                                                             if((!line.IsEmpty()) && line.HaveCharacters())
                                                               {
                                                                 AddLine(line);
-                                                                //XDEBUG_PRINTCOLOR(0,line.Get());
+                                                                //XDEBUGTRACE_PRINTCOLOR(0,line.Get());
                                                               }
 
                                                             if(!EncodeObject(false,(XFILEJSONOBJECT*)newarray,istabulatedline)) return false;
@@ -1937,7 +1937,7 @@ bool XFILEJSON::EncodeObject(bool isobject, XFILEJSONOBJECT* object,bool istabul
       if(!line.IsEmpty())
         {
           AddLine(line);
-          //XDEBUG_PRINTCOLOR(0,line.Get());
+          //XDEBUGTRACE_PRINTCOLOR(0,line.Get());
         }
 
       line.Empty();
@@ -1954,7 +1954,7 @@ bool XFILEJSON::EncodeObject(bool isobject, XFILEJSONOBJECT* object,bool istabul
   AddControlCharacter(isobject?XFILEJSONCONTROLCHAR_CLOSEBRACE:XFILEJSONCONTROLCHAR_CLOSEBRACKET, line);
   AddLine(line);
 
-  //XDEBUG_PRINTCOLOR(0,line.Get());
+  //XDEBUGTRACE_PRINTCOLOR(0,line.Get());
 
   return true;
 }

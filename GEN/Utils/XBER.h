@@ -1,15 +1,17 @@
 /**-------------------------------------------------------------------------------------------------------------------
-* @file     XBER.h
 *
-* @class    XBER
-* @brief    Basic Encoding Rules (BER) encoding class (https://en.wikipedia.org/wiki/X.690)
-* @ingroup  UTILS
+* @file        XBER.h
 *
-* @author   Abraham J. Velez 
-* @date     13/05/2018 13:27:17
+* @class       XBER
+* @brief       Basic Encoding Rules (BER) encoding class (https://en.wikipedia.org/wiki/X.690)
+* @ingroup     UTILS
 *
-* Copyright(c) 2005 - 2018 GEN Group.
+* @author      Abraham J. Velez 
+* @date        28/05/2018 19:54:13
 *
+* @copyright   Copyright(c) 2005 - 2018 GEN Group.
+*
+* @cond
 * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 * documentation files(the "Software"), to deal in the Software without restriction, including without limitation
 * the rights to use, copy, modify, merge, publish, distribute, sublicense, and/ or sell copies of the Software,
@@ -23,6 +25,8 @@
 * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
+* @endcond
+*
 *---------------------------------------------------------------------------------------------------------------------*/
 
 #ifndef _XBER_H_
@@ -116,8 +120,5 @@ class XBER
 /*---- INLINE FUNCTIONS ----------------------------------------------------------------------------------------------*/
 
 #endif
-
-
-
 
 

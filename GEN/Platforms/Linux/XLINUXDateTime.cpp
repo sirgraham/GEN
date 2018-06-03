@@ -26,7 +26,7 @@
 #include <sys/ioctl.h>
 #include <linux/rtc.h>
 
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "XLINUXFile.h"
 
 #include "XLINUXDateTime.h"

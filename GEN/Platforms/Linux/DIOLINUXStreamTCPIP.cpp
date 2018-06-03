@@ -43,9 +43,9 @@
 #include "XTimer.h"
 #include "XBuffer.h"
 #include "XThread.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "XString.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "DIOIP.h"
 #include "DIOURL.h"
@@ -254,7 +254,7 @@ bool DIOLINUXSTREAMTCPIP::Close()
                   config->SetHandleMultiServer(-1);
                   config->GetXMutexMultiServer()->UnLock();
 
-                  //XDEBUG_PRINTCOLOR(2, __L("TCPIP: Delete Handle BASE %d Port %d"), handleserver, config->GetRemotePort());
+                  //XDEBUGTRACE_PRINTCOLOR(2, __L("TCPIP: Delete Handle BASE %d Port %d"), handleserver, config->GetRemotePort());
                 }
             }
         }

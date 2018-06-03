@@ -1,27 +1,43 @@
-//------------------------------------------------------------------------------------------
-//  XSYSTEM.H
-//
-/**
-// \class
-//
-//  System Resources Class
-//
-//  @author  Abraham J. Velez
-//  @version 03/03/2004 12:15:55
-*/
-//  GEN  Copyright (C).  All right reserved.
-//------------------------------------------------------------------------------------------
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @file        XSystem.h
+*
+* @class       XSYSTEM
+* @brief       System class
+* @note        Can´t be construct Factory + singelton without depends of system. IT´S NOT A SINGLETON.
+* @ingroup     UTILS
+*
+* @author      Abraham J. Velez 
+* @date        02/06/2018 16:56:14
+*
+* @copyright   Copyright(c) 2005 - 2018 GEN Group.
+*
+* @cond
+* Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+* documentation files(the "Software"), to deal in the Software without restriction, including without limitation
+* the rights to use, copy, modify, merge, publish, distribute, sublicense, and/ or sell copies of the Software,
+* and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of
+* the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+* THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+* @endcond
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 
 #ifndef _XSYSTEM_H_
 #define _XSYSTEM_H_
 
-
-//---- INCLUDES ----------------------------------------------------------------------------
+/*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 
 #include "XLanguage.h"
 
-
-//---- DEFINES & ENUMS  --------------------------------------------------------------------
+/*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
 
 enum XSYSTEM_HARDWARETYPE
 {
@@ -76,54 +92,47 @@ enum XSYSTEM_SHUTDOWNTYPE
 };
 
 
-//---- CLASS -------------------------------------------------------------------------------
 
+/*---- CLASS ---------------------------------------------------------------------------------------------------------*/
 
 class XSYSTEM
-{
+{  
   public:
+                                    XSYSTEM                         ();                                    
+    virtual                        ~XSYSTEM                         ();
+  
+    static bool                     GetIsInstanced                  ();                       
+    static XSYSTEM&                 GetInstance                     ();                      
+    static bool                     SetInstance                     (XSYSTEM* instance);                      
+    static bool                     DelInstance                     ();
+                       
+    virtual XSYSTEM_HARDWARETYPE    GetTypeHardware                 (int* revision = NULL);
+    
+    bool                            HardwareUseLittleEndian         ();
 
-                                    XSYSTEM                       ();
-    virtual                        ~XSYSTEM                       ();
+    virtual XSYSTEM_SO              GetTypeSO                       ();
+    bool                            CheckTypeSO                     (XSYSTEM_SO SOtoCheck);
 
-    virtual XSYSTEM_HARDWARETYPE    GetTypeHardware               (int* revision = NULL)                          { return XSYSTEM_HARDWARETYPE_UNKNOWN;              }
-    bool                            HardwareUseLittleEndian       ();
+    virtual XLANGUAGE_CODE          GetLanguage                     ();
 
-    virtual XSYSTEM_SO              GetSO                         ()                                              { return XSYSTEM_SO_UNKNOWN;                        }
-    bool                            CheckGetSO                    (XSYSTEM_SO SOtoCheck);
+    virtual bool                    GetMemoryInfo                   (XDWORD& total,XDWORD& free);    
+    int                             GetFreeMemoryPercent            ();
 
-    virtual XLANGUAGE_CODE          GetLanguage                   ()                                              { return XLANGUAGE_UNKNOWN;                         }
+    virtual bool                    MakeCommand                     (XCHAR* command, int* returncode = NULL);
+    bool                            MakeCommand                     (XSTRING& command, int* returncode = NULL);
+    virtual bool                    ExecuteApplication              (XCHAR* command, XCHAR* params = NULL);    
+    virtual bool                    IsApplicationRunning            (XCHAR* command, XDWORD* ID = NULL);
 
-    virtual bool                    GetMemoryInfo                 (XDWORD& total,XDWORD& free)
-                                    {
-                                      total = 0;
-                                      free  = 0;
-                                      return false;
-                                    }
+    virtual bool                    ShutDown                        (XSYSTEM_SHUTDOWNTYPE type);
 
-    int                             GetMemoryFreePercentAvailable   ();
+  private:
 
-
-    virtual bool                    MakeCommand                   (XCHAR* command, int* returncode = NULL)        { return false;                                     }
-    bool                            MakeCommand                   (XSTRING& command, int* returncode = NULL)      { return MakeCommand(command.Get(), returncode);    }
-
-
-    virtual bool                    ExecuteApplication            (XCHAR* command, XCHAR* params = NULL, bool special = false)
-                                    {
-                                      return false;
-                                    }
-
-    virtual bool                    IsApplicationRunning          (XCHAR* command, XDWORD* ID = NULL)             { return false;                                     }
-
-    virtual bool                    ShutDown                      (XSYSTEM_SHUTDOWNTYPE type)                     { return false;                                     }
-
-  protected:
-
-    void                            Clean                         ()                                              {                                                   }
+    void                            Clean                           ();
+    
+    static XSYSTEM*                 instance;
 };
 
-
-//---- INLINE FUNCTIONS --------------------------------------------------------------------
+/*---- INLINE FUNCTIONS ----------------------------------------------------------------------------------------------*/
 
 #endif
 

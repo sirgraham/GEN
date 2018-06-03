@@ -49,9 +49,11 @@ Name                                                                       | Ver
 [**FFmpeg**](#ffmpeg)                                                      | 4.0
 [**OpenGL-Registry**](#opengl-registry)                                    | 
 [**OpenGL Extension Wrangler Library**](opengl-extension-wrangler-library) | 1.13.0
+[**Android NDK**](android-ndk)																						 | r17 
 [**InpOut 32/64**](inpout-32/64)                                           | 1.5.0.1
 [**STM32Fxxx HAL**](stm32fxxx-hal)                                         | 
-[**Physx**](physx)                                                         | 3.4    
+[**Physx**](physx)                                                         | 3.4   
+
 
 
 ## Details of third party libraries
@@ -192,7 +194,7 @@ FFmpeg is the leading multimedia framework, able to decode, encode, transcode, m
 Directory        **ffmpeg**  
 Version          **4.0**  
 Web              **http://ffmpeg.org  https://www.ffmpeg.org/download.html#repositories**  
-Download URL     **https://ffmpeg.zeranoe.com/builds/**  
+Download URL     **https://ffmpeg.zeranoe.com/builds/** , **https://sourceforge.net/projects/avbuild/files/android/**  
 Comments
 It´s neccesary download the binary files. Used dinamic librarys to run GEN applications.
 
@@ -221,6 +223,19 @@ Web              **http://glew.sourceforge.net/**
 Download URL     **https://github.com/nigels-com/glew**  
 Comments         
 It is necessary to modify the file glew.h. 
+
+
+
+### **Android NDK**
+
+The Android NDK (Native Developed Kit) is a toolset that lets you implement parts of your app in native code, using languages such as C and C++. 
+
+Directory        **android-ndk**  
+Version          **r17** 
+Web              **https://developer.android.com/ndk/**  
+Download URL     **https://developer.android.com/ndk/downloads/**  
+Comments
+Only for Android platform. Only use the Android **Native App Glue**.
 
 
 

@@ -18,7 +18,7 @@
 #include <malloc.h>
 #include <errno.h>
 
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "XLINUXThread.h"
 

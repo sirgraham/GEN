@@ -20,7 +20,7 @@
 #include "DIOWebServer.h"
 #include "DIOWebPageHTMLCreator.h"
 
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "XMemory.h"
 

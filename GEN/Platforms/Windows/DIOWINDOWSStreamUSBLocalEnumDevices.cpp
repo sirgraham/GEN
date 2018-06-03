@@ -20,7 +20,7 @@
 #include <initguid.h>
 #include <stdio.h>
 
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "DIOStreamDeviceUSB.h"
 #include "DIOWINDOWSStreamUSBLocalEnumDevices.h"
@@ -192,7 +192,7 @@ bool DIOWINDOWSSTREAMUSBLOCALENUMDEVICES::SearchGUID(const GUID* interfaceclassg
 
                       devices.Add(device);
 
-                      //XDEBUG_PRINTCOLOR(1, __L("%02d %-20s %s"), index, device->GetName()->Get(), device->GetResource()->Get());
+                      //XDEBUGTRACE_PRINTCOLOR(1, __L("%02d %-20s %s"), index, device->GetName()->Get(), device->GetResource()->Get());
                     }
                 }
             }

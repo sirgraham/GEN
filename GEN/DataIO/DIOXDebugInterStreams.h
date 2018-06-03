@@ -20,12 +20,12 @@
 
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
 
 
-#define DIOXDEBUGINTERSTREAMS_LOGSECTIONID              __L("Debug")
+#define DIOXDEBUGINTERSTREAMS_LOGSECTIONID    __L("Debug")
 
 /*---- CLASS -----------------------------------------------------------------------------*/
 

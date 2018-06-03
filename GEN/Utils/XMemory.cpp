@@ -23,7 +23,7 @@
 #endif
 
 #include "XString.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "XMemory.h"
 
@@ -304,7 +304,7 @@ void* XMEMORY::Assign(size_t size,char* pathfile,int line)
     {
       if(nassigns+1 >= (XMEMORY_MAXASSIGN-10))
         {
-          // XDEBUG_PRINTCOLOR(4, __L("XMEMORY ALERT: It will exceed the maximum of possible assignments [%d Nblocks]!!!"), nblocks);
+          //XDEBUGTRACE_PRINTCOLOR(4, __L("XMEMORY ALERT: It will exceed the maximum of possible assignments [%d Nblocks]!!!"), nblocks);
 
           free(ptr);
           ptr = NULL;
@@ -332,7 +332,7 @@ void* XMEMORY::Assign(size_t size,char* pathfile,int line)
             }
            else
             {
-              // XDEBUG_PRINTCOLOR(4, __L("XMEMORY ALERT: Block without control [%d Nblocks]!!!"), nblocks);
+              //XDEBUGTRACE_PRINTCOLOR(4, __L("XMEMORY ALERT: Block without control [%d Nblocks]!!!"), nblocks);
 
               free(ptr);
               ptr = NULL;
@@ -341,7 +341,7 @@ void* XMEMORY::Assign(size_t size,char* pathfile,int line)
     }
    else
     {
-      // XDEBUG_PRINTCOLOR(4, __L("XMEMORY ALERT: Insufficient memory [%d Nblocks ]!!!"), nblocks);
+      //XDEBUGTRACE_PRINTCOLOR(4, __L("XMEMORY ALERT: Insufficient memory [%d Nblocks ]!!!"), nblocks);
 
       free(ptr);
       ptr = NULL;
@@ -392,7 +392,7 @@ void XMEMORY::Free(void* ptr)
     }
    else
     {
-      // XDEBUG_PRINTCOLOR(4, __L("XMEMORY ALERT: Pointer not found!! [%d Nblocks]!!!"), nblocks);
+      //XDEBUGTRACE_PRINTCOLOR(4, __L("XMEMORY ALERT: Pointer not found!! [%d Nblocks]!!!"), nblocks);
     }
 
   UnLock();
@@ -454,24 +454,29 @@ bool XMEMORY::FreeAll()
 /*-----------------------------------------------------------------*/
 bool XMEMORY::DisplayAll(bool displaydata)
 {
-  int nassign = 0;
+  int nassigned = 0;
 
   for(XDWORD c=0;c<XMEMORY_MAXASSIGN;c++)
     {
-      if(assignlist[c]) nassign++;
+      if(assignlist[c]) nassigned++;
     }
-#ifdef XDEBUG
-  XDEBUG_PRINTHEADER((!nassign)?__L("ALL FREE MEMORY RESOURCES"):__L("NOT FREE MEMORY RESOURCES"));
-  XDEBUG_PRINT(__L(" "));
-  XDEBUG_PRINT(__L("Maximum allocated blocks at a time : %d") , maxnassigns);
-  XDEBUG_PRINT(__L("Maximum memory used at a time      : %dk"), maxused/1024);
-  if(nassign)
+
+  #ifdef XDEBUG_TRACE
+
+  XDEBUGTRACE_PRINTHEADER((!nassigned)?__L("ALL FREE MEMORY RESOURCES"):__L("NOT FREE MEMORY RESOURCES"));
+  XDEBUGTRACE_PRINT(__L(" "));
+  XDEBUGTRACE_PRINT(__L("Maximum allocated blocks at a time : %d") , maxnassigns);
+  XDEBUGTRACE_PRINT(__L("Maximum memory used at a time      : %dk"), maxused/1024);
+
+  if(nassigned)
     {
-      XDEBUG_PRINT(__L("Number memory blocks not free      : %d"), nassign);
-      XDEBUG_PRINT(__L(" "));
-      XDEBUG_PRINT(__L("         Address  Size    Line  Module"));
+      XDEBUGTRACE_PRINT(__L("Number memory blocks not free      : %d"), nassigned);
+      XDEBUGTRACE_PRINT(__L(" "));
+      XDEBUGTRACE_PRINT(__L("         Address  Size    Line  Module"));
+
       XDWORD count = 0;
-      for(XDWORD c=0;c<XMEMORY_MAXASSIGN;c++)
+
+      for(XDWORD c=0; c<XMEMORY_MAXASSIGN; c++)
         {
           if(assignlist[c])
             {
@@ -485,11 +490,12 @@ bool XMEMORY::DisplayAll(bool displaydata)
                   size_t  address = (size_t)assignlist[c]->ptr;
                   XDWORD _address = (XDWORD)address;
 
-                  XDEBUG_PRINTCOLOR(XDEBUG_COLORRED, __L("%08d %08X %07d %05d %s")  , c
-                                                                                    , _address
-                                                                                    , assignlist[c]->size
-                                                                                    , assignlist[c]->linemodule
-                                                                                    , namemodule.Get());
+                  XDEBUGTRACE_PRINTCOLOR(XDEBUGTRACE_COLOR_RED, __L("%08d %08X %07d %05d %s")   , c
+                                                                                                , _address
+                                                                                                , assignlist[c]->size
+                                                                                                , assignlist[c]->linemodule
+                                                                                                , namemodule.Get());
+
                   //-----------------------------------------------------------------
 
 
@@ -497,24 +503,26 @@ bool XMEMORY::DisplayAll(bool displaydata)
                   if(datablocksize>XMEMORY_SHOWDATABLOCKSIZE) datablocksize = XMEMORY_SHOWDATABLOCKSIZE;
 
                   if(displaydata)
-                  {
-                    XDEBUG_PRINTDATABLOCK(XDEBUGLEVELCOLOR(XDEBUG_COLORRED), (XBYTE*)assignlist[c]->ptr, datablocksize, 1);
-                  }
+                    {
+                      XDEBUGTRACE_PRINTDATABLOCK(XDEBUGLEVELCOLOR(XDEBUG_COLOR_RED), (XBYTE*)assignlist[c]->ptr, datablocksize, 1);
+                    }
 
                   //-----------------------------------------------------------------
+
                   count++;
-                  if (count > maximunLeaksToDisplay)
-                  {
-                      XDEBUG_PRINTCOLOR(XDEBUGLEVELCOLOR(XDEBUG_COLORRED), __L("\n\n [...]\t\t\t\t too many leaks, only the first %d of %d shown\n\n\n\n "), maximunLeaksToDisplay, nassign);
+                  if(count > XMEMORY_MAXIMUNLEAKSTODISPLAY)
+                    {
+                      XDEBUGTRACE_PRINTCOLOR(XDEBUGTRACE_LEVEL_COLOR(XDEBUGTRACE_COLOR_RED), __L("\ntoo many leaks: > %d and have %d.\n "), XMEMORY_MAXIMUNLEAKSTODISPLAY, nassigned);
                       break;
-                  }
+                    }
                 }
             }
         }
 
-      XDEBUG_PRINTHEADER(NULL);
+      XDEBUGTRACE_PRINTHEADER(NULL);
     }
-#endif
+
+  #endif
   return true;
 }
 

@@ -90,8 +90,6 @@ bool DIOREMOTEFILECONFIG::Ini()
   if(!webclient)         return false;
   if(namefile.IsEmpty()) return false;
 
-  Default();
-
   XPATH  xpathroot;
   XPATH  xpathremotefile;
   DIOURL downloadURL;

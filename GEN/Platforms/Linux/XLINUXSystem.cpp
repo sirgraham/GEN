@@ -1,18 +1,35 @@
-//------------------------------------------------------------------------------------------
-//  XLINUXSYSTEM.CPP
-//
-//  LINUX system class
-//
-//  Author            : Abraham J. Velez
-//  Date Of Creation  : 03/03/2004 12:28:40
-//  Lsdddast Mofificacion :
-//
-//  GEN  Copyright (C).  All right reserved.
-//------------------------------------------------------------------------------------------
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @file        XLINUXSystem.cpp
+*
+* @class       XLINUXSYSTEM
+* @brief       Linux system class
+* @ingroup     PLATFORM_LINUX
+*
+* @author      Abraham J. Velez 
+* @date        03/06/2018 13:34:05
+*
+* @copyright   Copyright(c) 2005 - 2018 GEN Group.
+*
+* @cond
+* Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+* documentation files(the "Software"), to deal in the Software without restriction, including without limitation
+* the rights to use, copy, modify, merge, publish, distribute, sublicense, and/ or sell copies of the Software,
+* and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of
+* the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+* THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+* @endcond
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 
-
-//---- INCLUDES ----------------------------------------------------------------------------
-
+/*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -26,11 +43,10 @@
 #include <sys/wait.h>
 #include <linux/reboot.h>
 
-
 #include "XLINUXFactory.h"
 #include "XBuffer.h"
 #include "XFileTXT.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "XString.h"
 #include "XPath.h"
 
@@ -38,60 +54,66 @@
 
 #include "XMemory.h"
 
-//---- GENERAL VARIABLE --------------------------------------------------------------------
+/*---- GENERAL VARIABLE ----------------------------------------------------------------------------------------------*/
+
+/*---- CLASS MEMBERS -------------------------------------------------------------------------------------------------*/
 
 
-//---- CLASS MEMBERS -----------------------------------------------------------------------
 
-
-//-------------------------------------------------------------------
-//  XLINUXSYSTEM::XLINUXSYSTEM
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      03/03/2004 12:28:59
-//
-//  @return
-//  */
-//-------------------------------------------------------------------
-XLINUXSYSTEM::XLINUXSYSTEM() : XSYSTEM()
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XLINUXSYSTEM::XLINUXSYSTEM()
+* @brief      Constructor
+* @ingroup    PLATFORM_LINUX
+*
+* @author     Abraham J. Velez 
+* @date       03/06/2018 13:35:45
+*
+* @return     Does not return anything. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+XLINUXSYSTEM::XLINUXSYSTEM(): XSYSTEM()
 {
-
+  Clean();
 }
 
 
 
-//-------------------------------------------------------------------
-//  XLINUXSYSTEM::~XLINUXSYSTEM
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      03/03/2004 12:29:20
-//
-//  @return
-//  */
-//-------------------------------------------------------------------
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XLINUXSYSTEM::~XLINUXSYSTEM()
+* @brief      Destructor
+* @note       VIRTUAL
+* @ingroup    PLATFORM_LINUX
+*
+* @author     Abraham J. Velez 
+* @date       03/06/2018 13:35:53
+*
+* @return     Does not return anything. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XLINUXSYSTEM::~XLINUXSYSTEM()
 {
-
+   Clean();
 }
 
 
 
-/*-------------------------------------------------------------------
-//  XLINUXSYSTEM::GetTypeHardware
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      01/08/2009 05:01:13 p.m.
-//
-//  @return       XSYSTEM_HARDWARE :
-//  */
-/*-----------------------------------------------------------------*/
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XSYSTEM_HARDWARETYPE XLINUXSYSTEM::GetTypeHardware(int* revision)
+* @brief      Get Type Hardware
+* @ingroup    PLATFORM_LINUX
+*
+* @author     Abraham J. Velez 
+* @date       03/06/2018 13:36:19
+*
+* @param[out]  revision : revision of hardware
+*
+* @return     XSYSTEM_HARDWARETYPE : hardware type
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XSYSTEM_HARDWARETYPE XLINUXSYSTEM::GetTypeHardware(int* revision)
 {
   #define CPUINFOREVISION __L("Revision")
@@ -169,19 +191,19 @@ XSYSTEM_HARDWARETYPE XLINUXSYSTEM::GetTypeHardware(int* revision)
 
 
 
-
-//-------------------------------------------------------------------
-//  XLINUXSYSTEM::GetSO
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      03/03/2004 12:29:40
-//
-//  @return       XLINUXSYSTEM_SO :
-//  */
-//-------------------------------------------------------------------
-XSYSTEM_SO XLINUXSYSTEM::GetSO()
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XSYSTEM_SO XLINUXSYSTEM::GetTypeSO()
+* @brief      Get Type SO
+* @ingroup    PLATFORM_LINUX
+*
+* @author     Abraham J. Velez 
+* @date       03/06/2018 13:37:14
+*
+* @return     XSYSTEM_SO : type of SO (enum XSYSTEM_SO)
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+XSYSTEM_SO XLINUXSYSTEM::GetTypeSO()
 {
   #ifdef HW_PC
   return XSYSTEM_SO_LINUX;
@@ -211,17 +233,19 @@ XSYSTEM_SO XLINUXSYSTEM::GetSO()
 }
 
 
-//-------------------------------------------------------------------
-//  XLINUXSYSTEM::GetLanguage
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      03/03/2004 12:29:55
-//
-//  @return       XLANGUAGE_CODE :
-//  */
-//-------------------------------------------------------------------
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XLANGUAGE_CODE XLINUXSYSTEM::GetLanguage()
+* @brief      Get Language Code
+* @ingroup    PLATFORM_LINUX
+*
+* @author     Abraham J. Velez 
+* @date       03/06/2018 13:37:55
+*
+* @return     XLANGUAGE_CODE : language code
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XLANGUAGE_CODE XLINUXSYSTEM::GetLanguage()
 {
   return XLANGUAGE_UNKNOWN;
@@ -229,20 +253,21 @@ XLANGUAGE_CODE XLINUXSYSTEM::GetLanguage()
 
 
 
-/*-------------------------------------------------------------------
-//  XLINUXSYSTEM::GetMemoryInfo
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      18/09/2012 9:22:44
-//
-//  @return       bool :
-//  @param        total :
-//  @param        free :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XLINUXSYSTEM::GetMemoryInfo(XDWORD& total,XDWORD& free)
+* @brief      Get Memory Info
+* @ingroup    PLATFORM_LINUX
+*
+* @author     Abraham J. Velez 
+* @date       03/06/2018 13:38:20
+*
+* @param[out] total : total memory
+* @param[out] free : free memory
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XLINUXSYSTEM::GetMemoryInfo(XDWORD& total,XDWORD& free)
 {
   struct sysinfo meminfo;
@@ -263,62 +288,25 @@ bool XLINUXSYSTEM::GetMemoryInfo(XDWORD& total,XDWORD& free)
   free  = (XDWORD)((totalvirtualmem - virtualmemused)  / 1024);
 
   return true;
-
-
-  /*
-  total = 0;
-  free  = 0;
-
-  XFILETXT* meminfofile = new XFILETXT();
-  if(!meminfofile) return false;
-
-  XPATH   xpath;
-  bool    status = false;
-  xpath = __L("/proc/meminfo");
-
- //xpath = __L("D:/Proyects/XTrap/Visual/meminfo");
-
-  if(meminfofile->Open(xpath))
-    {
-      if(meminfofile->ReadAllFile())
-        {
-          XSTRING* stringmemtotal =  meminfofile->GetLine(0);
-          XSTRING* stringmemfree  =  meminfofile->GetLine(1);
-
-          if(stringmemtotal) stringmemtotal->UnFormat(__L("MemTotal: %d kB"),&total);
-          if(stringmemfree)  stringmemfree->UnFormat (__L("MemFree: %d kB") ,&free);
-        }
-
-      meminfofile->Close();
-
-      status = true;
-    }
-
-  delete meminfofile;
-  return status;
-  */
-
-
 }
 
 
 
-/*-------------------------------------------------------------------
-//  XLINUXSYSTEM::MakeCommand
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      12/11/2014 20:48:59
-//
-//  @return       bool :
-//
-//  @param        command :
-//  @param        returncode :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XLINUXSYSTEM::MakeCommand(XCHAR* command, int* returncode)
+* @brief      Make Command
+* @ingroup    PLATFORM_LINUX
+*
+* @author     Abraham J. Velez 
+* @date       03/06/2018 13:39:14
+*
+* @param[in]  command : command to make
+* @param[out] returncode : return code to command
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XLINUXSYSTEM::MakeCommand(XCHAR* command, int* returncode)
 {
   int status;
@@ -339,25 +327,24 @@ bool XLINUXSYSTEM::MakeCommand(XCHAR* command, int* returncode)
 
 
 
-/*-------------------------------------------------------------------
-//  XLINUXSYSTEM::ExecuteApplication
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      06/08/2015 16:06:58
-//
-//  @return       bool :
-//
-//  @param        command :
-//  @param        params :
-*/
-/*-----------------------------------------------------------------*/
-bool XLINUXSYSTEM::ExecuteApplication(XCHAR* command, XCHAR* params, bool special)
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XLINUXSYSTEM::ExecuteApplication(XCHAR* applicationpath, XCHAR* params)
+* @brief      ExecuteApplication
+* @ingroup    PLATFORM_LINUX
+*
+* @author     Abraham J. Velez 
+* @date       03/06/2018 13:39:58
+*
+* @param[in]  applicationpath : application path + name to exec
+* @param[in]  params : params to exec with application
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+bool XLINUXSYSTEM::ExecuteApplication(XCHAR* applicationpath, XCHAR* params)
 {
-  if(!command) return false;
+  if(!applicationpath) return false;
 
   pid_t pID;
   bool  exist  = false;
@@ -366,7 +353,7 @@ bool XLINUXSYSTEM::ExecuteApplication(XCHAR* command, XCHAR* params, bool specia
   XFILE* xfile = xfactory->Create_File();
   if(xfile)
     {
-      exist = xfile->Open(command);
+      exist = xfile->Open(applicationpath);
       xfile->Close();
     }
 
@@ -380,7 +367,7 @@ bool XLINUXSYSTEM::ExecuteApplication(XCHAR* command, XCHAR* params, bool specia
   XSTRING cmd;
 
   cmd  = __L("chmod 775 ");
-  cmd += command;
+  cmd += applicationpath;
 
   XSTRING_CREATEOEM(cmd, charOEM)
   status = system(charOEM);
@@ -392,41 +379,15 @@ bool XLINUXSYSTEM::ExecuteApplication(XCHAR* command, XCHAR* params, bool specia
 
   XSTRING _params;
 
-  if(!special)
+  cmd     = applicationpath;
+
+  _params.Add(cmd);
+  if(params)
     {
-      cmd     = command;
-
-      _params.Add(cmd);
-      if(params)
-        {
-          _params.Add(" ");
-          _params.Add(params);
-        }
-    }
-   else
-    {
-      XPATH xpath;
-      XPATH namefileapp;
-
-      xpath = command;
-      xpath.GetNamefile(namefileapp);
-
-      cmd = __L("/usr/bin/screen");
-
-      _params.Add(cmd);
-
       _params.Add(" ");
-      _params.Add("-S ");
-      _params.Add(namefileapp);
-      _params.Add(" -d -m ");
-      _params.Add(command);
-
-      if(params)
-        {
-          _params.Add(" ");
-          _params.Add(params);
-        }
+      _params.Add(params);
     }
+   
 
   /*
   XSTRING_CREATEOEM(cmd, charOEM2)
@@ -434,7 +395,7 @@ bool XLINUXSYSTEM::ExecuteApplication(XCHAR* command, XCHAR* params, bool specia
   XSTRING_DELETEOEM(charOEM2)
   */
 
-  //XDEBUG_PRINTCOLOR(3, __L("EXEC PARAMS: cmd [%s] params [%s]"), cmd.Get(), _params.Get());
+  //XDEBUGTRACE_PRINTCOLOR(3, __L("EXEC PARAMS: cmd [%s] params [%s]"), cmd.Get(), _params.Get());
 
   #define MAXNPARAMS  20
 
@@ -462,7 +423,7 @@ bool XLINUXSYSTEM::ExecuteApplication(XCHAR* command, XCHAR* params, bool specia
 
       string.CreateOEM(param[c]);
 
-      //XDEBUG_PRINTCOLOR(3, __L("EXEC PARAMS: param%02d [%s]"), c, string.Get());
+      //XDEBUGTRACE_PRINTCOLOR(3, __L("EXEC PARAMS: param%02d [%s]"), c, string.Get());
 
       if(endfound) break;
     }
@@ -482,7 +443,7 @@ bool XLINUXSYSTEM::ExecuteApplication(XCHAR* command, XCHAR* params, bool specia
 
                   if(_status == -1)
                     {
-                      XDEBUG_PRINTCOLOR(4,__L("Error en EXEC: %d"), errno);
+                     XDEBUGTRACE_PRINTCOLOR(4,__L("Error en EXEC: %d"), errno);
                     }
                   else
                    {
@@ -508,22 +469,23 @@ bool XLINUXSYSTEM::ExecuteApplication(XCHAR* command, XCHAR* params, bool specia
 
 
 
-/*-------------------------------------------------------------------
-//   XLINUXSYSTEM::IsApplicationRunning
-*/
-/**
-//
-//
-//
-//  @author   Abraham J. Velez
-//  @version
-//
-//  @return   bool :
-//
-//  @param    XCHAR* :
-//
-*//*-----------------------------------------------------------------*/
-bool XLINUXSYSTEM::IsApplicationRunning(XCHAR* command, XDWORD* ID)
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XLINUXSYSTEM::IsApplicationRunning(XCHAR* applicationname, XDWORD* ID)
+* @brief      Is Application Running
+* @ingroup    PLATFORM_LINUX
+*
+* @author     Abraham J. Velez 
+* @date       03/06/2018 17:14:30
+*
+* @param[in]  applicationname : application name
+* @param[out] ID : ID of the application in the SO
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+bool XLINUXSYSTEM::IsApplicationRunning(XCHAR* applicationname, XDWORD* ID)
 {
   DIR*            dir;
   struct dirent*  ent;
@@ -560,7 +522,7 @@ bool XLINUXSYSTEM::IsApplicationRunning(XCHAR* command, XDWORD* ID)
               nameall.DeleteCharacter(__C('\n'), XSTRINGCONTEXT_ATEND);
               nameall.DeleteCharacter(__C('\r'), XSTRINGCONTEXT_ATEND);
 
-              if(!nameall.Compare(command,false))
+              if(!nameall.Compare(applicationname, false))
                 {
                   if(ID) (*ID) = (XDWORD)lpid;
 
@@ -584,22 +546,20 @@ bool XLINUXSYSTEM::IsApplicationRunning(XCHAR* command, XDWORD* ID)
 
 
 
-
-/*-------------------------------------------------------------------
-//  XLINUXSYSTEM::ShutDown
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      12/11/2014 20:48:43
-//
-//  @return       bool :
-//
-//  @param        type :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XLINUXSYSTEM::ShutDown(XSYSTEM_SHUTDOWNTYPE type)
+* @brief      ShutDown of SO
+* @ingroup    PLATFORM_LINUX
+*
+* @author     Abraham J. Velez 
+* @date       03/06/2018 17:15:13
+*
+* @param[in]  type : type of shutdown of SO
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XLINUXSYSTEM::ShutDown(XSYSTEM_SHUTDOWNTYPE type)
 {
   switch(type)
@@ -621,5 +581,23 @@ bool XLINUXSYSTEM::ShutDown(XSYSTEM_SHUTDOWNTYPE type)
 
 
 
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         void XLINUXSYSTEM::Clean()
+* @brief      Clean the attributes of the class: Default initialice
+* @note       INTERNAL
+* @ingroup    PLATFORM_LINUX
+*
+* @author     Abraham J. Velez 
+* @date       03/06/2018 17:28:43
+*
+* @return     void : does not return anything. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+void XLINUXSYSTEM::Clean()
+{
+  
+}
 
 

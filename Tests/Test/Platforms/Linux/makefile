@@ -1,42 +1,42 @@
 
 TARGET   		 	= test
 
-ARCHITECTURE = PC
-#ARCHITECTURE  = RASPBERRYPI
+ARCHITECTURE 	= PC
+#ARCHITECTURE = RASPBERRYPI
 DEBUGMODE    	= YES
 TOOLCHAIN     = RASPBIAN
-#TOOLCHAIN			= LINARO
+#TOOLCHAIN		= LINARO
 SYSROOT				= JESSIE
 
 ADDDIRECTORYGEN = ../../GENFrameWork/
 
-FLAGS  			 += -D LINUX
-FLAGS  			 += -D UNICODE
-FLAGS  			 += -D XMEM
-FLAGS				 += -D SND_ACTIVE
-FLAGS				 += -D DIO_ACTIVE
-FLAGS				 += -D DIOUART_ACTIVE
-FLAGS				 += -D DIOUSB_ACTIVE
-FLAGS				 += -D DIOICMP_ACTIVE
-FLAGS				 += -D DIOUDP_ACTIVE
-FLAGS				 += -D DIOTCPIP_ACTIVE
-FLAGS				 += -D DIOTCPIPLOCALENUMSERVERS_ACTIVE
-#FLAGS				 += -D DIOBLUETOOTH_ACTIVE
-#FLAGS				 += -D DIOWIFI_ACTIVE
-#FLAGS				 += -D DIOSPI_ACTIVE
-#FLAGS				 += -D DIOI2C_ACTIVE
-FLAGS				 += -D DIONTP_ACTIVE
-FLAGS				 += -D DIOPING_ACTIVE
-FLAGS				 += -D DIOGPIO_ACTIVE
-FLAGS				 += -D DIOALERTS_ACTIVE
-FLAGS		   	 += -D DBSQL_ACTIVE
-FLAGS		   	 += -D DBSQLMYSQL_ACTIVE	
-FLAGS		     += -D DBSQLPOSTGRESQL_ACTIVE
-FLAGS		     += -D DBSQLSQLITE_ACTIVE			
-FLAGS     	 += -D DIOPCAP_ACTIVE
+FLAGS  			+= -D LINUX
+FLAGS  			+= -D UNICODE
+#FLAGS  		+= -D XMEM
+#FLAGS			+= -D SND_ACTIVE
+FLAGS				+= -D DIO_ACTIVE
+FLAGS				+= -D DIOUART_ACTIVE
+#FLAGS			+= -D DIOUSB_ACTIVE
+ FLAGS			+= -D DIOICMP_ACTIVE
+FLAGS				+= -D DIOUDP_ACTIVE
+FLAGS				+= -D DIOTCPIP_ACTIVE
+FLAGS		    += -D DIOTCPIPLOCALENUMSERVERS_ACTIVE
+#FLAGS			+= -D DIOBLUETOOTH_ACTIVE
+#FLAGS			+= -D DIOWIFI_ACTIVE
+#FLAGS			+= -D DIOSPI_ACTIVE
+#FLAGS			+= -D DIOI2C_ACTIVE
+#FLAGS			+= -D DIONTP_ACTIVE
+ FLAGS			+= -D DIOPING_ACTIVE
+#FLAGS			+= -D DIOGPIO_ACTIVE
+#FLAGS		  += -D DIOALERTS_ACTIVE
+#FLAGS		 	+= -D DBSQL_ACTIVE
+#FLAGS		 	+= -D DBSQLMYSQL_ACTIVE	
+#FLAGS		  += -D DBSQLPOSTGRESQL_ACTIVE
+#FLAGS		  += -D DBSQLSQLITE_ACTIVE			
+#FLAGS    	+= -D DIOPCAP_ACTIVE
 
-FLAGSC  		 += 
-FLAGSCPP	   += 
+FLAGSC  		+= 
+FLAGSCPP	    += 
 
 #---- INCLUDES --------------------------------------------------------------------------------------------------
 
@@ -217,7 +217,7 @@ SOURCESCPP  += INPLINUXDeviceMouseDirect.cpp
 SOURCESCPP  += LINUXMain.cpp
 SOURCESCPP  += XLINUXConsole.cpp
 SOURCESCPP  += XLINUXSleep.cpp
-SOURCESCPP  += XLINUXDebug.cpp
+SOURCESCPP  += XLINUXDebugTrace.cpp
 SOURCESCPP  += XLINUXDir.cpp
 SOURCESCPP  += XLINUXFactory.cpp
 SOURCESCPP  += XLINUXFile.cpp
@@ -226,12 +226,13 @@ SOURCESCPP  += XLINUXSystem.cpp
 SOURCESCPP  += XLINUXThread.cpp
 SOURCESCPP  += XLINUXTimer.cpp
 SOURCESCPP  += XLINUXDateTime.cpp
+SOURCESCPP  += XLINUXSharedMemory.cpp
 
 SOURCESCPP  += Script.cpp
 SOURCESCPP  += ScriptLib.cpp
 SOURCESCPP  += ScriptLibBase.cpp
 SOURCESCPP  += ScriptG.cpp
-SOURCESCPP  += ScriptLua.cpp
+#SOURCESCPP  += ScriptLua.cpp
 
 
 ifneq (,$(findstring SND_ACTIVE,$(FLAGS)))
@@ -283,7 +284,7 @@ SOURCESCPP  += XBase.cpp
 SOURCESCPP  += XBER.cpp
 SOURCESCPP  += XBuffer.cpp
 SOURCESCPP  += XConsole.cpp
-SOURCESCPP  += XDebug.cpp
+SOURCESCPP  += XDebugTrace.cpp
 SOURCESCPP  += XDir.cpp
 SOURCESCPP  += XErrorMsg.cpp
 SOURCESCPP  += XFile.cpp
@@ -320,20 +321,20 @@ SOURCESCPP  += XVariant.cpp
 
 #---- SOURCES C --------------------------------------------------------------------------------------------------
 
-SOURCESC 		+= adler32.c
-SOURCESC		+= compress.c
-SOURCESC 		+= crc32.c
-SOURCESC 		+= deflate.c
-SOURCESC 		+= infback.c
-SOURCESC 		+= inffast.c
-SOURCESC 		+= inflate.c
-SOURCESC 		+= inftrees.c
-SOURCESC 		+= ioapi.c
-SOURCESC 		+= trees.c
-SOURCESC 		+= uncompr.c
-SOURCESC 		+= unzip.c
-SOURCESC 		+= zip.c
-SOURCESC 		+= zutil.c
+SOURCESC 	+= adler32.c
+SOURCESC	+= compress.c
+SOURCESC 	+= crc32.c
+SOURCESC 	+= deflate.c
+SOURCESC 	+= infback.c
+SOURCESC 	+= inffast.c
+SOURCESC 	+= inflate.c
+SOURCESC 	+= inftrees.c
+SOURCESC 	+= ioapi.c
+SOURCESC 	+= trees.c
+SOURCESC 	+= uncompr.c
+SOURCESC 	+= unzip.c
+SOURCESC 	+= zip.c
+SOURCESC 	+= zutil.c
 
 ifneq (,$(findstring DBSQL_ACTIVE,$(FLAGS)))			
 	ifneq (,$(findstring DBSQLSQLITE_ACTIVE,$(FLAGS)))				

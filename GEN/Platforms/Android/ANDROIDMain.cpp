@@ -160,10 +160,7 @@ bool ANDROIDMAIN::Ini(XSTRING* apkpath, XSTRING* xpath)
   xsystem = new XANDROIDSYSTEM();
   if(!xsystem)    return false;
 
-  xfactory->HardwareUseLittleEndian(xsystem->HardwareUseLittleEndian());
-
-  XBUFFER::SetHardwareUseLittleEndian(xfactory->HardwareUseLittleEndian());
-
+  XBUFFER::SetHardwareUseLittleEndian(xsystem->HardwareUseLittleEndian());
 
   xlanguage = new XLANGUAGE();
   if(!xlanguage) return false;

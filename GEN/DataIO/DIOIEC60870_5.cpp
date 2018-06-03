@@ -24,7 +24,7 @@
 #include "XTimer.h"
 #include "XFSMachine.h"
 #include "XBuffer.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "DIOStream.h"
 
@@ -870,14 +870,14 @@ bool DIOIEC60870_5::Connect(XWORD addressfield,XBYTE addressPM, XDWORD keyPM, bo
   if(!diostream)                                                  return false;
   //if(diostream->GetConnectStatus()!=DIOSTREAMSTATUS_DISCONNECTED) return false;
 
-  #ifdef XDEBUG
+  #ifdef XDEBUG_TRACE
 
   switch(diostream->GetConfig()->GetType())
     {
-      case DIOSTREAMTYPE_UART  :  XDEBUG_PRINTCOLOR(1,__L("IEC60870_5 Connexion to UART: "));
+      case DIOSTREAMTYPE_UART  : XDEBUGTRACE_PRINTCOLOR(1,__L("IEC60870_5 Connexion to UART: "));
                                   break;
 
-      case DIOSTREAMTYPE_TCPIP :  XDEBUG_PRINTCOLOR(1,__L("IEC60870_5 Connexion to TCP/IP: "));
+      case DIOSTREAMTYPE_TCPIP : XDEBUGTRACE_PRINTCOLOR(1,__L("IEC60870_5 Connexion to TCP/IP: "));
                                   break;
 
                        default :  break;
@@ -893,7 +893,7 @@ bool DIOIEC60870_5::Connect(XWORD addressfield,XBYTE addressPM, XDWORD keyPM, bo
 
   if(!diostream->WaitToConnected(timeout)) return false;
 
-  XDEBUG_PRINTCOLOR(1,__L("IEC60870_5 Connected physical layer."));
+ XDEBUGTRACE_PRINTCOLOR(1,__L("IEC60870_5 Connected physical layer."));
 
   this->addressfield      = addressfield;
   this->addressPM         = addressPM;
@@ -901,7 +901,7 @@ bool DIOIEC60870_5::Connect(XWORD addressfield,XBYTE addressPM, XDWORD keyPM, bo
   this->inlittleendian    = inlittleendian;
   this->havelongaddress   = havelongaddress;
 
-  XDEBUG_PRINTCOLOR(1,__L("IEC60870_5 Meter Address Field: %d, Address PM: %d, Key PM: %d"), addressfield, addressPM, keyPM);
+ XDEBUGTRACE_PRINTCOLOR(1,__L("IEC60870_5 Meter Address Field: %d, Address PM: %d, Key PM: %d"), addressfield, addressPM, keyPM);
 
 
   canceloperations = false;
@@ -1922,7 +1922,7 @@ bool DIOIEC60870_5::WaitToReadMsg(XDWORD size,int timeout)
       actualsize = diostream->GetInXBuffer()->GetSize();
       if((int)xtimer->GetMeasureSeconds() >= timeout) return false;
 
-      xsleep->MilliSeconds(10);
+      XSLEEP::GetInstance().MilliSeconds(10);
 
       if(actualsize >= size) return true;
 

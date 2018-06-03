@@ -147,32 +147,43 @@ namespace Extensions
 
         private void GetGroupID(string directory, ref bool isGEN, ref string groupID)
         {
+             isGEN = false;
+
             // is GEN?
-            if (directory.Contains("GENFrameWork"))             isGEN = true;
+            if ((directory.Contains("/GEN/"))          || 
+                (directory.Contains("\\GEN\\"))        ||      
+                (directory.Contains("/GENFrameWork/")) || 
+                (directory.Contains("\\GENFrameWork\\"))) isGEN = true;
 
-            // Types
-            if (directory.Contains("Utils"))                    groupID = "UTILS";
-            if (directory.Contains("DataIO"))                   groupID = "DATAIO";
-            if (directory.Contains("Graphic"))                  groupID = "GRAPHIC";
-            if (directory.Contains("Sound"))                    groupID = "SOUND";
-            if (directory.Contains("Input"))                    groupID = "INPUT";
-            if (directory.Contains("Cipher"))                   groupID = "CIPHER";
-            if (directory.Contains("Compress"))                 groupID = "COMPRESS";
-            if (directory.Contains("Main"))                     groupID = "MAIN";
-            if (directory.Contains("Script"))                   groupID = "SCRIPT";
-            if (directory.Contains("DatabasesSQL"))             groupID = "DATABASESSQL";
-            if (directory.Contains("UserInterface"))            groupID = "USERINTERFACE";
-            if (directory.Contains("Video"))                    groupID = "VIDEO";
-            if (directory.Contains("Media"))                    groupID = "MEDIA";
-            if (directory.Contains("Physics"))                  groupID = "PHYSICS";
-            if (directory.Contains("ArtificialIntelligence"))   groupID = "ARTIFICIALINTELLIGENCE";
+            if(isGEN)
+              {
+                // Types
+                if (directory.Contains("Utils"))                    groupID = "UTILS";
+                if (directory.Contains("DataIO"))                   groupID = "DATAIO";
+                if (directory.Contains("Graphic"))                  groupID = "GRAPHIC";
+                if (directory.Contains("Sound"))                    groupID = "SOUND";
+                if (directory.Contains("Input"))                    groupID = "INPUT";
+                if (directory.Contains("Cipher"))                   groupID = "CIPHER";
+                if (directory.Contains("Compress"))                 groupID = "COMPRESS";
+                if (directory.Contains("Main"))                     groupID = "MAIN";
+                if (directory.Contains("Script"))                   groupID = "SCRIPT";
+                if (directory.Contains("DatabasesSQL"))             groupID = "DATABASESSQL";
+                if (directory.Contains("UserInterface"))            groupID = "USERINTERFACE";
+                if (directory.Contains("Video"))                    groupID = "VIDEO";
+                if (directory.Contains("Media"))                    groupID = "MEDIA";
+                if (directory.Contains("Physics"))                  groupID = "PHYSICS";
+                if (directory.Contains("ArtificialIntelligence"))   groupID = "ARTIFICIALINTELLIGENCE";
 
-            // Platforms
-            if (directory.Contains("Windows"))                  groupID = "PLATFORM_WINDOWS";
-            if (directory.Contains("Linux"))                    groupID = "PLATFORM_LINUX";
-            if (directory.Contains("Android"))                  groupID = "PLATFORM_ANDROID";
-            if (directory.Contains("Common"))                   groupID = "PLATFORM_COMMON";
-            if (directory.Contains("STM32Fxxx"))                groupID = "PLATFORM_STM32FXXX";
+                // Platforms
+                if (directory.Contains("Windows"))                  groupID = "PLATFORM_WINDOWS";
+                if (directory.Contains("Linux"))                    groupID = "PLATFORM_LINUX";
+                if (directory.Contains("Android"))                  groupID = "PLATFORM_ANDROID";
+                if (directory.Contains("Common"))                   groupID = "PLATFORM_COMMON";
+                if (directory.Contains("STM32Fxxx"))                groupID = "PLATFORM_STM32FXXX";
+
+                if ((directory.Contains("/Tests/")) || 
+                    (directory.Contains("\\Tests\\")))              groupID = "TEST";
+              }
         }
 
         private void CreateInfo(bool isGEN, string name, string description, string group, ref string info)
@@ -250,6 +261,7 @@ namespace Extensions
             selection.Text += "\n";
             selection.Text += "/*---- INCLUDES ------------------------------------------------------------------------------------------------------*/\n\n";
             selection.Text += "#include \"" + namewithoutext + ".h\"\n\n";
+            selection.Text += "#include \"XMemory.h\"\n\n";
             selection.Text += "/*---- GENERAL VARIABLE ----------------------------------------------------------------------------------------------*/\n\n";
             selection.Text += "/*---- CLASS MEMBERS -------------------------------------------------------------------------------------------------*/\n\n";            
         }
@@ -262,7 +274,7 @@ namespace Extensions
             string  info            = "";
             string  copyright       = "";
             string  description     = Microsoft.VisualBasic.Interaction.InputBox(   "Purpose of the file" 	,
-                                                                             	    "File header H,HPP"    ,
+                                                                                    "File header H,HPP"    ,
                                                                                     "");
 
             selection.GotoLine(1, true);

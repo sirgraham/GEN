@@ -25,7 +25,7 @@
 #include <sys/ioctl.h>
 #include <sys/io.h>
 
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "DIOLINUXGPIOPC.h"
 

@@ -16,7 +16,7 @@
 #include "XFactory.h"
 #include "XSleep.h"
 #include "XTimer.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "XThreadCollected.h"
 
 #include "DIOFactory.h"
@@ -1141,7 +1141,7 @@ bool DIOPROTOCOLCONNEXIONSMANAGER::WaitToAnyConnexionIsConnected(int timeout)
           break;
         }
 
-      xsleep->MilliSeconds(10);
+      XSLEEP::GetInstance().MilliSeconds(10);
 
       if(xtimerout->GetMeasureSeconds() >= (XDWORD)timeout)
         {
@@ -1197,7 +1197,7 @@ bool DIOPROTOCOLCONNEXIONSMANAGER::WaitToAllConnexionsCanBeDeleted(int timeout)
 
       if(candelete) break;
 
-      xsleep->MilliSeconds(10);
+      XSLEEP::GetInstance().MilliSeconds(10);
 
       if(timeout)
         {
@@ -1387,7 +1387,7 @@ void DIOPROTOCOLCONNEXIONSMANAGER::ManageProtocolConnexionsClient()
 
                                                         while(diostreamenumservers->IsSearching())
                                                           {
-                                                            xsleep->MilliSeconds(1);
+                                                            XSLEEP::GetInstance().MilliSeconds(1);
                                                           }
 
                                                         diostreamenumservers->StopSearch(true);
@@ -1464,10 +1464,10 @@ void DIOPROTOCOLCONNEXIONSMANAGER::ManageProtocolConnexionsClient()
                                   break;
                                 }
 
-                              xsleep->MilliSeconds(50);
+                              XSLEEP::GetInstance().MilliSeconds(50);
                             }
 
-                          XDEBUG_PRINTCOLOR(1, __L("Trying to connect to %s [%s]: %s (%d) seconds."),  URLclient->Get(), scfg->GetRemoteURL()->Get(), protocolconnexion?__L("Connected!."):__L("Not Connected!."), xtimerconnexions->GetMeasureSeconds());
+                         XDEBUGTRACE_PRINTCOLOR(1, __L("Trying to connect to %s [%s]: %s (%d) seconds."),  URLclient->Get(), scfg->GetRemoteURL()->Get(), protocolconnexion?__L("Connected!."):__L("Not Connected!."), xtimerconnexions->GetMeasureSeconds());
                         }
                        else
                         {
@@ -1558,7 +1558,7 @@ void DIOPROTOCOLCONNEXIONSMANAGER::ThreadProtocolConnexions(void* param)
                                   if(timerout->GetMeasureSeconds() > 5) break;
                                 }
 
-                              xsleep->MilliSeconds(10);
+                              XSLEEP::GetInstance().MilliSeconds(10);
                             }
 
                           xfactory->DeleteTimer(timerout);
@@ -1575,7 +1575,7 @@ void DIOPROTOCOLCONNEXIONSMANAGER::ThreadProtocolConnexions(void* param)
                             }
                         }
 
-                      XDEBUG_PRINTCOLOR((protocol->IsInitialized()?2:4), __L("Protocol Connexion Manager: %s Init Protocol %s") , protocolconnexions->isserver?__L("Server"):__L("Client"), protocol->IsInitialized()?__L("Ok!"):__L("Error!"));
+                     XDEBUGTRACE_PRINTCOLOR((protocol->IsInitialized()?2:4), __L("Protocol Connexion Manager: %s Init Protocol %s") , protocolconnexions->isserver?__L("Server"):__L("Client"), protocol->IsInitialized()?__L("Ok!"):__L("Error!"));
 
                       if(!protocol->IsInitialized())
                         {
@@ -1593,7 +1593,7 @@ void DIOPROTOCOLCONNEXIONSMANAGER::ThreadProtocolConnexions(void* param)
                             {
                               protocolconnexions->ProtocolConnexions_Disconnect(c);
 
-                              XDEBUG_PRINTCOLOR(status?1:4, __L("Protocol Connexion Manager: Check connexion protocol %s"), status?__L("Ok!"):__L("Error!"));
+                             XDEBUGTRACE_PRINTCOLOR(status?1:4, __L("Protocol Connexion Manager: Check connexion protocol %s"), status?__L("Ok!"):__L("Error!"));
                             }
                         }
                     }

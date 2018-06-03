@@ -40,7 +40,6 @@
 
 class XFACTORY;
 class XTIMER;
-class XSYSTEM;
 class XPUBLISHER;
 class DIOFACTORY;
 class DIOSTREAMSPI;
@@ -48,7 +47,7 @@ class DIOSTREAMSPI;
 class DIOSPILCDSCREENILI9341 : public DIODEVICE
 {
   public:
-                            DIOSPILCDSCREENILI9341          (XSYSTEM* xsystem);
+                            DIOSPILCDSCREENILI9341          ();
     virtual                ~DIOSPILCDSCREENILI9341          ();
 
     bool                    Ini                             (int chipselect, int timeout);
@@ -81,8 +80,6 @@ class DIOSPILCDSCREENILI9341 : public DIODEVICE
 
     void                    Clean                           ()
                             {
-                              xsystem                 = NULL;
-
                               timeout                 = 0;
 
                               diogpio             = NULL;
@@ -113,8 +110,6 @@ class DIOSPILCDSCREENILI9341 : public DIODEVICE
 
     bool                    DeleteBuffer                    ();
 
-
-    XSYSTEM*                xsystem;
 
     int                     timeout;
 

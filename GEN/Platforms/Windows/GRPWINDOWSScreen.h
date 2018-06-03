@@ -18,8 +18,9 @@
 
 //---- INCLUDES ----------------------------------------------------------------------------
 
+#include <Windows.h>
 
-#include "GRPOpenGL.h"
+//#include "GRPOpenGL.h"
 #include "GRPScreen.h"
 
 #include "XString.h"

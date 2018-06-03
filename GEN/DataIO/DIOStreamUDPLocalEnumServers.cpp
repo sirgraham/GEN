@@ -249,6 +249,7 @@ bool DIOSTREAMUDPLOCALENUMSERVERS::SendSignal()
   diostreamudpcfg->SetMode(DIOSTREAMMODE_CLIENT);
   diostreamudpcfg->SetBroadcastModeActive(true);
   diostreamudpcfg->SetRemotePort(port);
+  diostreamudpcfg->SetIsUsedDatagrams(false);
 
   if(diostreamudp->Open())
     {
@@ -379,6 +380,7 @@ void DIOSTREAMUDPLOCALENUMSERVERS::ThreadDiscoveryLocalServer(void* data)
   diostreamudpcfg->SetMode(DIOSTREAMMODE_SERVER);
   diostreamudpcfg->SetBroadcastModeActive(true);
   diostreamudpcfg->SetRemotePort(discoveryenum->GetPort());
+  diostreamudpcfg->SetIsUsedDatagrams(true);
 
   discoveryenum->xtimer->Reset();
 

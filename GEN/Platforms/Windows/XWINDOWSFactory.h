@@ -50,16 +50,16 @@ class XWINDOWSFACTORY : public XFACTORY
       XCONSOLE*           CreateConsole           ();
       bool                DeleteConsole           (XCONSOLE* xconsole);
 
-      #ifdef XPHONE_ACTIVE
-      XPHONE*             CreatePhone             ();
-      bool                DeletePhone             (XPHONE* phone);
-      #endif
-
       XMUTEX*             Create_Mutex            ();
       bool                Delete_Mutex            (XMUTEX* phone);
 
       XTHREAD*            CreateThread            (XTHREADGROUPID groupID, XCHAR* ID,XTHREADFUNCTION function = NULL,void* data = NULL);
       bool                DeleteThread            (XTHREADGROUPID groupID, XTHREAD* xthread);
+      
+      XSHAREDMEMORY*      Create_SharedMemory     ();   
+      bool                Delete_SharedMemory     (XSHAREDMEMORY* sharedmemory); 
+
+
 };
 
 //---- INLINE FUNCTIONS --------------------------------------------------------------------

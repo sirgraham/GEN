@@ -15,7 +15,7 @@
 
 #include <string.h>
 
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "XFactory.h"
 #include "XBuffer.h"
 

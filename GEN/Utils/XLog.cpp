@@ -23,7 +23,7 @@
 #include "XDir.h"
 #include "XFileTXT.h"
 #include "XFileZIP.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "XLog.h"
 
@@ -389,7 +389,7 @@ bool XLOG::PassFilters(XLOGLEVEL level, XCHAR* sectionID)
 /*-----------------------------------------------------------------*/
 bool XLOG::AddEntry(XLOGLEVEL level, XCHAR* sectionID, bool inmemory, XCHAR* mask,...)
 {
-  //XDEBUG_PRINTCOLOR(3,__L(" XLOG::AddEntry %u"),XMEMORY_GETMEMORYUSED);
+  //XDEBUGTRACE_PRINTCOLOR(3,__L(" XLOG::AddEntry %u"),XMEMORY_GETMEMORYUSED);
 
   if(!IsActive()) return false;
   if(!mask)       return false;
@@ -406,7 +406,7 @@ bool XLOG::AddEntry(XLOGLEVEL level, XCHAR* sectionID, bool inmemory, XCHAR* mas
         }
     }
 
-  //XDEBUG_PRINTCOLOR(3,__L(" XLOG::AddEntry  %u"),XMEMORY_GETMEMORYUSED);
+  //XDEBUGTRACE_PRINTCOLOR(3,__L(" XLOG::AddEntry  %u"),XMEMORY_GETMEMORYUSED);
 
   Backup_ControlLimits();
 
@@ -423,7 +423,7 @@ bool XLOG::AddEntry(XLOGLEVEL level, XCHAR* sectionID, bool inmemory, XCHAR* mas
     }
 
   GetLevelString(level, levelstring, 7);
-  //XDEBUG_PRINTCOLOR(3,__L(" XLOG::AddEntry %u"),XMEMORY_GETMEMORYUSED);
+  //XDEBUGTRACE_PRINTCOLOR(3,__L(" XLOG::AddEntry %u"),XMEMORY_GETMEMORYUSED);
   if(sectionID)
     {
       string = datestring;
@@ -442,7 +442,7 @@ bool XLOG::AddEntry(XLOGLEVEL level, XCHAR* sectionID, bool inmemory, XCHAR* mas
       string = __L(" ");
       string.AdjustSize(XLOG_MAXDATETIMESIZE +  XLOG_MAXLEVELSIZE + XLOG_MAXSECTIONIDSIZE, false, __L(" "));
     }
-  //XDEBUG_PRINTCOLOR(3,__L(" XLOG::AddEntry  %u"),XMEMORY_GETMEMORYUSED);
+  //XDEBUGTRACE_PRINTCOLOR(3,__L(" XLOG::AddEntry  %u"),XMEMORY_GETMEMORYUSED);
   outstring += string;
   outstring += __L(" ");
 
@@ -455,7 +455,7 @@ bool XLOG::AddEntry(XLOGLEVEL level, XCHAR* sectionID, bool inmemory, XCHAR* mas
   va_end(arg);
 
   outstring += string;
-  //XDEBUG_PRINTCOLOR(3,__L(" XLOG::AddEntry %u"),XMEMORY_GETMEMORYUSED);
+  //XDEBUGTRACE_PRINTCOLOR(3,__L(" XLOG::AddEntry %u"),XMEMORY_GETMEMORYUSED);
   if(isdumpindebug)
     {
       int leveldebug = 0;
@@ -469,9 +469,9 @@ bool XLOG::AddEntry(XLOGLEVEL level, XCHAR* sectionID, bool inmemory, XCHAR* mas
           case XLOGLEVEL_INFO     : leveldebug = 0; break;
         }
 
-      XDEBUG_PRINTCOLOR(leveldebug , __L("[Log] %s "), outstring.Get());
+     XDEBUGTRACE_PRINTCOLOR(leveldebug , __L("[Log] %s "), outstring.Get());
     }
-  //XDEBUG_PRINTCOLOR(3,__L(" XLOG::AddEntry  %u"),XMEMORY_GETMEMORYUSED);
+  //XDEBUGTRACE_PRINTCOLOR(3,__L(" XLOG::AddEntry  %u"),XMEMORY_GETMEMORYUSED);
   if(inmemory)
     {
       filelog->AddLine(outstring);
@@ -507,9 +507,9 @@ bool XLOG::AddEntry(XLOGLEVEL level, XCHAR* sectionID, bool inmemory, XCHAR* mas
 
       nlines++;
     }
-  //XDEBUG_PRINTCOLOR(3,__L(" XLOG::AddEntry %u"),XMEMORY_GETMEMORYUSED);
+  //XDEBUGTRACE_PRINTCOLOR(3,__L(" XLOG::AddEntry %u"),XMEMORY_GETMEMORYUSED);
   mutex->UnLock();
-  //XDEBUG_PRINTCOLOR(3,__L(" XLOG::AddEntry  %u"),XMEMORY_GETMEMORYUSED);
+  //XDEBUGTRACE_PRINTCOLOR(3,__L(" XLOG::AddEntry  %u"),XMEMORY_GETMEMORYUSED);
   return true;
 }
 

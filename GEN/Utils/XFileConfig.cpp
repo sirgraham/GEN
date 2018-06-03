@@ -302,8 +302,6 @@ XFILECONFIG::~XFILECONFIG()
 //-------------------------------------------------------------------
 bool XFILECONFIG::Ini()
 {
-  Default();
-
   if(namefile.IsEmpty())   return false;
   if(xpathfile.IsEmpty())  return false;
 
@@ -477,24 +475,6 @@ bool XFILECONFIG::Save(XPATH& xpath)
     }
 
   return EndFile();
-}
-
-
-
-//-------------------------------------------------------------------
-//  XFILECONFIG::Default
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      12/08/2004 21:40:05
-//
-//  @return       bool :
-//  */
-//-------------------------------------------------------------------
-bool XFILECONFIG::Default()
-{
-  return true;
 }
 
 

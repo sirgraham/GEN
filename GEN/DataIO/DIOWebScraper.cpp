@@ -20,7 +20,7 @@
 #include "XFile.h"
 #include "XFileXML.h"
 #include "XFileJSON.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "DIOFactory.h"
 #include "DIOURL.h"

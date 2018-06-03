@@ -1,17 +1,35 @@
-//------------------------------------------------------------------------------------------
-//	TEST.CPP
-//	
-//	Test
-//   
-//	Author						: Abraham J. Velez
-//	Date Of Creation	: 06/10/2005 20:05:56
-//	Last Mofificacion	:	
-//	
-//	GEN (C) Copyright  (All right reserved).			 
-//------------------------------------------------------------------------------------------
+/**-------------------------------------------------------------------------------------------------------------------/**-------------------------------------------------------------------------------------------------------------------
+*
+* @file        Test.cpp
+*
+* @class       TEST
+* @brief       Unit Test for console
+* @ingroup     TEST
+*
+* @author      Abraham J. Velez 
+* @date        23/05/2018 14:04:08
+*
+* @copyright   Copyright(c) 2005 - 2018 GEN Group.
+*
+* @cond
+* Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+* documentation files(the "Software"), to deal in the Software without restriction, including without limitation
+* the rights to use, copy, modify, merge, publish, distribute, sublicense, and/ or sell copies of the Software,
+* and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of
+* the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+* THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+* @endcond
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 
-	
-//---- INCLUDES ----------------------------------------------------------------------------
+/*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -37,7 +55,7 @@
 #include "XFileCSV.h"
 #include "XFileZIP.h"
 #include "XFileDBF.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "XThread.h"
 #include "XFileHash.h"
 #include "XConsole.h"
@@ -196,30 +214,34 @@
 
 #include "CompressManager.h"
 
+#include "XSharedMemory.h"
+
+
 #include "Test.h"
 
 #include "XMemory.h"
 	
+/*---- GENERAL VARIABLE ----------------------------------------------------------------------------------------------*/
 
-//---- GENERAL VARIABLE --------------------------------------------------------------------
-	
 TEST* test = NULL;
-	
-//---- CLASS MEMBERS -----------------------------------------------------------------------
+
+/*---- CLASS MEMBERS -------------------------------------------------------------------------------------------------*/
 
 
 
-//-------------------------------------------------------------------
-//  TEST::TEST
-/**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			13/08/2002 13:15:15
-//	
-//	@return 			
-//	*/
-//-------------------------------------------------------------------
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::TEST
+* @brief      Constructor
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:06:03
+*
+* @return     Does not return anything. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 TEST::TEST() :  XFSMACHINE(0)
 {		
 	Clean();
@@ -227,34 +249,37 @@ TEST::TEST() :  XFSMACHINE(0)
 
 
 
-//-------------------------------------------------------------------
-//  TEST::~TEST
-/**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			13/08/2002 13:15:40
-//	
-//	@return 			
-//	*/
-//-------------------------------------------------------------------
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::~TEST
+* @brief      Destructor
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:07:46
+*
+* @return     Does not return anything. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 TEST::~TEST()
 {
 	Clean();
 }
 
 
-//-------------------------------------------------------------------
-//  XAPPLICATION::Create
-/**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			13/08/2002 11:02:38
-//	
-//	@return 			XAPPLICATION* : 
-//	*/
-//-------------------------------------------------------------------
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XAPPLICATION::Create
+* @brief      Create Application class
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:08:25
+*
+* @return     XAPPLICATION* : 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XAPPLICATION* XAPPLICATION::Create()
 {
 	test = new TEST();
@@ -264,17 +289,19 @@ XAPPLICATION* XAPPLICATION::Create()
 
 
 
-//-------------------------------------------------------------------
-//  TEST::Ini
-/**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			13/08/2002 13:17:31
-//	
-//	@return 			bool : 
-//	*/
-//-------------------------------------------------------------------
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Ini
+* @brief      Ini TEST application
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:09:08
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Ini()
 {		
 	//-------------------------------------------------------------------------------------------------
@@ -285,9 +312,9 @@ bool TEST::Ini()
 
 	XSTRING string;
 	
-	string = APPLICATION_NAMEAPP;			XDEBUG_SETAPPLICATIONNAME(string);																		
-	XDEBUG_SETAPPLICATIONVERSION(APPLICATION_VERSION, APPLICATION_SUBVERSION, APPLICATION_SUBVERSIONERR);
-	string = __L("");							  	XDEBUG_SETAPPLICATIONID(string);
+	string = APPLICATION_NAMEAPP;			XDEBUGTRACE_SETAPPLICATIONNAME(string);																		
+	XDEBUGTRACE_SETAPPLICATIONVERSION(APPLICATION_VERSION, APPLICATION_SUBVERSION, APPLICATION_SUBVERSIONERR);
+	string = __L("");							  	XDEBUGTRACE_SETAPPLICATIONID(string);
 
 	//-------------------------------------------------------------------------------------------------
 
@@ -297,11 +324,11 @@ bool TEST::Ini()
 
 	//----------------------------------------------------------------	-------------------------------
 
-	XDEBUG_SETTARGET(0, XDEBUGCTRLTYPE_NET			, XDEBUG_DEFAULT_NETAIM1);	
-	XDEBUG_SETTARGET(1, XDEBUGCTRLTYPE_NET			, XDEBUG_DEFAULT_NETAIM2);	
-	XDEBUG_SETTARGET(2, XDEBUGCTRLTYPE_NET			, XDEBUG_DEFAULT_NETAIM3);	
-	XDEBUG_SETTARGET(3, XDEBUGCTRLTYPE_NET			, XDEBUG_DEFAULT_NETAIM4);	
-	XDEBUG_SETTARGET(4, XDEBUGCTRLTYPE_NET			, XDEBUG_DEFAULT_NETAIM5);	
+	XDEBUGTRACE_SETTARGET(0, XDEBUGTRACE_TYPE_NET			, XDEBUGTRACE_DEFAULT_NETAIM1);	
+	XDEBUGTRACE_SETTARGET(1, XDEBUGTRACE_TYPE_NET			, XDEBUGTRACE_DEFAULT_NETAIM2);	
+	XDEBUGTRACE_SETTARGET(2, XDEBUGTRACE_TYPE_NET			, XDEBUGTRACE_DEFAULT_NETAIM3);	
+	XDEBUGTRACE_SETTARGET(3, XDEBUGTRACE_TYPE_NET			, XDEBUGTRACE_DEFAULT_NETAIM4);	
+	XDEBUGTRACE_SETTARGET(4, XDEBUGTRACE_TYPE_NET			, XDEBUGTRACE_DEFAULT_NETAIM5);	
 	
 	InitFSMachine();
 
@@ -313,18 +340,18 @@ bool TEST::Ini()
 
 
 
-
-//-------------------------------------------------------------------
-//  TEST::InitFSMachine
-/**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			15/03/2004 16:34:54
-//	
-//	@return				bool : 
-//	*/
-//-------------------------------------------------------------------
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::InitFSMachine
+* @brief      Init FSmachine for application
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:09:41
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::InitFSMachine()
 {
 	if(!AddState(	TEST_XFSMSTATE_NONE							, 												 												
@@ -350,16 +377,18 @@ bool TEST::InitFSMachine()
 
 
 
-//-------------------------------------------------------------------
-//  TEST::FirstUpdate
-/**
-//	
-//	@author        Abraham J. Velez
-//	@version       20/2/2003   16:26:12
-//	
-//	@return        bool : 
-*/
-//-------------------------------------------------------------------
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::FirstUpdate
+* @brief      First update for application. Active the unit test
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:11:54
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::FirstUpdate()
 {
 	if(!xfactory) return false;
@@ -407,14 +436,14 @@ bool TEST::FirstUpdate()
 	if(modeserver)
 		{
 			string.Format(__L("%s Server"), APPLICATION_NAMEAPP);			
-			XDEBUG_SETAPPLICATIONNAME(string);
+			XDEBUGTRACE_SETAPPLICATIONNAME(string);
 		}
  	 else
 		{
 			XSTRING string;
 			
 			string.Format(__L("%s Client"), APPLICATION_NAMEAPP);			
-			XDEBUG_SETAPPLICATIONNAME(string);
+			XDEBUGTRACE_SETAPPLICATIONNAME(string);
 		}
 
 	//--------------------------------------------------------------------------------------
@@ -427,7 +456,7 @@ bool TEST::FirstUpdate()
 
 	xconsole->PrintMessage(__L("\n\n"),0,false,false);
 	
-	XDEBUG_PRINTCOLOR(1, __L("Init App..."));
+	XDEBUGTRACE_PRINTCOLOR(1, __L("Init App..."));
 
 	//--------------------------------------------------------------------------------------
 
@@ -519,7 +548,7 @@ bool TEST::FirstUpdate()
 	//if(!Test_XSystem())																		return false;		  	
 	//if(!Test_DatabaseDBF())																return false;			
 	//if(!Test_DatabaseSQL(DBSQLDATABASE_TYPE_MYSQL))				return false;
-		if(!Test_DatabaseSQL(DBSQLDATABASE_TYPE_POSTGRESQL))	return false;	
+  //if(!Test_DatabaseSQL(DBSQLDATABASE_TYPE_POSTGRESQL))	return false;	
 	//if(!Test_DatabaseSQL(DBSQLDATABASE_TYPE_SQLITE))			return false;
 	//if(!Test_XFile())																			return false;		
 	//if(!Test_DIOPCap())																		return false;	
@@ -538,26 +567,25 @@ bool TEST::FirstUpdate()
 	//if(!Test_StringProtocol(modeserver))									return false;
 	//if(!Test_XDebug())																		return false;	
 	//if(!Test_String())																		return false;
+  if(!Test_SharedMemory(modeserver))				   					  return false;
 
 	return true;
 }
 
 
 
-
-
-
-//-------------------------------------------------------------------
-//  TEST::Update
-/**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			15/03/2004 16:53:03
-//	
-//	@return				bool : 
-//	*/
-//-------------------------------------------------------------------
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Update
+* @brief      Update for Application
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:15:27
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Update()
 {
   if(GetEvent()==TEST_XFSMEVENT_NONE) // Not new event
@@ -566,7 +594,7 @@ bool TEST::Update()
 				{
 					case TEST_XFSMSTATE_NONE 			: break;
 
-					case TEST_XFSMSTATE_INI	 			: if(xconsole->KBHit()) 
+ 					case TEST_XFSMSTATE_INI	 			: if(xconsole->KBHit()) 
 																						{ 
 																							SetExitStatus( XAPPLICATIONEXITTYPE_BYUSER); 
 																							SetEvent(TEST_XFSMEVENT_END);																							
@@ -598,18 +626,19 @@ bool TEST::Update()
 
 
 
-/*-------------------------------------------------------------------
-//  TEST::End
-*/ 
-/**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			14/05/2012 19:02:07
-//	
-//	@return 			bool : 
-//	*/
-/*-----------------------------------------------------------------*/
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::End
+* @brief      End For application
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:15:50
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::End()
 {		
 	
@@ -658,17 +687,19 @@ bool TEST::End()
 
 
 
-//-------------------------------------------------------------------
-//  TEST::Clean
-/**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			25/11/2002 11:49:57
-//	
-//	@return 			void : 
-//	*/
-//-------------------------------------------------------------------
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Clean
+* @brief      Clean variables for class TEST
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:16:19
+*
+* @return     void : does not return anything. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void TEST::Clean()
 {
 	xdatetime									= NULL;
@@ -683,20 +714,21 @@ void TEST::Clean()
 
 
 
-/*-------------------------------------------------------------------
-//	TEST::Test_Exceptions
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			07/04/2017 10:57:59
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_Exceptions
+* @brief      Unit Test Exceptions
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:16:55
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+
 void A()
 {
 	int* a=0;
@@ -722,24 +754,22 @@ bool TEST::Test_Exceptions()
 }
 
 
-
-
-
-/*-------------------------------------------------------------------
-//  TEST::Test_Hash
-*/ 
-/**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			01/12/2013 14:01:23
-//	
-//	@return 			bool : 
-//	@param				HASH : 
-//  @param				input : 
-//  @param				leyend : 
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_Hash
+* @brief      Unit Test Hash function
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:17:57
+*
+* @param[in]    HASH : class type to use in hash 
+* @param[in]    input : buffer to hash
+* @param[in]    leyend : leyend to id test
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_Hash(HASH* HASH, XBUFFER& input, XCHAR* leyend)
 {
 	if(!HASH) return false;
@@ -750,28 +780,29 @@ bool TEST::Test_Hash(HASH* HASH, XBUFFER& input, XCHAR* leyend)
 
 	HASH->GetResultString(result);
 			
-	xconsole->Printf(__L("%-12s : %s\n"),leyend, result.Get());
+	xconsole->Printf(__L("%-12s : %s\n"), leyend, result.Get());
 
 	return true;
 }
 
 
 
-/*-------------------------------------------------------------------
-//  TEST::Test_Cipher
-*/ 
-/**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			01/12/2013 14:01:45
-//	
-//	@return 			bool : 
-//	@param				cipher : 
-//  @param				input : 
-//  @param				leyend : 
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_Cipher
+* @brief      Unit Test Cipher
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:19:03
+*
+* @param[in]    cipher : class type to use in cipher
+* @param[in]    input : buffer to hash
+* @param[in]    leyend : leyend to id test
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_Cipher(CIPHER* cipher, XBUFFER& input, XCHAR* leyend)
 {
 	if(!cipher) return false;
@@ -820,19 +851,18 @@ bool TEST::Test_Cipher(CIPHER* cipher, XBUFFER& input, XCHAR* leyend)
 
 
 
-
-/*-------------------------------------------------------------------
-//  TEST::Test_Threads
-*/ 
-/**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/12/2013 10:47:25
-//	
-//	@return 			bool : 
-//	*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_Threads
+* @brief      Unit Test to Threads
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:20:37
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_Threads()
 {
   memset(threadwebclient,0,sizeof(XTHREAD*)*50);
@@ -844,7 +874,7 @@ bool TEST::Test_Threads()
 			if(threadwebclient[c]) threadwebclient[c]->Ini();
 		}
 
-	xsleep->MilliSeconds(150000);	
+	XSLEEP::GetInstance().MilliSeconds(150000);	
 
 	for(int c=0;c<1;c++)
 		{			
@@ -870,7 +900,7 @@ bool TEST::Test_WaitThread()
 		for(int c = 0; c < 6; c++)
 			{
 				if(c==3) thread->Run(false);
-				xsleep->Seconds(1);
+				XSLEEP::GetInstance().Seconds(1);
 			}
 		thread->End();
 		//thread->WaitToEnd();
@@ -882,19 +912,18 @@ bool TEST::Test_WaitThread()
 
 
 
-
-/*-------------------------------------------------------------------
-//  TEST::Test_XBuffer1
-*/ 
-/**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/12/2013 10:51:19
-//	
-//	@return 			bool : 
-//	*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_XBuffer1
+* @brief      Unit Test for XBuffer
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:26:48
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_XBuffer1()
 {
 	XBUFFER xbuffer;
@@ -928,18 +957,19 @@ bool TEST::Test_XBuffer1()
 
 
 
-/*-------------------------------------------------------------------
-//  TEST::Test_XBuffer2
-*/ 
-/**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/12/2013 10:51:13
-//	
-//	@return 			bool : 
-//	*/
-/*-----------------------------------------------------------------*/
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_XBuffer2
+* @brief      Unit Test for XBuffer
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:27:21
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_XBuffer2()
 {	
 	XBUFFER	data;
@@ -959,20 +989,19 @@ bool TEST::Test_XBuffer2()
 	
 
 
-/*-------------------------------------------------------------------
-//	TEST::Test_XBuffer3
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			26/04/2016 9:33:09
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_XBuffer3
+* @brief      Unit Test for XBuffer
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:28:55
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_XBuffer3()
 {	
 	XDWORD value    = 12345;
@@ -998,18 +1027,18 @@ bool TEST::Test_XBuffer3()
 
 
 
-/*-------------------------------------------------------------------
-//  TEST::Test_WEBClient
-*/ 
-/**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			01/12/2013 14:02:20
-//	
-//	@return 			bool : 
-//	*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_WEBClient
+* @brief      Unit Test for Web client
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:29:31
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_WEBClient()
 {	
 	DIOWEBCLIENT  webclient;
@@ -1033,7 +1062,7 @@ bool TEST::Test_WEBClient()
 			if(webclient.Get(url,webpage))
 				{			
 					handle.Set(webpage.Get(), webpage.GetSize());
-					XDEBUG_PRINTCOLOR(0,__L("recibir debug es muy mainstream"));
+					XDEBUGTRACE_PRINTCOLOR(0,__L("recibir debug es muy mainstream"));
 					xconsole->Print(handle.Get());
 					//break;
 					/*
@@ -1073,20 +1102,21 @@ bool TEST::Test_WEBClient()
 
 
 
-/*-------------------------------------------------------------------
-//	TEST::WEBServerRequest
-*/	
-/**	
-//	
-//	
-//	 
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			23/06/2016 10:52:52
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_WEBServerRequest
+* @brief      Unit Test for Web Server request 
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:30:12
+*
+* @param[in]  xevent : event to test
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_WEBServerRequest(DIOWEBSERVERXEVENT* xevent)
 {
 	if(!xevent)	return false;	
@@ -1143,24 +1173,23 @@ bool TEST::Test_WEBServerRequest(DIOWEBSERVERXEVENT* xevent)
 
 
 
-/*-------------------------------------------------------------------
-//	TEST::WEBServerSendFile
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			24/08/2016 18:17:53
-//	
-//	@return 			bool : 
-//
-//  @param				connexion : 
-//  @param				request : 
-//  @param				resource : 
-//  @param				iscached : 
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_WEBServerSendFile
+* @brief      Unit Test for Web Send file
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:31:33
+*
+* @param[in]    connexion : connexion of web server
+* @param[in]    request : request of web server
+* @param[in]    resource : resource of web server
+* @param[out]   iscached : is resource cached
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_WEBServerSendFile(DIOWEBSERVER_CONNEXION* connexion, DIOWEBSERVER_REQUEST* request, XSTRING& resource, bool& iscached)
 {	
 	XPATH								xpathfile;	
@@ -1213,23 +1242,20 @@ bool TEST::Test_WEBServerSendFile(DIOWEBSERVER_CONNEXION* connexion, DIOWEBSERVE
 
 
 
-
-
-/*-------------------------------------------------------------------
-//	TEST::Test_WEBServerTag
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			24/08/2016 18:33:30
-//	
-//	@return 			bool : 
-//
-//  @param				xevent : 
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_WEBServerTag
+* @brief      Unit Test Web server tag
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:33:46
+*
+* @param[in]  xevent : event of Web server with the TAG.
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_WEBServerTag(DIOWEBSERVERXEVENT* xevent)
 {
 	xevent->GetOutput()->Set(__L("<!-- TAG REMOVED -->"));
@@ -1238,21 +1264,18 @@ bool TEST::Test_WEBServerTag(DIOWEBSERVERXEVENT* xevent)
 
 
 
-
-/*-------------------------------------------------------------------
-//	TEST::Test_WEBServer
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			22/06/2016 15:53:11
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_WEBServer
+* @brief      Unit Test WEB server
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:34:35
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_WEBServer()
 {
 	DIOWEBSERVER*		webserver	=	NULL;
@@ -1260,10 +1283,7 @@ bool TEST::Test_WEBServer()
 	XSTRING					stringresult;
 	bool						status		= false;
 	XSTRING					autoaddress;
-	int							port			=8080;
-
-
-	
+	int							port			= 8080;
 
 	webserver = new DIOWEBSERVER(); 
 	xconsole->PrintMessage(__L("Activando servidor web  "), 1, true, false);	
@@ -1273,37 +1293,33 @@ bool TEST::Test_WEBServer()
 	xconsole->PrintMessage(stringresult.Get(), 0, false, true);
 
 	if(status)
-	{			
-	SubscribeEvent(DIOWEBSERVERXEVENTTYPE_REQUEST	    , (XSUBJECT*)webserver);
-	SubscribeEvent(DIOWEBSERVERXEVENTTYPE_TAGFOUND	  , (XSUBJECT*)webserver);
-	}
+	  {			
+  	  SubscribeEvent(DIOWEBSERVERXEVENTTYPE_REQUEST	    , (XSUBJECT*)webserver);
+	    SubscribeEvent(DIOWEBSERVERXEVENTTYPE_TAGFOUND	  , (XSUBJECT*)webserver);
+	  }
+
 	xconsole->PrintMessage(__L("Press a key to exit"), 0, false, true);	
 
 	while (!xconsole->KBHit());
 	delete(webserver);
-
-	
-	
 
 	return status;
 }
 
 
 
-
-/*-------------------------------------------------------------------
-//  TEST::Test_UARTDIOStream
-*/ 
-/**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/12/2013 9:31:00
-//	
-//	@return 			bool : 
-//	@param				modeserver : 
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_DIOStreamEnumLocal
+* @brief      Unit Test Enum Local para DIO Stream
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:35:51
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_DIOStreamEnumLocal()
 {
 	DIOSTREAMENUMDEVICES* enumdevices;
@@ -1385,21 +1401,21 @@ bool TEST::Test_DIOStreamEnumLocal()
 
 
 
-/*-------------------------------------------------------------------
-//	TEST::Test_TCPIPDIOStream
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			15/10/2014 17:06:45
-//	
-//	@return 			bool : 
-//
-//  @param				modeserver : 
-*/
-/*-----------------------------------------------------------------*/
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_DIOStreamUART
+* @brief      Unit Test Stream UART
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:36:32
+*
+* @param[in]  modeserver : 
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_DIOStreamUART(bool modeserver)
 {		
 	int uartspeed[] = { 300, 1200, 2400, 4800, 9600, 19200, 38400, 57600, 115200 };
@@ -1439,7 +1455,7 @@ bool TEST::Test_DIOStreamUART(bool modeserver)
 									while(diostream->GetConnectStatus() != DIOSTREAMSTATUS_CONNECTED)
 										{
 											if(xconsole->KBHit()) break;
-											xsleep->MilliSeconds(50);
+											XSLEEP::GetInstance().MilliSeconds(50);
 										}
 
 									xconsole->Printf(__L("\nOpen (%d bauds) ...\n"), uartspeed[c]);
@@ -1499,20 +1515,18 @@ bool TEST::Test_DIOStreamUART(bool modeserver)
 
 
 
-/*-------------------------------------------------------------------
-//	TEST::Test_DIOStreamUARTForMicro
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			23/01/2017 11:37:54
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_DIOStreamUARTForMicro
+* @brief      Unit Test DIO Stream UART for Microcontroler
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:37:40
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 
 bool TEST::Test_DIOStreamUARTForMicroReadCommand(DIOSTREAM*	diostream, XBUFFER& command)
 {
@@ -1539,7 +1553,6 @@ bool TEST::Test_DIOStreamUARTForMicroReadCommand(DIOSTREAM*	diostream, XBUFFER& 
 																							 
 	return true;
 }
-
 
 //------------------------------------------------------------------
 
@@ -1600,7 +1613,7 @@ bool TEST::Test_DIOStreamUARTForMicro()
 							while(diostream->GetConnectStatus() != DIOSTREAMSTATUS_CONNECTED)
 								{
 									if(xconsole->KBHit()) break;
-									xsleep->MilliSeconds(50);
+									XSLEEP::GetInstance().MilliSeconds(50);
 								}
 
 							while(!xconsole->KBHit())
@@ -1661,22 +1674,20 @@ bool TEST::Test_DIOStreamUARTForMicro()
 
 
 
-
-/*-------------------------------------------------------------------
-//	TEST::Test_DIOStreamTCPIP
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			15/10/2014 17:06:17
-//	
-//	@return 			bool : 
-//
-//  @param				modeserver : 
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_DIOStreamTCPIP
+* @brief      Unit Test DIO Stream TCPIP 
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:38:42
+*
+* @param[in]  modeserver : Is server or client
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_DIOStreamTCPIP(bool modeserver)
 {	
 	DIOSTREAMTCPIPCONFIG * diostreamcfg;
@@ -1714,7 +1725,7 @@ bool TEST::Test_DIOStreamTCPIP(bool modeserver)
 											{
 												if(xconsole->KBHit()) break;
 
-												xsleep->MilliSeconds(50);
+												XSLEEP::GetInstance().MilliSeconds(50);
 											}
 
 											xconsole->Print(__L("Open Server...\n"));
@@ -1742,7 +1753,7 @@ bool TEST::Test_DIOStreamTCPIP(bool modeserver)
 										{
 											if(xconsole->KBHit()) break;
 
-											xsleep->MilliSeconds(50);
+											XSLEEP::GetInstance().MilliSeconds(50);
 										}	
 
 									localenumservers->StopSearch(true);
@@ -1767,7 +1778,7 @@ bool TEST::Test_DIOStreamTCPIP(bool modeserver)
 															{
 																if(xconsole->KBHit()) break;
 
-																xsleep->MilliSeconds(50);
+																XSLEEP::GetInstance().MilliSeconds(50);
 															}
 
 															xconsole->Print(__L("Open Client...\n"));
@@ -1780,7 +1791,7 @@ bool TEST::Test_DIOStreamTCPIP(bool modeserver)
 
 															xconsole->Print(__L("Close...\n"));
 
-															xsleep->MilliSeconds(1000);
+															XSLEEP::GetInstance().MilliSeconds(1000);
 
 															diostream->Close();
 
@@ -1800,23 +1811,21 @@ bool TEST::Test_DIOStreamTCPIP(bool modeserver)
 		
 	return true;
 }
-	
-	
 
 
 
-/*-------------------------------------------------------------------
-//  TEST::Test_OBEX
-*/ 
-/**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/12/2013 9:29:25
-//	
-//	@return 			bool : 
-//	*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_OBEX
+* @brief      Unit Test Obex protocol
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:39:46
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_OBEX()
 {
 	xconsole->Printf(__L("Inicializando conexion...\n"));
@@ -1852,7 +1861,7 @@ bool TEST::Test_OBEX()
 			
 							while(enumdevicesremote->IsSearching())
 								{
-									xsleep->MilliSeconds(10);
+									XSLEEP::GetInstance().MilliSeconds(10);
 								}
 					
 							for(int c=0;c<(int)enumdevicesremote->GetDevices()->GetSize();c++)
@@ -1892,7 +1901,7 @@ bool TEST::Test_OBEX()
 											DIOSTREAMBLUETOOTH* diostream = (DIOSTREAMBLUETOOTH*)diofactory->CreateStreamIO( diostreamcfg);
 											if(diostream)
 												{										
-													DIOOBEXPUSH* obexpush = new DIOOBEXPUSH(diostream, xsystem->HardwareUseLittleEndian());
+													DIOOBEXPUSH* obexpush = new DIOOBEXPUSH(diostream, XSYSTEM::GetInstance().HardwareUseLittleEndian());
 													if(obexpush)
 														{
 															if(obexpush->Ini(15))
@@ -1917,7 +1926,7 @@ bool TEST::Test_OBEX()
 																	while(obexpush->IsSending())
 																		{
 																			if(xconsole->KBHit()) break;
-																			xsleep->MilliSeconds(10);
+																			XSLEEP::GetInstance().MilliSeconds(10);
 																		}
 													
 																	obexpush->End();											
@@ -1947,226 +1956,18 @@ bool TEST::Test_OBEX()
 
 
 
-
-/*-------------------------------------------------------------------
-//  TEST::Test_ATCommand
-*/ 
-/**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/12/2013 9:34:10
-//	
-//	@return 			bool : 
-//	*/
-/*-----------------------------------------------------------------*/
-/*
-bool TEST::Test_ATCommand()
-{
-	DIOSTREAMENUMDEVICES*			 enumdeviceslocal	 = NULL;
-	DIOSTREAMENUMDEVICES*			 enumdevicesremote = NULL;
-	DIOSTREAMDEVICEBLUETOOTH*  devicelocal			 = NULL;
-	DIOSTREAMDEVICEBLUETOOTH*  deviceremote			 = NULL;
-
-	enumdeviceslocal = diofactory->CreateStreamEnumDevices( DIOSTREAMENUMTYPE_BLUETOOTH_LOCAL);
-	if(enumdeviceslocal)
-		{					
-			enumdeviceslocal->Search();
-
-			if(enumdeviceslocal->GetDevices()->GetSize())
-				{
-					devicelocal = (DIOSTREAMDEVICEBLUETOOTH*)enumdeviceslocal->GetDevices()->Get(0);
-					devicelocal->DebugPrintInfo(xconsole);	
-				}
-			 else devicelocal = NULL;
-
-			if(devicelocal)
-				{
-					enumdevicesremote = diofactory->CreateStreamEnumDevices( DIOSTREAMENUMTYPE_BLUETOOTH_REMOTE);
-					if(enumdevicesremote)
-						{					
-							enumdevicesremote->Search();
-
-							DIOSTREAMDEBUGPRINTINFO(xconsole, __L("------------------------------------------------------"));
-							DIOSTREAMDEBUGPRINTINFO(xconsole, __L("Remote Bluetooth modules:"));
-			
-							xtimer->Reset();
-			
-							while(enumdevicesremote->IsSearching())
-								{
-									xsleep->MilliSeconds(10);
-								}
-					
-							for(int c=0;c<(int)enumdevicesremote->GetDevices()->GetSize();c++)
-								{					
-									DIOSTREAMDEVICEBLUETOOTH* devicesearch = (DIOSTREAMDEVICEBLUETOOTH*)enumdevicesremote->GetDevices()->Get(c);
-									if(devicesearch) 
-										{												
-											if(!devicesearch->GetName()->Compare(__L("Nexus 5")))
-												{																																		
-													deviceremote = devicesearch;
-													break;
-												} 											
-										}
-								}
-
-							if(deviceremote)				
-								{					
-									DIOSTREAMBLUETOOTHCONFIG* diostreamcfg = new DIOSTREAMBLUETOOTHCONFIG();
-									if(diostreamcfg)
-										{			
-											
-											//DIOMAC mac;
-											//XBYTE  addrmac[] = { 0x00, 0x12, 0xD1, 0x6C, 0x80, 0x79  };
-
-											//mac.Set(addrmac);
-
-											
-							
-											//diostreamcfg->GetRemoteMAC()->Set(mac.Get());
-											//diostreamcfg->SetRemoteChannel(2);
-											
-
-											//DIOSTREAMDEVICEBLUETOOTH_NOCHANNEL
-
-											diostreamcfg->SetMode(DIOSTREAMMODE_CLIENT);
-											diostreamcfg->GetLocalMAC()->Set(devicelocal->GetMAC()->Get());																		
-											diostreamcfg->GetRemoteMAC()->Set(deviceremote->GetMAC()->Get());						
-											diostreamcfg->SetRemoteChannel(deviceremote->GetChannelDialUpNetworking());
-											
-											diostreamcfg->GetPIN()->Set(__L("1234"));
-
-											DIOSTREAMBLUETOOTH* diostream = (DIOSTREAMBLUETOOTH*)diofactory->CreateStreamIO( diostreamcfg);
-											if(diostream)
-												{																		 									
-													DIOATCMDGSM* dioatcmdgsm =  new DIOATCMDGSM(diostream);
-													if(!dioatcmdgsm) return false;
-					
-													xconsole->PrintMessage(__L(" Comprobando dispositivo... "),1,false,false);
-
-													if(dioatcmdgsm->Ini(15, true, true))
-														{																	
-															xconsole->PrintMessage(__L("\r Dispositivo comandos AT accesible..."),1,false,true);
-															xconsole->PrintMessage(__L(""),0,false,true);
-
-															XSTRING string;
-															XSTRING value;
-
-															for(int c=0;c<10;c++)
-																{
-																	string.Empty();
-							
-																	switch(c)
-																		{
-																			case  0 : if(dioatcmdgsm->GetManufactured(value)==DIOATCMD_ERROR_NONE)					string.Format(__L("Fabricante             : %s"),value.Get());   
-																								break;
-
-																			case  1 : if(dioatcmdgsm->GetModel(value)==DIOATCMD_ERROR_NONE)									string.Format(__L("Modelo de terminal     : %s"),value.Get());   
-																								break;
-											
-																			case  2 : if(dioatcmdgsm->GetIMEI(value)==DIOATCMD_ERROR_NONE)									string.Format(__L("IMEI                   : %s"),value.Get());   
-																								break;
-
-																			case  3 : if(dioatcmdgsm->GetVersion(value)==DIOATCMD_ERROR_NONE)								string.Format(__L("Version                : %s"),value.Get());   
-																								break;	
-														
-																			case  4 : { int RSSI = 0;
-																									int BER  = 0;
-																			
-																									if(dioatcmdgsm->GetSignalQuality(RSSI,BER)==DIOATCMD_ERROR_NONE)		string.Format(__L("Calidad de senal       : (RSSI %d)  (BER %d)"),RSSI,BER);																																							
-																								}
-																								break;		
-
-																			case  5 : { bool avaible;
-
-																									if(dioatcmdgsm->IsAvailableServiceGSM(avaible)==DIOATCMD_ERROR_NONE)	string.Format(__L("Disp. Servicios GSM    : %s") , avaible?__L("Si"):__L("No"));                           
-																								}
-																								break;
-
-																			case  6 : if(dioatcmdgsm->GetIMSI(value)==DIOATCMD_ERROR_NONE)									string.Format(__L("IMSI                   : %s"),value.Get());   
-																								break;													
-																									
-
-																			case  7 : { XBYTE support;
-															
-																									if(dioatcmdgsm->GetSMSSupport(support)==DIOATCMD_ERROR_NONE)				string.Format(__L("Soporte SMS            : servicio %d, destino %s, origen %s, broadcast %s")	, (support>>4)  
-																																																																																																											, support&DIOATCMDGSM_SMSSUPPORT_MOVILETERMINATED ?__L("Si"):__L("No")
-																																																																																																											, support&DIOATCMDGSM_SMSSUPPORT_MOVILEORIGINATED ?__L("Si"):__L("No")
-																																																																																																											, support&DIOATCMDGSM_SMSSUPPORT_BROADCAST			   ?__L("Si"):__L("No"));																				
-																								}
-																								break;	
-													
-																			case  8 : { XBYTE format;
-																									XBYTE support;
-																																						
-																									if(dioatcmdgsm->GetSMSFormat(format,false) ==DIOATCMD_ERROR_NONE) 
-																										{
-																											if(dioatcmdgsm->GetSMSFormat(support,true)==DIOATCMD_ERROR_NONE) 
-																												{
-																													XSTRING strformat;
-																													XSTRING strsupport;
-
-																													strformat = __L("desconocido");
-																													if(format == DIOATCMDGSM_SMSFORMAT_PDU)  strformat = __L("PDU");
-																													if(format == DIOATCMDGSM_SMSFORMAT_TXT)  strformat = __L("Texto");
-
-																													if(support&DIOATCMDGSM_SMSFORMAT_PDU)		 strsupport = __L("PDU");
-																													if(support&DIOATCMDGSM_SMSFORMAT_TXT)     
-																														{
-																															if(!strsupport.IsEmpty()) strsupport += __L(" + ");
-																															strsupport += __L("Texto");
-																														}
-
-
-																													string.Format(__L("Formato de SMS         : %s  (valido %s)"),strformat.Get(),strsupport.Get());																																							
-																												}
-																										}
-																								}
-																								break;	
-
-																			 case 9 : if(dioatcmdgsm->GetSMSCenter(value)==DIOATCMD_ERROR_NONE)						string.Format(__L("Centro de mensajes     : %s"),value.Get());   
-																								break;		
-																		}
-											
-																	if(!string.IsEmpty()) xconsole->PrintMessage(string.Get(),1,true,true);
-																}												
-											
-															xconsole->PrintMessage(__L("Enviando mensaje ... "),1,true,false);	
-
-															if(dioatcmdgsm->SendSMS(__L("649668886"),__L("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ$%&/{}[]()\\*#@+-\"=;:.,_|")) == DIOATCMD_ERROR_NONE) 	 //  ¿?¡!																		
-																			xconsole->PrintMessage(__L("Ok."),0,false,true);	
-																 else xconsole->PrintMessage(__L("Error!"),0,false,true);	
-											 
-																
-															dioatcmdgsm->End();
-
-														} else xconsole->PrintMessage(__L("\r Dispositivo de comandos AT NO accesible!"),1,true,true);	
-									
-
-													delete dioatcmdgsm;
-												}
-											
-											diofactory->DeleteStreamIO(diostream);
-										}
-
-									delete diostreamcfg;
-								}
-
-						}
-
-					diofactory->DeleteStreamEnumDevices(enumdevicesremote);			
-				}
-
-			diofactory->DeleteStreamEnumDevices(enumdeviceslocal);			
-		}
-
-	xconsole->Printf(__L("Terminada conexion AT.\n"));
-
-	return true;
-}
-*/
-
-
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_ATCommand
+* @brief      Unit Test AT command
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:40:49
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_ATCommand()
 {				
 	xconsole->PrintMessage(__L("Creando dispositivo... "), 1 , true, true);	
@@ -2272,7 +2073,7 @@ bool TEST::Test_ATCommand()
 											
 			xconsole->PrintMessage(__L("Enviando mensaje ... "),1,true,false);	
 
-			if(dioatcmdgsm->SendSMS(__L("649668886"),__L("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ$%&/{}[]()\\*#@+-\"=;:.,_|")) == DIOATCMD_ERROR_NONE) 	 //  ¿?¡!																		
+			if(dioatcmdgsm->SendSMS(__L("64xxxxxx"),__L("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ$%&/{}[]()\\*#@+-\"=;:.,_|")) == DIOATCMD_ERROR_NONE) 	 //  ¿?¡!																		
 						xconsole->PrintMessage(__L("Ok."),0,false,true);	
 				else xconsole->PrintMessage(__L("Error!"),0,false,true);	
 											 
@@ -2296,18 +2097,18 @@ bool TEST::Test_ATCommand()
 
 
 
-/*-------------------------------------------------------------------
-//  TEST::Test_ClientBTModuleCSR
-*/ 
-/**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/12/2013 9:36:59
-//	
-//	@return 			bool : 
-//	*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_ClientBTModuleCSR
+* @brief      Unit Test BT module CSR
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:42:08
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_ClientBTModuleCSR()
 {
 
@@ -2345,7 +2146,7 @@ bool TEST::Test_ClientBTModuleCSR()
 							xtimer->Reset();
 							while(enumdevicesremote->IsSearching())
 								{
-									xsleep->MilliSeconds(10);
+									XSLEEP::GetInstance().MilliSeconds(10);
 								}
 					
 							for(int c=0;c<(int)enumdevicesremote->GetDevices()->GetSize();c++)
@@ -2419,20 +2220,18 @@ bool TEST::Test_ClientBTModuleCSR()
 
 
 
-/*-------------------------------------------------------------------
-//	 TEST::Test_SSHReverse
-*/
-/**
-//
-//	
-//
-//	@author		Abraham J. Velez 
-//	@version	03/01/2018 14:18:05
-//	@return		bool : 
-//
-//	@param		 : 
-//
-*//*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_SSHReverse
+* @brief      Unit Test SSHReverse
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:43:01
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_SSHReverse()
 {
 	XSTRING		string;
@@ -2462,9 +2261,6 @@ bool TEST::Test_SSHReverse()
 			delete webscraperpublicip;
 		}
 	
-	
-		
-	
 	string.Format(__L("public IP            : [%s]"), publicIPstring.Get());
 	xconsole->PrintMessage(string.Get(), 1, true, true);
 	
@@ -2491,7 +2287,7 @@ bool TEST::Test_SSHReverse()
 			XBYTE key = 0;
 			while(!xconsole->KBHit())
 				{
-					xsleep->MilliSeconds(100);
+					XSLEEP::GetInstance().MilliSeconds(100);
 				}
 				
 			key = xconsole->GetChar();						
@@ -2521,21 +2317,18 @@ bool TEST::Test_SSHReverse()
 
 
 
-
-
-
-/*-------------------------------------------------------------------
-//  TEST::Test_HASHGeneric
-*/ 
-/**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/12/2013 9:42:04
-//	
-//	@return 			bool : 
-//	*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_HASHGeneric
+* @brief      Unit Test Hash Generic
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:43:32
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_HASHGeneric()
 {
 	
@@ -2626,18 +2419,19 @@ bool TEST::Test_HASHGeneric()
 
 
 
-/*-------------------------------------------------------------------
-//  TEST::Test_HASHCOMP128
-*/ 
-/**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/12/2013 9:42:00
-//	
-//	@return 			bool : 
-//	*/
-/*-----------------------------------------------------------------*/
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_HASHCOMP128
+* @brief      Unit Test HASH COMP 128
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:44:00
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_HASHCOMP128()
 { 
 	// Rand					: 58 E3 5D D5 D0 DD F8 5E CF F0 58 1C FA 14 DB A6
@@ -2693,19 +2487,18 @@ bool TEST::Test_HASHCOMP128()
 	
 
 
-
-/*-------------------------------------------------------------------
-//  TEST::Test_CIPHERSimetric
-*/ 
-/**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			12/03/2014 10:45:32
-//	
-//	@return 			bool : 
-//	*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_CIPHERSimetric
+* @brief      Unit Test Cipher Simetric
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:44:29
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_CIPHERSimetric()
 {
 	XBUFFER								input;
@@ -2751,19 +2544,18 @@ bool TEST::Test_CIPHERSimetric()
 
 
 
-
-/*-------------------------------------------------------------------
-//  TEST::Test_CIPHERRSA
-*/ 
-/**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			12/03/2014 10:46:03
-//	
-//	@return 			bool : 
-//	*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_CIPHERRSA
+* @brief      Unit Test  Cipher RSA
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:45:10
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_CIPHERRSA()
 {
 	//rsa_self_test(1);
@@ -2948,19 +2740,18 @@ bool TEST::Test_CIPHERRSA()
 
 
 
-
-/*-------------------------------------------------------------------
-//  TEST::Test_HASHFile
-*/ 
-/**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/12/2013 9:59:50
-//	
-//	@return 			bool : 
-//	*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_HASHFile
+* @brief      Unit Test HASH File
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:45:43
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_HASHFile()
 {
 	XPATH pathname;
@@ -2999,21 +2790,23 @@ bool TEST::Test_HASHFile()
 
 
 
-
-/*-------------------------------------------------------------------
-//  TEST::Test_Ping
-*/ 
-/**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/12/2013 10:37:37
-//	
-//	@return 			bool : 
-//	*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_Ping
+* @brief      Unit Test Ping 
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:46:11
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_Ping()
 {
+
+  #ifdef DIOPING_ACTIVE
+
 	/*
 	DIOPING* ping = (DIOPING*)diofactory->CreatePing();
 	if(ping)
@@ -3089,7 +2882,6 @@ bool TEST::Test_Ping()
 	return true;
 
 
-
 	/*
 	DIOPING* ping = diofactory->CreatePing;
 	if(ping)
@@ -3134,23 +2926,24 @@ bool TEST::Test_Ping()
 
 	return true;
 	*/
+
+  #endif
 }		
 	
 
 
-
-/*-------------------------------------------------------------------
-//  TEST::Test_DIOStreamTCPIP2
-*/ 
-/**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/12/2013 10:24:14
-//	
-//	@return 			bool : 
-//	*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_DIOStreamTCPIP2
+* @brief      Unit Test 2 DIO Stream TCPIP 
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:46:54
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_DIOStreamTCPIP2()
 {
 	xconsole->PrintMessage(__L(" Init ..."),1,true,true);	
@@ -3176,7 +2969,7 @@ bool TEST::Test_DIOStreamTCPIP2()
 										{
 											xconsole->Printf(__L("    Check conexion [%d] ...  \r") , xtimer->GetMeasureSeconds());		
 
-											xsleep->MilliSeconds(500);
+											XSLEEP::GetInstance().MilliSeconds(500);
 
 											if(xtimer->GetMeasureSeconds()>10)  
 												{
@@ -3225,19 +3018,18 @@ bool TEST::Test_DIOStreamTCPIP2()
 
 
 
-
-/*-------------------------------------------------------------------
-//  TEST::Test_WebScrapers
-*/ 
-/**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/12/2013 10:41:55
-//	
-//	@return 			bool : 
-//	*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_WebScrapers
+* @brief      Unit Test Web Scrapper
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:47:28
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_WebScrapers()
 {
 	DIOWEBSCRAPERPUBLICIP*				publicip				= new DIOWEBSCRAPERPUBLICIP;	
@@ -3465,18 +3257,19 @@ bool TEST::Test_WebScrapers()
 
 
 
-/*-------------------------------------------------------------------
-//  TEST::Test_MACManufactured
-*/ 
-/**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/12/2013 10:41:09
-//	
-//	@return 			bool : 
-//	*/
-/*-----------------------------------------------------------------*/
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_MACManufactured
+* @brief      Unit Test MAC Manufactured
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:48:00
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_MACManufactured()
 {
 	DIOMACMANUFACTURED* macmanufactured = new DIOMACMANUFACTURED;
@@ -3524,20 +3317,18 @@ bool TEST::Test_MACManufactured()
 
 
 
-
-
-/*-------------------------------------------------------------------
-//  TEST::Test_Date1
-*/ 
-/**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/12/2013 10:19:13
-//	
-//	@return 			bool : 
-//	*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_Date1
+* @brief      Unit Test 1 Date 
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:48:31
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_Date1()
 {
 	if(!xdatetime) return false;
@@ -3597,19 +3388,18 @@ bool TEST::Test_Date1()
 
 
 
-
-/*-------------------------------------------------------------------
-//  TEST::Test_Date2
-*/ 
-/**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/12/2013 10:18:24
-//	
-//	@return 			bool : 
-//	*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_Date2
+* @brief      Unit Test 2 Date
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:48:53
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_Date2()
 {
 	if(!xdatetime)	return false;
@@ -3647,7 +3437,7 @@ bool TEST::Test_Date2()
 			xdatetime->SetDay(29);
 			xdatetime->AddYears(-1);
 
-			xsleep->MilliSeconds(100);
+			XSLEEP::GetInstance().MilliSeconds(100);
 
 			xdatetime->GetDayOfWeekString(dayofweekstring);
 
@@ -3661,18 +3451,20 @@ bool TEST::Test_Date2()
 
 
 
-/*-------------------------------------------------------------------
-//  TEST::Test_NTP
-*/ 
-/**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/12/2013 10:34:57
-//	
-//	@return 			bool : 
-//	*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_NTP
+* @brief      Unit Test NTP protocol
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:49:18
+*
+* @param[in]    ) : 
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_NTP()
 {
 	DIONTP* ntp = new DIONTP;
@@ -3696,7 +3488,7 @@ bool TEST::Test_NTP()
 					(*url) = __L("1.es.pool.ntp.org");
 		
 
-					if(ntp->GetTime((*url), 5, xsystem->HardwareUseLittleEndian(), (*xdatetime)))
+					if(ntp->GetTime((*url), 5, XSYSTEM::GetInstance().HardwareUseLittleEndian(), (*xdatetime)))
 						{
 							xconsole->PrintMessage(__L("OK"),1,false,true);	
 						}
@@ -3728,20 +3520,18 @@ bool TEST::Test_NTP()
 
 
 
-
-
-/*-------------------------------------------------------------------
-//  TEST::Test_Log
-*/ 
-/**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/12/2013 10:12:16
-//	
-//	@return 			bool : 
-//	*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_Log
+* @brief      Unit Test Log functions
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:49:43
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_Log()
 {
 	XLOG::GetInstance().SetLimit(XLOGTYPELIMIT_SIZE, 1024*500, 10);		
@@ -3782,20 +3572,18 @@ bool TEST::Test_Log()
 
 
 
-
-
-/*-------------------------------------------------------------------
-//  TEST::Test_Scheduler
-*/ 
-/**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/12/2013 10:09:37
-//	
-//	@return 			bool : 
-//	*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_Scheduler
+* @brief      Unit Test Sheduler
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:50:16
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_Scheduler()
 {		
 	XSCHEDULER* xscheduler = new XSCHEDULER;
@@ -3845,7 +3633,7 @@ bool TEST::Test_Scheduler()
 
 					while(!xconsole->KBHit())
 						{
-							xsleep->MilliSeconds(10);
+							XSLEEP::GetInstance().MilliSeconds(10);
 						}
 
 					UnSubscribeEvent(XEVENTTYPE_SCHEDULER, xscheduler);
@@ -3864,20 +3652,18 @@ bool TEST::Test_Scheduler()
 
 
 
-
-
-/*-------------------------------------------------------------------
-//  TEST::Test_Script
-*/ 
-/**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/12/2013 10:07:51
-//	
-//	@return 			bool : 
-//	*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_Script
+* @brief      Unit Test Script
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 14:50:37
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_Script()
 {			
 	SubscribeEvent(SCRIPTXEVENTTYPE_ERROR, this);						
@@ -3907,6 +3693,7 @@ bool TEST::Test_Script()
 		}
 	*/
 
+  /*
 	SCRIPTLUA* script = new SCRIPTLUA();
 	if(script)
 		{
@@ -3928,7 +3715,7 @@ bool TEST::Test_Script()
 
 			delete script;
 		}
-
+  */
 	
 
 	UnSubscribeEvent(SCRIPTXEVENTTYPE_ERROR, this);		
@@ -3939,87 +3726,23 @@ bool TEST::Test_Script()
 
 
 
-
-/*-------------------------------------------------------------------
-//  TEST::Test_OrganicCipherDB
-*/ 
-/**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			01/12/2013 14:06:05
-//	
-//	@return 			bool : 
-//	*/
-/*-----------------------------------------------------------------*/
-bool TEST::Test_OrganicCipherDB()
-{
-	XPATH	xpath;
-
-	CIPHERAES* cipher = new CIPHERAES();
-	if(cipher)
-		{
-			CIPHERKEYSYMMETRICAL key;	
-			XBYTE								 keydata[]		  = { 0x53, 0x54, 0x45, 0x56, 0x45, 0x43, 0x53, 0x54, 0x45, 0x56, 0x45, 0x43, 0x53, 0x54, 0x45, 0x56  };
-  
-
-			key.Set(keydata, sizeof(keydata));	
-
-			cipher->SetChainingMode(CIPHERCHAININGMODE_CFB);				
-			cipher->SetPaddingType(XBUFFER_PADDINGTYPE_ZEROS); 			
-			cipher->SetKey(&key);
-
-			xpath = __L("D:\\Projects\\Test\\resources\\Stevec.dat");
-
-			XFILE* xfile = xfactory->Create_File();
-			if(xfile)
-				{
-					if(xfile->Open(xpath))
-						{
-							XBUFFER xbuffer;
-							
-							xbuffer.Resize(xfile->GetSize());
-
-							if(xfile->Read(xbuffer.Get(),xfile->GetSize()))
-								{
-
-
-								}
-
-							xbuffer.Resize( (((xfile->GetSize()/16)+1)*16));
-
-
-							cipher->Uncipher(xbuffer);
-
-							xfile->Close();
-						}
-
-					xfactory->Delete_File(xfile);
-				}
-
-			delete cipher;
-		}
-
-	return true;
-}	
-
-
-
-
-/*-------------------------------------------------------------------
-//  TEST::Test_AOSONGSensor
-*/ 
-/**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/12/2013 9:16:12
-//	
-//	@return 			bool : 
-//	*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_AOSONGSensor
+* @brief      Unit Test AOSNGSensor
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 15:33:42
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_AOSONGSensor()
 {
+
+  #ifdef DIOGPIO_ACTIVE
+
 	int counter = 0;
 
 	DIOGPIO*	diogpio = diofactory->CreateGPIO();
@@ -4047,7 +3770,7 @@ bool TEST::Test_AOSONGSensor()
 											xconsole->Printf(__L("[%5d] Error al leer, datos no disponibles.											 \r"), counter);																		
 										}
 										
-									xsleep->Seconds(1);
+									XSLEEP::GetInstance().Seconds(1);
 
 								} while(!xconsole->KBHit());
 
@@ -4060,29 +3783,30 @@ bool TEST::Test_AOSONGSensor()
 			diofactory->DeleteGPIO(diogpio);
 		}
 
+  #endif
+
 	return true;
 }
 
 
 
-
-
-/*-------------------------------------------------------------------
-//	TEST::Test_Rele220V
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			19/02/2016 10:29:19
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_Rele220V
+* @brief      Unit Test Rele 220v
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 15:34:16
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_Rele220V()
 {
+
+  #ifdef DIOGPIO_ACTIVE
+
 	#define RELE220V_DATAPIN	18
 
 	DIOGPIO*	diogpio = diofactory->CreateGPIO();
@@ -4095,10 +3819,10 @@ bool TEST::Test_Rele220V()
 					
 					do{ 
 							diogpio->Set(RELE220V_DATAPIN, true);  
-							xsleep->Seconds(1);
+							XSLEEP::GetInstance().Seconds(1);
 							
 							diogpio->Set(RELE220V_DATAPIN, false);  
-							xsleep->Seconds(1);
+							XSLEEP::GetInstance().Seconds(1);
 
 					} while(!xconsole->KBHit());
 						
@@ -4108,24 +3832,25 @@ bool TEST::Test_Rele220V()
 			diofactory->DeleteGPIO(diogpio);
 		}
 
+  #endif
+
 	return true;
 }
 
 
 
-
-/*-------------------------------------------------------------------
-//  TEST::Test_TimeString
-*/ 
-/**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			23/12/2013 16:42:17
-//	
-//	@return 			bool : 
-//	*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_TimeString
+* @brief      Unit Test TimeString
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 15:34:55
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_TimeString()
 {
 	XDATETIME* xdatetimetest = xfactory->CreateDateTime();
@@ -4142,8 +3867,6 @@ bool TEST::Test_TimeString()
 	xrand = xfactory->CreateRand();
 	if(xrand) 
 		{
-
-
 			while(!xconsole->KBHit())
 				{
 					//modificator =	xrand->Between(0x0001, 0x0200);		// XDATETIME_FORMAT_FIRSTDAYOFWWEEK | XDATETIME_FORMAT_FIRSTDATEDAY | XDATETIME_FORMAT_ADDDATE |  XDATETIME_FORMAT_ADDTIME | XDATETIME_FORMAT_ADDDAYOFWWEEK | XDATETIME_FORMAT_TIMEWITHSECONDS;							
@@ -4161,11 +3884,11 @@ bool TEST::Test_TimeString()
 
 					if(string2.Compare(string)) color = 4; else color=1;
 						
-					XDEBUG_PRINTCOLOR(color, __L("%04X [1] Fecha Conversion: %s"), modificator, string.Get());
-					XDEBUG_PRINTCOLOR(color, __L("     [2] Fecha Conversion: %s"), string2.Get());
-					XDEBUG_PRINTCOLOR(color, __L("--------------------------------------------------------------------"));
+					XDEBUGTRACE_PRINTCOLOR(color, __L("%04X [1] Fecha Conversion: %s"), modificator, string.Get());
+					XDEBUGTRACE_PRINTCOLOR(color, __L("     [2] Fecha Conversion: %s"), string2.Get());
+					XDEBUGTRACE_PRINTCOLOR(color, __L("--------------------------------------------------------------------"));
 
-					xsleep->Seconds(1);
+					XSLEEP::GetInstance().Seconds(1);
 					
 				}
 
@@ -4180,20 +3903,18 @@ bool TEST::Test_TimeString()
 
 
 
-
-
-/*-------------------------------------------------------------------
-//  TEST::Test_EnumWifiRemote
-*/ 
-/**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			31/01/2014 12:38:56
-//	
-//	@return 			bool : 
-//	*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_EnumWifiRemote
+* @brief      Unit Test Enum WIFI inquiry
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 15:35:32
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_EnumWifiRemote()
 {
 	DIOSTREAMENUMDEVICES* enumdevices;
@@ -4212,7 +3933,7 @@ bool TEST::Test_EnumWifiRemote()
 			
 			while(enumdevices->IsSearching())
 				{
-					xsleep->MilliSeconds(10);
+					XSLEEP::GetInstance().MilliSeconds(10);
 				}
 
 			DIOSTREAMDEVICEWIFI* device = NULL;
@@ -4234,18 +3955,18 @@ bool TEST::Test_EnumWifiRemote()
 
 
 
-/*-------------------------------------------------------------------
-//  TEST::Test_XMPIntegers
-*/ 
-/**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			07/03/2014 17:49:05
-//	
-//	@return 			bool : 
-//	*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_XMPIntegers
+* @brief      Unit Test  XMP Integer (long long long numbers for RSA)
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 15:36:17
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_XMPIntegers()
 {
 	//int status = mpi_self_test(1);
@@ -4387,18 +4108,18 @@ bool TEST::Test_XMPIntegers()
 
 
 
-/*-------------------------------------------------------------------
-//  TEST::Test_ConvertBase64
-*/ 
-/**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			11/03/2014 16:22:49
-//	
-//	@return 			bool : 
-//	*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_ConvertBase64
+* @brief      Unit Test  Convert Base 64
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 15:36:49
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_ConvertBase64()
 {
 	//-------------------------------------------------------------
@@ -4434,22 +4155,22 @@ bool TEST::Test_ConvertBase64()
 
 
 
-/*-------------------------------------------------------------------
-//	TEST::Test_ReadLDRDigitalIO
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			22/03/2014 12:58:20
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_ReadLDRDigitalIO
+* @brief      Unit Test Read LDR (Digital PINS use ANALOGIC system)
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 15:37:11
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_ReadLDRDigitalIO()
 {	
+  #ifdef DIOGPIO_ACTIVE
+
 	int counter = 0;
 
 	DIOGPIO*	diogpio = diofactory->CreateGPIO();
@@ -4475,7 +4196,7 @@ bool TEST::Test_ReadLDRDigitalIO()
 											xconsole->Printf(__L("[%5d] Error al leer, datos no disponibles.			 \r"), counter);																		
 										}
 										
-									xsleep->MilliSeconds(500);
+									XSLEEP::GetInstance().MilliSeconds(500);
 
 								} while(!xconsole->KBHit());
 
@@ -4487,27 +4208,26 @@ bool TEST::Test_ReadLDRDigitalIO()
 
 			diofactory->DeleteGPIO(diogpio);
 		}
-
+  
+  #endif
 
 	return true;
 }
 
 
 
-/*-------------------------------------------------------------------
-//	TEST::Test_RSASignCert
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			24/03/2014 9:32:08
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_RSASignCert
+* @brief      Unit Test RSA Sig certificated
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 15:38:49
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_RSASignCert()
 {
 	xconsole->PrintMessage(__L(" Init ..."),1,true,true);	
@@ -4630,20 +4350,18 @@ bool TEST::Test_RSASignCert()
 
 
 
-/*-------------------------------------------------------------------
-//	TEST::Test_StringFormat
-*/	 
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			27/03/2014 10:56:24
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_StringFormat
+* @brief      Unit Test String Format
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 15:39:31
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_StringFormat()
 {	
 	XSTRING _params;
@@ -4709,7 +4427,7 @@ bool TEST::Test_StringFormat()
 	int re=s.Find(__L("Point_"),false,0);
 	if(re!=XSTRING_NOTFOUND)
 		{
-			XDEBUG_PRINTCOLOR(0,__L("found"));
+			XDEBUGTRACE_PRINTCOLOR(0,__L("found"));
 		}
 
 	*/
@@ -4899,20 +4617,18 @@ bool TEST::Test_StringFormat()
 
 
 
-/*-------------------------------------------------------------------
-//	TEST::Test_I2CStream
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			19/04/2014 22:38:03
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_I2CDevices
+* @brief      Unit Test I2C devices 
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 15:40:32
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_I2CDevices()
 {	
 	xconsole->PrintMessage(__L(" I2C Test START..."),1,true,true);	
@@ -5011,7 +4727,7 @@ bool TEST::Test_I2CDevices()
 							
 							xconsole->Printf(__L(" %6.2f \n"), ypos);	
               
-              xsleep->MilliSeconds(200);
+              XSLEEP::GetInstance().MilliSeconds(200);
 						} 
 
 					lsm303dlhc->End();												
@@ -5059,7 +4775,7 @@ bool TEST::Test_I2CDevices()
 									case  50: sense[1]  = !sense[1]; break;
 								}
 
-							XDEBUG_PRINTCOLOR(2, __L("[Key: %d] Motor 1 %d %s - Motor 2 %d %s"), key, motor[0], sense[0]?__L("A"):__L("T"), motor[1], sense[1]?__L("A"):__L("T"));
+							XDEBUGTRACE_PRINTCOLOR(2, __L("[Key: %d] Motor 1 %d %s - Motor 2 %d %s"), key, motor[0], sense[0]?__L("A"):__L("T"), motor[1], sense[1]?__L("A"):__L("T"));
 
 							for(int c=0; c<2; c++)
 								{
@@ -5073,7 +4789,7 @@ bool TEST::Test_I2CDevices()
 										{
 											pca9685->SetPWM(11, 0, motor[0]);
 											pca9685->SetPWM(10, 0, 0);
-											xsleep->MilliSeconds(50);							
+											XSLEEP::GetInstance().MilliSeconds(50);							
 										}	
 									 else
 										{
@@ -5153,7 +4869,7 @@ bool TEST::Test_I2CDevices()
 						{
 							x_old = x;
 							if(!pca9685->SetPWM(11, 0, x)) xconsole->Printf(__L(" Error PWN \n"));									
-							xsleep->MilliSeconds(50);
+							XSLEEP::GetInstance().MilliSeconds(50);
 
 							xconsole->Printf(__L("x: %03d, y: %03d        \r"), x, y);
 						}	
@@ -5163,7 +4879,7 @@ bool TEST::Test_I2CDevices()
 							y_old = y;
 
 							if(!pca9685->SetPWM(10, 0, y)) xconsole->Printf(__L(" Error PWN \n"));									
-							xsleep->MilliSeconds(50);
+							XSLEEP::GetInstance().MilliSeconds(50);
 
 							xconsole->Printf(__L("x: %03d, y: %03d        \r"), x, y);
 						}	
@@ -5236,7 +4952,7 @@ bool TEST::Test_I2CDevices()
 			
 			while(!xconsole->KBHit())				
 				{				
-					if(xtimer) xsleep->MilliSeconds(10);
+					if(xtimer) XSLEEP::GetInstance().MilliSeconds(10);
 				}
 
 			
@@ -5300,7 +5016,7 @@ bool TEST::Test_I2CDevices()
 							 //xconsole->Printf(__L("pin %d  [%02X]    \r"), data, data2);
 							 
 							
-							 xsleep->MilliSeconds(150);			
+							 XSLEEP::GetInstance().MilliSeconds(150);			
 
 							 if(xconsole->KBHit()) break;								
 						}					
@@ -5349,7 +5065,7 @@ bool TEST::Test_I2CDevices()
 									
 									if(!d) wvalue <<= 1; else wvalue >>= 1;
 
-									xsleep->MilliSeconds(150);			
+									XSLEEP::GetInstance().MilliSeconds(150);			
 
 									if(xconsole->KBHit()) break;
 								}
@@ -5390,7 +5106,7 @@ bool TEST::Test_I2CDevices()
 							xconsole->Printf(__L("[%5d] Error al leer, datos no disponibles.											 \r"), counter);																		
 						}
 										
-					xsleep->Seconds(3);
+					XSLEEP::GetInstance().Seconds(3);
 
 				} while(!xconsole->KBHit());
 									
@@ -5442,7 +5158,7 @@ bool TEST::Test_I2CDevices()
 
 			//		xconsole->Printf(__L(" [%02X] %2.3f [%02X] [%02X] [%02X]   \r"),  values[0], (values[0]* 3.3)/255, values[1], values[2], values[3]);					
 			//				
-			//		xsleep->MilliSeconds(100);							
+			//		XSLEEP::GetInstance().MilliSeconds(100);							
 			//	}	
 			//		
 			//converterPCF8591->WriteDAChannel((XBYTE)value[0]);			
@@ -5567,7 +5283,7 @@ bool TEST::Test_I2CDevices()
 								 xconsole->Printf(__L("Read %5d: Error ...\n"), c);				
 						else xconsole->Printf(__L("Read %5d: Ok!\n"), c);			
 		
-					XDEBUG_PRINTDATABLOCK(XDEBUGLEVELCOLOR(XDEBUG_COLORGREEN), dataread);
+					XDEBUGTRACE_PRINTDATABLOCK(XDEBUGLEVELCOLOR(XDEBUG_COLORGREEN), dataread);
 				}						
 
 			eeprom24xxx->End();
@@ -5646,7 +5362,7 @@ bool TEST::Test_I2CDevices()
 
 							if(diostreami2c->Read(data2, 4))
 								{
-									XDEBUG_PRINTDATABLOCK(XDEBUGLEVELCOLOR(2), data2, 4); 
+									XDEBUGTRACE_PRINTDATABLOCK(XDEBUGLEVELCOLOR(2), data2, 4); 
 								}
 						}
 					
@@ -5684,7 +5400,7 @@ bool TEST::Test_I2CDevices()
      	 diostreami2c->Write(data, 8);   
        diostreami2c->WaitToFlushOutXBuffer(3);
 			 
-			 //XDEBUG_PRINTDATABLOCK(XDEBUGLEVELCOLOR(2), data, 4);               			 
+			 //XDEBUGTRACE_PRINTDATABLOCK(XDEBUGLEVELCOLOR(2), data, 4);               			 
     }
     
 	diostreami2c->Close();
@@ -5696,20 +5412,18 @@ bool TEST::Test_I2CDevices()
 
 
 
-/*-------------------------------------------------------------------
-//	TEST::Test_PiFace
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			06/05/2014 16:50:10
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_PiFace
+* @brief      Unit Test Raspberry Pi Face Board
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 15:41:19
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_PiFace()
 {
 	xconsole->PrintMessage(__L(" Piface Test ..."),1,true,true);	
@@ -5741,7 +5455,7 @@ bool TEST::Test_PiFace()
 									
 									if(!d) wvalue <<= 1; else wvalue >>= 1;
 
-									xsleep->MilliSeconds(150);			
+									XSLEEP::GetInstance().MilliSeconds(150);			
 
 									if(xconsole->KBHit()) break;
 								}
@@ -5762,20 +5476,18 @@ bool TEST::Test_PiFace()
 
 
 
-/*-------------------------------------------------------------------
-//	TEST::Test_Compress
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			06/05/2014 16:50:00
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_Compress
+* @brief      Unit Test  ZIP File compression
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 15:41:54
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_Compress()
 {
 	XFILEUNZIP xfileunzip;
@@ -5796,20 +5508,19 @@ bool TEST::Test_Compress()
 
 
 
-/*-------------------------------------------------------------------
-//	TEST::Test_DynDNS
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			12/05/2014 17:36:44
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_DynDNS
+* @brief      Unit Test Dyn DNS 
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 15:42:24
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_DynDNS()
 {
 	DIODYNDNS							dyndns;
@@ -5829,7 +5540,7 @@ bool TEST::Test_DynDNS()
 	if(!newip) return false;
 	
 	dyndns.GetLogin()->Set(__L("sirgraham"));
-	dyndns.GetPassword()->Set(__L("sgraham01"));
+	dyndns.GetPassword()->Set(__L("------"));
 	
 	if(dyndns.IsChangedPublicIP(url, needchange, newip))
 		{
@@ -5876,20 +5587,19 @@ bool TEST::Test_DynDNS()
 
 
 
-/*-------------------------------------------------------------------
-//	TEST::Test_License
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			15/05/2014 17:12:04
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_License
+* @brief      Test Licence functions
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 15:42:58
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_License()
 {
 
@@ -5939,103 +5649,19 @@ bool TEST::Test_License()
 
 
 
-/*-------------------------------------------------------------------
-//	TEST::Test_SMTP
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			26/05/2014 16:28:53
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
-/*
-bool TEST::Test_SMTP()
-{	
-	DIOSTREAMTCPIPCONFIG*	diostreamcfg	= NULL;
-	DIOSTREAM*						diostream			= NULL;
-	DIOSMTP*							smtp					= NULL;
-	
-	diostreamcfg = new DIOSTREAMTCPIPCONFIG();
-	if(diostreamcfg) 
-		{
-			diostream = (DIOSTREAM*)diofactory->CreateStreamIO(diostreamcfg);
-			if(diostream) 
-				{	
-					smtp = new DIOSMTP(diostream);
-					if(smtp)
-						{
-							DIOURL url;
-							
-							//smtp->Server_GetURL()->Set(__L("mail.pictel.es"));
-							smtp->Server_GetURL()->Set(__L("192.168.2.7"));
-							smtp->Server_SetPort(587);
-							smtp->Server_GetLogin()->Set(__L("abraham.velez"));
-							smtp->Server_GetPassword()->Set(__L("sgraham"));
-							smtp->GetSenderName()->Set(__L("Abraham"));
-							smtp->GetSenderEmail()->Set(__L("abraham.velez@innomatic.es"));									
-							smtp->SetContentType(DIOSSMPTCONTENTTYPE_UTF8);
-							
-							
-							//int nconnexions = 0;
-							//while(!xconsole->KBHit())
-							//	{
-							//		bool avaible = smtp->Server_IsAvailable();
 
-							//		xconsole->Printf(__L("%04d Connexion SMTP: %s"), nconnexions, avaible?__L("Ok             \r"):__L("Error!\n"));
-							//		nconnexions++;
-							//	}
-							
-
-							if(smtp->Ini())
-								{
-									XPATH xpath;
-												
-									smtp->GetSubject()->Set(__L("Esto es una prueba."));
-
-									XPATHSMANAGER::GetInstance().GetPathOfSection(XPATHSMANAGERSECTIONTYPE_ROOT, xpath);
-									xpath += __L("Lord_Vader.jpg");															
-									smtp->AddAttachment(xpath);
-
-									XPATHSMANAGER::GetInstance().GetPathOfSection(XPATHSMANAGERSECTIONTYPE_ROOT, xpath);
-									xpath += __L("helloworld.c!");															
-									smtp->AddAttachment(xpath);
-
-
-									smtp->GetMessage()->AddLine(__L("Esto es una prueba de envio de email desde el GEN."));
-									smtp->GetMessage()->AddLine(__L("Esta seria la segunda linea."));
-									smtp->GetMessage()->AddLine(__L("Esta seria la tercera linea."));
-
-									smtp->AddRecipient(DIOSMTPRECIPIENTTYPE_TO, __L("Abraham")		, __L("abraham.velez@innomatic.es"));
-									//smtp->AddRecipient(DIOSMTPRECIPIENTTYPE_CC, __L("Abraham")		, __L("ajvelez@endorasoft.com"));
-									//smtp->AddRecipient(DIOSMTPRECIPIENTTYPE_CC, __L("Luis")				, __L("luis@pictel.es"));
-									//smtp->AddRecipient(DIOSMTPRECIPIENTTYPE_CC, __L("Sir Graham")	, __L("sirgraham2@gmail.com"));
-									
-									if(!smtp->Send())										
-												xconsole->Print(__L("Error al enviar el email!!!\n"));										 
-									 else xconsole->Print(__L("email enviado.\n"));
-									
-									smtp->End();
-								}
-
-							delete smtp;
-						}
-
-					diofactory->DeleteStreamIO(diostream);
-				}
-
-			delete diostreamcfg;
-		}
-	
-	return true;
-}
-*/
-
-
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_SMTP
+* @brief      Unit Test SMTP protocol
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 15:43:41
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_SMTP()
 {	
 	DIOSTREAMTCPIPCONFIG*	diostreamcfg	= NULL;
@@ -6108,23 +5734,22 @@ bool TEST::Test_SMTP()
 
 
 
-
-/*-------------------------------------------------------------------
-//	TEST::Test_LCDPhilipsPCF8833
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			01/06/2014 17:54:38
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_LCDPhilipsPCF8833
+* @brief      Unit Test LCD Philips PCF 8833
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 15:44:19
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_LCDPhilipsPCF8833()
 {
+  #ifdef DIOGPIO_ACTIVE
+
 	bool status = false;
 			
 	DIOGPIO* diogpio = diofactory->CreateGPIO();
@@ -6132,7 +5757,7 @@ bool TEST::Test_LCDPhilipsPCF8833()
 		{
 			if(diogpio->Ini())
 				{							
-					DIOSPILCDSCREENPCF8833* lcdscreen = new DIOSPILCDSCREENPCF8833(xsystem);
+					DIOSPILCDSCREENPCF8833* lcdscreen = new DIOSPILCDSCREENPCF8833();
 					if(lcdscreen)     
 						{
 							lcdscreen->SetDIOGPIO(diogpio);					
@@ -6147,20 +5772,20 @@ bool TEST::Test_LCDPhilipsPCF8833()
 									status = lcdscreen->Clear(DIOSPILCDSCREENPCF8833_RED);
 									xconsole->Printf(__L("Send screen Clean : %s \n"), status?__L("Ok!"):__L("Error!"));		
 
-									xsleep->Seconds(2);
+									XSLEEP::GetInstance().Seconds(2);
 									if(status) 
 										{
 											status = lcdscreen->Clear(DIOSPILCDSCREENPCF8833_GREEN);
 											xconsole->Printf(__L("Send screen Clean : %s \n"), status?__L("Ok!"):__L("Error!"));				
 
-											xsleep->Seconds(2);
+											XSLEEP::GetInstance().Seconds(2);
 
 											if(status) 
 												{
 													status = lcdscreen->Clear(DIOSPILCDSCREENPCF8833_BLUE);
 													xconsole->Printf(__L("Send screen Clean : %s \n"), status?__L("Ok!"):__L("Error!"));				
 
-													xsleep->Seconds(3);
+													XSLEEP::GetInstance().Seconds(3);
 
 												  for(int y=0; y< lcdscreen->GetHeight(); y++)
                              {
@@ -6222,29 +5847,31 @@ bool TEST::Test_LCDPhilipsPCF8833()
 			diofactory->DeleteGPIO(diogpio);
 
 		}
-	
+
+  #endif
 	return true;
 }
 
 
 
 
-/*-------------------------------------------------------------------
-//	TEST::Test_LCDIlitekILI9341
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			07/06/2014 10:28:51
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_LCDIlitekILI9341
+* @brief      Unit Test LCD Ilitek ILI 9341
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 15:44:57
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_LCDIlitekILI9341()
 {
+  #ifdef DIOGPIO_ACTIVE
+
 	bool status = false;
 		
 	DIOGPIO* diogpio = diofactory->CreateGPIO();
@@ -6262,7 +5889,7 @@ bool TEST::Test_LCDIlitekILI9341()
 
 							if(status)
 								{															
-									DIOSPILCDSCREENILI9341* lcdscreen = new DIOSPILCDSCREENILI9341(xsystem);
+									DIOSPILCDSCREENILI9341* lcdscreen = new DIOSPILCDSCREENILI9341();
 									if(lcdscreen)     
 										{
 											lcdscreen->SetDIOGPIO(diogpio);						
@@ -6354,29 +5981,30 @@ bool TEST::Test_LCDIlitekILI9341()
 			diofactory->DeleteGPIO(diogpio);
 		}
 
+  #endif
+
 	return true;
 }
 
 
 
 
-
-/*-------------------------------------------------------------------
-//	TEST::Test_OLEDSSD1331
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			05/12/2016 23:10:14
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_OLEDSSD1331
+* @brief      Unit Test Oled SSD 1331
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 15:45:32
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_OLEDSSD1331()
 {
+  #ifdef DIOGPIO_ACTIVE
+
 	bool status = false;
 			
 	DIOGPIO* diogpio = diofactory->CreateGPIO();
@@ -6435,7 +6063,7 @@ bool TEST::Test_OLEDSSD1331()
 
 									while(!xconsole->KBHit())
 										{
-											xsleep->MilliSeconds(100);
+											XSLEEP::GetInstance().MilliSeconds(100);
 										}
 
 									lcdscreen->End();
@@ -6448,28 +6076,25 @@ bool TEST::Test_OLEDSSD1331()
 			diofactory->DeleteGPIO(diogpio);
 		}
 
+  #endif
+
 	return true;
 }
 
 
 
-
-
-
-/*-------------------------------------------------------------------
-//	TEST::Test_DIOStreamUSB
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			18/11/2014 13:20:11
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_DIOStreamUSB
+* @brief      DIO stream USB
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 15:46:01
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_DIOStreamUSB()
 {
 	DIOSTREAMUSBLOCALENUMDEVICES* enumdevices;
@@ -6620,23 +6245,18 @@ bool TEST::Test_DIOStreamUSB()
 }
 
 
-
-
-
-/*-------------------------------------------------------------------
-//	TEST::Test_MemControl
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			10/09/2014 9:03:21
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_MemControl
+* @brief      Unit Test Mem Control
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 15:46:36
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_MemControl()
 {
 	XRAND*					xrand;
@@ -6718,7 +6338,7 @@ bool TEST::Test_MemControl()
 									
 									assign.Add(ptr);
 
-									//XDEBUG_PRINTCOLOR(1, __L("assign %d"), c);
+									//XDEBUGTRACE_PRINTCOLOR(1, __L("assign %d"), c);
 								}
 
 							alltime += xtimer->GetMeasureMilliSeconds();
@@ -6756,20 +6376,19 @@ bool TEST::Test_MemControl()
 
 
 
-/*-------------------------------------------------------------------
-//	TEST::Test_ExecApplication
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			12/11/2014 20:15:15
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_SystemCommand
+* @brief      Unit Test System Command
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 15:49:25
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_SystemCommand()
 {
 	XSTRING command;
@@ -6784,7 +6403,7 @@ bool TEST::Test_SystemCommand()
 
 	int returncode = 0;
 
-	bool status = GetXSystem()->MakeCommand(command, &returncode);
+	bool status = XSYSTEM::GetInstance().MakeCommand(command, &returncode);
 
 	if(status)
 				xconsole->Printf(__L("correcto!!  exitcode %d\n"), returncode);										 
@@ -6796,20 +6415,21 @@ bool TEST::Test_SystemCommand()
 
 
 
-/*-------------------------------------------------------------------
-//	TEST::Test_DIOStreamUDP
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			18/11/2014 13:25:04
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_DIOStreamUDP
+* @brief      Unit Test UDP DIO Stream
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 15:49:50
+*
+* @param[in]    modeserver : 
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_DIOStreamUDP(bool modeserver)
 {
 	XSTRING							 autoaddress;
@@ -6879,7 +6499,7 @@ bool TEST::Test_DIOStreamUDP(bool modeserver)
 													status = (br == xbuffer.GetSize())?true:false; 
 													if(status)
 														{
-															XDEBUG_PRINTDATABLOCK(modeserver?1:2, xbuffer);								
+															XDEBUGTRACE_PRINTDATABLOCK(modeserver?1:2, xbuffer);								
 
 														}	else xconsole->Print(__L("Error to Read ...\n"));																																				
 												}
@@ -6903,21 +6523,20 @@ bool TEST::Test_DIOStreamUDP(bool modeserver)
 
 
 
-/*-------------------------------------------------------------------
-//	TEST::Test_DIOProtocolConnexionsManager
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			04/09/2015 14:03:09
-//	
-//	@return 			bool : 
-//
-//  @param				modeserver : 
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_DIOProtocolConnexionsManager
+* @brief      Unit Test Protocol Connexions Manager
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 15:50:24
+*
+* @param[in]    modeserver : 
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_DIOProtocolConnexionsManager(bool modeserver)
 {
 	bool status	= true;	
@@ -7112,21 +6731,21 @@ bool TEST::Test_DIOProtocolConnexionsManager(bool modeserver)
 }
 
 
-/*-------------------------------------------------------------------
-//	TEST::Test_DIOStreamCipher
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			19/11/2014 17:15:46
-//	
-//	@return 			bool : 
-//
-//  @param				modeserver : 
-*/
-/*-----------------------------------------------------------------*/
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_DIOStreamCipher
+* @brief      Unit Test Ciphe DIO stream
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 15:51:04
+*
+* @param[in]    modeserver : 
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_DIOStreamCipher(bool modeserver)
 {
 	XSTRING									autoaddress;
@@ -7219,7 +6838,7 @@ bool TEST::Test_DIOStreamCipher(bool modeserver)
 													status = (br == xbuffer.GetSize())?true:false; 
 													if(status)
 														{
-															XDEBUG_PRINTDATABLOCK(modeserver?1:2, xbuffer);								
+															XDEBUGTRACE_PRINTDATABLOCK(modeserver?1:2, xbuffer);								
 
 														}	else xconsole->Print(__L("Error to Read ...\n"));																																				
 												}
@@ -7243,23 +6862,20 @@ bool TEST::Test_DIOStreamCipher(bool modeserver)
 
 
 
-
-
-/*-------------------------------------------------------------------
-//	TEST::Test_DIOProtocol
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			25/11/2014 14:18:53
-//	
-//	@return 			bool : 
-//
-//  @param				modeserver : 
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_DIOProtocol
+* @brief      Unit Test DIO Protocol
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 15:51:42
+*
+* @param[in]    modeserver : 
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_DIOProtocol(bool modeserver)
 {
 	DIOSTREAMUDPLOCALENUMSERVERS* localenumservers;
@@ -7316,7 +6932,7 @@ bool TEST::Test_DIOProtocol(bool modeserver)
 										{
 											if(xconsole->KBHit()) break;
 
-											xsleep->MilliSeconds(50);
+											XSLEEP::GetInstance().MilliSeconds(50);
 										}	
 
 									localenumservers->StopSearch(true);
@@ -7369,7 +6985,7 @@ bool TEST::Test_DIOProtocol(bool modeserver)
 																			status = protocol->CMD_GetProtocolVersion(version, subversion, subversionerr);
 																			xconsole->Printf(__L("[%s] Get Version %02d.%02d.%02d ...\n"), status?__L("Ok!"):__L("Error!"), version, subversion, subversionerr);
 
-																			if(xtimer) xsleep->Seconds(1);													
+																			if(xtimer) XSLEEP::GetInstance().Seconds(1);													
 																		}
 
 																} while(!xconsole->KBHit());
@@ -7400,22 +7016,18 @@ bool TEST::Test_DIOProtocol(bool modeserver)
 
 
 
-
-
-/*-------------------------------------------------------------------
-//	TEST::Test_GSMATCommand
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			01/12/2014 23:23:51
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_GSMATCommand
+* @brief      Unit Test GSM AT Command
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 15:52:14
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_GSMATCommand()
 {	
 	DIOSTREAMENUMDEVICES*			enumdevices		= NULL;
@@ -7436,7 +7048,7 @@ bool TEST::Test_GSMATCommand()
 			
 			while(enumdevices->IsSearching())
 				{
-					xsleep->MilliSeconds(10);
+					XSLEEP::GetInstance().MilliSeconds(10);
 				}
 
 			DIOSTREAMDEBUGPRINTINFO(xconsole, __L("Busqueda concluida..."));						
@@ -7608,20 +7220,18 @@ bool TEST::Test_GSMATCommand()
 
 
 
-/*-------------------------------------------------------------------
-//	TEST::Test_GSMATCommand2
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			08/12/2014 16:54:22
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_GSMATCommand2
+* @brief      Unit Test 2 GSM AT command
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 15:52:48
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_GSMATCommand2()
 {	
 	DIOSTREAMENUMDEVICES*			enumdevices		= NULL;
@@ -7825,27 +7435,31 @@ bool TEST::Test_GSMATCommand2()
 
 
 
-/*-------------------------------------------------------------------
-//	TEST::Test_DIOAlerts
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			16/01/2015 22:56:13
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_DIOAlerts
+* @brief      Unit Test DIO Alerts
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 15:53:17
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_DIOAlerts()
 {	
+  
+  bool											status = false;
+
+  #ifdef DIOALERTS_ACTIVE
+
 	DIOSTREAMENUMDEVICES*			SMSenumdevices  = NULL;
 	DIOSTREAMDEVICEBLUETOOTH*	SMSdevice       = NULL;
 	DIOSTREAMCONFIG*					SMSdiostreamcfg	= NULL;
 	DIOSTREAM*								SMSdiostream		= NULL;	
-	bool											status = false;
+	
 
 	/*
 	SMSenumdevices = diofactory->CreateStreamEnumDevices( DIOSTREAMENUMTYPE_BLUETOOTH_REMOTE);
@@ -7857,7 +7471,7 @@ bool TEST::Test_DIOAlerts()
 			
 			while(SMSenumdevices->IsSearching())
 				{
-					xsleep->MilliSeconds(10);
+					XSLEEP::GetInstance().MilliSeconds(10);
 				}
 			
 			for(int c=0;c<(int)SMSenumdevices->GetDevices()->GetSize();c++)
@@ -7935,26 +7549,26 @@ bool TEST::Test_DIOAlerts()
 			SMSenumdevices = NULL;
 		}
 
+  #endif
+
 	return status;
 }
 
 
 
 
-/*-------------------------------------------------------------------
-//	TEST::Test_BusPirate
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			05/02/2015 17:20:06
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_BusPirate
+* @brief      Unit Test Bus Pirate Board
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 15:53:47
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_BusPirate()
 {
 	DIOSTREAMUARTCONFIG* diostreamcfg;
@@ -8009,20 +7623,18 @@ bool TEST::Test_BusPirate()
 
 
 
-/*-------------------------------------------------------------------
-//	TEST::Test_WiiMote
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			15/02/2015 17:50:58
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_WiiMote
+* @brief      Unit Test Wii Mote 
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 15:54:16
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_WiiMote()
 {
 	DIOWIIMOTE* wiimote = new DIOWIIMOTE;
@@ -8044,22 +7656,20 @@ bool TEST::Test_WiiMote()
 
 
 
-
-
-/*-------------------------------------------------------------------
-//	TEST::Test_DIOStreamUDPAcknowledge
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			17/02/2015 19:53:57
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_DIOStreamUDPAcknowledge
+* @brief      Unit Test UDP DIO Stream with acknowledge
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 15:55:02
+*
+* @param[in]    modeserver : 
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_DIOStreamUDPAcknowledge(bool modeserver)
 {
 	DIOSTREAMUDPCONFIG*				diostreamudpcfg;
@@ -8109,7 +7719,7 @@ bool TEST::Test_DIOStreamUDPAcknowledge(bool modeserver)
 												 //break;
 											 }
 
-											//xsleep->Seconds(1);
+											//XSLEEP::GetInstance().Seconds(1);
 										}
 
 								}	
@@ -8145,22 +7755,23 @@ bool TEST::Test_DIOStreamUDPAcknowledge(bool modeserver)
 
 
 
-/*-------------------------------------------------------------------
-//	TEST::Test_DIOAlertServer
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			14/05/2015 19:52:09
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_DIOAlertServer
+* @brief      Unit Test Alert Server
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 15:55:29
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_DIOAlertServer()
 {
+
+  #ifdef DIOALERTS_ACTIVE
+
 	DIOALERTSUDPSERVER* alertsUDPserver = NULL;
 		
 	alertsUDPserver = new DIOALERTSUDPSERVER;
@@ -8176,7 +7787,7 @@ bool TEST::Test_DIOAlertServer()
 				{
 					xconsole->Printf(__L("N Alerts: %3d.        \r"), alertsUDPserver->GetNAlerts());
 
-					xsleep->MilliSeconds(100);
+					XSLEEP::GetInstance().MilliSeconds(100);
 				}
 
 			alertsUDPserver->End();
@@ -8187,28 +7798,25 @@ bool TEST::Test_DIOAlertServer()
 
 	xconsole->Printf(__L("Alert Server Close."));
 
+  #endif
+
 	return true;
 }
 
 
 
-
-
-
-/*-------------------------------------------------------------------
-//	TEST::Test_DIOCheckInternetConnexion
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			21/05/2015 8:43:09
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_DIOCheckInternetConnexion
+* @brief      Unit Test Internet Check Connexion
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 15:55:57
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_DIOCheckInternetConnexion()
 {
 	xconsole->Printf(__L("Connecting internet connection status ...\n"));
@@ -8275,20 +7883,18 @@ bool TEST::Test_DIOCheckInternetConnexion()
 
 
 
-/*-------------------------------------------------------------------
-//	TEST::Test_DIOCheckConnexions
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			29/05/2015 14:19:13
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_DIOCheckConnexions
+* @brief      Unit Test Check Connexions
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 15:56:23
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_DIOCheckConnexions()
 {
 	DIOCHECKCONNEXIONS* checkconnexions	= new DIOCHECKCONNEXIONS;
@@ -8304,7 +7910,7 @@ bool TEST::Test_DIOCheckConnexions()
 			checkconnexions->Connexion_Add(__L("192.168.1.3")			, connexionID[2]);
 			checkconnexions->Connexion_Add(__L("192.168.1.18")		, connexionID[3]);
 			
-			xsleep->Seconds(3);
+			XSLEEP::GetInstance().Seconds(3);
 
 			xconsole->Printf(__L("Checking connection status ...\n"));
 
@@ -8323,7 +7929,7 @@ bool TEST::Test_DIOCheckConnexions()
 
 					xconsole->Printf( __L("\n"));
 
-					if(!xconsole->KBHit()) xsleep->Seconds(1);
+					if(!xconsole->KBHit()) XSLEEP::GetInstance().Seconds(1);
 				}		
 
 			checkconnexions->Connexion_DeleteByID(connexionID[0]);
@@ -8341,21 +7947,19 @@ bool TEST::Test_DIOCheckConnexions()
 
 
 
-
-/*-------------------------------------------------------------------
-//	TEST::Test_FileTXT
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			06/06/2015 10:21:43
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_FileTXT
+* @brief      Unit Test FILE TXT
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 15:56:53
+*
+* @return     
+bool : 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_FileTXT()
 {
 	/*
@@ -8417,20 +8021,18 @@ bool TEST::Test_FileTXT()
 
 
 
-/*-------------------------------------------------------------------
-//	TEST::Test_UpdateAPP
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			08/06/2015 15:58:58
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_ApplicationUpdate
+* @brief      Unit Test Applicacion Update
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 15:57:33
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_ApplicationUpdate()
 {	
 	XPATH xpathrootapp;
@@ -8512,36 +8114,29 @@ bool TEST::Test_ApplicationUpdate()
 
 
 
-/*-------------------------------------------------------------------
-//	TEST::Test_XSystem
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			07/08/2015 12:09:30
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_XSystem
+* @brief      Unit Test XSystem Class
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 15:58:01
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_XSystem()
-{
-
-	
-	XSYSTEM* xsystem =  GetXSystem();
-	if(!xsystem) return false;
-
+{	
 	XSTRING string;
 
 	string = __L("Prueba de xsystem\n");
-	XDEBUG_PRINTCOLOR(1, string.Get());
+	XDEBUGTRACE_PRINTCOLOR(1, string.Get());
 	if(xconsole) xconsole->Printf(string.Get(), __L("\n"));			
 	
 	
 	XSTRING		 nameapp;	
-	XSYSTEM_SO so = xsystem->GetSO();
+	XSYSTEM_SO so = XSYSTEM::GetInstance().GetTypeSO();
 
 	if(so & XSYSTEM_SO_WINDOWS)
 		{	
@@ -8550,7 +8145,7 @@ bool TEST::Test_XSystem()
 			nameapp = __L("calc.exe");
 
 			pathapp.Add(nameapp);
-			xsystem->ExecuteApplication(pathapp.Get());
+			XSYSTEM::GetInstance().ExecuteApplication(pathapp.Get());
 		}
 	 else
 		{
@@ -8561,27 +8156,27 @@ bool TEST::Test_XSystem()
 					nameapp = __L("top");
 
 					pathapp.Add(nameapp);
-					xsystem->ExecuteApplication(pathapp.Get());
+					XSYSTEM::GetInstance().ExecuteApplication(pathapp.Get());
 				}
 			 else
 			  {				 
 					string = __L("sistema operativo invalido...");
-					XDEBUG_PRINTCOLOR(1, string.Get());
+					XDEBUGTRACE_PRINTCOLOR(1, string.Get());
 					if(xconsole) xconsole->Printf(string.Get(), __L("\n"));				
 			  }
 		}
 	
 	
 	XDWORD	ID				 = 0;
-	bool		isrunning = xsystem->IsApplicationRunning(nameapp.Get(), &ID);
+	bool		isrunning = XSYSTEM::GetInstance().IsApplicationRunning(nameapp.Get(), &ID);
 
 	string.Format(__L("esta ejecutandose %s:  %s [%x] "), nameapp.Get(), isrunning?__L("Ok!"):__L("Error!"), ID);
-	XDEBUG_PRINTCOLOR(1, string.Get());
+	XDEBUGTRACE_PRINTCOLOR(1, string.Get());
 	if(xconsole) xconsole->Printf(string.Get(), __L("\n"));			
 	
 	
 	string = __L("Saliendo ...");
-	XDEBUG_PRINTCOLOR(1, string.Get());
+	XDEBUGTRACE_PRINTCOLOR(1, string.Get());
 	if(xconsole) xconsole->Printf(string.Get(), __L("\n"));			
 
 	SetExitStatus(XAPPLICATIONEXITTYPE_BYUSER); 
@@ -8592,22 +8187,18 @@ bool TEST::Test_XSystem()
 
 
 
-
-
-/*-------------------------------------------------------------------
-//	TEST::Test_DatabaseDBF
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			06/10/2015 8:26:50
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_DatabaseDBF
+* @brief      Unit Test DBF format
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 15:58:32
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_DatabaseDBF()
 {
 	XPATH			 xpath;	
@@ -8686,20 +8277,21 @@ public:
 
 
 
-/*-------------------------------------------------------------------
-//	TEST::Test_Database
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			01/10/2015 15:42:23
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_DatabaseSQL
+* @brief      Unit Test SQL connector
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 15:59:04
+*
+* @param[in]  type : type of SQL. 
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_DatabaseSQL(XDWORD type)
 {
 		xconsole->Print(__L("\nTesting SQL\n"));
@@ -8717,11 +8309,11 @@ bool TEST::Test_DatabaseSQL(XDWORD type)
 		*/												
 
 	switch (type)
-	{
-	case DBSQLDATABASE_TYPE_MYSQL			: xconsole->Print(__L("\nTesting MySQL\n")); break;
-	case DBSQLDATABASE_TYPE_POSTGRESQL: xconsole->Print(__L("\nTesting PostgreSQL\n")); break;
-	case DBSQLDATABASE_TYPE_SQLITE		: xconsole->Print(__L("\nTesting SQLite\n")); break;
-	}
+	  {
+	    case DBSQLDATABASE_TYPE_MYSQL			: xconsole->Print(__L("\nTesting MySQL\n")); break;
+	    case DBSQLDATABASE_TYPE_POSTGRESQL: xconsole->Print(__L("\nTesting PostgreSQL\n")); break;
+	    case DBSQLDATABASE_TYPE_SQLITE		: xconsole->Print(__L("\nTesting SQLite\n")); break;
+	  }
 
 	DBSQLDATABASE*				database	= NULL;
 	DBSQLCONNECTION*			connexion	= NULL;
@@ -8738,7 +8330,7 @@ bool TEST::Test_DatabaseSQL(XDWORD type)
 	xpath.GetPath(path);
 
 	xconsole->Print(__L("Creating Database\n\n"));
-	XDEBUG_PRINTCOLOR(0,__L("Creating database "));
+	XDEBUGTRACE_PRINTCOLOR(0,__L("Creating database "));
 	database = DBSQLFACTORY::Create( (DBSQLDATABASE_TYPE)type);	
 
 	status = true;
@@ -8747,7 +8339,7 @@ bool TEST::Test_DatabaseSQL(XDWORD type)
 	if(database)
 		{			
 			xconsole->Print(__L("Creating Connection\n\n"));
-			XDEBUG_PRINTCOLOR(0,__L("Creating Connection "));
+			XDEBUGTRACE_PRINTCOLOR(0,__L("Creating Connection "));
 			connexion	= database->CreateConnection();
 			
 
@@ -8778,16 +8370,16 @@ bool TEST::Test_DatabaseSQL(XDWORD type)
 					if (database->IsThreadSafe())
 					{
 							xconsole->Print(__L("Database is ThreadSafe\n\n"));
-							XDEBUG_PRINTCOLOR(0, __L("Database is ThreadSafe"));
+							XDEBUGTRACE_PRINTCOLOR(0, __L("Database is ThreadSafe"));
 					}
 					else
 					{
 							xconsole->Print(__L("Database is not ThreadSafe\n\n"));
-							XDEBUG_PRINTCOLOR(0, __L("Database is not ThreadSafe"));
+							XDEBUGTRACE_PRINTCOLOR(0, __L("Database is not ThreadSafe"));
 					}
 
 					xconsole->Print(__L("Openning Connection \n\n"));
-					XDEBUG_PRINTCOLOR(0, __L("Openning Connection "));					
+					XDEBUGTRACE_PRINTCOLOR(0, __L("Openning Connection "));					
 
 					if (database->Open())
 					{
@@ -8938,13 +8530,13 @@ bool TEST::Test_DatabaseSQL(XDWORD type)
 													XSTRING s;
 													if (database->GetErrorList()->GetSize())
 													s.Format(__L("DBSQL Execute failed %s %s"), database->GetName(), database->GetErrorList()->GetLast()->description.Get());
-													XDEBUG_PRINTCOLOR(4, s.Get());
+													XDEBUGTRACE_PRINTCOLOR(4, s.Get());
 													xconsole->Print(s.Get());
 											}
 									}
 
 							}
-							else XDEBUG_PRINTCOLOR(0, __L("DBSQL Create Query %s"), database->GetName());
+							else XDEBUGTRACE_PRINTCOLOR(0, __L("DBSQL Create Query %s"), database->GetName());
 
 					}
 					else
@@ -8952,7 +8544,7 @@ bool TEST::Test_DatabaseSQL(XDWORD type)
 							XSTRING s;
 							if (database->GetErrorList()->GetSize())
 							s.Format(__L("DBSQL Open Connection %s %s"), database->GetName(), database->GetErrorList()->GetLast()->description.Get());
-							XDEBUG_PRINTCOLOR(4, s.Get());
+							XDEBUGTRACE_PRINTCOLOR(4, s.Get());
 							xconsole->Print(s.Get());
 					}
 			}
@@ -8961,11 +8553,11 @@ bool TEST::Test_DatabaseSQL(XDWORD type)
 							XSTRING s;
 							if (database->GetErrorList()->GetSize())
 							s.Format(__L("DBSQL Create Connection %s %s"), database->GetName(), database->GetErrorList()->GetLast()->description.Get());
-							XDEBUG_PRINTCOLOR(4, s.Get());
+							XDEBUGTRACE_PRINTCOLOR(4, s.Get());
 							xconsole->Print(s.Get());
 					}
 			
-		} else XDEBUG_PRINTCOLOR(4,__L("DBSQL failed to create database (factory)"));
+		} else XDEBUGTRACE_PRINTCOLOR(4,__L("DBSQL failed to create database (factory)"));
 		
 		
 	delete query;
@@ -8981,22 +8573,18 @@ bool TEST::Test_DatabaseSQL(XDWORD type)
 
 
 
-
-
-/*-------------------------------------------------------------------
-//	TEST::XFile
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			06/10/2015 9:35:54
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_XFile
+* @brief      Unit Test XFile class
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 16:00:00
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_XFile()
 {
 	XPATH xpath;
@@ -9028,21 +8616,18 @@ bool TEST::Test_XFile()
 
 
 
-
-/*-------------------------------------------------------------------
-//	TEST::Test_PCap
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			22/10/2015 11:01:03
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_DIOPCap
+* @brief      Unit Test Pcap library (capture ethernet data)
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 16:00:51
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_DIOPCap()
 {
 	#ifdef DIOPCAP_ACTIVE
@@ -9136,28 +8721,29 @@ bool TEST::Test_DIOPCap()
 }
 
 
-/*-------------------------------------------------------------------
-//	TEST::RPI_RevisionBoard
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			20/02/2016 20:28:12
-//	
-//	@return 			bool : 
-//
-//  @param				model : 
-//  @param				megabytes : 
-//  @param				revision : 
-*/
-/*-----------------------------------------------------------------*/
-bool TEST::Test_RPI_RevisionBoard(RASPBERRYPI_MODEL& model, int& megabytes, float& revision)
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_RPI_RevisionBoard
+* @brief      Unit Test Raspberry PI revision board (ID)
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 16:01:34
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+bool TEST::Test_RPI_RevisionBoard()
 {
-	XPATH			xpath;
-	XFILETXT* xfiletxt;
-	bool			status = false;
+  /*
+  XDWORD             model; 
+  int                megabytes;
+  float              revision;
+  */
+
+	XPATH			         xpath;
+	XFILETXT*          xfiletxt;
+	bool			         status = false;
 
 	//xpath = __L("/proc/cpuinfo");
 
@@ -9183,8 +8769,9 @@ bool TEST::Test_RPI_RevisionBoard(RASPBERRYPI_MODEL& model, int& megabytes, floa
 											line->DeleteCharacters(0, position+1);
 											line->DeleteCharacter(0x20);
 											
-											model = RASPBERRYPI_MODEL_UNKNOWN;
+											//model = RASPBERRYPI_MODEL_UNKNOWN;
 
+                      /*
 											if(!line->Compare(__L("0002")		, true))  { model = RASPBERRYPI_MODEL_B;								megabytes = 256;			revision = 1.0f; }
 											if(!line->Compare(__L("0003")		, true))  { model = RASPBERRYPI_MODEL_B;								megabytes = 256;			revision = 1.0f; }
 											if(!line->Compare(__L("0004")		, true))  { model = RASPBERRYPI_MODEL_B;								megabytes = 256;			revision = 2.0f; }
@@ -9209,6 +8796,7 @@ bool TEST::Test_RPI_RevisionBoard(RASPBERRYPI_MODEL& model, int& megabytes, floa
 													status = true;
 													break;
 												}
+                      */
 										}
 								}
 						}
@@ -9225,24 +8813,28 @@ bool TEST::Test_RPI_RevisionBoard(RASPBERRYPI_MODEL& model, int& megabytes, floa
 
 
 
-/*-------------------------------------------------------------------
-//	TEST::Test_DIOGPIO
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			22/10/2015 14:13:15
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_DIOGPIO
+* @brief      Unit Test GPIO (input output pins)
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 16:02:11
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_DIOGPIO()
-{	
+{		
+  
+  bool							 status = false;
+  
+
+  #ifdef DIOGPIO_ACTIVE
+
 	XPATH							 xpathroot;	
-	bool							 status = false;
+
 
 	/*
 	RASPBERRYPI_MODEL	 model;
@@ -9266,10 +8858,10 @@ bool TEST::Test_DIOGPIO()
 					while(!xconsole->KBHit())
 						{
 							diogpio->Set(PINGPIO, true);
-							if(xtimer) xsleep->MilliSeconds(50);
+							if(xtimer) XSLEEP::GetInstance().MilliSeconds(50);
 			
 							diogpio->Set(PINGPIO, false);
-							if(xtimer) xsleep->MilliSeconds(50);
+							if(xtimer) XSLEEP::GetInstance().MilliSeconds(50);
 						}				
 
 					diogpio->End();	
@@ -9279,27 +8871,25 @@ bool TEST::Test_DIOGPIO()
 			diofactory->DeleteGPIO(diogpio);
 		}
 
+  #endif
+
 	return status;
 }
 
 
 
-
-
-/*-------------------------------------------------------------------
-//	TEST::Test_Lists
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			04/12/2015 15:52:00
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_Lists
+* @brief      Unit Test XLIST class
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 16:02:36
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_Lists()
 {
 	// test some lists
@@ -9312,31 +8902,31 @@ bool TEST::Test_Lists()
 
 	if(testlist.Get(7) != 7)
 		{
-			XDEBUG_PRINTCOLOR(4,__L("Get failed"));
+			XDEBUGTRACE_PRINTCOLOR(4,__L("Get failed"));
 			return false;
 		}
 
 	/*for(XDWORD i = 0; i < testlist.GetSize(); i++)
 	{
-		XDEBUG_PRINTCOLOR(0,__L("%i"), testlist.Get(i));
+		XDEBUGTRACE_PRINTCOLOR(0,__L("%i"), testlist.Get(i));
 	}*/
 
 	testlist.Insert(5, 6);
 	if(testlist.Get(5) != 6)
 		{
-			XDEBUG_PRINTCOLOR(4,__L("Insert failed"));
+			XDEBUGTRACE_PRINTCOLOR(4,__L("Insert failed"));
 			return false;
 		}
 
 	for(XDWORD i = 0; i < 12; i++)
 		{
-			XDEBUG_PRINTCOLOR(0,__L("%i"), testlist.Get(i));
+			XDEBUGTRACE_PRINTCOLOR(0,__L("%i"), testlist.Get(i));
 		}
 	testlist.Delete(6);
 	
 	if(testlist.Get(6) != 6)
 		{
-			XDEBUG_PRINTCOLOR(4,__L("Delete failed"));
+			XDEBUGTRACE_PRINTCOLOR(4,__L("Delete failed"));
 			return false;
 		}
 
@@ -9344,7 +8934,7 @@ bool TEST::Test_Lists()
 
 	if(testlist.Get(10) != 11)
 		{
-			XDEBUG_PRINTCOLOR(4,__L("DeleteIndex failed"));
+			XDEBUGTRACE_PRINTCOLOR(4,__L("DeleteIndex failed"));
 			return false;
 		}
 
@@ -9353,7 +8943,7 @@ bool TEST::Test_Lists()
 
 	if(testlist.GetLast() == 29)
 		{
-			XDEBUG_PRINTCOLOR(4,__L("DeleteLast failed"));
+			XDEBUGTRACE_PRINTCOLOR(4,__L("DeleteLast failed"));
 			return false;
 		}
 
@@ -9366,7 +8956,7 @@ bool TEST::Test_Lists()
 	if((previous0 != testlist.Get(1))
 	|| (previous1 != testlist.Get(0)))
 		{
-			XDEBUG_PRINTCOLOR(4,__L("Swap failed"));
+			XDEBUGTRACE_PRINTCOLOR(4,__L("Swap failed"));
 			return false;
 		}
 
@@ -9377,7 +8967,7 @@ bool TEST::Test_Lists()
 
 	if(testlist.Get(0) != 512)
 		{
-			XDEBUG_PRINTCOLOR(4,__L("Insert with xlistdata failed"));
+			XDEBUGTRACE_PRINTCOLOR(4,__L("Insert with xlistdata failed"));
 			return false;
 		}
 
@@ -9386,7 +8976,7 @@ bool TEST::Test_Lists()
 
 	if(testlist.Get(1) != 1024)
 		{
-			XDEBUG_PRINTCOLOR(4,__L("Insert with xlistdata failed"));
+			XDEBUGTRACE_PRINTCOLOR(4,__L("Insert with xlistdata failed"));
 			return false;
 		}
 
@@ -9394,14 +8984,14 @@ bool TEST::Test_Lists()
 
 	if(testlist.Get(testlist.GetSize() -1 -1) != 2048)
 		{
-			XDEBUG_PRINTCOLOR(4,__L("Insert with xlistdata failed"));
+			XDEBUGTRACE_PRINTCOLOR(4,__L("Insert with xlistdata failed"));
 			return false;
 		}
 
 	// sample "pseudoiterator" usage
 	for(XLISTDATA<int>* first = testlist.GetData(0); first != NULL; first = Increment(first))
 		{
-			XDEBUG_PRINTCOLOR(0,__L("%i"), first->data);
+			XDEBUGTRACE_PRINTCOLOR(0,__L("%i"), first->data);
 		}
 
 	XLISTDATA<int>* data = testlist.GetData(6);
@@ -9413,7 +9003,7 @@ bool TEST::Test_Lists()
 
 	if(testlist.Get(10) != 20)
 		{
-			XDEBUG_PRINTCOLOR(4,__L("Set failed"));
+			XDEBUGTRACE_PRINTCOLOR(4,__L("Set failed"));
 			return false;
 		}
 
@@ -9421,7 +9011,7 @@ bool TEST::Test_Lists()
 
 	if(testlist.Get(location) != 2)
 		{
-			XDEBUG_PRINTCOLOR(4,__L("find failed"));
+			XDEBUGTRACE_PRINTCOLOR(4,__L("find failed"));
 			return false;
 		}
 
@@ -9434,21 +9024,19 @@ bool TEST::Test_Lists()
 
 
 
-/*-------------------------------------------------------------------
-//	TEST::Test_Audio
-*/	
-/**	
-//	
-//	tests the audio output
-//	
-//	@author				Imanol Celaya Ruiz de Alegria
-//	@version			24/11/2015 11:07:55
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
-bool TEST::Test_Audio()
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_Sound
+* @brief      Unit Test Sound
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 16:03:58
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+bool TEST::Test_Sound()
 {
 	#ifdef SND_ACTIVE
 	
@@ -9489,7 +9077,7 @@ bool TEST::Test_Audio()
 	while(true)
 		{	
 			if(xconsole->KBHit()) break;				
-			xsleep->MilliSeconds(100);
+			XSLEEP::GetInstance().MilliSeconds(100);
 		}
 	
 	
@@ -9500,20 +9088,19 @@ bool TEST::Test_Audio()
 
 
 
-/*-------------------------------------------------------------------
-//	TEST::Test_AVLTree
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			30/12/2015 9:57:08
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_AVLTree
+* @brief      Unit Test AVL Tree class
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 16:05:04
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_AVLTree()
 {
 	XAVLTREE<float> tree;
@@ -9557,7 +9144,7 @@ bool TEST::Test_AVLTree()
 
 	for(it = tree.Begin(); it != tree.End(); it++)
 		{
-			XDEBUG_PRINTCOLOR(4,__L("Element: %i : %f"), i, *it);
+			XDEBUGTRACE_PRINTCOLOR(4,__L("Element: %i : %f"), i, *it);
 			i++;
 		}
 
@@ -9573,23 +9160,18 @@ bool TEST::Test_AVLTree()
 
 
 
-
-
-
-/*-------------------------------------------------------------------
-//	TEST::Test_BinaryMap
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			16/01/2016 19:05:56
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_BinaryMap
+* @brief      Unit Test Binary Map
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 16:05:39
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_BinaryMap()
 {
 	XBINARYMAP<float, float> map;
@@ -9622,7 +9204,7 @@ bool TEST::Test_BinaryMap()
 	
 	for(it = map.Begin(); it != map.End(); it++)
 		{
-			XDEBUG_PRINTCOLOR(4,__L("Element: %i : %f"), i, *it);
+			XDEBUGTRACE_PRINTCOLOR(4,__L("Element: %i : %f"), i, *it);
 			i++;
 		}
 
@@ -9631,21 +9213,18 @@ bool TEST::Test_BinaryMap()
 
 
 
-
-/*-------------------------------------------------------------------
-//	TEST::Test_Variants
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			04/03/2016 10:19:40
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_Variants
+* @brief      Unit Test XVARIANT class
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 16:06:46
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_Variants()
 {
 	XVARIANT variant;
@@ -9760,7 +9339,7 @@ bool TEST::Test_Variants()
 										hasher.Do(buf);
 										if (crc!=hasher.GetResultCRC32())
 										{
-											XDEBUG_PRINTCOLOR(0,(__L("Error con el transporte del Serializable")));
+											XDEBUGTRACE_PRINTCOLOR(0,(__L("Error con el transporte del Serializable")));
 										}
 
 										return true;
@@ -9925,21 +9504,21 @@ bool TEST::Test_Variants()
 
 
 
-/*-------------------------------------------------------------------
-//	TEST::Test_VariantProtocol
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			04/09/2015 14:03:09
-//	
-//	@return 			bool : 
-//
-//  @param				modeserver : 
-*/
-/*-----------------------------------------------------------------*/
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_VariantProtocol
+* @brief      Unit Test  XVARIANT in protocol
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 16:07:25
+*
+* @param[in]    modeserver : 
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_VariantProtocol(bool modeserver)
 {
 	TESTPROTOCOLCONNEXIONSMANAGER*	protocolconnexionmanager	= NULL;		
@@ -10034,7 +9613,7 @@ bool TEST::Test_VariantProtocol(bool modeserver)
 								}
 							
 							if(xtimer) 
-								xsleep->Seconds(1);			
+								XSLEEP::GetInstance().Seconds(1);			
 				
 				} while(!xconsole->KBHit());
 		}
@@ -10136,7 +9715,7 @@ bool TEST::Test_VariantProtocol(bool modeserver)
 										}									
 								}
 							
-							if(xtimer) xsleep->Seconds(1);			
+							if(xtimer) XSLEEP::GetInstance().Seconds(1);			
 						}
 					
 				} while(!xconsole->KBHit());
@@ -10154,53 +9733,56 @@ bool TEST::Test_VariantProtocol(bool modeserver)
 	return true;
 }
 
-/*-------------------------------------------------------------------
-//	 TEST::Test_Map
-*/
-/**
-//
-//	
-//
-//	@author		Diego Martinez Ruiz de Gaona 
-//	@version	24/01/2018 9:49:54
-//	@return		bool : 
-//
-//	@param		 : 
-//
-*//*-----------------------------------------------------------------*/
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_Map
+* @brief      Unit Test Map class
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 16:08:41
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_Map()
 {
-		XMAP<XDWORD, XDWORD>		map;
-														map.Add(0, 1);
-														map.Add(1, 1);
-														map.Add(2, 1);
-														map.Add(3, 1);		
+	XMAP<XDWORD, XDWORD>		map;
+														
+  map.Add(0, 1);
+	map.Add(1, 1);
+	map.Add(2, 1);
+	map.Add(3, 1);		
 
-		for (XDWORD e = 0; e < map.GetSize(); e++)
+	for(XDWORD e = 0; e < map.GetSize(); e++)
 		{
-				XSTRING s;
-				s.Format(__L("Map %d,%d \r\n"), map.GetKey(e), map.GetElement(e));
-				xconsole->Print(s.Get());
+			XSTRING s;
+			
+      s.Format(__L("Map %d,%d \r\n"), map.GetKey(e), map.GetElement(e));
+			xconsole->Print(s.Get());
 		}
 
-		return true;
+	return true;
 }
 
-/*-------------------------------------------------------------------
-//	TEST::Test_Vector
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			14/03/2016 13:49:38
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
-bool	TEST::Test_Vector()
+
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_Vector
+* @brief      Unit Test XVector Class
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 16:09:54
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+bool TEST::Test_Vector()
 {
 	XVECTOR<int> test;
 
@@ -10380,29 +9962,23 @@ bool	TEST::Test_Vector()
 	stringvector.DeleteContents	();
 	stringvector.DeleteAll			();	
 
-
-
-
-
 	return true;
 }
 
 
 
-/*-------------------------------------------------------------------
-//	TEST::Test_DIOStreamTCPIPConnection
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			06/06/2016 12:24:39
-//	
-//	@return 			bool : 
-//
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_DIOStreamTCPIPConnection
+* @brief      Unit Test TCPIP stream connection
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 16:10:43
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_DIOStreamTCPIPConnection()
 {
 	DIOSTREAMTCPIPCONFIG diostreamcfg; 
@@ -10479,18 +10055,19 @@ bool TEST::Test_DIOStreamTCPIPConnection()
 
 
 
-/*-------------------------------------------------------------------
-//	TEST::Test_Zip
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Diego Martinez Ruiz de Gaona
-//	@version			22/06/2016 11:55:20
-//	
-*/
-/*-----------------------------------------------------------------*/
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_Zip
+* @brief      Unit Test ZIP file 
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 16:11:48
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_Zip()
 {
 	bool status=true;
@@ -10585,22 +10162,20 @@ bool TEST::Test_Zip()
 
 
 
-
-/*-------------------------------------------------------------------
-//	TEST::Test_StringProtocol
-*/	
-/**	
-//	
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			02/02/2017 12:04:59
-//	
-//	@return 			bool : 
-//
-//  @param				modeserver : 
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_StringProtocol
+* @brief      Unit Test String Protocol
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 16:12:46
+*
+* @param[in]    modeserver : 
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_StringProtocol(bool modeserver)
 {	
 	DIOSTREAMUARTCONFIG diostreamcfg;
@@ -10626,13 +10201,8 @@ bool TEST::Test_StringProtocol(bool modeserver)
 			DIOSTRINGPROTOCOL* stringprotocol =  new DIOSTRINGPROTOCOL(diostream);
 			if(stringprotocol)
 				{
-
 					if(stringprotocol->Ini())
 						{
-
-
-
-
 							stringprotocol->End();
 						}
 				}	
@@ -10645,29 +10215,25 @@ bool TEST::Test_StringProtocol(bool modeserver)
 
 
 
-
-
-/*-------------------------------------------------------------------
-//	 TEST::Test_XDebug
-*/
-/**
-//
-//	
-//
-//	@author		Abraham J. Velez 
-//	@version		
-//	@return		bool : 
-//
-//	@param		 : 
-//
-*//*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_XDebug
+* @brief      Unit Test XDEBUG functions (debug traces)
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 16:14:08
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_XDebug()
 {
 	XDWORD counter = 0;
 
 	while(!xconsole->KBHit())
 		{
-			XDEBUG_PRINTCOLOR((counter%2)?3:2, __L(" [%8d] Linea de DEBUG .... "), counter);
+			XDEBUGTRACE_PRINTCOLOR((counter%2)?3:2, __L(" [%8d] Linea de DEBUG .... "), counter);
 			counter++;			
 		}
 
@@ -10675,20 +10241,19 @@ bool TEST::Test_XDebug()
 
 }
 
-/*-------------------------------------------------------------------
-//	 TEST::Test_String
-*/
-/**
-//
-//	
-//
-//	@author		Diego Martinez Ruiz de Gaona 
-//	@version	29/01/2018 10:36:51
-//	@return		bool : 
-//
-//	@param		 : 
-//
-*//*-----------------------------------------------------------------*/
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_String
+* @brief      Unit Test String Test
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 16:14:37
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool TEST::Test_String()
 {
 		XSTRING str = __L("410.0");
@@ -10831,19 +10396,98 @@ bool TEST::Test_String()
 }
 
 
-/*-------------------------------------------------------------------
-//  TEST::HandleEvent
-*/ 
-/**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			24/08/2012 17:12:12
-//	
-//	@return 			void : 
-//	@param				xevent : 
-*/
-/*-----------------------------------------------------------------*/
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::Test_SharedMemory
+* @brief      Unit Test Shared Memory
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       24/05/2018 8:39:27
+*
+* @param[in]  modeserver : select mode to create o open shared memory.
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+bool TEST::Test_SharedMemory(bool modeserver)
+{
+  #define SHAREDMEMORYID __L("SharedMemoryID")
+
+  //xconsole->Printf(__L("Creating Shared Memory: %s \n"), (modeserver?__L("[Master]"):__L("[Slave]")));				
+
+  XSHAREDMEMORY* sharedmemory = xfactory->Create_SharedMemory();
+  if(!sharedmemory) return false;
+
+  XBYTE*    pointer = NULL;
+  XDWORD    size    = 0;
+  XDWORD*   data    = 0;
+  bool      exit    = false;
+    
+  if(modeserver) 
+    {  
+      size = 32;
+      pointer = sharedmemory->Create(SHAREDMEMORYID, size); 
+    }
+   else pointer = sharedmemory->Open(SHAREDMEMORYID, size); 
+   
+  xconsole->Printf(__L("Create Shared Memory %d bytes: %s\n"), size, pointer?__L("Ok"):__L("Error!"));			
+
+  data = (XDWORD*)pointer;
+
+  XRAND* xrand = xfactory->CreateRand();
+  if(xrand)
+    {
+      if(pointer)
+        {
+          do{ 
+              if(xconsole->KBHit())
+                {
+                  switch(xconsole->GetChar())
+                    {
+                      case 't' :
+                      case 'T' :  (*data) = (XDWORD)xrand->Max(100000000);
+                                  break;
+
+                      case 'Q'  : exit = true;
+                                  break;
+                    }
+                }
+
+              xconsole->Printf(__L("Data Shared Memory: %04X     \r"), (*data));	
+
+            } while(!exit);
+
+          sharedmemory->Close();
+        }
+    }
+
+  xfactory->Delete_SharedMemory(sharedmemory);
+
+  xconsole->Printf(__L("\nDelete Shared Memory: Ok\n"));			
+
+  return true;
+}
+
+
+
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::HandleEvent
+* @brief      Handle Event Observer callback
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 16:24:31
+*
+* @param[in]  xevent : event data from observer
+*
+* @return     void : does not return anything. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void TEST::HandleEvent(XEVENT* xevent)
 {
 	if(!xevent) return;
@@ -10872,13 +10516,13 @@ void TEST::HandleEvent(XEVENT* xevent)
 																																																																	protocol->SetIsInitialized(true);
 																																																																}
 																																																														}	
-																																																														//XDEBUG_PRINTCOLOR(2,__L("Connexion Manager: Init Protocol"));
+																																																														//XDEBUGTRACE_PRINTCOLOR(2,__L("Connexion Manager: Init Protocol"));
 																																																														break;
 
 																												case DIOPROTOCOLCONNEXIONSMANAGERXEVENTTYPE_DISCONNECTEDCONNEXION	: { 
 
 																																																														}  
-																																																														//XDEBUG_PRINTCOLOR(2,__L("Connexion Manager: Disconnected Connexion. "));
+																																																														//XDEBUGTRACE_PRINTCOLOR(2,__L("Connexion Manager: Disconnected Connexion. "));
 																																																														break;			
 																											}																																																															
 																									}
@@ -10932,7 +10576,7 @@ void TEST::HandleEvent(XEVENT* xevent)
 
 																									switch(event->GetTask()->GetID())
 																										{
-																											case  1:	XDEBUG_PRINTCOLOR(4,__L("TASK Event...."));
+																											case  1:	XDEBUGTRACE_PRINTCOLOR(4,__L("TASK Event...."));
 																																break;
 
 																											case  2:	break;
@@ -10945,10 +10589,10 @@ void TEST::HandleEvent(XEVENT* xevent)
 
 																									switch(xevent->GetEventType())
 																										{			
-																											case SCRIPTXEVENTTYPE_ERROR		:	XDEBUG_PRINTCOLOR(4,__L("Script ERROR [%d]: %s line %d -> \"%s\""), event->GetError(), event->GetErrorText()->Get(), event->GetNLine(), event->GetCurrentToken()->Get());			
+																											case SCRIPTXEVENTTYPE_ERROR		:	XDEBUGTRACE_PRINTCOLOR(4,__L("Script ERROR [%d]: %s line %d -> \"%s\""), event->GetError(), event->GetErrorText()->Get(), event->GetNLine(), event->GetCurrentToken()->Get());			
 																																											break;
 
-																											case SCRIPTXEVENTTYPE_BREAK		: XDEBUG_PRINTCOLOR(4,__L("Script BREAK: line %d -> \"%s\""), event->GetNLine(), event->GetCurrentToken()->Get());			
+																											case SCRIPTXEVENTTYPE_BREAK		:XDEBUGTRACE_PRINTCOLOR(4,__L("Script BREAK: line %d -> \"%s\""), event->GetNLine(), event->GetCurrentToken()->Get());			
 																																											break;
 
 																										}
@@ -11007,26 +10651,23 @@ void TEST::HandleEvent(XEVENT* xevent)
 
 
 
-
-
-
-
-/*-------------------------------------------------------------------
-//  TEST::ThreadRunFunction
-*/ 
-/**
-//	
-//	
-//	@author				Abraham J. Velez
-//	@version			07/04/2013 11:43:22
-//	
-//	@return 			void : 
-//	@param				thread : 
-*/
-/*-----------------------------------------------------------------*/
-void TEST::ThreadRunFunction(void* data)
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         TEST::ThreadRunFunction
+* @brief      Unit Test Thread Callback
+* @ingroup    TEST
+*
+* @author     Abraham J. Velez 
+* @date       23/05/2018 16:16:30
+*
+* @param[in]  param : param of thread 
+*
+* @return     void : does not return anything. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+void TEST::ThreadRunFunction(void* param)
 {
-	TEST* test   = (TEST*)data;
+	TEST* test   = (TEST*)param;
 	int   actual = test->threadwebactual;
 			 
 	test->Test_WEBClient();

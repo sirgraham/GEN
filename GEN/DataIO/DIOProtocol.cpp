@@ -25,7 +25,7 @@
 #include "XFactory.h"
 #include "XString.h"
 #include "XThreadCollected.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "XVariant.h"
 
 #include "HashCRC32.h"
@@ -919,7 +919,7 @@ DIOPROTOCOL_RESULT DIOPROTOCOL::Received()
       DIOPROTOCOL_COMMAND* cmd  = GetCommand(rtype);
       if(cmd)
         {
-          XDEBUG_PRINTCOLOR(((isanswer)?1:2), __L("DIOPROTOCOL %s %s : %08X %08X %02d %-35s (%8d)") , GetDIOStream()->GetConfig()->IsServer()?__L("Server  "):__L("Client  ")
+         XDEBUGTRACE_PRINTCOLOR(((isanswer)?1:2), __L("DIOPROTOCOL %s %s : %08X %08X %02d %-35s (%8d)") , GetDIOStream()->GetConfig()->IsServer()?__L("Server  "):__L("Client  ")
                                                                                                     , (isanswer)?__L("Answer  "):__L("Ask     ")
                                                                                                     , this
                                                                                                     , ID
@@ -1124,7 +1124,7 @@ bool DIOPROTOCOL::Command(XDWORD type, XBUFFER& xbuffer, int timeout)
   if(cmd)
     {
       /*
-      XDEBUG_PRINTCOLOR(1, __L("DIOPROTOCOL %s Command  : %08X %08X %02d %-35s (%8d)") , GetDIOStream()->GetConfig()->IsServer()?__L("Server  "):__L("Client  ")
+     XDEBUGTRACE_PRINTCOLOR(1, __L("DIOPROTOCOL %s Command  : %08X %08X %02d %-35s (%8d)") , GetDIOStream()->GetConfig()->IsServer()?__L("Server  "):__L("Client  ")
                                                                                        , this
                                                                                        , ID
                                                                                        , type
@@ -1134,7 +1134,7 @@ bool DIOPROTOCOL::Command(XDWORD type, XBUFFER& xbuffer, int timeout)
       if(SendCommand(type, ID, xbuffer))
         {
           /*
-          XDEBUG_PRINTCOLOR(1, __L("DIOPROTOCOL %s Send     : %08X %08X %02d %-35s (%8d)") , GetDIOStream()->GetConfig()->IsServer()?__L("Server  "):__L("Client  ")
+         XDEBUGTRACE_PRINTCOLOR(1, __L("DIOPROTOCOL %s Send     : %08X %08X %02d %-35s (%8d)") , GetDIOStream()->GetConfig()->IsServer()?__L("Server  "):__L("Client  ")
                                                                                            , this
                                                                                            , ID
                                                                                            , type
@@ -1170,14 +1170,14 @@ bool DIOPROTOCOL::Command(XDWORD type, XBUFFER& xbuffer, int timeout)
                       break;
                     }
 
-                  xsleep->MilliSeconds(10);
+                  XSLEEP::GetInstance().MilliSeconds(10);
                 }
 
             } else status = true;
 
           if(!status)
             {
-              XDEBUG_PRINTCOLOR((status?1:4), __L("DIOPROTOCOL %s Resolved : %08X %08X %02d %-35s (%8d)  %s") , GetDIOStream()->GetConfig()->IsServer()?__L("Server  "):__L("Client  ")
+             XDEBUGTRACE_PRINTCOLOR((status?1:4), __L("DIOPROTOCOL %s Resolved : %08X %08X %02d %-35s (%8d)  %s") , GetDIOStream()->GetConfig()->IsServer()?__L("Server  "):__L("Client  ")
                                                                                                               , this
                                                                                                               , ID
                                                                                                               , type
@@ -1843,7 +1843,7 @@ bool DIOPROTOCOL::CMD_File(DIOPROTOCOL_DIRECTION direction, XCHAR* sourcename, X
                                                      , fileprogress->GetPercent()
                                                      , param);
 
-      xsleep->MilliSeconds(10);
+      XSLEEP::GetInstance().MilliSeconds(10);
 
       if(!IsConnected())                              break;
       if((int)xtimer->GetMeasureSeconds()>=timeout)   break;
@@ -2913,7 +2913,7 @@ void DIOPROTOCOL::ThreadAsks(void* data)
                 }
             }
 
-          //if(protocol->xtimer) protocol->xsleep->MilliSeconds(50);
+          //if(protocol->xtimer) protocol->XSLEEP::GetInstance().MilliSeconds(50);
         }
     }
 }

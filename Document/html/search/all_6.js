@@ -1,0 +1,10 @@
+var searchData=
+[
+  ['get',['Get',['../classXBUFFER.html#a59d2c2b8d1c32098920f5d3eba0a5971',1,'XBUFFER::Get()'],['../classXBUFFER.html#a819fc12232e4ccd2e2ba005500730698',1,'XBUFFER::Get(XBYTE *pbuffer, int psize, int frompos=XBUFFER_INVALIDPOSITION)'],['../classXBUFFER.html#afd2ad07e0aeeb7632f794d23e9b4e5a9',1,'XBUFFER::Get(XBYTE &amp;data, int frompos=XBUFFER_INVALIDPOSITION)'],['../classXBUFFER.html#ad4aae7e01b7006e03dee36795e647e26',1,'XBUFFER::Get(bool &amp;data, int frompos=XBUFFER_INVALIDPOSITION)'],['../classXBUFFER.html#a4df5c9e9263f98bb5a967fabcea0a341',1,'XBUFFER::Get(XWORD &amp;data, int frompos=XBUFFER_INVALIDPOSITION)'],['../classXBUFFER.html#a1fe3d861549327bd21ba33efc31e50dc',1,'XBUFFER::Get(XDWORD &amp;data, int frompos=XBUFFER_INVALIDPOSITION)'],['../classXBUFFER.html#aabca9aa7af0d5508b8ea9c0d81f63d45',1,'XBUFFER::Get(XQWORD &amp;data, int frompos=XBUFFER_INVALIDPOSITION)'],['../classXBUFFER.html#a4b051f8bbe3c597b212d57cf5a467335',1,'XBUFFER::Get(double &amp;data, int frompos=XBUFFER_INVALIDPOSITION)'],['../classXBUFFER.html#a7b9dea3612b02db2f93b2beb5b6f8b30',1,'XBUFFER::Get(float &amp;data, int frompos=XBUFFER_INVALIDPOSITION)'],['../classXBUFFER.html#a8bd4d8c0a23eb08a5b3eecde272bfd66',1,'XBUFFER::Get(XSTRING &amp;data, int psize, int frompos=XBUFFER_INVALIDPOSITION)']]],
+  ['getbyte',['GetByte',['../classXBUFFER.html#abfaf967d136d37f0c5dcf4ded0296dac',1,'XBUFFER']]],
+  ['getnbits',['GetNBits',['../classXBUFFER.html#ac65f74a1730cb407ea56f56287013475',1,'XBUFFER']]],
+  ['getnbitsfree',['GetNBitsFree',['../classXBUFFER.html#a9d45ff68f91706857ccb7da67ec737fc',1,'XBUFFER']]],
+  ['getposition',['GetPosition',['../classXBUFFER.html#a2cea18563b3d0b687377f101ca1b42be',1,'XBUFFER']]],
+  ['getsize',['GetSize',['../classXBUFFER.html#a726a6143d8a9293a199f8033c8198a0a',1,'XBUFFER']]],
+  ['getwithmask',['GetWithMask',['../classXBUFFER.html#a366ac8314162b9a8f47ecdb6c9533a49',1,'XBUFFER::GetWithMask(XCHAR *mask, int frompos,...)'],['../classXBUFFER.html#ac9aaf64fbab7557ced4d8f1d2c69acaf',1,'XBUFFER::GetWithMask(XSTRING *mask, int frompos,...)']]]
+];

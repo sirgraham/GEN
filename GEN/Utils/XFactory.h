@@ -39,6 +39,7 @@ class XPHONE;
 #endif
 class XMUTEX;
 class XTHREAD;
+class XSHAREDMEMORY;
 
 
 class XFACTORY
@@ -61,10 +62,7 @@ class XFACTORY
 
     virtual XDIR*               Create_Dir                  ()                                                              { return NULL;                                                      }
     virtual bool                Delete_Dir                  (XDIR*  dir)                                                    { return false;                                                     }
-
-    virtual XSYSTEM*            CreateSystem                ()                                                              { return NULL;                                                      }
-    virtual bool                DeleteSystem                (XSYSTEM* xsystem)                                              { return false;                                                     }
-
+    
     virtual XCONSOLE*           CreateConsole               ()                                                              { return NULL;                                                      }
     virtual bool                DeleteConsole               (XCONSOLE* xconsole)                                            { return false;                                                     }
 
@@ -76,15 +74,15 @@ class XFACTORY
     virtual XMUTEX*             Create_Mutex                ()                                                              { return NULL;                                                      }
     virtual bool                Delete_Mutex                (XMUTEX* phone)                                                 { return false;                                                     }
 
-    virtual XTHREAD*            CreateThread                (XTHREADGROUPID groupID, XCHAR* ID,XTHREADFUNCTION function = NULL,void* data = NULL)   { return NULL;                              }
+    virtual XTHREAD*            CreateThread                (XTHREADGROUPID groupID, XCHAR* ID,XTHREADFUNCTION function = NULL,void* data = NULL)   
+                                { 
+                                  return NULL;                              
+                                }
     virtual bool                DeleteThread                (XTHREADGROUPID groupID, XTHREAD* xthread)                      { return false;                                                     }
 
-    bool                        HardwareUseLittleEndian     ()                                                              { return uselittleendian;                                           }
-    bool                        HardwareUseLittleEndian     (bool uselittleendian)                                          { this->uselittleendian = uselittleendian;  return uselittleendian; }
+    virtual XSHAREDMEMORY*      Create_SharedMemory         ()                                                              { return NULL;                                                      }
+    virtual bool                Delete_SharedMemory         (XSHAREDMEMORY* sharedmemory)                                   { return false;                                                     }
 
-  private:
-
-    bool                        uselittleendian;
 };
 
 //---- INLINE FUNCTIONS --------------------------------------------------------------------

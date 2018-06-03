@@ -1,17 +1,35 @@
-//------------------------------------------------------------------------------------------
-//  XCONSOLE.CPP
-//
-//  System resources Class
-//
-//  Author            : Abraham J. Velez
-//  Date Of Creation  : 03/03/2004 12:28:40
-//  Last Mofificacion :
-//
-//  GEN  Copyright (C).  All right reserved.
-//------------------------------------------------------------------------------------------
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @file        XConsole.cpp
+*
+* @class       XCONSOLE
+* @brief       Console base class
+* @ingroup     UTILS
+*
+* @author      Abraham J. Velez 
+* @date        28/05/2018 20:55:23
+*
+* @copyright   Copyright(c) 2005 - 2018 GEN Group.
+*
+* @cond
+* Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+* documentation files(the "Software"), to deal in the Software without restriction, including without limitation
+* the rights to use, copy, modify, merge, publish, distribute, sublicense, and/ or sell copies of the Software,
+* and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of
+* the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+* THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+* @endcond
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 
-
-//---- INCLUDES ----------------------------------------------------------------------------
+/*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -21,72 +39,279 @@
 #include "XBuffer.h"
 #include "XTimer.h"
 #include "XSleep.h"
+
 #include "XConsole.h"
 
 #include "XMemory.h"
 
-//---- GENERAL VARIABLE --------------------------------------------------------------------
+
+/*---- GENERAL VARIABLE ----------------------------------------------------------------------------------------------*/
+
+/*---- CLASS MEMBERS -------------------------------------------------------------------------------------------------*/
 
 
-//---- CLASS MEMBERS -----------------------------------------------------------------------
-
-
-
-/*-------------------------------------------------------------------
-//  XCONSOLE::XCONSOLE
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      12/09/2012 9:17:20
-//
-//  @return
-//  @param        xfactory :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XCONSOLE::XCONSOLE()
+* @brief      Constructor
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       28/05/2018 20:56:23
+*
+* @return     Does not return anything. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XCONSOLE::XCONSOLE()
 {
   Clean();
 }
 
 
-
-//-------------------------------------------------------------------
-//  XCONSOLE::~XCONSOLE
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      03/03/2004 12:29:20
-//
-//  @return
-//  */
-//-------------------------------------------------------------------
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XCONSOLE::~XCONSOLE()
+* @brief      Destructor
+* @note       VIRTUAL
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       29/05/2018 13:23:49
+*
+* @return     Does not return anything. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XCONSOLE::~XCONSOLE()
+
 {
   Clean();
+}
+
+
+ 
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XCONSOLE::GetSize(int& width, int& height)
+* @brief      Get size Of Console
+* @note       VIRTUAL
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       29/05/2018 13:21:09
+*
+* @param[out]  width : return width of console
+* @param[out]  height : return height of console
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+bool XCONSOLE::GetSize(int& width, int& height)
+{
+  width  = 0;
+  height = 0;
+ 
+  return false;
+}
+
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XCONSOLE::SetSize(int width, int height)
+* @brief      Set Size oif console
+* @note       VIRTUAL
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       29/05/2018 13:23:08
+*
+* @param[in]  width : set width of console
+* @param[in]  height : swet height of console
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+bool XCONSOLE::SetSize(int width, int height) 
+{ 
+  return false;         
+}
+
+
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XCONSOLE::Maximize()
+* @brief      Maximize console
+* @note       VIRTUAL
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       29/05/2018 13:24:11
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+bool XCONSOLE::Maximize() 
+{ 
+  return false;         
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XCONSOLE::Minimize()
+* @brief      Minimize console
+* @note       VIRTUAL
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       29/05/2018 13:24:31
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+bool XCONSOLE::Minimize() 
+{ 
+  return false;         
+}
+
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XCONSOLE::Hide()
+* @brief      Hide console
+* @note       VIRTUAL
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       29/05/2018 13:24:57
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+bool XCONSOLE::Hide()
+{ 
+  return false;         
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XCONSOLE::IsHide()
+* @brief      Check if the console is hide
+* @note       VIRTUAL
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       29/05/2018 13:25:16
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+bool XCONSOLE::IsHide()
+{ 
+  return false;         
+}
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XCONSOLE::UnHide()
+* @brief      unhide console
+* @note       VIRTUAL
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       29/05/2018 13:25:31
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+bool XCONSOLE::UnHide() 
+{ 
+  return false;         
+}
+
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XCONSOLE::Clear()
+* @brief      Clear console
+* @note       VIRTUAL
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       29/05/2018 13:25:44
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+bool XCONSOLE::Clear()  
+{ 
+  return false;         
+}
+
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XCONSOLE::KBHit()
+* @brief      Kbhit in console
+* @note       VIRTUAL
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       29/05/2018 13:26:07
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+bool XCONSOLE::KBHit() 
+{ 
+  return false;         
+}
+
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         int XCONSOLE::GetChar()
+* @brief      GetChar Console
+* @note       VIRTUAL
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       29/05/2018 13:26:36
+*
+* @return     int : 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+int XCONSOLE::GetChar()
+{ 
+  return 0;             
 }
 
 
 
 
 
-
-
-/*-------------------------------------------------------------------
-//  XCONSOLE::ConsolePrint
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      31/03/2011 9:55:43
-//
-//  @return       bool :
-//  @param        string :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XCONSOLE::Print(XCHAR* string)
+* @brief      Print a string
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       28/05/2018 20:56:44
+*
+* @param[in]  string : string to print
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XCONSOLE::Print(XCHAR* string)
 {
   if(!string) return false;
@@ -99,21 +324,21 @@ bool XCONSOLE::Print(XCHAR* string)
 
 
 
-
-/*-------------------------------------------------------------------
-//  XCONSOLE::Printf
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      21/10/2012 10:47:04
-//
-//  @return       bool :
-//  @param        mask :
-//  @param        ... :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XCONSOLE::Printf(XCHAR* mask,...)
+* @brief      Print variables with a mask
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       28/05/2018 20:57:12
+*
+* @param[in]  mask : mask to use
+* @param[in]  ... : variables
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XCONSOLE::Printf(XCHAR* mask,...)
 {
   if(!mask) return false;
@@ -135,27 +360,25 @@ bool XCONSOLE::Printf(XCHAR* mask,...)
 
 
 
-
-/*-------------------------------------------------------------------
-//  XCONSOLE::PrintDataBlock
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      18/02/2015 9:26:25
-//
-//  @return       bool :
-//
-//  @param        data :
-//  @param        size :
-//  @param        marginsize :
-//  @param        sizeline :
-//  @param        showoffset :
-//  @param        showtext :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XCONSOLE::PrintDataBlock(XBYTE* data, XDWORD size, XDWORD marginsize, XDWORD sizeline, bool showoffset, bool showtext)
+* @brief      Print data block in HEX and Character
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       28/05/2018 20:58:53
+*
+* @param[in]  data : data to print
+* @param[in]  size : size of data
+* @param[in]  marginsize : size of margin
+* @param[in]  sizeline :  size for the line.
+* @param[in]  showoffset : true if show offset
+* @param[in]  showtext : true if show the data in char format.
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XCONSOLE::PrintDataBlock(XBYTE* data, XDWORD size, XDWORD marginsize, XDWORD sizeline, bool showoffset, bool showtext)
 {
   XSTRING    margin;
@@ -228,26 +451,24 @@ bool XCONSOLE::PrintDataBlock(XBYTE* data, XDWORD size, XDWORD marginsize, XDWOR
 
 
 
-
-/*-------------------------------------------------------------------
-//  XCONSOLE::PrintDataBlock
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      18/02/2015 9:27:37
-//
-//  @return       bool :
-//
-//  @param        data :
-//  @param        marginsize :
-//  @param        sizeline :
-//  @param        showoffset :
-//  @param        showtext :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XCONSOLE::PrintDataBlock(XBUFFER& data, XDWORD marginsize, XDWORD sizeline, bool showoffset, bool showtext)
+* @brief      Print data block in HEX and Character
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       28/05/2018 21:00:08
+*
+* @param[in]  data : buffer data to print
+* @param[in]  marginsize : size of margin
+* @param[in]  sizeline :  size of line
+* @param[in]  showoffset : true if show offset
+* @param[in]  showtext : true if show the data in char format. 
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XCONSOLE::PrintDataBlock(XBUFFER& data, XDWORD marginsize, XDWORD sizeline, bool showoffset, bool showtext)
 {
   return PrintDataBlock(data.Get(), data.GetSize(), marginsize, sizeline, showoffset, showtext);
@@ -256,25 +477,24 @@ bool XCONSOLE::PrintDataBlock(XBUFFER& data, XDWORD marginsize, XDWORD sizeline,
 
 
 
-/*-------------------------------------------------------------------
-//  XCONSOLE::FormatMessage
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      23/08/2016 11:03:33
-//
-//  @return       bool :
-//
-//  @param        message :
-//  @param        margin :
-//  @param        prelude :
-//  @param        returnline :
-//  @param        string :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XCONSOLE::FormatMessage(XCHAR* message, XDWORD margin, bool prelude, bool returnline, XSTRING& string)
+* @brief      Format a message to string.
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       28/05/2018 21:01:43
+*
+* @param[in]  message : Message to format.
+* @param[in]  margin : size margin
+* @param[in]  prelude : true if has prelude
+* @param[in]  returnline : true if has return
+* @param[out] string : result string formated
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XCONSOLE::FormatMessage(XCHAR* message, XDWORD margin, bool prelude, bool returnline, XSTRING& string)
 {
   string.Empty();
@@ -296,24 +516,23 @@ bool XCONSOLE::FormatMessage(XCHAR* message, XDWORD margin, bool prelude, bool r
 
 
 
-/*-------------------------------------------------------------------
-//  XCONSOLE::PrintMessage
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      23/08/2016 11:03:50
-//
-//  @return       bool :
-//
-//  @param        message :
-//  @param        margin :
-//  @param        prelude :
-//  @param        returnline :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XCONSOLE::PrintMessage(XCHAR* message, XDWORD margin, bool prelude, bool returnline)
+* @brief      Print Message 
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       28/05/2018 21:05:55
+*
+* @param[in]  message : Message to print
+* @param[in]  margin : size of margin
+* @param[in]  prelude : true if has prelude
+* @param[in]  returnline : true if return line
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XCONSOLE::PrintMessage(XCHAR* message, XDWORD margin, bool prelude, bool returnline)
 {
   XSTRING string;
@@ -326,27 +545,27 @@ bool XCONSOLE::PrintMessage(XCHAR* message, XDWORD margin, bool prelude, bool re
 
 
 
-/*-------------------------------------------------------------------
-//  XCONSOLE::TipicalHeader_Create
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      23/08/2016 11:04:23
-//
-//  @return       bool :
-//
-//  @param        yearorigin :
-//  @param        nameapp :
-//  @param        version :
-//  @param        subversion :
-//  @param        subversionerr :
-//  @param        enterprise :
-//  @param        header :
-*/
-/*-----------------------------------------------------------------*/
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XCONSOLE::TipicalHeader_Create(int yearorigin, XCHAR* nameapp,int version,int subversion,int subversionerr,XCHAR* enterprise,XSTRING& header)
+* @brief      Create in string a tipical header in console
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       28/05/2018 21:07:06
+*
+* @param[in]  yearorigin : year of origin
+* @param[in]  nameapp : name of application
+* @param[in]  version : veraion of application
+* @param[in]  subversion : suversion of application
+* @param[in]  subversionerr : sub version error of application
+* @param[in]  enterprise : enterprise
+* @param[out] header : string result
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XCONSOLE::TipicalHeader_Create(int yearorigin, XCHAR* nameapp,int version,int subversion,int subversionerr,XCHAR* enterprise,XSTRING& header)
 {
   if(!nameapp)      return false;
@@ -365,7 +584,7 @@ bool XCONSOLE::TipicalHeader_Create(int yearorigin, XCHAR* nameapp,int version,i
 
   if(version<1) statusstr += __L("Beta");
 
-  #ifdef XDEBUG
+  #ifdef XDEBUG_TRACE
   if(statusstr.GetSize()) statusstr += __L("+");
   statusstr += __L("Debug");
   #endif
@@ -394,24 +613,26 @@ bool XCONSOLE::TipicalHeader_Create(int yearorigin, XCHAR* nameapp,int version,i
 
 
 
-/*-------------------------------------------------------------------
-//  XAPPLICATION::TipicalHeader_Show
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      23/03/2013 14:55:45
-//
-//  @return       bool :
-//  @param        yearorigin :
-//  @param        nameapp :
-//  @param        version :
-//  @param        subversion :
-//  @param        subversionerr :
-//  @param        enterprise :
-*/
-/*-----------------------------------------------------------------*/
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XCONSOLE::TipicalHeader_Show(int yearorigin, XCHAR* nameapp,int version,int subversion,int subversionerr, XCHAR* enterprise)
+* @brief      Print a tipical header in console
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       28/05/2018 21:09:11
+*
+* @param[in]  yearorigin : year of origin
+* @param[in]  nameapp : name of application
+* @param[in]  version : veraion of application
+* @param[in]  subversion : suversion of application
+* @param[in]  subversionerr : sub version error of application
+* @param[in]  enterprise : enterprise
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XCONSOLE::TipicalHeader_Show(int yearorigin, XCHAR* nameapp,int version,int subversion,int subversionerr, XCHAR* enterprise)
 {
   XSTRING header;
@@ -425,24 +646,24 @@ bool XCONSOLE::TipicalHeader_Show(int yearorigin, XCHAR* nameapp,int version,int
 
 
 
-/*-------------------------------------------------------------------
-//  XCONSOLE::WaitKey
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      23/08/2016 11:05:18
-//
-//  @return       bool :
-//
-//  @param        text :
-//  @param        margin :
-//  @param        prelude :
-//  @param        timeout :
-*/
-/*-----------------------------------------------------------------*/
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XCONSOLE::WaitKey(XCHAR* text, XDWORD margin, bool prelude, XDWORD timeout)
+* @brief      Prints a Wait menssage with timeout
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       28/05/2018 21:10:04
+*
+* @param[in]  text : Text of the wait
+* @param[in]  margin : size of margin
+* @param[in]  prelude : true if has prelude
+* @param[in]  timeout : timeout of the wait
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XCONSOLE::WaitKey(XCHAR* text, XDWORD margin, bool prelude, XDWORD timeout)
 {
   XTIMER* xtimer = xfactory->CreateTimer();
@@ -461,7 +682,7 @@ bool XCONSOLE::WaitKey(XCHAR* text, XDWORD margin, bool prelude, XDWORD timeout)
 
       string2.Format(string.Get(), (timeout - xtimer->GetMeasureSeconds()));
 
-      xsleep->MilliSeconds(100);
+      XSLEEP::GetInstance().MilliSeconds(100);
 
       PrintMessage(string2.Get(), margin, prelude, false);
 
@@ -495,3 +716,23 @@ bool XCONSOLE::WaitKey(XCHAR* text, XDWORD margin, bool prelude, XDWORD timeout)
   return status;
 }
 
+
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         void XCONSOLE::Clean()
+* @brief      Clean the attributes of the class: Default initialice
+* @note       INTERNAL
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       29/05/2018 13:29:41
+*
+* @return     void : does not return anything. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+void XCONSOLE::Clean()
+{
+
+}

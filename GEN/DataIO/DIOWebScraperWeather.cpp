@@ -14,7 +14,7 @@
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
 #include "XThread.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "DIOWebScraperWeather.h"
 
 #include "XMemory.h"

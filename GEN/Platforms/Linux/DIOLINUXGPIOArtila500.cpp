@@ -26,7 +26,7 @@
 #include <sys/stat.h>
 #include <sys/ioctl.h>
 
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "DIOLINUXGPIOArtila500.h"
 

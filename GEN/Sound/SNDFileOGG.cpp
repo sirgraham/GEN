@@ -16,7 +16,7 @@
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
 #include "XFactory.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "stb_vorbis.h"
 
@@ -81,7 +81,7 @@ bool SNDFILEOGG::LoadFile(XCHAR* path, XCHAR* name, bool streaming)
       return false;
     }
 
-  //XDEBUG_PRINTCOLOR(0,__L("Loading file %s"), xfile->GetPathNameFile());
+  //XDEBUGTRACE_PRINTCOLOR(0,__L("Loading file %s"), xfile->GetPathNameFile());
 
   xbuffer->Resize(xfile->GetSize());
   status = xfile->Read(xbuffer->Get(), xbuffer->GetSize());
@@ -95,7 +95,7 @@ bool SNDFILEOGG::LoadFile(XCHAR* path, XCHAR* name, bool streaming)
   stream = stb_vorbis_open_memory(xbuffer->Get(), xbuffer->GetSize(), NULL, NULL);
   if(!stream)
     {
-      XDEBUG_PRINTCOLOR(4,__L("File Load Failed"), xfile->GetPathNameFile());
+     XDEBUGTRACE_PRINTCOLOR(4,__L("File Load Failed"), xfile->GetPathNameFile());
       return false; // need to check the specific error
     }
 

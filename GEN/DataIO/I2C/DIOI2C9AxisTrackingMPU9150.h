@@ -409,8 +409,8 @@ class DIOI2C9AXISTRACKINGMPU9150 : public DIODEVICEI2C
 {
   public:
 
-                              DIOI2C9AXISTRACKINGMPU9150      ();
-    virtual                  ~DIOI2C9AXISTRACKINGMPU9150      ();
+                              DIOI2C9AXISTRACKINGMPU9150            ();
+    virtual                  ~DIOI2C9AXISTRACKINGMPU9150            ();
 
     bool                      End                                   ();
 

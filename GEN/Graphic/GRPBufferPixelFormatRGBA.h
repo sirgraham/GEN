@@ -18,7 +18,7 @@
 
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "GRPBufferColorRGB.h"
 

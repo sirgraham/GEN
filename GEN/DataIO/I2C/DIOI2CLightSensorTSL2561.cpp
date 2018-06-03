@@ -15,7 +15,7 @@
 
 #include "XFactory.h"
 #include "XBuffer.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "DIOFactory.h"
 #include "DIOStreamI2CConfig.h"
@@ -349,7 +349,7 @@ bool DIOI2CLIGHTSENSORTSL2561::WriteReg(XBYTE reg, XBYTE value, int timeout)
   if(!diostream->Write(xbuffer))                  return false;
   if(!diostream->WaitToFlushOutXBuffer(timeout))  return false;
 
-  //XDEBUG_PRINTDATABLOCKCOLOR(XDEBUG_COLORRED, xbuffer);
+  //XDEBUGTRACE_PRINTDATABLOCKCOLOR(XDEBUG_COLORRED, xbuffer);
 
   return true;
 }
@@ -394,7 +394,7 @@ bool DIOI2CLIGHTSENSORTSL2561::ReadData16(XBYTE reg, XWORD& value, int timeout)
   value <<= 8;
   value  |= xbuffer.GetByte(0);
 
-  //XDEBUG_PRINTCOLOR(XDEBUG_COLORGREEN, __L("%02X %02X"), xbuffer.GetByte(1), xbuffer.GetByte(0));
+  //XDEBUGTRACE_PRINTCOLOR(XDEBUG_COLORGREEN, __L("%02X %02X"), xbuffer.GetByte(1), xbuffer.GetByte(0));
 
   return true;
 
@@ -431,9 +431,9 @@ bool DIOI2CLIGHTSENSORTSL2561::GetData(XWORD& fullspectrum, XWORD& infrared)
   // wait for the internal ADC to complete conversion
   switch(integrationtime)
     {
-      case DIOI2CLIGHTSENSORTSL2561INTEGRATIONTIME_13MS  : xsleep->MilliSeconds(20);  break;
-      case DIOI2CLIGHTSENSORTSL2561INTEGRATIONTIME_101MS : xsleep->MilliSeconds(150); break;
-      case DIOI2CLIGHTSENSORTSL2561INTEGRATIONTIME_402MS : xsleep->MilliSeconds(450); break;
+      case DIOI2CLIGHTSENSORTSL2561INTEGRATIONTIME_13MS  : XSLEEP::GetInstance().MilliSeconds(20);  break;
+      case DIOI2CLIGHTSENSORTSL2561INTEGRATIONTIME_101MS : XSLEEP::GetInstance().MilliSeconds(150); break;
+      case DIOI2CLIGHTSENSORTSL2561INTEGRATIONTIME_402MS : XSLEEP::GetInstance().MilliSeconds(450); break;
     }
 
   status = ReadData16((DIOI2CLIGHTSENSORTSL2561_COMMAND_BIT |  DIOI2CLIGHTSENSORTSL2561_WORD_BIT |  DIOI2CLIGHTSENSORTSL2561REGISTER_CHAN0_LOW), fullspectrum, timeout);

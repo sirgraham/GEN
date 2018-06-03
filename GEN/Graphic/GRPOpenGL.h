@@ -22,7 +22,7 @@
 
 #include "XBase.h"
 #include "XString.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "GRPRect.h"
 
 

@@ -17,7 +17,7 @@
 
 #include "XBuffer.h"
 #include "XFactory.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "Hash.h"
 
@@ -214,7 +214,7 @@ bool XFILEXDB::OpenFile()
       GetPrimaryFile()->Read((XBYTE*)&ID      , sizeof(XDWORD));
       GetPrimaryFile()->Read((XBYTE*)&filepos , sizeof(XDWORD));
 
-      //XDEBUG_PRINTCOLOR(1,__L("ID: %08X"), ID);
+      //XDEBUGTRACE_PRINTCOLOR(1,__L("ID: %08X"), ID);
 
       indexmap.Add(ID,filepos);
     }

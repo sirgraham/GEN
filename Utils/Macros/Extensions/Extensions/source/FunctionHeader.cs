@@ -132,32 +132,44 @@ namespace Extensions
 
         private void GetGroupID(string directory, ref bool isGEN, ref string groupID)
         {
-            // is GEN?
-            if (directory.Contains("GENFrameWork")) isGEN = true;
+            isGEN = false;
 
-            // Types
-            if (directory.Contains("Utils"))                    groupID = "UTILS";
-            if (directory.Contains("DataIO"))                   groupID = "DATAIO";
-            if (directory.Contains("Graphic"))                  groupID = "GRAPHIC";
-            if (directory.Contains("Sound"))                    groupID = "SOUND";
-            if (directory.Contains("Input"))                    groupID = "INPUT";
-            if (directory.Contains("Cipher"))                   groupID = "CIPHER";
-            if (directory.Contains("Compress"))                 groupID = "COMPRESS";
-            if (directory.Contains("Main"))                     groupID = "MAIN";
-            if (directory.Contains("Script"))                   groupID = "SCRIPT";
-            if (directory.Contains("DatabasesSQL"))             groupID = "DATABASESSQL";
-            if (directory.Contains("UserInterface"))            groupID = "USERINTERFACE";
-            if (directory.Contains("Video"))                    groupID = "VIDEO";
-            if (directory.Contains("Media"))                    groupID = "MEDIA";
-            if (directory.Contains("Physics"))                  groupID = "PHYSICS";
-            if (directory.Contains("ArtificialIntelligence"))   groupID = "ARTIFICIALINTELLIGENCE";
+             // is GEN?
+            if ((directory.Contains("/GEN/"))          || 
+                (directory.Contains("\\GEN\\"))        ||      
+                (directory.Contains("/GENFrameWork/")) || 
+                (directory.Contains("\\GENFrameWork\\"))) isGEN = true;
 
-            // Platforms
-            if (directory.Contains("Windows"))                  groupID = "PLATFORM_WINDOWS";
-            if (directory.Contains("Linux"))                    groupID = "PLATFORM_LINUX";
-            if (directory.Contains("Android"))                  groupID = "PLATFORM_ANDROID";
-            if (directory.Contains("Common"))                   groupID = "PLATFORM_COMMON";
-            if (directory.Contains("STM32Fxxx"))                groupID = "PLATFORM_STM32FXXX";
+
+            if(isGEN)
+              {
+                // Types
+                if (directory.Contains("Utils"))                    groupID = "UTILS";
+                if (directory.Contains("DataIO"))                   groupID = "DATAIO";
+                if (directory.Contains("Graphic"))                  groupID = "GRAPHIC";
+                if (directory.Contains("Sound"))                    groupID = "SOUND";
+                if (directory.Contains("Input"))                    groupID = "INPUT";
+                if (directory.Contains("Cipher"))                   groupID = "CIPHER";
+                if (directory.Contains("Compress"))                 groupID = "COMPRESS";
+                if (directory.Contains("Main"))                     groupID = "MAIN";
+                if (directory.Contains("Script"))                   groupID = "SCRIPT";
+                if (directory.Contains("DatabasesSQL"))             groupID = "DATABASESSQL";
+                if (directory.Contains("UserInterface"))            groupID = "USERINTERFACE";
+                if (directory.Contains("Video"))                    groupID = "VIDEO";
+                if (directory.Contains("Media"))                    groupID = "MEDIA";
+                if (directory.Contains("Physics"))                  groupID = "PHYSICS";
+                if (directory.Contains("ArtificialIntelligence"))   groupID = "ARTIFICIALINTELLIGENCE";
+
+                // Platforms
+                if (directory.Contains("Windows"))                  groupID = "PLATFORM_WINDOWS";
+                if (directory.Contains("Linux"))                    groupID = "PLATFORM_LINUX";
+                if (directory.Contains("Android"))                  groupID = "PLATFORM_ANDROID";
+                if (directory.Contains("Common"))                   groupID = "PLATFORM_COMMON";
+                if (directory.Contains("STM32Fxxx"))                groupID = "PLATFORM_STM32FXXX";
+
+                if ((directory.Contains("/Tests/")) || 
+                    (directory.Contains("\\Tests\\")))              groupID = "TEST";
+              }
         }
 
         /// <summary>
@@ -173,7 +185,7 @@ namespace Extensions
 
             if(dte.ActiveDocument != null)
               {
-                var selection       = (TextSelection)dte.ActiveDocument.Selection;
+                var    selection    = (TextSelection)dte.ActiveDocument.Selection;
                 string text         = selection.Text;
                          
                 string funcname     = "";
@@ -187,7 +199,10 @@ namespace Extensions
                 DateTime localDate  = DateTime.Now;
                 var      culture    = new CultureInfo("es-ES");
 
-                version =localDate.ToString(culture);
+                bool     isvirtual  = false;
+                bool     isinternal = false;
+
+                version = localDate.ToString(culture);
 
                 if(text.Length==0) return;
 
@@ -204,8 +219,8 @@ namespace Extensions
                     line = line.Replace("  ", " ");
                   }
 
-                line.Trim();
-                text = line;
+              
+                text = line.TrimEnd(' ');
 
                 if(text.Length == 0) return;
 
@@ -218,8 +233,14 @@ namespace Extensions
                     returntype = "";
 
                     if(text.IndexOf('~') == -1)
-                           description = "Constructor";
-                      else description = "Destructor";
+                       {
+                         description = "Constructor";
+                       }
+                      else
+                       {
+                         description = "Destructor";
+                         isvirtual = true;
+                       }
 
                     if(parenthesis < 0) return;
 
@@ -230,9 +251,8 @@ namespace Extensions
 
                     for(i = 0; i < parameters.Length; i++)
                        {
-                         int index=parameters[i].IndexOf(' ');
-
-                         if (index>0) parameters[i] = parameters[i].Substring(0, index);
+                         int index = parameters[i].IndexOf(' ');
+                         if(index >0 )  parameters[i] = parameters[i].Substring(0, index);
                        }
                   }
              
@@ -251,17 +271,17 @@ namespace Extensions
                        {
                          parameters[i] = parameters[i].Trim();
 
-                        int size = parameters[i].Length;
-                        int pos = parameters[i].IndexOf(' ');
+                         int size = parameters[i].Length;
+                         int pos = parameters[i].IndexOf(' ');
 
-                        if(pos != -1)
-                          {
-                            if(size > pos + 1)
-                              {
-                                parameters[i] = parameters[i].Substring(pos + 1, (size-(pos+1)));
-                              }
-                          }
-                      }
+                         if(pos != -1)
+                           {
+                             if(size > pos + 1)
+                               {
+                                 parameters[i] = parameters[i].Substring(pos + 1, (size-(pos+1)));
+                               }
+                           }
+                     }
                   }
 
                 var     dtename     = dte.ActiveDocument.FullName;
@@ -274,40 +294,71 @@ namespace Extensions
 
                 GetGroupID(directory, ref isGEN, ref group);
 
-                string result;
+                string   result;
+
+                if(((funcname.Contains("::Clean")) && (description.Length == 0)))
+                  {
+                    isinternal  = true;
+                    description = "Clean the attributes of the class: Default initialice";
+                  }
+
+                if(((funcname.Contains("::HandleEvent")) && (description.Length == 0)))
+                  {
+                    isinternal  = true;
+                    description = "Handle Event for the observer manager of this class";
+                  }
+              
+                if(description.Length == 0)
+                  {
+                    description = funcname.Trim();
+
+                    // It´s a classe member
+                    int index2points = description.IndexOf(':');
+                    if(index2points !=0)
+                      {
+                        description = description.Substring(index2points + 2);
+                      }
+                  }
 
                 result  = "/**-------------------------------------------------------------------------------------------------------------------\n";
                 result += "*\n";
-                result += "*\t@fn \t\t\t\t"    + funcname.TrimStart() + "\n";
-                result += "*\t@brief\t\t\t"    + description + "\n";                
+                result += "*\t@fn \t\t\t\t"    + text        + "\n";
+                result += "*\t@brief\t\t\t"    + description + "\n";  
+                if(isinternal)  result += "*\t@note\t\t\t\tINTERNAL\n"; 
+                if(isvirtual)   result += "*\t@note\t\t\t\tVIRTUAL\n";           
                 result += "*\t@ingroup\t\t"    + group       + "\n";  
                 result += "*\n";
                 result += "*\t@author \t\t"    + author      + "\n";       
                 result += "*\t@date\t\t\t\t"   + date        + "\n";
               
-                
                 if(parameters != null)
                   {
                     if(parameters.Length != 0)
                       {
-                        result += "*\n";
-                      }
-                    
-                    for (i = 0; i < parameters.Length; i++)
-                      {
-                        if(parameters[i].Length != 0)
-                               result += "*\t@param[]\t\t" + parameters[i] + " : \n";
-                          else result += "*\t@param\n";
+                        if(parameters[0].Length != 0)
+                          {
+                            result += "*\n";
+
+                            for(i = 0; i < parameters.Length; i++)
+                              {
+                                // Default use param["in"] because is it is more likely
+
+                                if(parameters[i].Length != 0) result += "*\t@param[in]\t" + parameters[i] + " : \n";
+                                
+                              }
+                          }
                       }
                   }
-                  
+
+                result += "*\n";  
+
                 if(returntype.Length == 0)
                   {
-                     result += "*\t@return\n";       
+                    
+                    result += "*\t@return\t\t\t" +"Does not return anything. \n";
                   }           
                  else
                   {
-                    result += "*\n";
                     if(returntype == "void")
                       {
                         result += "*\t@return\t\t\t" + returntype + " : does not return anything. \n";    

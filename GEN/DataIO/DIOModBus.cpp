@@ -231,7 +231,7 @@ bool DIOMODBUS::ReadHoldingRegisters(XWORD address, XWORD nregisters, XBUFFER& a
                                               return false;
                                             }
 
-                                          xsleep->MilliSec(10);
+                                          XSLEEP::GetInstance().MilliSec(10);
                                         }
 
                                       answer.Resize(size);
@@ -293,7 +293,7 @@ bool DIOMODBUS::ReadHoldingRegisters(XWORD address, XWORD nregisters, XBUFFER& a
                                               return false;
                                             }
 
-                                          xsleep->MilliSeconds(10);
+                                          XSLEEP::GetInstance().MilliSeconds(10);
                                         }
 
                                       answer.Resize(size);

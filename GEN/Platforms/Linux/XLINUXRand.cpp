@@ -95,7 +95,7 @@ bool XLINUXRAND::Ini()
 //-------------------------------------------------------------------
 int XLINUXRAND::MaxElements(int max)
 {
-  return GetRandom(0,max-1);;
+  return GETRANDOM(0, max-1);;
 }
 
 
@@ -113,7 +113,7 @@ int XLINUXRAND::MaxElements(int max)
 //-------------------------------------------------------------------
 int XLINUXRAND::Max(int max)
 {
-  return GetRandom(0,max);
+  return GETRANDOM(0, max);
 }
 
 
@@ -132,7 +132,7 @@ int XLINUXRAND::Max(int max)
 //-------------------------------------------------------------------
 int XLINUXRAND::Between(int min,int max)
 {
-  return GetRandom(min,max);
+  return GETRANDOM(min, max);
 }
 
 

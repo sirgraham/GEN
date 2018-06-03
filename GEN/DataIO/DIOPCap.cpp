@@ -20,6 +20,7 @@
 #include "XBase.h"
 #include "XFactory.h"
 #include "XVector.h"
+#include "XSystem.h"
 
 #include "DIOPCap.h"
 
@@ -216,22 +217,25 @@ void DIOPCAPNETINTERFACE::Clean()
 
 
 
-/*-------------------------------------------------------------------
-//  DIOPCAPFRAME::DIOPCAPFRAME
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      26/10/2012 13:06:09
-//
-//  @return       void :
-//  @param        xfactory :
-*/
-/*-----------------------------------------------------------------*/
-DIOPCAPFRAME::DIOPCAPFRAME()
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         DIOPCAPFRAME::DIOPCAPFRAME
+* @brief      Constructor
+* @ingroup    DATAIO
+*
+* @author     Abraham J. Velez 
+* @date       24/05/2018 11:51:17
+*
+* @param[in]  hardwareuselittleendian : true is hardware use "littleendian"
+*
+* @return     Does not return anything. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+DIOPCAPFRAME::DIOPCAPFRAME(bool hardwareuselittleendian)
 {
   Clean();
+
+  this->hardwareuselittleendian = hardwareuselittleendian;
 
   data = new XBUFFER();
 }
@@ -289,7 +293,7 @@ bool DIOPCAPFRAME::GetHeaderEthernet(DIOPCAPETHERNETHEADER& ethernetheader)
 
   memcpy((XBYTE*)&ethernetheader,(XBYTE*)(_ethernetheader),sizeof(DIOPCAPETHERNETHEADER));
 
-  if(xfactory->HardwareUseLittleEndian())
+  if(hardwareuselittleendian)
     {
       SWAPWORD(ethernetheader.type);
     }
@@ -325,7 +329,7 @@ bool DIOPCAPFRAME::GetHeaderIP(DIOPCAPIPHEADER& ipheader)
 
   memcpy((XBYTE*)&ipheader,(XBYTE*)(_ipheader),sizeof(DIOPCAPIPHEADER));
 
-  if(xfactory->HardwareUseLittleEndian())
+  if(hardwareuselittleendian)
     {
       SWAPWORD(ipheader.len);
       SWAPWORD(ipheader.identification);
@@ -363,7 +367,7 @@ bool DIOPCAPFRAME::GetHeaderUDP(DIOPCAPUDPHEADER& udpheader)
 
   memcpy((XBYTE*)&udpheader,(XBYTE*)(_udpheader),sizeof(DIOPCAPUDPHEADER));
 
-  if(xfactory->HardwareUseLittleEndian())
+  if(hardwareuselittleendian)
     {
       SWAPWORD(udpheader.sourceport);        // Source port
       SWAPWORD(udpheader.targetport);        // Target port
@@ -397,7 +401,7 @@ bool DIOPCAPFRAME::GetHeaderTCP(DIOPCAPTCPHEADER& tcpheader)
 
   memcpy((XBYTE*)&tcpheader,(XBYTE*)(_tcpheader),sizeof(DIOPCAPTCPHEADER));
 
-  if(xfactory->HardwareUseLittleEndian())
+  if(hardwareuselittleendian)
     {
       SWAPWORD (tcpheader.sourceport);
       SWAPWORD (tcpheader.targetport);
@@ -567,16 +571,9 @@ bool DIOPCAPFRAME::SetData(XBYTE* data, XDWORD size)
 /*-----------------------------------------------------------------*/
 void DIOPCAPFRAME::Clean()
 {
-  data     = NULL;
+  data                    = NULL;
+  hardwareuselittleendian = false;
 }
-
-
-
-
-
-
-
-
 
 
 
@@ -597,7 +594,10 @@ void DIOPCAPFRAME::Clean()
 DIOPCAP::DIOPCAP()
 {
   Clean();
+
+  xsystem = xfactory->CreateSystem();
 }
+
 
 
 /*-------------------------------------------------------------------
@@ -615,6 +615,8 @@ DIOPCAP::DIOPCAP()
 DIOPCAP::~DIOPCAP()
 {
   End();
+
+  if(xsystem) xfactory->DeleteSystem(xsystem);
 
   Clean();
 }
@@ -873,7 +875,12 @@ bool DIOPCAP::Frames_Add(XBYTE* data,XDWORD size)
 
   if(xmutexframes) xmutexframes->Lock();
 
-  DIOPCAPFRAME* frame = new DIOPCAPFRAME();
+  bool hardwareuselittleendian = true;
+
+  if(xsystem) hardwareuselittleendian = xsystem->HardwareUseLittleEndian();
+
+
+  DIOPCAPFRAME* frame = new DIOPCAPFRAME(hardwareuselittleendian);
   if(frame)
     {
       if(frame->SetData(data,size))
@@ -906,6 +913,7 @@ bool DIOPCAP::Frames_Add(XBYTE* data,XDWORD size)
 void DIOPCAP::Clean()
 {
   xmutexframes    = NULL;
+  xsystem         = NULL;
 }
 
 

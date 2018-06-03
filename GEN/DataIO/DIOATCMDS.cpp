@@ -17,7 +17,7 @@
 #include "XSleep.h"
 #include "XFSMachine.h"
 #include "XBuffer.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "XThreadCollected.h"
 
 #include "DIOStream.h"
@@ -721,7 +721,7 @@ int DIOATCMDS::CalculeBaudRateStreamUART(int timeout)
     {
       diostreamcfg->SetBaudRate(baudrates[c]);
 
-      //XDEBUG_PRINT(__L("Open connexion: %d bauds"),baudrates[c]);
+      //XDEBUGTRACE_PRINT(__L("Open connexion: %d bauds"),baudrates[c]);
 
       diostream->ResetXBuffers();
 
@@ -907,7 +907,7 @@ DIOATCMD_ERROR DIOATCMDS::SendCommand(XDWORD type,XCHAR* param)
 
   if(!status) return DIOATCMD_ERROR_WRITECMD;
 
-  //XDEBUG_PRINT(__L("> %s"),command.Get());
+  //XDEBUGTRACE_PRINT(__L("> %s"),command.Get());
 
   return DIOATCMD_ERROR_NONE;
 }
@@ -969,7 +969,7 @@ DIOATCMD_ERROR DIOATCMDS::SendParam(XCHAR* param)
 
   if(!status) return DIOATCMD_ERROR_WRITECMD;
 
-  //XDEBUG_PRINT(__L("> %s"),_param.Get());
+  //XDEBUGTRACE_PRINT(__L("> %s"),_param.Get());
 
   return DIOATCMD_ERROR_NONE;
 }
@@ -1005,7 +1005,7 @@ DIOATCMD_ERROR DIOATCMDS::SendParam(XBUFFER& xbuffer)
 
 
   /*
-  #ifdef XDEBUG
+  #ifdef XDEBUG_TRACE
   XSTRING string;
 
   for(int c=0;c<(int)xbuffer.GetSize();c++)
@@ -1013,7 +1013,7 @@ DIOATCMD_ERROR DIOATCMDS::SendParam(XBUFFER& xbuffer)
       string.Add((XBYTE)xbuffer.GetByte(c));
     }
 
-  XDEBUG_PRINT(__L("1< %s"),string.Get());
+  XDEBUGTRACE_PRINT(__L("1< %s"),string.Get());
   #endif
   */
 
@@ -1265,7 +1265,7 @@ bool DIOATCMDS::ReadAnswer(XSTRING& answer,int timeout)
           status = false;
           break;
 
-        } else xsleep->MilliSeconds(10);
+        } else XSLEEP::GetInstance().MilliSeconds(10);
 
     } while(1);
 
@@ -1284,8 +1284,8 @@ bool DIOATCMDS::ReadAnswer(XSTRING& answer,int timeout)
         }
 
       /*
-      #ifdef XDEBUG
-      if(!answer.IsEmpty()) XDEBUG_PRINT(__L("2< %s"),answer.Get());
+      #ifdef XDEBUG_TRACE
+      if(!answer.IsEmpty()) XDEBUGTRACE_PRINT(__L("2< %s"),answer.Get());
       #endif
       */
 
@@ -1348,7 +1348,7 @@ bool DIOATCMDS::ReadAnswerWithOutEndChar(XSTRING& answer, int timeout)
           status = false;
           break;
 
-        } else xsleep->MilliSeconds(10);
+        } else XSLEEP::GetInstance().MilliSeconds(10);
 
     } while(1);
 
@@ -1365,8 +1365,8 @@ bool DIOATCMDS::ReadAnswerWithOutEndChar(XSTRING& answer, int timeout)
     }
 
   /*
-  #ifdef XDEBUG
-  if(!answer.IsEmpty()) XDEBUG_PRINT(__L("3< %s"),answer.Get());
+  #ifdef XDEBUG_TRACE
+  if(!answer.IsEmpty()) XDEBUGTRACE_PRINT(__L("3< %s"),answer.Get());
   #endif
   */
 
@@ -1578,7 +1578,7 @@ int DIOATCMDS::SearchInAnswers(XCHAR* string, int timeout)
             {
               return -1;
 
-            } else xsleep->MilliSeconds(10);
+            } else XSLEEP::GetInstance().MilliSeconds(10);
 
         } else break;
 
@@ -1662,7 +1662,7 @@ DIOATCMD_ERROR DIOATCMDS::WaitToProccessAnswer(int timeout, int* index)
         {
           return DIOATCMD_ERROR_TIMEOUT;
 
-        } else xsleep->MilliSeconds(50);
+        } else XSLEEP::GetInstance().MilliSeconds(50);
 
     } while(1);
 
@@ -1696,7 +1696,7 @@ DIOATCMD_ERROR DIOATCMDS::WaitToOneAnswerMore(int timeout)
         {
           return DIOATCMD_ERROR_TIMEOUT;
 
-        } else xsleep->MilliSeconds(50);
+        } else XSLEEP::GetInstance().MilliSeconds(50);
 
     } while(actualnanswer == (int)answers.GetSize());
 

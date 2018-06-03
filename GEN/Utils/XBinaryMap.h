@@ -29,7 +29,10 @@
 
 
 /*---- CLASS -----------------------------------------------------------------------------*/
+
+
 template <class K, class E, class Comparator = XLESS<XPAIR<K, E> > , class Container = XAVLTREE<XPAIR<K, E>, Comparator> >
+
 class XBINARYMAP
 {
   public:

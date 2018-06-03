@@ -21,7 +21,7 @@
 #include "XFileZIP.h"
 #include "XString.h"
 #include "XSystem.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "HashCRC32.h"
 
@@ -307,7 +307,7 @@ bool DIOAPPLICATIONUPDATE::Download(DIOURL& url, int port, XCHAR* addtargetpath,
 
   if(!filestoupdate.GetSize())
   {
-    XDEBUG_PRINTCOLOR(4,__L("No files to update"));
+   XDEBUGTRACE_PRINTCOLOR(4,__L("No files to update"));
     return DIOAPPLICATIONUPDATE_ERROR_NOTFILESTOUPDATE;
   }
 
@@ -365,12 +365,12 @@ bool DIOAPPLICATIONUPDATE::Download(DIOURL& url, int port, XCHAR* addtargetpath,
         {
           webclient->SetPort(port);
 
-          XDEBUG_PRINTCOLOR(1,__L("Downloading update file : %s"),namefile.Get());
+         XDEBUGTRACE_PRINTCOLOR(1,__L("Downloading update file : %s"),namefile.Get());
 
           status = webclient->Get(urlfile, xpathfile, NULL, timeout);
           if(!status)
             {
-              XDEBUG_PRINTCOLOR(4,__L("webclient failed to retrieve file %s:%s"),xpathfile.Get(),urlfile.Get());
+             XDEBUGTRACE_PRINTCOLOR(4,__L("webclient failed to retrieve file %s:%s"),xpathfile.Get(),urlfile.Get());
               if(stopproccess)
                         error = DIOAPPLICATIONUPDATE_ERROR_BREAKFORUSER;
                   else  error = DIOAPPLICATIONUPDATE_ERROR_DOWNLOADFILE;
@@ -393,7 +393,7 @@ bool DIOAPPLICATIONUPDATE::Download(DIOURL& url, int port, XCHAR* addtargetpath,
 
           if(updatefile->GetCRC32() != hashCRC32.GetResultCRC32())
             {
-              XDEBUG_PRINTCOLOR(4,__L("webclient CRC error on file %s:%s"),xpathfile.Get(),urlfile.Get());
+             XDEBUGTRACE_PRINTCOLOR(4,__L("webclient CRC error on file %s:%s"),xpathfile.Get(),urlfile.Get());
               status = false;
               break;
 
@@ -618,11 +618,8 @@ bool DIOAPPLICATIONUPDATE::ChangeFilesFromDownload(DIOAPPLICATIONUPDATEVERSIONDA
 //  @param        error :
 */
 /*-----------------------------------------------------------------*/
-bool DIOAPPLICATIONUPDATE::RestartApplication(DIOAPPLICATIONUPDATE_ERROR& error, bool specialexecution)
+bool DIOAPPLICATIONUPDATE::RestartApplication(DIOAPPLICATIONUPDATE_ERROR& error)
 {
-  XSYSTEM* xsystem = xfactory->CreateSystem();
-  if(!xsystem) return  false;
-
   XSTRING command;
   XSTRING _applicationname;
   int     returncode = 0;
@@ -636,10 +633,7 @@ bool DIOAPPLICATIONUPDATE::RestartApplication(DIOAPPLICATIONUPDATE_ERROR& error,
   command += __L(".exe");
   #endif
 
-  xsystem->ExecuteApplication(command.Get(), NULL, specialexecution);
-
-  xfactory->DeleteSystem(xsystem);
-
+  XSYSTEM::GetInstance().ExecuteApplication(command.Get(), NULL);
 
   return true;
 }

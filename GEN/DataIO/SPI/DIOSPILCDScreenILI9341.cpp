@@ -16,7 +16,7 @@
 #include "XFactory.h"
 #include "XSleep.h"
 #include "XBuffer.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "DIOFactory.h"
 #include "DIOStreamSPIConfig.h"
@@ -48,13 +48,9 @@
 //  @param        xsystem :
 */
 /*-----------------------------------------------------------------*/
-DIOSPILCDSCREENILI9341::DIOSPILCDSCREENILI9341(XSYSTEM* xsystem) : DIODEVICE()
+DIOSPILCDSCREENILI9341::DIOSPILCDSCREENILI9341() : DIODEVICE()
 {
   Clean();
-
-
-  ;
-  this->xsystem       = xsystem;
 
   xtimer = xfactory->CreateTimer();
   databuffer = new XBUFFER();
@@ -293,7 +289,7 @@ bool DIOSPILCDSCREENILI9341::LCD_Init()
 
 
   if(!SendCommand(0x01)) return false;
-  xsleep->MilliSeconds(5);
+  XSLEEP::GetInstance().MilliSeconds(5);
   SendCommand(0x28);
 
   //-----------------------------------------------------------------------------------------------
@@ -367,10 +363,10 @@ bool DIOSPILCDSCREENILI9341::LCD_Init()
   if(!LCD_RotateRGB(90, 2))          return false;
 
   SendCommand(0x11);                // Sleep out
-  xsleep->MilliSeconds(100);
+  XSLEEP::GetInstance().MilliSeconds(100);
 
   SendCommand(0x29);                // display on
-  xsleep->MilliSeconds(20);
+  XSLEEP::GetInstance().MilliSeconds(20);
 
   return true;
 }
@@ -400,10 +396,10 @@ bool DIOSPILCDSCREENILI9341::LCD_Reset()
   if(!diogpio)                       return false;
 
   diogpio->Set(pinreset,false);
-  xsleep->MilliSeconds(100);
+  XSLEEP::GetInstance().MilliSeconds(100);
 
   diogpio->Set(pinreset,true);
-  xsleep->MilliSeconds(100);
+  XSLEEP::GetInstance().MilliSeconds(100);
 
   return true;
 }

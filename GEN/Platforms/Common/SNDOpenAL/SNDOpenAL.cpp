@@ -16,7 +16,7 @@
 
 #include "XFactory.h"
 #include "XTimer.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "XThread.h"
 
 
@@ -236,7 +236,7 @@ SNDELEMENT* SNDOPENAL::AddFile(XPATH& xpath, XCHAR* namefile, bool stream)
       SNDOPENALELEMENT* element = (SNDOPENALELEMENT*)GetFile(namefile, stream);
       if(element != NULL)
         {
-          //XDEBUG_PRINTCOLOR(0,__L("File already Loaded:  %s"), file);
+          //XDEBUGTRACE_PRINTCOLOR(0,__L("File already Loaded:  %s"), file);
           return element;
         }
 
@@ -254,7 +254,7 @@ SNDELEMENT* SNDOPENAL::AddFile(XPATH& xpath, XCHAR* namefile, bool stream)
       // for this the system needs to get xpaths
       if(!fileogg->LoadFile(xpathfull, namefile, stream))
         {
-          XDEBUG_PRINTCOLOR(4,__L("Couldn't load %s"), xpath.Get());
+         XDEBUGTRACE_PRINTCOLOR(4,__L("Couldn't load %s"), xpath.Get());
           delete fileogg;
           return NULL;
         }
@@ -266,7 +266,7 @@ SNDELEMENT* SNDOPENAL::AddFile(XPATH& xpath, XCHAR* namefile, bool stream)
       element = new SNDOPENALELEMENT(&xpathfull);
       if(!element)
         {
-          XDEBUG_PRINTCOLOR(4,__L("Couldn't load %s"), xpathfull.Get());
+         XDEBUGTRACE_PRINTCOLOR(4,__L("Couldn't load %s"), xpathfull.Get());
           delete fileogg;
           return NULL;
         }
@@ -278,7 +278,7 @@ SNDELEMENT* SNDOPENAL::AddFile(XPATH& xpath, XCHAR* namefile, bool stream)
 
       if (fileogg->GetChannels()==0)
         {
-          XDEBUG_PRINTCOLOR(4,__L(" SNDOPENAL::AddFile: Exception using 0 channels to set samples"), namefile);
+         XDEBUGTRACE_PRINTCOLOR(4,__L(" SNDOPENAL::AddFile: Exception using 0 channels to set samples"), namefile);
         }
       else
         {
@@ -293,7 +293,7 @@ SNDELEMENT* SNDOPENAL::AddFile(XPATH& xpath, XCHAR* namefile, bool stream)
 
       delete fileogg;
 
-      //XDEBUG_PRINTCOLOR(1,__L("File %s Loaded"), file);
+      //XDEBUGTRACE_PRINTCOLOR(1,__L("File %s Loaded"), file);
 
       //return it
       return element;
@@ -322,7 +322,7 @@ SNDELEMENT* SNDOPENAL::AddFile(XPATH& xpath, XCHAR* namefile, bool stream)
       // for this the system needs to get xpaths
       if(!fileogg->LoadFile(xpathfull, namefile, stream))
         {
-          XDEBUG_PRINTCOLOR(4,__L("Couldn't load %s"), namefile);
+         XDEBUGTRACE_PRINTCOLOR(4,__L("Couldn't load %s"), namefile);
           delete fileogg;
           return NULL;
         }
@@ -535,7 +535,7 @@ SNDINSTANCE* SNDOPENAL::PlaySound(SNDELEMENT* element)
 
           if (source==NULL)
             {
-              XDEBUG_PRINTCOLOR(4,__L("SNDOPENAL::PlaySound : Executing a NULL source"));
+             XDEBUGTRACE_PRINTCOLOR(4,__L("SNDOPENAL::PlaySound : Executing a NULL source"));
             }
 
           if(source->IsStopped())
@@ -572,7 +572,7 @@ SNDINSTANCE* SNDOPENAL::PlaySound(SNDELEMENT* element)
 
           if (source==NULL)
             {
-              XDEBUG_PRINTCOLOR(4,__L("SNDOPENAL::PlaySound : Executing a NULL source"));
+             XDEBUGTRACE_PRINTCOLOR(4,__L("SNDOPENAL::PlaySound : Executing a NULL source"));
             }
 
           if(source->IsStopped())
@@ -605,7 +605,7 @@ SNDINSTANCE* SNDOPENAL::PlaySound(SNDELEMENT* element)
   if (element)
     if (element->GetNameFile())
     {
-        XDEBUG_PRINTCOLOR(4,__L("No available Source : %s"),element->GetNameFile()->Get());
+       XDEBUGTRACE_PRINTCOLOR(4,__L("No available Source : %s"),element->GetNameFile()->Get());
     }
 
   return NULL;

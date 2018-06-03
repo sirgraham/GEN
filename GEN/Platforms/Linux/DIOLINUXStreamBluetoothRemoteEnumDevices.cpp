@@ -164,7 +164,7 @@ bool DIOLINUXSTREAMBLUETOOTHREMOTEENUMDEVICES::Search()
       xtimerout->Reset();
       while(GetCurrentState() == DIOLINUXBTENUMFSMSTATE_NONE)
         {
-          xsleep->MilliSeconds(10);
+          XSLEEP::GetInstance().MilliSeconds(10);
 
           if(xtimerout->GetMeasureSeconds() >= 5)
             {
@@ -202,7 +202,7 @@ bool DIOLINUXSTREAMBLUETOOTHREMOTEENUMDEVICES::StopSearch(bool waitend)
     {
       while(GetCurrentState()!=DIOLINUXBTENUMFSMEVENT_SEARCHEND)
         {
-          xsleep->MilliSeconds(10);
+          XSLEEP::GetInstance().MilliSeconds(10);
         }
     }
 
@@ -716,7 +716,7 @@ extern "C"
   {
     if(!SDP_lastservice) return;
 
-    //XDEBUG_PRINTCOLOR(4, __L("print_service_class"));
+    //XDEBUGTRACE_PRINTCOLOR(4, __L("print_service_class"));
 
     uuid_t* uuid = (uuid_t*)value;
     sdp_uuid2strn(uuid, UUID_str, MAX_LEN_UUID_STR);
@@ -768,13 +768,13 @@ extern "C"
             case SDP_UINT8    : if(proto == RFCOMM_UUID) protocol->SetChannel(p->val.uint8);
                                 break;
 
-                      default : XDEBUG_PRINTCOLOR(1, __L("[type unknown]"));
+                      default :XDEBUGTRACE_PRINTCOLOR(1, __L("[type unknown]"));
                                 break;
 
           }
        }
 
-    XDEBUG_PRINTCOLOR(4, __L("Protocol: %08X %08X %d"), SDP_lastservice->GetID(), protocol->GetType(), protocol->GetChannel());
+   XDEBUGTRACE_PRINTCOLOR(4, __L("Protocol: %08X %08X %d"), SDP_lastservice->GetID(), protocol->GetType(), protocol->GetChannel());
 
     SDP_lastservice->SetNProtocols(SDP_lastservice->GetNProtocols()+1);
   }
@@ -798,7 +798,7 @@ extern "C"
   /*-----------------------------------------------------------------*/
   void print_access_protos(void* value, void* userData)
   {
-    //XDEBUG_PRINTCOLOR(4, __L("print_access_protos"));
+    //XDEBUGTRACE_PRINTCOLOR(4, __L("print_access_protos"));
 
     sdp_list_t* protDescSeq = (sdp_list_t*)value;
     sdp_list_foreach(protDescSeq, print_service_desc, 0);

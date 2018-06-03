@@ -1,28 +1,43 @@
-//------------------------------------------------------------------------------------------
-//  XBUFFER.H
-//
-/**
-// \class
-//
-//  eXtended Buffer
-//
-//  @author  Abraham J. Velez
-//  @version 17/11/2001
-*/
-//  GEN  Copyright (C).  All right reserved.
-//------------------------------------------------------------------------------------------
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @file        XBuffer.h
+*
+* @class       XBUFFER
+* @brief       eXtended buffer functions class
+* @ingroup     UTILS
+*
+* @author      Abraham J. Velez 
+* @date        25/05/2018 18:12:34
+*
+* @copyright   Copyright(c) 2005 - 2018 GEN Group.
+*
+* @cond
+* Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+* documentation files(the "Software"), to deal in the Software without restriction, including without limitation
+* the rights to use, copy, modify, merge, publish, distribute, sublicense, and/ or sell copies of the Software,
+* and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of
+* the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+* THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+* @endcond
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 
 #ifndef _XBUFFER_H_
 #define _XBUFFER_H_
 
-
-//---- INCLUDES ----------------------------------------------------------------------------
+/*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 
 #include "XBase.h"
 #include "XString.h"
 
-//---- DEFINES & ENUMS  --------------------------------------------------------------------
-
+/*---- DEFINES & ENUMS  ----------------------------------------------------------------------------------------------*/
 
 enum XBUFFER_PADDINGTYPE
 {
@@ -40,9 +55,7 @@ enum XBUFFER_PADDINGTYPE
 #define XBUFFER_INVALIDPOSITION         -1
 #define XBUFFER_ISTHREADSAFE            true
 
-
-//---- CLASS -------------------------------------------------------------------------------
-
+/*---- CLASS ---------------------------------------------------------------------------------------------------------*/
 
 class XFACTORY;
 class XMUTEX;
@@ -53,11 +66,11 @@ class XBUFFER
                              XBUFFER                        (bool threadsafe = XBUFFER_ISTHREADSAFE);
                              XBUFFER                        (XDWORD size, bool threadsafe = XBUFFER_ISTHREADSAFE);
     virtual                 ~XBUFFER                        ();
-
+    
     XDWORD                   GetSize                        ();
     bool                     SetSize                        (XDWORD size);
 
-    bool                     IsEmpty                        ()                                 { return (!GetSize())?true:false;                                }
+    bool                     IsEmpty                        ();
 
     void                     ResetPosition                  ();
     XDWORD                   GetPosition                    ();
@@ -65,8 +78,6 @@ class XBUFFER
 
     bool                     IsBlocked                      ();
     bool                     SetBlocked                     (bool blocked);
-
-    bool                     FillBuffer                     (XBYTE fillchar = 0);
 
     bool                     Add                            (XBYTE* pbuffer, XDWORD psize);
     bool                     Add                            (XBUFFER* buffer);
@@ -81,8 +92,7 @@ class XBUFFER
     bool                     Add                            (XSTRING& string);
     bool                     AddWithMask                    (XCHAR* mask, ...);
     bool                     AddWithMask                    (XSTRING* mask, ...);
-    bool                     AddNBits                       (XWORD data);
-
+    
     bool                     Insert                         (XBYTE* pbuffer, XDWORD psize, int frompos = 0);
     bool                     Insert                         (XBUFFER* buffer, int frompos = 0);
     bool                     Insert                         (XBUFFER& buffer, int frompos = 0);
@@ -96,13 +106,7 @@ class XBUFFER
     bool                     Insert                         (XSTRING& string, int frompos = 0);
     bool                     InsertWithMask                 (XCHAR* mask, int frompos, ...);
     bool                     InsertWithMask                 (XSTRING* mask, int frompos, ...);
-
-    bool                     Padding_Add                    (XBYTE bitsadjust, XBUFFER_PADDINGTYPE type = XBUFFER_PADDINGTYPE_PKCS5);
-    bool                     Padding_Has                    ();
-    XBUFFER_PADDINGTYPE      Padding_GetType                ();
-    XBYTE                    Padding_GetSize                ();
-    bool                     Padding_Delete                 ();
-
+   
     XDWORD                   Extract                        (XBYTE* pbuffer,XDWORD ppos, XDWORD psize);
     bool                     Extract                        (XBYTE& data, XDWORD ppos = 0);
     bool                     Extract                        (bool& data, XDWORD ppos = 0);
@@ -114,10 +118,7 @@ class XBUFFER
     bool                     Extract                        (XSTRING& string, XDWORD ppos, XDWORD psize);
     bool                     ExtractWithMask                (XCHAR* mask, int frompos, ...);
     bool                     ExtractWithMask                (XSTRING* mask, int frompos, ...);
-
-    bool                     Compare                        (XBYTE* pbuffer, XDWORD psize);
-    bool                     Compare                        (XBUFFER* buffer);
-
+   
     XBYTE*                   Get                            ();
     XBYTE                    GetByte                        (XDWORD index);
     bool                     Get                            (XBYTE* pbuffer,int psize, int frompos = XBUFFER_INVALIDPOSITION);
@@ -129,6 +130,7 @@ class XBUFFER
     bool                     Get                            (double& data, int frompos = XBUFFER_INVALIDPOSITION);
     bool                     Get                            (float& data, int frompos = XBUFFER_INVALIDPOSITION);
     bool                     Get                            (XSTRING& data, int psize, int frompos = XBUFFER_INVALIDPOSITION);
+    bool                     GetWithMask                    (XCHAR* mask, int frompos, ...);
     bool                     GetWithMask                    (XSTRING* mask, int frompos, ...);
 
     bool                     Set                            (XBYTE* pbuffer,int psize, int topos = XBUFFER_INVALIDPOSITION);
@@ -142,18 +144,26 @@ class XBUFFER
     bool                     Set                            (XSTRING& data, int topos = XBUFFER_INVALIDPOSITION);
     XDWORD                   SetWithMask                    (XCHAR* mask, int topos, ...);
     XDWORD                   SetWithMask                    (XSTRING* mask, int topos, ...);
-    bool                     SetNBits                       (XWORD data, int topos = XBUFFER_INVALIDPOSITION);
-
+  
     bool                     Resize                         (XDWORD newsize,bool setblocked = true);
-
     bool                     Delete                         (bool setblocked = true);
+    bool                     FillBuffer                     (XBYTE fillchar = 0);
+    bool                     Empty                          ();
+    bool                     Swap                           (); 
+    
+    bool                     Compare                        (XBYTE* pbuffer, XDWORD psize);
+    bool                     Compare                        (XBUFFER* buffer);
+    
+    bool                     Padding_Add                    (XBYTE bitsadjust, XBUFFER_PADDINGTYPE type = XBUFFER_PADDINGTYPE_PKCS5);
+    bool                     Padding_Has                    ();
+    XBUFFER_PADDINGTYPE      Padding_GetType                ();
+    XBYTE                    Padding_GetSize                ();
+    bool                     Padding_Delete                 ();
 
-    bool                     Empty                          ()                                 { return Delete();                                               }
-
-    bool                     Swap                           ();
-
+    bool                     AddNBits                       (XWORD data);
     bool                     AdjustToNBits                  (int nbits);
-    XBYTE                    GetNBits                       ()                                 { return nbits;                                                  }
+    XBYTE                    GetNBits                       (); 
+    bool                     SetNBits                       (XWORD data, int topos = XBUFFER_INVALIDPOSITION);
     XBYTE                    GetNBitsFree                   ();
     bool                     SetNBitsFree                   (XBYTE nbitsfree);
 
@@ -162,35 +172,15 @@ class XBUFFER
 
     XDWORD                   DecodeBCD                      (XDWORD ppos,XDWORD psize);
     XQWORD                   DecodeBCDLong                  (XDWORD ppos,XDWORD psize);
-
-    static void              SetHardwareUseLittleEndian     (bool hardwareuselittleendian)     { XBUFFER::hardwareuselittleendian = hardwareuselittleendian;    }
-
+   
   private:
 
-    void                     Clean                          ()
-                             {
-                                buffer                    = NULL;
-                                size                      = 0;
-                                sizeassign                = 0;
-                                position                  = 0;
-
-                                nbits                     = 0;
-                                nbitsfree                 = 0;
-                                lastnbitsfree             = 0;
-
-                                paddingtype               = XBUFFER_PADDINGTYPE_NONE;
-                                paddinghas                = false;
-                                paddingbitadjust          = 0;
-                                paddingsize               = 0;
-
-                                xmutex                    = NULL;
-                             }
-
+    void                     Clean                          ();
 
     bool                     AddXBufferWithMask             (XBUFFER& xbuffer, XSTRING* mask, va_list& arg);
     bool                     ExtractXBufferWithMask         (XBUFFER& xbuffer, XSTRING* mask, va_list& arg);
 
-    static bool              hardwareuselittleendian;
+    bool                     hardwareuselittleendian;
 
     XBYTE*                   buffer;
     XDWORD                   size;
@@ -210,7 +200,9 @@ class XBUFFER
 };
 
 
-//---- INLINE FUNCTIONS --------------------------------------------------------------------
+/*---- INLINE FUNCTIONS ----------------------------------------------------------------------------------------------*/
 
 #endif
+
+
 

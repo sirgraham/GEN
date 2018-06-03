@@ -19,7 +19,7 @@
 #include <winsock2.h>
 #include <windows.h>
 
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "XString.h"
 #include "XWINDOWSThread.h"
 

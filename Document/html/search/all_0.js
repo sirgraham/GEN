@@ -1,0 +1,8 @@
+var searchData=
+[
+  ['add',['Add',['../classXBUFFER.html#a03212e4f31a9d07995ac4f72db1dd0cf',1,'XBUFFER::Add(XBYTE *pbuffer, XDWORD psize)'],['../classXBUFFER.html#a784c3f22a2c5a4d5b7b305fdb9b038b4',1,'XBUFFER::Add(XBUFFER *buffer)'],['../classXBUFFER.html#a62d933a7751ca6a851d06eef99531988',1,'XBUFFER::Add(XBUFFER &amp;buffer)'],['../classXBUFFER.html#a6bc25e337eef54e48380456e4ac4dbaa',1,'XBUFFER::Add(XBYTE data)'],['../classXBUFFER.html#a63d29280cdee8af10624ce2a11495728',1,'XBUFFER::Add(bool data)'],['../classXBUFFER.html#a182e445d8aa4f7deb1cfc398855a60a3',1,'XBUFFER::Add(XWORD data)'],['../classXBUFFER.html#ac5af0640709a45111cebe0ac4cd4b2e5',1,'XBUFFER::Add(XDWORD data)'],['../classXBUFFER.html#a3ad0be944171dbf438a00caeedf74b4a',1,'XBUFFER::Add(XQWORD data)'],['../classXBUFFER.html#ab262090c9eb2d339ddf3f1a3d7c4051e',1,'XBUFFER::Add(float data)'],['../classXBUFFER.html#adaff3ce4c6e8f32495cd231a978e4e4f',1,'XBUFFER::Add(double data)'],['../classXBUFFER.html#afb1d9e48c3144b824bb2ceead4984667',1,'XBUFFER::Add(XSTRING &amp;string)']]],
+  ['addnbits',['AddNBits',['../classXBUFFER.html#ab19e3824f2106918cf42a81979d25d73',1,'XBUFFER']]],
+  ['addwithmask',['AddWithMask',['../classXBUFFER.html#a3d876a464cae64521ca8185d7685e511',1,'XBUFFER::AddWithMask(XCHAR *mask,...)'],['../classXBUFFER.html#a47d424a2632df7a89182695cab11e969',1,'XBUFFER::AddWithMask(XSTRING *mask,...)']]],
+  ['addxbufferwithmask',['AddXBufferWithMask',['../classXBUFFER.html#aac6fe306cb1773e5851d217a4cd4cb0b',1,'XBUFFER']]],
+  ['adjusttonbits',['AdjustToNBits',['../classXBUFFER.html#ab0e09220cdd8ad2b8d98a5c18eae1304',1,'XBUFFER']]]
+];

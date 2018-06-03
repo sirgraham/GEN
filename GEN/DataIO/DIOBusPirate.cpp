@@ -17,7 +17,7 @@
 #include "XFactory.h"
 #include "XSleep.h"
 #include "XBuffer.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "DIOFactory.h"
 #include "DIOStreamConfig.h"
@@ -107,7 +107,7 @@ bool DIOBUSPIRATE::Ini(int timeout)
   if(!WriteCommand(__L("m"), timeout))     return false;
   if(!WriteCommand(__L("1") , timeout))    return false;
 
-  xsleep->Seconds(1);
+  XSLEEP::GetInstance().Seconds(1);
   diostream->GetInXBuffer()->Empty();
 
   return (GetActualProtocol() == DIOBUSPIRATETYPEPROCOTOL_HIZ);
@@ -205,7 +205,7 @@ bool DIOBUSPIRATE::SetMode(DIOBUSPIRATETYPEPROCOTOL protocol, bool issoftware, i
                                                   }
                                               }
 
-                                            xsleep->Seconds(1);
+                                            XSLEEP::GetInstance().Seconds(1);
                                             diostream->GetInXBuffer()->Empty();
                                             break;
 
@@ -268,7 +268,7 @@ bool DIOBUSPIRATE::ReadI2CSnifferCommand(XBUFFER& in, XBUFFER& out)
 
   delete [] buffer;
 
-  XDEBUG_PRINTCOLOR(1, __L("%s"), string.Get());
+ XDEBUGTRACE_PRINTCOLOR(1, __L("%s"), string.Get());
 
   return true;
 }

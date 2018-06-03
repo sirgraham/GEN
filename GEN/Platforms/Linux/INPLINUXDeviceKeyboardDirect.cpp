@@ -25,7 +25,7 @@
 #include "XFactory.h"
 #include "XBase.h"
 #include "XFileTXT.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "INPButton.h"
 
@@ -195,24 +195,24 @@ bool INPLINUXDEVICEKEYBOARDDIRECT::Update()
                   case 0:
                           {
                           button->state=INPBUTTON_STATE_RELEASED;
-                          //XDEBUG_PRINTCOLOR(0,__L("INPBUTTON_STATE_RELEASED %d"),event.code);
+                          //XDEBUGTRACE_PRINTCOLOR(0,__L("INPBUTTON_STATE_RELEASED %d"),event.code);
                           }
                           break;
                   case 1:
                           if (button->state==INPBUTTON_STATE_PRESSED)
                           {
                             button->state=INPBUTTON_STATE_HOLD;
-                            //XDEBUG_PRINTCOLOR(0,__L("INPBUTTON_STATE_PRESSED %d"),event.code);
+                            //XDEBUGTRACE_PRINTCOLOR(0,__L("INPBUTTON_STATE_PRESSED %d"),event.code);
                           }
                           else
                           {
                             button->state=INPBUTTON_STATE_PRESSED;
-                            //XDEBUG_PRINTCOLOR(0,__L("INPBUTTON_STATE_PRESSED %d"),event.code);
+                            //XDEBUGTRACE_PRINTCOLOR(0,__L("INPBUTTON_STATE_PRESSED %d"),event.code);
                           }
                           break;
                   case 2:
                           button->state=INPBUTTON_STATE_HOLD;
-                          //XDEBUG_PRINTCOLOR(0,__L("INPBUTTON_STATE_HOLD %d"),event.code);
+                          //XDEBUGTRACE_PRINTCOLOR(0,__L("INPBUTTON_STATE_HOLD %d"),event.code);
                           break;
                   }
                   button->updated=true;
@@ -235,7 +235,7 @@ bool INPLINUXDEVICEKEYBOARDDIRECT::Update()
           if (button->state==INPBUTTON_STATE_RELEASED)
           {
             button->state=INPBUTTON_STATE_UP;
-            //XDEBUG_PRINTCOLOR(0,__L("INPBUTTON_STATE_UP %d"),event.code);
+            //XDEBUGTRACE_PRINTCOLOR(0,__L("INPBUTTON_STATE_UP %d"),event.code);
           }
         }
         else
@@ -301,7 +301,7 @@ bool INPLINUXDEVICEKEYBOARDDIRECT::CreateAllButtons()
   INPBUTTON::CreateButton( &buttons, KEY_COMMA            , INPBUTTON_ID_COMMA              , __C(',' ));
   INPBUTTON::CreateButton( &buttons, KEY_MINUS            , INPBUTTON_ID_MINUS              , __C('-' ));
   INPBUTTON::CreateButton( &buttons, KEY_DOT              , INPBUTTON_ID_POINT              , __C('.' ));
-  INPBUTTON::CreateButton( &buttons,  KEY_SLASH           , INPBUTTON_ID_SLASH              , __C('/' ));
+  INPBUTTON::CreateButton( &buttons, KEY_SLASH           , INPBUTTON_ID_SLASH              , __C('/' ));
 
   INPBUTTON::CreateButton( &buttons, KEY_LEFTBRACE        , INPBUTTON_ID_OPEN_BRACKET       , __C('[' ));
   INPBUTTON::CreateButton( &buttons, KEY_RIGHTBRACE       , INPBUTTON_ID_CLOSE_BRACKET      , __C(']'  ));
@@ -375,7 +375,9 @@ bool INPLINUXDEVICEKEYBOARDDIRECT::CreateAllButtons()
   INPBUTTON::CreateButton( &buttons, KEY_F11              , INPBUTTON_ID_F11               , __C('\x0'));
   INPBUTTON::CreateButton( &buttons, KEY_F12              , INPBUTTON_ID_F12               , __C('\x0'));
 
+  #ifdef KEY_SCREEN
   INPBUTTON::CreateButton( &buttons, KEY_SCREEN           , INPBUTTON_ID_PRINTSCREEN       , __C('\x0'));
+  #endif
   INPBUTTON::CreateButton( &buttons, KEY_SCROLLLOCK       , INPBUTTON_ID_SCROLL_LOCK       , __C('\x0'));
   INPBUTTON::CreateButton( &buttons, KEY_PAUSE            , INPBUTTON_ID_PAUSE             , __C('\x0'));
 
@@ -478,7 +480,7 @@ bool INPLINUXDEVICEKEYBOARDDIRECT::GetHandleEvent()
                   ioctl(filedescriptor, EVIOCGNAME(_MAXSTR), keyboardOEMname);
                   namehardware.Set(keyboardOEMname);
 
-                  //XDEBUG_PRINTCOLOR(1,__L("Keyboard : (%s) on Event[%d] %s"), namehardware.Get(), eventnumber, event.Get());
+                  //XDEBUGTRACE_PRINTCOLOR(1,__L("Keyboard : (%s) on Event[%d] %s"), namehardware.Get(), eventnumber, event.Get());
 
                   INPLINUXDEVICEID* deviceID = new INPLINUXDEVICEID();
                   if(!deviceID) return false;

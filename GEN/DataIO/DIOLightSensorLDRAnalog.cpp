@@ -189,7 +189,7 @@ bool DIOLIGHTSENSORLDRANALOG::ReadDirect(XDWORD& level)
   // Discharge capacitor
   diogpio->SetMode(pindata, false);
   diogpio->Set(pindata    , false);
-  xsleep->MilliSeconds(100);
+  XSLEEP::GetInstance().MilliSeconds(100);
 
   diogpio->SetMode(pindata,  true);
   while(!diogpio->Get(pindata))
@@ -269,6 +269,6 @@ void DIOLIGHTSENSORLDRANALOG::ThreadRunFunction(void* param)
 
   if(sensor->xtimer)
     {
-      if(sensor->threadcache->IsRunning()) xsleep->Seconds(1);
+      if(sensor->threadcache->IsRunning()) XSLEEP::GetInstance().Seconds(1);
     }
 }

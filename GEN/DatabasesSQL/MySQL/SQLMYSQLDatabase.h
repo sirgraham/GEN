@@ -24,7 +24,7 @@
 
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "DBSQLBase.h"
 #include "DBSQLDatabase.h"

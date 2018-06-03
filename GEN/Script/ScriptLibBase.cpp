@@ -20,7 +20,7 @@
 #include "XFactory.h"
 #include "XSleep.h"
 #include "XTimer.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "ScriptLibBase.h"
 
@@ -73,7 +73,7 @@ bool SCRIPTLIBBASE::AddLibraryFunctions(SCRIPT* script)
 
   script->AddLibraryFunction(this, __L("GetPathScript")       , Call_GetPathScript);
 
-  script->AddLibraryFunction(this, __L("XDEBUG_PRINTCOLOR")   , Call_XDEBUG_PRINTCOLOR);
+  script->AddLibraryFunction(this, __L("XDEBUGTRACE_PRINTCOLOR")   , Call_XDEBUGTRACE_PRINTCOLOR);
 
   return true;
 }
@@ -347,7 +347,7 @@ void Call_Delay(SCRIPTLIB* library, SCRIPT* script, XVECTOR<XVARIANT*>* params, 
 
   int miliseconds = (int)(*params->Get(0));
 
-  xsleep->MilliSeconds(miliseconds);
+  XSLEEP::GetInstance().MilliSeconds(miliseconds);
 }
 
 
@@ -726,7 +726,7 @@ void Call_GetPathScript(SCRIPTLIB* library, SCRIPT* script, XVECTOR<XVARIANT*>* 
 
 
 /*-------------------------------------------------------------------
-//   Call_XDEBUG_PRINTCOLOR
+//   Call_XDEBUGTRACE_PRINTCOLOR
 */
 /**
 //
@@ -742,7 +742,7 @@ void Call_GetPathScript(SCRIPTLIB* library, SCRIPT* script, XVECTOR<XVARIANT*>* 
 //  @param    XVARIANT* :
 //
 *//*-----------------------------------------------------------------*/
-void Call_XDEBUG_PRINTCOLOR(SCRIPTLIB* library, SCRIPT* script, XVECTOR<XVARIANT*>* params, XVARIANT* returnvalue)
+void Call_XDEBUGTRACE_PRINTCOLOR(SCRIPTLIB* library, SCRIPT* script, XVECTOR<XVARIANT*>* params, XVARIANT* returnvalue)
 {
   if(!library)      return;
   if(!script)       return;
@@ -854,7 +854,7 @@ void Call_XDEBUG_PRINTCOLOR(SCRIPTLIB* library, SCRIPT* script, XVECTOR<XVARIANT
       outstring += string;
     }
 
-  XDEBUG_PRINTCOLOR(color, outstring.Get());
+ XDEBUGTRACE_PRINTCOLOR(color, outstring.Get());
 }
 
 

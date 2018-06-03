@@ -37,13 +37,8 @@ enum MAIN_TYPESYSTEM
 
 class XFACTORY;
 class XLOG;
-class XAPPLICATION;
 class XMUTEX;
 class XSTRING;
-class DIOFACTORY;
-class DIOSTREAMTCPIPCONFIG;
-class DIOSTREAM;
-class DIOSMTP;
 
 class MAIN
 {

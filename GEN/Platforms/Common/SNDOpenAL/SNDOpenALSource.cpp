@@ -20,7 +20,7 @@
 #include "SNDOpenALElement.h"
 #include "SNDOpenAL.h"
 
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "XMemory.h"
 

@@ -20,7 +20,7 @@
 #include "XDir.h"
 #include "XFileTXT.h"
 #include "XThreadCollected.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "DIOStreamBluetoothConfig.h"
 #include "DIOStreamDeviceBluetooth.h"
@@ -406,8 +406,8 @@ bool DIOLINUXSTREAMBLUETOOTH::ManagementOfPIN(bool active, XSTRING &localMACstri
   local.ToUpperCase();
   remote.ToUpperCase();
 
-  //XDEBUG_PRINTCOLOR(1, __L("Local  MAC: %s"), local.Get());
-  //XDEBUG_PRINTCOLOR(1, __L("Remote MAC: %s"), remote.Get());
+  //XDEBUGTRACE_PRINTCOLOR(1, __L("Local  MAC: %s"), local.Get());
+  //XDEBUGTRACE_PRINTCOLOR(1, __L("Remote MAC: %s"), remote.Get());
 
   xpathfile.Format(__L("/var/lib/bluetooth/%s"), local.Get());
   //xpathfile.Format(__L("D:/Projects/pinprobe/%s"), local.Get());

@@ -20,7 +20,7 @@
 #include "XFactory.h"
 #include "XFileTXT.h"
 #include "XThread.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "XThreadCollected.h"
 
 #include "ScriptLib.h"

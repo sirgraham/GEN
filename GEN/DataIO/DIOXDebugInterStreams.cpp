@@ -52,7 +52,7 @@ bool DIOXDEBUGINTERSTREAMS::Process()
   XSTRING   string;
 
 
-  if(!XDEBUG_GETDEBUGFROMSTREAMIO(streamIO, publicIP, localIP, level, sequence, &xtime, string))
+  if(!XDEBUGTRACE_GETDEBUGFROMSTREAMIO(streamIO, publicIP, localIP, level, sequence, &xtime, string))
     {
       if(iswithlog)
         {
@@ -61,22 +61,22 @@ bool DIOXDEBUGINTERSTREAMS::Process()
           switch(level & 0x0F)
             {
 
-              case XDEBUG_COLORBLACK  :
-              case XDEBUG_COLORBLUE   :
-              case XDEBUG_COLORGREEN  :
-              case XDEBUG_COLORGRAY   :
-                              default : xloglevel = (XLOGLEVEL)XLOGLEVEL_INFO;      break;
-              case XDEBUG_COLORPURPLE : xloglevel = (XLOGLEVEL)XLOGLEVEL_WARNING;   break;
-              case XDEBUG_COLORRED    : xloglevel = (XLOGLEVEL)XLOGLEVEL_ERROR;     break;
+              case XDEBUGTRACE_COLOR_BLACK  :
+              case XDEBUGTRACE_COLOR_BLUE   :
+              case XDEBUGTRACE_COLOR_GREEN  :
+              case XDEBUGTRACE_COLOR_GRAY   :
+                                    default : xloglevel = (XLOGLEVEL)XLOGLEVEL_INFO;      break;
+              case XDEBUGTRACE_COLOR_PURPLE : xloglevel = (XLOGLEVEL)XLOGLEVEL_WARNING;   break;
+              case XDEBUGTRACE_COLOR_RED    : xloglevel = (XLOGLEVEL)XLOGLEVEL_ERROR;     break;
             }
 
           XLOG::GetInstance().AddEntry(xloglevel, DIOXDEBUGINTERSTREAMS_LOGSECTIONID, false, string.Get());
         }
        else
         {
-          if(XDebugCtrl)
+          if(XDEBUGTRACE::instance)
             {
-              XDebugCtrl->Print(level, string.Get());
+              XDEBUGTRACE::instance->Print(level, string.Get());
             }
         }
     }

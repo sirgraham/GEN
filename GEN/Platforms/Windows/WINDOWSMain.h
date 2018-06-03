@@ -29,7 +29,7 @@
 #include "XApplication.h"
 #include "XSystem.h"
 
-#include "XWINDOWSDebug.h"
+#include "XWINDOWSDebugTrace.h"
 
 #include "Main.h"
 

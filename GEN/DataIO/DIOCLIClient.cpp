@@ -660,7 +660,7 @@ bool DIOCLICLIENT::ReadAnswerLF(XSTRING& answer,int timeout)
               memset(str,0,4);
               while(!diostream->Read((XBYTE*)str,1))
                 {
-                  xsleep->MilliSeconds(10);
+                  XSLEEP::GetInstance().MilliSeconds(10);
                 }
 
               break;
@@ -675,7 +675,7 @@ bool DIOCLICLIENT::ReadAnswerLF(XSTRING& answer,int timeout)
               status = false;
               break;
 
-            } else xsleep->MilliSeconds(10);
+            } else XSLEEP::GetInstance().MilliSeconds(10);
         }
 
     } while(1);
@@ -727,7 +727,7 @@ bool DIOCLICLIENT::ReadAnswer(XSTRING& answer,XDWORD size,int timeout)
               status = false;
               break;
 
-            } else xsleep->MilliSeconds(10);
+            } else XSLEEP::GetInstance().MilliSeconds(10);
         }
 
     } while(1);
@@ -958,7 +958,7 @@ void DIOCLICLIENT::ProcessWait(DIOCLICLIENT_ERROR& error)
 {
   while(IsSendCommand(error))
     {
-      if(timer) xsleep->MilliSeconds(10);
+      if(timer) XSLEEP::GetInstance().MilliSeconds(10);
     }
 }
 
@@ -1014,7 +1014,7 @@ bool DIOCLICLIENT::ProcessCommand(DIOCLICLIENT_ERROR& error)
 
                                                             while(!diostream->Read(str,1))
                                                               {
-                                                                if(timer) xsleep->MilliSeconds(10);
+                                                                if(timer) XSLEEP::GetInstance().MilliSeconds(10);
                                                               }
 
                                                             if(str[0]!='>')
@@ -1065,7 +1065,7 @@ bool DIOCLICLIENT::ProcessCommand(DIOCLICLIENT_ERROR& error)
 
                                                               while(!diostream->Read(str,1))
                                                                 {
-                                                                  if(timer) xsleep->MilliSeconds(10);
+                                                                  if(timer) XSLEEP::GetInstance().MilliSeconds(10);
                                                                 }
 
                                                               if(str[0]!='\n')

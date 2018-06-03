@@ -25,7 +25,7 @@
 #include <errno.h>
 
 #include "XFactory.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "XBuffer.h"
 #include "XThreadCollected.h"
 

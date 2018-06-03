@@ -42,7 +42,7 @@
 
 #include "XSleep.h"
 #include "XRand.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "XBuffer.h"
 #include "XTimer.h"
 
@@ -181,7 +181,7 @@ bool DIOLINUXPING::Do(XDWORD nretries, XDWORD timebetweenchecks, bool exitfirstg
       XDWORD size = sendto(handle,(char*)&echorequest, sizeof(DIOPING_ECHOREQUEST), 0, (sockaddr*)&targetaddr, sizeof(struct sockaddr_in));
       if(size != sizeof(DIOPING_ECHOREQUEST))
         {
-          XDEBUG_PRINTCOLOR(4, __L("Ping: not write packet! %s"), targetIP.Get());
+         XDEBUGTRACE_PRINTCOLOR(4, __L("Ping: not write packet! %s"), targetIP.Get());
           break;
         }
 
@@ -244,28 +244,28 @@ bool DIOLINUXPING::Do(XDWORD nretries, XDWORD timebetweenchecks, bool exitfirstg
                       xevent.SetPingReply((DIOPINGREPLY*)replys.Get(replys.GetSize()-1));
                       PostEvent(&xevent);
 
-                      //XDEBUG_PRINTCOLOR(1, __L("Ping: received! %s %s"), fromIP.Get(), targetIP.Get());
+                      //XDEBUGTRACE_PRINTCOLOR(1, __L("Ping: received! %s %s"), fromIP.Get(), targetIP.Get());
 
-                      if(!exitfirstgoodreply) xsleep->MilliSeconds(timebetweenchecks);
+                      if(!exitfirstgoodreply) XSLEEP::GetInstance().MilliSeconds(timebetweenchecks);
                     }
                    else
                     {
-                      XDEBUG_PRINTCOLOR(4, __L("Ping: application ID not equal! %s"), fromIP.Get());
+                     XDEBUGTRACE_PRINTCOLOR(4, __L("Ping: application ID not equal! %s"), fromIP.Get());
                     }
                 }
                else
                 {
-                  XDEBUG_PRINTCOLOR(4, __L("Ping: error Checksum! %s "), targetIP.Get());
+                 XDEBUGTRACE_PRINTCOLOR(4, __L("Ping: error Checksum! %s "), targetIP.Get());
                 }
             }
            else
             {
-              XDEBUG_PRINTCOLOR(4, __L("Ping: error CRC! %s "), targetIP.Get());
+             XDEBUGTRACE_PRINTCOLOR(4, __L("Ping: error CRC! %s "), targetIP.Get());
             }
         }
        else
         {
-          XDEBUG_PRINTCOLOR(4, __L("Ping: invalid packet! %s "), targetIP.Get());
+         XDEBUGTRACE_PRINTCOLOR(4, __L("Ping: invalid packet! %s "), targetIP.Get());
         }
 
       if(exitfirstgoodreply) nloop = 0; else nloop--;
@@ -277,7 +277,7 @@ bool DIOLINUXPING::Do(XDWORD nretries, XDWORD timebetweenchecks, bool exitfirstg
 
   if(!status)
     {
-      XDEBUG_PRINTCOLOR((status?1:4), __L("Ping to [%s]: %s"), targetIP.Get(), (status?__L("Ok."): __L("Error!")));
+     XDEBUGTRACE_PRINTCOLOR((status?1:4), __L("Ping to [%s]: %s"), targetIP.Get(), (status?__L("Ok."): __L("Error!")));
     }
 
   return status;

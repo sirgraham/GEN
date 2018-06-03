@@ -110,7 +110,7 @@ class DIOSTREAMSPI;
 class DIOSPILCDSCREENPCF8833 : public DIODEVICESPI
 {
   public:
-                            DIOSPILCDSCREENPCF8833          (XSYSTEM* xsystem);
+                            DIOSPILCDSCREENPCF8833          ();
     virtual                ~DIOSPILCDSCREENPCF8833          ();
 
     bool                    IniDevice                       ();
@@ -145,8 +145,6 @@ class DIOSPILCDSCREENPCF8833 : public DIODEVICESPI
 
     void                    Clean                           ()
                             {
-                              xsystem                 = NULL;
-
                               diogpio                 = NULL;
                               diostream               = NULL;
                               isdirectconnexion       = false;
@@ -168,8 +166,6 @@ class DIOSPILCDSCREENPCF8833 : public DIODEVICESPI
     bool                    Buffer_Resize                   (XDWORD newsize);
     bool                    Buffer_Send                     ();
     bool                    Buffer_Delete                   ();
-
-    XSYSTEM*                xsystem;
 
     DIOGPIO*                diogpio;
     DIOSTREAMSPI*           diostream;

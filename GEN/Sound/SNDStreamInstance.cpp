@@ -20,7 +20,7 @@
 #include "SNDCodec.h"
 #include "MEDIAFrameReader.h"
 
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "XMemory.h"
 
 /*---- GENERAL VARIABLE ------------------------------------------------------------------*/

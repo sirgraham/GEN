@@ -33,7 +33,7 @@ enum
 
 #define XFILE_MAXBUFFER     8192
 
-#ifdef XDEBUG
+#ifdef XDEBUG_TRACE
   #define XFILE_DISPLAYNOTCLOSEFILES    XFileOpenList.DisplayAll();
 #else
   #define XFILE_DISPLAYNOTCLOSEFILES
@@ -156,7 +156,7 @@ class XFILECONTAINER
 };
 
 
-#ifdef XDEBUG
+#ifdef XDEBUG_TRACE
 class XFILEOPENLIST
 {
   public:

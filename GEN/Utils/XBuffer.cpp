@@ -1,17 +1,35 @@
-//------------------------------------------------------------------------------------------
-//  XBUFFER.CPP
-//
-//  eXtended buffer
-//
-//  Author            : Abraham J. Velez
-//  Date Of Creation  : 10/02/2004 17:44:22
-//  Last Mofificacion :
-//
-//  GEN  Copyright (C).  All right reserved.
-//------------------------------------------------------------------------------------------
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @file        XBuffer.cpp
+*
+* @class       XBUFFER
+* @brief       eXtended buffer functions class
+* @ingroup     UTILS
+*
+* @author      Abraham J. Velez 
+* @date        25/05/2018 18:16:02
+*
+* @copyright   Copyright(c) 2005 - 2018 GEN Group.
+*
+* @cond
+* Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+* documentation files(the "Software"), to deal in the Software without restriction, including without limitation
+* the rights to use, copy, modify, merge, publish, distribute, sublicense, and/ or sell copies of the Software,
+* and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of
+* the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+* THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+* @endcond
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 
-
-//---- INCLUDES ----------------------------------------------------------------------------
+/*---- INCLUDES ------------------------------------------------------------------------------------------------------*/
 
 #include <stdio.h>
 #include <string.h>
@@ -19,54 +37,63 @@
 #include "XFactory.h"
 #include "XTimer.h"
 #include "XVariant.h"
+#include "XSystem.h"
 
 #include "XBuffer.h"
 
 #include "XMemory.h"
 
-//---- GENERAL VARIABLE --------------------------------------------------------------------
-
-bool XBUFFER::hardwareuselittleendian = true;
-
-//---- CLASS MEMBERS -----------------------------------------------------------------------
+/*---- GENERAL VARIABLE ----------------------------------------------------------------------------------------------*/
 
 
-//-------------------------------------------------------------------
-//  XBUFFER::XBUFFER
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      17/02/2007 12:13:55
-//
-//  @return
+/*---- CLASS MEMBERS -------------------------------------------------------------------------------------------------*/
 
-//  */
-//-------------------------------------------------------------------
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XBUFFER::XBUFFER(bool threadsafe)
+* @brief      Constructor
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 18:26:02
+*
+* @param[in]  bool : Is thread safe buffer functions
+*
+* @return     Does not return anything. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XBUFFER::XBUFFER(bool threadsafe)
 {
   Clean();
+
+  hardwareuselittleendian = XSYSTEM::GetInstance().HardwareUseLittleEndian();
 
   if(threadsafe && xfactory) xmutex = xfactory->Create_Mutex();
 }
 
 
-//-------------------------------------------------------------------
-//  XBUFFER::XBUFFER
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      10/02/2004 17:45:42
-//
-//  @return
 
-//  @param        size :
-*/
-//-------------------------------------------------------------------
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XBUFFER::XBUFFER(XDWORD size, bool threadsafe)
+* @brief      Constructor
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 18:26:37
+*
+* @param[in]  size : initial size of the buffer
+* @param[in]  threadsafe : true is thread safe operative buffer
+*
+* @return     Does not return anything. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XBUFFER::XBUFFER(XDWORD size, bool threadsafe)
 {
   Clean();
+
+  hardwareuselittleendian = XSYSTEM::GetInstance().HardwareUseLittleEndian();
 
   if(threadsafe && xfactory) xmutex = xfactory->Create_Mutex();
 
@@ -76,17 +103,18 @@ XBUFFER::XBUFFER(XDWORD size, bool threadsafe)
 
 
 
-//-------------------------------------------------------------------
-//  XBUFFER::~XBUFFER
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      10/02/2004 17:46:06
-//
-//  @return
-//  */
-//-------------------------------------------------------------------
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XBUFFER::~XBUFFER()
+* @brief      Destructor
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 18:29:45
+*
+* @return     Does not return anything. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XBUFFER::~XBUFFER()
 {
   Delete();
@@ -98,18 +126,18 @@ XBUFFER::~XBUFFER()
 
 
 
-
-//-------------------------------------------------------------------
-//  XBUFFER::GetSize
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      17/02/2007 12:48:16
-//
-//  @return       XDWORD :
-//  */
-//-------------------------------------------------------------------
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XDWORD XBUFFER::GetSize()
+* @brief      Get actual size of buffer
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 18:29:59
+*
+* @return     XDWORD : size actual of buffer
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XDWORD XBUFFER::GetSize()
 {
   SetBlocked(true);
@@ -123,19 +151,20 @@ XDWORD XBUFFER::GetSize()
 
 
 
-/*-------------------------------------------------------------------
-//  XBUFFER::SetSize
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      25/08/2011 22:50:40
-//
-//  @return       bool :
-//  @param        size :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::SetSize(XDWORD size)
+* @brief      Set size of buffer (not allocated space)
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 18:30:28
+*
+* @param[in]  size : new size of buffer
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::SetSize(XDWORD size)
 {
   SetBlocked(true);
@@ -149,52 +178,77 @@ bool XBUFFER::SetSize(XDWORD size)
 
 
 
-//-------------------------------------------------------------------
-//  XBUFFER::ResetPosition
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      17/02/2007 18:09:51
-//
-//  @return       void :
-//  */
-//-------------------------------------------------------------------
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::IsEmpty()
+* @brief      Check If buffer is empty
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       27/05/2018 10:47:09
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+bool XBUFFER::IsEmpty()
+{ 
+  return (!GetSize())?true:false;                                
+}
+
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         void XBUFFER::ResetPosition()
+* @brief      Set pointer position of buffer to zero.
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 18:32:37
+*
+* @return     void : does not return anything. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 void XBUFFER::ResetPosition()
 {
   SetPosition(0);
 }
 
 
-//-------------------------------------------------------------------
-//  XBUFFER::GetPosition
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      17/02/2007 12:46:17
-//
-//  @return       XDWORD :
-//  */
-//-------------------------------------------------------------------
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XDWORD XBUFFER::GetPosition()
+* @brief      Get Pointer position of buffer
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 18:33:07
+*
+* @return     XDWORD : Pointer position of buffer
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XDWORD XBUFFER::GetPosition()
 {
   return position;
 }
 
 
-//-------------------------------------------------------------------
-//  XBUFFER::SetPosition
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      24/11/2004 12:31:49
-//
-//  @return       bool :
-//  @param        position :
-//  */
-//-------------------------------------------------------------------
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::SetPosition(XDWORD position)
+* @brief      Set Pointer to position
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 18:35:41
+*
+* @param[in]  position : new position of pointer.
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::SetPosition(XDWORD position)
 {
   this->position = position;
@@ -203,18 +257,19 @@ bool XBUFFER::SetPosition(XDWORD position)
 }
 
 
-/*-------------------------------------------------------------------
-//  XBUFFER::IsBlocked
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      08/12/2012 11:21:29
-//
-//  @return       bool :
-//  */
-/*-----------------------------------------------------------------*/
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::IsBlocked()
+* @brief      Get if this buffer is blocked
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 18:37:26
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::IsBlocked()
 {
   if(!xmutex) return false;
@@ -224,19 +279,20 @@ bool XBUFFER::IsBlocked()
 
 
 
-/*-------------------------------------------------------------------
-//  XBUFFER::SetBlocked
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      25/08/2011 22:55:40
-//
-//  @return       bool :
-//  @param        blocked :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::SetBlocked(bool blocked)
+* @brief      Set Blocked buffer
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 18:38:17
+*
+* @param[in]  blocked : true to blocked buffer.
+*
+* @return     bool : true if is blocked
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::SetBlocked(bool blocked)
 {
   if(!xmutex) return false;
@@ -246,51 +302,21 @@ bool XBUFFER::SetBlocked(bool blocked)
 
 
 
-
-//-------------------------------------------------------------------
-//  XBUFFER::FillBuffer
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      24/11/2004 12:22:48
-//
-//  @return       bool :
-//  @param        fillchar :
-*/
-//-------------------------------------------------------------------
-bool XBUFFER::FillBuffer(XBYTE fillchar)
-{
-  SetBlocked(true);
-
-  bool status = false;
-
-  if(buffer && size)
-    {
-      memset(buffer , fillchar,  size);
-      status = true;
-    }
-
-  SetBlocked(false);
-
-  return status;
-}
-
-
-
-//-------------------------------------------------------------------
-//  XBUFFER::Add
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      24/11/2004 12:22:48
-//
-//  @return       bool :
-//  @param        pbuffer :
-//  @param        psize :
-*/
-//-------------------------------------------------------------------
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Add(XBYTE* pbuffer, XDWORD psize)
+* @brief      Add array of bytes to buffer
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 18:43:11
+*
+* @param[in]  pbuffer : pointer of bytes to add
+* @param[in]  psize : size of array of bytes
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Add(XBYTE* pbuffer, XDWORD psize)
 {
   if(!pbuffer)  return false;
@@ -300,6 +326,7 @@ bool XBUFFER::Add(XBYTE* pbuffer, XDWORD psize)
 
   XDWORD ppos     = size;
   bool   status   = true;
+
   if(!Resize(size+psize,false))
     {
       SetBlocked(false);
@@ -317,18 +344,20 @@ bool XBUFFER::Add(XBYTE* pbuffer, XDWORD psize)
 
 
 
-//-------------------------------------------------------------------
-//  XBUFFER::Add
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      11/02/2007 14:29:13
-//
-//  @return       bool :
-//  @param        buffer :
-*/
-//-------------------------------------------------------------------
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Add(XBUFFER* buffer)
+* @brief      Add buffer to buffer
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 18:44:25
+*
+* @param[in]  buffer : pointer of buffer to add
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Add(XBUFFER* buffer)
 {
   return Add(buffer->buffer, buffer->size);
@@ -336,20 +365,20 @@ bool XBUFFER::Add(XBUFFER* buffer)
 
 
 
-
-/*-------------------------------------------------------------------
-//  XBUFFER::Add
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      09/12/2012 16:01:49
-//
-//  @return       bool :
-//  @param        buffer :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Add(XBUFFER& buffer)
+* @brief      Add buffer to buffer
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 18:45:11
+*
+* @param[in]  buffer : buffer to add
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Add(XBUFFER& buffer)
 {
   return Add(buffer.buffer, buffer.size);
@@ -357,20 +386,20 @@ bool XBUFFER::Add(XBUFFER& buffer)
 
 
 
-
-/*-------------------------------------------------------------------
-//  XBUFFER::Add
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      18/05/2011 10:05:30
-//
-//  @return       bool :
-//  @param        data :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Add(XBYTE data)
+* @brief      Add one byte to buffer
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 18:46:25
+*
+* @param[in]  data : byte to add 
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Add(XBYTE data)
 {
   return Add((XBYTE*)&data, sizeof(XBYTE));
@@ -378,20 +407,20 @@ bool XBUFFER::Add(XBYTE data)
 
 
 
-/*-------------------------------------------------------------------
-//   XBUFFER::Add
-*/
-/**
-//
-//
-//
-//  @author   Abraham J. Velez
-//  @version  08/01/2018 16:11:08
-//  @return   bool :
-//
-//  @param    bool :
-//
-*//*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Add(bool data)
+* @brief      Add one boolean to buffer 
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 18:46:49
+*
+* @param[in]  data : boolean to add
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Add(bool data)
 {
   XBYTE _data = data?1:0;
@@ -401,20 +430,20 @@ bool XBUFFER::Add(bool data)
 
 
 
-
-/*-------------------------------------------------------------------
-//  XBUFFER::Add
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      19/11/2012 23:27:58
-//
-//  @return       bool :
-//  @param        data :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Add(XWORD data)
+* @brief      Add one WORD to buffer (16 bits)
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 18:47:51
+*
+* @param[in]  data : WORD to add.
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Add(XWORD data)
 {
   if(hardwareuselittleendian) SWAPWORD(data);
@@ -424,20 +453,20 @@ bool XBUFFER::Add(XWORD data)
 
 
 
-/*-------------------------------------------------------------------
-//  XBUFFER::Add
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      19/11/2012 23:28:11
-//
-//  @return       bool :
-//  @param        data :
-//  @param        checkendian :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Add(XDWORD data)
+* @brief      Add one Doble WORD to buffer (32 bits)
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 18:48:40
+*
+* @param[in]  data : DWORD to Add
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Add(XDWORD data)
 {
   if(hardwareuselittleendian) SWAPDWORD(data);
@@ -447,21 +476,20 @@ bool XBUFFER::Add(XDWORD data)
 
 
 
-/*-------------------------------------------------------------------
-//  XBUFFER::Add
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      14/03/2016 12:53:24
-//
-//  @return       bool :
-//
-//  @param        data :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Add(XQWORD data)
+* @brief      Add one Quad WORD to buffer (64 bits)
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 18:49:23
+*
+* @param[in]  data : QWORD to add 
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Add(XQWORD data)
 {
   if(hardwareuselittleendian) SWAPQWORD(data);
@@ -472,21 +500,20 @@ bool XBUFFER::Add(XQWORD data)
 
 
 
-/*-------------------------------------------------------------------
-//  XBUFFER::Add
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      14/03/2016 12:54:17
-//
-//  @return       bool :
-//
-//  @param        data :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Add(float data)
+* @brief      Add one float to buffer
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 18:50:11
+*
+* @param[in]  data : float to add
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Add(float data)
 {
   return Add((XBYTE*)&data, sizeof(XDWORD));
@@ -494,21 +521,20 @@ bool XBUFFER::Add(float data)
 
 
 
-/*-------------------------------------------------------------------
-//  XBUFFER::Add
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      14/03/2016 12:54:25
-//
-//  @return       bool :
-//
-//  @param        data :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Add(double data)
+* @brief      Add one double to buffer
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 18:52:20
+*
+* @param[in]  data : double to add
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Add(double data)
 {
   return Add((XBYTE*)&data, sizeof(XQWORD));
@@ -516,22 +542,20 @@ bool XBUFFER::Add(double data)
 
 
 
-
-/*-------------------------------------------------------------------
-//  XBUFFER::Add
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      16/05/2014 10:24:13
-//
-//  @return       bool :
-//
-//  @param        string :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Add(XSTRING& string)
+* @brief      Add one string to buffer
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 18:53:53
+*
+* @param[in]  string : string to add
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Add(XSTRING& string)
 {
   if(string.IsEmpty()) return false;
@@ -550,22 +574,21 @@ bool XBUFFER::Add(XSTRING& string)
 
 
 
-/*-------------------------------------------------------------------
-//  XBUFFER::AddWithMask
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      05/12/2016 16:26:19
-//
-//  @return       bool :
-//
-//  @param        mask :
-//  @param        ... :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::AddWithMask(XCHAR* mask, ...)
+* @brief      Add variant data with a mask
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 18:54:38
+*
+* @param[in]  mask : pointer XCHAR with a mask to use in add
+* @param[in]  ... : params with a variant data
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::AddWithMask(XCHAR* mask, ...)
 {
   if(!mask) return false;
@@ -585,22 +608,22 @@ bool XBUFFER::AddWithMask(XCHAR* mask, ...)
 
 
 
-
-
-/*-------------------------------------------------------------------
-//  XBUFFER::AddWithMask
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      16/12/2012 1:18:09
-//
-//  @return       bool :
-//  @param        data :
-*/
-/*-----------------------------------------------------------------*/
-bool XBUFFER::AddWithMask(XSTRING* mask,...)
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::AddWithMask(XSTRING* mask, ...)
+* @brief      Add variant data with a mask
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 18:59:23
+*
+* @param[in]  mask : string with a mask to use in add
+* @param[in]  ... : params with a variant data
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+bool XBUFFER::AddWithMask(XSTRING* mask, ...)
 {
   XBUFFER  xbuffer;
   va_list  arg;
@@ -616,76 +639,22 @@ bool XBUFFER::AddWithMask(XSTRING* mask,...)
 
 
 
-
-
-/*-------------------------------------------------------------------
-//  XBUFFER::AddNBits
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      16/12/2012 1:18:09
-//
-//  @return       bool :
-//  @param        data :
-*/
-/*-----------------------------------------------------------------*/
-bool XBUFFER::AddNBits(XWORD data)
-{
-  if(!lastnbitsfree)
-    {
-      XWORD _data = data;
-
-      _data <<=nbitsfree;
-      lastnbitsfree = nbitsfree;
-
-      Add((XWORD)_data);
-    }
-   else
-    {
-      SetBlocked(true);
-
-      XWORD _data[2];
-
-      lastnbitsfree = nbitsfree - (8-lastnbitsfree);
-
-      _data[0] = (buffer[size-1]<<8);
-      _data[1] = (data<<lastnbitsfree);
-
-      _data[0] |= _data[1];
-
-      buffer[size-1] = (XBYTE)(_data[0]>>8);
-
-      SetBlocked(false);
-
-      Add((XBYTE)_data[0]);
-    }
-
-
-  return true;
-}
-
-
-
-
-/*-------------------------------------------------------------------
-//  XBUFFER::Insert
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      18/09/2015 15:48:43
-//
-//  @return       bool :
-//
-//  @param        pbuffer :
-//  @param        psize :
-//  @param        frompos :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Insert(XBYTE* pbuffer, XDWORD psize, int frompos)
+* @brief      Insert array of bytes into buffer
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 19:02:14
+*
+* @param[in]  pbuffer : pointer to bytes to add
+* @param[in]  psize : size of bytes to add
+* @param[in]  frompos : position in buffer to insert
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Insert(XBYTE* pbuffer, XDWORD psize, int frompos)
 {
   if(!pbuffer)                  return false;
@@ -702,6 +671,7 @@ bool XBUFFER::Insert(XBYTE* pbuffer, XDWORD psize, int frompos)
   xbuffertempo.Add(&Get()[frompos], (GetSize()-frompos));
 
   Empty();
+
   Add(xbuffertempo);
 
   return true;
@@ -709,23 +679,21 @@ bool XBUFFER::Insert(XBYTE* pbuffer, XDWORD psize, int frompos)
 
 
 
-
-/*-------------------------------------------------------------------
-//  XBUFFER::Insert
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      18/09/2015 15:48:53
-//
-//  @return       bool :
-//
-//  @param        buffer :
-//  @param        frompos :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Insert(XBUFFER* xbuffer, int frompos)
+* @brief      Insert to buffer into buffer
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 19:04:26
+*
+* @param[in]  xbuffer : pointer of buffer to insert into buffer
+* @param[in]  frompos : position to insert
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Insert(XBUFFER* xbuffer, int frompos)
 {
   if(!xbuffer)  return false;
@@ -735,22 +703,21 @@ bool XBUFFER::Insert(XBUFFER* xbuffer, int frompos)
 
 
 
-/*-------------------------------------------------------------------
-//  XBUFFER::Insert
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      18/09/2015 15:49:02
-//
-//  @return       bool :
-//
-//  @param        buffer :
-//  @param        frompos :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Insert(XBUFFER& xbuffer, int frompos)
+* @brief      Insert to buffer into buffer
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 19:07:07
+*
+* @param[in]  xbuffer : buffer to insert into buffer
+* @param[in]  frompos : position to insert
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Insert(XBUFFER& xbuffer, int frompos)
 {
   return Insert(xbuffer.Get(), xbuffer.GetSize(), frompos);
@@ -758,22 +725,21 @@ bool XBUFFER::Insert(XBUFFER& xbuffer, int frompos)
 
 
 
-/*-------------------------------------------------------------------
-//  XBUFFER::Insert
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      18/09/2015 15:49:09
-//
-//  @return       bool :
-//
-//  @param        data :
-//  @param        frompos :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Insert(XBYTE data, int frompos)
+* @brief      Insert one byte into buffer
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 19:08:19
+*
+* @param[in]  data : byte to insert
+* @param[in]  frompos : position of insert
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Insert(XBYTE data, int frompos)
 {
   return Insert(&data, 1, frompos);
@@ -781,21 +747,21 @@ bool XBUFFER::Insert(XBYTE data, int frompos)
 
 
 
-/*-------------------------------------------------------------------
-//   XBUFFER::Insert
-*/
-/**
-//
-//
-//
-//  @author   Abraham J. Velez
-//  @version  08/01/2018 16:14:43
-//  @return   bool :
-//
-//  @param    bool :
-//  @param    int :
-//
-*//*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Insert(bool data, int frompos)
+* @brief      Insert one boolean into buffer
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 19:13:52
+*
+* @param[in]  data : boolean to insert
+* @param[in]  frompos : position of insert
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Insert(bool data, int frompos)
 {
   XBYTE _data = data?1:0;
@@ -805,22 +771,21 @@ bool XBUFFER::Insert(bool data, int frompos)
 
 
 
-/*-------------------------------------------------------------------
-//  XBUFFER::Insert
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      18/09/2015 15:49:16
-//
-//  @return       bool :
-//
-//  @param        data :
-//  @param        frompos :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Insert(XWORD data, int frompos)
+* @brief      Insert one WORD into buffer (16 bits)
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 19:15:35
+*
+* @param[in]  data : WORD to insert
+* @param[in]  frompos : position of insert
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Insert(XWORD data, int frompos)
 {
   if(hardwareuselittleendian) SWAPWORD(data);
@@ -830,22 +795,21 @@ bool XBUFFER::Insert(XWORD data, int frompos)
 
 
 
-/*-------------------------------------------------------------------
-//  XBUFFER::Insert
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      18/09/2015 15:49:21
-//
-//  @return       bool :
-//
-//  @param        data :
-//  @param        frompos :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Insert(XDWORD data, int frompos)
+* @brief      Insert one doble WORD into buffer (32 bits)
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 19:16:59
+*
+* @param[in]  data : Double word to insert
+* @param[in]  frompos : position of insert 
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Insert(XDWORD data, int frompos)
 {
   if(hardwareuselittleendian) SWAPDWORD(data);
@@ -855,22 +819,21 @@ bool XBUFFER::Insert(XDWORD data, int frompos)
 
 
 
-/*-------------------------------------------------------------------
-//  XBUFFER::Insert
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      14/03/2016 13:02:40
-//
-//  @return       bool :
-//
-//  @param        data :
-//  @param        frompos :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Insert(XQWORD data, int frompos)
+* @brief      Insert quad WORD into buffer (64 bits)
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 19:17:55
+*
+* @param[in]  data : Quad word to insert
+* @param[in]  frompos : position of insert
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Insert(XQWORD data, int frompos)
 {
   if(hardwareuselittleendian) SWAPQWORD(data);
@@ -880,22 +843,21 @@ bool XBUFFER::Insert(XQWORD data, int frompos)
 
 
 
-/*-------------------------------------------------------------------
-//  XBUFFER::Insert
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      14/03/2016 13:02:45
-//
-//  @return       bool :
-//
-//  @param        data :
-//  @param        frompos :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Insert(float data, int frompos)
+* @brief      Insert float into buffer 
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 19:19:17
+*
+* @param[in]  data : float to insert
+* @param[in]  frompos : position of insert
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Insert(float data, int frompos)
 {
   return Insert((XBYTE*)&data, sizeof(XDWORD), frompos);
@@ -903,22 +865,21 @@ bool XBUFFER::Insert(float data, int frompos)
 
 
 
-/*-------------------------------------------------------------------
-//  XBUFFER::Insert
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      14/03/2016 13:02:50
-//
-//  @return       bool :
-//
-//  @param        data :
-//  @param        frompos :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Insert(double data, int frompos)
+* @brief      Insert double into buffer 
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 19:20:03
+*
+* @param[in]  data : double to insert
+* @param[in]  frompos : position of insert
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Insert(double data, int frompos)
 {
   return Insert((XBYTE*)&data, sizeof(XQWORD), frompos);
@@ -926,22 +887,21 @@ bool XBUFFER::Insert(double data, int frompos)
 
 
 
-/*-------------------------------------------------------------------
-//  XBUFFER::Insert
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      18/09/2015 15:49:27
-//
-//  @return       bool :
-//
-//  @param        string :
-//  @param        frompos :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Insert(XSTRING& string, int frompos)
+* @brief      Insert string into buffer 
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 19:20:54
+*
+* @param[in]  string : string to insert
+* @param[in]  frompos : position of insert
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Insert(XSTRING& string, int frompos)
 {
   if(string.IsEmpty()) return false;
@@ -960,24 +920,22 @@ bool XBUFFER::Insert(XSTRING& string, int frompos)
 
 
 
-
-/*-------------------------------------------------------------------
-//  XBUFFER::InsertWithMask
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      05/12/2016 16:37:23
-//
-//  @return       bool :
-//
-//  @param        mask :
-//  @param        frompos :
-//  @param        ... :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::InsertWithMask(XCHAR* mask, int frompos, ...)
+* @brief      Add variant data with a mask
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 19:22:22
+*
+* @param[in]  mask : pointer XCHAR with a mask to use in insert
+* @param[in]  frompos : position of insert
+* @param[in]  ... : params with a variant data
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::InsertWithMask(XCHAR* mask, int frompos, ...)
 {
   if(!mask) return false;
@@ -997,24 +955,22 @@ bool XBUFFER::InsertWithMask(XCHAR* mask, int frompos, ...)
 
 
 
-
-/*-------------------------------------------------------------------
-//  XBUFFER::InsertWithMask
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      05/03/2016 17:51:18
-//
-//  @return       bool :
-//
-//  @param        mask :
-//  @param        frompos :
-//  @param        ... :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::InsertWithMask(XSTRING* mask, int frompos, ...)
+* @brief      Add variant data with a mask
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 19:24:11
+*
+* @param[in]  mask : string with a mask to use in insert
+* @param[in]  frompos : position of insert
+* @param[in]  ... : params with a variant data
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::InsertWithMask(XSTRING* mask, int frompos, ...)
 {
   XBUFFER  xbuffer;
@@ -1031,193 +987,22 @@ bool XBUFFER::InsertWithMask(XSTRING* mask, int frompos, ...)
 
 
 
-
-
-/*-------------------------------------------------------------------
-//  XBUFFER::Padding_Add
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      14/03/2013 19:25:39
-//
-//  @return       bool :
-//  @param        bitsadjust :
-//  @param        type :
-*/
-/*-----------------------------------------------------------------*/
-bool XBUFFER::Padding_Add(XBYTE bitsadjust, XBUFFER_PADDINGTYPE type)
-{
-  if(paddinghas) return false;
-
-  paddingbitadjust = bitsadjust;
-  paddingsize     = bitsadjust - (size % bitsadjust);
-
-  switch(type)
-    {
-      case XBUFFER_PADDINGTYPE_ZEROS        :
-      case XBUFFER_PADDINGTYPE_SPACES       :
-      case XBUFFER_PADDINGTYPE_PKCS7        :
-      case XBUFFER_PADDINGTYPE_PKCS5        : for(int c=0;c<paddingsize;c++)
-                                                {
-                                                  switch(type)
-                                                    {
-                                                      case XBUFFER_PADDINGTYPE_ZEROS        : Add((XBYTE)0x00);
-                                                                                              break;
-
-                                                      case XBUFFER_PADDINGTYPE_SPACES       : Add((XBYTE)0x20);
-                                                                                              break;
-
-                                                      case XBUFFER_PADDINGTYPE_PKCS7        :
-                                                      case XBUFFER_PADDINGTYPE_PKCS5        : Add((XBYTE)paddingsize);
-                                                                                              break;
-                                                      default: break;
-                                                    }
-                                                }
-                                              break;
-
-      case XBUFFER_PADDINGTYPE_ANSIX923     : for(int c=0;c<paddingsize-1;c++)
-                                                {
-                                                  Add((XBYTE)0x00);
-                                                }
-                                              Add((XBYTE)paddingsize);
-                                              break;
-
-      case XBUFFER_PADDINGTYPE_ISO10126     : { XRAND* xrand = xfactory->CreateRand();
-                                                if(!xrand) return false;
-
-                                                for(int c=0;c<paddingsize-1;c++)
-                                                  {
-                                                    Add((XBYTE)0x00);
-                                                  }
-
-                                                Add((XBYTE)paddingsize);
-                                                xfactory->DeleteRand(xrand);
-                                              }
-                                              break;
-
-      case XBUFFER_PADDINGTYPE_ISOIEC7816_4 : Add((XBYTE)0x80);
-                                              for(int c=0;c<paddingsize-1;c++)
-                                                {
-                                                  Add((XBYTE)0x00);
-                                                }
-                                              break;
-      default: break;
-    }
-
-  paddinghas      = true;
-
-  return true;
-}
-
-
-
-
-/*-------------------------------------------------------------------
-//  XBUFFER::Padding_Has
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      12/03/2013 18:26:00
-//
-//  @return       bool :
-//  */
-/*-----------------------------------------------------------------*/
-bool XBUFFER::Padding_Has()
-{
-  return paddinghas;
-}
-
-
-
-/*-------------------------------------------------------------------
-//  XBUFFER::Padding_GetType
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      14/03/2013 19:23:40
-//
-//  @return       XBUFFER_PADDINGTYPE :
-//  */
-/*-----------------------------------------------------------------*/
-XBUFFER_PADDINGTYPE XBUFFER::Padding_GetType()
-{
-  return paddingtype;
-}
-
-
-
-
-/*-------------------------------------------------------------------
-//  XBUFFER::Padding_GetSize
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      12/03/2013 18:43:05
-//
-//  @return       XBYTE :
-//  */
-/*-----------------------------------------------------------------*/
-XBYTE XBUFFER::Padding_GetSize()
-{
-  return paddingsize;
-}
-
-
-
-/*-------------------------------------------------------------------
-//  XBUFFER::Padding_Delete
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      12/03/2013 18:26:06
-//
-//  @return       bool :
-//  */
-/*-----------------------------------------------------------------*/
-bool XBUFFER::Padding_Delete()
-{
-  if(!paddinghas) return false;
-
-  int newsize = GetSize() - Padding_GetSize();
-
-  Resize(newsize , true);
-
-  if((int)GetSize() != newsize)  return false;
-
-  paddinghas        = false;
-  paddingbitadjust    = 0;
-  paddingsize       = 0;
-
-  return true;
-}
-
-
-
-
-//-------------------------------------------------------------------
-//  XBUFFER::Extract
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      11/02/2007 14:41:30
-//
-//  @return       bool :
-//  @param        pbuffer :
-//  @param        ppos :
-//  @param        psize :
-*/
-//-------------------------------------------------------------------
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XDWORD XBUFFER::Extract(XBYTE* pbuffer, XDWORD ppos, XDWORD psize)
+* @brief      Extract to array of bytes from buffer
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 19:32:58
+*
+* @param[out] pbuffer : pointer to array of bytes.
+* @param[in]  ppos : position of buffer to extract
+* @param[in]  psize : size bytes to extract
+*
+* @return     XDWORD : number bytes extracted.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XDWORD XBUFFER::Extract(XBYTE* pbuffer, XDWORD ppos, XDWORD psize)
 {
   SetBlocked(true);
@@ -1234,7 +1019,9 @@ XDWORD XBUFFER::Extract(XBYTE* pbuffer, XDWORD ppos, XDWORD psize)
 
   if(pbuffer) memcpy(pbuffer,&buffer[ppos],esize);
 
-  memmove(&buffer[ppos],&buffer[ppos+esize],size-(ppos+esize)); // #Imanol changed to avoid copyng overlapped memory, as that's undefined
+  // #Imanol changed to avoid copyng overlapped memory, as that's undefined
+  memmove(&buffer[ppos],&buffer[ppos+esize],size-(ppos+esize)); 
+  
   //memcpy(&buffer[ppos],&buffer[ppos+esize],size-(ppos+esize));
 
   Resize(size-esize,false);
@@ -1246,20 +1033,21 @@ XDWORD XBUFFER::Extract(XBYTE* pbuffer, XDWORD ppos, XDWORD psize)
 
 
 
-/*-------------------------------------------------------------------
-//  XBUFFER::Extract
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      18/05/2011 10:15:07
-//
-//  @return       bool :
-//  @param        data :
-//  @param        ppos :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Extract(XBYTE& data, XDWORD ppos)
+* @brief      Extract one byte from buffer
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 19:38:07
+*
+* @param[out] data : byte extracted 
+* @param[in]  ppos : position of buffer to extract
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Extract(XBYTE& data, XDWORD ppos)
 {
   XDWORD size = Extract((XBYTE*)&data, ppos, sizeof(XBYTE));
@@ -1270,22 +1058,21 @@ bool XBUFFER::Extract(XBYTE& data, XDWORD ppos)
 
 
 
-
-/*-------------------------------------------------------------------
-//   XBUFFER::Extract
-*/
-/**
-//
-//
-//
-//  @author   Abraham J. Velez
-//  @version  08/01/2018 16:16:51
-//  @return   bool :
-//
-//  @param    bool& :
-//  @param    XDWORD :
-//
-*//*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Extract(bool& data, XDWORD ppos)
+* @brief      Extract one boolean from buffer
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 19:41:13
+*
+* @param[out] data : boolean extracted 
+* @param[in]  ppos : position of buffer to extract
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Extract(bool& data, XDWORD ppos)
 {
   XBYTE _data = 0;
@@ -1300,20 +1087,21 @@ bool XBUFFER::Extract(bool& data, XDWORD ppos)
 
 
 
-/*-------------------------------------------------------------------
-//  XBUFFER::Extract
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      18/05/2011 10:16:02
-//
-//  @return       bool :
-//  @param        data :
-//  @param        ppos :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Extract(XWORD& data, XDWORD ppos)
+* @brief      Extract one WORD from buffer (16 bits)
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 19:47:07
+*
+* @param[out] data : WORD extracted 
+* @param[in]  ppos : position of buffer to extract
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Extract(XWORD& data, XDWORD ppos)
 {
   XDWORD size = Extract((XBYTE*)&data, ppos, sizeof(XWORD));
@@ -1326,21 +1114,21 @@ bool XBUFFER::Extract(XWORD& data, XDWORD ppos)
 
 
 
-
-/*-------------------------------------------------------------------
-//  XBUFFER::Extract
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      18/05/2011 10:17:03
-//
-//  @return       bool :
-//  @param        data :
-//  @param        ppos :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Extract(XDWORD& data, XDWORD ppos)
+* @brief      Extract one Double WORD from buffer (32 bits)
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 19:49:35
+*
+* @param[out] data : DWORD extracted 
+* @param[in]  ppos : position of buffer to extract
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Extract(XDWORD& data, XDWORD ppos)
 {
   XDWORD size = Extract((XBYTE*)&data, ppos, sizeof(XDWORD));
@@ -1353,22 +1141,21 @@ bool XBUFFER::Extract(XDWORD& data, XDWORD ppos)
 
 
 
-/*-------------------------------------------------------------------
-//  XBUFFER::Extract
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      14/03/2016 13:03:50
-//
-//  @return       bool :
-//
-//  @param        data :
-//  @param        ppos :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Extract(XQWORD& data, XDWORD ppos)
+* @brief      Extract one Quad WORD from buffer (64 bits)
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 19:51:15
+*
+* @param[out] data : QWORD extracted 
+* @param[in]  ppos : position of buffer to extract
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Extract(XQWORD& data, XDWORD ppos)
 {
   XDWORD size = Extract((XBYTE*)&data, ppos, sizeof(XQWORD));
@@ -1381,22 +1168,21 @@ bool XBUFFER::Extract(XQWORD& data, XDWORD ppos)
 
 
 
-/*-------------------------------------------------------------------
-//  XBUFFER::Extract
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      14/03/2016 13:04:35
-//
-//  @return       bool :
-//
-//  @param        data :
-//  @param        ppos :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Extract(float& data,XDWORD ppos)
+* @brief      Extract one float from buffer 
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 19:53:59
+*
+* @param[out] data : float extracted
+* @param[in]  ppos : position of buffer to extract
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Extract(float& data,XDWORD ppos)
 {
   XDWORD size = Extract((XBYTE*)&data, ppos, sizeof(XDWORD));
@@ -1407,22 +1193,21 @@ bool XBUFFER::Extract(float& data,XDWORD ppos)
 
 
 
-/*-------------------------------------------------------------------
-//  XBUFFER::Extract
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      14/03/2016 13:04:41
-//
-//  @return       bool :
-//
-//  @param        data :
-//  @param        ppos :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Extract(double& data, XDWORD ppos)
+* @brief      Extract one double from buffer 
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 19:54:51
+*
+* @param[out] data : double extracted
+* @param[in]  ppos : position of buffer to extract
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Extract(double& data, XDWORD ppos)
 {
   XDWORD size = Extract((XBYTE*)&data, ppos, sizeof(XQWORD));
@@ -1433,24 +1218,22 @@ bool XBUFFER::Extract(double& data, XDWORD ppos)
 
 
 
-
-/*-------------------------------------------------------------------
-//  XBUFFER::Extract
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      30/03/2015 16:17:19
-//
-//  @return       bool :
-//
-//  @param        string :
-//  @param        ppos :
-//  @param        size :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Extract(XSTRING& string, XDWORD ppos, XDWORD psize)
+* @brief      Extract one string from buffer 
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 19:57:08
+*
+* @param[in]  string : string extracted
+* @param[in]  ppos : position of buffer to extract
+* @param[in]  psize : size of string to extract
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Extract(XSTRING& string, XDWORD ppos, XDWORD psize)
 {
   string.Empty();
@@ -1477,23 +1260,23 @@ bool XBUFFER::Extract(XSTRING& string, XDWORD ppos, XDWORD psize)
 
 
 
-/*-------------------------------------------------------------------
-//  XBUFFER::ExtractWithMask
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      05/12/2016 16:38:16
-//
-//  @return       bool :
-//
-//  @param        mask :
-//  @param        frompos :
-//  @param        ... :
-*/
-/*-----------------------------------------------------------------*/
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::ExtractWithMask(XCHAR* mask, int frompos, ...)
+* @brief      Extract variant data with a mask
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 19:59:35
+*
+* @param[in]  mask : pointer XCHAR with a mask to use in extract
+* @param[in]  frompos : position of buffer to extract
+* @param[out] ... : params with a variant data
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::ExtractWithMask(XCHAR* mask, int frompos, ...)
 {
   if(!mask) return false;
@@ -1512,24 +1295,22 @@ bool XBUFFER::ExtractWithMask(XCHAR* mask, int frompos, ...)
 
 
 
-
-/*-------------------------------------------------------------------
-//  XBUFFER::ExtractWithMask
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      05/03/2016 18:26:52
-//
-//  @return       bool :
-//
-//  @param        mask :
-//  @param        frompos :
-//  @param        ... :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::ExtractWithMask(XSTRING* mask, int frompos, ...)
+* @brief      Extract variant data with a mask
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 20:03:47
+*
+* @param[in]  mask : string with a mask to use in extract
+* @param[in]  frompos : position of buffer to extract
+* @param[in]  ... : params with a variant data
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::ExtractWithMask(XSTRING* mask, int frompos, ...)
 {
   va_list  arg;
@@ -1545,79 +1326,18 @@ bool XBUFFER::ExtractWithMask(XSTRING* mask, int frompos, ...)
 
 
 
-
-/*-------------------------------------------------------------------
-//  XBUFFER::Compare
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      01/06/2012 11:25:47
-//
-//  @return       bool :
-//  @param        pbuffer :
-//  @param        psize :
-*/
-/*-----------------------------------------------------------------*/
-bool XBUFFER::Compare(XBYTE* pbuffer,XDWORD psize)
-{
-  if(!pbuffer)  return false;
-  if(!psize)    return false;
-
-  bool status;
-
-  SetBlocked(true);
-
-  if(psize != size)
-    {
-      SetBlocked(false);
-      return false;
-    }
-
-  status = (memcmp(pbuffer, buffer, psize) == 0);
-
-  SetBlocked(false);
-
-  return status;
-}
-
-
-
-/*-------------------------------------------------------------------
-//  XBUFFER::Compare
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      01/06/2012 11:25:52
-//
-//  @return       bool :
-//  @param        buffer :
-*/
-/*-----------------------------------------------------------------*/
-bool XBUFFER::Compare(XBUFFER* buffer)
-{
-  if(!buffer) return false;
-
-  return Compare(buffer->Get(), buffer->GetSize());
-}
-
-
-
-/*-------------------------------------------------------------------
-//  XBUFFER::Get
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      25/08/2011 22:37:09
-//
-//  @return       XBYTE* :
-//  */
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XBYTE* XBUFFER::Get()
+* @brief      Get Pointer to array of bytes of buffer
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 20:14:21
+*
+* @return     XBYTE* : Array of bytes of buffer 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XBYTE* XBUFFER::Get()
 {
   if(!size) return NULL;
@@ -1627,22 +1347,20 @@ XBYTE* XBUFFER::Get()
 
 
 
-
-/*-------------------------------------------------------------------
-//  XBUFFER::GetByte
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      30/01/2017 9:32:53
-//
-//  @return       XBYTE :
-//
-//  @param        index :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XBYTE XBUFFER::GetByte(XDWORD index)
+* @brief      Get a byte from buffer
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 20:15:34
+*
+* @param[in]  index : index of byte into buffer
+*
+* @return     XBYTE : 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XBYTE XBUFFER::GetByte(XDWORD index)
 {
   SetBlocked(true);
@@ -1666,20 +1384,22 @@ XBYTE XBUFFER::GetByte(XDWORD index)
 
 
 
-//-------------------------------------------------------------------
-//  XBUFFER::Get
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      24/11/2004 12:36:54
-//
-//  @return       bool :
-//  @param        pbuffer :
-//  @param        psize :
-//  @param        frompos:
-*/
-//-------------------------------------------------------------------
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Get(XBYTE* pbuffer,int psize,int frompos)
+* @brief      Get array of bytes from buffer
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 20:21:09
+*
+* @param[out] pbuffer : byte array obtained
+* @param[in]  psize : size of array
+* @param[in]  frompos : position of buffer to get
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Get(XBYTE* pbuffer,int psize,int frompos)
 {
   if(!pbuffer) return false;
@@ -1710,21 +1430,21 @@ bool XBUFFER::Get(XBYTE* pbuffer,int psize,int frompos)
 
 
 
-
-/*-------------------------------------------------------------------
-//  XBUFFER::Get
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      12/07/2009 05:30:19 p.m.
-//
-//  @return       bool :
-//  @param        data :
-//  @param        fromposition :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Get(XBYTE& data, int frompos)
+* @brief      Get byte from buffer
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 20:24:44
+*
+* @param[out] data : byte obtained 
+* @param[in]  frompos : position of buffer to get
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Get(XBYTE& data, int frompos)
 {
   SetBlocked(true);
@@ -1749,22 +1469,21 @@ bool XBUFFER::Get(XBYTE& data, int frompos)
 
 
 
-
-/*-------------------------------------------------------------------
-//   XBUFFER::Get
-*/
-/**
-//
-//
-//
-//  @author   Abraham J. Velez
-//  @version  08/01/2018 16:19:25
-//  @return   bool :
-//
-//  @param    bool& :
-//  @param    int :
-//
-*//*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Get(bool& data, int frompos)
+* @brief      Get boolean from buffer
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 20:27:30
+*
+* @param[in]  data : boolean obtained 
+* @param[in]  frompos : position of buffer to get
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Get(bool& data, int frompos)
 {
   XBYTE _data = 0;
@@ -1779,23 +1498,21 @@ bool XBUFFER::Get(bool& data, int frompos)
 
 
 
-
-
-
-/*-------------------------------------------------------------------
-//  XBUFFER::Get
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      13/08/2013 16:21:53
-//
-//  @return       bool :
-//  @param        data :
-//  @param        frompos :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Get(XWORD& data, int frompos)
+* @brief      Get WORD from buffer. (16 bits)
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 20:28:24
+*
+* @param[in]  data : WORD obtained
+* @param[in]  frompos : position of buffer to get
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Get(XWORD& data, int frompos)
 {
   if(!Get((XBYTE*)&data,sizeof(XWORD), frompos)) return false;
@@ -1807,20 +1524,21 @@ bool XBUFFER::Get(XWORD& data, int frompos)
 
 
 
-/*-------------------------------------------------------------------
-//  XBUFFER::Get
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      13/08/2013 16:22:19
-//
-//  @return       bool :
-//  @param        data :
-//  @param        frompos :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Get(XDWORD& data, int frompos)
+* @brief      Get doble WORD from buffer. (32 bits)
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 20:30:07
+*
+* @param[in]  data : double WORD obtained
+* @param[in]  frompos : position of buffer to get
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Get(XDWORD& data, int frompos)
 {
   if(!Get((XBYTE*)&data,sizeof(XDWORD), frompos)) return false;
@@ -1832,22 +1550,21 @@ bool XBUFFER::Get(XDWORD& data, int frompos)
 
 
 
-/*-------------------------------------------------------------------
-//  XBUFFER::Get
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      14/03/2016 13:06:57
-//
-//  @return       bool :
-//
-//  @param        data :
-//  @param        frompos :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Get(XQWORD& data, int frompos)
+* @brief      Get quad WORD from buffer. (64 bits)
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 20:31:12
+*
+* @param[in]  data : quad WORD obtained
+* @param[in]  frompos : position of buffer to get
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Get(XQWORD& data, int frompos)
 {
   if(!Get((XBYTE*)&data,sizeof(XQWORD), frompos)) return false;
@@ -1859,23 +1576,21 @@ bool XBUFFER::Get(XQWORD& data, int frompos)
 
 
 
-
-/*-------------------------------------------------------------------
-//  XBUFFER::Get
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      14/03/2016 13:06:48
-//
-//  @return       bool :
-//
-//  @param        data :
-//  @param        frompos :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Get(float& data, int frompos)
+* @brief      Get float from buffer. 
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 20:32:24
+*
+* @param[in]  data : float obtained
+* @param[in]  frompos : position of buffer to get
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Get(float& data, int frompos)
 {
   if(!Get((XBYTE*)&data, sizeof(XDWORD), frompos)) return false;
@@ -1885,22 +1600,21 @@ bool XBUFFER::Get(float& data, int frompos)
 
 
 
-/*-------------------------------------------------------------------
-//  XBUFFER::Get
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      14/03/2016 13:06:52
-//
-//  @return       bool :
-//
-//  @param        data :
-//  @param        frompos :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Get(double& data, int frompos)
+* @brief      Get double from buffer. 
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 20:33:28
+*
+* @param[in]  data : double obtained.
+* @param[in]  frompos : position of buffer to get 
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Get(double& data, int frompos)
 {
   if(!Get((XBYTE*)&data, sizeof(XQWORD), frompos)) return false;
@@ -1910,24 +1624,22 @@ bool XBUFFER::Get(double& data, int frompos)
 
 
 
-
-/*-------------------------------------------------------------------
-//  XBUFFER::Get
-*/
-/**
-//
-//  gets a xstring from a buffer
-//
-//  @author       Imanol Celaya Ruiz de Alegria
-//  @version      23/11/2015 11:45:54
-//
-//  @return       bool :
-//
-//  @param        data :
-//  @param        psize : size in characters
-//  @param        XBUFFER_INVALIDPOSITION :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Get(XSTRING& data,  int psize, int frompos)
+* @brief      Get string from buffer.
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 20:35:15
+*
+* @param[out] data : strint obtained
+* @param[in]  psize : size n bytes to obtain
+* @param[in]  frompos : position of buffer to get
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Get(XSTRING& data,  int psize, int frompos)
 {
   XDWORD pos = frompos;
@@ -1950,23 +1662,59 @@ bool XBUFFER::Get(XSTRING& data,  int psize, int frompos)
 
 
 
-/*-------------------------------------------------------------------
-//  XBUFFER::GetWithMask
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      05/03/2016 18:36:15
-//
-//  @return       bool :
-//
-//  @param        mask :
-//  @param        frompos :
-//  @param        ... :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::GetWithMask(XCHAR* mask, int frompos, ...)
+* @brief      Get variant data with a mask
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       27/05/2018 11:19:56
+*
+* @param[in]  mask : pointer to string with a mask to use in get
+* @param[in]  frompos : position of buffer to get
+* @param[in]  ... : params with a variant data
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+bool XBUFFER::GetWithMask(XCHAR* mask, int frompos, ...)
+{
+  if(!mask) return false;
+
+  XSTRING  _mask   = mask;
+  XBUFFER  xbuffer;
+  va_list  arg;
+
+  xbuffer.Add((*this));
+
+  va_start(arg, frompos);
+
+  bool status = ExtractXBufferWithMask(xbuffer, &_mask, arg);
+
+  va_end(arg);
+
+  return status;
+}
+
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::GetWithMask(XSTRING* mask, int frompos, ...)
+* @brief      Get variant data with a mask
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 20:39:38
+*
+* @param[in]  mask : pointer to string with a mask to use in get
+* @param[in]  frompos : position of buffer to get
+* @param[in]  ... : params with a variant data
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::GetWithMask(XSTRING* mask, int frompos, ...)
 {
   XBUFFER  xbuffer;
@@ -1985,21 +1733,22 @@ bool XBUFFER::GetWithMask(XSTRING* mask, int frompos, ...)
 
 
 
-
-//-------------------------------------------------------------------
-//  XBUFFER::Set
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      24/11/2004 12:38:18
-//
-//  @return       bool :
-//  @param        pbuffer :
-//  @param        psize :
-//  @param        toposition :
-*/
-//-------------------------------------------------------------------
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Set(XBYTE* pbuffer, int psize, int topos)
+* @brief      Set array of bytes into buffer
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 20:57:53
+*
+* @param[in]  pbuffer : pointer of buffer to set
+* @param[in]  psize : size of buffer to set.
+* @param[in]  topos : position of buffer to set
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Set(XBYTE* pbuffer, int psize, int topos)
 {
   SetBlocked(true);
@@ -2026,20 +1775,21 @@ bool XBUFFER::Set(XBYTE* pbuffer, int psize, int topos)
 
 
 
-/*-------------------------------------------------------------------
-//  XBUFFER::Set
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      12/07/2009 05:30:26 p.m.
-//
-//  @return       bool :
-//  @param        data :
-//  @param        toposition :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Set(XBYTE data, int topos)
+* @brief      Set byte to buffer
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 21:01:32
+*
+* @param[in]  data : byte to set
+* @param[in]  topos : position of buffer to set
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Set(XBYTE data, int topos)
 {
   SetBlocked(true);
@@ -2064,21 +1814,21 @@ bool XBUFFER::Set(XBYTE data, int topos)
 
 
 
-/*-------------------------------------------------------------------
-//   XBUFFER::Set
-*/
-/**
-//
-//
-//
-//  @author   Abraham J. Velez
-//  @version  08/01/2018 16:21:52
-//  @return   bool :
-//
-//  @param    bool :
-//  @param    int :
-//
-*//*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Set(bool data, int topos)
+* @brief      Set boolean to buffer
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 21:03:56
+*
+* @param[in]  data : boolean to set
+* @param[in]  topos : position of buffer to set
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Set(bool data, int topos)
 {
   XBYTE _data = data?1:0;
@@ -2089,21 +1839,21 @@ bool XBUFFER::Set(bool data, int topos)
 
 
 
-
-/*-------------------------------------------------------------------
-//  XBUFFER::Set
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      09/08/2013 0:09:32
-//
-//  @return       bool :
-//  @param        data :
-//  @param        topos :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Set(XWORD data, int topos)
+* @brief      Set WORD to buffer. (16 bits) 
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 21:04:45
+*
+* @param[in]  data : WORD to set
+* @param[in]  topos : position of buffer to set
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Set(XWORD data, int topos)
 {
   if(hardwareuselittleendian) SWAPWORD(data);
@@ -2113,20 +1863,21 @@ bool XBUFFER::Set(XWORD data, int topos)
 
 
 
-/*-------------------------------------------------------------------
-//  XBUFFER::Set
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      09/08/2013 0:09:57
-//
-//  @return       bool :
-//  @param        data :
-//  @param        topos :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Set(XDWORD data, int topos)
+* @brief      Set double WORD to buffer. (32 bits) 
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 21:06:16
+*
+* @param[in]  data : DWORD to set
+* @param[in]  topos : position of buffer to set
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Set(XDWORD data, int topos)
 {
   if(hardwareuselittleendian) SWAPDWORD(data);
@@ -2136,23 +1887,21 @@ bool XBUFFER::Set(XDWORD data, int topos)
 
 
 
-
-/*-------------------------------------------------------------------
-//  XBUFFER::Set
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      14/03/2016 13:08:42
-//
-//  @return       bool :
-//
-//  @param        data :
-//  @param        topos :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Set(XQWORD data, int topos)
+* @brief      Set quad WORD to buffer. (64 bits) 
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 21:09:17
+*
+* @param[in]  data : QWORD to set
+* @param[in]  topos : position of buffer to set
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Set(XQWORD data, int topos)
 {
   if(hardwareuselittleendian) SWAPQWORD(data);
@@ -2162,22 +1911,21 @@ bool XBUFFER::Set(XQWORD data, int topos)
 
 
 
-/*-------------------------------------------------------------------
-//  XBUFFER::Set
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      14/03/2016 13:08:46
-//
-//  @return       bool :
-//
-//  @param        data :
-//  @param        topos :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Set(float data, int topos)
+* @brief      Set float buffer. 
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 21:10:17
+*
+* @param[in]  data : float to set 
+* @param[in]  topos : position of buffer to set
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Set(float data, int topos)
 {
   return Set((XBYTE*)&data, sizeof(XDWORD), topos);
@@ -2185,23 +1933,21 @@ bool XBUFFER::Set(float data, int topos)
 
 
 
-
-/*-------------------------------------------------------------------
-//  XBUFFER::Set
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      14/03/2016 13:08:51
-//
-//  @return       bool :
-//
-//  @param        data :
-//  @param        topos :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Set(double data, int topos)
+* @brief      Set double to set
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 21:15:35
+*
+* @param[in]  data : double to set
+* @param[in]  topos : position of buffer to set
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Set(double data, int topos)
 {
   return Set((XBYTE*)&data, sizeof(XQWORD), topos);
@@ -2209,23 +1955,21 @@ bool XBUFFER::Set(double data, int topos)
 
 
 
-
-/*-------------------------------------------------------------------
-//  XBUFFER::Set
-*/
-/**
-//
-//  normalizes and puts an xstring on a buffer
-//
-//  @author       Imanol Celaya Ruiz de Alegria
-//  @version      23/11/2015 11:37:35
-//
-//  @return       bool :
-//
-//  @param        data :
-//  @param        XBUFFER_INVALIDPOSITION :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Set(XSTRING& data, int topos)
+* @brief      Set string to buffer (normalizes string before set)
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 21:16:28
+*
+* @param[in]  data : string to set 
+* @param[in]  topos : position of buffer to set 
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Set(XSTRING& data, int topos)
 {
   // should create temporary array and then put that
@@ -2249,23 +1993,23 @@ bool XBUFFER::Set(XSTRING& data, int topos)
 }
 
 
-/*-------------------------------------------------------------------
-//  XBUFFER::SetWithMask
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      05/12/2016 16:39:15
-//
-//  @return       XDWORD :
-//
-//  @param        mask :
-//  @param        topos :
-//  @param        ... :
-*/
-/*-----------------------------------------------------------------*/
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XDWORD XBUFFER::SetWithMask(XCHAR* mask, int topos, ...)
+* @brief      Set variant data with a mask
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 21:18:38
+*
+* @param[in]  mask : pointer XCHAR with a mask to use in extract
+* @param[in]  topos : position of buffer to set
+* @param[in]  ... : params with a variant data
+*
+* @return     XDWORD : size of byte set
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XDWORD XBUFFER::SetWithMask(XCHAR* mask, int topos, ...)
 {
   if(!mask) return 0;
@@ -2288,24 +2032,22 @@ XDWORD XBUFFER::SetWithMask(XCHAR* mask, int topos, ...)
 
 
 
-
-/*-------------------------------------------------------------------
-//  XBUFFER::SetWithMask
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      05/03/2016 19:51:46
-//
-//  @return       bool :
-//
-//  @param        mask :
-//  @param        topos :
-//  @param        ... :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XDWORD XBUFFER::SetWithMask(XSTRING* mask, int topos, ...)
+* @brief      Set variant data with a mask
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 21:21:59
+*
+* @param[in]  mask : string with a mask to use in extract
+* @param[in]  topos : position of buffer to set
+* @param[in]  ... : params with a variant data
+*
+* @return     XDWORD : size of byte set
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XDWORD XBUFFER::SetWithMask(XSTRING* mask, int topos, ...)
 {
   XBUFFER  xbuffer;
@@ -2325,73 +2067,21 @@ XDWORD XBUFFER::SetWithMask(XSTRING* mask, int topos, ...)
 
 
 
-
-/*-------------------------------------------------------------------
-//  XBUFFER::SetNBits
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      08/08/2013 23:45:51
-//
-//  @return       bool :
-//  @param        data :
-//  @param        XBUFFER_INVALIDPOSITION :
-*/
-/*-----------------------------------------------------------------*/
-bool XBUFFER::SetNBits(XWORD data, int topos)
-{
-  if(!lastnbitsfree)
-    {
-      XWORD _data = data;
-
-      _data <<=nbitsfree;
-      lastnbitsfree = nbitsfree;
-
-      Set((XWORD)_data);
-    }
-   else
-    {
-      SetBlocked(true);
-
-      XWORD _data[2];
-
-      lastnbitsfree = nbitsfree - (8-lastnbitsfree);
-
-      _data[0] = (buffer[position-1]<<8);
-      _data[1] = (data<<lastnbitsfree);
-
-      _data[0] |= _data[1];
-
-      buffer[position-1] = (XBYTE)(_data[0]>>8);
-
-      SetBlocked(false);
-
-      Set((XBYTE)_data[0], topos);
-    }
-
-  return true;
-}
-
-
-
-
-
-/*-------------------------------------------------------------------
-//  XBUFFER::Resize
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      12/07/2009 04:26:44 p.m.
-//
-//  @return       bool :
-//  @param        newsize :
-//  @param        setblocked :
-*/
-/*----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Resize(XDWORD newsize, bool setblocked)
+* @brief      Resize buffer
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 21:25:50
+*
+* @param[in]  newsize : new size of bufffer.
+* @param[in]  setblocked : blocked this operation.
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Resize(XDWORD newsize, bool setblocked)
 {
   bool status = true;
@@ -2461,17 +2151,20 @@ bool XBUFFER::Resize(XDWORD newsize, bool setblocked)
 
 
 
-//-------------------------------------------------------------------
-//  XBUFFER::Delete
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      24/11/2004 11:55:16
-//
-//  @return       bool :
-//  */
-//-------------------------------------------------------------------
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Delete(bool setblocked)
+* @brief      Delete buffer
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 21:26:55
+*
+* @param[in]  setblocked : blocked this operation.
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Delete(bool setblocked)
 {
   if(setblocked) SetBlocked(true);
@@ -2490,18 +2183,70 @@ bool XBUFFER::Delete(bool setblocked)
 
 
 
-/*-------------------------------------------------------------------
-//  XBUFFER::Swap
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      12/03/2014 9:20:28
-//
-//  @return       bool :
-//  */
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::FillBuffer(XBYTE fillchar)
+* @brief      Fill the buffer with a byte
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 18:40:52
+*
+* @param[in]  fillchar : byte to fill buffer
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+bool XBUFFER::FillBuffer(XBYTE fillchar)
+{
+  SetBlocked(true);
+
+  bool status = false;
+
+  if(buffer && size)
+    {
+      memset(buffer, fillchar,  size);
+      status = true;
+    }
+
+  SetBlocked(false);
+
+  return status;
+}
+
+
+
+ /**-------------------------------------------------------------------------------------------------------------------
+ *
+ *  @fn         bool XBUFFER::Empty()
+ *  @brief      Delete Buffer (set blocked default)
+ *  @ingroup    UTILS
+ *
+ *  @author     Abraham J. Velez 
+ *  @date       27/05/2018 10:48:49
+ *
+ *  @return     bool : true if is succesful. 
+ *
+ *---------------------------------------------------------------------------------------------------------------------*/
+bool XBUFFER::Empty()
+ { 
+   return Delete();                                               
+ }
+
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Swap()
+* @brief      Swap buffer (last to first byte and viceversa)
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 21:28:12
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::Swap()
 {
   SetBlocked(true);
@@ -2522,20 +2267,303 @@ bool XBUFFER::Swap()
 
 
 
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Compare(XBYTE* pbuffer,XDWORD psize)
+* @brief      Compare buffer to array of bytes
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 20:06:13
+*
+* @param[in]  pbuffer : pointer to buffer to compare
+* @param[in]  psize : size of buffer to compare
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+bool XBUFFER::Compare(XBYTE* pbuffer,XDWORD psize)
+{
+  if(!pbuffer)  return false;
+  if(!psize)    return false;
 
-/*-------------------------------------------------------------------
-//  XBUFFER::AdjustToNBits
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      16/12/2012 1:16:06
-//
-//  @return       bool :
-//  @param        nbits :
-*/
-/*-----------------------------------------------------------------*/
+  bool status;
+
+  SetBlocked(true);
+
+  if(psize != size)
+    {
+      SetBlocked(false);
+      return false;
+    }
+
+  status = (memcmp(pbuffer, buffer, psize) == 0);
+
+  SetBlocked(false);
+
+  return status;
+}
+
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Compare(XBUFFER* buffer)
+* @brief      Compare buffer to buffer 
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 20:08:05
+*
+* @param[in]  buffer : pointer to buffer
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+bool XBUFFER::Compare(XBUFFER* buffer)
+{
+  if(!buffer) return false;
+
+  return Compare(buffer->Get(), buffer->GetSize());
+}
+
+
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Padding_Add(XBYTE bitsadjust, XBUFFER_PADDINGTYPE type)
+* @brief      Add Padding (bits) to buffer
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 19:26:25
+*
+* @param[in]  bitsadjust : n bits of padding
+* @param[in]  type : type of padding
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+bool XBUFFER::Padding_Add(XBYTE bitsadjust, XBUFFER_PADDINGTYPE type)
+{
+  if(paddinghas) return false;
+
+  paddingbitadjust = bitsadjust;
+  paddingsize     = bitsadjust - (size % bitsadjust);
+
+  switch(type)
+    {
+      case XBUFFER_PADDINGTYPE_ZEROS        :
+      case XBUFFER_PADDINGTYPE_SPACES       :
+      case XBUFFER_PADDINGTYPE_PKCS7        :
+      case XBUFFER_PADDINGTYPE_PKCS5        : for(int c=0;c<paddingsize;c++)
+                                                {
+                                                  switch(type)
+                                                    {
+                                                      case XBUFFER_PADDINGTYPE_ZEROS        : Add((XBYTE)0x00);
+                                                                                              break;
+
+                                                      case XBUFFER_PADDINGTYPE_SPACES       : Add((XBYTE)0x20);
+                                                                                              break;
+
+                                                      case XBUFFER_PADDINGTYPE_PKCS7        :
+                                                      case XBUFFER_PADDINGTYPE_PKCS5        : Add((XBYTE)paddingsize);
+                                                                                              break;
+                                                      default: break;
+                                                    }
+                                                }
+                                              break;
+
+      case XBUFFER_PADDINGTYPE_ANSIX923     : for(int c=0;c<paddingsize-1;c++)
+                                                {
+                                                  Add((XBYTE)0x00);
+                                                }
+                                              Add((XBYTE)paddingsize);
+                                              break;
+
+      case XBUFFER_PADDINGTYPE_ISO10126     : { XRAND* xrand = xfactory->CreateRand();
+                                                if(!xrand) return false;
+
+                                                for(int c=0;c<paddingsize-1;c++)
+                                                  {
+                                                    Add((XBYTE)0x00);
+                                                  }
+
+                                                Add((XBYTE)paddingsize);
+                                                xfactory->DeleteRand(xrand);
+                                              }
+                                              break;
+
+      case XBUFFER_PADDINGTYPE_ISOIEC7816_4 : Add((XBYTE)0x80);
+                                              for(int c=0;c<paddingsize-1;c++)
+                                                {
+                                                  Add((XBYTE)0x00);
+                                                }
+                                              break;
+      default: break;
+    }
+
+  paddinghas      = true;
+
+  return true;
+}
+
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Padding_Has()
+* @brief      Check if buffer has padding
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 19:28:36
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+bool XBUFFER::Padding_Has()
+{
+  return paddinghas;
+}
+
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XBUFFER_PADDINGTYPE XBUFFER::Padding_GetType()
+* @brief      GetType of padding
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 19:28:59
+*
+* @return     XBUFFER_PADDINGTYPE : type of padding 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+XBUFFER_PADDINGTYPE XBUFFER::Padding_GetType()
+{
+  return paddingtype;
+}
+
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XBYTE XBUFFER::Padding_GetSize()
+* @brief      Get size of padding
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 19:30:57
+*
+* @return     XBYTE : size of padding
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+XBYTE XBUFFER::Padding_GetSize()
+{
+  return paddingsize;
+}
+
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::Padding_Delete()
+* @brief      Delete padding
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 19:31:35
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+bool XBUFFER::Padding_Delete()
+{
+  if(!paddinghas) return false;
+
+  int newsize = GetSize() - Padding_GetSize();
+
+  Resize(newsize , true);
+
+  if((int)GetSize() != newsize)  return false;
+
+  paddinghas        = false;
+  paddingbitadjust    = 0;
+  paddingsize       = 0;
+
+  return true;
+}
+
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::AddNBits(XWORD data)
+* @brief      Add bits to buffer
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 19:00:57
+*
+* @param[in]  data : 16bits to add
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+bool XBUFFER::AddNBits(XWORD data)
+{
+  if(!lastnbitsfree)
+    {
+      XWORD _data = data;
+
+      _data <<=nbitsfree;
+      lastnbitsfree = nbitsfree;
+
+      Add((XWORD)_data);
+    }
+   else
+    {
+      SetBlocked(true);
+
+      XWORD _data[2];
+
+      lastnbitsfree = nbitsfree - (8-lastnbitsfree);
+
+      _data[0] = (buffer[size-1]<<8);
+      _data[1] = (data<<lastnbitsfree);
+
+      _data[0] |= _data[1];
+
+      buffer[size-1] = (XBYTE)(_data[0]>>8);
+
+      SetBlocked(false);
+
+      Add((XBYTE)_data[0]);
+    }
+
+
+  return true;
+}
+
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::AdjustToNBits(int nbits)
+* @brief      Ajust buffer to nbits.
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 21:29:28
+*
+* @param[in]  nbits : nbits to adjust
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::AdjustToNBits(int nbits)
 {
   this->nbits     = nbits;
@@ -2546,18 +2574,88 @@ bool XBUFFER::AdjustToNBits(int nbits)
 
 
 
-/*-------------------------------------------------------------------
-//  XBUFFER::GetNBitsFree
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      09/12/2012 23:45:37
-//
-//  @return       XBYTE :
-//  */
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XBYTE XBUFFER::GetNBits()
+* @brief      Get NBits used
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       27/05/2018 10:51:59
+*
+* @return     XBYTE : n bits used
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+XBYTE XBUFFER::GetNBits()
+{ 
+  return nbits;                                                  
+}
+
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::SetNBits(XWORD data, int topos)
+* @brief      Set WORD in bits to buffer.
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 21:24:06
+*
+* @param[in]  data : 16 bits WORD to set
+* @param[in]  topos : position of buffer to set
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+bool XBUFFER::SetNBits(XWORD data, int topos)
+{
+  if(!lastnbitsfree)
+    {
+      XWORD _data = data;
+
+      _data <<=nbitsfree;
+      lastnbitsfree = nbitsfree;
+
+      Set((XWORD)_data);
+    }
+   else
+    {
+      SetBlocked(true);
+
+      XWORD _data[2];
+
+      lastnbitsfree = nbitsfree - (8-lastnbitsfree);
+
+      _data[0] = (buffer[position-1]<<8);
+      _data[1] = (data<<lastnbitsfree);
+
+      _data[0] |= _data[1];
+
+      buffer[position-1] = (XBYTE)(_data[0]>>8);
+
+      SetBlocked(false);
+
+      Set((XBYTE)_data[0], topos);
+    }
+
+  return true;
+}
+
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XBYTE XBUFFER::GetNBitsFree()
+* @brief      Get Nbits free in the buffer
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 21:31:24
+*
+* @return     XBYTE : number bits free.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XBYTE XBUFFER::GetNBitsFree()
 {
   return lastnbitsfree;
@@ -2565,19 +2663,20 @@ XBYTE XBUFFER::GetNBitsFree()
 
 
 
-/*-------------------------------------------------------------------
-//  XBUFFER::SetNBitsFree
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      09/12/2012 23:45:34
-//
-//  @return       bool :
-//  @param        nbitsfree :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::SetNBitsFree(XBYTE nbitsfree)
+* @brief      Set NBits free
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 21:34:19
+*
+* @param[in]  nbitsfree : number bits free.
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::SetNBitsFree(XBYTE nbitsfree)
 {
   lastnbitsfree = nbitsfree;
@@ -2587,21 +2686,20 @@ bool XBUFFER::SetNBitsFree(XBYTE nbitsfree)
 
 
 
-/*-------------------------------------------------------------------
-//  XBUFFER::ConvertFromBase64
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      19/03/2014 16:01:38
-//
-//  @return       bool :
-//
-//  @param        stringbase64 :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::ConvertFromBase64(XSTRING& stringbase64)
+* @brief      Convert from string in Base 64.
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 21:34:58
+*
+* @param[in]  stringbase64 : string origin to convert.
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::ConvertFromBase64(XSTRING& stringbase64)
 {
   XSTRING stringbin;
@@ -2624,21 +2722,20 @@ bool XBUFFER::ConvertFromBase64(XSTRING& stringbase64)
 
 
 
-/*-------------------------------------------------------------------
-//  XBUFFER::ConvertToBase64
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      20/05/2014 13:24:21
-//
-//  @return       bool :
-//
-//  @param        stringbase64 :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::ConvertToBase64(XSTRING& stringbase64)
+* @brief      Set String to base 64 from buffer
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 21:36:57
+*
+* @param[out] stringbase64 : string in base 64.
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::ConvertToBase64(XSTRING& stringbase64)
 {
   XSTRING stringbin;
@@ -2653,24 +2750,22 @@ bool XBUFFER::ConvertToBase64(XSTRING& stringbase64)
 
 
 
-
-/*-------------------------------------------------------------------
-//  XBUFFER::DecodeBCD
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      18/09/2014 16:49:33
-//
-//  @return       XDWORD :
-//
-//  @param        ppos :
-//  @param        psize :
-*/
-/*-----------------------------------------------------------------*/
-XDWORD XBUFFER::DecodeBCD(XDWORD ppos,XDWORD psize)
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XDWORD XBUFFER::DecodeBCD(XDWORD ppos, XDWORD psize)
+* @brief      Decode DWORD from buffer BCD
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 21:38:25
+*
+* @param[in]  ppos : position of DWORD
+* @param[in]  psize : size of decode
+*
+* @return     XDWORD : result od decode.
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+XDWORD XBUFFER::DecodeBCD(XDWORD ppos, XDWORD psize)
 {
   XDWORD result   = 0;
   int    position = ppos;
@@ -2692,22 +2787,22 @@ XDWORD XBUFFER::DecodeBCD(XDWORD ppos,XDWORD psize)
 
 
 
-/*-------------------------------------------------------------------
-//  XBUFFER::DecodeBCDLong
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      26/04/2016 10:35:43
-//
-//  @return       XQWORD :
-//
-//  @param        ppos :
-//  @param        psize :
-*/
-/*-----------------------------------------------------------------*/
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         XQWORD XBUFFER::DecodeBCDLong(XDWORD ppos,XDWORD psize)
+* @brief      Decode long from buffer BCD
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 21:44:07
+*
+* @param[in]  ppos : 
+* @param[in]  psize : 
+*
+* @return     XQWORD : 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 XQWORD XBUFFER::DecodeBCDLong(XDWORD ppos,XDWORD psize)
 {
   XQWORD result   = 0;
@@ -2733,24 +2828,22 @@ XQWORD XBUFFER::DecodeBCDLong(XDWORD ppos,XDWORD psize)
 
 
 
-
-/*-------------------------------------------------------------------
-//  XBUFFER::AddXBufferWithMask
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      05/03/2016 17:47:09
-//
-//  @return       bool :
-//
-//  @param        xbuffer :
-//  @param        mask :
-//  @param        arg :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::AddXBufferWithMask(XBUFFER& xbuffer, XSTRING* mask, va_list& arg)
+* @brief      Add buffer with MASK (INTERNAL)
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 21:45:18
+*
+* @param[out] xbuffer : buffer obtain
+* @param[in]  mask : string mask to obtain buffer
+* @param[in]  arg : arguments to create buffer
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::AddXBufferWithMask(XBUFFER& xbuffer, XSTRING* mask, va_list& arg)
 {
   if(!mask)           return false;
@@ -2857,24 +2950,22 @@ bool XBUFFER::AddXBufferWithMask(XBUFFER& xbuffer, XSTRING* mask, va_list& arg)
 
 
 
-
-/*-------------------------------------------------------------------
-//  XBUFFER::GetXBufferWithMask
-*/
-/**
-//
-//
-//
-//  @author       Abraham J. Velez
-//  @version      05/03/2016 17:54:58
-//
-//  @return       bool :
-//
-//  @param        xbuffer :
-//  @param        mask :
-//  @param        arg :
-*/
-/*-----------------------------------------------------------------*/
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         bool XBUFFER::ExtractXBufferWithMask(XBUFFER& xbuffer, XSTRING* mask, va_list& arg)
+* @brief      Extract from buffer with MASK (INTERNAL)
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       25/05/2018 21:47:44
+*
+* @param[in]  xbuffer : buffer to extract
+* @param[in]  mask :  string mask to extract buffer
+* @param[in]  arg : arguments to create buffer
+*
+* @return     bool : true if is succesful. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
 bool XBUFFER::ExtractXBufferWithMask(XBUFFER& xbuffer, XSTRING* mask, va_list& arg)
 {
   if(!mask)           return false;
@@ -2981,4 +3072,39 @@ bool XBUFFER::ExtractXBufferWithMask(XBUFFER& xbuffer, XSTRING* mask, va_list& a
     }
 
   return xbuffer.IsEmpty();
+}
+
+
+
+
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         void XBUFFER::Clean()
+* @brief      Clean the attributes of the class: Default initialice
+* @note       INTERNAL
+* @ingroup    UTILS
+*
+* @author     Abraham J. Velez 
+* @date       29/05/2018 13:12:19
+*
+* @return     void : does not return anything. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+void XBUFFER::Clean()
+{
+  buffer              = NULL;
+  size                = 0;
+  sizeassign          = 0;
+  position            = 0;
+
+  nbits               = 0;
+  nbitsfree           = 0;
+  lastnbitsfree       = 0;
+
+  paddingtype         = XBUFFER_PADDINGTYPE_NONE;
+  paddinghas          = false;
+  paddingbitadjust    = 0;
+  paddingsize         = 0;
+
+  xmutex              = NULL;
 }

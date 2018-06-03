@@ -78,13 +78,10 @@ DIOSTREAMSPICONFIG::~DIOSTREAMSPICONFIG()
 */
 /*-----------------------------------------------------------------*/
 bool DIOSTREAMSPICONFIG::SetLocalDeviceNameByPort()
-{
-  XSYSTEM* xsystem = xfactory->CreateSystem();
-  if(!xsystem) return false;
-
+{  
   int revision = 0;
 
-  switch(xsystem->GetTypeHardware(&revision))
+  switch(XSYSTEM::GetInstance().GetTypeHardware(&revision))
     {
       case XSYSTEM_HARDWARETYPE_PC          : localdevicename.Format(__L("/dev/spi%d"), port);
                                               break;
@@ -94,9 +91,7 @@ bool DIOSTREAMSPICONFIG::SetLocalDeviceNameByPort()
 
                                    default  : break;
     }
-
-  xfactory->DeleteSystem(xsystem);
-
+ 
   return true;
 }
 

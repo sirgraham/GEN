@@ -21,7 +21,7 @@
 
 #include "XBase.h"
 #include "XBuffer.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "XString.h"
 

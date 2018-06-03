@@ -18,12 +18,10 @@
 
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
-#include <termios.h>
-
 #include "XBase.h"
 #include "Main.h"
 
-#include "XLINUXDebug.h"
+#include "XLINUXDebugTrace.h"
 
 /*---- DEFINES & ENUMS  ------------------------------------------------------------------*/
 
@@ -37,10 +35,6 @@ class DIOLINUXFACTORY;
 class GRPLINUXFACTORY;
 class SNDLINUXBASE;
 class XAPPLICATION;
-class INPMANAGER;
-class INPDEVICE;
-class INPLINUXHID;
-class SNDLINUXFACTORY;
 
 class LINUXMAIN : public MAIN
 {
@@ -59,11 +53,7 @@ class LINUXMAIN : public MAIN
 
     void                          Clean                 ();
 
-    XLINUXSYSTEM*                 xsystem;
-
-    #ifdef INP_ACTIVE
-    //struct termios                termiosinitialsettings;
-    #endif
+    XLINUXSYSTEM*                 xsystem;   
 
     XAPPLICATION*                 xapplication;
 };
@@ -80,9 +70,6 @@ extern "C"
 }
 #endif
 
-#ifdef XDEBUG
-extern XLINUXDEBUGCTRL       debug;
-#endif
 
 #endif
 

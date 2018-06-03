@@ -31,7 +31,7 @@
 #include "XBuffer.h"
 #include "XThreadCollected.h"
 #include "XSystem.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "DIOFactory.h"
 #include "DIOStreamXEvent.h"
@@ -206,7 +206,7 @@ XDWORD DIOLINUXSTREAMI2C::ReadDirect(XBYTE* buffer, XDWORD size)
   bool status = (ioctl(handle, DIOLINUXSTREAMI2C_RDWR, &msg_rdwr) < 0) ? false:true;
   if(status) br = size;
 
-  //XDEBUG_PRINTCOLOR(1, __L("Write [Addr %04X, size:%d]  status: %s"), address, size, status?__L("true"):__L("false"));
+  //XDEBUGTRACE_PRINTCOLOR(1, __L("Write [Addr %04X, size:%d]  status: %s"), address, size, status?__L("true"):__L("false"));
 
   return br;
 }
@@ -253,7 +253,7 @@ XDWORD DIOLINUXSTREAMI2C::WriteDirect(XBYTE* buffer, XDWORD size)
 
   if(status) bw = size;
 
-  //XDEBUG_PRINTCOLOR(1, __L("Write [Addr %04X, size:%d]  status: %s"), address, size, status?__L("true"):__L("false"));
+  //XDEBUGTRACE_PRINTCOLOR(1, __L("Write [Addr %04X, size:%d]  status: %s"), address, size, status?__L("true"):__L("false"));
 
   return bw;
 
@@ -349,7 +349,7 @@ void DIOLINUXSTREAMI2C::ThreadConnexion(void* data)
 
                                                                           if(bw)
                                                                             {
-                                                                              //XDEBUG_PRINTDATABLOCKCOLOR(XDEBUG_COLORRED, diostream->outbuffer->Get(), size);
+                                                                              //XDEBUGTRACE_PRINTDATABLOCKCOLOR(XDEBUG_COLORRED, diostream->outbuffer->Get(), size);
                                                                               diostream->outbuffer->Extract(NULL, 0 , bw);
                                                                             }
                                                                         }
@@ -365,7 +365,7 @@ void DIOLINUXSTREAMI2C::ThreadConnexion(void* data)
                                                                             {
                                                                               if(diostream->ReadDirect(_data, diostream->sizeread))
                                                                                 {
-                                                                                  //XDEBUG_PRINTDATABLOCKCOLOR(XDEBUG_COLORGREEN, _data, diostream->sizeread);
+                                                                                  //XDEBUGTRACE_PRINTDATABLOCKCOLOR(XDEBUG_COLORGREEN, _data, diostream->sizeread);
                                                                                   diostream->inbuffer->Add(_data, diostream->sizeread);
                                                                                   diostream->sizeread = 0;
                                                                                 }

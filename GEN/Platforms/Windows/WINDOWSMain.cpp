@@ -61,7 +61,7 @@
 #include "XVector.h"
 #include "XLanguage.h"
 #include "XLog.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "XPublisher.h"
 #include "XFile.h"
 
@@ -70,14 +70,12 @@
 
 //---- GENERAL VARIABLE --------------------------------------------------------------------
 
-#ifdef XDEBUG
-XWINDOWSDEBUGCTRL debug;
+#ifdef XDEBUG_TRACE
+XWINDOWSDEBUGTRACE windowsdebugtrace;
 #endif
 
-WINDOWSMAIN windowsmain;
-XSTRING     allexceptiontext;
-
-
+WINDOWSMAIN        windowsmain;
+XSTRING            allexceptiontext;
 
 //---- INTERNAL PROTOTYPES -----------------------------------------------------------------
 
@@ -164,8 +162,8 @@ bool WINDOWSMAIN::Ini(XSTRING* xpath)
   xfactory = (XFACTORY*)new XWINDOWSFACTORY();
   if(!xfactory) return false;
 
-  xsleep = (XSLEEP*) new XWINDOWSSLEEP();
-  if(!xsleep) return false;
+  XSLEEP::SetInstance(new XWINDOWSSLEEP());
+  if(!XSLEEP::GetIsInstanced()) return false;
 
   if(xpath)
     {
@@ -178,12 +176,9 @@ bool WINDOWSMAIN::Ini(XSTRING* xpath)
   if(!xtimerclock) return false;
   #endif
 
-  xsystem = new XWINDOWSSYSTEM();
-  if(!xsystem) return false;
-
-  xfactory->HardwareUseLittleEndian(xsystem->HardwareUseLittleEndian());
-  XBUFFER::SetHardwareUseLittleEndian(xfactory->HardwareUseLittleEndian());
-
+  XSYSTEM::SetInstance(new XWINDOWSSYSTEM());
+  if(!XSYSTEM::GetIsInstanced()) return false;
+  
   xlanguage = new XLANGUAGE();
   if(!xlanguage) return false;
 
@@ -213,7 +208,7 @@ bool WINDOWSMAIN::Ini(XSTRING* xpath)
 
   xapplication->SetMain(&windowsmain);
 
-  if(!xapplication->IniApplication(xsystem, GetExecParams())) return false;
+  if(!xapplication->IniApplication(GetExecParams())) return false;
 
   return true;
 }
@@ -333,12 +328,8 @@ bool WINDOWSMAIN::End()
       xlanguage = NULL;
     }
 
-  if(xsystem)
-    {
-      delete xsystem;
-      xsystem = NULL;
-    }
-
+  if(XSYSTEM::GetIsInstanced()) XSYSTEM::DelInstance();      
+  
   XPUBLISHER::DelInstance();
   XPATHSMANAGER::DelInstance();
   XLOG::DelInstance();
@@ -352,11 +343,7 @@ bool WINDOWSMAIN::End()
   XTHREADSCOLLECTEDMANAGER::DelInstance();
   #endif
 
-  if(xsleep)
-    {
-      delete xsleep;
-      xsleep = NULL;
-    }
+  if(XSLEEP::GetIsInstanced()) XSLEEP::DelInstance();      
 
   if(xfactory)
     {
@@ -913,11 +900,11 @@ bool Exception_Printf(bool iserror, XCHAR* title, XCHAR* mask, ...)
   allexceptiontext += outstring;
   allexceptiontext += __L("\r\n");
 
-  #ifdef XDEBUG
+  #ifdef XDEBUG_TRACE
   if(!do_log)
     {
       int level = iserror?4:0;
-      XDEBUG_PRINTCOLOR(level, outstring.Get());
+     XDEBUGTRACE_PRINTCOLOR(level, outstring.Get());
     }
   #else
   //Exception_PrintNet(outstring.Get() , 4, windowsmain.GetXApplication()->GetXSystem()->HardwareUseLittleEndian());

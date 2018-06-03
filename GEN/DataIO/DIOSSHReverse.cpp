@@ -187,15 +187,9 @@ bool DIOSSHREVERSE::Activate()
   bool    status     = false;
   int     returncode = 0;
 
-  XSYSTEM* xsystem = xfactory->CreateSystem();
-  if(xsystem)
-    {
-      //command.AddFormat(__L("%s -p %s ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o ExitOnForwardFailure=yes -N -R %d:%s:%d %s@%s &"), DIOSSHREVERSE_DEFAULTAPPLICATION, password.Get(), port, localIP.Get() ,DIOSSHREVERSE_DEFAULTPORTSSH, login.Get(), URLtarget.Get());
-      command.AddFormat(__L("%s -p %s autossh -M 0 -o \"ServerAliveInterval 30\" -o \"ServerAliveCountMax 3\" -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o ExitOnForwardFailure=yes -N -R %d:%s:%d %s@%s &"), DIOSSHREVERSE_DEFAULTAPPLICATION, password.Get(), port, localIP.Get() ,DIOSSHREVERSE_DEFAULTPORTSSH, login.Get(), URLtarget.Get());
-      status = xsystem->MakeCommand(command.Get(), &returncode);
-
-      xfactory->DeleteSystem(xsystem);
-    }
+  //command.AddFormat(__L("%s -p %s ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o ExitOnForwardFailure=yes -N -R %d:%s:%d %s@%s &"), DIOSSHREVERSE_DEFAULTAPPLICATION, password.Get(), port, localIP.Get() ,DIOSSHREVERSE_DEFAULTPORTSSH, login.Get(), URLtarget.Get());
+  command.AddFormat(__L("%s -p %s autossh -M 0 -o \"ServerAliveInterval 30\" -o \"ServerAliveCountMax 3\" -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o ExitOnForwardFailure=yes -N -R %d:%s:%d %s@%s &"), DIOSSHREVERSE_DEFAULTAPPLICATION, password.Get(), port, localIP.Get() ,DIOSSHREVERSE_DEFAULTPORTSSH, login.Get(), URLtarget.Get());
+  status = XSYSTEM::GetInstance().MakeCommand(command.Get(), &returncode);
 
   XTIMER* xtimerout =  xfactory->CreateTimer();
   if(xtimerout)
@@ -208,7 +202,7 @@ bool DIOSSHREVERSE::Activate()
               break;
             }
 
-          xsleep->MilliSeconds(500);
+          XSLEEP::GetInstance().MilliSeconds(500);
 
           if(xtimerout->GetMeasureSeconds()>5) break;
         }
@@ -242,18 +236,12 @@ bool DIOSSHREVERSE::DeActivate()
   bool    status     = false;
   int     returncode = 0;
 
-  XSYSTEM* xsystem = xfactory->CreateSystem();
-  if(xsystem)
-    {
-      command.Format(__L("killall -9 %s > /dev/null"), DIOSSHREVERSE_DEFAULTAPPLICATION);
-      status = xsystem->MakeCommand(command.Get(), &returncode);
+  command.Format(__L("killall -9 %s > /dev/null"), DIOSSHREVERSE_DEFAULTAPPLICATION);
+  status = XSYSTEM::GetInstance().MakeCommand(command.Get(), &returncode);
 
-      command.Format(__L("killall -9 %s > /dev/null"), DIOSSHREVERSE_DEFAULTAPPLICATION2);
-      status = xsystem->MakeCommand(command.Get(), &returncode);
-
-      xfactory->DeleteSystem(xsystem);
-    }
-
+  command.Format(__L("killall -9 %s > /dev/null"), DIOSSHREVERSE_DEFAULTAPPLICATION2);
+  status = XSYSTEM::GetInstance().MakeCommand(command.Get(), &returncode);
+    
   XLOG::GetInstance().AddEntry((status?XLOGLEVEL_INFO:XLOGLEVEL_ERROR), DIOSSHREVERSE_LOGSECTIONID, false, __L("Deactivate service return code [%d]"), returncode);
 
   status = true;
@@ -280,9 +268,7 @@ bool DIOSSHREVERSE::DeActivate()
 *//*-----------------------------------------------------------------*/
 bool DIOSSHREVERSE::IsRunning()
 {
-  XSYSTEM* xsystem = xfactory->CreateSystem();
-  if(!xsystem) return false;
-
+  
   bool status = false;
 
   //status = xsystem->IsApplicationRunning(DIOSSHREVERSE_DEFAULTAPPLICATION);
@@ -311,7 +297,7 @@ bool DIOSSHREVERSE::IsRunning()
           xpath.Add(__L("backscreen"));
 
           command.Format(__L("netstat -napt > %s"), xpath.Get());
-          if(xsystem->MakeCommand(command.Get(), &returncode))
+          if(XSYSTEM::GetInstance().MakeCommand(command.Get(), &returncode))
             {
               XFILETXT* xfiletxt = new XFILETXT();
               if(xfiletxt)
@@ -353,8 +339,6 @@ bool DIOSSHREVERSE::IsRunning()
             }
         }
     }
-
-  xfactory->DeleteSystem(xsystem);
 
   XLOG::GetInstance().AddEntry(XLOGLEVEL_INFO, DIOSSHREVERSE_LOGSECTIONID, false, __L("Check is active: %s"), status?__L("yes"):__L("no"));
 

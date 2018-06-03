@@ -16,7 +16,7 @@
 
 #include "MEDIAH264FrameReader.h"
 #include "XFactory.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 //// yes yes I know this seems ugly and a crazy idea, but they have conflicts with new
 //#undef new

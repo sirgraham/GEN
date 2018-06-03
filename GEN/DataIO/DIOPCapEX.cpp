@@ -18,7 +18,7 @@
 #include <string.h>
 
 #include "XFactory.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "DIOPCapEX.h"
 
@@ -30,22 +30,23 @@
 /*---- CLASS MEMBERS ---------------------------------------------------------------------*/
 
 
-/*-------------------------------------------------------------------
-//  DIOPCAPFRAMEEX::DIOPCAPFRAMEEX
-*/
-/**
-//
-//
-//  @author       Abraham J. Velez
-//  @version      26/10/2012 13:06:09
-//
-//  @return       void :
-//  @param        xfactory :
-*/
-/*-----------------------------------------------------------------*/
-DIOPCAPFRAMEEX::DIOPCAPFRAMEEX() : DIOPCAPFRAME()
+/**-------------------------------------------------------------------------------------------------------------------
+*
+* @fn         DIOPCAPFRAMEEX::DIOPCAPFRAMEEX
+* @brief      Constructor
+* @ingroup    DATAIO
+*
+* @author     Abraham J. Velez 
+* @date       24/05/2018 13:08:19
+*
+* @param[in]  bool : true hardware use littleendian.
+*
+* @return     Does not return anything. 
+*
+*---------------------------------------------------------------------------------------------------------------------*/
+DIOPCAPFRAMEEX::DIOPCAPFRAMEEX(bool hardwareuselittleendian): DIOPCAPFRAME(hardwareuselittleendian)
 {
-  Clean();
+   Clean();
 }
 
 
@@ -91,7 +92,7 @@ bool DIOPCAPFRAMEEX::GetDNSAsk(DIOPCAPEXDNSHEADER& header,DIOPCAPEXDNSASK& ask)
 
   memcpy((XBYTE*)&header,(XBYTE*)(_header),sizeof(DIOPCAPEXDNSHEADER));
 
-  if(xfactory->HardwareUseLittleEndian())
+  if(hardwareuselittleendian)
     {
       SWAPWORD(header.ID);
       SWAPWORD(header.QDcount);
@@ -139,7 +140,7 @@ bool DIOPCAPFRAMEEX::GetDNSRequest(DIOPCAPEXDNSHEADER& header,DIOPCAPEXDNSREQUES
 
   memcpy((XBYTE*)&header,(XBYTE*)(_header),sizeof(DIOPCAPEXDNSHEADER));
 
-  if(xfactory->HardwareUseLittleEndian())
+  if(hardwareuselittleendian)
     {
       SWAPWORD(header.ID);
       SWAPWORD(header.QDcount);

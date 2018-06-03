@@ -18,7 +18,7 @@
 #include "XTimer.h"
 #include "XDateTime.h"
 #include "XBuffer.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "XThreadCollected.h"
 
 #include "DIOFactory.h"
@@ -408,7 +408,7 @@ bool DIOCHECKCONNEXIONS::Connexions_WaitToAllChecked(int timeout)
 
       if(Connexions_IsAllChecked()) break;
 
-      xsleep->MilliSeconds(100);
+      XSLEEP::GetInstance().MilliSeconds(100);
     }
 
   xfactory->DeleteTimer(xtimer);
@@ -463,7 +463,7 @@ bool DIOCHECKCONNEXIONS::Connexions_WaitToSomeIsChecked(int timeout)
 
       if(Connexions_IsSomeChecked()) break;
 
-      xsleep->MilliSeconds(100);
+      XSLEEP::GetInstance().MilliSeconds(100);
     }
 
   xfactory->DeleteTimer(xtimer);
@@ -655,7 +655,7 @@ void DIOCHECKCONNEXIONS::ThreadCheckConnexions(void* param)
               for(int d=0; d<10; d++)
                 {
                   if(!checkconnexions->threadcheckconnexions->IsRunning()) break;
-                  xsleep->MilliSeconds(100);
+                  XSLEEP::GetInstance().MilliSeconds(100);
                 }
             }
         }
@@ -694,7 +694,7 @@ void DIOCHECKCONNEXIONS::ThreadCheckConnexions(void* param)
               for(int d=0; d<10; d++)
                 {
                   if(!checkconnexions->threadcheckconnexions->IsRunning()) break;
-                  xsleep->MilliSeconds(100);
+                  XSLEEP::GetInstance().MilliSeconds(100);
                 }
             }
         }

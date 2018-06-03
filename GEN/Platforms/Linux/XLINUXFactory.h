@@ -55,6 +55,10 @@ class XLINUXFACTORY : public XFACTORY
 
     XTHREAD*            CreateThread            (XTHREADGROUPID groupID, XCHAR* ID,XTHREADFUNCTION function = NULL,void* data = NULL);
     bool                DeleteThread            (XTHREADGROUPID groupID, XTHREAD* xthread);
+    
+    XSHAREDMEMORY*      Create_SharedMemory     ();   
+    bool                Delete_SharedMemory     (XSHAREDMEMORY* sharedmemory); 
+
 };
 
 //---- INLINE FUNCTIONS --------------------------------------------------------------------

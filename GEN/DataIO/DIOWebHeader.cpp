@@ -14,7 +14,7 @@
 /*---- INCLUDES --------------------------------------------------------------------------*/
 
 #include "XSleep.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "XTimer.h"
 
 #include "DIOStreamTCPIP.h"
@@ -108,7 +108,7 @@ bool DIOWEBHEADER::Read(DIOSTREAMTCPIP* diostream, XTIMER* xtimer, int timeout)
             }
            else
             {
-              //XDEBUG_PRINTCOLOR(3, __L("WEB CLIENT HEADER LINE: %s"), line.Get());
+              //XDEBUGTRACE_PRINTCOLOR(3, __L("WEB CLIENT HEADER LINE: %s"), line.Get());
               AddLine(line);
             }
         }
@@ -117,7 +117,7 @@ bool DIOWEBHEADER::Read(DIOSTREAMTCPIP* diostream, XTIMER* xtimer, int timeout)
         {
           if(xtimer->GetMeasureSeconds()>(XDWORD)timeout) break;
 
-          xsleep->MilliSeconds(1);
+          XSLEEP::GetInstance().MilliSeconds(1);
         }
 
     } while((diostream->GetConnectStatus() == DIOSTREAMSTATUS_CONNECTED) || diostream->GetInXBuffer()->GetSize());
@@ -154,7 +154,7 @@ bool DIOWEBHEADER::Write(DIOSTREAMTCPIP* diostream, int timeout)
       XSTRING* line = (XSTRING*)lines.Get(c);
       if(line)
         {
-          //XDEBUG_PRINTCOLOR(2, __L("%s"), line->Get());
+          //XDEBUGTRACE_PRINTCOLOR(2, __L("%s"), line->Get());
 
           diostream->WriteStr((*line));
           diostream->WriteStr(__L("\r\n"));

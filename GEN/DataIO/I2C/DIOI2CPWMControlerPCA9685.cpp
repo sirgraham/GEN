@@ -17,7 +17,7 @@
 
 #include "XFactory.h"
 #include "XBuffer.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "DIOFactory.h"
 #include "DIOStreamI2CConfig.h"
@@ -129,8 +129,8 @@ bool DIOI2CPWMCONTROLERPCA9685::SetPWMFrequency(float frequency)
   XBYTE oldmode;
   bool  status;
 
-  //XDEBUG_PRINTCOLOR(1, __L("Estimated pre-scale: %f"), prescaleval);
-  //XDEBUG_PRINTCOLOR(1, __L("Final pre-scale    : %d"), prescale);
+  //XDEBUGTRACE_PRINTCOLOR(1, __L("Estimated pre-scale: %f"), prescaleval);
+  //XDEBUGTRACE_PRINTCOLOR(1, __L("Final pre-scale    : %d"), prescale);
 
   status = ReadCommand(DIOI2CPWMCONTROLERPCA9685_MODE1, oldmode);
   if(!status) return false;
@@ -176,7 +176,7 @@ bool DIOI2CPWMCONTROLERPCA9685::SetPWM(XBYTE channel, XWORD on, XWORD off, bool 
 {
   if(!IsInitialized())  return false;
 
-  //XDEBUG_PRINTCOLOR(XDEBUG_COLORGREEN, __L("PC9685 set channel(%d), on(%d), off(%d), wait(%s)"), channel, on, off, wait?__L("true"):__L("false"));
+  //XDEBUGTRACE_PRINTCOLOR(XDEBUG_COLORGREEN, __L("PC9685 set channel(%d), on(%d), off(%d), wait(%s)"), channel, on, off, wait?__L("true"):__L("false"));
 
   if(!SendCommand(DIOI2CPWMCONTROLERPCA9685_LED0_ON_L  + (4*channel), (on  &  0xFF), wait)) return false;
   if(!SendCommand(DIOI2CPWMCONTROLERPCA9685_LED0_ON_H  + (4*channel), (on  >> 0x08), wait)) return false;

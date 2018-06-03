@@ -256,7 +256,7 @@ endif
 #---- DEBUG MODE ------------------------------------------------------------------------------------------------
 
 ifeq "$(DEBUGMODE)" "YES"
-  FLAGS 		 += -g3 -Wno-psabi -rdynamic -funwind-tables -DXDEBUG
+  FLAGS 		 += -g3 -Wno-psabi -rdynamic -funwind-tables -DXDEBUG_TRACE
   OBJECTSDIR	= ./debug
   FLAGSLINK   = 
  else

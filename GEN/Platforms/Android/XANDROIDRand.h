@@ -30,7 +30,10 @@ class XANDROIDRAND : public XRAND
 {
   public:
 
-    bool          Ini             ();
+    bool          Ini               ();
+    int           MaxElements       (int max);
+    int           Max               (int max);
+    int           Between           (int min, int max);
 };
 
 //---- INLINE FUNCTIONS --------------------------------------------------------------------

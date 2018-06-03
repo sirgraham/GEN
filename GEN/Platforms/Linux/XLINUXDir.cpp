@@ -30,7 +30,7 @@
 
 #include "XLINUXDir.h"
 
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "XMemory.h"
 
@@ -137,7 +137,7 @@ bool XLINUXDIR::Make(XCHAR* path)
   xpathsequence.Empty();
 
   xpath = path;
-  XDEBUG_PRINTCOLOR(2, __L("XLINUXDIR::Make(%s)"), path);
+ XDEBUGTRACE_PRINTCOLOR(2, __L("XLINUXDIR::Make(%s)"), path);
 
   do{
       if(xpath.GetPathInSequence(index,pathpart))
@@ -154,7 +154,7 @@ bool XLINUXDIR::Make(XCHAR* path)
 
                   xpathsequence.ConvertToUTF8(newpath);
 
-                  XDEBUG_PRINTCOLOR(2, __L("---> Make: %s"), xpathsequence.Get());
+                 XDEBUGTRACE_PRINTCOLOR(2, __L("---> Make: %s"), xpathsequence.Get());
 
                   status = mkdir((char*)newpath.Get(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 
@@ -162,7 +162,7 @@ bool XLINUXDIR::Make(XCHAR* path)
                   {
                     XSTRING s;
                     s.Set(strerror(errno));
-                    XDEBUG_PRINTCOLOR(4,__L("mkdir failed : %s"),s.Get());
+                   XDEBUGTRACE_PRINTCOLOR(4,__L("mkdir failed : %s"),s.Get());
                   }
 
                   if(status) return false;

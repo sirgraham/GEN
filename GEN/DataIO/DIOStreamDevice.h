@@ -20,7 +20,7 @@
 
 #include "XUUID.h"
 #include "XString.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 
 //---- DEFINES & ENUMS  --------------------------------------------------------------------
@@ -36,8 +36,8 @@ enum DIOSTREAMDEVICE_TYPE
   DIOSTREAMDEVICE_TYPE_SPI                    ,
 };
 
-#define DIOSTREAMDEBUGPRINTINFO(console, line)      if(console) console->Printf(__L("%s\n"), line); \
-                                                    XDEBUG_PRINTCOLOR(2, line)
+#define DIOSTREAMDEBUGPRINTINFO(console, line)     if(console) console->Printf(__L("%s\n"), line); \
+                                                   XDEBUGTRACE_PRINTCOLOR(2, line)
 
 #define DIOGUID     XUUID
 

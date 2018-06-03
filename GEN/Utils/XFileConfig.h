@@ -94,8 +94,6 @@ class XFILECONFIG
                                         }
     virtual bool                        Save                      (XPATH& xpath);
 
-    virtual bool                        Default                   ();
-
     virtual bool                        End                       ();
 
     bool                                AddValue                  (XFILECONFIGVALUETYPE type, XCHAR* group, XCHAR* ID, void* value);

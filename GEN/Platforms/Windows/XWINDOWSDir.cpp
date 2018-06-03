@@ -17,7 +17,7 @@
 
 #include "XString.h"
 #include "XPath.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "XWINDOWSDir.h"
 
@@ -162,7 +162,7 @@ bool XWINDOWSDIR::Make(XCHAR* path)
             {
               if(!Exist(xpathsequence.Get()))
                 {
-                  //XDEBUG_PRINTCOLOR(2, __L("---> Make: %s"), xpathsequence.Get());
+                  //XDEBUGTRACE_PRINTCOLOR(2, __L("---> Make: %s"), xpathsequence.Get());
 
                   int result = CreateDirectory(xpathsequence.Get(), NULL);
                   if(!result) return false;

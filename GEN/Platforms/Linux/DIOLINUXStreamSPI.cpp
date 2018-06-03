@@ -26,7 +26,7 @@
 #include <linux/spi/spidev.h>
 
 #include "XBuffer.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "DIOStreamSPIConfig.h"
 
 #include "DIOLINUXStreamSPI.h"
@@ -93,7 +93,7 @@ bool DIOLINUXSTREAMSPI::Open()
 {
   if(!config) return false;
 
-  //XDEBUG_PRINTCOLOR(1, __L("open: %s"), config->GetLocalDeviceName()->Get());
+  //XDEBUGTRACE_PRINTCOLOR(1, __L("open: %s"), config->GetLocalDeviceName()->Get());
 
   XSTRING_CREATEOEM((*config->GetLocalDeviceName()), charOEM)
   handle = open(charOEM, O_RDWR);
@@ -173,7 +173,7 @@ bool DIOLINUXSTREAMSPI::TransferBuffer(XBYTE* bufferread, XBYTE* bufferwrite, XD
 
   memset((XBYTE*)&transf, 0, sizeof(struct spi_ioc_transfer));
 
-  //XDEBUG_PRINTCOLOR(1, __L("real SPI %d"), size);
+  //XDEBUGTRACE_PRINTCOLOR(1, __L("real SPI %d"), size);
 
   //wprintf((wchar_t *)__L("\n Write %4d bytes ->"),size);
   //fflush(stdout);

@@ -23,7 +23,7 @@
 
 #include "XSleep.h"
 #include "XRand.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "XBuffer.h"
 #include "XTimer.h"
 
@@ -199,33 +199,33 @@ bool DIOWINDOWSPING::Do(XDWORD nretries, XDWORD timebetweenchecks, bool exitfirs
                               break;
                             }
 
-                          xsleep->MilliSeconds(timebetweenchecks);
+                          XSLEEP::GetInstance().MilliSeconds(timebetweenchecks);
 
                           nloop--;
                         }
                        else
                         {
-                          //XDEBUG_PRINTCOLOR(4, __L("Ping: application ID not equal! %s"), targetIP.Get());
+                          //XDEBUGTRACE_PRINTCOLOR(4, __L("Ping: application ID not equal! %s"), targetIP.Get());
                         }
                     }
                    else
                     {
-                      //XDEBUG_PRINTCOLOR(4, __L("Ping: error CRC! %s "), targetIP.Get());
+                      //XDEBUGTRACE_PRINTCOLOR(4, __L("Ping: error CRC! %s "), targetIP.Get());
                     }
                 }
                else
                 {
-                  //XDEBUG_PRINTCOLOR(4, __L("Ping: Invalid size data packet! %s "), targetIP.Get());
+                  //XDEBUGTRACE_PRINTCOLOR(4, __L("Ping: Invalid size data packet! %s "), targetIP.Get());
                 }
             }
            else
             {
-              //XDEBUG_PRINTCOLOR(4, __L("Ping: not IP equal! %s "), targetIP.Get());
+              //XDEBUGTRACE_PRINTCOLOR(4, __L("Ping: not IP equal! %s "), targetIP.Get());
             }
         }
        else
         {
-          //XDEBUG_PRINTCOLOR(4, __L("Ping: not reply packet! %s "), targetIP.Get());
+          //XDEBUGTRACE_PRINTCOLOR(4, __L("Ping: not reply packet! %s "), targetIP.Get());
           if(exitfirstgoodreply) nloop = 0; else nloop--;
         }
    }
@@ -235,7 +235,7 @@ bool DIOWINDOWSPING::Do(XDWORD nretries, XDWORD timebetweenchecks, bool exitfirs
   /*
   if(!status)
     {
-      //XDEBUG_PRINTCOLOR((status?1:4), __L("Ping to [%s]: %s"), targetIP.Get(), (status?__L("Ok."):__L("Error!")));
+      //XDEBUGTRACE_PRINTCOLOR((status?1:4), __L("Ping to [%s]: %s"), targetIP.Get(), (status?__L("Ok."):__L("Error!")));
     }
   */
 

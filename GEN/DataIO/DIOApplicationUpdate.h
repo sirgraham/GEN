@@ -176,7 +176,7 @@ class DIOAPPLICATIONUPDATE : public XSUBJECT
     bool                                  Download                        (DIOURL& url, int port, XCHAR* addtargetpath, DIOAPPLICATIONUPDATEVERSIONDATA& updateversiondata, int timeout, DIOAPPLICATIONUPDATE_ERROR& error);
     bool                                  Download                        (DIOURL& url, int port, XPATH& addtargetpath, DIOAPPLICATIONUPDATEVERSIONDATA& updateversiondata, int timeout, DIOAPPLICATIONUPDATE_ERROR& error);
     bool                                  ChangeFilesFromDownload         (DIOAPPLICATIONUPDATEVERSIONDATA& updateversiondata, XPATH& xpathupdate, DIOAPPLICATIONUPDATE_ERROR& error);
-    bool                                  RestartApplication              (DIOAPPLICATIONUPDATE_ERROR& error, bool specialexecution = true);
+    bool                                  RestartApplication              (DIOAPPLICATIONUPDATE_ERROR& error);
     bool                                  RestoreUpdate                   (DIOAPPLICATIONUPDATE_ERROR& error);
 
     bool                                  IsNewVersion                    (DIOAPPLICATIONUPDATEVERSIONDATA& updateversiondata);

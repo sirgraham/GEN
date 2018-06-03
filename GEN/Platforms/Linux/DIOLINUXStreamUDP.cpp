@@ -40,7 +40,7 @@
 #include "XFactory.h"
 #include "XThreadCollected.h"
 #include "XBuffer.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "DIOIP.h"
 #include "DIOURL.h"
@@ -422,7 +422,7 @@ void DIOLINUXSTREAMUDP::ThreadRunFunction(void* thread)
 
                                                                   port =  ntohs(origin_addr.sin_port);
 
-                                                                  //XDEBUG_PRINTCOLOR(1, __L("Read UDP from [%s] (%d)"), address.Get(), size);
+                                                                  //XDEBUGTRACE_PRINTCOLOR(1, __L("Read UDP from [%s] (%d)"), address.Get(), size);
 
                                                                   if(diostream->config->IsUsedDatagrams())
                                                                           diostream->AddDatagram(false, address.Get(), port, (XBYTE*)buffer,size);
@@ -476,7 +476,7 @@ void DIOLINUXSTREAMUDP::ThreadRunFunction(void* thread)
 
                                                                           size = sendto(diostream->handle,(char*)datagram->GetData()->Get(), datagram->GetData()->GetSize(), 0, (sockaddr*)&target_addr, size_addr);
 
-                                                                          //XDEBUG_PRINTCOLOR(1, __L("Write UDP to [%s] (%d)"), tmpremoteaddress.Get(), size);
+                                                                          //XDEBUGTRACE_PRINTCOLOR(1, __L("Write UDP to [%s] (%d)"), tmpremoteaddress.Get(), size);
 
                                                                           if(size == -1)
                                                                             {

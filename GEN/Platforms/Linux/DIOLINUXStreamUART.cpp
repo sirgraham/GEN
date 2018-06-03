@@ -32,7 +32,7 @@
 #include "XBase.h"
 #include "XFactory.h"
 #include "XString.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "XThreadCollected.h"
 
 #include "DIOStreamXEvent.h"
@@ -697,7 +697,7 @@ void DIOLINUXSTREAMUART::ThreadConnexion(void* param)
                                                                     XDWORD br = diostream->ReadDirect(buffer, DIOSTREAM_MAXBUFFER);
                                                                     if(br)
                                                                       {
-                                                                        //XDEBUG_PRINTDATABLOCK(XDEBUGLEVELCOLOR(2), (XBYTE*)diostream->buffer, (int)br);
+                                                                        //XDEBUGTRACE_PRINTDATABLOCK(XDEBUGLEVELCOLOR(2), (XBYTE*)diostream->buffer, (int)br);
                                                                         diostream->inbuffer->Add(buffer, br);
                                                                       }
                                                                   }
@@ -715,7 +715,7 @@ void DIOLINUXSTREAMUART::ThreadConnexion(void* param)
 
                                                                         if(bw)
                                                                           {
-                                                                            //XDEBUG_PRINTDATABLOCK(XDEBUGLEVELCOLOR(4), (XBYTE*)diostream->buffer, (int)bw);
+                                                                            //XDEBUGTRACE_PRINTDATABLOCK(XDEBUGLEVELCOLOR(4), (XBYTE*)diostream->buffer, (int)bw);
                                                                             diostream->outbuffer->Extract(NULL, 0, bw);
                                                                           }
                                                                       }

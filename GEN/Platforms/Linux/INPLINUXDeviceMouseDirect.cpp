@@ -23,7 +23,7 @@
 
 #include "XTimer.h"
 #include "XFileTXT.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "INPLinuxDeviceMouseDirect.h"
 
@@ -277,11 +277,11 @@ bool INPLINUXDEVICEMOUSEDIRECT::Update()
                                       }
                                   }
                                   break;
-                    case EV_SYN:
-                          //  UpdateMouseData();
-                            break;
-                    default:
-                            continue;
+                    #ifdef EV_SYN
+                    case EV_SYN :  //  UpdateMouseData();
+                                  break;
+                    #endif
+                        default : continue;
                   }
             } else break;
         }
@@ -485,7 +485,7 @@ bool INPLINUXDEVICEMOUSEDIRECT::OpenAllDevicesID()
               minz = abs[1];
               maxz = abs[2];
 
-              XDEBUG_PRINTCOLOR(0,__L("Device %s x(%d,%d) y(%d,%d) z(%d,%d)"),namehardware.Get(),minx,maxx,miny,maxy,minz,maxz);
+             XDEBUGTRACE_PRINTCOLOR(0,__L("Device %s x(%d,%d) y(%d,%d) z(%d,%d)"),namehardware.Get(),minx,maxx,miny,maxy,minz,maxz);
 
               INPLINUXDEVICEID* deviceID = new INPLINUXDEVICEID();
               if(!deviceID) return false;
@@ -590,7 +590,7 @@ bool INPLINUXDEVICEMOUSEDIRECT::UpdateMouseData()
           cursor->Set(mousex, mousey);
           cursor->SetIsChanged(true);
 
-          XDEBUG_PRINTCOLOR(0,__L("Update %f %f %d %d"),cursor->GetX(),cursor->GetY(),mousex, mousey);
+         XDEBUGTRACE_PRINTCOLOR(0,__L("Update %f %f %d %d"),cursor->GetX(),cursor->GetY(),mousex, mousey);
         }
 
     else

@@ -24,7 +24,7 @@
 #include <sys/stat.h>
 #include <sys/ioctl.h>
 
-#include "XDebug.h"
+#include "XDebugTrace.h"
 #include "XFileTXT.h"
 
 #include "DIOLINUXGPIORaspberryPi.h"
@@ -448,7 +448,7 @@ bool DIOLINUXGPIORASPBERRYPI::RPI_GPIOMode(int GPIO, bool isinput)
         else  *(RPI_gpio+ fsel) = (*(RPI_gpio+ fsel) & ~(7 << shift)) | (1 << shift);
 
 
-  //XDEBUG_PRINTCOLOR(1, __L("RPI Data Port Mode: GPIO %d -> %s "), GPIO, isinput?__L("input"):__L("output"));
+  //XDEBUGTRACE_PRINTCOLOR(1, __L("RPI Data Port Mode: GPIO %d -> %s "), GPIO, isinput?__L("input"):__L("output"));
 
   return true;
 }
@@ -480,7 +480,7 @@ bool DIOLINUXGPIORASPBERRYPI::RPI_GPIORead(int GPIO)
 
   if((*(RPI_gpio+ gpiotoGPLEV[GPIO]) & (1 << (GPIO & 31))) != 0)
     {
-      //XDEBUG_PRINTCOLOR(1, __L("RPI Data Port Read: GPIO %d"), GPIO);
+      //XDEBUGTRACE_PRINTCOLOR(1, __L("RPI Data Port Read: GPIO %d"), GPIO);
       return true;
     }
 
@@ -522,7 +522,7 @@ bool DIOLINUXGPIORASPBERRYPI::RPI_GPIOWrite(int GPIO, bool isactive)
   if(isactive)   *(RPI_gpio+ gpiotoGPSET[GPIO]) = 1 << (GPIO & 31);
           else   *(RPI_gpio+ gpiotoGPCLR[GPIO]) = 1 << (GPIO & 31);
 
-  //XDEBUG_PRINTCOLOR(1, __L("RPI Data Port Write: GPIO %d ->%s"), GPIO, isactive?__L("on"):__L("off"));
+  //XDEBUGTRACE_PRINTCOLOR(1, __L("RPI Data Port Write: GPIO %d ->%s"), GPIO, isactive?__L("on"):__L("off"));
 
   return true;
 }

@@ -19,7 +19,7 @@
 #include "XFactory.h"
 #include "XFile.h"
 
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "XMemory.h"
 
@@ -200,7 +200,7 @@ MEDIAFRAMEREADERLIBAV::~MEDIAFRAMEREADERLIBAV()
 /*-----------------------------------------------------------------*/
 int MEDIAFRAMEREADERLIBAV::init_demuxer(XSTRING* filename)
 {
-  //XDEBUG_PRINTCOLOR(2, __L("Initializing demuxer"));
+  //XDEBUGTRACE_PRINTCOLOR(2, __L("Initializing demuxer"));
   if(!registered)
     {
       av_register_all(); // shouldn't be needed as ffmpeg is supposedly clever enough not to run this twice internally
@@ -215,7 +215,7 @@ int MEDIAFRAMEREADERLIBAV::init_demuxer(XSTRING* filename)
   char* cstr = NULL;
   if(!filename->CreateOEM(cstr))
     {
-      XDEBUG_PRINTCOLOR(4, __L("Error Creating OEM string"));
+     XDEBUGTRACE_PRINTCOLOR(4, __L("Error Creating OEM string"));
     }
 
 
@@ -239,10 +239,10 @@ int MEDIAFRAMEREADERLIBAV::init_demuxer(XSTRING* filename)
   formatcontext = avformat_alloc_context();
   formatcontext->pb = aviocontext;
 
-  //XDEBUG_PRINTCOLOR(3, __L("START OPEN INPUT"));
+  //XDEBUGTRACE_PRINTCOLOR(3, __L("START OPEN INPUT"));
   //avformat_open_input(&formatcontext, cstr, iformat, NULL);
   avformat_open_input(&formatcontext, NULL, NULL, NULL);
-  //XDEBUG_PRINTCOLOR(3, __L("END OPEN INPUT"));
+  //XDEBUGTRACE_PRINTCOLOR(3, __L("END OPEN INPUT"));
 
   // set the interrupt callback, appeared in libavformat 53.15.0
   //formatcontext->interrupt_callback = int_cb;
@@ -254,9 +254,9 @@ int MEDIAFRAMEREADERLIBAV::init_demuxer(XSTRING* filename)
   //    formatcontext->max_analyze_duration = 500000;
   //  }
 
-  //XDEBUG_PRINTCOLOR(3, __L("START STREAM INFO"));
+  //XDEBUGTRACE_PRINTCOLOR(3, __L("START STREAM INFO"));
   avformat_find_stream_info(formatcontext, NULL);
-  //XDEBUG_PRINTCOLOR(3, __L("END STREAM INFO"));
+  //XDEBUGTRACE_PRINTCOLOR(3, __L("END STREAM INFO"));
 
   // find all the enabled streams
   video_stream_idx = av_find_best_stream(formatcontext, AVMEDIA_TYPE_VIDEO, -1, -1, NULL, 0);

@@ -47,7 +47,7 @@
 #include "XLanguage.h"
 #include "XApplication.h"
 #include "XPublisher.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "XLINUXFactory.h"
 #include "XLINUXSleep.h"
@@ -90,13 +90,12 @@
 
 //---- GENERAL VARIABLE --------------------------------------------------------------------
 
-#ifdef XDEBUG
-XLINUXDEBUGCTRL    debug;
+#ifdef XDEBUG_TRACE
+XLINUXDEBUGTRACE      linuxdebugtrace;
 #endif
-
-LINUXMAIN          linuxmain;
-struct sigaction   signalaction;
-XSTRING            allexceptiontext;
+LINUXMAIN             linuxmain;
+struct sigaction      signalaction;
+XSTRING               allexceptiontext;
 
 //---- INTERNAL PROTOTYPES -----------------------------------------------------------------
 
@@ -169,8 +168,8 @@ bool LINUXMAIN::Ini(XSTRING* xpath)
   xfactory = new  XLINUXFACTORY();
   if(!xfactory) return false;
 
-  xsleep = (XSLEEP*) new XLINUXSLEEP();
-  if(!xsleep) return false;
+  XSLEEP::SetInstance(new XLINUXSLEEP());
+  if(!XSLEEP::GetIsInstanced()) return false;
 
   if(xpath)
     {
@@ -183,11 +182,8 @@ bool LINUXMAIN::Ini(XSTRING* xpath)
   if(!xtimerclock) return false;
   #endif
 
-  xsystem = new XLINUXSYSTEM();
-  if(!xsystem) return false;
-
-  xfactory->HardwareUseLittleEndian(xsystem->HardwareUseLittleEndian());
-  XBUFFER::SetHardwareUseLittleEndian(xfactory->HardwareUseLittleEndian());
+  XSYSTEM::SetInstance(new XLINUXSYSTEM());
+  if(!XSYSTEM::GetIsInstanced()) return false;
 
   xlanguage = new XLANGUAGE();
   if(!xlanguage) return false;
@@ -217,7 +213,7 @@ bool LINUXMAIN::Ini(XSTRING* xpath)
   xapplication  = (XAPPLICATION*)XAPPLICATION::Create();
   if(!xapplication) return false;
   xapplication->SetMain(&linuxmain);
-  if(!xapplication->IniApplication(xsystem, GetExecParams())) return false;
+  if(!xapplication->IniApplication(GetExecParams())) return false;
 
   return true;
 }
@@ -318,11 +314,7 @@ bool LINUXMAIN::End()
       xlanguage = NULL;
     }
 
-  if(xsystem)
-    {
-      delete xsystem;
-      xsystem = NULL;
-    }
+  if(XSYSTEM::GetIsInstanced()) XSYSTEM::DelInstance();      
 
   XPUBLISHER::DelInstance();
   XPATHSMANAGER::DelInstance();
@@ -337,11 +329,7 @@ bool LINUXMAIN::End()
   XTHREADSCOLLECTEDMANAGER::DelInstance();
   #endif
 
-  if(xsleep)
-    {
-      delete xsleep;
-      xsleep = NULL;
-    }
+  if(XSLEEP::GetIsInstanced()) XSLEEP::DelInstance();      
 
   if(xfactory)
     {
@@ -849,11 +837,11 @@ static void Signal_Handler(int sig)
 
                           if(app->GetExitStatus()!=XAPPLICATIONEXITTYPE_NONE) return;
 
-                          //xsleep->Seconds(2);
+                          //XSLEEP::GetInstance().Seconds(2);
 
                           if(Signal_RunLevel(previous, actual))
                             {
-                              //XDEBUG_PRINTCOLOR(2, __L("Run level: %c"), actual);
+                              //XDEBUGTRACE_PRINTCOLOR(2, __L("Run level: %c"), actual);
 
                               if((actual == __C('0')))
                                 {
@@ -916,12 +904,12 @@ bool Signal_Printf(bool iserror, XCHAR* title, XCHAR* mask, ...)
   allexceptiontext += outstring;
   allexceptiontext += __L("\r\n");
 
-  #ifdef XDEBUG
+  #ifdef XDEBUG_TRACE
   if(!do_log)
     {
       int level = iserror?4:0;
 
-      XDEBUG_PRINTCOLOR(level, outstring.Get());
+     XDEBUGTRACE_PRINTCOLOR(level, outstring.Get());
     }
   #endif
 

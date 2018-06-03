@@ -18,7 +18,7 @@
 #include "XSerializable.h"
 
 #include "XVariant.h"
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "XMemory.h"
 

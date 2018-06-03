@@ -23,7 +23,7 @@
 #include "XPath.h"
 #include "XString.h"
 
-#include "XDebug.h"
+#include "XDebugTrace.h"
 
 #include "Cipher.h"
 
@@ -404,7 +404,7 @@ bool XLINUXFILE::Close()
     {
       fclose(filehandle);
 
-      #ifdef XDEBUG
+      #ifdef XDEBUG_TRACE
       XFileOpenList.Del(this);
       #endif
 
@@ -488,7 +488,7 @@ bool XLINUXFILE::Rename(XCHAR* xpathold, XCHAR* xpathnew)
     {
       XSTRING err;
       err.Set(strerror(errno));
-      XDEBUG_PRINTCOLOR(4,__L("Error renaming file %s -> %s : %s"),xpathold,xpathnew,err.Get());
+     XDEBUGTRACE_PRINTCOLOR(4,__L("Error renaming file %s -> %s : %s"),xpathold,xpathnew,err.Get());
     }
 
   return (!status)?true:false;
